@@ -1,0 +1,15 @@
+    <div class="row">
+        <div class="col barChart sm-8 mt-1 mb-5">
+            <p-chart height="400" width="70%" type="bar" [data]="barChartData" [options]="options"></p-chart>
+        </div>
+    </div>
+    <div class="row mt-2">
+        <div class="card chart col-sm-5 mt-1">
+            <p-chart height="400" type="pie" [data]="data" [options]="options"></p-chart>
+        </div>
+        <div class="card chart col-sm-5 mt-1">
+            <p-chart height="400" type="doughnut" [data]="doughnutData" [options]="options">
+            </p-chart>
+        </div>
+    </div>
+    <ngx-ui-loader [fgsColor]="'#000000'" [fgsType]="fgsType"></ngx-ui-loader>

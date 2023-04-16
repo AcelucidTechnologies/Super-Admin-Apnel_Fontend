@@ -1,0 +1,42 @@
+<div class="container py-2 h-10 justify-content-center" style="margin-left: 15%;">
+  <app-content></app-content>
+</div>
+<div class="h-100 gradient-form">
+  <div class="container h-100">
+    <div class="row d-flex justify-content-center align-items-center h-100">
+      <div class="col-xl-8">
+        <div class="card rounded-5 text-black" style="background: #b3b2b78c;">
+          <div class="row g-0">
+            <div class="col-lg-12">
+              <div class="card-body ">
+
+                <div class="text-center">
+                  <img class="pt-1 mb-2 pb-1" src="../../../assets/images/Logo-03 1.png" alt="logo">
+                </div>
+                <form [formGroup]="form" class="text-center">
+                  <p>Please login to your account</p>
+
+                  <mat-form-field class="example-full-width" appearance="outline">
+                    <input matInput placeholder="Username/Email" type="text" formControlName="email" autocomplete="on">
+                  </mat-form-field>
+                  <mat-form-field class="example-full-width" appearance="outline">
+                    <input matInput placeholder="Password" type="password" formControlName="password" autocomplete="off" [type]="showPassword ? 'text' : 'password'">
+                    <mat-icon matSuffix (click)="toggleShow()" style="color: #3d3d3e;">
+                      {{ showPassword ? 'visibility_off' : 'visibility' }}
+                    </mat-icon>
+                  </mat-form-field>
+
+                  <div class="text-center pt-1 mb-3 pb-1">
+                    <button class="btn btn-primary btn-block pt-1 mb-3" style="width: 40%; margin-left:30%"
+                      (click)="onSubmit()">login</button>
+                    <a class="text-black" style="color: black;" href="#!">Forgot password?</a>
+                  </div>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

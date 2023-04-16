@@ -1,0 +1,63 @@
+<div class="page-heading">
+  <h1 class="header-text-title" style="margin-left: 1%;">Admin List</h1>
+</div>
+  <p-table id="customerTable" #dt [value]="customerData" [columns]="cols" responsiveLayout="scroll" [paginator]="true"
+    [rows]="10" [showCurrentPageReport]="true"
+    currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries" [responsive]="true"
+    [globalFilterFields]="['email', 'phone', 'role', 'status']" styleClass="p-datatable-striped">
+
+    <ng-template pTemplate="caption">
+      <div class="d-flex justify-content-between" >
+        <span class="p-input-icon-right">
+          <i class="pi pi-search"></i>
+          <input pInputText type="text" placeholder="Search keyword"  (input)="applyFilterGlobal($event, 'contains')"/>
+        </span>
+      
+      <div class="btn-grp d-flex align-items-center" >
+        <button type="button" pButton pRipple icon="pi pi-file" (click)="downloadResource()" class="mr-2" pTooltip="CSV"
+          tooltipPosition="bottom"></button>
+        <button type="button" pButton pRipple icon="pi pi-file-excel" class="p-button-success mr-2" pTooltip="XLSX"
+          tooltipPosition="bottom" (click)="exportExcel()"></button>
+        <button type="button" pButton pRipple icon="pi pi-file-pdf" class="p-button-warning mr-2" pTooltip="PDF"
+          tooltipPosition="bottom" (click)="exportPdf()"></button>
+      </div>
+    </div>
+    </ng-template>
+
+    <ng-template pTemplate="header" let-columns>
+      <tr>
+        <th>S.No</th>
+        <th pSortableColumn="email" *ngFor="let col of columns" [ngClass]="{'d-none': !col.show}">{{col.headers}}
+          <p-sortIcon class="p-shortIcon light" field="email"></p-sortIcon>
+        </th>
+        <th>Options</th>
+      </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-customerData let-i="rowIndex" let-columns="columns">
+      <tr>
+        <td>{{i+1}}</td>
+        <td *ngFor="let col of columns" [ngClass]="{'d-none': !col.show}">{{customerData[col.field]}}</td>
+        <td>
+          <div class="btn-grp">
+          <button class="p-button-primary" pButton type="button" icon="pi pi-eye" pTooltip="view customer"
+            tooltipPosition="bottom" [routerLink]="['/customer/viewcustomer']" [queryParams]="{ id:customerData?._id }"
+            style="margin-right:5px">
+          </button>
+          <button class="p-button-warning" pButton type="button" icon="pi pi-user-edit" pTooltip="Edit Customer"
+            tooltipPosition="bottom" style="margin-right:5px" [routerLink]="['/customer/editcustomer']"
+            [queryParams]="{id:customerData?._id}"></button>
+          <button class="p-button-danger" pButton type="button" icon="pi pi-trash" pTooltip="Delete Customer"
+            tooltipPosition="bottom" (click)="onDeleteCustomer(customerData)"></button>
+          </div>
+        </td>
+      </tr>
+    </ng-template>
+    <ng-template pTemplate="emptymessage">
+      <tr>
+        <td class="text-center text-danger font-weight-700" colspan="12">
+          No Records Found.
+        </td>
+      </tr>
+    </ng-template>
+  </p-table>
+  <ngx-ui-loader [fgsColor]="'#000000'" [fgsType]="fgsType"></ngx-ui-loader>
