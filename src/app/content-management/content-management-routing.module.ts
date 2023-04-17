@@ -11,6 +11,7 @@ import { BannerSpecialComponent } from './banner-special/banner-special/banner-s
 import { AddBannerSpecialComponent } from './banner-special/add-banner-special/add-banner-special.component';
 import { FeatureProductListComponent } from './feature-product/feature-product-list/feature-product-list.component';
 import { AddFeatureProductComponent } from './feature-product/add-feature-product/add-feature-product.component';
+import { AddSliderComponent } from './slider/add-slider/add-slider.component';
 const routes: Routes = [
   {
     path:'category', component: CategoryComponent
@@ -53,6 +54,9 @@ const routes: Routes = [
   },
   {
     path: 'add-featured-product', component: AddFeatureProductComponent
+  },
+  {
+    path: 'add-slider', component: AddSliderComponent
   },
  
 ];
