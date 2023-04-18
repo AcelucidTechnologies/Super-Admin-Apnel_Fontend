@@ -23,6 +23,21 @@ export class BannerSpecialComponent implements OnInit {
   bannerList: BANNERSPECIAL[]=[]
   accessPermission:access
 
+  // ----------------------------
+
+  customers: BANNERSPECIAL[];
+
+  selectedCustomers: BANNERSPECIAL[];
+
+
+  statuses: any[];
+
+
+  activityValues: number[] = [0, 100];
+
+
+  // --------------------------------
+
   constructor(private ngxLoader: NgxUiLoaderService,
     private CmsService: CmsService,
     private toastr: ToastrMsgService,
