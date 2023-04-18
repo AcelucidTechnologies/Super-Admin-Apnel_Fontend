@@ -7,6 +7,8 @@ import { category, sub_category } from '../DummyData/category_subCategory';
 import {sponsors} from '../DummyData/sponsor'
 import { bannerSpecialData } from '../DummyData/bannerSpecial';
 import { featureData } from '../DummyData/feature';
+import { SLIDER } from '../_models/slider';
+import { sliderData } from '../DummyData/slider';
 
 @Injectable({
     providedIn: 'root'
@@ -244,4 +246,69 @@ export class CmsService {
         return of(featureData[indexObj])
     }
 
+    deleteProduct(id: number) {
+        const token = localStorage.getItem('token') || '';
+        let httpOptions = new HttpHeaders().set('x-access-token', token)
+        const endpointUrl = `${environment.JSON_SERVER}/category/${id}`;
+        //return this.http.delete<CATEGORY>(endpointUrl, { 'headers': httpOptions });
+        let productObj = featureData.map(item => {
+            item.id == id;
+            return item;
+        })
+        featureData.splice(featureData.findIndex((index) => index.id == id),1);
+        return of(productObj)
+    }
+
+
+     // ------------------------Slider Api-------------------------
+
+     getSliderList(): Observable<SLIDER[]> {
+        const token = localStorage.getItem('token') || '';
+        let httpOptions = new HttpHeaders().set('x-access-token', token)
+       // const endpointUrl = `${environment.JSON_SERVER}/category`;
+        // return this.http.get<CATEGORY[]>(endpointUrl, { 'headers': httpOptions });
+        return of(sliderData)
+    }
+
+    addSlider(slider: any) {
+        const token = localStorage.getItem('token') || '';
+        let httpOptions = new HttpHeaders().set('x-access-token', token)
+        const endpointUrl = `${environment.JSON_SERVER}/slider`;
+        // return this.http.post<any>(endpointUrl, categoryData, { 'headers': httpOptions });
+        slider.id = sliderData.length + 1
+        sliderData.push(slider);
+        return of(slider)
+    }
+
+    editSlider(slidersData: SLIDER, id: number) {
+        const token = localStorage.getItem('token') || '';
+        let httpOptions = new HttpHeaders().set('x-access-token', token)
+        const endpointUrl = `${environment.JSON_SERVER}/category/${id}`;
+        // return this.http.put<CATEGORY>(endpointUrl, categoryData, { 'headers': httpOptions });
+        let sliderObj = sliderData.findIndex((obj) => obj.id == id);
+        sliderData[sliderObj] = slidersData
+        return of(slidersData)
+    }
+
+    deleteSlider(id: number) {
+        const token = localStorage.getItem('token') || '';
+        let httpOptions = new HttpHeaders().set('x-access-token', token)
+        const endpointUrl = `${environment.JSON_SERVER}/slider/${id}`;
+        //return this.http.delete<CATEGORY>(endpointUrl, { 'headers': httpOptions });
+        let sliderObj = sliderData.map(item => {
+            item.id == id;
+            return item;
+        })
+        sliderData.splice(sliderData.findIndex((index) => index.id == id),1);
+        return of(sliderObj)
+    }
+
+    getSliderById(id: number): Observable<SLIDER> {
+        const token = localStorage.getItem('token') || '';
+        let httpOptions = new HttpHeaders().set('x-access-token', token)
+        const endpointUrl = `${environment.JSON_SERVER}/slider/${id}`;
+        let indexObj = sliderData.findIndex((obj)=>obj.id==id);
+        //return this.http.get<CATEGORY>(endpointUrl,{ 'headers': httpOptions });
+        return of(sliderData[indexObj])
+    }
 }

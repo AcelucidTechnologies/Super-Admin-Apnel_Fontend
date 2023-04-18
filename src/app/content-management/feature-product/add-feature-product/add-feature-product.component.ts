@@ -137,6 +137,8 @@ cropperReady() {
 loadImageFailed() {
     / show message /
 }
+
+
 onToggleSidebar(sidebarState: any) {
   if (sidebarState === 'open') {
     this.sidebarSpacing = 'contracted';
