@@ -180,7 +180,7 @@
   <div class="page-heading">
     <h1 class="header-text-title" style="margin-left: 1%;">Banner Special</h1>
     <div class="page-btn">
-      <a class="btn btn-added">
+      <a class="btn btn-added" [routerLink]="['/cms/add-special-banner']">
           <img src="../assets/images/icons/plus.svg" class="me-1" alt="img">Add Category
       </a>
   </div>
@@ -189,12 +189,12 @@
   <p-table style="background-color: white !important;" #dt [value]="bannerList" [(selection)]="selectedCustomers" dataKey="id" [rowHover]="true"
     [rows]="10" [showCurrentPageReport]="true" responsiveLayout="scroll"
     [paginator]="true" currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
-    [filterDelay]="0" [globalFilterFields]="['name']" class="abc">
+    [filterDelay]="0" [globalFilterFields]="['url','description']" class="abc">
     <ng-template pTemplate="caption" style="background-color: #fff !important; ">
         <div class="table-header">
             <span style="display: flex; justify-content: center; align-items: center;" class="p-input-icon-left ">
               <img style="margin-right: 5px;" src="../assets/images/icons/filter.svg" class="filter" alt="img">
-                <input style="outline: none; border-radius: 5px; border: 1px solid rgb(195, 183, 183); padding: 6px;" type="text" (input)="dt.filterGlobal($event, 'contains')" placeholder="Search..." />
+                <input style="outline: none; border-radius: 5px; border: 1px solid rgb(195, 183, 183); padding: 6px;" type="text" (input)="applyFilterGlobal($event, 'contains')" placeholder="Search..." />
             </span>
 
             <div class="d-flex justify-content-end align-items-end">
@@ -215,10 +215,10 @@
             <th style="width: 3rem;">
                 <p-tableHeaderCheckbox></p-tableHeaderCheckbox>
             </th>
-            <th pSortableColumn="name">
+            <th pSortableColumn="url">
                 <div class="flex justify-content-between align-items-center head1">
                     Name
-                    <p-sortIcon field="name"></p-sortIcon>
+                    <p-sortIcon field="url"></p-sortIcon>
                     
                 </div>
             </th>
@@ -239,8 +239,7 @@
 
           <th>
             <div class="flex justify-content-between align-items-center head1">
-                image
-                    
+                Image
             </div>
         </th>
         <th>
@@ -294,33 +293,33 @@
             
         </tr>
     </ng-template>
-    <ng-template pTemplate="body" let-customer>
+    <ng-template pTemplate="body" let-bannerList>
         <tr class="p-selectable-row">
             <td>
-                <p-tableCheckbox [value]="customer"></p-tableCheckbox>
+                <p-tableCheckbox [value]="bannerList"></p-tableCheckbox>
             </td>
             <td>
                 <span class="p-column-title">Url</span>
-                {{customer.url}}
+                {{bannerList.url}}
             </td>
             <td>
                 <span class="p-column-title">Description</span>
                 
-                <span class="image-text">{{customer.description}}</span>
+                <span class="image-text">{{bannerList.description}}</span>
             </td>
            
             <td>
                 <span class="p-column-title">Date</span>
-                {{customer.id}}
+                {{bannerList.id}}
             </td>
             <td>
-                {{customer.image}}
+                {{bannerList.image}}
             </td>
             <td>
-              <a class="me-3" style="margin-right: 10px;" href="editcategory.html">
-                  <img src="../assets/images/icons/edit.svg" alt="img">
+              <a pTooltip="Edit Banner" tooltipPosition="bottom" class="me-3" style="margin-right: 10px;">
+                  <img src="../assets/images/icons/edit.svg" [routerLink]="['/cms/add-special-banner']"  alt="img">
               </a>
-              <a class="me-3 confirm-text" href="javascript:void(0);">
+              <a pTooltip="Delete Banner" tooltipPosition="bottom" (click)="openDialog(bannerList)"  class="me-3 confirm-text" href="javascript:void(0);">
                   <img src="../assets/images/icons/delete.svg" alt="img">
               </a>
           </td>

@@ -10,6 +10,7 @@ import { access } from 'src/app/_models/modulepermission';
 import { DialogComponent } from 'src/app/leads/dialog/dialog.component';
 import { MatDialog } from '@angular/material/dialog';
 import { BannerDialogComponent } from '../banner-dialog/banner-dialog.component';
+import { log } from 'console';
 @Component({
   selector: 'app-banner-special',
   templateUrl: './banner-special.component.html',
@@ -54,13 +55,13 @@ export class BannerSpecialComponent implements OnInit {
     this.ngxLoader.start();
     this.sidebarSpacing = 'contracted';
    
-    this.cols = [
-      { field: 'bannerimage', show: true, headers: 'Banner Image' },
-      { field: 'url', show: true, headers: 'URL' },
-      { field: 'description', show: true, headers: 'Description' },
-      { field: 'sortby', show: true, headers: 'Sort By' },
-      { field: 'action', show: true, headers: 'Action' },
-    ]
+    // this.cols = [
+    //   { field: 'bannerimage', show: true, headers: 'Banner Image' },
+    //   { field: 'url', show: true, headers: 'URL' },
+    //   { field: 'description', show: true, headers: 'Description' },
+    //   { field: 'sortby', show: true, headers: 'Sort By' },
+    //   { field: 'action', show: true, headers: 'Action' },
+    // ]
     this.getbannerList();
 
     // $('#myModal').on('shown.bs.modal', function () {
@@ -78,10 +79,13 @@ export class BannerSpecialComponent implements OnInit {
 
   deleteBanner(bannerList: any) {
     this.ngxLoader.start();
+    console.log("1");
     this.CmsService.deleteSpecialBanner(bannerList.id).subscribe(res => {
       if (res) {
+        
         this.toastr.showSuccess("bannerSpecial deleted successfully", "banner delete")
         this.getbannerList()
+        
       }
     })
   }
@@ -102,6 +106,7 @@ export class BannerSpecialComponent implements OnInit {
     }
   }
 
-
-
+  applyFilterGlobal($event, stringVal) {
+    this.dt.filterGlobal(($event.target as HTMLInputElement).value, stringVal);
+  }
 }

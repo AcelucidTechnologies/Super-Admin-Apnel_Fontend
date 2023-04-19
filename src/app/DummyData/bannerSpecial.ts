@@ -22,21 +22,21 @@ export const bannerSpecialData = [
     },
     {
         id: 4,
-        url: "Raman",
+        url: "Ajay",
         sortby:"kjnjkwendc",
         image: "dummy 3",
         description: "hello i am 3"
     },
     {
         id: 5,
-        url: "Raman",
+        url: "Bingo",
         sortby:"kjnjkwendc",
         image: "dummy 3",
         description: "hello i am 3"
     },
     {
         id: 6,
-        url: "Raman",
+        url: "Girish",
         sortby:"kjnjkwendc",
         image: "dummy 3",
         description: "hello i am 3"

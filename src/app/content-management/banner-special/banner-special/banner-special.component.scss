@@ -70,4 +70,11 @@ td,th{
     .p-datatable .p-sortable-column:focus {
          box-shadow:none
     }
+    // .p-datatable .p-sortable-column .p-sortable-column-icon :hover {
+    //     color: #848484;
+    // }
+
+    .p-datatable .p-sortable-column.p-highlight:hover .p-sortable-column-icon {
+        color: #848484;
+    }
 }
