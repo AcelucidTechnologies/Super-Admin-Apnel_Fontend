@@ -1,5 +1,15 @@
-<div>
+<!-- <div>
     <h4>User Permission List</h4>
+</div> -->
+<div class="container-fluid">
+  <div class="row mb-2 mt-2">
+    <div class="col-6">
+      <h4>User Permission List</h4>
+    </div>
+    <div class="col-6 text-right">
+      <button pButton class="add-button"   [routerLink]="['/modulepermission/permissionform']">+ Add</button>
+    </div>
+  </div>
 </div>
 <p-table #dt responsiveLayout="scroll" [paginator]="true" [rows]="10"
 [showCurrentPageReport]="true" [value]="modulePermissionList"
@@ -30,7 +40,7 @@ styleClass="p-datatable-striped" [globalFilterFields]="['username']">
         <div>
         <button pButton class="p-button-secondary mr-2"icon="pi pi-user-edit" [routerLink]="['/modulepermission/permissionform']" [queryParams]="{user:list.username}"></button>
         <button pButton class="p-button-danger"icon="pi pi-trash" (click)="openDialog(list.username)"></button>
-        </div>   
+        </div>
     </td>
 </tr>
 </ng-template>

@@ -1,55 +1,99 @@
-<div>
-    <h4>Admin List</h4>
+
+<div class="container">
+  <div class="row mb-2 mt-2">
+    <div class="col-6">
+      <h4>Admin List</h4>
+    </div>
+    <div class="col-6 text-right">
+    <span class="p-input-icon-right ml-5">
+      <button pButton type="button" style="background-color: rgb(245, 46, 46); color: white;" label=" + Add Admin" class="p-button-danger"
+      [routerLink]="['/roleandpermission/adminform']" ></button>
+    </span>
+  </div>
+    <!-- <div class="col-6 text-right">
+      <button pButton class="add-button"   [routerLink]="['/roleandpermission/adminform']">+ Add</button>
+    </div> -->
+  </div>
 </div>
-<p-table #dt responsiveLayout="scroll" [paginator]="true" [rows]="10"
+<div class="card col-sm-12" style="border: none; margin-top: 10px;">
+<p-table #dt  responsiveLayout="scroll" [paginator]="true" [rows]="10"
     [showCurrentPageReport]="true" [value]="adminDetails"
     currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries" [responsive]="true"
-    styleClass="p-datatable-striped" [globalFilterFields]="['username']">
+    [globalFilterFields]="['username']" borderless="true"
+    [scrollable]="true" [scrollHeight]="'520px'">
+
     <ng-template pTemplate="caption">
         <div class="d-flex justify-content-between">
-            <div class="d-flex align-items-center">
-                <input #search pInputText type="text" placeholder="Search By Username">
-                <button pButton class="p-button-success ml-2"(click)="globalSearch(search.value,'contains')">Search</button>
+
+            <div class="d-flex align-items-center p-0 ">
+              <img src="../../../../assets/images/filter.svg" style="margin-right: 10px;">
+              <div class="input-container">
+              <img src="../../../../assets/images/search-white.svg" class="input-container-img">
+                <input #search pInputText type="text" placeholder="Search..."></div>
+                <!-- <button pButton class="p-button-success ml-2 add-button"(click)="globalSearch(search.value,'contains')">Search</button> -->
             </div>
             <div>
-                <button pButton [routerLink]="['/roleandpermission/adminform']">Add</button>
+              <button pButton   pTooltip="pdf" tooltipPosition="bottom" class="custom-image"
+              > <img src="../../../../assets/images/pdf.svg" alt="Button Image"></button>
+          <button pButton  pTooltip="Excel" tooltipPosition="bottom" class="custom-image"
+             ><img src="../../../../assets/images/excel.svg" alt="Button Image"></button>
+          <button pButton pTooltip="print" tooltipPosition="bottom" class="custom-image"
+              ><img src="../../../../assets/images/printer.svg" alt="Button Image"></button>
             </div>
         </div>
     </ng-template>
+
     <ng-template pTemplate="header">
+
         <tr>
-            <th class="text-center">Sno</th>
-            <th class="text-center">Image</th>
-            <th class="text-center">User Name</th>
-            <th class="text-center">Email</th>
-            <th class="text-center">Role</th>
+          <th class="text-center"></th>
+            <th  class="text-center" >Sno<p-sortIcon field="Sno" style="color: black;"></p-sortIcon></th>
+            <th  class="text-center" >Image</th>
+            <th   class="text-center" pSortableColumn="username">User Name<p-sortIcon field="username"></p-sortIcon></th>
+            <th  class="text-center" pSortableColumn="email">Email<p-sortIcon field="email"></p-sortIcon></th>
+            <th class="text-center" pSortableColumn="role">Role<p-sortIcon ></p-sortIcon></th>
             <th class="text-center">Actions</th>
         </tr>
     </ng-template>
+
     <ng-template pTemplate="body" let-list let-i="rowIndex">
         <tr>
+          <td><input type="checkbox" [(ngModel)]="list.selected" class="my-checkbox" ></td>
             <td>{{i+1}}</td>
-            <td><div *ngIf="!!list.image; else defaultImg"><img style="width:100px;height: 100px;" [src]="list.image" ></div>
+            <td><div *ngIf="!!list.image; else defaultImg"><img class="user-name-img"  [src]="list.image" ></div>
                 </td>
             <td>{{list.username}}</td>
             <td>{{list.email}}</td>
             <td>{{list.role}}</td>
             <td>
-                <div>
-                    <button pButton icon="pi pi-user-edit" pTooltip="Edit" tooltipPosition="bottom"
-                        class="p-button-secondary mr-3" [routerLink]="['/roleandpermission/editAdmin']" [queryParams]="{user:list.username}"></button>
-                    <button pButton icon="pi pi-trash" pTooltip="Delete" tooltipPosition="bottom"
-                        class="p-button-danger" (click)="openDialog(list.username)"></button>
+              <div class="btn-grp" id="btn-grp">
+                <!-- <button class="p-button-primary" pButton type="button" icon="pi pi-eye" style="margin-right:5px">
+              </button> -->
+    <div>
+                    <button pButton icon="pi pi-user-edit" style="color:grey;" pTooltip="Edit" tooltipPosition="bottom"
+                        class="mr-3 action-button" [routerLink]="['/roleandpermission/editAdmin']" [queryParams]="{user:list.username}"></button>
+                    <button pButton icon="pi pi-trash"  pTooltip="Delete" tooltipPosition="bottom"
+                        class="action-button" (click)="openDialog(list.username)"></button>
                 </div>
+              </div>
+
             </td>
+
         </tr>
+        <span class="border-bottom" style="border: 1px red"></span>
+
+
     </ng-template>
+
     <ng-template pTemplate="emptymessage">
         <tr>
             <td colspan="12" class="text-danger">No records to show</td>
         </tr>
     </ng-template>
 </p-table>
+</div>
+
 <ng-template #defaultImg>
-    <div ><img [src]="image" style="width:100px;height: 100px;"></div>
+    <div ><img [src]="image" class="user-name-img"></div>
 </ng-template>
+

@@ -10,9 +10,12 @@ import { DialogComponent } from '../dialog/dialog.component';
   styleUrls: ['./admin-list.component.scss'],
 })
 export class AdminListComponent implements OnInit {
+
   adminDetails: any[];
-  image:any="https://source.unsplash.com/c_GmwfHBDzk/200x200"
+  image:any="https://source.unsplash.com/c_GmwfHBDzk/200x200";
+  item:any
   @ViewChild('dt') dt:Table|undefined
+
   constructor(private dialog:MatDialog
     ,private adminService: AdminService) {
     this.getAdminListDetail();
@@ -20,16 +23,21 @@ export class AdminListComponent implements OnInit {
 
   ngOnInit(): void {}
 
+
   getAdminListDetail() {
     this.adminService.getAdminList().subscribe((res:any) => {
       this.adminDetails = res.data;
-      console.log(this.adminDetails)
+      this.item= this.adminDetails
+      console.log("hello" + JSON.stringify(this.item))
+
     });
   }
+
 
   globalSearch(value,mode){
     this.dt.filterGlobal(value,mode)
   }
+
 
   openDialog(name: any) {
     const dialogRef = this.dialog.open(DialogComponent);
