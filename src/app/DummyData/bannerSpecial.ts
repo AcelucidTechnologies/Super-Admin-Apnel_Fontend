@@ -20,5 +20,61 @@ export const bannerSpecialData = [
         image: "dummy 3",
         description: "hello i am 3"
     },
+    {
+        id: 4,
+        url: "Raman",
+        sortby:"kjnjkwendc",
+        image: "dummy 3",
+        description: "hello i am 3"
+    },
+    {
+        id: 5,
+        url: "Raman",
+        sortby:"kjnjkwendc",
+        image: "dummy 3",
+        description: "hello i am 3"
+    },
+    {
+        id: 6,
+        url: "Raman",
+        sortby:"kjnjkwendc",
+        image: "dummy 3",
+        description: "hello i am 3"
+    },
+    {
+        id: 7,
+        url: "Raman",
+        sortby:"kjnjkwendc",
+        image: "dummy 3",
+        description: "hello i am 3"
+    },
+    {
+        id: 8,
+        url: "Raman",
+        sortby:"kjnjkwendc",
+        image: "dummy 3",
+        description: "hello i am 3"
+    },
+    {
+        id: 9,
+        url: "Raman",
+        sortby:"kjnjkwendc",
+        image: "dummy 3",
+        description: "hello i am 3"
+    },
+    {
+        id: 10,
+        url: "Raman",
+        sortby:"kjnjkwendc",
+        image: "dummy 3",
+        description: "hello i am 3"
+    },
+    {
+        id: 11,
+        url: "Raman",
+        sortby:"kjnjkwendc",
+        image: "dummy 3",
+        description: "hello i am 3"
+    },
 
 ]
