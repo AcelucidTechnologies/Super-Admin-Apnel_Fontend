@@ -1,9 +1,9 @@
 <div class="d-flex justify-content-center">
-    <div class="card p-5" style="width:1000px; height: 650px;">
+    <div class="card p-5" style="width:1000px; height: 720px;">
     <div class="card-body">
         <div class="mt-1 mb-5">
             <h4>Edit Admin Details</h4>
-        </div> 
+        </div>
         <form [formGroup]="adminForm">
         <div class="row mt-2 mb-4">
             <!-- <div class="form-group col-3">
@@ -24,9 +24,9 @@
                 </div>
             </div>
             </div>
-           
+
             <div class="form-group col-8">
-               
+
                 <div class="row " style="margin-top: 40px;">
                     <label for="username" class="col-form-label starlabel col-3">User Email</label>
                     <div class="col-9"><input readOnly id="username" type="text" class="form-control" formControlName="userEmail">
@@ -40,7 +40,7 @@
                      <div *ngIf="!adminForm.controls['userName'].valid && adminForm.controls['userName'].touched ">
                          <div [hidden]="!adminForm.controls['userName'].errors['required']" style="font-size:smaller; color: rgb(253, 122, 122); font-style: italic;">UserName is required</div>
                      </div>
-                 </div> 
+                 </div>
                  </div>
             </div>
             <!-- <div class="form-group col-6">
@@ -50,8 +50,8 @@
                     <div [hidden]="!adminForm.controls['userEmail'].errors['required']" style="font-size:smaller; color: rgb(253, 122, 122); font-style: italic;">User's Email is required</div>
                 </div>
             </div> -->
-            
-            
+
+
         </div>
         <div class="row mb-4">
             <div class="form-group col-6">
@@ -67,7 +67,7 @@
                 <div *ngIf="!adminForm.controls['password'].valid && adminForm.controls['password'].touched ">
                     <div [hidden]="!adminForm.controls['password'].errors['required']" style="font-size:smaller; color: rgb(253, 122, 122); font-style: italic;">Password is required</div>
                 </div>
-                
+
             </div> -->
             <div class="form-group col-6">
                 <label for="username" class="col-form-label starlabel">Admin role</label>
@@ -78,6 +78,31 @@
                 </div>
             </div>
         </div>
+        <div class="row mb-6">
+          <div class="form-group col-6">
+              <label for="username" class="col-form-label starlabel">Password</label>
+              <input id="username" type="test" class="form-control" formControlName="password">
+              <div *ngIf="!adminForm.controls['password'].valid && adminForm.controls['password'].touched ">
+                  <div [hidden]="!adminForm.controls['password'].errors['required']" style="font-size:smaller; color: rgb(253, 122, 122); font-style: italic;">Password is required</div>
+              </div>
+          </div>
+          <!-- <div class="form-group col-6">
+              <label for="username" class="col-form-label starlabel">Password</label>
+              <input id="username" type="password" class="form-control" formControlName="password">
+              <div *ngIf="!adminForm.controls['password'].valid && adminForm.controls['password'].touched ">
+                  <div [hidden]="!adminForm.controls['password'].errors['required']" style="font-size:smaller; color: rgb(253, 122, 122); font-style: italic;">Password is required</div>
+              </div>
+
+          </div> -->
+          <div class="form-group col-6">
+              <label for="username" class="col-form-label starlabel">Confirm Password</label>
+              <input id="username" type="text" class="form-control" formControlName="confirmPassword">
+              <!-- <p-dropdown [options]="roleList" styleClass="roledropdown"  placeholder="Select" formControlName="adminRole"></p-dropdown> -->
+              <div *ngIf="!adminForm.controls['confirmPassword'].valid && adminForm.controls['confirmPassword'].touched ">
+                  <div [hidden]="!adminForm.controls['confirmPassword'].errors['required']" style="font-size:smaller; color: rgb(253, 122, 122); font-style: italic;">Confirm Password is required</div>
+              </div>
+          </div>
+      </div>
         <!-- <div class="row mb-5"> -->
             <!-- <div class="form-group col-6">
                 <label for="username" class="col-form-label starlabel">Confirm Password</label>
@@ -85,20 +110,19 @@
                 <div *ngIf="!adminForm.controls['confirmPassword'].valid && adminForm.controls['confirmPassword'].touched ">
                     <div [hidden]="!adminForm.controls['confirmPassword'].errors['required']" style="font-size:smaller; color: rgb(253, 122, 122); font-style: italic;">Confirm Password is required</div>
                 </div>
-                
+
                 <div *ngIf="!adminForm.valid && adminForm.controls['confirmPassword'].dirty&&adminForm.controls['confirmPassword'].value ">
                     <div [hidden]="!passchecker" style="font-size:smaller; color: rgb(253, 122, 122); font-style: italic;">Password does not match</div>
                 </div>
-                
+
             </div> -->
-           
+
         <!-- </div> -->
         <div class="d-flex justify-content-end ">
-            <button type="submit" class="btn btn-info mr-3" [disabled]="!adminForm.valid" (click)="submit()">Submit</button>
-            <button class="btn btn-info" [routerLink]="['/roleandpermission/adminlist']">Cancel</button>
+            <button type="submit" style="background: #FF9F43; border:none" class="btn btn-info mr-3" [disabled]="!adminForm.valid" (click)="submit()">Submit</button>
+            <button class="btn btn-info" style="background: #637381;border:none" [routerLink]="['/roleandpermission/adminlist']">Cancel</button>
         </div>
     </form>
     </div>
     </div>
     </div>
-    

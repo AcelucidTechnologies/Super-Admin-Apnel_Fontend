@@ -8,16 +8,20 @@ import {MatDialog} from '@angular/material/dialog';
 })
 export class DialogComponent implements OnInit {
 
+
   constructor() {
-   
+
    }
-  
-  
-  
+
+
   ngOnInit(): void {
   }
 
- 
+
 
 
 }
+function MyNewDialogComponent(MyNewDialogComponent: any, arg1: { width: string; disableClose: boolean; }) {
+  throw new Error('Function not implemented.');
+}
+
