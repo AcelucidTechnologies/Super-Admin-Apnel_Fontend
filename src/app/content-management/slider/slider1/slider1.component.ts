@@ -11,7 +11,10 @@ import { DialogComponent } from 'src/app/leads/dialog/dialog.component';
 import { MatDialog } from '@angular/material/dialog';
 import { SLIDER } from 'src/app/_models/slider';
 import { SliderDialogComponent } from '../slider-dialog/slider-dialog.component';
-
+import * as jsPDF from 'jspdf';
+import autoTable from 'jspdf-autotable'
+import * as FileSaver from 'file-saver';
+import * as xlsxPackage from 'xlsx'
 //import { BannerDialogComponent } from '../banner-dialog/banner-dialog.component';
 
 @Component({
@@ -25,7 +28,18 @@ export class Slider1Component implements OnInit {
   cols!: TABLE_HEADING[];
   fgsType: any;
   sliderList: SLIDER[]=[]
-  accessPermission:access
+  accessPermission:access;
+  exportColumns: any[];
+  sliderDetails:any[];
+  // ----------------------------
+
+  customers: SLIDER[];
+
+  selectedCustomers: SLIDER[];
+
+  statuses: any[];
+
+  activityValues: number[] = [0, 100];
 
   constructor(private ngxLoader: NgxUiLoaderService,
     private CmsService: CmsService,
@@ -88,4 +102,35 @@ export class Slider1Component implements OnInit {
       this.sidebarSpacing = 'expanded';
     }
   }
+
+  applyFilterGlobal($event, stringVal) {
+    this.dt.filterGlobal(($event.target as HTMLInputElement).value, stringVal);
+  }
+
+  exportPdf() {
+    this.sliderDetails = this.sliderList
+            const doc = new jsPDF.jsPDF('l', 'pt');
+           autoTable(doc, {
+            columns:this.exportColumns,
+            body:this.sliderDetails
+           });
+            doc.save('products.pdf');
+        }
+
+        exportExcel() {
+          const worksheet = xlsxPackage.utils.json_to_sheet(this.sliderList);
+          const workbook = { Sheets: { 'data': worksheet }, SheetNames: ['data'] };
+          const excelBuffer: any = xlsxPackage.write(workbook, { bookType: 'xlsx', type: 'array' });
+          this.saveAsExcelFile(excelBuffer, "leads");
+        }   
+        
+  saveAsExcelFile(buffer: any, fileName: string): void {
+    let EXCEL_TYPE = 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;charset=UTF-8';
+    let EXCEL_EXTENSION = '.xlsx';
+    const data: Blob = new Blob([buffer], {
+      type: EXCEL_TYPE
+    });
+    FileSaver.saveAs(data, fileName + '_export_' + new Date().getTime() + EXCEL_EXTENSION);
+  }
+
 }
