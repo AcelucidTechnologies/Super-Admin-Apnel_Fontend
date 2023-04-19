@@ -11,6 +11,8 @@ import { DialogComponent } from 'src/app/leads/dialog/dialog.component';
 import { MatDialog } from '@angular/material/dialog';
 import { BannerDialogComponent } from '../banner-dialog/banner-dialog.component';
 import { log } from 'console';
+import * as jsPDF from 'jspdf';
+import autoTable from 'jspdf-autotable'
 @Component({
   selector: 'app-banner-special',
   templateUrl: './banner-special.component.html',
@@ -23,7 +25,8 @@ export class BannerSpecialComponent implements OnInit {
   fgsType: any;
   bannerList: BANNERSPECIAL[]=[]
   accessPermission:access
-
+  bannerDetails:any[];
+  exportColumns: any[];
   // ----------------------------
 
   customers: BANNERSPECIAL[];
@@ -55,13 +58,14 @@ export class BannerSpecialComponent implements OnInit {
     this.ngxLoader.start();
     this.sidebarSpacing = 'contracted';
    
-    // this.cols = [
-    //   { field: 'bannerimage', show: true, headers: 'Banner Image' },
-    //   { field: 'url', show: true, headers: 'URL' },
-    //   { field: 'description', show: true, headers: 'Description' },
-    //   { field: 'sortby', show: true, headers: 'Sort By' },
-    //   { field: 'action', show: true, headers: 'Action' },
-    // ]
+    this.cols = [
+      { field: 'bannerimage', show: true, headers: 'Banner Image' },
+      { field: 'url', show: true, headers: 'URL' },
+      { field: 'description', show: true, headers: 'Description' },
+      { field: 'sortby', show: true, headers: 'Sort By' },
+      { field: 'action', show: true, headers: 'Action' },
+    ]
+    this.exportColumns = this.cols.map(col => ({title: col.headers,dataKey: col.field}))
     this.getbannerList();
 
     // $('#myModal').on('shown.bs.modal', function () {
@@ -109,4 +113,14 @@ export class BannerSpecialComponent implements OnInit {
   applyFilterGlobal($event, stringVal) {
     this.dt.filterGlobal(($event.target as HTMLInputElement).value, stringVal);
   }
+
+  exportPdf() {
+    this.bannerDetails = this.bannerList
+            const doc = new jsPDF.jsPDF('l', 'pt');
+           autoTable(doc, {
+            columns:this.exportColumns,
+            body:this.bannerDetails
+           });
+            doc.save('products.pdf');
+        }
 }
