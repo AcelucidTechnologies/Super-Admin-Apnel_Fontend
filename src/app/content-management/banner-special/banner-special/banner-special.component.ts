@@ -10,10 +10,18 @@ import { access } from 'src/app/_models/modulepermission';
 import { DialogComponent } from 'src/app/leads/dialog/dialog.component';
 import { MatDialog } from '@angular/material/dialog';
 import { BannerDialogComponent } from '../banner-dialog/banner-dialog.component';
+import { log } from 'console';
+import * as jsPDF from 'jspdf';
+import autoTable from 'jspdf-autotable'
+import * as FileSaver from 'file-saver';
+import * as xlsxPackage from 'xlsx'
+import { CustomPipe } from 'src/app/pipe/custom.pipe';
+
 @Component({
   selector: 'app-banner-special',
   templateUrl: './banner-special.component.html',
-  styleUrls: ['./banner-special.component.scss']
+  styleUrls: ['./banner-special.component.scss'],
+  providers: [ CustomPipe ]
 })
 export class BannerSpecialComponent implements OnInit {
   @ViewChild('dt') dt: Table | undefined;
@@ -22,7 +30,8 @@ export class BannerSpecialComponent implements OnInit {
   fgsType: any;
   bannerList: BANNERSPECIAL[]=[]
   accessPermission:access
-
+  bannerDetails:any[];
+  exportColumns: any[];
   // ----------------------------
 
   customers: BANNERSPECIAL[];
@@ -41,6 +50,7 @@ export class BannerSpecialComponent implements OnInit {
   constructor(private ngxLoader: NgxUiLoaderService,
     private CmsService: CmsService,
     private toastr: ToastrMsgService,
+    private pipe : CustomPipe,
     private permissionService:ModulePermissionService,
     public dialog: MatDialog) {
       this.permissionService.getModulePermission().subscribe(res=>{ 
@@ -59,8 +69,8 @@ export class BannerSpecialComponent implements OnInit {
       { field: 'url', show: true, headers: 'URL' },
       { field: 'description', show: true, headers: 'Description' },
       { field: 'sortby', show: true, headers: 'Sort By' },
-      { field: 'action', show: true, headers: 'Action' },
     ]
+    this.exportColumns = this.cols.map(col => ({title: col.headers,dataKey: col.field}))
     this.getbannerList();
 
     // $('#myModal').on('shown.bs.modal', function () {
@@ -78,10 +88,13 @@ export class BannerSpecialComponent implements OnInit {
 
   deleteBanner(bannerList: any) {
     this.ngxLoader.start();
+    console.log("1");
     this.CmsService.deleteSpecialBanner(bannerList.id).subscribe(res => {
       if (res) {
+        
         this.toastr.showSuccess("bannerSpecial deleted successfully", "banner delete")
         this.getbannerList()
+        
       }
     })
   }
@@ -102,6 +115,35 @@ export class BannerSpecialComponent implements OnInit {
     }
   }
 
+  applyFilterGlobal($event, stringVal) {
+    this.dt.filterGlobal(($event.target as HTMLInputElement).value, stringVal);
+  }
+
+  exportPdf() {
+    this.bannerDetails = this.bannerList
+            const doc = new jsPDF.jsPDF('l', 'pt');
+           autoTable(doc, {
+            columns:this.exportColumns,
+            body:this.bannerDetails
+           });
+            doc.save('products.pdf');
+        }
+
+        exportExcel() {
+          const worksheet = xlsxPackage.utils.json_to_sheet(this.bannerList);
+          const workbook = { Sheets: { 'data': worksheet }, SheetNames: ['data'] };
+          const excelBuffer: any = xlsxPackage.write(workbook, { bookType: 'xlsx', type: 'array' });
+          this.saveAsExcelFile(excelBuffer, "leads");
+        }   
+        
+  saveAsExcelFile(buffer: any, fileName: string): void {
+    let EXCEL_TYPE = 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;charset=UTF-8';
+    let EXCEL_EXTENSION = '.xlsx';
+    const data: Blob = new Blob([buffer], {
+      type: EXCEL_TYPE
+    });
+    FileSaver.saveAs(data, fileName + '_export_' + new Date().getTime() + EXCEL_EXTENSION);
+  }
 
 
 }

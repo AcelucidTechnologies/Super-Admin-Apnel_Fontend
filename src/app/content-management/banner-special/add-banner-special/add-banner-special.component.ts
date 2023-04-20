@@ -6,6 +6,9 @@ import { BANNERSPECIAL } from 'src/app/_models/cms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ToastrMsgService } from 'src/app/_services/toastr-msg.service';
 import { CmsService } from '../../../_services/cms.service'
+import bsCustomFileInput from 'bs-custom-file-input';
+import { CommonService } from 'src/app/_services/common';
+//import * as customBuild from ""
 @Component({
   selector: 'app-add-banner-special',
   templateUrl: './add-banner-special.component.html',
@@ -24,13 +27,22 @@ export class AddBannerSpecialComponent implements OnInit {
   payload: BANNERSPECIAL
   imageChangedEvent: any = '';
   croppedImage: any = '';
+  //public Editor = customBuild;
+  public config={
+    toolbar:['heading','|','bold','italic','custombutton'],
+    language: 'en'
+  }
+  //var plainText = content.replace(/<[^>]*>/g, '');
+  
   reg = '(https?://)?([\\da-z.-]+)\\.([a-z.]{2,6})[/\\w .-]*/?';
-
-  constructor(private ngxLoader: NgxUiLoaderService, private fb: FormBuilder,
+  
+  constructor(private ngxLoader: NgxUiLoaderService,
+    private fb: FormBuilder,
     private route: Router,
     private activateRoute: ActivatedRoute,
     private toastr: ToastrMsgService,
-    private CmsService: CmsService
+    private CmsService: CmsService,
+    private common: CommonService
     ) {
       this.bannerSpecialForm = this.fb.group({
         id:['',],
@@ -43,6 +55,8 @@ export class AddBannerSpecialComponent implements OnInit {
   ngOnInit(): void {
     this.fgsType = SPINNER.squareLoader
     this.ngxLoader.start();
+    bsCustomFileInput.init();
+    //this.myCkeditorConfig = this.common.getConfig(150,400);
     this.sidebarSpacing = 'contracted';
     this.activateRoute.queryParamMap.subscribe(params => {
       this.id = params.get('id');
@@ -145,4 +159,8 @@ export class AddBannerSpecialComponent implements OnInit {
       this.ngxLoader.stop();
     })
   }
+
+
+
+ 
 }

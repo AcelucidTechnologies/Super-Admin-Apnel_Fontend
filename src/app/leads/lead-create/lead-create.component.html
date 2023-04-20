@@ -196,6 +196,7 @@
                   <div class="col-8">
                     <!-- <textarea rows="10" formControlName="commentGiven"></textarea> -->
                     <ckeditor formControlName="commentGiven"></ckeditor>
+                    
                     <div
                       *ngIf="!leadForm.controls['commentGiven'].valid && (leadForm.controls['commentGiven'].touched || leadForm.controls['commentGiven'].dirty)">
                       <div [hidden]="!leadForm.controls['commentGiven'].errors['required']"

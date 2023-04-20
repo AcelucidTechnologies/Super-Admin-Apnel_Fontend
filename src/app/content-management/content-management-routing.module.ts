@@ -58,7 +58,7 @@ const routes: Routes = [
   {
     path: 'add-slider', component: AddSliderComponent
   },
- 
+
 ];
 
 @NgModule({

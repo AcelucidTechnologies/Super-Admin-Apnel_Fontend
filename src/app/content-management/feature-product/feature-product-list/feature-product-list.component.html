@@ -1,4 +1,4 @@
-
+<!-- 
 
     <div class="page-heading">
         <h1 class="header-text-title" style="margin-left: 1%;">Featured Product</h1>
@@ -27,8 +27,7 @@
               <td>{{featureList.quantity}}</td>
               <td>
                 <div class="btn-grp" id="btn-grp">
-                  <!-- <button class="p-button-primary" pButton type="button" icon="pi pi-eye" style="margin-right:5px">
-                </button> -->
+                  
                   <button class="p-button-warning" pButton type="button" icon="pi pi-user-edit" pTooltip="Edit Product"
                   [queryParams]="{id:featureList?.id}" tooltipPosition="bottom" [routerLink]="['/cms/add-featured-product']" style="margin-right:5px"
                  ></button>
@@ -41,4 +40,137 @@
         </p-table>
           
     
-    </div>
+    </div> -->
+
+    
+  <div class="page-heading">
+    <h1 class="header-text-title" style="margin-left: 1%;">Feature Product</h1>
+    <div class="page-btn">
+      <a class="btn btn-added" [routerLink]="['/cms/add-featured-product']">
+          <img src="../assets/images/icons/plus.svg" class="me-1" alt="img">Add Product
+      </a>
+  </div>
+  </div>
+
+  <p-table #dt [value]="featureList" [(selection)]="selectedProduct" dataKey="id" [rowHover]="true"
+    [rows]="10" [showCurrentPageReport]="true" responsiveLayout="scroll"
+    [paginator]="true" currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
+    [filterDelay]="0" [globalFilterFields]="['productName','modal']" class="abc">
+    <ng-template pTemplate="caption" style="background-color: #fff !important; ">
+        <div class="table-header">
+            <span style="display: flex; justify-content: center; align-items: center;" class="p-input-icon-left ">
+              <img style="margin-right: 5px;" src="../assets/images/icons/filter.svg" class="filter" alt="img">
+                <input style="outline: none; border-radius: 5px; border: 1px solid rgb(195, 183, 183); padding: 6px;" type="text" (input)="applyFilterGlobal($event, 'contains')" placeholder="Search..." />
+            </span>
+
+            <div class="d-flex justify-content-end align-items-end">
+              <button style="background-color: #f4f4f4; border: none;" type="button" pButton class="mr-1" pTooltip="Pdf" (click)="exportPdf()" 
+                tooltipPosition="bottom"><img
+                src="../assets/images/icons/pdf.svg"></button>
+              <button type="button" style="background-color: #f4f4f4;; border: none;" pButton class="mr-1" pTooltip="excel" (click)="exportExcel()"
+                tooltipPosition="bottom" ><img
+                src="../assets/images/icons/excel.svg"></button>
+                <button type="button" style="background-color: #f4f4f4;; border: none;" pButton class=" mr-1" pTooltip="print"
+                tooltipPosition="bottom" ><img
+                src="../assets/images/icons/printer.svg"></button>
+            </div>
+        </div>
+    </ng-template>
+    <ng-template  pTemplate="header">
+        <tr>
+            <th style="width: 3rem;">
+                <p-tableHeaderCheckbox></p-tableHeaderCheckbox>
+            </th>
+            <th pSortableColumn="productName">
+                <div class="flex justify-content-between align-items-center head1">
+                  Product Name
+                    <p-sortIcon field="productName"></p-sortIcon>
+                    
+                </div>
+            </th>
+            <th pSortableColumn="modal">
+                <div class="flex justify-content-between align-items-center head1">
+                    Modal
+                    <p-sortIcon field="modal"></p-sortIcon>
+                    
+                </div>
+            </th>
+
+            <th pSortableColumn="price">
+              <div class="flex justify-content-between align-items-center head1">
+                  Price
+                  <p-sortIcon field="price"></p-sortIcon>
+              </div>
+          </th>
+
+          <th pSortableColumn="quantity">
+            <div class="flex justify-content-between align-items-center head1">
+                Quantity
+                <p-sortIcon field="quantity"></p-sortIcon>
+            </div>
+        </th>
+
+          <th>
+            <div class="flex justify-content-between align-items-center head1">
+                Image
+            </div>
+        </th>
+        <th>
+          <div class="flex justify-content-between align-items-center head1">
+              Action
+              
+          </div>
+      </th>
+
+            
+        </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-featureList>
+        <tr class="p-selectable-row">
+            <td>
+                <p-tableCheckbox [value]="featureList"></p-tableCheckbox>
+            </td>
+            <td>
+                <span class="p-column-title">Product Name</span>
+                {{featureList.productName}}
+            </td>
+            <td>
+                <span class="p-column-title">Modal</span>
+                
+                {{featureList.modal}}
+            </td>
+           
+            <td>
+                <span class="p-column-title">Price</span>
+                {{featureList.price}}
+            </td>
+
+            <td>
+              <span class="p-column-title">Quantity</span>
+              {{featureList.quantity}}
+          </td>
+
+            <td>
+              <span class="p-column-title">Image</span>
+                {{featureList.image}}
+            </td>
+
+            <td>
+              <a pTooltip="Edit Banner" tooltipPosition="bottom" class="me-3" style="margin-right: 10px;">
+                  <img src="../assets/images/icons/edit.svg" [queryParams]="{id:featureList?.id}" [routerLink]="['/cms/add-featured-product']"  alt="img">
+              </a>
+              <a pTooltip="Delete Banner" tooltipPosition="bottom" class="me-3 confirm-text" (click)="openDialog(featureList)" href="javascript:void(0);">
+                  <img src="../assets/images/icons/delete.svg" alt="img">
+              </a>
+          </td>
+           
+         
+        </tr>
+    </ng-template>
+    <ng-template pTemplate="emptymessage">
+        <tr>
+            <td colspan="8">No customers found.</td>
+        </tr>
+    </ng-template>
+</p-table>
+

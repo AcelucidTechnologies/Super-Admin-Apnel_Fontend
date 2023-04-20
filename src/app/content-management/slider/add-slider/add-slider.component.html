@@ -49,13 +49,17 @@
   
                 <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
                   <div class="form-group">
-                    <label for="Name" class="col-form-label text-left starlabel">Description</label><br>
-                    <textarea class="form-control" cols="110" rows="8" placeholder="Enter Discription" formControlName="description"></textarea>
-                    <div
+                    <label for="comment" class="col-form-label text-left starlabel">Comment:</label>
+                    <div class="col-12">
+                      <!-- <textarea rows="10" formControlName="commentGiven"></textarea> -->
+                      <ckeditor name="editor1" formControlName="description"></ckeditor>
+  
+                      <div
                       *ngIf="(!sliderForm.controls['description'].valid) && (sliderForm.controls['description'].touched || sliderForm.controls['description'].dirty)">
-                      <div [hidden]="!sliderForm.controls['description'].errors['required']"
-                        style="color: rgb(253, 122, 122); font-size:small; font-style: italic;">
-                        Description is required
+                        <div [hidden]="!sliderForm.controls['description'].errors['required']"
+                          style="color: rgb(253, 122, 122); font-size:small; font-style: italic;">
+                          Comment is required
+                        </div>
                       </div>
                     </div>
                   </div>

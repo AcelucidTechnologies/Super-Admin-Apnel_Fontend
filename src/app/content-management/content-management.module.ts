@@ -21,7 +21,11 @@ import {MatDialogModule} from '@angular/material/dialog';
 import { MatButtonModule } from '@angular/material/button';
 import { AddSliderComponent } from './slider/add-slider/add-slider.component';
 import { DialogFeatureComponent } from './feature-product/dialog-feature/dialog-feature.component';
-import { SliderDialogComponent } from './slider/slider-dialog/slider-dialog.component'
+import { SliderDialogComponent } from './slider/slider-dialog/slider-dialog.component';
+import { CKEditorModule } from 'ckeditor4-angular';
+import { CustomPipe } from '../pipe/custom.pipe';
+
+
 @NgModule({
   declarations: [
     CategoryComponent,
@@ -38,7 +42,8 @@ import { SliderDialogComponent } from './slider/slider-dialog/slider-dialog.comp
     BannerDialogComponent,
     AddSliderComponent,
     DialogFeatureComponent,
-    SliderDialogComponent
+    SliderDialogComponent,
+    
   ],
   imports: [
     CommonModule,
@@ -48,7 +53,8 @@ import { SliderDialogComponent } from './slider/slider-dialog/slider-dialog.comp
     FormsModule,
     ReactiveFormsModule,
     MatDialogModule,
-    MatButtonModule
+    MatButtonModule,
+    CKEditorModule,
   ]
 })
 export class ContentManagementModule { }
