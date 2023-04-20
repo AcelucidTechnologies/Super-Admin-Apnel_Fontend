@@ -10,3 +10,19 @@ label.starlabel::after{
     padding-right: 6em;
     text-overflow: ellipsis;
 }
+.back-button{
+  background: rgb(228, 28, 28);;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  margin-left: 80px;
+  width: 40px;
+
+}
+::ng-deep.back-button:hover {
+  background-color: lightcoral !important;
+}
+.button-heading-container {
+  display: flex;
+  align-items: center;
+}

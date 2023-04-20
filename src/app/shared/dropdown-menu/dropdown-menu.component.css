@@ -78,12 +78,12 @@ mat-icon {
   margin-left: 10px
 }
 .user-name{
-  color: white;
+  color: #1B2950;
   margin-top: -10px;
   cursor: pointer;
 }
 .user-role{
-  color: white;
+  color: #67748E;
   cursor: pointer;
   font-size: 12px;
   justify-content: center;

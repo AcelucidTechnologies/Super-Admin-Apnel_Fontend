@@ -1,0 +1,10 @@
+.add-button-admin{
+  background-color: rgb(245, 46, 46);
+  color: white;
+  border: none;
+}
+:host::ng-deep.add-button-admin:hover{
+  background-color: lightcoral;
+  color: white;
+  border: none;
+}
