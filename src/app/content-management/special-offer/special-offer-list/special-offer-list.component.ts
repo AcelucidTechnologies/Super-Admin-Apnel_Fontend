@@ -1,112 +1,94 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { BANNERSPECIAL } from 'src/app/_models/cms';
 import { TABLE_HEADING } from 'src/app/_models/table_heading';
 import { Table } from 'primeng/table';
-import { NgxUiLoaderService, SPINNER } from 'ngx-ui-loader';
+import { NgxUiLoaderService } from 'ngx-ui-loader';
 import { ToastrMsgService } from 'src/app/_services/toastr-msg.service';
 import { ModulePermissionService } from 'src/app/_services/module-permission.service';
 import { CmsService } from '../../../_services/cms.service';
 import { access } from 'src/app/_models/modulepermission';
-import { DialogComponent } from 'src/app/leads/dialog/dialog.component';
 import { MatDialog } from '@angular/material/dialog';
-import { BannerDialogComponent } from '../banner-dialog/banner-dialog.component';
-import { log } from 'console';
 import * as jsPDF from 'jspdf';
 import autoTable from 'jspdf-autotable'
 import * as FileSaver from 'file-saver';
 import * as xlsxPackage from 'xlsx'
-
+import { SPECIALOFFER } from 'src/app/_models/cms';
+import { DialogSpecialOfferComponent } from '../dialog-special-offer/dialog-special-offer.component';
 
 @Component({
-  selector: 'app-banner-special',
-  templateUrl: './banner-special.component.html',
-  styleUrls: ['./banner-special.component.scss'],
-  providers: []
+  selector: 'app-special-offer-list',
+  templateUrl: './special-offer-list.component.html',
+  styleUrls: ['./special-offer-list.component.scss']
 })
-export class BannerSpecialComponent implements OnInit {
+export class SpecialOfferListComponent implements OnInit {
+
+ 
+
   @ViewChild('dt') dt: Table | undefined;
   sidebarSpacing: any;
   cols!: TABLE_HEADING[];
-  fgsType: any;
-  bannerList: BANNERSPECIAL[]=[]
+  offerList : SPECIALOFFER[]=[]
   accessPermission:access
-  bannerDetails:any[];
+  productDetails:any[];
   exportColumns: any[];
-  // ----------------------------
+  customers:SPECIALOFFER[]=[]
 
-  customers: BANNERSPECIAL[];
-
-  selectedCustomers: BANNERSPECIAL[];
-
-
+  selectedOffer: SPECIALOFFER[]=[]
   statuses: any[];
 
-
   activityValues: number[] = [0, 100];
-
-
-  // --------------------------------
-
+  
   constructor(private ngxLoader: NgxUiLoaderService,
     private CmsService: CmsService,
     private toastr: ToastrMsgService,
-    
-    private permissionService:ModulePermissionService,
-    public dialog: MatDialog) {
+    public dialog: MatDialog,
+    private permissionService:ModulePermissionService) {
       this.permissionService.getModulePermission().subscribe(res=>{ 
         this.accessPermission=res[0].CmsBanner
-       
+        console.log( this.accessPermission)
       })
      }
 
   ngOnInit(): void {
-    this.fgsType = SPINNER.squareLoader
+    this.sidebarSpacing = 'contracted';
     this.ngxLoader.start();
     this.sidebarSpacing = 'contracted';
-   
     this.cols = [
-      { field: 'bannerimage', show: true, headers: 'Banner Image' },
-      { field: 'url', show: true, headers: 'URL' },
-      { field: 'description', show: true, headers: 'Description' },
-      { field: 'sortby', show: true, headers: 'Sort By' },
+      { field: 'image', show: true, headers: 'Image' },
+      { field: 'product name', show: true, headers: 'Product Name' },
+      { field: 'Modal', show: true, headers: 'Modal' },
+      { field: 'price', show: true, headers: 'Price' },
+      { field: 'quantity', show: true, headers: 'Quantity' },
     ]
-    this.exportColumns = this.cols.map(col => ({title: col.headers,dataKey: col.field}))
-    this.getbannerList();
-
-    // $('#myModal').on('shown.bs.modal', function () {
-    //   $('#myInput').trigger('focus')
-    // })
+    this.getofferList();
   }
-  
-  getbannerList() {
-    this.CmsService.getSpecialBannerList().subscribe((res: BANNERSPECIAL[]) => {
-      this.bannerList = res
-      console.log(this.bannerList,"--------------------")
+
+  getofferList(){
+    this.CmsService.getOfferList().subscribe((res: []) => {
+      this.offerList = res
+      //console.log(this.bannerList,"--------------------")
       this.ngxLoader.stop();
     })
   }
 
-  deleteBanner(bannerList: any) {
+  deleteProduct(offerList: any) {
     this.ngxLoader.start();
-    console.log("1");
-    this.CmsService.deleteSpecialBanner(bannerList.id).subscribe(res => {
+    this.CmsService.deleteOffer(offerList.id).subscribe(res => {
       if (res) {
-        
-        this.toastr.showSuccess("bannerSpecial deleted successfully", "banner delete")
-        this.getbannerList()
-        
+        this.toastr.showSuccess("Special Product deleted successfully", "Special product delete")
+        this.getofferList()
       }
     })
   }
-  openDialog(deleteList: any) {
-    const dialogRef = this.dialog.open(BannerDialogComponent);
+
+  openDialog(offerList: any) {
+    const dialogRef = this.dialog.open(DialogSpecialOfferComponent);
     dialogRef.afterClosed().subscribe(result => {
       if (result == true) {
-        this.deleteBanner(deleteList)
+        this.deleteProduct(offerList)
       }
     });
   }
-
+  
   onToggleSidebar(sidebarState: any) {
     if (sidebarState === 'open') {
       this.sidebarSpacing = 'contracted';
@@ -115,22 +97,18 @@ export class BannerSpecialComponent implements OnInit {
     }
   }
 
-  applyFilterGlobal($event, stringVal) {
-    this.dt.filterGlobal(($event.target as HTMLInputElement).value, stringVal);
-  }
-
   exportPdf() {
-    this.bannerDetails = this.bannerList
+    this.productDetails = this.offerList
             const doc = new jsPDF.jsPDF('l', 'pt');
            autoTable(doc, {
             columns:this.exportColumns,
-            body:this.bannerDetails
+            body:this.productDetails
            });
             doc.save('products.pdf');
         }
 
         exportExcel() {
-          const worksheet = xlsxPackage.utils.json_to_sheet(this.bannerList);
+          const worksheet = xlsxPackage.utils.json_to_sheet(this.offerList);
           const workbook = { Sheets: { 'data': worksheet }, SheetNames: ['data'] };
           const excelBuffer: any = xlsxPackage.write(workbook, { bookType: 'xlsx', type: 'array' });
           this.saveAsExcelFile(excelBuffer, "leads");
@@ -145,5 +123,8 @@ export class BannerSpecialComponent implements OnInit {
     FileSaver.saveAs(data, fileName + '_export_' + new Date().getTime() + EXCEL_EXTENSION);
   }
 
+  applyFilterGlobal($event, stringVal) {
+    this.dt.filterGlobal(($event.target as HTMLInputElement).value, stringVal);
+  }
 
 }

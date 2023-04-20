@@ -1,0 +1,32 @@
+mat-dialog-content{
+    width:550px;
+    height: 200px;
+    }
+    :host::ng-deep .dialog1{
+            background-color: rgb(212, 214, 214);
+            border-radius: 5px;
+            outline: none;
+        }
+        .box{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+        }
+        .mat-typography{
+            display: flex;
+            justify-content: center;
+        }
+        mat-dialog-actions{
+            margin-bottom: 3px;
+        }
+        .bt-1{
+                background-color: #ff9f43;
+                color: #fff;
+                font-size: 20px;
+        }
+        .bt-2{
+            background-color: rgb(228, 28, 28);
+            color: #fff;
+            font-size: 20px;
+        }

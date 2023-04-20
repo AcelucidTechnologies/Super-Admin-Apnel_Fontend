@@ -88,6 +88,18 @@ export const SideNaveMenueRoute = [
                         icon: 'pi pi-list',
                         routerLink: ['/cms/slider']
             },
+            {
+                label: 'Special-Offer',
+               
+                        icon: 'pi pi-list',
+                        routerLink: ['/cms/special-offer']
+            },
+            {
+                label: 'page Setup',
+               
+                        icon: 'pi pi-list',
+                        routerLink: ['/cms/page']
+            },
             // {
             //     label: 'Slider',
             //     items: [
