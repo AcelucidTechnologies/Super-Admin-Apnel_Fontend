@@ -3,7 +3,7 @@ mat-icon {
 }
 
 .dropdown-menu-container {
-  margin: 0;
+  margin: -20px !important;
 }
 /* .dropdown-menu-container .main-menu {
   margin: 0;
@@ -17,13 +17,13 @@ mat-icon {
   top: 1px;
   right: 1.5rem;
   display: block;
-  background: #151D3B;
+  background: white;
   border: 1px solid #D1D1D1;
   border-radius: 20px 0 20px 20px;
   list-style: none;
   margin: 0;
   padding: 1rem 0;
-  width: 110px;
+  width: 150px;
 }
 .menu-items .menu-item {
   margin: 0;
@@ -31,8 +31,8 @@ mat-icon {
 }
 .menu-item .link {
   text-decoration: none;
-  color: #fff;
-  font-size: 0.9rem;
+
+  font-size: 13px;
   display: block;
   margin: 0;
   padding: 0.3rem 1.5rem;
@@ -58,7 +58,7 @@ mat-icon {
 @media screen and (min-width: 992px) {
   .dropdown-menu-container .main-menu .main-menu-btn {
     padding: 1rem 1rem 0;
-    margin: 1.3rem 1.4rem 0 0;
+
   }
   .sub-menu-container {
     position: relative;
@@ -68,3 +68,46 @@ mat-icon {
     margin: 0px;
   }
 }
+mat-icon {
+  font-size: 2rem!important;
+}
+.user-detail{
+  display: inline-grid;
+  position: relative;
+  margin-right: 30px;
+  margin-left: 10px
+}
+.user-name{
+  color: white;
+  margin-top: -10px;
+  cursor: pointer;
+}
+.user-role{
+  color: white;
+  cursor: pointer;
+  font-size: 12px;
+  justify-content: center;
+  margin-left: 10px;
+}
+.navigation-bar{
+  margin-top: 30px;
+}
+.user-info{
+  float: center;
+  align-items: center;
+  display: inline-flex;
+}
+.user-info img{
+  width: 35px;
+  height: 35px;
+  border-radius: 10px;
+  margin-top: -20px;
+}
+.admin-icon{
+  color: black;
+  width: 10px;
+  height: 10px;
+  margin-right: 25px;
+}
+
+

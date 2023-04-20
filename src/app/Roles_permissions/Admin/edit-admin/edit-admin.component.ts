@@ -24,7 +24,9 @@ export class EditAdminComponent implements OnInit {
       userName: new FormControl('', [Validators.required]),
       userEmail: new FormControl('', [Validators.required]),
       contactNumber: new FormControl('', [Validators.required]),
-      adminRole: new FormControl('', [Validators.required])
+      adminRole: new FormControl('', [Validators.required]),
+      password: new FormControl('', [Validators.required]),
+      confirmPassword: new FormControl('', [Validators.required])
     })
     this.activatedroute.queryParamMap.subscribe((params) => {
       this.username = params.get('user')
@@ -81,14 +83,14 @@ export class EditAdminComponent implements OnInit {
       console.log(data.target.result)
     }
   }
-  
+
 submitEditedDetails(recievedValue:any){
 let newPayload= Object.assign({},recievedValue)
 this.adminService.submitEditedAdminDetail(newPayload)
 .subscribe((res)=>{
  if(res)
 //  console.log(res);
- 
+
  this.route.navigate(['/roleandpermission/adminlist']);
 })
 }

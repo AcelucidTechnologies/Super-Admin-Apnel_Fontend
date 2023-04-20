@@ -1,19 +1,28 @@
-<div class="dropdown-menu-container" #dropdown>
+<div class="dropdown-menu-container" #dropdown >
   <div class="main-menu">
-    <div class="pr-4">
-      <span class="main-menu-btn f-btn " (click)="toggleMenu()"><mat-icon>account_circle</mat-icon></span>
-    </div>
-    <!-- <div *ngIf="profileAvatarUrl">
-      <span class="main-menu-btn f-btn" [ngStyle]="{ 'background-size': 'cover' , 'background-image': 'url(' + profileAvatarUrl + ')'}" (click)="toggleMenu()">&nbsp;</span>
-    </div> -->
+    <div class=" navigation-bar">
+      <span class="main-menu-btn f-btn " ><mat-icon>fullscreen</mat-icon></span>
+      <span class="main-menu-btn f-btn mr-3 " matBadge="4" ><mat-icon >notifications</mat-icon></span>
+
+      <span class="user-info">
+
+        <img src="../../../assets/images/profile-img.jpeg" alt="Image">
+        <span class="user-detail" >
+
+          <span class="user-name" style="display: flex;" (click)="toggleMenu()">John Smilga <mat-icon >expand_more</mat-icon></span>
+          <span class="user-role"> Super Admin</span>
+        </span>
+      </span>
   </div>
-  <div class="sub-menu-container" #submenu> 
+  <div class="sub-menu-container" #submenu>
     <ul class="menu-items" [@menu]="menuState" >  <!--[@menu] usage reference https://angular.io/guide/animations -->
       <li class="menu-item" [ngClass]="settingsClass">
-        <a [hidden]="user!='superAdmin'" href="javascript:void(0)" class="link" [routerLink]="['/roleandpermission/editSuperAdmin']">Settings</a>
+        <a [hidden]="user!='superAdmin'" href="javascript:void(0)" style="color: #637381;" class="link" [routerLink]="['/roleandpermission/editSuperAdmin']"><img src="../../../assets/images/users1.svg" alt="Button Image" style="margin-right: 10px;">My Profile</a>
       </li>
-      <li class="menu-item">
-        <a href="javascript:void(0)" class="link" (click)="onLogout()">Logout</a>
+
+      <li class="menu-item" style="border-top: 1px solid">
+
+        <a href="javascript:void(0)" class="link" style="color: red;" (click)="onLogout()"><img src="../../../assets/images/log-out.svg" style="margin-right: 10px;" alt="Button Image">Logout</a>
       </li>
     </ul>
   </div>

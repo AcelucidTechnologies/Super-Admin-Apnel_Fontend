@@ -38,6 +38,7 @@
 }
 .dropdown-custom {
     margin-left: auto;
+    margin-top: -20px;
 }
 .logo-custom {
     a {
@@ -55,6 +56,10 @@
         color: #fff;
         cursor: pointer;
     }
+}
+.header-color{
+  background-color: rgb(245, 46, 46);
+  height: 10px;
 }
 @media screen and (max-width:545px){
     .link-menu-cont {
@@ -79,3 +84,4 @@
         margin: 1.7rem 2rem 0 0;
     }
 }
+
