@@ -11,26 +11,25 @@
           <ng-template pTemplate="header" let-columns>
             <tr>
               <th style="text-align: center;" *ngFor="let col of columns">{{col.headers}}</th>
-             
+
             </tr>
           </ng-template>
           <ng-template pTemplate="body" let-bannerList>
             <tr>
-              
+
               <td>{{bannerList.image}}</td>
               <td>{{bannerList.url}}</td>
               <td>{{bannerList.description}}</td>
               <td>{{bannerList.sortby}}</td>
-              
+
               <td>
                 <div class="btn-grp" id="btn-grp">
-                  <!-- <button class="p-button-primary" pButton type="button" icon="pi pi-eye" style="margin-right:5px">
-                </button> -->
+
                   <button class="p-button-warning" pButton type="button" icon="pi pi-user-edit" pTooltip="Edit banner"
                   [queryParams]="{id:bannerList?.id}" tooltipPosition="bottom" [routerLink]="['/cms/add-special-banner']" style="margin-right:5px"
                  ></button>
                   <button class="p-button-danger" pButton type="button" icon="pi pi-trash" pTooltip="Delete Banner"
-                    tooltipPosition="bottom" style="margin-right:5px"  (click)="openDialog(bannerList)"></button>               
+                    tooltipPosition="bottom" style="margin-right:5px"  (click)="openDialog(bannerList)"></button>
                 </div>
               </td>
             </tr>
