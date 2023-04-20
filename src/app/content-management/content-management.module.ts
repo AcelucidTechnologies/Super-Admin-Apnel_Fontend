@@ -23,12 +23,13 @@ import { AddSliderComponent } from './slider/add-slider/add-slider.component';
 import { DialogFeatureComponent } from './feature-product/dialog-feature/dialog-feature.component';
 import { SliderDialogComponent } from './slider/slider-dialog/slider-dialog.component';
 import { CKEditorModule } from 'ckeditor4-angular';
-import { CustomPipe } from '../pipe/custom.pipe';
+
 import { SpecialOfferListComponent } from './special-offer/special-offer-list/special-offer-list.component';
 import { AddSpecialOfferComponent } from './special-offer/add-special-offer/add-special-offer.component';
 import { DialogSpecialOfferComponent } from './special-offer/dialog-special-offer/dialog-special-offer.component';
 import { PageListComponent } from './page/page-list/page-list.component';
 import { AddPageListComponent } from './page/add-page-list/add-page-list.component';
+import { DialogSelectComponent } from './page/dialog-select/dialog-select.component';
 
 
 @NgModule({
@@ -53,6 +54,7 @@ import { AddPageListComponent } from './page/add-page-list/add-page-list.compone
     DialogSpecialOfferComponent,
     PageListComponent,
     AddPageListComponent,
+    DialogSelectComponent,
     
   ],
   imports: [

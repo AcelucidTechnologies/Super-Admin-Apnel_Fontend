@@ -6,7 +6,7 @@
     <!-- </div> -->
     <div *ngIf="check; else other">
    <app-header (toggleSidebar)="onToggleSidebar($event)"></app-header>
-    <div class="body" [ngClass]="sidebarSpacing">
+    <div class="bcard body" [ngClass]="sidebarSpacing">
         <router-outlet></router-outlet>
     </div>
 </div>

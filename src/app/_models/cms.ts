@@ -60,3 +60,10 @@ export interface SPECIALOFFER {
     category: string,
    
 }
+
+export interface PAGE {
+    id: number,
+    url: string
+    page: string,
+    description: string, 
+}

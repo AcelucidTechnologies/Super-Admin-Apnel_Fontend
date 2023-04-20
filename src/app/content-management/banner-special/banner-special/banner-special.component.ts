@@ -15,13 +15,13 @@ import * as jsPDF from 'jspdf';
 import autoTable from 'jspdf-autotable'
 import * as FileSaver from 'file-saver';
 import * as xlsxPackage from 'xlsx'
-import { CustomPipe } from 'src/app/pipe/custom.pipe';
+
 
 @Component({
   selector: 'app-banner-special',
   templateUrl: './banner-special.component.html',
   styleUrls: ['./banner-special.component.scss'],
-  providers: [ CustomPipe ]
+  providers: []
 })
 export class BannerSpecialComponent implements OnInit {
   @ViewChild('dt') dt: Table | undefined;
@@ -50,7 +50,7 @@ export class BannerSpecialComponent implements OnInit {
   constructor(private ngxLoader: NgxUiLoaderService,
     private CmsService: CmsService,
     private toastr: ToastrMsgService,
-    private pipe : CustomPipe,
+    
     private permissionService:ModulePermissionService,
     public dialog: MatDialog) {
       this.permissionService.getModulePermission().subscribe(res=>{ 
