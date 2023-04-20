@@ -1,15 +1,15 @@
 <div class="dropdown-menu-container" #dropdown >
   <div class="main-menu">
     <div class=" navigation-bar">
-      <span class="main-menu-btn f-btn " ><mat-icon>fullscreen</mat-icon></span>
-      <span class="main-menu-btn f-btn mr-3 " matBadge="4" ><mat-icon >notifications</mat-icon></span>
+      <span class="main-menu-btn f-btn " ><mat-icon style="color: #67748E;">fullscreen</mat-icon></span>
+      <span class="main-menu-btn f-btn mr-3 " matBadge="4" ><mat-icon style="color: #67748E;">notifications</mat-icon></span>
 
       <span class="user-info">
 
         <img src="../../../assets/images/profile-img.jpeg" alt="Image">
         <span class="user-detail" >
 
-          <span class="user-name" style="display: flex;" (click)="toggleMenu()">John Smilga <mat-icon >expand_more</mat-icon></span>
+          <span class="user-name" style="display: flex;" (click)="toggleMenu()">John Smilga <mat-icon style="color: #212B36;" >expand_more</mat-icon></span>
           <span class="user-role"> Super Admin</span>
         </span>
       </span>
@@ -19,7 +19,6 @@
       <li class="menu-item" [ngClass]="settingsClass">
         <a [hidden]="user!='superAdmin'" href="javascript:void(0)" style="color: #637381;" class="link" [routerLink]="['/roleandpermission/editSuperAdmin']"><img src="../../../assets/images/users1.svg" alt="Button Image" style="margin-right: 10px;">My Profile</a>
       </li>
-
       <li class="menu-item" style="border-top: 1px solid">
 
         <a href="javascript:void(0)" class="link" style="color: red;" (click)="onLogout()"><img src="../../../assets/images/log-out.svg" style="margin-right: 10px;" alt="Button Image">Logout</a>
