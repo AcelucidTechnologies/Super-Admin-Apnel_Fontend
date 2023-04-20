@@ -1,4 +1,4 @@
-<form [formGroup]="featureForm">
+<form [formGroup]="specialOfferForm">
     <div class="page-heading col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
         <h1 class="header-text-title">
             <i pButton class="pi pi-arrow-left p-button-text" [routerLink]="['/cms/feature']" pTooltip="Back"
@@ -15,15 +15,15 @@
                             <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
                                 <div class="form-group">
                                     <label for="name" class="col-form-label text-left starlabel">Product Name</label>
-                                    <input type="text" class="form-control" formControlName="productName">
+                                    <input type="text" class="form-control" formControlName="product">
                                     <div
-                                        *ngIf="!featureForm.controls['productName'].valid && (featureForm.controls['productName'].touched || featureForm.controls['productName'].dirty)">
-                                        <div [hidden]="!featureForm.controls['productName'].errors['required']"
+                                        *ngIf="!specialOfferForm.controls['product'].valid && (specialOfferForm.controls['product'].touched || specialOfferForm.controls['product'].dirty)">
+                                        <div [hidden]="!specialOfferForm.controls['product'].errors['required']"
                                             style="color: rgb(253, 122, 122); font-size:small; font-style: italic;">
                                             Product Name is required
                                         </div>
                                     </div>
-                                    <!-- <div *ngIf="featureForm.controls['productName'].errors['pattern']"
+                                    <!-- <div *ngIf="specialOfferForm.controls['productName'].errors['pattern']"
                                     style="color: rgb(253, 122, 122); font-size:small; font-style: italic;">
                                     please enter only alphabet and number
                                   </div> -->
@@ -33,13 +33,13 @@
 
                             <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
                                 <div class="form-group">
-                                    <label for="hyperlink" class="col-form-label text-left starlabel">Modal</label>
-                                    <input type="text" class="form-control" formControlName="modal">
+                                    <label for="hyperlink" class="col-form-label text-left starlabel">category</label>
+                                    <input type="text" class="form-control" formControlName="category">
                                     <div
-                                        *ngIf="!featureForm.controls['modal'].valid && (featureForm.controls['modal'].touched || featureForm.controls['modal'].dirty)">
-                                        <div [hidden]="!featureForm.controls['modal'].errors['required']"
+                                        *ngIf="!specialOfferForm.controls['category'].valid && (specialOfferForm.controls['category'].touched || specialOfferForm.controls['category'].dirty)">
+                                        <div [hidden]="!specialOfferForm.controls['category'].errors['required']"
                                             style="color: rgb(253, 122, 122); font-size:small; font-style: italic;">
-                                            Modal is required
+                                            Category is required
                                         </div>
                                     </div>
                                 </div>
@@ -48,45 +48,6 @@
                         </div>
 
 
-                        <div class="row gutters">
-                            <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
-                                <div class="form-group">
-                                    <label for="Name" class="col-form-label text-left starlabel">Price</label><br>
-                                    <input type="text" class="form-control" formControlName="price">
-                                      <div
-                                    *ngIf="(!featureForm.controls['price'].valid) && (featureForm.controls['price'].touched || featureForm.controls['price'].dirty)">
-                                    <div [hidden]="!featureForm.controls['price'].errors['required']"
-                                      style="color: rgb(253, 122, 122); font-size:small; font-style: italic;">
-                                      price is required
-                                    </div>
-                                    <div *ngIf="featureForm.controls['price'].errors['pattern']"
-                                      style="color: rgb(253, 122, 122); font-size:small; font-style: italic;">
-                                      Please enter valid price
-                                    </div>
-                                  </div>
-                                </div>
-                            </div>
-
-                            <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
-                                <div class="form-group">
-                                    <label for="Name" class="col-form-label text-left starlabel">Quantity</label><br>
-                                    <input type="text" class="form-control" formControlName="quantity">
-                                    <div
-                                    *ngIf="(!featureForm.controls['quantity'].valid) && (featureForm.controls['quantity'].touched || featureForm.controls['quantity'].dirty)">
-                                    <div [hidden]="!featureForm.controls['quantity'].errors['required']"
-                                      style="color: rgb(253, 122, 122); font-size:small; font-style: italic;">
-                                      quantity is required
-                                    </div>
-                                    <div *ngIf="featureForm.controls['quantity'].errors['pattern']"
-                                      style="color: rgb(253, 122, 122); font-size:small; font-style: italic;">
-                                      Please enter valid quantity
-                                    </div>
-                                  </div>
-          
-                                </div>
-                            </div>
-
-                        </div>
 
 
                         <div class="row gutters">
@@ -126,9 +87,9 @@
                                 <div class="text-center">
                                     <button pButton type="button" id="submit" name="submit"
                                         class="p-button mr-4 first-button" (click)="submitForm()"
-                                        [disabled]="!(featureForm.valid)">Save</button>
+                                        [disabled]="!(specialOfferForm.valid)">Save</button>
                                     <button pButton type="button" id="submit" name="submit" class="p-button second-button "
-                                        [routerLink]="['/cms/feature']">Cancel</button>
+                                        [routerLink]="['/cms/special-offer']">Cancel</button>
 
                                 </div>
                             </div>
