@@ -14,6 +14,9 @@ export class AddEditPermissionComponent implements OnInit {
   userlist: string[] = []
   name: string
   title: string
+  isChecked = true;
+  isOn: boolean = false;
+  
   permissionData = [
     {
       moduleName: 'Order',
@@ -213,11 +216,18 @@ export class AddEditPermissionComponent implements OnInit {
       })
 
     });
-    
+
   }
 
   ngOnInit(): void {
-    
+
+  }
+
+
+
+  onToggleChange(event: Event) {
+    this.isChecked = (event.target as HTMLInputElement).checked;
+    console.log('Toggle button state:', this.isChecked);
   }
 
   getPermissionDetail() {

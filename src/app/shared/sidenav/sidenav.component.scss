@@ -170,6 +170,11 @@ color: white !important;
    color: red !important;
 }
 
+.pi-chevron-right:before {
+  content: "\e94a" !important;
+  display: none !important;
+}
+
 // .pi-chevron-right:before {
 //   content: "\e94a" !important;
 // }
