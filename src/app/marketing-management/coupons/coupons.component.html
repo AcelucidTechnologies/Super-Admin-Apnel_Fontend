@@ -4,7 +4,130 @@
 	<mat-tab-group mat-align-tabs="start">
 		<mat-tab label="All Coupons">
 			<div class="card col-sm-12" style="border:none;">
-				<p-table id="customerTable" #dt [value]="couponData" [columns]="cols" responsiveLayout="scroll"
+				
+				<p-table #dt [value]="couponData" [(selection)]="selectedCustomers" dataKey="id" [rowHover]="true"
+    [rows]="10" [showCurrentPageReport]="true" responsiveLayout="scroll"
+    [paginator]="true" currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
+    [filterDelay]="0" [globalFilterFields]="['url','description']" class="abc">
+    <ng-template pTemplate="caption">
+        <div class="table-header">
+            <span style="display: flex; justify-content: center; align-items: center;" class="p-input-icon-left ">
+              <img style="margin-right: 5px;" src="../assets/images/icons/filter.svg" class="filter" alt="img">
+                <input style="outline: none; border-radius: 5px; border: 1px solid rgb(195, 183, 183); padding: 6px;" type="text" (input)="applyFilterGlobal($event, 'contains')" placeholder="Search..." />
+            </span>
+
+            <div class="d-flex justify-content-end align-items-end">
+              <button style="background-color: #f4f4f4; border: none;" type="button" pButton class="mr-1" pTooltip="Pdf"
+                tooltipPosition="bottom"><img
+                src="../assets/images/icons/pdf.svg"></button>
+              <button type="button" style="background-color: #f4f4f4;; border: none;" pButton class="mr-1" pTooltip="excel"  
+                tooltipPosition="bottom" ><img
+                src="../assets/images/icons/excel.svg"></button>
+                <button type="button" style="background-color: #f4f4f4;; border: none;" pButton class=" mr-1" pTooltip="print"
+                tooltipPosition="bottom" ><img
+                src="../assets/images/icons/printer.svg"></button>
+            </div>
+        </div>
+    </ng-template>
+    <ng-template  pTemplate="header">
+        <tr>
+            <th style="width: 3rem;">
+                <p-tableHeaderCheckbox></p-tableHeaderCheckbox>
+            </th>
+            <th pSortableColumn="country">
+                <div class="flex justify-content-between align-items-center head1">
+                    Country
+                    <p-sortIcon field="country"></p-sortIcon>
+                    
+                </div>
+            </th>
+            <th pSortableColumn="code">
+                <div class="flex justify-content-between align-items-center head1">
+                    Code
+                    <p-sortIcon field="code"></p-sortIcon>
+                    
+                </div>
+            </th>
+
+            <th pSortableColumn="Title">
+              <div class="flex justify-content-between align-items-center head1">
+                  Title
+                  <p-sortIcon field="Title"></p-sortIcon>
+              </div>
+          </th>
+
+          <th>
+            <div class="flex justify-content-between align-items-center head1">
+                Coupan
+            </div>
+        </th>
+        <th>
+          <div class="flex justify-content-between align-items-center head1">
+              Action
+              
+          </div>
+      </th>
+
+            
+        </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-coupanData>
+        <tr class="p-selectable-row">
+            <td>
+                <p-tableCheckbox [value]="coupanData"></p-tableCheckbox>
+            </td>
+            <td>
+                <span class="p-column-title">Url</span>
+                {{coupanData.url}}
+            </td>
+            <td>
+                <span class="p-column-title">Description</span>
+                
+                {{coupanData.description}}
+            </td>
+           
+            <td>
+                <span class="p-column-title">Date</span>
+                {{coupanData.sortby}}
+            </td>
+            <td>
+                {{coupanData.image}}
+            </td>
+            <td>
+              <a pTooltip="Edit Banner" tooltipPosition="bottom" class="me-3" style="margin-right: 10px;">
+                  <img src="../assets/images/icons/edit.svg" [routerLink]="['/cms/add-special-banner']"  alt="img">
+              </a>
+              <a pTooltip="Delete Banner" tooltipPosition="bottom"  class="me-3 confirm-text" href="javascript:void(0);">
+                  <img src="../assets/images/icons/delete.svg" alt="img">
+              </a>
+          </td>
+           
+         
+        </tr>
+    </ng-template>
+    <ng-template pTemplate="emptymessage">
+        <tr>
+            <td colspan="8">No customers found.</td>
+        </tr>
+    </ng-template>
+</p-table>
+
+				<ngx-ui-loader [fgsColor]="'#000000'" [fgsType]="fgsType"></ngx-ui-loader>
+			</div>
+		</mat-tab>
+		<mat-tab label="Active">
+			<app-active-coupon [deleteAccess]="accessPermission?.delete"></app-active-coupon>
+		</mat-tab>
+		<mat-tab label="InActivate">
+			<app-inactive-coupon [deleteAccess]="accessPermission?.delete"></app-inactive-coupon>
+		</mat-tab>
+	</mat-tab-group>
+
+
+
+
+
+	<!-- <p-table id="customerTable" #dt [value]="couponData" [columns]="cols" responsiveLayout="scroll"
 					[paginator]="true" [rows]="10" [showCurrentPageReport]="true"
 					currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries" [responsive]="true"
 					[globalFilterFields]="['Code']" styleClass="p-datatable-striped">
@@ -18,7 +141,7 @@
 							</div>
 							<div class="p-input-icon-right ml-5">
 								<button pButton type="button" label="Add New Promo" class="p-button-success"
-									[routerLink]="['/marketing/addpromo']" [disabled]="!accessPermission.add"></button>
+									[routerLink]="['/marketing/addpromo']" [disabled]="!accessPermission?.add"></button>
 							</div>
 						</div>
 					</ng-template>
@@ -43,9 +166,9 @@
 								<div class="btn-grp">
 									<button class="p-button-warning" pButton type="button" icon="pi pi-user-edit"
 										pTooltip="Edit Promotion" tooltipPosition="bottom" style="margin-right:5px"
-										[routerLink]="['/marketing/editpromo']" [queryParams]="{id:coupon?.id}" [disabled]="!accessPermission.edit"></button>
+										[routerLink]="['/marketing/editpromo']" [queryParams]="{id:coupon?.id}" [disabled]="!accessPermission?.edit"></button>
 									<button class="p-button-danger" pButton type="button" icon="pi pi-trash"
-										pTooltip="In-Active promotion" tooltipPosition="bottom" (click)="InActivate(coupon?.Code)" [disabled]="!accessPermission.delete"></button>
+										pTooltip="In-Active promotion" tooltipPosition="bottom" (click)="InActivate(coupon?.Code)" [disabled]="!accessPermission?.delete"></button>
 								</div>
 							</td>
 						</tr>
@@ -57,14 +180,4 @@
 							</td>
 						</tr>
 					</ng-template>
-				</p-table>
-				<ngx-ui-loader [fgsColor]="'#000000'" [fgsType]="fgsType"></ngx-ui-loader>
-			</div>
-		</mat-tab>
-		<mat-tab label="Active">
-			<app-active-coupon [deleteAccess]="accessPermission.delete"></app-active-coupon>
-		</mat-tab>
-		<mat-tab label="InActivate">
-			<app-inactive-coupon [deleteAccess]="accessPermission.delete"></app-inactive-coupon>
-		</mat-tab>
-	</mat-tab-group>
+				</p-table> -->
