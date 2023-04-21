@@ -32,10 +32,11 @@ export class CouponsComponent implements OnInit {
         console.log(res);
         
         this.accessPermission=res[0].MarketingCoupon;
-        console.log( this.accessPermission)
+        console.log(this.accessPermission.delete)
       })
     }
 
+    
   ngOnInit(): void {
     this.sidebarSpacing = 'contracted';
     this.fgsType = SPINNER.squareLoader

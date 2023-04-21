@@ -98,7 +98,7 @@ export const SideNaveMenueRoute = [
                         routerLink: ['/cms/special-offer']
             },
             {
-                label: 'page Setup',
+                label: 'Page Setup',
 
                         icon: 'pi pi-list',
                         routerLink: ['/cms/page']

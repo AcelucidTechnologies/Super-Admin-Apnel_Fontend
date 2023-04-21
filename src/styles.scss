@@ -123,8 +123,7 @@ mat-accordion .mat-expansion-panel:last-of-type {
     }
 }
 .page-heading {
-    margin-top: 200px;
-
+    
     h1 {
         font-size: 1.5rem;
         font-weight: 700;
@@ -250,11 +249,4 @@ mat-accordion .mat-expansion-panel:last-of-type {
 }
 #search-box{
     width: 280px
-}
-
-@media screen and (min-width: 992px){
-.body.contracted {
-    margin: -8rem 0 0 15rem !important;
-}
-
 }
