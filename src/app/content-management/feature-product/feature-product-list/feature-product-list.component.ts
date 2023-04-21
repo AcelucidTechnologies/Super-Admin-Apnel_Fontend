@@ -9,6 +9,10 @@ import { CmsService } from '../../../_services/cms.service';
 import { access } from 'src/app/_models/modulepermission';
 import { MatDialog } from '@angular/material/dialog';
 import { DialogFeatureComponent } from '../dialog-feature/dialog-feature.component';
+import * as jsPDF from 'jspdf';
+import autoTable from 'jspdf-autotable'
+import * as FileSaver from 'file-saver';
+import * as xlsxPackage from 'xlsx'
 
 @Component({
   selector: 'app-feature-product-list',
@@ -22,6 +26,14 @@ export class FeatureProductListComponent implements OnInit {
   cols!: TABLE_HEADING[];
   featureList : FEATURE[]=[]
   accessPermission:access
+  productDetails:any[];
+  exportColumns: any[];
+  customers:FEATURE[]=[]
+
+  selectedProduct: FEATURE[]=[]
+  statuses: any[];
+
+  activityValues: number[] = [0, 100];
   
   constructor(private ngxLoader: NgxUiLoaderService,
     private CmsService: CmsService,
@@ -39,13 +51,11 @@ export class FeatureProductListComponent implements OnInit {
     this.ngxLoader.start();
     this.sidebarSpacing = 'contracted';
     this.cols = [
-      { field: 'sr.no', show: true, headers: 'Sr.no' },
       { field: 'image', show: true, headers: 'Image' },
       { field: 'product name', show: true, headers: 'Product Name' },
       { field: 'Modal', show: true, headers: 'Modal' },
       { field: 'price', show: true, headers: 'Price' },
       { field: 'quantity', show: true, headers: 'Quantity' },
-      { field: 'action', show: true, headers: 'Action' },
     ]
     this.getFeatureList();
   }
@@ -85,4 +95,34 @@ export class FeatureProductListComponent implements OnInit {
     }
   }
 
+  exportPdf() {
+    this.productDetails = this.featureList
+            const doc = new jsPDF.jsPDF('l', 'pt');
+           autoTable(doc, {
+            columns:this.exportColumns,
+            body:this.productDetails
+           });
+            doc.save('products.pdf');
+        }
+
+        exportExcel() {
+          const worksheet = xlsxPackage.utils.json_to_sheet(this.featureList);
+          const workbook = { Sheets: { 'data': worksheet }, SheetNames: ['data'] };
+          const excelBuffer: any = xlsxPackage.write(workbook, { bookType: 'xlsx', type: 'array' });
+          this.saveAsExcelFile(excelBuffer, "leads");
+        }   
+        
+  saveAsExcelFile(buffer: any, fileName: string): void {
+    let EXCEL_TYPE = 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;charset=UTF-8';
+    let EXCEL_EXTENSION = '.xlsx';
+    const data: Blob = new Blob([buffer], {
+      type: EXCEL_TYPE
+    });
+    FileSaver.saveAs(data, fileName + '_export_' + new Date().getTime() + EXCEL_EXTENSION);
+  }
+
+
+  applyFilterGlobal($event, stringVal) {
+    this.dt.filterGlobal(($event.target as HTMLInputElement).value, stringVal);
+  }
 }

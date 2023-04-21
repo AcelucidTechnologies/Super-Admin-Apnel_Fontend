@@ -2,13 +2,16 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import * as moment from 'moment';
 
+
 @Injectable({ providedIn: 'root' })
 export class CommonService {
     URLBase64:any
     myData:any;
+    plantext: any;
     constructor(
         private http:HttpClient
     ) {
+       
     }
     generateRandomNo() {
         var date = new Date()
@@ -50,5 +53,18 @@ export class CommonService {
 
     getCountries(){
         return this.http.get('https://trial.mobiscroll.com/content/countries.json')
+    }
+
+    public getConfig(height: number, maxCharCount: number){
+        return {
+          customConfig: '/assets/js/ckeditor/ckeditor-config.js',
+          height: height,
+          wordcount: {
+            showParagraphs: false,
+            showWordCount: false,
+            showCharCount: true,
+            maxCharCount: maxCharCount
+          }
+        }
     }
 }
