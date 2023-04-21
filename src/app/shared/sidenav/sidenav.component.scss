@@ -116,6 +116,7 @@ color: red!important;
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  position: fixed;
 
   .profile-img {
     width: 7rem;
@@ -137,6 +138,9 @@ color: red!important;
     color: #67748E;
   }
 }
+
+
+
 
 // .sidebar-cont .sidebar .menu-list {
 //   padding: 0 1rem;

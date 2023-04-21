@@ -4,7 +4,7 @@
 <div class="container-fluid">
   <div class="row mb-2 mt-2">
     <div class="col-6">
-      <h4>User Permission List</h4>
+      <h4>Role List</h4>
     </div>
     <div class="col-6 text-right">
       <button pButton class="add-button-admin"   [routerLink]="['/modulepermission/permissionform']">+ Add Permission</button>
@@ -15,7 +15,7 @@
 [showCurrentPageReport]="true" [value]="modulePermissionList"
 currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries" [responsive]="true"
 styleClass="p-datatable-striped" [globalFilterFields]="['username']">
-<ng-template pTemplate="caption">
+<!-- <ng-template pTemplate="caption">
     <div class="d-flex justify-content-between">
     <div class="d-flex align-items-center">
         <input #search pInputText type="text" placeholder="Search By Username">
@@ -23,24 +23,87 @@ styleClass="p-datatable-striped" [globalFilterFields]="['username']">
     </div>
     <div><button pButton [routerLink]="['/modulepermission/permissionform']">Add</button></div>
 </div>
+</ng-template> -->
+<ng-template pTemplate="caption">
+  <div class="d-flex justify-content-between">
+
+      <div class="d-flex align-items-center p-0 ">
+        <img src="../../../../assets/images/filter.svg" style="margin-right: 10px;">
+        <div class="input-container">
+        <img src="../../../../assets/images/search-white.svg" class="input-container-img">
+          <input #search pInputText type="text" placeholder="Search..."></div>
+      </div>
+      <div>
+        <button pButton   pTooltip="pdf" tooltipPosition="bottom" class="custom-image"
+        > <img src="../../../../assets/images/pdf.svg" alt="Button Image"></button>
+    <button pButton  pTooltip="Excel" tooltipPosition="bottom" class="custom-image"
+       ><img src="../../../../assets/images/excel.svg" alt="Button Image"></button>
+    <button pButton pTooltip="print" tooltipPosition="bottom" class="custom-image"
+        ><img src="../../../../assets/images/printer.svg" alt="Button Image"></button>
+      </div>
+  </div>
 </ng-template>
-<ng-template pTemplate="header">
+<!-- <ng-template pTemplate="header">
     <tr>
     <th class="text-center">Sno</th>
     <th class="text-center">User Name</th>
     <th class="text-center">Modules Permitted</th>
     <th class="text-center">Actions</th>
 </tr>
+</ng-template> -->
+<ng-template  pTemplate="header">
+  <tr>
+
+      <th pSortableColumn="Sno">
+          <div class="flex justify-content-between align-items-center head1">
+              Sno
+              <p-sortIcon field="Sno"></p-sortIcon>
+
+          </div>
+      </th>
+      <th pSortableColumn="UserName">
+          <div class="flex justify-content-between align-items-center head1">
+            User Name
+              <p-sortIcon field="UserName"></p-sortIcon>
+
+          </div>
+      </th>
+
+
+
+    <th pSortableColumn="ModulesPermitted">
+      <div class="flex justify-content-between align-items-center head1">
+        Modules Permitted
+        <p-sortIcon field="Email"></p-sortIcon>
+      </div>
+  </th>
+
+<th>
+  <div class="flex justify-content-between align-items-center head1">
+    Actions
+
+  </div>
+</th>
+
+
+  </tr>
 </ng-template>
+
 <ng-template pTemplate="body" let-i="rowIndex" let-list>
     <tr><td>{{i+1}}</td>
     <td>{{list.username}}</td>
     <td><div *ngFor="let module of list.moduleList">{{module}}</div></td>
     <td>
-        <div>
+        <!-- <div>
         <button pButton class="p-button-secondary mr-2"icon="pi pi-user-edit" [routerLink]="['/modulepermission/permissionform']" [queryParams]="{user:list.username}"></button>
         <button pButton class="p-button-danger"icon="pi pi-trash" (click)="openDialog(list.username)"></button>
-        </div>
+        </div> -->
+        <a pTooltip="Edit Banner" tooltipPosition="bottom"  style="margin-right: 15px; cursor: pointer;">
+          <img src="../../../../assets/images/edit.svg" [queryParams]="{user:list.username}" [routerLink]="['/modulepermission/permissionform']" alt="img">
+      </a>
+      <a pTooltip="Delete Banner" tooltipPosition="bottom" (click)="openDialog(list.username)" class="me-4 confirm-text mr-3" href="javascript:void(0);">
+          <img src="../../../../assets/images/delete.svg" alt="img">
+      </a>
     </td>
 </tr>
 </ng-template>

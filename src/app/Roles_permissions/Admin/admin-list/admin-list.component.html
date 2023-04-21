@@ -1,5 +1,5 @@
 
-<div class="container">
+<div class="container ">
   <div class="row mb-2 mt-2">
     <div class="col-6">
       <h4>Admin List</h4>
@@ -15,7 +15,7 @@
     </div> -->
   </div>
 </div>
-<div class="card col-sm-12" style="border: none; margin-top: 10px;">
+<div class="card col-sm-12" style="border: none; margin-top: 10px; padding: 0px;">
 <p-table #dt  responsiveLayout="scroll" [paginator]="true" [rows]="10"
     [showCurrentPageReport]="true" [value]="adminDetails"
     currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries" [responsive]="true"
@@ -30,7 +30,6 @@
               <div class="input-container">
               <img src="../../../../assets/images/search-white.svg" class="input-container-img">
                 <input #search pInputText type="text" placeholder="Search..."></div>
-                <!-- <button pButton class="p-button-success ml-2 add-button"(click)="globalSearch(search.value,'contains')">Search</button> -->
             </div>
             <div>
               <button pButton   pTooltip="pdf" tooltipPosition="bottom" class="custom-image"
@@ -42,17 +41,17 @@
             </div>
         </div>
     </ng-template>
-
-    <!-- <ng-template pTemplate="header">
+<!--
+    <ng-template pTemplate="header">
 
         <tr>
-          <th class="text-center"></th>
-            <th  class="text-center" >Sno<p-sortIcon field="Sno" style="color: black;"></p-sortIcon></th>
-            <th  class="text-center" >Image</th>
-            <th   class="text-center" pSortableColumn="username">User Name<p-sortIcon field="username"></p-sortIcon></th>
-            <th  class="text-center" pSortableColumn="email">Email<p-sortIcon field="email"></p-sortIcon></th>
-            <th class="text-center" pSortableColumn="role">Role<p-sortIcon ></p-sortIcon></th>
-            <th class="text-center">Actions</th>
+          <th class="text-center" style="width: 3rem;"><p-tableHeaderCheckbox></p-tableHeaderCheckbox></th>
+            <th  class="text-center head1" >Sno<p-sortIcon field="Sno" style="color: black;"></p-sortIcon></th>
+            <th  class="text-center head1" >Image</th>
+            <th   class="text-center head1" pSortableColumn="username">User Name<p-sortIcon field="username"></p-sortIcon></th>
+            <th  class="text-center head1" pSortableColumn="email">Email<p-sortIcon field="email"></p-sortIcon></th>
+            <th class="text-center head1" pSortableColumn="role">Role<p-sortIcon ></p-sortIcon></th>
+            <th class="text-center head1">Actions</th>
         </tr>
     </ng-template> -->
     <ng-template  pTemplate="header">
@@ -67,10 +66,10 @@
 
               </div>
           </th>
-          <th pSortableColumn="UserName">
+          <th pSortableColumn="username">
               <div class="flex justify-content-between align-items-center head1">
                 User Name
-                  <p-sortIcon field="UserName"></p-sortIcon>
+                  <p-sortIcon field="username"></p-sortIcon>
 
               </div>
           </th>
@@ -82,10 +81,10 @@
             </div>
         </th>
 
-        <th pSortableColumn="Email">
+        <th pSortableColumn="email">
           <div class="flex justify-content-between align-items-center head1">
             Email
-            <p-sortIcon field="Email"></p-sortIcon>
+            <p-sortIcon field="email"></p-sortIcon>
           </div>
       </th>
       <th>
@@ -119,10 +118,12 @@
           {{list.username}}
       </td>
         <td>
-            <span class="p-column-title"></span>
+          <span class="p-column-title"></span>
 
-              <div *ngIf="!!list.image; else defaultImg"><img class="user-name-img"  [src]="list.image" ></div>
-        </td>
+            <div *ngIf="!!list.image; else defaultImg"><img class="user-name-img"  [src]="list.image" ></div>
+      </td>
+
+
 
 
         <td>
@@ -131,10 +132,10 @@
         <td>{{list.role}}</td>
         <td>
           <a pTooltip="Edit Banner" tooltipPosition="bottom"  style="margin-right: 15px; cursor: pointer;">
-              <img src="../../../../assets/images/edit-5.svg" [queryParams]="{user:list.username}" [routerLink]="['/roleandpermission/editAdmin']" alt="img">
+              <img src="../../../../assets/images/edit.svg" [queryParams]="{user:list.username}" [routerLink]="['/roleandpermission/editAdmin']" alt="img">
           </a>
-          <a pTooltip="Delete Banner" tooltipPosition="bottom" (click)="openDialog(list.username)" class="me-3 confirm-text" href="javascript:void(0);">
-              <img src="../../../../assets/images/delete-2.svg" alt="img">
+          <a pTooltip="Delete Banner" tooltipPosition="bottom" (click)="openDialog(list.username)" class="me-4 confirm-text mr-3" href="javascript:void(0);">
+              <img src="../../../../assets/images/delete.svg" alt="img">
           </a>
       </td>
 
