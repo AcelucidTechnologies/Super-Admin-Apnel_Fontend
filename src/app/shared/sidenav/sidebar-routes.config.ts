@@ -75,7 +75,8 @@ export const SideNaveMenueRoute = [
             },
             {
                 label: 'Banner Special',
-
+               
+                        icon: 'pi pi-clone',
                         routerLink: ['/cms/banner']
             },
             {
@@ -97,7 +98,7 @@ export const SideNaveMenueRoute = [
                         routerLink: ['/cms/special-offer']
             },
             {
-                label: 'page Setup',
+                label: 'Page Setup',
 
                         icon: 'pi pi-list',
                         routerLink: ['/cms/page']
