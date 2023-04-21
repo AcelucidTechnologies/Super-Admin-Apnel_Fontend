@@ -39,7 +39,7 @@ export class AddPageListComponent implements OnInit {
     ) {
       this.pageForm = this.fb.group({
         id:['',],
-        url: ['', [Validators.required, Validators.pattern(this.reg)]],
+        link: ['', [Validators.required, Validators.pattern(this.reg)]],
         page: ['', [Validators.pattern("^[1-5]\d*$")]],
         description: ['', [Validators.required]],
       })

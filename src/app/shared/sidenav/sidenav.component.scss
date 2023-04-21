@@ -19,7 +19,7 @@
     }
 
 .p-panelmenu .p-panelmenu-header >a:hover{
-      background-color: lightcoral !important;
+      background-color: #ff2800 !important;
       color: white !important;
       border:none !important;
     }
@@ -33,8 +33,8 @@
   }
 
      .p-panelmenu .p-panelmenu-content .p-menuitem .p-menuitem-link:hover {
-background-color: lightcoral !important;
-color: red!important;
+    background-color: lightcoral !important;
+    color: red!important;
     }
 
 
@@ -168,6 +168,10 @@ color: white !important;
 :host::ng-deep{
   .p-panelmenu .p-panelmenu-content .p-menuitem .p-menuitem-link :hover{
    color: red !important;
+}
+
+.pi-chevron-right:before {
+  content: "\e901" !important;
 }
 
 }

@@ -1,7 +1,7 @@
 <!-- <div>
     <h4>User Permission List</h4>
 </div> -->
-<div class="container-fluid">
+<div class="container-fluid page-heading">
   <div class="row mb-2 mt-2">
     <div class="col-6">
       <h4>User Permission List</h4>
@@ -38,7 +38,9 @@ styleClass="p-datatable-striped" [globalFilterFields]="['username']">
     <td><div *ngFor="let module of list.moduleList">{{module}}</div></td>
     <td>
         <div>
-        <button pButton class="p-button-secondary mr-2"icon="pi pi-user-edit" [routerLink]="['/modulepermission/permissionform']" [queryParams]="{user:list.username}"></button>
+        <a pButton class="p-button-secondary mr-2" [routerLink]="['/modulepermission/permissionform']" [queryParams]="{user:list.username}">
+          <img src="../assets/images/icons/edit.svg">
+        </a>
         <button pButton class="p-button-danger"icon="pi pi-trash" (click)="openDialog(list.username)"></button>
         </div>
     </td>

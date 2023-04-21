@@ -1,4 +1,4 @@
-<!-- 
+
 <form [formGroup]="pageForm">
     <div class="page-heading col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 mb-3" >
       <h1 class="header-text-title">
@@ -33,7 +33,15 @@
                 <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
                   <div class="form-group">
                     <label for="hyperlink" class="col-form-label">Link</label>
-                    <input type="text" class="form-control" placeholder="Enter Only link" formControlName="link">                  
+                    <input type="text" class="form-control" placeholder="Enter Only link" formControlName="link"> 
+                    <div
+                    *ngIf="(!pageForm.controls['link'].valid) && (pageForm.controls['link'].touched || pageForm.controls['link'].dirty)">
+                    <div [hidden]="!pageForm.controls['link'].errors['required']"
+                      style="color: rgb(253, 122, 122); font-size:small; font-style: italic;">
+                      page is required
+                    </div>
+                    
+                  </div>                 
                   </div>
                 </div>
   
@@ -62,7 +70,7 @@
                     <button pButton type="button" id="submit" name="submit" class="first-button mr-4"
                       (click)="submitForm()" [disabled]="!(pageForm.valid)">Save</button>
                     <button pButton type="button" id="submit" name="submit" class="p-button second-button "
-                      [routerLink]="['/cms/banner']">Cancel</button>
+                      >Cancel</button>
   
                   </div>
                 </div>
@@ -72,4 +80,4 @@
         </div>
       </div>
     </div>
-  </form> -->
+  </form>

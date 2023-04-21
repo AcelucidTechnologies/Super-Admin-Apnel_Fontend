@@ -13,4 +13,4 @@ export class DialogSelectComponent implements OnInit {
   ngOnInit(): void {
   }
 
-}
+} 
