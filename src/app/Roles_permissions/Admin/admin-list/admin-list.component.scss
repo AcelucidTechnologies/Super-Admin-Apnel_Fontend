@@ -1,34 +1,21 @@
-
 th {
-  background-color: white!important;
+  background-color: white !important;
   color: black !important;
   justify-content: center;
 }
-td{
+td {
   justify-content: center;
 }
 ::ng-deep.p-datatable .p-sortable-column.p-highlight .p-sortable-column-icon {
   color: black !important;
 }
-// .add-button{
-//   width: 100px;
-//   height: 50px;
 
-//   background-color:rgb(245, 46, 46);
-//   border:1px rgb(245, 46, 46);
-
-
-// }
-// .add-button:hover{
-//   background-color:#a3a1a1 !important;
-// }
-
-.add-button-admin{
+.add-button-admin {
   background-color: rgb(245, 46, 46);
   color: white;
   border: none;
 }
-.add-button-admin:hover{
+.add-button-admin:hover {
   background-color: lightcoral;
   color: white;
   border: none;
@@ -36,20 +23,18 @@ td{
 .small-header {
   width: 20px; /* or whatever width you want */
 }
-.action-button{
+.action-button {
   background-color: white;
   color: rgb(245, 46, 46);
   border: none;
 }
-.admin-list-icon{
+.admin-list-icon {
   background-color: none !important;
   border: none !important;
   width: 40px;
   height: 40px;
   margin: 10px;
   border-radius: 5px;
-
-
 }
 .p-button.p-button-icon-only {
   height: 40px !important;
@@ -64,33 +49,33 @@ td{
 .my-checkbox:checked {
   background-color: red;
 }
-.user-name-img{
-  width:50px;
+.user-name-img {
+  width: 50px;
   height: 50px;
   border-radius: 50px;
 }
-td,th{
+td,
+th {
   border: none !important;
   border-bottom: 1px solid rgb(215, 198, 198) !important;
   justify-content: start;
 }
-.custom-image{
+.custom-image {
   background: none;
   border: none;
 }
-::ng-deep  .p-datatable .p-datatable-header {
-background:none;
+::ng-deep .p-datatable .p-datatable-header {
+  background: white;
   color: #333333;
-   border: none;
+  border: none;
   border-width: 1px 1px 0 1px;
   padding: 0.857rem 1rem;
   font-weight: 700;
 }
 
-
 .input-container {
   position: relative;
-  border: 0.5px solid  rgba(145, 158, 171, 0.32)!important;
+  border: 0.5px solid rgba(145, 158, 171, 0.32) !important;
 }
 
 .input-container-img {
@@ -105,7 +90,7 @@ background:none;
 
 .input-container input[type="text"] {
   padding-left: 30px; /* adjust the padding to fit the image */
-  font-size: .875rem;
+  font-size: 0.875rem;
 }
 ::ng-deep .p-paginator {
   background: none !important;
@@ -115,15 +100,13 @@ background:none;
   border-radius: 3px;
 }
 ::ng-deep .p-button :hover {
-
   color: rgb(245, 46, 46) !important;
   background-color: none !important;
 }
 
-:host::ng-deep{
-  .p-paginator .p-paginator-pages .p-paginator-page.p-highlight{
-      background-color: rgb(228, 28, 28);
-      margin-bottom: 10px;
+:host::ng-deep {
+  .p-paginator .p-paginator-pages .p-paginator-page.p-highlight {
+    background-color: rgb(228, 28, 28);
+    margin-bottom: 10px;
   }
 }
-
