@@ -7,6 +7,9 @@ th {
 td{
   justify-content: center;
 }
+::ng-deep.p-datatable .p-sortable-column.p-highlight .p-sortable-column-icon {
+  color: black !important;
+}
 // .add-button{
 //   width: 100px;
 //   height: 50px;
@@ -102,6 +105,7 @@ background:none;
 
 .input-container input[type="text"] {
   padding-left: 30px; /* adjust the padding to fit the image */
+  font-size: .875rem;
 }
 ::ng-deep .p-paginator {
   background: none !important;
@@ -119,6 +123,7 @@ background:none;
 :host::ng-deep{
   .p-paginator .p-paginator-pages .p-paginator-page.p-highlight{
       background-color: rgb(228, 28, 28);
+      margin-bottom: 10px;
   }
 }
 

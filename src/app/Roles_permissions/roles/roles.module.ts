@@ -13,6 +13,8 @@ import {InputNumberModule} from 'primeng/inputnumber';
 import { RolesRoutingModule } from './roles-routing.module';
 import { DialogComponent } from './dialog/dialog.component';
 import { AddEditPermissionComponent } from './add-edit-permission/add-edit-permission.component';
+import { AngularMaterialModule } from 'src/app/_modules/angular-material.module';
+import {MatSlideToggleModule} from '@angular/material/slide-toggle';
 
 
 @NgModule({
@@ -28,7 +30,9 @@ import { AddEditPermissionComponent } from './add-edit-permission/add-edit-permi
     ConfirmDialogModule,
     MatDialogModule,
     MatButtonModule,
-    InputNumberModule
+    InputNumberModule,
+    AngularMaterialModule,
+    MatSlideToggleModule
   ]
 })
 export class RolesModule { }
