@@ -1,19 +1,15 @@
 mat-dialog-content{
 width:600px
 }
-:host::ng-deep
-.dialog1{
-  color: #fff;
-  background-color: #FF9F43 !important;
-  border-color: #FF9F43 !important;
-
+:host::ng-deep.dialog1{
+  background: rgb(228, 28, 28);
+  color: white;
         border-radius: 5px;
         outline: none;
     }
     .dialog2{
       color: #fff;
-    background-color: #dc3545;
-    border-color: #dc3545;
+      background: #637381;
     border-radius: 5px;
     outline: none;
     }
@@ -34,7 +30,3 @@ width:600px
     margin: 0 10px;
   }
 
-.button-color{
-
-
-}

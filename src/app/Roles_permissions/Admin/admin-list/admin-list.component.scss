@@ -94,20 +94,29 @@ th {
   font-size: 0.875rem;
 }
 ::ng-deep .p-paginator {
-  background: none !important;
-  color: #333333 !important;
-  border: none !important;
-  padding: 0;
-  border-radius: 3px;
+  background: white !important;
+
 }
 ::ng-deep .p-button :hover {
   color: rgb(245, 46, 46) !important;
   background-color: none !important;
+  // margin-top: 10px;
 }
 
 :host::ng-deep {
   .p-paginator .p-paginator-pages .p-paginator-page.p-highlight {
     background-color: rgb(228, 28, 28);
     margin-bottom: 10px;
+    border-radius: 5px;
+  }
+}
+.page-heading {
+  // margin-top: 200px;
+
+  h1 {
+      font-size: 1.5rem;
+      font-weight: 700;
+      letter-spacing: 1.2px;
+      word-spacing: 0.1rem;
   }
 }

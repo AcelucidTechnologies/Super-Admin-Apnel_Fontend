@@ -59,4 +59,8 @@ export class AdminListComponent implements OnInit {
       }
     })
   }
+    //Search functionality start here
+    applyFilterGlobal($event, stringVal) {
+      this.dt.filterGlobal(($event.target as HTMLInputElement).value, stringVal);
+    }
 }

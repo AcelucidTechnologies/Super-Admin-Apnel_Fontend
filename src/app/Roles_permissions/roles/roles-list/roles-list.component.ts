@@ -18,7 +18,7 @@ export class RolesListComponent implements OnInit {
   }
 
   ngOnInit(): void {}
-  
+
   openDialog(name: any) {
     const dialogRef = this.dialog.open(DialogComponent);
     dialogRef.afterClosed().subscribe(result => {
@@ -49,5 +49,9 @@ export class RolesListComponent implements OnInit {
   globalSearch(value,mode)
   {
     this.dt.filterGlobal(value,mode)
+  }
+  //Search functionality start here
+  applyFilterGlobal($event, stringVal) {
+    this.dt.filterGlobal(($event.target as HTMLInputElement).value, stringVal);
   }
 }

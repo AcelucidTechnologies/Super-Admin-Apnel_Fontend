@@ -53,13 +53,15 @@
 
     fa-icon {
         font-size: 1.7rem;
-        color: #fff;
+        color: red;
         cursor: pointer;
+        margin-bottom: 15px !important;
     }
 }
 .header-color{
   // background-color: rgb(245, 46, 46);
   background-color: white;
+  color: black!important;
   height: 10px;
 }
 @media screen and (max-width:545px){

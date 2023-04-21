@@ -83,3 +83,39 @@
         border-color: #ced4da
     }
 }
+.page-heading{
+  background-color: white !important;
+}
+.button-heading-container {
+  display: flex;
+  align-items: center;
+}
+.back-button{
+  background: rgb(228, 28, 28);;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  margin-left: 100px;
+  width: 40px;
+
+}
+::ng-deep.back-button:hover {
+  background-color: lightcoral !important;
+}
+.page-heading {
+  // margin-top: 200px;
+
+  h1 {
+      font-size: 1.5rem;
+      font-weight: 700;
+      letter-spacing: 1.2px;
+      word-spacing: 0.1rem;
+  }
+}
+.add-lead-card{
+margin-left: 100px;
+margin-right: 100px
+}
+.form-control-lead{
+
+}

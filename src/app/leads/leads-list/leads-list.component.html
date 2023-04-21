@@ -1,68 +1,153 @@
-    <div class="page-heading">
+    <!-- <div class="page-heading">
         <h1 class="header-text-title" style="margin-left: 1%;">Leads</h1>
+    </div> -->
+    <div class="container page-heading">
+      <div class="row mb-2 mt-2">
+        <div class="col-6">
+          <h4>Leads</h4>
+        </div>
+        <div class="col-6 text-right">
+          <span class="p-input-icon-right ml-5">
+            <button
+              pButton
+              type="button"
+              label=" + Add Leads"
+              class="add-button-lead"
+              [routerLink]="['/leads/leadcreate']" [disabled]="!accessPermission.add"
+            ></button>
+          </span>
+        </div>
+      </div>
     </div>
     <div >
         <p-table id="customerTable" #dt [columns]="cols" responsiveLayout="scroll" [paginator]="true" [rows]="10"
             [showCurrentPageReport]="true" [value]="leadlist"
             currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries" [responsive]="true"
-            [globalFilterFields]="['name']" styleClass="p-datatable-striped">
+            [globalFilterFields]="['name']" styleClass="p-datatable">
             <ng-template pTemplate="caption">
-                <div class="row d-flex align-items-center justify-content-between">
-                    <div class="d-flex align-items-center">
-                    <span class="p-input-icon-right ml-3">
-                        <i class="pi pi-search"></i>
-                        <input pInputText type="text" placeholder="Search keyword"
-                            (input)="applyFilterGlobal($event, 'contains')" placeholder="Search by Name">
-                    </span>
-                    <span class="p-input-icon-right ml-2">
-                        <button pButton type="button" label="Create lead" class="p-button-success" [routerLink]="['/leads/leadcreate']" [disabled]="!accessPermission.add"
-                    ></button>
-                    </span>
+              <div class="d-flex justify-content-between">
+                <div class="d-flex align-items-center p-0">
+                  <img
+                    style="margin-right: 5px"
+                    src="../assets/images/icons/filter.svg"
+                    class="filter"
+                    alt="img"
+                  />
+                  <div class="input-container">
+                    <img
+                      src="../../../assets/images/search-white.svg"
+                      class="input-container-img"
+                    />
+                    <input #search pInputText type="text" placeholder="Search..."
+                    (input)="applyFilterGlobal($event, 'contains')"/>
+                  </div>
                 </div>
-                    <div class="d-flex justify-content-end align-items-end " >
-                        <button type="button" pButton pRipple icon="pi pi-file" class="mr-2" pTooltip="CSV" (click)="dt.exportCSV()"
-                          tooltipPosition="bottom"></button>
-                        <button type="button" pButton pRipple icon="pi pi-file-excel" class="p-button-success mr-2" pTooltip="XLSX"  (click)="exportExcel()"
-                          tooltipPosition="bottom" ></button>
-                        <button type="button" pButton pRipple icon="pi pi-file-pdf" class="p-button-warning mr-2" pTooltip="PDF"     (click)="exportPdf()" 
-                          tooltipPosition="bottom" ></button>
-                      </div>
+                <div>
+                  <button
+                    pButton
+                    pTooltip="pdf"
+                    tooltipPosition="bottom"
+                    class="custom-image"
+                  >
+                    <img src="../../../../assets/images/pdf.svg" alt="Button Image" />
+                  </button>
+                  <button
+                    pButton
+                    pTooltip="Excel"
+                    tooltipPosition="bottom"
+                    class="custom-image"
+                  >
+                    <img src="../../../../assets/images/excel.svg" alt="Button Image" />
+                  </button>
+                  <button
+                    pButton
+                    pTooltip="print"
+                    tooltipPosition="bottom"
+                    class="custom-image"
+                  >
+                    <img
+                      src="../../../../assets/images/printer.svg"
+                      alt="Button Image"
+                    />
+                  </button>
                 </div>
+              </div>
             </ng-template>
-
-            <ng-template pTemplate="header" >
-                <tr >
-                    <th class="text-center">Id</th>
-                    <th class="text-center">Name</th>
-                    <th class="text-center">Email</th>
-                    <th class="text-center">Created By</th>
-                    <th><div class="d-flex justify-content-between align-items-center"> Technology 
-                        <p-columnFilter class="column-subhead" field="technology" matchMode="in" display="menu"
+            <ng-template pTemplate="header">
+              <tr>
+                <th pSortableColumn="Sno">
+                  <div class="flex justify-content-between align-items-center head1">
+                    Id
+                  </div>
+                </th>
+                <th pSortableColumn="name">
+                  <div class="flex justify-content-between align-items-center head1">
+                    Name
+                  </div>
+                </th>
+                <th pSortableColumn="email">
+                  <div class="flex justify-content-between align-items-center head1">
+                    Email
+                  </div>
+                </th>
+                <th>
+                  <div class="flex justify-content-between align-items-center head1">
+                    Created By
+                  </div>
+                </th>
+                <th>
+                  <div class="d-flex justify-content-between align-items-center"> Technology
+                    <p-columnFilter class="column-subhead" field="technology" matchMode="in" display="menu"
+                    [showMatchModes]="false" [showOperator]="false" [showAddButton]="false">
+                    <ng-template pTemplate="header">
+                        <div class="px-3 pt-3 pb-0">
+                            <span class="font-bold">Technology Picker</span>
+                        </div>
+                    </ng-template>
+                    <ng-template pTemplate="filter" let-value let-filter="filterCallback">
+                        <p-multiSelect [ngModel]="value" [options]="technologies" placeholder="Any" (onChange)="[filter($event.value),show($event.value)]" >
+                            <ng-template let-option pTemplate="item">
+                                <div class="p-multiselect-representative-option">
+                                    <span class="ml-1">{{option}}</span>
+                                </div>
+                            </ng-template>
+                        </p-multiSelect>
+                    </ng-template>
+                </p-columnFilter></div>
+                </th>
+                <th><div class="d-flex justify-content-between align-items-center">Lead Source <p-columnFilter class="column-subhead" field="source" matchMode="in" display="menu"
+                  [showMatchModes]="false" [showOperator]="false" [showAddButton]="false">
+                  <ng-template pTemplate="header">
+                      <div class="px-3 pt-3 pb-0">
+                          <span class="font-bold">Source Picker</span>
+                      </div>
+                  </ng-template>
+                  <ng-template pTemplate="filter" let-value let-filter="filterCallback">
+                      <p-multiSelect [ngModel]="value" [options]="sources" placeholder="Any" (onChange)="filter($event.value)"
+                         >
+                          <ng-template let-option pTemplate="item">
+                              <div class="p-multiselect-representative-option">
+                                  <span class="ml-1">{{option}}</span>
+                              </div>
+                          </ng-template>
+                      </p-multiSelect>
+                  </ng-template>
+              </p-columnFilter></div></th>
+              <th><div class="d-flex justify-content-between align-items-center">Start Date<p-columnFilter class="column-subhead" type="date" field="startDate" display="menu"></p-columnFilter></div></th>
+              <th><div class="d-flex justify-content-between align-items-center">Follow-up Date<p-columnFilter  class="column-subhead" type="date" field="followUpDate" display="menu"></p-columnFilter></div></th>
+              <th class="text-center">Budget</th>
+              <th class="text-center">Status </th>
+              <th>
+                <div class="d-flex justify-content-between align-items-center">Deal
+                    <p-columnFilter class="column-subhead" field="deal" matchMode="in" display="menu"
                         [showMatchModes]="false" [showOperator]="false" [showAddButton]="false">
                         <ng-template pTemplate="header">
                             <div class="px-3 pt-3 pb-0">
-                                <span class="font-bold">Technology Picker</span>
+                                <span class="font-bold">Deal Picker</span>
                             </div>
                         </ng-template>
                         <ng-template pTemplate="filter" let-value let-filter="filterCallback">
-                            <p-multiSelect [ngModel]="value" [options]="technologies" placeholder="Any" (onChange)="[filter($event.value),show($event.value)]" >
-                                <ng-template let-option pTemplate="item">
-                                    <div class="p-multiselect-representative-option">
-                                        <span class="ml-1">{{option}}</span>
-                                    </div>
-                                </ng-template>
-                            </p-multiSelect>
-                        </ng-template>
-                    </p-columnFilter></div></th>
-                    <th><div class="d-flex justify-content-between align-items-center">Lead Source <p-columnFilter class="column-subhead" field="source" matchMode="in" display="menu"
-                        [showMatchModes]="false" [showOperator]="false" [showAddButton]="false">
-                        <ng-template pTemplate="header">
-                            <div class="px-3 pt-3 pb-0">
-                                <span class="font-bold">Source Picker</span>
-                            </div>
-                        </ng-template>
-                        <ng-template pTemplate="filter" let-value let-filter="filterCallback">
-                            <p-multiSelect [ngModel]="value" [options]="sources" placeholder="Any" (onChange)="filter($event.value)"
+                            <p-multiSelect [ngModel]="value" [options]="deals" placeholder="Any" (onChange)="filter($event.value)"
                                >
                                 <ng-template let-option pTemplate="item">
                                     <div class="p-multiselect-representative-option">
@@ -71,36 +156,13 @@
                                 </ng-template>
                             </p-multiSelect>
                         </ng-template>
-                    </p-columnFilter></div></th>
-                    <th><div class="d-flex justify-content-between align-items-center">Start Date<p-columnFilter class="column-subhead" type="date" field="startDate" display="menu"></p-columnFilter></div></th>
-                    <th><div class="d-flex justify-content-between align-items-center">Follow-up Date<p-columnFilter  class="column-subhead" type="date" field="followUpDate" display="menu"></p-columnFilter></div></th>
-                    <th class="text-center">Budget</th>
-                    <th class="text-center">Status </th>
-                    <th>
-                        <div class="d-flex justify-content-between align-items-center">Deal 
-                            <p-columnFilter class="column-subhead" field="deal" matchMode="in" display="menu"
-                                [showMatchModes]="false" [showOperator]="false" [showAddButton]="false">
-                                <ng-template pTemplate="header">
-                                    <div class="px-3 pt-3 pb-0">
-                                        <span class="font-bold">Deal Picker</span>
-                                    </div>
-                                </ng-template>
-                                <ng-template pTemplate="filter" let-value let-filter="filterCallback">
-                                    <p-multiSelect [ngModel]="value" [options]="deals" placeholder="Any" (onChange)="filter($event.value)"
-                                       >
-                                        <ng-template let-option pTemplate="item">
-                                            <div class="p-multiselect-representative-option">
-                                                <span class="ml-1">{{option}}</span>
-                                            </div>
-                                        </ng-template>
-                                    </p-multiSelect>
-                                </ng-template>
-                            </p-columnFilter>
-                        </div>
-                    </th>
-                  <th class="text-center">Actions</th>
-                </tr>
+                    </p-columnFilter>
+                </div>
+            </th>
+          <th class="text-center">Actions</th>
+              </tr>
             </ng-template>
+
             <ng-template pTemplate="body" let-i="rowIndex" let-leadsList>
                 <tr>
                     <td>{{leadsList.id}}</td>
@@ -118,22 +180,41 @@
                         <div class="d-flex justify-content-between align-items-center ">
                             <!-- <button class="p-button-primary" pButton type="button" icon="pi pi-eye" style="margin-right:5px">
                 </button> -->
-                            <button class="p-button-secondary" pButton type="button" icon="pi pi-user-edit" [routerLink]="['/leads/leadedit']" [queryParams]="{leadName:leadsList.name}"
+                            <!-- <button class="edit-delete-button" pButton type="button"  [routerLink]="['/leads/leadedit']" [queryParams]="{leadName:leadsList.name}"
                                 pTooltip="Edit lead" tooltipPosition="bottom" style="margin-right:5px"
-                                [disabled]="!accessPermission.edit"></button>
-                            <button class="p-button-info" pButton type="button" icon="pi pi-eye"   [routerLink]="['/leads/leadview']" [queryParams]="{leadName:leadsList.name}"
+                                [disabled]="!accessPermission.edit">  <img
+                                src="../../../../assets/images/edit.svg"
+
+
+                                alt="img"
+                              /></button> -->
+                            <!-- <button class="edit-delete-button" pButton type="button"   [routerLink]="['/leads/leadview']" [queryParams]="{leadName:leadsList.name}"
                                 pTooltip="view lead" tooltipPosition="bottom" style="margin-right:5px"
-                               ></button>
-                              
-                               <!-- <p-confirmDialog [style]="{width: '50vw'}" [baseZIndex]="10000" rejectButtonStyleClass="p-button-text"></p-confirmDialog> -->
-                                <button  class="p-button-danger" pButton type="button" icon="pi pi-trash"
-                                pTooltip="Delete lead" tooltipPosition="bottom" style="margin-right:5px" (click)="openDialog(leadsList)" [disabled]="!accessPermission.delete"
-                               ></button>
+                               > <img
+                               src="../../../../assets/images/eye.svg"
+
+
+                               alt="img"
+                             /></button>
+                                <button  class="edit-delete-button" pButton type="button"
+                                pTooltip="Delete lead" tooltipPosition="bottom" style="margin-right:5px; " (click)="openDialog(leadsList)" [disabled]="!accessPermission.delete"
+                               ><img src="../../../../assets/images/delete.svg" alt="img" /></button> -->
+                               <a pTooltip="Edit Banner" tooltipPosition="bottom" style="margin-right: 15px; cursor: pointer;">
+                                <img src="../../../../assets/images/edit.svg" [routerLink]="['/leads/leadedit']" [queryParams]="{leadName:leadsList.name}" alt="img">
+                              </a>
+                              <a pTooltip="Edit Banner" tooltipPosition="bottom" style="margin-right: 15px; cursor: pointer;">
+                                <img src="../../../../assets/images/eye.svg" [routerLink]="['/leads/leadview']" [queryParams]="{leadName:leadsList.name}" alt="img">
+                              </a>
+                              <a pTooltip="Delete Banner" tooltipPosition="bottom" (click)="openDialog(leadsList)"
+                                class="me-3 confirm-text" href="javascript:void(0);">
+                                <img src="../../../../assets/images/delete.svg" alt="img">
+                              </a>
+
                         </div>
                     </td>
-                </tr>              
+                </tr>
             </ng-template>
-           
+
             <ng-template pTemplate="emptymessage">
                 <tr>
                     <td class="text-center text-danger font-weight-700" colspan="12">

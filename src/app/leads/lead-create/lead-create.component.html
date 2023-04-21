@@ -1,37 +1,52 @@
-  <div class="card" style=" height: 100%; background-color: #cccfcd;">
+
+<!--
     <div class="page-heading my-2">
       <h4 class="header-text-title" style="margin-left: 1%;">Create Lead</h4>
-    </div>
-    <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 d-flex justify-content-center " style=" height: 100%;">
-      <div class="card-body " style="max-width: 950px;">
+    </div> -->
+    <!-- <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 d-flex justify-content-center " style=" height: 100%;">
+      <div class="card-body " style="max-width: 950px;"> -->
+        <div class="page-heading"></div>
+<div class="button-heading-container ">
+
+  <button class="mb-2 p-1 back-button " [routerLink]="['/leads/leadslist']"><i class="material-icons">arrow_back</i>
+  </button>
+  <h5>&nbsp;Add Lead Details</h5>
+</div>
         <form [formGroup]="leadForm" novalidate>
-          <mat-card>
+          <mat-card class="add-lead-card">
             <mat-card-title>
-              <div class="page-heading">
-                <div class="d-flex justify-content-between">
-                  <h5 class="pt-2">Lead Details</h5>
-                  <button type="submit" class="btn btn-info" [routerLink]="['/leads/leadslist']"> Back </button>
+              <!-- <div class="page-heading"> -->
+                <div class=" justify-content-between">
+                  <h5 class="pt-2" style="margin-left: 128px;">Lead Details</h5>
+                  <!-- <button type="submit" class="btn btn-info" [routerLink]="['/leads/leadslist']"> Back </button> -->
                 </div>
-              </div>
+              <!-- </div> -->
             </mat-card-title>
             <div class=" d-flex justify-content-center ml-4 pl-4">
               <div>
 
-                <div class="row ">
-                  <div class="form-group pt-3 px-3 col-5">
+                <div class="form-row pt-5">
+                  <div class="col-3 ">
                     <label for="name" class="col-form-label text-left starlabel">Name</label>
+                  </div>
+                  <div class="col-9">
                     <input type="text" id="name" class="form-control" formControlName="leadName">
                     <div
-                      *ngIf="!leadForm.controls['leadName'].valid && (leadForm.controls['leadName'].touched || leadForm.controls['leadName'].dirty)">
-                      <div [hidden]="!leadForm.controls['leadName'].errors['required']"
-                        style="color: rgb(253, 122, 122); font-size:small; font-style: italic;">
-                        Leadname is required
-                      </div>
+                    *ngIf="!leadForm.controls['leadName'].valid && (leadForm.controls['leadName'].touched || leadForm.controls['leadName'].dirty)">
+                    <div [hidden]="!leadForm.controls['leadName'].errors['required']"
+                      style="color: rgb(253, 122, 122); font-size:small; font-style: italic;">
+                      Leadname is required
                     </div>
                   </div>
+                  </div>
+                </div>
 
-                  <div class="form-group pt-3 px-3 col-5">
+
+                <div class="form-row pt-5">
+                  <div class="col-3">
                     <label for="contact" class="col-form-label text-left starlabel">Contact No</label>
+                  </div>
+                  <div class="col-9">
                     <input type="number" id="contact" class="form-control" formControlName="contactNumber">
                     <div
                       *ngIf="!leadForm.controls['contactNumber'].valid && (leadForm.controls['contactNumber'].touched || leadForm.controls['contactNumber'].dirty)">
@@ -43,9 +58,114 @@
                   </div>
                 </div>
 
+                <div class="form-row pt-5">
+                  <div class="col-3">
+                    <label for="email" class="col-form-label text-left starlabel">Email Address</label>
+                  </div>
+                  <div class="col-9">
+                    <input type="text" id="email" class="form-control" formControlName="emailAddress">
+                    <div
+                    *ngIf="!leadForm.controls['emailAddress'].valid && (leadForm.controls['emailAddress'].touched || leadForm.controls['emailAddress'].dirty)">
+                    <div [hidden]="!leadForm.controls['emailAddress'].errors['required']"
+                      style="color: rgb(253, 122, 122); font-size:small; font-style: italic;">
+                      Email is required
+                    </div>
+                  </div>
+                  </div>
+                </div>
 
-                <div class="row">
-                  <div class="form-group pt-3 col-5">
+                <div class="form-row pt-5">
+                  <div class="col-3">
+                    <label for="imageUpload" class="col-form-label">Image</label>
+                  </div>
+                  <div class="col-9">
+                    <div id="imageUpload" class="custom-file">
+                      <input type="file" class="custom-file-input" id="inputGroupFile01">
+                      <label class="custom-file-label" for="inputGroupFile01">Choose file</label>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="form-row pt-5">
+                  <div class="col-3">
+                    <label for="tech" style="display: block;"
+                    class="col-form-label text-left starlabel">Tech stack</label>
+                  </div>
+                  <div class="col-9">
+                    <p-dropdown styleClass="tech-dropdown" [options]="technologies"
+                    formControlName="technologyRequested" id="tech" placeholder="Select Tech"></p-dropdown>
+                    <div
+                    *ngIf="!leadForm.controls['technologyRequested'].valid && (leadForm.controls['technologyRequested'].touched || leadForm.controls['technologyRequested'].dirty)">
+                    <div [hidden]="!leadForm.controls['technologyRequested'].errors['required']"
+                      style="color: rgb(253, 122, 122); font-size:small; font-style: italic;">
+                      Technology is required
+                    </div>
+                  </div>
+                  </div>
+                </div>
+
+                <div class="form-row pt-5">
+                  <div class="col-3">
+                    <label for="budget" class="col-form-label text-left starlabel">Budget</label>
+                  </div>
+                  <div class="col-9">
+                    <input type="number" id="budget" class="form-control" formControlName="BudgetAmount">
+                    <div
+                    *ngIf="!leadForm.controls['BudgetAmount'].valid && (leadForm.controls['BudgetAmount'].touched || leadForm.controls['BudgetAmount'].dirty)">
+                    <div [hidden]="!leadForm.controls['BudgetAmount'].errors['required']"
+                      style="color: rgb(253, 122, 122); font-size:small; font-style: italic;">
+                      Budget is required
+                    </div>
+                  </div>
+                  </div>
+                </div>
+
+                <div class="form-row pt-5">
+                  <div class="col-3">
+                    <label for="source" class="col-form-label text-left starlabel">Reference Source</label>
+                  </div>
+                  <div class="col-9">
+                    <input type="text" id="source" class="form-control" formControlName="reference">
+                    <div
+                    *ngIf="!leadForm.controls['reference'].valid && (leadForm.controls['reference'].touched || leadForm.controls['reference'].dirty)">
+                    <div [hidden]="!leadForm.controls['reference'].errors['required']"
+                      style="color: rgb(253, 122, 122); font-size:small; font-style: italic;">
+                      Reference Source is required
+                    </div>
+                  </div>
+                  </div>
+                </div>
+
+
+                <!-- <div class="row ">
+                  <div class="form-group pt-3 px-3 col-6">
+                    <label for="name" class="col-form-label text-left starlabel">Name</label>
+                    <input type="text" id="name" class="form-control" formControlName="leadName">
+                    <div
+                      *ngIf="!leadForm.controls['leadName'].valid && (leadForm.controls['leadName'].touched || leadForm.controls['leadName'].dirty)">
+                      <div [hidden]="!leadForm.controls['leadName'].errors['required']"
+                        style="color: rgb(253, 122, 122); font-size:small; font-style: italic;">
+                        Leadname is required
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="form-group pt-3 px-3 col-6">
+                    <label for="contact" class="col-form-label text-left starlabel">Contact No</label>
+                    <input type="number" id="contact" class="form-control" formControlName="contactNumber">
+                    <div
+                      *ngIf="!leadForm.controls['contactNumber'].valid && (leadForm.controls['contactNumber'].touched || leadForm.controls['contactNumber'].dirty)">
+                      <div [hidden]="!leadForm.controls['contactNumber'].errors['required']"
+                        style="color: rgb(253, 122, 122); font-size:small; font-style: italic;">
+                        Contact No is required
+                      </div>
+                    </div>
+                  </div>
+                </div> -->
+
+
+                <!-- <div class="row">
+                  <div class="form-group pt-3 col-6">
                     <label for="email" class="col-form-label text-left starlabel">Email Address</label>
                     <input type="text" id="email" class="form-control" formControlName="emailAddress">
                     <div
@@ -58,17 +178,17 @@
                   </div>
 
 
-                  <div class="col-5 form-group pt-3">
+                  <div class="col-6 form-group pt-3">
                     <label for="imageUpload" class="col-form-label">Image</label>
                     <div id="imageUpload" class="custom-file">
                       <input type="file" class="custom-file-input" id="inputGroupFile01">
                       <label class="custom-file-label" for="inputGroupFile01">Choose file</label>
                     </div>
                   </div>
-                </div>
+                </div> -->
 
 
-                <div class="row">
+                <!-- <div class="row">
                   <div class="form-group pt-3 col-4">
                     <label for="tech" style="display: block;"
                       class="col-form-label text-left starlabel">Technology</label>
@@ -83,7 +203,7 @@
                     </div>
                   </div>
 
-                  <div class="form-group pt-3 col-3">
+                  <div class="form-group pt-3 col-4">
                     <label for="budget" class="col-form-label text-left starlabel">Budget</label>
                     <input type="number" id="budget" class="form-control" formControlName="BudgetAmount">
                     <div
@@ -95,7 +215,7 @@
                     </div>
                   </div>
 
-                  <div class="form-group pt-3 col-3">
+                  <div class="form-group pt-3 col-4">
                     <label for="source" class="col-form-label text-left starlabel">Reference Source</label>
                     <input type="text" id="source" class="form-control" formControlName="reference">
                     <div
@@ -106,10 +226,10 @@
                       </div>
                     </div>
                   </div>
-                </div>
+                </div> -->
 
                 <div class="row">
-                  <div class=" col-4 form-group pt-3">
+                  <div class=" col-3 form-group pt-5">
                     <label for="country" style="display: block;" class="starlabel">Country</label>
                     <p-dropdown [options]="countries" id="country" optionLabel="text" placeholder="Select Country"
                       formControlName="countryName" styleClass="country-dropdown"></p-dropdown>
@@ -121,10 +241,21 @@
                       </div>
                     </div>
                   </div>
+                  <div class=" col-3 form-group pt-5">
+                    <label for="pincode" class="col-form-label starlabel">Pin Code</label>
+                    <input type="number" id="pincode" class="form-control" formControlName="pinCode">
+                    <div
+                      *ngIf="!leadForm.controls['pinCode'].valid && (leadForm.controls['pinCode'].touched || leadForm.controls['pinCode'].dirty)">
+                      <div [hidden]="!leadForm.controls['followUpDate'].errors['required']"
+                        style="color: rgb(253, 122, 122); font-size:small; font-style: italic;">
+                        Pincode is required
+                      </div>
+                    </div>
+                  </div>
 
 
 
-                  <div class=" col-3 form-group pt-3">
+                  <div class=" col-3 form-group pt-5">
                     <label for="state" class="starlabel">State</label>
                     <p-dropdown [options]="stateArray" id="state" formControlName="stateName" placeholder="Select"
                       styleClass="state-dropdown"></p-dropdown>
@@ -138,7 +269,7 @@
                   </div>
 
 
-                  <div class=" col-3 form-group pt-3">
+                  <div class=" col-3 form-group pt-5">
                     <label for="city" class="starlabel">City</label>
                     <p-dropdown [options]="cityArray" id="city" placeholder="Select" formControlName="cityName"
                       styleClass="city-dropdown"></p-dropdown>
@@ -150,9 +281,70 @@
                       </div>
                     </div>
                   </div>
+
                 </div>
 
-                <div class="row">
+
+
+
+
+
+
+
+                <div class="form-row pt-5">
+                  <div class="col-3">
+                    <label class="col-form-label text-left starlabel">Follow-up Date</label>
+                  </div>
+                  <div class="col-9">
+                    <p-calendar [minDate]="dateFieldDate" styleClass="date-picker"
+                    formControlName="followUpDate"></p-calendar>
+                    <div
+                    *ngIf="!leadForm.controls['followUpDate'].valid && (leadForm.controls['followUpDate'].touched || leadForm.controls['followUpDate'].dirty)">
+                    <div [hidden]="!leadForm.controls['followUpDate'].errors['required']"
+                      style="color: rgb(253, 122, 122); font-size:small; font-style: italic;">
+                      Follow-up Date is required
+                    </div>
+                  </div>
+                  </div>
+                </div>
+
+                <div class="form-row pt-5">
+                  <div class="col-3">
+                    <label for="sale" class="col-form-label text-left starlabel">Sales Person</label>
+                  </div>
+                  <div class="col-9">
+                    <input type="text" id="sale" class="form-control" formControlName="salesPersonName">
+                    <div
+                    *ngIf="!leadForm.controls['salesPersonName'].valid && (leadForm.controls['salesPersonName'].touched || leadForm.controls['salesPersonName'].dirty)">
+                    <div [hidden]="!leadForm.controls['salesPersonName'].errors['required']"
+                      style="color: rgb(253, 122, 122); font-size:small; font-style: italic;">
+                      Sales Person's name is required
+                    </div>
+                  </div>
+                  </div>
+                </div>
+
+
+                <div class="form-row pt-5">
+                  <div class="col-3" style="margin-top: 50px;">
+                    <label for="comment" class="col-2 col-form-label text-left starlabel" style="margin-top: auto;">Comment</label>
+                  </div>
+                  <div class="col-9" >
+                    <textarea rows="6" formControlName="commentGiven"></textarea>
+                    <div
+                    *ngIf="!leadForm.controls['commentGiven'].valid && (leadForm.controls['commentGiven'].touched || leadForm.controls['commentGiven'].dirty)">
+                    <div [hidden]="!leadForm.controls['commentGiven'].errors['required']"
+                      style="color: rgb(253, 122, 122); font-size:small; font-style: italic;">
+                      Comment is required
+                    </div>
+                  </div>
+                  </div>
+                </div>
+
+
+
+
+                <!-- <div class="row">
                   <div class=" col-4 form-group pt-3">
                     <label for="pincode" class="col-form-label starlabel">Pin Code</label>
                     <input type="number" id="pincode" class="form-control" formControlName="pinCode">
@@ -165,7 +357,7 @@
                     </div>
                   </div>
 
-                  <div class="form-group pt-3 col-3">
+                  <div class="form-group pt-3 col-4">
                     <label class="col-form-label text-left starlabel">Follow-up Date</label>
                     <p-calendar [minDate]="dateFieldDate" styleClass="date-picker"
                       formControlName="followUpDate"></p-calendar>
@@ -178,7 +370,7 @@
                     </div>
                   </div>
 
-                  <div class="form-group pt-3 col-3">
+                  <div class="form-group pt-3 col-4">
                     <label for="sale" class="col-form-label text-left starlabel">Sales Person</label>
                     <input type="text" id="sale" class="form-control" formControlName="salesPersonName">
                     <div
@@ -189,14 +381,14 @@
                       </div>
                     </div>
                   </div>
-                </div>
+                </div> -->
 
-                <div class="form-group pt-3 row">
+                <!-- <div class="form-group pt-3 row">
                   <label for="comment" class="col-2 col-form-label text-left starlabel">Comment:</label>
                   <div class="col-8">
-                    <!-- <textarea rows="10" formControlName="commentGiven"></textarea> -->
+                    <textarea rows="10" formControlName="commentGiven"></textarea>
                     <ckeditor formControlName="commentGiven"></ckeditor>
-                    
+
                     <div
                       *ngIf="!leadForm.controls['commentGiven'].valid && (leadForm.controls['commentGiven'].touched || leadForm.controls['commentGiven'].dirty)">
                       <div [hidden]="!leadForm.controls['commentGiven'].errors['required']"
@@ -205,13 +397,13 @@
                       </div>
                     </div>
                   </div>
-                </div>
+                </div> -->
               </div>
             </div>
-            <div class="d-flex justify-content-end"><button type="submit" class="btn btn-info"
+            <div class="d-flex justify-content-end " style="margin-right: 80px;"><button type="submit" class="btn btn-info" style="background: rgb(228, 28, 28);border:none"
                 [disabled]="!(leadForm.valid)" (click)="submit()">
                 Submit </button></div>
           </mat-card>
         </form>
-      </div>
-    </div>
+      <!-- </div>
+    </div> -->
