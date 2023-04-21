@@ -21,6 +21,7 @@ export class CouponsComponent implements OnInit {
   cols!: TABLE_HEADING[];
   couponData: CouponCode[] = []
   accessPermission:access;
+  selectedCustomers: CouponCode[] = []
 
   constructor(
     private ngxLoader: NgxUiLoaderService,
