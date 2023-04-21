@@ -12,7 +12,7 @@ import { access } from 'src/app/_models/modulepermission';
   templateUrl: './coupons.component.html',
   styleUrls: ['./coupons.component.scss']
 })
-
+  
 
 export class CouponsComponent implements OnInit {
   @ViewChild('dt') dt: Table | undefined;
@@ -29,7 +29,9 @@ export class CouponsComponent implements OnInit {
     private MarketingService: MarketingService,
     private permissionService:ModulePermissionService) { 
       this.permissionService.getModulePermission().subscribe(res=>{ 
-        this.accessPermission=res[0].MarketingCoupon
+        console.log(res);
+        
+        this.accessPermission=res[0].MarketingCoupon;
         console.log( this.accessPermission)
       })
     }

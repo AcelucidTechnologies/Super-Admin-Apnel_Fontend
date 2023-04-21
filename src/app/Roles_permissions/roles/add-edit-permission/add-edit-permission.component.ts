@@ -16,6 +16,7 @@ export class AddEditPermissionComponent implements OnInit {
   title: string
   isChecked = true;
   isOn: boolean = false;
+  
   permissionData = [
     {
       moduleName: 'Order',
