@@ -1,54 +1,131 @@
-<!-- <div>
-    <h4>User Permission List</h4>
-</div> -->
+
 <div class="container-fluid page-heading">
   <div class="row mb-2 mt-2">
     <div class="col-6">
-      <h4>User Permission List</h4>
+      <h4>Role List</h4>
     </div>
     <div class="col-6 text-right">
-      <button pButton class="add-button-admin"   [routerLink]="['/modulepermission/permissionform']">+ Add Permission</button>
+      <button
+        pButton
+        class="add-button-admin"
+        [routerLink]="['/modulepermission/permissionform']"
+      >
+        + Add Permission
+      </button>
     </div>
   </div>
 </div>
-<p-table #dt responsiveLayout="scroll" [paginator]="true" [rows]="10"
-[showCurrentPageReport]="true" [value]="modulePermissionList"
-currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries" [responsive]="true"
-styleClass="p-datatable-striped" [globalFilterFields]="['username']">
-<ng-template pTemplate="caption">
+<p-table
+  #dt
+  responsiveLayout="scroll"
+  [paginator]="true"
+  [rows]="10"
+  [showCurrentPageReport]="true"
+  [value]="modulePermissionList"
+  currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
+  [responsive]="true"
+  styleClass="p-datatable-striped"
+  [globalFilterFields]="['username']"
+>
+  <ng-template pTemplate="caption">
     <div class="d-flex justify-content-between">
-    <div class="d-flex align-items-center">
-        <input #search pInputText type="text" placeholder="Search By Username">
-        <button pButton class="p-button-success ml-2" (click)="globalSearch(search.value,'contains')">Search</button>
-    </div>
-    <div><button pButton [routerLink]="['/modulepermission/permissionform']">Add</button></div>
-</div>
-</ng-template>
-<ng-template pTemplate="header">
-    <tr>
-    <th class="text-center">Sno</th>
-    <th class="text-center">User Name</th>
-    <th class="text-center">Modules Permitted</th>
-    <th class="text-center">Actions</th>
-</tr>
-</ng-template>
-<ng-template pTemplate="body" let-i="rowIndex" let-list>
-    <tr><td>{{i+1}}</td>
-    <td>{{list.username}}</td>
-    <td><div *ngFor="let module of list.moduleList">{{module}}</div></td>
-    <td>
-        <div>
-        <a pButton class="p-button-secondary mr-2" [routerLink]="['/modulepermission/permissionform']" [queryParams]="{user:list.username}">
-          <img src="../assets/images/icons/edit.svg">
-        </a>
-        <button pButton class="p-button-danger"icon="pi pi-trash" (click)="openDialog(list.username)"></button>
+      <div class="d-flex align-items-center p-0">
+        <img
+          style="margin-right: 5px"
+          src="../assets/images/icons/filter.svg"
+          class="filter"
+          alt="img"
+        />
+        <div class="input-container">
+          <img
+            src="../../../../assets/images/search-white.svg"
+            class="input-container-img"
+          />
+          <input #search pInputText type="text" placeholder="Search..." />
         </div>
-    </td>
-</tr>
-</ng-template>
-<ng-template pTemplate="emptymessage">
+      </div>
+      <div>
+        <button
+          pButton
+          pTooltip="pdf"
+          tooltipPosition="bottom"
+          class="custom-image"
+        >
+          <img src="../../../../assets/images/pdf.svg" alt="Button Image" />
+        </button>
+        <button
+          pButton
+          pTooltip="Excel"
+          tooltipPosition="bottom"
+          class="custom-image"
+        >
+          <img src="../../../../assets/images/excel.svg" alt="Button Image" />
+        </button>
+        <button
+          pButton
+          pTooltip="print"
+          tooltipPosition="bottom"
+          class="custom-image"
+        >
+          <img src="../../../../assets/images/printer.svg" alt="Button Image" />
+        </button>
+      </div>
+    </div>
+  </ng-template>
+
+  <ng-template pTemplate="header">
     <tr>
-        <td colspan="12" class="text-danger">No records to show</td>
+        </div>
+      </th>
+
+      <th>
+        <div class="flex justify-content-between align-items-center head1">
+          Actions
+        </div>
+      </th>
     </tr>
-</ng-template>
+  </ng-template>
+  <ng-template pTemplate="body" let-list let-i="rowIndex">
+    <tr class="p-selectable-row">
+      <td>
+        <span class="p-column-title"></span>
+        {{ i + 1 }}
+      </td>
+
+      <td>{{ list.username }}</td>
+      <td>
+        <div *ngFor="let module of list.moduleList">{{ module }}</div>
+      </td>
+
+      <td>
+        <a
+          pTooltip="Edit Banner"
+          tooltipPosition="bottom"
+          style="margin-right: 15px; cursor: pointer"
+        >
+          <img
+            src="../../../../assets/images/edit.svg"
+            [queryParams]="{ user: list.username }"
+            [routerLink]="['/modulepermission/permissionform']"
+            alt="img"
+          />
+        </a>
+        <a
+          pTooltip="Delete Banner"
+          tooltipPosition="bottom"
+          (click)="openDialog(list.username)"
+          class="me-4 confirm-text mr-3"
+          href="javascript:void(0);"
+        >
+          <img src="../../../../assets/images/delete.svg" alt="img" />
+        </a>
+      </td>
+    </tr>
+  </ng-template>
+
+  <ng-template pTemplate="emptymessage">
+    <tr>
+      <td colspan="12" class="text-danger">No records to show</td>
+    </tr>
+  </ng-template>
 </p-table>

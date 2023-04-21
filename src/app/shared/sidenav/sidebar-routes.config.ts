@@ -11,6 +11,7 @@ export const SideNaveMenueRoute = [
     // },
     {
         label: 'Roles & Permission',
+        icon: 'pi pi-user-plus',
         items: [
             {
                 label: 'Admin List',
@@ -26,6 +27,7 @@ export const SideNaveMenueRoute = [
     },
     {
         label: 'Order',
+        icon: 'pi pi-shopping-cart',
         items: [
             {
                 label: 'OrderList',
@@ -47,6 +49,7 @@ export const SideNaveMenueRoute = [
     },
     {
         label: 'CMS',
+        icon: 'pi pi-file',
         items: [
             {
                 label: 'Banner',
@@ -72,31 +75,30 @@ export const SideNaveMenueRoute = [
             },
             {
                 label: 'Banner Special',
-               
-                        icon: 'pi pi-clone',
+
                         routerLink: ['/cms/banner']
             },
             {
                 label: 'Feature Product',
-               
+
                         icon: 'pi pi-list',
                         routerLink: ['/cms/feature']
             },
             {
                 label: 'Slider',
-               
+
                         icon: 'pi pi-list',
                         routerLink: ['/cms/slider']
             },
             {
                 label: 'Special-Offer',
-               
+
                         icon: 'pi pi-list',
                         routerLink: ['/cms/special-offer']
             },
             {
                 label: 'page Setup',
-               
+
                         icon: 'pi pi-list',
                         routerLink: ['/cms/page']
             },
@@ -120,6 +122,7 @@ export const SideNaveMenueRoute = [
     },
     {
         label: 'Catalog',
+        icon: 'pi pi-folder',
         items: [
             {
                 label: 'Product',
@@ -136,6 +139,7 @@ export const SideNaveMenueRoute = [
     },
     {
         label: 'Marketing',
+        icon: 'pi pi-id-card',
         items: [
             {
                 label: 'Coupons',
@@ -156,17 +160,19 @@ export const SideNaveMenueRoute = [
     },
     {
         label: 'Appointment',
+        icon: 'pi pi-calendar',
         items: [
             {
                 label: 'Appointment',
                 icon: 'pi pi-fw pi-calendar',
                 routerLink: ['/appointment']
             },
-            
+
             ]
     },
      {
             label: 'User',
+            icon: 'pi pi-users',
             items: [
                 {
                     label: 'User List',
@@ -212,6 +218,7 @@ export const SideNaveMenueRoute = [
     // },
     {
         label: 'Leads',
+        icon: 'pi pi-user',
         items: [
             {
                 label: 'Leads List',
@@ -222,6 +229,7 @@ export const SideNaveMenueRoute = [
     },
     {
         label: 'Rating & Review',
+        icon: 'pi pi-star',
         items: [
             {
                 label: 'Rating List',
@@ -252,7 +260,7 @@ export const SideNaveMenueRoute = [
                         routerLink: ['/usertypesettings/usertypelist']
                     }
                 ]
-               
+
             }
         ]
     }

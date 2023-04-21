@@ -121,6 +121,7 @@ color: white !important;
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  position: fixed;
 
   .profile-img {
     width: 7rem;
@@ -142,6 +143,9 @@ color: white !important;
     color: #67748E;
   }
 }
+
+
+
 
 // .sidebar-cont .sidebar .menu-list {
 //   padding: 0 1rem;
@@ -169,9 +173,13 @@ color: white !important;
   .p-panelmenu .p-panelmenu-content .p-menuitem .p-menuitem-link :hover{
    color: red !important;
 }
-
 .pi-chevron-right:before {
-  content: "\e901" !important;
+  content: "\e94a" !important;
+  display: none !important;
 }
 
+
+
 }
+
+
