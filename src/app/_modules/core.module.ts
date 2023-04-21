@@ -3,8 +3,6 @@ import { CommonModule } from '@angular/common';
 import { AuthenticationModule } from '../authentication/authentication.module';
 import { DashboardModule } from '../dashboard/dashboard.module';
 
-
-
 @NgModule({
   declarations: [],
   imports: [
@@ -14,3 +12,4 @@ import { DashboardModule } from '../dashboard/dashboard.module';
   ]
 })
 export class CoreModule { }
+

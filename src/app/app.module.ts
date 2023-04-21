@@ -18,7 +18,7 @@ import { AuthenticationModule } from './authentication/authentication.module';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
     ],
   imports: [
     CommonModule,

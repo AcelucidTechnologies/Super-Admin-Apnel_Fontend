@@ -12,6 +12,10 @@ import { AddBannerSpecialComponent } from './banner-special/add-banner-special/a
 import { FeatureProductListComponent } from './feature-product/feature-product-list/feature-product-list.component';
 import { AddFeatureProductComponent } from './feature-product/add-feature-product/add-feature-product.component';
 import { AddSliderComponent } from './slider/add-slider/add-slider.component';
+import { SpecialOfferListComponent } from './special-offer/special-offer-list/special-offer-list.component';
+import { AddSpecialOfferComponent } from './special-offer/add-special-offer/add-special-offer.component';
+import { PageListComponent } from './page/page-list/page-list.component';
+import { AddPageListComponent } from './page/add-page-list/add-page-list.component';
 const routes: Routes = [
   {
     path:'category', component: CategoryComponent
@@ -58,7 +62,18 @@ const routes: Routes = [
   {
     path: 'add-slider', component: AddSliderComponent
   },
- 
+  {
+    path: 'special-offer', component: SpecialOfferListComponent
+  },
+  {
+    path: 'add-special-offer', component: AddSpecialOfferComponent
+  },
+  {
+    path: 'page', component: AddPageListComponent
+  },
+//  {
+//     path: 'add-page', component: AddPageListComponent
+//   },
 ];
 
 @NgModule({

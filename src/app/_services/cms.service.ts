@@ -2,13 +2,14 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { of, Observable, from } from 'rxjs';
 import { environment } from '../../environments/environment';
-import { CATEGORY, SUB_CATEGORY, SPONSOR, BANNERSPECIAL, FEATURE } from '../_models/cms'
+import { CATEGORY, SUB_CATEGORY, SPONSOR, BANNERSPECIAL, FEATURE, SPECIALOFFER } from '../_models/cms'
 import { category, sub_category } from '../DummyData/category_subCategory';
 import {sponsors} from '../DummyData/sponsor'
 import { bannerSpecialData } from '../DummyData/bannerSpecial';
 import { featureData } from '../DummyData/feature';
 import { SLIDER } from '../_models/slider';
 import { sliderData } from '../DummyData/slider';
+import { specialOffer } from '../DummyData/special-offer';
 
 @Injectable({
     providedIn: 'root'
@@ -310,5 +311,57 @@ export class CmsService {
         let indexObj = sliderData.findIndex((obj)=>obj.id==id);
         //return this.http.get<CATEGORY>(endpointUrl,{ 'headers': httpOptions });
         return of(sliderData[indexObj])
+    }
+
+    // -----------------special offer Api------------------------------
+
+    getOfferList(): Observable<SPECIALOFFER[]> {
+        const token = localStorage.getItem('token') || '';
+        let httpOptions = new HttpHeaders().set('x-access-token', token)
+       // const endpointUrl = `${environment.JSON_SERVER}/category`;
+        // return this.http.get<CATEGORY[]>(endpointUrl, { 'headers': httpOptions });
+        return of(specialOffer)
+    }
+
+    addOffer(offer: any) {
+        const token = localStorage.getItem('token') || '';
+        let httpOptions = new HttpHeaders().set('x-access-token', token)
+        const endpointUrl = `${environment.JSON_SERVER}/slider`;
+        // return this.http.post<any>(endpointUrl, categoryData, { 'headers': httpOptions });
+        offer.id = specialOffer.length + 1
+        specialOffer.push(offer);
+        return of(offer)
+    }
+
+    editOffer(offersData: SPECIALOFFER, id: number) {
+        const token = localStorage.getItem('token') || '';
+        let httpOptions = new HttpHeaders().set('x-access-token', token)
+        const endpointUrl = `${environment.JSON_SERVER}/category/${id}`;
+        // return this.http.put<CATEGORY>(endpointUrl, categoryData, { 'headers': httpOptions });
+        let sliderObj = specialOffer.findIndex((obj) => obj.id == id);
+        specialOffer[sliderObj] = offersData
+        return of(offersData)
+    }
+
+    deleteOffer(id: number) {
+        const token = localStorage.getItem('token') || '';
+        let httpOptions = new HttpHeaders().set('x-access-token', token)
+        const endpointUrl = `${environment.JSON_SERVER}/slider/${id}`;
+        //return this.http.delete<CATEGORY>(endpointUrl, { 'headers': httpOptions });
+        let offerObj = specialOffer.map(item => {
+            item.id == id;
+            return item;
+        })
+        specialOffer.splice(specialOffer.findIndex((index) => index.id == id),1);
+        return of(offerObj)
+    }
+
+    getOfferById(id: number): Observable<SPECIALOFFER> {
+        const token = localStorage.getItem('token') || '';
+        let httpOptions = new HttpHeaders().set('x-access-token', token)
+        const endpointUrl = `${environment.JSON_SERVER}/slider/${id}`;
+        let indexObj = specialOffer.findIndex((obj)=>obj.id==id);
+        //return this.http.get<CATEGORY>(endpointUrl,{ 'headers': httpOptions });
+        return of(specialOffer[indexObj])
     }
 }

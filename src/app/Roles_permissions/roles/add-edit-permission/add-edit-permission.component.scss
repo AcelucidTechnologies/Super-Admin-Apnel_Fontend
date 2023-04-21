@@ -3,6 +3,8 @@
         width: 100%;
     }
 }
+
+
 ::ng-deep  .p-datatable .p-datatable-header {
   background:white;
     color: #333333;
@@ -71,10 +73,10 @@
     transition: background-color 0.2s, box-shadow 0.2s;
     border-radius: 0;
 }
-:host:ng-deep.my-dropdown .ui-dropdown-item:hover{
-  background-color: rgb(46, 206, 46) !important;
-  color: red !important;
-}
+// :host:ng-deep.my-dropdown .ui-dropdown-item:hover{
+//   background-color: rgb(46, 206, 46) !important;
+//   color: red !important;
+// }
 
 ::ng-deep.mat-slide-toggle-bar {
   background-color: rgb(91, 91, 218) !important;

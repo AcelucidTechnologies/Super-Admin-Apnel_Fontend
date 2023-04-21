@@ -52,3 +52,18 @@ export interface FEATURE {
     price: string,
     quantity: string
 }
+
+export interface SPECIALOFFER {
+    id: number,
+    image: File|any,
+    product: string,
+    category: string,
+   
+}
+
+export interface PAGE {
+    id: number,
+    url: string
+    page: string,
+    description: string, 
+}

@@ -64,6 +64,11 @@ color: red!important;
       color: #67748E !important;
     }
 
+    .p-panelmenu .p-panelmenu-content .p-menuitem .p-menuitem-link:hover {
+background-color: #fff !important;
+color: white !important;
+    }
+
     .p-panelmenu .p-panelmenu-content {
       border: none;
       padding-left:  25px;
@@ -163,3 +168,17 @@ color: red!important;
 //   letter-spacing: .1rem;
 //   padding: 0 0 0 1rem;
 // }
+
+:host::ng-deep{
+  .p-panelmenu .p-panelmenu-content .p-menuitem .p-menuitem-link :hover{
+   color: red !important;
+}
+.pi-chevron-right:before {
+  content: "\e94a" !important;
+  display: none !important;
+}
+
+
+
+}
+

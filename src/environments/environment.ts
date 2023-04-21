@@ -9,3 +9,4 @@ export const environment = {
   BASE_URL2:"http://65.0.110.147:4000",
   IP_ADDRESS:"http://localhost:4200",
 };
+

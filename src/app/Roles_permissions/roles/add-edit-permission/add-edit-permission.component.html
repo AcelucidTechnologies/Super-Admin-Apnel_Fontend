@@ -1,6 +1,6 @@
-
+<div class="page-heading"></div>
 <form [formGroup]="permissionForm">
-  <div class="my-2 mb-3 button-heading-container">
+  <div class="my-2 mb-3 button-heading-container ">
   <button class="mb-2 p-1 back-button" [routerLink]="['/modulepermission/rolelist']"><i class="material-icons">arrow_back</i>
   </button>
     <!-- <div class="d-flex justify-content-between"> -->
@@ -25,9 +25,9 @@ sortField="moduleName"
 sortMode="single">
     <ng-template pTemplate="caption">
     <div class="form-group col-8 d-flex justify-content-start align-items-center" style="padding-left: 0px;">
-      <h5 style="margin-right:10px">Role Name</h5>
+      <h5 style="margin-right:10px">User Name</h5>
       <!-- <input id='username' type="text" class="form-control col-3" formControlName="username"> -->
-      <div class="col-3 ml-4" ><p-dropdown styleClass="userDropdown" [ngClass]="'my-dropdown'" id="username" placeholder="Select User" [options]="userlist" formControlName="username"></p-dropdown></div>
+      <div class="col-3 ml-4" ><p-dropdown styleClass="userDropdown"  id="username" placeholder="Select User" [options]="userlist" formControlName="username"></p-dropdown></div>
     </div>
 
         <!-- <div class="d-flex justify-content-between"> -->
@@ -76,7 +76,7 @@ sortMode="single">
 
 </p-table>
 <div class="d-flex justify-content-end mt-4" >
-  <button type="submit" style="background: #FF9F43; border:none" class="btn btn-info mr-3" [disabled]="!permissionForm.valid" (click)="submit()">Submit</button>
+  <button type="submit" style="background: rgb(228, 28, 28); border:none" class="btn btn-info mr-3" [disabled]="!permissionForm.valid" (click)="submit()">Submit</button>
   <button class="btn btn-info" style="background: #637381;border:none" [routerLink]="['/modulepermission/rolelist']">Cancel</button>
     <!-- <button class="btn btn-info mr-3" (click)="submit()" [disabled]="!permissionForm.valid">Submit</button>
     <button class="btn btn-info" [routerLink]="['/modulepermission/rolelist']">Cancel</button> -->
