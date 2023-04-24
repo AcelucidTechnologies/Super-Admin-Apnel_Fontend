@@ -106,3 +106,22 @@
         font-size: small;
     }
 }
+.page-heading{
+  background-color: white !important;
+}
+.button-heading-container {
+  display: flex;
+  align-items: center;
+}
+.back-button{
+  background: rgb(228, 28, 28);;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  margin-left: 122px;
+  width: 40px;
+
+}
+::ng-deep.back-button:hover {
+  background-color: lightcoral !important;
+}

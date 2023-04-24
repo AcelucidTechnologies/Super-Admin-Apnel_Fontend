@@ -1,6 +1,4 @@
-    <!-- <div class="page-heading">
-        <h1 class="header-text-title" style="margin-left: 1%;">Leads</h1>
-    </div> -->
+
     <div class="container page-heading">
       <div class="row mb-2 mt-2">
         <div class="col-6">
@@ -199,13 +197,13 @@
                                 <button  class="edit-delete-button" pButton type="button"
                                 pTooltip="Delete lead" tooltipPosition="bottom" style="margin-right:5px; " (click)="openDialog(leadsList)" [disabled]="!accessPermission.delete"
                                ><img src="../../../../assets/images/delete.svg" alt="img" /></button> -->
-                               <a pTooltip="Edit Banner" tooltipPosition="bottom" style="margin-right: 15px; cursor: pointer;">
+                               <a pTooltip="Edit Lead" tooltipPosition="bottom" style="margin-right: 15px; cursor: pointer;">
                                 <img src="../../../../assets/images/edit.svg" [routerLink]="['/leads/leadedit']" [queryParams]="{leadName:leadsList.name}" alt="img">
                               </a>
-                              <a pTooltip="Edit Banner" tooltipPosition="bottom" style="margin-right: 15px; cursor: pointer;">
+                              <a pTooltip="View Lead" tooltipPosition="bottom" style="margin-right: 15px; cursor: pointer;">
                                 <img src="../../../../assets/images/eye.svg" [routerLink]="['/leads/leadview']" [queryParams]="{leadName:leadsList.name}" alt="img">
                               </a>
-                              <a pTooltip="Delete Banner" tooltipPosition="bottom" (click)="openDialog(leadsList)"
+                              <a pTooltip="Delete Lead" tooltipPosition="bottom" (click)="openDialog(leadsList)"
                                 class="me-3 confirm-text" href="javascript:void(0);">
                                 <img src="../../../../assets/images/delete.svg" alt="img">
                               </a>
