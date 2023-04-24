@@ -1,8 +1,11 @@
 <div class="page-heading">
     <h1 class="header-text-title" style="margin-left: 1%;">Promo Code Details</h1>
+    <div class="page-btn">
+        <a class="btn btn-added" [routerLink]="['/marketing/add-coupan']">
+            <img src="../assets/images/icons/plus.svg" class="me-1" alt="img">Add Product
+        </a>
+    </div>
 </div>
-<mat-tab-group mat-align-tabs="start">
-    <mat-tab label="All Coupons">
         <div class="card col-sm-12" style="border:none;">
             <p-table #dt [value]="couponData" [(selection)]="selectedCustomers" dataKey="id" [rowHover]="true"
                 [rows]="10" [showCurrentPageReport]="true" responsiveLayout="scroll" [paginator]="true"
@@ -103,7 +106,6 @@
                         </td>
                         <td>
                             <span class="p-column-title">Code</span>
-
                             {{coupanData.Code}}
                         </td>
 
@@ -143,14 +145,6 @@
 
             <ngx-ui-loader [fgsColor]="'#000000'" [fgsType]="fgsType"></ngx-ui-loader>
         </div>
-    </mat-tab>
-    <mat-tab label="Active">
-        <app-active-coupon [deleteAccess]="accessPermission?.delete"></app-active-coupon>
-    </mat-tab>
-    <mat-tab label="InActivate">
-        <app-inactive-coupon [deleteAccess]="accessPermission?.delete"></app-inactive-coupon>
-    </mat-tab>
-</mat-tab-group>
 
 
 

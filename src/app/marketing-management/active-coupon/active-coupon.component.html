@@ -3,7 +3,7 @@
     <mat-tab label="All Active Coupons">
         <div class="card col-sm-12" style="border:none;">
 
-            <p-table #dt [value]="couponData" [(selection)]="selectedCustomers" dataKey="id" [rowHover]="true"
+            <p-table #dt [value]="couponData" dataKey="id" [rowHover]="true"
                 [rows]="10" [showCurrentPageReport]="true" responsiveLayout="scroll" [paginator]="true"
                 currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries" [filterDelay]="0"
                 [globalFilterFields]="['Code','.country']" class="abc">

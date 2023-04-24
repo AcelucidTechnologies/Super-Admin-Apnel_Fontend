@@ -1,0 +1,73 @@
+
+<div class="page-heading">
+    <h1 class="header-text-title" style="margin-left: 1%;">Add Api</h1>
+    <div class="page-btn">
+      <button pButton type="button" href="https://signal.org/en/" label="Create Api" class="theme" ></button>
+  </div>
+  </div>
+
+<form [formGroup]="pushNotificationForm">
+    <div class="card col-sm-12">
+      <div class="row gutters">
+        <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+          <div class="h-100 mt-3">
+            <div class="card-body">
+              <div class="row gutters">
+                <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
+                  <div class="form-group">
+                    <label for="name" class="col-form-label text-left starlabel">Api Id</label>
+                    <input type="apiId" class="form-control" placeholder="Enter Api Id" formControlName="apiId">
+                    <div
+                      *ngIf="(!pushNotificationForm.controls['apiId'].valid) && (pushNotificationForm.controls['apiId'].touched || pushNotificationForm.controls['apiId'].dirty)">
+                      <div [hidden]="!pushNotificationForm.controls['apiId'].errors['required']"
+                        style="color: rgb(253, 122, 122); font-size:small; font-style: italic;">
+                        Api Id is required
+                      </div>
+                      <!-- <div *ngIf="pushNotificationForm.controls['apiId'].errors['pattern']"
+                        style="color: rgb(253, 122, 122); font-size:small; font-style: italic;">
+                        Please enter valid ApiId
+                      </div> -->
+                    </div>
+                    
+  
+                  </div>
+                </div>
+                <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
+                  <div class="form-group">
+                    <label for="hyperlink" class="col-form-label">Authentication key</label>
+                    <input type="text" class="form-control" placeholder="Enter Authentication key" formControlName="key">
+                    <div
+                                        *ngIf="!pushNotificationForm.controls['key'].valid && (pushNotificationForm.controls['key'].touched || pushNotificationForm.controls['key'].dirty)">
+                                        <div [hidden]="!pushNotificationForm.controls['key'].errors['required']"
+                                            style="color: rgb(253, 122, 122); font-size:small; font-style: italic;">
+                                            key is required
+                                        </div>
+                                    </div>
+                  </div>
+  
+                </div>
+  
+    
+               
+              </div>
+  
+              
+  
+              <!-- ------------------------------------- -->
+  
+              <div class="row gutters mt-4">
+                <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 mt-4">
+                  <div class="text-center">
+                    <button pButton type="button" id="submit" name="submit" class="first-button mr-4"
+                      (click)="submitForm()" [disabled]="!(pushNotificationForm.valid)">Save</button>
+                    
+  
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </form>

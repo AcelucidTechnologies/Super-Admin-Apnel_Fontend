@@ -25,3 +25,18 @@ export default interface rewards {
     completedOn: string;
     status:string;
 }
+
+export interface COUPANCODEDATA {
+    id: number;
+    coupanName: string,
+    coupanCode: string,
+    type: string,
+    discount: string,
+    startDate: string,
+    endDate: string,
+    category:string,
+    maxDiscount: string,
+    products: string,
+    usesPerCoupan: string,
+    status:string;
+}

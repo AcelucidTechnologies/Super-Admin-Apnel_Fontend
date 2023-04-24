@@ -2,7 +2,8 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { of, Observable, from } from 'rxjs';
 import { environment } from '../../environments/environment';
-import { CouponData, rewardsRedemptionData } from '../DummyData/marketing';
+import { CouponData, couponAllData, rewardsRedemptionData } from '../DummyData/marketing';
+import { COUPANCODEDATA, } from '../_models/marketingModule';
 
 
 @Injectable({
@@ -70,5 +71,57 @@ export class MarketingService {
         const endpointUrl = `${environment.JSON_SERVER}/coupons`;
         //return this.http.get(endpointUrl, { 'headers': httpOptions }).pipe(map(res => res));
         return of(rewardsRedemptionData)
+    }
+
+            //    ---------------------marketting apis---------------
+
+            
+    getCouponsList(): Observable<COUPANCODEDATA[]> {
+        const token = localStorage.getItem('token') || '';
+        let httpOptions = new HttpHeaders().set('x-access-token', token)
+        const endpointUrl = `${environment.JSON_SERVER}/coupons`;
+        //return this.http.get(endpointUrl, { 'headers': httpOptions }).pipe(map(res => res));
+        return of(couponAllData)
+    }
+
+    addCoupon(Data: any) {
+        const token = localStorage.getItem('token') || '';
+        let httpOptions = new HttpHeaders().set('x-access-token', token)
+        const endpointUrl = `${environment.JSON_SERVER}/coupons`;
+        //return this.http.get(endpointUrl, { 'headers': httpOptions }).pipe(map(res => res));
+        couponAllData.push(Data)
+        return of(Data)
+    }
+
+    editCoupon(coupanData: COUPANCODEDATA, id: number) {
+        const token = localStorage.getItem('token') || '';
+        let httpOptions = new HttpHeaders().set('x-access-token', token)
+        const endpointUrl = `${environment.JSON_SERVER}/coupons`;
+        //return this.http.get(endpointUrl, { 'headers': httpOptions }).pipe(map(res => res));
+        let indeofCoupon = couponAllData.findIndex((obj) => obj.id == id);
+        couponAllData[indeofCoupon] = coupanData
+        return of(coupanData)
+    }
+
+    deleteCoupan(id: number) {
+        const token = localStorage.getItem('token') || '';
+        let httpOptions = new HttpHeaders().set('x-access-token', token)
+        const endpointUrl = `${environment.JSON_SERVER}/category/${id}`;
+        //return this.http.delete<CATEGORY>(endpointUrl, { 'headers': httpOptions });
+        let productObj = couponAllData.map(item => {
+            item.id == id;
+            return item;
+        })
+        couponAllData.splice(couponAllData.findIndex((index) => index.id == id),1);
+        return of(productObj)
+    }
+
+    getcoupanById(id: number): Observable<COUPANCODEDATA> {
+        const token = localStorage.getItem('token') || '';
+        let httpOptions = new HttpHeaders().set('x-access-token', token)
+        const endpointUrl = `${environment.JSON_SERVER}/slider/${id}`;
+        let indexObj = couponAllData.findIndex((obj)=>obj.id==id);
+        //return this.http.get<CATEGORY>(endpointUrl,{ 'headers': httpOptions });
+        return of(couponAllData[indexObj])
     }
 }
