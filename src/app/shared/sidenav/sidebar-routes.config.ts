@@ -145,18 +145,42 @@ export const SideNaveMenueRoute = [
             {
                 label: 'Coupons',
                 icon: 'pi pi-fw pi-shopping-cart',
-                routerLink: ['/marketing']
+                routerLink: ['/marketing/coupanList']
+            },
+            // {
+            //     label: 'Rewards',
+            //     items: [
+            //         {
+            //             label: 'Redemption',
+            //             icon: 'pi pi-fw pi-money-bill',
+            //             routerLink: ['/marketing/redemption']
+            //         }
+            //     ]
+            // },
+            {
+                label: 'Live Chat',
+               
+                        icon: 'pi pi-clone',
+                        routerLink: ['/marketing/live-chat']
             },
             {
-                label: 'Rewards',
-                items: [
-                    {
-                        label: 'Redemption',
-                        icon: 'pi pi-fw pi-money-bill',
-                        routerLink: ['/marketing/redemption']
-                    }
-                ]
-            }
+                label: 'Push Notification',
+               
+                        icon: 'pi pi-clone',
+                        routerLink: ['/marketing/push-notification']
+            },
+            {
+                label: 'Seo',
+               
+                        icon: 'pi pi-clone',
+                        routerLink: ['/marketing/seo']
+            },
+            {
+                label: 'Analytics Tracking',
+               
+                        icon: 'pi pi-clone',
+                        routerLink: ['/marketing/analytics-tracking']
+            },
             ]
     },
     {

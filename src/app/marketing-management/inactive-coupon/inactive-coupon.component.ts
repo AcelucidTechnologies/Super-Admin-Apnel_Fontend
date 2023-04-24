@@ -25,7 +25,7 @@ export class InactiveCouponComponent implements OnInit {
   ngOnInit(): void {
     this.fgsType = SPINNER.squareLoader
     this.ngxLoader.start();
-    this.getInActiveCouponList()
+    //this.getInActiveCouponList()
     this.cols = [
       { field: 'Country', show: true, headers: 'Country' },
       { field: 'Code', show: true, headers: 'Code' },
@@ -36,14 +36,14 @@ export class InactiveCouponComponent implements OnInit {
     ]
   }
 
-  getInActiveCouponList() {
-    this.MarketingService.getInActiveCouponList().subscribe(res => {
-      this.couponData = res
-      this.ngxLoader.stop();
-    })
-  }
-  applyFilterGlobal($event, stringVal) {
-    this.dt.filterGlobal(($event.target as HTMLInputElement).value, stringVal);
-    console.log($event)
-  }
+  // getInActiveCouponList() {
+  //   this.MarketingService.getInActiveCouponList().subscribe(res => {
+  //     this.couponData = res
+  //     this.ngxLoader.stop();
+  //   })
+  // }
+  // applyFilterGlobal($event, stringVal) {
+  //   this.dt.filterGlobal(($event.target as HTMLInputElement).value, stringVal);
+  //   console.log($event)
+  // }
 }

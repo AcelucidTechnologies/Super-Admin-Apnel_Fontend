@@ -16,7 +16,6 @@ export class ActiveCouponComponent implements OnInit {
   cols!: TABLE_HEADING[];    
   couponData: CouponCode[] = []
   @Input() deleteAccess:boolean;
-  selectedCustomers: CouponCode[] = []
 
   constructor(private ngxLoader: NgxUiLoaderService,
     private toastr: ToastrMsgService,

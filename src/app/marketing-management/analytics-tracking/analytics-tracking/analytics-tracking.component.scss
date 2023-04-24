@@ -1,3 +1,8 @@
+.page-heading{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
 .page-heading {
     display: flex;
     justify-content: space-between;
@@ -24,9 +29,8 @@ p-sortIcon {
 
 .btn:hover {
     color: #fff;
-    background-color: rgb(245, 46, 46);
+    background-color:rgb(228, 28, 28);
 }
-
 .theme{
     background-color: rgb(245, 46, 46) ;
     color: white;
@@ -49,7 +53,7 @@ p-table {
 }
 
 .filter {
-    color: rgb(245, 46, 46);
+    color:rgb(228, 28, 28);
 }
 
 
@@ -63,31 +67,34 @@ td,th{
     border-bottom: 1px solid rgb(215, 198, 198) !important;
 }
 :host::ng-deep {
-    .p-datatable .p-datatable-header,.p-paginator{
-        background-color: #fff !important;
-        border: none !important;
-    }
 
-    .p-datatable .p-sortable-column .p-sortable-column-icon{
-        color: #848484;
+    label.starlabel::after {
+        content: "*";
+        color: rgb(228, 28, 28);
     }
+}
 
-    .p-datatable .p-sortable-column.p-highlight:hover{
-        background-color: none;
-    }
-    .p-datatable .p-sortable-column.p-highlight{
-        background-color: none;
-    }
-   
-    .p-datatable .p-sortable-column:focus {
-         box-shadow:none
-    }
+.form-control:active{
+    border-color:rgb(245, 46, 46) !important;
+    box-shadow: none !important;
+}
 
-    .p-datatable .p-sortable-column.p-highlight:hover .p-sortable-column-icon {
-        color: #848484;
-    }
-
-    .p-paginator .p-paginator-pages .p-paginator-page.p-highlight{
-        background-color: rgb(228, 28, 28);
-    }
+.form-control:focus{
+    border-color:rgb(245, 46, 46) !important;
+    box-shadow:none !important;
+}
+.first-button{
+    background-color: rgb(245, 46, 46);;
+    color: #fff;
+    outline: none !important;
+    padding: 10px 20px 10px 20px;
+}
+.second-button{
+    background-color: #424b52;
+    color: #fff;
+    outline: none !important;
+    padding: 10px 20px 10px 20px;
+}
+.p-button{
+    border: none !important;
 }

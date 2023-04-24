@@ -1,7 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { MarketingService } from 'src/app/_services/marketing';
 import { NgxUiLoaderService, SPINNER } from 'ngx-ui-loader';
-import { TABLE_HEADING } from '../../_models/table_heading'
+import { TABLE_HEADING } from '../../../../_models/table_heading'
 import { Table } from 'primeng/table';
 import { ToastrMsgService } from 'src/app/_services/toastr-msg.service';
 import { CouponCode } from 'src/app/_models/marketingModule';
@@ -42,7 +42,7 @@ export class CouponsComponent implements OnInit {
     this.fgsType = SPINNER.squareLoader
     this.ngxLoader.start();
     this.sidebarSpacing = 'contracted';
-    this.getCouponList()
+    //this.getCouponList()
     this.cols = [
       { field: 'Country', show: true, headers: 'Country' },
       { field: 'Code', show: true, headers: 'Code' },
@@ -60,12 +60,12 @@ export class CouponsComponent implements OnInit {
       this.sidebarSpacing = 'expanded';
     }
   }
-  getCouponList() {
-    this.MarketingService.getCouponList().subscribe((data) => {
-      this.couponData = data
-      this.ngxLoader.stop();
-    });
-  }
+  // getCouponList() {
+  //   this.MarketingService.getCouponList().subscribe((data) => {
+  //     this.couponData = data
+  //     this.ngxLoader.stop();
+  //   });
+  // }
   InActivate(Code){
 
   }

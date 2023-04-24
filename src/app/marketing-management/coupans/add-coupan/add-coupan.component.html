@@ -1,0 +1,220 @@
+<form [formGroup]="coupanForm">
+    <div class="page-heading col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+        <h1 class="header-text-title">
+            <i pButton style="color: rgb(245, 46, 46);" class="pi pi-arrow-left p-button-text"
+                [routerLink]="['/cms/coupanList']" pTooltip="Back" tooltipPosition="bottom">
+            </i>{{title}}
+        </h1>
+    </div>
+    <div class="card col-sm-12">
+        <div class="row gutters">
+            <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+                <div class="h-100 mt-3">
+                    <div class="card-body">
+                        <div class="row gutters">
+                            <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
+                                <div class="form-group">
+                                    <label for="name" class="col-form-label text-left starlabel">Coupan Name</label>
+                                    <input type="text" class="form-control" formControlName="coupanName">
+                                    <div
+                                        *ngIf="!coupanForm.controls['coupanName'].valid && (coupanForm.controls['coupanName'].touched || coupanForm.controls['coupanName'].dirty)">
+                                        <div [hidden]="!coupanForm.controls['coupanName'].errors['required']"
+                                            style="color: rgb(253, 122, 122); font-size:small; font-style: italic;">
+                                            Coupan Name is required
+                                        </div>
+                                    </div>
+                                    <!-- <div *ngIf="coupanForm.controls['coupanName'].errors['pattern']"
+                                    style="color: rgb(253, 122, 122); font-size:small; font-style: italic;">
+                                    please enter only alphabet and number
+                                  </div> -->
+                                </div>
+                            </div>
+
+
+                            <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
+                                <div class="form-group">
+                                    <label for="hyperlink" class="col-form-label text-left starlabel">Coupan
+                                        Code</label>
+                                    <input type="text" class="form-control" formControlName="coupanCode">
+                                    <div
+                                        *ngIf="!coupanForm.controls['coupanCode'].valid && (coupanForm.controls['coupanCode'].touched || coupanForm.controls['coupanCode'].dirty)">
+                                        <div [hidden]="!coupanForm.controls['coupanCode'].errors['required']"
+                                            style="color: rgb(253, 122, 122); font-size:small; font-style: italic;">
+                                            Coupan Code is required
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+
+
+                        <div class="row gutters">
+                            <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
+                                <div class="form-group">
+                                    <label for="Name" class="col-form-label text-left starlabel">Type</label><br>
+                                    <input type="text" class="form-control" formControlName="type">
+                                    <div
+                                        *ngIf="(!coupanForm.controls['type'].valid) && (coupanForm.controls['type'].touched || coupanForm.controls['type'].dirty)">
+                                        <div [hidden]="!coupanForm.controls['type'].errors['required']"
+                                            style="color: rgb(253, 122, 122); font-size:small; font-style: italic;">
+                                            Type is required
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
+                                <div class="form-group">
+                                    <label for="Name" class="col-form-label text-left starlabel">Discount</label><br>
+                                    <input type="text" class="form-control" formControlName="discount">
+                                    <div
+                                        *ngIf="(!coupanForm.controls['discount'].valid) && (coupanForm.controls['discount'].touched || coupanForm.controls['discount'].dirty)">
+                                        <div [hidden]="!coupanForm.controls['discount'].errors['required']"
+                                            style="color: rgb(253, 122, 122); font-size:small; font-style: italic;">
+                                            Discount is required
+                                        </div>
+
+                                    </div>
+
+                                </div>
+                            </div>
+
+                        </div>
+
+
+
+                        <div class="row gutters">
+                            <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
+                                <div class="form-group">
+                                    <label for="Name" class="col-form-label text-left starlabel">Max
+                                        Discount</label><br>
+                                    <input type="text" class="form-control" formControlName="maxDiscount">
+                                    <div
+                                        *ngIf="(!coupanForm.controls['maxDiscount'].valid) && (coupanForm.controls['maxDiscount'].touched || coupanForm.controls['maxDiscount'].dirty)">
+                                        <div [hidden]="!coupanForm.controls['maxDiscount'].errors['required']"
+                                            style="color: rgb(253, 122, 122); font-size:small; font-style: italic;">
+                                            maxDiscount is required
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
+                                <div class="form-group">
+                                    <label for="Name" class="col-form-label text-left starlabel">Category</label><br>
+                                    <input type="text" class="form-control" formControlName="category">
+                                    <div
+                                        *ngIf="(!coupanForm.controls['category'].valid) && (coupanForm.controls['category'].touched || coupanForm.controls['category'].dirty)">
+                                        <div [hidden]="!coupanForm.controls['category'].errors['required']"
+                                            style="color: rgb(253, 122, 122); font-size:small; font-style: italic;">
+                                            Category is required
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+
+
+                        <div class="row gutters">
+                            <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
+                                <div class="form-group">
+                                    <label for="Name" class="col-form-label text-left starlabel">Product</label><br>
+                                    <input type="text" class="form-control" formControlName="product">
+                                    <div
+                                        *ngIf="(!coupanForm.controls['product'].valid) && (coupanForm.controls['product'].touched || coupanForm.controls['product'].dirty)">
+                                        <div [hidden]="!coupanForm.controls['product'].errors['required']"
+                                            style="color: rgb(253, 122, 122); font-size:small; font-style: italic;">
+                                            Product is required
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+
+                            <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
+                                <div class="form-group">
+                                    <label class="col-form-label text-left starlabel">Start Date</label>
+                                    <div>
+                                        <p-calendar [minDate]="dateFieldDate" styleClass="date-picker"
+                                            formControlName="startDate"></p-calendar>
+                                    </div>
+                                    <div
+                                        *ngIf="!coupanForm.controls['startDate'].valid && (coupanForm.controls['startDate'].touched || coupanForm.controls['startDate'].dirty)">
+                                        <div [hidden]="!coupanForm.controls['startDate'].errors['required']"
+                                            style="color: rgb(253, 122, 122); font-size:small; font-style: italic;">
+                                            Start Date is required
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+
+                        </div>
+
+                        <div class="row gutters">
+                            <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
+
+                                <div class="form-group">
+                                    <label class="col-form-label text-left starlabel">End Date</label>
+                                    <div>
+                                        <p-calendar [minDate]="dateFieldDate" styleClass="date-picker"
+                                            formControlName="endDate"></p-calendar>
+                                    </div>
+                                    <div
+                                        *ngIf="!coupanForm.controls['endDate'].valid && (coupanForm.controls['endDate'].touched || coupanForm.controls['endDate'].dirty)">
+                                        <div [hidden]="!coupanForm.controls['endDate'].errors['required']"
+                                            style="color: rgb(253, 122, 122); font-size:small; font-style: italic;">
+                                            Follow-up Date is required
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+
+                            <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
+                                <div class="form-group">
+                                    <label for="Name" class="col-form-label text-left starlabel">uses per
+                                        Coupan</label><br>
+                                    <input type="text" class="form-control" formControlName="usesPerCoupan">
+                                    <div
+                                        *ngIf="(!coupanForm.controls['usesPerCoupan'].valid) && (coupanForm.controls['usesPerCoupan'].touched || coupanForm.controls['usesPerCoupan'].dirty)">
+                                        <div [hidden]="!coupanForm.controls['usesPerCoupan'].errors['required']"
+                                            style="color: rgb(253, 122, 122); font-size:small; font-style: italic;">
+                                            uses per coupan is required
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+
+
+
+
+
+                        <!-- ------------------------------------- -->
+
+                        <div class="row gutters mt-4">
+                            <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 mt-4">
+                                <div class="text-center">
+                                    <button pButton maxDiscount="button" id="submit" name="submit"
+                                        class="p-button mr-4 first-button" (click)="submitForm()"
+                                        [disabled]="!(coupanForm.valid)">Save</button>
+                                    <button pButton maxDiscount="button" id="submit" name="submit"
+                                        class="p-button second-button "
+                                        [routerLink]="['/marketing/coupanList']">Cancel</button>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>

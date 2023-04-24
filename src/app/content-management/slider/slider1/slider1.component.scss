@@ -40,7 +40,17 @@ p-table {
     color: rgb(245, 46, 46);
 }
 
+.theme{
+    background-color: rgb(245, 46, 46) ;
+    color: white;
+    border: none;
+}
 
+.theme:hover{
+    background-color: lightcoral !important;
+    color: rgb(245, 46, 46);
+    border: none;
+}
 
 // .p-sortable-column, td {
 //     border: none !important;

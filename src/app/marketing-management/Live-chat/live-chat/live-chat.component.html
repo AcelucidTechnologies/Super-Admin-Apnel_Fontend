@@ -1,0 +1,51 @@
+
+<form [formGroup]="liveChatForm">
+
+    <div class="page-heading col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 mb-4" >
+      <h1 class="header-text-title">
+        Live Chat(Tawk.to Live chat)
+      </h1>
+    </div>
+    <div class="card col-sm-12">
+      <div class="row gutters">
+        <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+          <div class="h-100 mt-3">
+            <div class="card-body">
+              <div class="row gutters">
+                <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+                  <div class="form-group">
+                    <label for="name" class="col-form-label text-left starlabel">Property Id</label>
+                    <input type="url" class="form-control" placeholder="Enter Property Id" formControlName="propertyId">   
+                    <div
+                    *ngIf="!liveChatForm.controls['propertyId'].valid && (liveChatForm.controls['propertyId'].touched || liveChatForm.controls['propertyId'].dirty)">
+                    <div [hidden]="!liveChatForm.controls['propertyId'].errors['required']"
+                        style="color: rgb(253, 122, 122); font-size:small; font-style: italic;">
+                        Property Id is required
+                    </div>
+                </div>           
+                  </div>
+                </div>
+              </div> 
+              <!-- ------------------------------------- -->
+            </div>
+          </div>
+        </div>
+      </div>
+
+
+      
+      <div class="row gutters mb-3">
+        <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+            <div class="text-center">
+                <button pButton type="button" id="submit" name="submit"
+                    class="p-button mr-4 first-button" [disabled]="!(liveChatForm.valid)" (click)="submitForm()"
+                    >Save</button>
+            </div>
+            <div style="text-align: center !important;" class="footer mt-3">
+                Click here to Redirect on <a href="">Tawk.to</a>and create the key
+            </div>
+        </div>
+       
+    </div>
+    </div>
+  </form>
