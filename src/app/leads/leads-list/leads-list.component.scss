@@ -102,7 +102,12 @@ th {
 }
 ::ng-deep .p-datatable .p-datatable-header {
   background: white;
+  border: none;
 
+}
+.custom-image:hover{
+  background: none;
+  border: none;
 }
 .page-heading {
   // margin-top: 200px;

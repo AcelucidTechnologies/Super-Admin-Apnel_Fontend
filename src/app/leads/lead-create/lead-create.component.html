@@ -5,7 +5,7 @@
     </div> -->
     <!-- <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 d-flex justify-content-center " style=" height: 100%;">
       <div class="card-body " style="max-width: 950px;"> -->
-        <div class="page-heading"></div>
+<div class="page-heading"></div>
 <div class="button-heading-container ">
 
   <button class="mb-2 p-1 back-button " [routerLink]="['/leads/leadslist']"><i class="material-icons">arrow_back</i>
@@ -89,7 +89,7 @@
                 <div class="form-row pt-5">
                   <div class="col-3">
                     <label for="tech" style="display: block;"
-                    class="col-form-label text-left starlabel">Tech stack</label>
+                    class="col-form-label text-left starlabel">Tech Stack</label>
                   </div>
                   <div class="col-9">
                     <p-dropdown styleClass="tech-dropdown" [options]="technologies"
@@ -329,8 +329,9 @@
                   <div class="col-3" style="margin-top: 50px;">
                     <label for="comment" class="col-2 col-form-label text-left starlabel" style="margin-top: auto;">Comment</label>
                   </div>
-                  <div class="col-9" >
-                    <textarea rows="6" formControlName="commentGiven"></textarea>
+                  <div class="col-9 mb-3" >
+                    <!-- <textarea rows="6" formControlName="commentGiven"></textarea> -->
+                    <ckeditor formControlName="commentGiven"></ckeditor>
                     <div
                     *ngIf="!leadForm.controls['commentGiven'].valid && (leadForm.controls['commentGiven'].touched || leadForm.controls['commentGiven'].dirty)">
                     <div [hidden]="!leadForm.controls['commentGiven'].errors['required']"

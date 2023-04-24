@@ -131,11 +131,11 @@
         </td>
         <td>{{list.role}}</td>
         <td>
-          <a pTooltip="Edit Banner" tooltipPosition="bottom" style="margin-right: 15px; cursor: pointer;">
+          <a pTooltip="Edit Admin" tooltipPosition="bottom" style="margin-right: 15px; cursor: pointer;">
             <img src="../../../../assets/images/edit.svg" [queryParams]="{user:list.username}"
               [routerLink]="['/roleandpermission/editAdmin']" alt="img">
           </a>
-          <a pTooltip="Delete Banner" tooltipPosition="bottom" (click)="openDialog(list.username)"
+          <a pTooltip="Delete Admin" tooltipPosition="bottom" (click)="openDialog(list.username)"
             class="me-3 confirm-text" href="javascript:void(0);">
             <img src="../../../../assets/images/delete.svg" alt="img">
           </a>
