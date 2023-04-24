@@ -1,4 +1,213 @@
-<div>
+
+<mat-tab-group mat-align-tabs="start">
+    <mat-tab label="All Active Coupons">
+        <div class="card col-sm-12" style="border:none;">
+
+            <p-table #dt [value]="couponData" [(selection)]="selectedCustomers" dataKey="id" [rowHover]="true"
+                [rows]="10" [showCurrentPageReport]="true" responsiveLayout="scroll" [paginator]="true"
+                currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries" [filterDelay]="0"
+                [globalFilterFields]="['Code','.country']" class="abc">
+                <ng-template pTemplate="caption">
+                    <div class="table-header">
+                        <span style="display: flex; justify-content: center; align-items: center;"
+                            class="p-input-icon-left ">
+                            <img style="margin-right: 5px;" src="../assets/images/icons/filter.svg" class="filter"
+                                alt="img">
+                            <input
+                                style="outline: none; border-radius: 5px; border: 1px solid rgb(195, 183, 183); padding: 6px;"
+                                type="text" (input)="applyFilterGlobal($event, 'contains')" placeholder="Search..." />
+                        </span>
+
+                        <div class="d-flex justify-content-end align-items-end">
+                            <button style="background-color: #f4f4f4; border: none;" type="button" pButton class="mr-1"
+                                pTooltip="Pdf" tooltipPosition="bottom"><img
+                                    src="../assets/images/icons/pdf.svg"></button>
+                            <button type="button" style="background-color: #f4f4f4;; border: none;" pButton class="mr-1"
+                                pTooltip="excel" tooltipPosition="bottom"><img
+                                    src="../assets/images/icons/excel.svg"></button>
+                            <button type="button" style="background-color: #f4f4f4;; border: none;" pButton
+                                class=" mr-1" pTooltip="print" tooltipPosition="bottom"><img
+                                    src="../assets/images/icons/printer.svg"></button>
+                        </div>
+                    </div>
+                </ng-template>
+                <ng-template pTemplate="header">
+                    <tr>
+                        <th style="width: 3rem;">
+                            <p-tableHeaderCheckbox></p-tableHeaderCheckbox>
+                        </th>
+
+               
+
+                        <th pSortableColumn="Country">
+                            <div class="flex justify-content-between align-items-center head1">
+                                Country
+                                <p-sortIcon field="Country"></p-sortIcon>
+                            </div>
+                        </th>
+                        <th pSortableColumn="Code">
+                            <div class="flex justify-content-between align-items-center head1">
+                                Code
+
+
+                            </div>
+                        </th>
+
+                        <th pSortableColumn="promotionName">
+                            <div class="flex justify-content-between align-items-center head1">
+                                Promotion Name
+                                <p-sortIcon field="promotionName"></p-sortIcon>
+
+                            </div>
+                        </th>
+
+                        <th pSortableColumn="endDate">
+                            <div class="flex justify-content-between align-items-center head1">
+								Promo Code Type
+                                <p-sortIcon field="endDate"></p-sortIcon>
+                            </div>
+                        </th>
+
+                        <th pSortableColumn="endDate">
+                            <div class="flex justify-content-between align-items-center head1">
+								End Date
+								<p-sortIcon field="endDate"></p-sortIcon>
+                            </div>
+                        </th>
+
+						<th>
+                            <div class="flex justify-content-between align-items-center head1">
+								First Time
+                            </div>
+                        </th>
+
+                        <th>
+                            <div class="flex justify-content-between align-items-center head1">
+                                Action
+
+                            </div>
+                        </th>
+
+
+                    </tr>
+                </ng-template>
+                <ng-template pTemplate="body" let-i="rowIndex" let-coupanData>
+                    <tr class="p-selectable-row">
+                        <td>
+                            <p-tableCheckbox [value]="coupanData"></p-tableCheckbox>
+                        </td>
+						
+
+                    
+                        <td>
+                            <span class="p-column-title">Country</span>
+                            {{coupanData.Country}}
+                        </td>
+                        <td>
+                            <span class="p-column-title">Code</span>
+
+                            {{coupanData.Code}}
+                        </td>
+
+                        <td>
+                            <span class="p-column-title">Title</span>
+                            {{coupanData.Title}}
+                        </td>
+                        <td>
+                            {{coupanData.couponType}}
+                        </td>
+
+						<td>
+                            {{coupanData.endDate}}
+                        </td>
+                        <td>
+                            {{coupanData.status}}
+                        </td>
+                        <td>
+
+                            <button style="border: none !important; background-color: #fff !important;" type="button"
+                                pTooltip="In-Active promotion" tooltipPosition="bottom"
+                                [disabled]="!deleteAccess">
+                                <img src="../assets/images/icons/delete.svg" alt="img"></button>
+                        </td>
+
+
+                    </tr>
+                </ng-template>
+                <ng-template pTemplate="emptymessage">
+                    <tr>
+                        <td colspan="8">No customers found.</td>
+                    </tr>
+                </ng-template>
+            </p-table>
+
+            <ngx-ui-loader [fgsColor]="'#000000'" [fgsType]="fgsType"></ngx-ui-loader>
+        </div>
+    </mat-tab>
+</mat-tab-group>
+
+
+
+
+
+<!-- <p-table id="customerTable" #dt [value]="couponData" [columns]="cols" responsiveLayout="scroll"
+					[paginator]="true" [rows]="10" [showCurrentPageReport]="true"
+					currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries" [responsive]="true"
+					[globalFilterFields]="['Code']" styleClass="p-datatable-striped">
+
+					<ng-template pTemplate="caption">
+						<div class="row">
+							<div class="p-input-icon-right ml-5">
+								<i class="pi pi-search"></i>
+								<input pInputText type="text" placeholder="Search by Code"
+									(input)="applyFilterGlobal($event, 'contains')" />
+							</div>
+							<div class="p-input-icon-right ml-5">
+								<button pButton type="button" label="Add New Promo" class="p-button-success"
+									[routerLink]="['/marketing/addpromo']" [disabled]="!accessPermission?.add"></button>
+							</div>
+						</div>
+					</ng-template>
+
+					<ng-template pTemplate="header" let-columns>
+						<tr>
+							<th>S.No</th>
+							<th *ngFor="let col of columns">{{col.headers}}</th>
+							<th>Options</th>
+						</tr>
+					</ng-template>
+					<ng-template pTemplate="body" let-i="rowIndex" let-coupon>
+						<tr>
+							<td>{{i+1}}</td>
+							<td>{{coupon.Country}}</td>
+							<td>{{coupon.Code}}</td>
+							<td>{{coupon.Title}}</td>
+							<td>{{coupon.couponType}}</td>
+							<td>{{coupon.endDate}}</td>
+							<td>{{coupon.status}}</td>
+							<td>
+								<div class="btn-grp">
+									<button class="p-button-warning" pButton type="button" icon="pi pi-user-edit"
+										pTooltip="Edit Promotion" tooltipPosition="bottom" style="margin-right:5px"
+										[routerLink]="['/marketing/editpromo']" [queryParams]="{id:coupon?.id}" [disabled]="!accessPermission?.edit"></button>
+									<button class="p-button-danger" pButton type="button" icon="pi pi-trash"
+										pTooltip="In-Active promotion" tooltipPosition="bottom" (click)="InActivate(coupon?.Code)" [disabled]="!accessPermission?.delete"></button>
+								</div>
+							</td>
+						</tr>
+					</ng-template>
+					<ng-template pTemplate="emptymessage">
+						<tr>
+							<td class="text-center text-danger font-weight-700" colspan="12">
+								No Records Found.
+							</td>
+						</tr>
+					</ng-template>
+				</p-table> -->
+
+
+
+<!-- <div>
 	<div class="mt-3">
 		<h6 class="header-text-title" style="margin-left: 1%;">All Active Coupons</h6>
 	</div>
@@ -34,7 +243,7 @@
 					<td>{{coupon.endDate}}</td>
 					<td>{{coupon.firstTimeUser}}</td>
 					<td>
-						<!-- <button class="p-button-warning" pButton type="button" icon="pi pi-user-edit" pTooltip="Edit Customer" tooltipPosition="bottom" style="margin-right:5px"></button> -->
+
 						<button class="p-button-danger" pButton type="button" icon="pi pi-trash" pTooltip="In-Active promotion"
 							tooltipPosition="bottom" [disabled]="!deleteAccess"></button>
 					</td>
@@ -50,4 +259,4 @@
 		</p-table>
 		<ngx-ui-loader [fgsColor]="'#000000'" [fgsType]="fgsType"></ngx-ui-loader>
 	</div>
-</div>
+</div> -->

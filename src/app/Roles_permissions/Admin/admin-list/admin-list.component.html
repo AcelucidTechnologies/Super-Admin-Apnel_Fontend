@@ -1,45 +1,46 @@
-
 <div class="container page-heading">
   <div class="row mb-2 mt-2">
     <div class="col-6">
       <h4>Admin List</h4>
     </div>
     <div class="col-6 text-right">
-    <span class="p-input-icon-right ml-5">
-      <button pButton type="button" label=" + Add Admin" class="add-button-admin"
-      [routerLink]="['/roleandpermission/adminform']" ></button>
-    </span>
-  </div>
+      <span class="p-input-icon-right ml-5">
+        <button pButton type="button" label=" + Add Admin" class="add-button-admin"
+          [routerLink]="['/roleandpermission/adminform']"></button>
+      </span>
+    </div>
     <!-- <div class="col-6 text-right">
       <button pButton class="add-button"   [routerLink]="['/roleandpermission/adminform']">+ Add</button>
     </div> -->
   </div>
 </div>
 <div class="card col-sm-12" style="border: none; margin-top: 10px;">
-<p-table #dt  responsiveLayout="scroll" [paginator]="true" [rows]="10"
-    [showCurrentPageReport]="true" [value]="adminDetails"
-    currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries" [responsive]="true"
-    [globalFilterFields]="['username']" borderless="true"
-    [scrollable]="true" [scrollHeight]="'520px'">
+  <p-table #dt responsiveLayout="scroll" [paginator]="true" [rows]="10" [showCurrentPageReport]="true"
+    [value]="adminDetails" currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
+    [responsive]="true" [globalFilterFields]="['username']" borderless="true" [scrollable]="true"
+    [scrollHeight]="'520px'">
 
     <ng-template pTemplate="caption">
-        <div class="d-flex justify-content-between">
-
-            <div class="d-flex align-items-center p-0 ">
-              <img src="../../../../assets/images/filter.svg" style="margin-right: 10px;">
-              <div class="input-container">
-              <img src="../../../../assets/images/search-white.svg" class="input-container-img">
-                <input #search pInputText type="text" placeholder="Search..."></div>
-                <!-- <button pButton class="p-button-success ml-2 add-button"(click)="globalSearch(search.value,'contains')">Search</button> -->
-            </div>
-            <div>
-              <button pButton   pTooltip="pdf" tooltipPosition="bottom" class="custom-image"
-              > <img src="../../../../assets/images/pdf.svg" alt="Button Image"></button>
-          <button pButton  pTooltip="Excel" tooltipPosition="bottom" class="custom-image"
-             ><img src="../../../../assets/images/excel.svg" alt="Button Image"></button>
-          <button pButton pTooltip="print" tooltipPosition="bottom" class="custom-image"
-              ><img src="../../../../assets/images/printer.svg" alt="Button Image"></button>
-            </div>
+      <div class="d-flex justify-content-between">
+        <div class="d-flex align-items-center p-0">
+          <img style="margin-right: 5px" src="../assets/images/icons/filter.svg" class="filter" alt="img" />
+          <div class="input-container">
+            <img src="../../../../assets/images/search-white.svg" class="input-container-img" />
+            <input #search pInputText type="text" placeholder="Search..."
+              (input)="applyFilterGlobal($event, 'contains')">
+          </div>
+        </div>
+        <div>
+          <button pButton pTooltip="pdf" tooltipPosition="bottom" class="custom-image">
+            <img src="../../../../assets/images/pdf.svg" alt="Button Image" />
+          </button>
+          <button pButton pTooltip="Excel" tooltipPosition="bottom" class="custom-image">
+            <img src="../../../../assets/images/excel.svg" alt="Button Image" />
+          </button>
+          <button pButton pTooltip="print" tooltipPosition="bottom" class="custom-image">
+            <img src="../../../../assets/images/printer.svg" alt="Button Image" />
+          </button>
+          </div>
         </div>
     </ng-template>
 
@@ -55,31 +56,31 @@
             <th class="text-center">Actions</th>
         </tr>
     </ng-template> -->
-    <ng-template  pTemplate="header">
+    <ng-template pTemplate="header">
       <tr>
-          <th style="width: 3rem;">
-              <p-tableHeaderCheckbox></p-tableHeaderCheckbox>
-          </th>
-          <th pSortableColumn="Sno">
-              <div class="flex justify-content-between align-items-center head1">
-                  Sno
-                  <p-sortIcon field="Sno"></p-sortIcon>
+        <th style="width: 3rem;">
+          <p-tableHeaderCheckbox></p-tableHeaderCheckbox>
+        </th>
+        <th pSortableColumn="Sno">
+          <div class="flex justify-content-between align-items-center head1">
+            Sno
+            <p-sortIcon field="Sno"></p-sortIcon>
 
-              </div>
-          </th>
-          <th pSortableColumn="UserName">
-              <div class="flex justify-content-between align-items-center head1">
-                User Name
-                  <p-sortIcon field="UserName"></p-sortIcon>
+          </div>
+        </th>
+        <th pSortableColumn="UserName">
+          <div class="flex justify-content-between align-items-center head1">
+            User Name
+            <p-sortIcon field="UserName"></p-sortIcon>
 
-              </div>
-          </th>
+          </div>
+        </th>
 
-          <th pSortableColumn="Image">
-            <div class="flex justify-content-between align-items-center head1">
-              Image
+        <th pSortableColumn="Image">
+          <div class="flex justify-content-between align-items-center head1">
+            Image
 
-            </div>
+          </div>
         </th>
 
         <th pSortableColumn="Email">
@@ -87,41 +88,41 @@
             Email
             <p-sortIcon field="Email"></p-sortIcon>
           </div>
-      </th>
-      <th>
-        <div class="flex justify-content-between align-items-center head1">
-          Role
+        </th>
+        <th>
+          <div class="flex justify-content-between align-items-center head1">
+            Role
 
-        </div>
-    </th>
-    <th>
-      <div class="flex justify-content-between align-items-center head1">
-        Actions
+          </div>
+        </th>
+        <th>
+          <div class="flex justify-content-between align-items-center head1">
+            Actions
 
-      </div>
-  </th>
+          </div>
+        </th>
 
 
       </tr>
-  </ng-template>
+    </ng-template>
 
-  <ng-template pTemplate="body" let-list let-i="rowIndex">
-    <tr class="p-selectable-row">
+    <ng-template pTemplate="body" let-list let-i="rowIndex">
+      <tr class="p-selectable-row">
         <td>
-            <p-tableCheckbox [value]="list"></p-tableCheckbox>
+          <p-tableCheckbox [value]="list"></p-tableCheckbox>
         </td>
         <td>
-            <span class="p-column-title"></span>
-            {{i+1}}
+          <span class="p-column-title"></span>
+          {{i+1}}
         </td>
         <td>
           <span class="p-column-title">UserName</span>
           {{list.username}}
-      </td>
+        </td>
         <td>
-            <span class="p-column-title"></span>
+          <span class="p-column-title"></span>
 
-              <div *ngIf="!!list.image; else defaultImg"><img class="user-name-img"  [src]="list.image" ></div>
+          <div *ngIf="!!list.image; else defaultImg"><img class="user-name-img" [src]="list.image"></div>
         </td>
 
 
@@ -130,29 +131,30 @@
         </td>
         <td>{{list.role}}</td>
         <td>
-          <a pTooltip="Edit Banner" tooltipPosition="bottom"  style="margin-right: 15px; cursor: pointer;">
-              <img src="../../../../assets/images/edit-5.svg" [queryParams]="{user:list.username}" [routerLink]="['/roleandpermission/editAdmin']" alt="img">
+          <a pTooltip="Edit Banner" tooltipPosition="bottom" style="margin-right: 15px; cursor: pointer;">
+            <img src="../../../../assets/images/edit.svg" [queryParams]="{user:list.username}"
+              [routerLink]="['/roleandpermission/editAdmin']" alt="img">
           </a>
-          <a pTooltip="Delete Banner" tooltipPosition="bottom" (click)="openDialog(list.username)" class="me-3 confirm-text" href="javascript:void(0);">
-              <img src="../../../../assets/images/delete-2.svg" alt="img">
+          <a pTooltip="Delete Banner" tooltipPosition="bottom" (click)="openDialog(list.username)"
+            class="me-3 confirm-text" href="javascript:void(0);">
+            <img src="../../../../assets/images/delete.svg" alt="img">
           </a>
-      </td>
+        </td>
 
 
-    </tr>
-</ng-template>
+      </tr>
+    </ng-template>
 
 
 
     <ng-template pTemplate="emptymessage">
-        <tr>
-            <td colspan="12" class="text-danger">No records to show</td>
-        </tr>
+      <tr>
+        <td colspan="12" class="text-danger">No records to show</td>
+      </tr>
     </ng-template>
-</p-table>
+  </p-table>
 </div>
 
 <ng-template #defaultImg>
-    <div ><img [src]="image" class="user-name-img"></div>
+  <div><img [src]="image" class="user-name-img"></div>
 </ng-template>
-

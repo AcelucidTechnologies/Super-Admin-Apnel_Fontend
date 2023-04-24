@@ -2,3 +2,91 @@
     display:flex;
     justify-content: flex-start;
 }
+.add-button-lead {
+  background-color: rgb(245, 46, 46);
+  color: white;
+  border: none;
+}
+.add-button-lead:hover {
+  background-color: lightcoral;
+  color: white;
+  border: none;
+}
+.input-container {
+  position: relative;
+  border: 0.5px solid rgba(145, 158, 171, 0.32) !important;
+}
+
+.input-container-img {
+  position: absolute;
+  left: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 20px;
+  height: 20px;
+  cursor: pointer;
+}
+
+.input-container input[type="text"] {
+  padding-left: 30px; /* adjust the padding to fit the image */
+  font-size: 0.875rem;
+}
+.custom-image {
+  background: none;
+  border: none;
+}
+td,
+th {
+  border: none !important;
+  border-bottom: 1px solid rgb(215, 198, 198) !important;
+  background-color: white !important;
+  color: black !important;
+  justify-content: center;
+}
+:host::ng-deep {
+  .p-paginator .p-paginator-pages .p-paginator-page.p-highlight {
+    background-color: rgb(228, 28, 28);
+    margin-bottom: 10px;
+    margin-top: 10px;
+    border-radius: 5px;
+  }
+}
+::ng-deep .p-paginator {
+  background: white !important;
+  border: none !important;
+}
+::ng-deep.p-datatable-thead > tr > th {
+  text-align: center !important;
+}
+::ng-deep .p-datatable .p-datatable-header {
+  background: white;
+  border: none;
+}
+.button-heading-container {
+  display: flex;
+  align-items: center;
+}
+.button-heading-container {
+  display: flex;
+  align-items: center;
+}
+.back-button {
+  background: rgb(228, 28, 28);
+  color: white;
+  border: none;
+  border-radius: 5px;
+  width: 40px;
+}
+::ng-deep.back-button:hover {
+  background-color: lightcoral !important;
+}
+.page-heading {
+  // margin-top: 200px;
+
+  h1 {
+      font-size: 1.5rem;
+      font-weight: 700;
+      letter-spacing: 1.2px;
+      word-spacing: 0.1rem;
+  }
+}

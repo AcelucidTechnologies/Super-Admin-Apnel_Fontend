@@ -24,7 +24,7 @@
   [value]="modulePermissionList"
   currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
   [responsive]="true"
-  styleClass="p-datatable-striped"
+  styleClass="p-datatable"
   [globalFilterFields]="['username']"
 >
   <ng-template pTemplate="caption">
@@ -41,7 +41,7 @@
             src="../../../../assets/images/search-white.svg"
             class="input-container-img"
           />
-          <input #search pInputText type="text" placeholder="Search..." />
+          <input #search pInputText type="text" placeholder="Search..."(input)="applyFilterGlobal($event, 'contains')"/>
         </div>
       </div>
       <div>
@@ -75,7 +75,24 @@
 
   <ng-template pTemplate="header">
     <tr>
-      
+        <th pSortableColumn="Sno">
+          <div class="flex justify-content-between align-items-center head1">
+            Sno
+            <p-sortIcon field="Sno"></p-sortIcon>
+          </div>
+        </th>
+        <th pSortableColumn="UserName">
+          <div class="flex justify-content-between align-items-center head1">
+            User Name
+            <p-sortIcon field="UserName"></p-sortIcon>
+          </div>
+        </th>
+        <th pSortableColumn="ModulesPermitted">
+          <div class="flex justify-content-between align-items-center head1">
+            Modules Permitted
+            <p-sortIcon field="ModulesPermitted"></p-sortIcon>
+          </div>
+        </th>
 
       <th>
         <div class="flex justify-content-between align-items-center head1">

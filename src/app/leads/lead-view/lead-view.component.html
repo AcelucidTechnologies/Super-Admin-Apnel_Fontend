@@ -1,12 +1,33 @@
-    <div class="page-heading">
-        <h1 class="header-text-title" style="margin-left: 1%;">Enteries</h1>
+    <div class=" page-heading">
+      <div class="row mb-2 mt-2">
+        <div class="col-6 button-heading-container">
+          <button
+          class="mb-2 p-1 back-button"
+          [routerLink]="['/leads/leadslist']"
+        >
+          <i class="material-icons">arrow_back</i>
+        </button>
+          <h4>&nbsp;Leads</h4>
+        </div>
+        <div class="col-6 text-right">
+          <span class="p-input-icon-right ml-5">
+            <button
+              pButton
+              type="button"
+              label=" + Add Leads"
+              class="add-button-lead"
+              [routerLink]="['/leads/leadcreate']"
+            ></button>
+          </span>
+        </div>
+      </div>
     </div>
-    <div class="card col-sm-12" style="border:none;">
+    <div class="card col-sm-12" style="border:none; padding: 0px;">
         <p-table  #dt responsiveLayout="scroll" [paginator]="true" [rows]="10"
             [showCurrentPageReport]="true" [value]="followUpDetails"
             currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries" [responsive]="true"
-            [globalFilterFields]="['clientName']" styleClass="p-datatable-striped" rowGroupMode="subheader" 
-            sortField="clientName" sortMode="single" 
+            [globalFilterFields]="['clientName']" styleClass="p-datatable" rowGroupMode="subheader"
+            sortField="clientName" sortMode="single"
             groupRowsBy="clientName" dataKey="clientName">
 
             <ng-template pTemplate="header" >
@@ -15,7 +36,7 @@
                     <th>Current Date</th>
                     <th>Next Follow-up Date</th>
                     <th>Comment</th>
-                    <th>Deal</th>                   
+                    <th>Deal</th>
                     <th>Status</th>
                 </tr>
             </ng-template>
@@ -24,8 +45,8 @@
                 <tr>
                     <td colspan="6">
                         <div class="d-flex justify-content-start">
-                            <button type="button" pButton pRipple [pRowToggler]="client" 
-                                class="p-button-text p-button-rounded p-button-plain mr-2" 
+                            <button type="button" pButton pRipple [pRowToggler]="client"
+                                class="p-button-text p-button-rounded p-button-plain mr-2"
                                 [icon]="expanded ? 'pi pi-chevron-down' : 'pi pi-chevron-right'">
                             </button>
                             <span class="font-bold ml-2">{{client.clientName}}</span>
@@ -33,7 +54,7 @@
                     </td>
                 </tr>
             </ng-template>
-
+<!--
             <ng-template pTemplate="caption">
                 <div class="row d-flex align-items-center justify-content-between">
                     <div>
@@ -44,18 +65,67 @@
                     </span>
                 </div>
                 </div>
-            </ng-template>    
+            </ng-template> -->
+            <ng-template pTemplate="caption">
+              <div class="d-flex justify-content-between">
+                <div class="d-flex align-items-center p-0">
+                  <img
+                    style="margin-right: 5px"
+                    src="../assets/images/icons/filter.svg"
+                    class="filter"
+                    alt="img"
+                  />
+                  <div class="input-container">
+                    <img
+                      src="../../../assets/images/search-white.svg"
+                      class="input-container-img"
+                    />
+                    <input #search pInputText type="text" placeholder="Search..."
+                    (input)="applyFilterGlobal($event, 'contains')"/>
+                  </div>
+                </div>
+                <div>
+                  <button
+                    pButton
+                    pTooltip="pdf"
+                    tooltipPosition="bottom"
+                    class="custom-image"
+                  >
+                    <img src="../../../../assets/images/pdf.svg" alt="Button Image" />
+                  </button>
+                  <button
+                    pButton
+                    pTooltip="Excel"
+                    tooltipPosition="bottom"
+                    class="custom-image"
+                  >
+                    <img src="../../../../assets/images/excel.svg" alt="Button Image" />
+                  </button>
+                  <button
+                    pButton
+                    pTooltip="print"
+                    tooltipPosition="bottom"
+                    class="custom-image"
+                  >
+                    <img
+                      src="../../../../assets/images/printer.svg"
+                      alt="Button Image"
+                    />
+                  </button>
+                </div>
+              </div>
+            </ng-template>
             <ng-template pTemplate="rowexpansion" let-followUp>
-               
+
                 <tr>
                     <td></td>
                     <td>{{followUp.currentDate}}</td>
                     <td>{{followUp.nextFollowUpDate}}</td>
                     <td>{{followUp.comment}}</td>
                     <td>{{followUp.deal}}</td>
-                    <td>{{followUp.status}}</td>  
+                    <td>{{followUp.status}}</td>
                 </tr>
-            
+
             </ng-template>
             <ng-template pTemplate="emptymessage">
                 <tr>
