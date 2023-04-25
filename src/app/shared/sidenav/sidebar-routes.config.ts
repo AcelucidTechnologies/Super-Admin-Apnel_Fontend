@@ -58,13 +58,14 @@ export const SideNaveMenueRoute = [
                         icon: 'pi pi-fw pi-shopping-cart',
                         label: 'Category',
                         routerLink: ['/cms/category']
-                    },
+                    }, 
                     {
                         icon: 'pi pi-fw pi-shopping-cart',
                         label: 'SubCategory',
                         routerLink: ['/cms/subcategory']
 
                     },
+
                     {
                         icon: 'pi pi-fw pi-user-plus',
                         label: 'Sponsor',
@@ -75,33 +76,33 @@ export const SideNaveMenueRoute = [
             },
             {
                 label: 'Banner Special',
-               
-                        icon: 'pi pi-clone',
-                        routerLink: ['/cms/banner']
+
+                icon: 'pi pi-clone',
+                routerLink: ['/cms/banner']
             },
             {
                 label: 'Feature Product',
 
-                        icon: 'pi pi-list',
-                        routerLink: ['/cms/feature']
+                icon: 'pi pi-list',
+                routerLink: ['/cms/feature']
             },
             {
                 label: 'Slider',
 
-                        icon: 'pi pi-list',
-                        routerLink: ['/cms/slider']
+                icon: 'pi pi-list',
+                routerLink: ['/cms/slider']
             },
             {
                 label: 'Special-Offer',
 
-                        icon: 'pi pi-list',
-                        routerLink: ['/cms/special-offer']
+                icon: 'pi pi-list',
+                routerLink: ['/cms/special-offer']
             },
             {
                 label: 'Page Setup',
 
-                        icon: 'pi pi-list',
-                        routerLink: ['/cms/page']
+                icon: 'pi pi-list',
+                routerLink: ['/cms/page']
             },
             // {
             //     label: 'Slider',
@@ -128,7 +129,7 @@ export const SideNaveMenueRoute = [
             {
                 label: 'Product',
                 icon: 'pi pi-fw pi-shopping-cart',
-                routerLink: ['/product/productlist']
+                routerLink: ['/product/productlist ']
             },
             {
                 label: 'Category',
@@ -136,6 +137,17 @@ export const SideNaveMenueRoute = [
                 routerLink: ['/product/categorylist']
             },
 
+        ]
+    },
+    {
+        label: 'Booking',
+        icon: 'pi pi-folder',   
+        items: [
+            {
+                label: 'Order',
+                icon: 'pi pi-fw pi-shopping-cart',
+                routerLink: ['/booking/order-List']
+            },
         ]
     },
     {
@@ -159,29 +171,29 @@ export const SideNaveMenueRoute = [
             // },
             {
                 label: 'Live Chat',
-               
-                        icon: 'pi pi-clone',
-                        routerLink: ['/marketing/live-chat']
+
+                icon: 'pi pi-clone',
+                routerLink: ['/marketing/live-chat']
             },
             {
                 label: 'Push Notification',
-               
-                        icon: 'pi pi-clone',
-                        routerLink: ['/marketing/push-notification']
+
+                icon: 'pi pi-clone',
+                routerLink: ['/marketing/push-notification']
             },
             {
                 label: 'Seo',
-               
-                        icon: 'pi pi-clone',
-                        routerLink: ['/marketing/seo']
+
+                icon: 'pi pi-clone',
+                routerLink: ['/marketing/seo']
             },
             {
                 label: 'Analytics Tracking',
-               
-                        icon: 'pi pi-clone',
-                        routerLink: ['/marketing/analytics-tracking']
+
+                icon: 'pi pi-clone',
+                routerLink: ['/marketing/analytics-tracking']
             },
-            ]
+        ]
     },
     {
         label: 'Appointment',
@@ -193,24 +205,24 @@ export const SideNaveMenueRoute = [
                 routerLink: ['/appointment']
             },
 
-            ]
+        ]
     },
-     {
-            label: 'User',
-            icon: 'pi pi-users',
-            items: [
-                {
-                    label: 'User List',
-                    icon: 'pi pi-list',
-                    routerLink: ['/user/userlist']
-                },
-                {
-                    label: 'Query List',
-                    icon: 'pi pi-question-circle',
-                    routerLink: ['/user/querycontent']
-                },
-            ]
-        },
+    {
+        label: 'User',
+        icon: 'pi pi-users',
+        items: [
+            {
+                label: 'User List',
+                icon: 'pi pi-list',
+                routerLink: ['/user/userlist']
+            },
+            {
+                label: 'Query List',
+                icon: 'pi pi-question-circle',
+                routerLink: ['/user/querycontent']
+            },
+        ]
+    },
     // {
     //     label: 'Bundle',
     //     items: [
