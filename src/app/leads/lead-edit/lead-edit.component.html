@@ -4,7 +4,7 @@
 
       <button class="mb-2 p-1 back-button " [routerLink]="['/leads/leadslist']"><i class="material-icons">arrow_back</i>
       </button>
-      <h5>&nbsp;Edit Lead Details</h5>
+      <h5>&nbsp;Lead Details</h5>
     </div>
     <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 d-flex justify-content-center " style=" height: 100%;">
       <div class="card-body " style="max-width: 950px;">
@@ -13,7 +13,7 @@
             <mat-card-title>
               <!-- <div class="page-heading"> -->
                 <div class=" justify-content-between">
-                  <h5 class="pt-2" style="margin-left: 90px;">Lead Details</h5>
+                  <h5 class="pt-2" style="margin-left: 90px;">Edit Lead Details</h5>
                   <!-- <button type="submit" class="btn btn-info" [routerLink]="['/leads/leadslist']"> Back </button> -->
                 </div>
               <!-- </div> -->
@@ -486,9 +486,14 @@
               </div>
             </div>
 
-            <div class="d-flex justify-content-end " style="margin-right: 60px;"><button type="submit" class="btn btn-info" style="background: rgb(228, 28, 28);border:none" (click)="submit()"
+            <!-- <div class="d-flex justify-content-end " style="margin-right: 60px;"><button type="submit" class="btn btn-info" style="background: rgb(228, 28, 28);border:none" (click)="submit()"
                 [disabled]="!(leadForm.valid)">
-                Submit </button></div>
+                Submit </button>
+              </div> -->
+              <div class="d-flex justify-content-end col-11 mt-4 p-0">
+                <button type="submit" style="background: rgb(228, 28, 28);border:none" class="btn btn-info mr-3" (click)="submit()" [disabled]="!leadForm.valid">Submit</button>
+                <button class="btn btn-info" style="background: #637381;border:none" [routerLink]="['/leads/leadslist']">Cancel</button>
+            </div>
           </mat-card>
 
         </form>

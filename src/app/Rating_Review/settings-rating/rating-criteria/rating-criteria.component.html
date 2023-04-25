@@ -1,11 +1,64 @@
-<div>
-    <h4>Rating Criteria List</h4>
-</div>
+
+    <div class="container page-heading">
+      <div class="row mb-2 mt-2">
+        <div class="col-6">
+          <h4>Rating Criteria List</h4>
+        </div>
+        <div class="col-6 text-right">
+          <span class="p-input-icon-right ml-5">
+            <button
+              pButton
+              type="button"
+              label=" + Add Criteria"
+              class="add-button-rating"
+              [routerLink]="['/ratesettings/ratingcriteriaform']" [disabled]="!accessPermission.add"
+            ></button>
+          </span>
+        </div>
+      </div>
+    </div>
 <p-table id="customerTable" #dt [columns]="cols" responsiveLayout="scroll" [paginator]="true" [rows]="10"
 [showCurrentPageReport]="true" [value]=" ratingSettingData"
 currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries" [responsive]="true"
 styleClass="p-datatable-striped" [globalFilterFields]="['ratingCriteria']">
 <ng-template pTemplate="caption">
+  <div class="d-flex justify-content-between">
+    <div class="d-flex align-items-center p-0" >
+      <img
+        style="margin-right: 5px"
+        src="../assets/images/icons/filter.svg"
+        class="filter"
+        alt="img"
+      />
+      <div class="input-container" (click)="applyFilterGlobal(search.value,'contains')">
+        <img
+          src="../../../assets/images/search-white.svg"
+          class="input-container-img"
+        />
+        <input #search pInputText type="text" placeholder="Search..."
+        (input)="applyFilterGlobal($event, 'contains')"/>
+      </div>
+    </div>
+    <div>
+
+      <button pButton type="button" pTooltip="Pdf" class="custom-image" tooltipPosition="bottom" (click)=" exportPdf()"> <img src="../../../../assets/images/pdf.svg" alt="Button Image" /></button>
+
+      <button pButton type="button"   pTooltip="Excel" class="custom-image" tooltipPosition="bottom" (click)="exportExcel()"><img src="../../../../assets/images/excel.svg" alt="Button Image" /></button>
+      <button
+        pButton
+        pTooltip="print"
+        tooltipPosition="bottom"
+        class="custom-image"
+      >
+        <img
+          src="../../../../assets/images/printer.svg"
+          alt="Button Image"
+        />
+      </button>
+    </div>
+  </div>
+</ng-template>
+<!-- <ng-template pTemplate="caption">
     <div class="d-flex justify-content-between">
     <div>
         <input #search pInputText type="text" placeholder="Search by Criteria"class="mr-2">
@@ -33,7 +86,7 @@ styleClass="p-datatable-striped" [globalFilterFields]="['ratingCriteria']">
         <button pButton [routerLink]="['/ratesettings/ratingcriteriaform']" [disabled]="!accessPermission.add">Add</button>
     </div>
 </div>
-</ng-template>
+</ng-template> -->
 <ng-template pTemplate="header">
     <tr>
         <th class="text-center">Rating Criteria</th>
@@ -46,8 +99,15 @@ styleClass="p-datatable-striped" [globalFilterFields]="['ratingCriteria']">
     <td>{{criterias.status}}</td>
     <td>
         <div>
-            <button pButton class="p-button-secondary mr-3"  pTooltip="Edit Criteria" tooltipPosition="bottom" icon="pi pi-user-edit" [routerLink]="['/ratesettings/ratingcriteriaform']" [queryParams]="{serialno:criterias.sno}" [disabled]="!accessPermission.edit"></button>
-            <button pButton class="p-button-danger" pTooltip="Delete Criteria" tooltipPosition="bottom" icon="pi pi-trash" (click)="openDialog(criterias.ratingCriteria)" [disabled]="!accessPermission.delete"></button>
+          <a pTooltip="Edit Criteria" tooltipPosition="bottom" style="margin-right: 15px; cursor: pointer;">
+            <img src="../../../../assets/images/edit.svg" [routerLink]="['/ratesettings/ratingcriteriaform']" [queryParams]="{serialno:criterias.sno}"  alt="img">
+          </a>
+          <a pTooltip="Delete Criteria" tooltipPosition="bottom" (click)="openDialog(criterias.ratingCriteria)"
+            class="me-3 confirm-text" href="javascript:void(0);" >
+            <img src="../../../../assets/images/delete.svg" alt="img">
+          </a>
+            <!-- <button pButton class="p-button-secondary mr-3"  pTooltip="Edit Criteria" tooltipPosition="bottom" icon="pi pi-user-edit" [routerLink]="['/ratesettings/ratingcriteriaform']" [queryParams]="{serialno:criterias.sno}" [disabled]="!accessPermission.edit"></button>
+            <button pButton class="p-button-danger" pTooltip="Delete Criteria" tooltipPosition="bottom" icon="pi pi-trash" (click)="openDialog(criterias.ratingCriteria)" [disabled]="!accessPermission.delete"></button> -->
         </div>
     </td>
 </tr>
@@ -55,11 +115,11 @@ styleClass="p-datatable-striped" [globalFilterFields]="['ratingCriteria']">
 <ng-template pTemplate="emptymessage"><tr>
     <td colspan="12" class="text-danger">No Records to Show</td>
 </tr></ng-template>
-<ng-template pTemplate="summary">
+<!-- <ng-template pTemplate="summary">
     <div>
         <button pButton icon="pi pi-file" pTooltip="CSV" tooltipPosition="bottom" class="mr-2" (click)="dt.exportCSV()"></button>
         <button pButton icon="pi pi-file-excel" pTooltip="Excel" tooltipPosition="bottom" class="mr-2" (click)="exportExcel()"></button>
         <button pButton icon="pi pi-file-pdf" pTooltip="Pdf" tooltipPosition="bottom" (click)=" exportPdf()"></button>
     </div>
-</ng-template>
+</ng-template> -->
 </p-table>

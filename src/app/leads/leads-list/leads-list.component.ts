@@ -32,21 +32,21 @@ export class LeadsListComponent implements OnInit {
   leadlist:leadStructure[]=[]
   leadDetails:any[];
   accessPermission:access
-  
+
   constructor(private leadService:LeadService,
     private toastr: ToastrMsgService,
     private ngxLoader: NgxUiLoaderService,
     private confirmationService:ConfirmationService,
     public dialog: MatDialog,
     private permissionService:ModulePermissionService) {
-      this.permissionService.getModulePermission().subscribe(res=>{ 
+      this.permissionService.getModulePermission().subscribe(res=>{
         this.accessPermission=res[0].LeadList
         console.log( this.accessPermission)
       })
     this.sidebarSpacing = 'contracted';
     this.getLeadsDetails();
    }
- 
+
   onToggleSidebar(sidebarState: any) {
     if (sidebarState === 'open') {
       this.sidebarSpacing = 'contracted';
@@ -54,7 +54,7 @@ export class LeadsListComponent implements OnInit {
       this.sidebarSpacing = 'expanded';
     }
   }
-  
+
   ngOnInit(): void {
     this.cols = [
       { field: 'id', show: true, headers: 'Id' },
@@ -89,7 +89,7 @@ export class LeadsListComponent implements OnInit {
       );
     })
   }
-  
+
   openDialog(leadList: any) {
     const dialogRef = this.dialog.open(DialogComponent);
     dialogRef.afterClosed().subscribe(result => {
@@ -98,7 +98,7 @@ export class LeadsListComponent implements OnInit {
       }
     });
   }
-  
+
   show(data:any){
     console.log(data)
   }
@@ -126,9 +126,9 @@ export class LeadsListComponent implements OnInit {
             columns:this.exportColumns,
             body:this.leadDetails
            });
-            doc.save('products.pdf');
+            doc.save('LeadsList.pdf');
         }
-       
+
         deleteLeadDetails(leadList: any) {
           console.log(leadList)
           this.ngxLoader.start();
