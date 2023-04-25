@@ -17,13 +17,17 @@ import {MenuModule} from 'primeng/menu';
 import {MatExpansionModule} from '@angular/material/expansion';
 import {MatMenuModule} from '@angular/material/menu';
 import {MatIconModule} from '@angular/material/icon';
+import { DialogComponent } from './dialog/dialog.component';
+import { MatDialogModule } from '@angular/material/dialog';
+import { MatButtonModule } from '@angular/material/button';
 
 @NgModule({
   declarations: [
     UserListComponent,
     CreateUserComponent,
     QueryListComponent,
-    QueryContentComponent
+    QueryContentComponent,
+    DialogComponent
   ],
   imports: [
     SharedModule,
@@ -39,7 +43,9 @@ import {MatIconModule} from '@angular/material/icon';
     MenuModule,
     MatExpansionModule,
     MatMenuModule,
-    MatIconModule
+    MatIconModule,
+    MatDialogModule,
+    MatButtonModule
   ]
 })
 export class UserModule { }
