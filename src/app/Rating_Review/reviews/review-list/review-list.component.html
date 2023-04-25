@@ -1,10 +1,78 @@
-    <h3>Review List</h3>
-    <div class="card">
+<div class="container page-heading">
+  <div class="row mb-2 mt-2">
+    <div class="col-6">
+      <h4>Review List</h4>
+    </div>
+    <div class="col-6 text-right">
+      <span class="p-input-icon-right ml-5">
+        <button
+          pButton
+          type="button"
+          label=" + Add Review"
+          class="add-button-review"
+          [routerLink]="['/review/addreview']" [disabled]="!accessPermission.add"
+        ></button>
+      </span>
+    </div>
+  </div>
+</div>
+
         <p-table id="reviewTable" #dt [columns]="cols" responsiveLayout="scroll" [paginator]="true" [rows]="10"
             [showCurrentPageReport]="true" [value]="reviewListValue"
             currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries" [responsive]="true"
             styleClass="p-datatable-striped" [globalFilterFields]="['reviewSubject']">
             <ng-template pTemplate="caption">
+              <div class="d-flex justify-content-between">
+                <div class="d-flex align-items-center p-0" >
+                  <img
+                    style="margin-right: 5px"
+                    src="../assets/images/icons/filter.svg"
+                    class="filter"
+                    alt="img"
+                  />
+                  <div class="input-container">
+                    <img
+                      src="../../../assets/images/search-white.svg"
+                      class="input-container-img"
+                    />
+                    <input #search pInputText type="text" placeholder="Search..."
+                    (input)="applyGlobalFilter($event, 'contains')"/>
+                  </div>
+                </div>
+                <div>
+                  <!-- <button
+                    pButton
+                    pTooltip="pdf"
+                    class="custom-image"
+
+                  >
+                    <img src="../../../../assets/images/pdf.svg" alt="Button Image" />
+                  </button> -->
+                  <button pButton type="button" pTooltip="Pdf" class="custom-image" tooltipPosition="bottom" (click)=" exportPdf()"> <img src="../../../../assets/images/pdf.svg" alt="Button Image" /></button>
+                  <!-- <button
+                    pButton
+                    pTooltip="Excel"
+                    tooltipPosition="bottom"
+                    class="custom-image"
+                  >
+                    <img src="../../../../assets/images/excel.svg" alt="Button Image" />
+                  </button> -->
+                  <button pButton type="button"   pTooltip="Excel" class="custom-image" tooltipPosition="bottom" (click)="exportExcel()"><img src="../../../../assets/images/excel.svg" alt="Button Image" /></button>
+                  <button
+                    pButton
+                    pTooltip="print"
+                    tooltipPosition="bottom"
+                    class="custom-image"
+                  >
+                    <img
+                      src="../../../../assets/images/printer.svg"
+                      alt="Button Image"
+                    />
+                  </button>
+                </div>
+              </div>
+            </ng-template>
+            <!-- <ng-template pTemplate="caption">
                 <div class="d-flex justify-content-between">
                     <div class="d-flex align-items-center">
                         <input #search pInputText type="text" type="text" placeholder='Search By Review Subject'
@@ -13,7 +81,7 @@
                             (click)="applyGlobalFilter(search.value,'contains')">Search</button>
                     </div>
                     <div class="d-flex align-items-center">
-                        <!-- <button pButton type="button" class="mr-2">Filter</button> -->
+
                         <div class="captionFilter"><p-columnFilter class="filterButton" field="status" matchMode="in"
                                 display="menu" [showMatchModes]="false" [showOperator]="false" [showAddButton]="false">
                                 <ng-template pTemplate="header">
@@ -36,7 +104,7 @@
                         <button pButton type="button" [routerLink]="['/review/addreview']" [disabled]="!accessPermission.add">Add</button>
                     </div>
                 </div>
-            </ng-template>
+            </ng-template> -->
             <ng-template pTemplate="header">
                 <tr>
                     <th class="text-center">Review Subject</th>
@@ -53,12 +121,19 @@
                     <td>{{reviews.rating}}</td>
                     <td>{{reviews.status}}</td>
                     <td>
-                        <button pButton type="button" icon="pi pi-user-edit" pTooltip="Edit Review"
+                        <!-- <button pButton type="button" icon="pi pi-user-edit" pTooltip="Edit Review"
                             tooltipPosition="bottom" class="mr-2 p-button-secondary"
                             [routerLink]="['/review/editreview']" [queryParams]="{serialno:reviews.Sno}" [disabled]="!accessPermission.edit"></button>
                         <button pButton type="button" icon="pi pi-trash" pTooltip="Delete Review"
                             tooltipPosition="bottom" class="mr-2 p-button-danger"
-                            (click)="openDialog(reviews.id)" [disabled]="!accessPermission.delete"></button>
+                            (click)="openDialog(reviews.id)" [disabled]="!accessPermission.delete"></button> -->
+                            <a pTooltip="Edit Review" tooltipPosition="bottom" style="margin-right: 15px; cursor: pointer;">
+                              <img src="../../../../assets/images/edit.svg" [routerLink]="['/review/editreview']" [queryParams]="{serialno:reviews.Sno}"  alt="img">
+                            </a>
+                            <a pTooltip="Delete Review" tooltipPosition="bottom" (click)="openDialog(reviews.id)"
+                              class="me-3 confirm-text" href="javascript:void(0);" >
+                              <img src="../../../../assets/images/delete.svg" alt="img">
+                            </a>
                     </td>
                 </tr>
             </ng-template>
@@ -67,7 +142,7 @@
                     <td class="text-center text-danger" colspan="12">No records to show</td>
                 </tr>
             </ng-template>
-            <ng-template pTemplate="summary">
+            <!-- <ng-template pTemplate="summary">
                 <div>
                     <button pButton icon="pi pi-file" class="mr-2" pTooltip="CSV" tooltipPosition="bottom"
                         (click)="dt.exportCSV()"></button>
@@ -76,6 +151,6 @@
                     <button pButton icon="pi pi-file-pdf" class="mr-2" pTooltip="Pdf" tooltipPosition="bottom"
                         (click)="exportPdf()"></button>
                 </div>
-            </ng-template>
+            </ng-template> -->
         </p-table>
-    </div>
+

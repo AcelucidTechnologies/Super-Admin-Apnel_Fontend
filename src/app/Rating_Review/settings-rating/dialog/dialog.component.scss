@@ -2,7 +2,26 @@ mat-dialog-content{
 width:600px
 }
 :host::ng-deep  .dialog1{
-        background-color: rgb(212, 214, 214);
+  background: rgb(228, 28, 28);
+  color: white;
         border-radius: 5px;
         outline: none;
     }
+    .dialog2{
+      color: #fff;
+      background: #637381;
+    border-radius: 5px;
+    outline: none;
+    }
+    .mat-dialog-title {
+      text-align: center;
+    }
+
+    .mat-dialog-content {
+      text-align: center;
+    }
+
+    .mat-dialog-actions {
+    display: flex;
+    justify-content: center;
+  }

@@ -1,24 +1,31 @@
-    <div class="d-flex justify-content-center">
+<div class="page-heading"></div>
+<div class="button-heading-container ">
+
+  <button class="mb-2 p-1 back-button " [routerLink]="['/ratesettings/ratingcriterialist']"><i class="material-icons">arrow_back</i>
+  </button>
+  <h5>&nbsp;Criteria Details</h5>
+</div>
+   <div class="d-flex justify-content-center">
         <div class="card" style="width: 1000px; height: 500px;">
             <div class="p-5">
                 <div class="card-body">
-                    <div class="mt-2 mb-3">
+                    <div class="mt-2 mb-3" style="padding-left: 90px;">
                         <h3>{{title}} Rating Criteria</h3>
                     </div>
                     <form [formGroup]="criteriaForm" class="d-flex justify-content-center">
-                        <div class="w-75">
+                        <div class="w-100">
                             <div class="row mt-5">
-                                <div class="form-group  col-10 d-flex justify-content-center">
+                                <div class="form-group  col-12 d-flex justify-content-center">
                                     <label for="criteriaName" class=" col-2 col-form-label starlabel">Criteria</label>
                                     <div class="col-8"><input type="text" id="criteriaName" class="form-control" formControlName="name">
                                         <div *ngIf="!criteriaForm.controls['name'].valid && criteriaForm.controls['name'].touched ">
                                             <div [hidden]="!criteriaForm.controls['name'].errors['required']" style="font-size:smaller; color: rgb(253, 122, 122); font-style: italic; display:block">Criteria is required</div>
                                         </div></div>
-                                    
+
                                 </div>
                             </div>
                             <div class="row mt-5">
-                                <div class="form-group  col-10 d-flex justify-content-center">
+                                <div class="form-group  col-12 d-flex justify-content-center">
                                     <label for="status" class=" col-2 col-form-label starlabel">Status</label>
                                     <div class="col-8"><p-dropdown styleClass="statusDropdown" [options]="statusList"
                                             placeholder="Select status" formControlName="status"></p-dropdown>
@@ -29,9 +36,10 @@
                                 </div>
                             </div>
                             <div class="row mt-5">
-                                <div class="form-group  col-12 d-flex justify-content-end">
-                                    <button type="submit" class="btn btn-info mr-3" (click)="submit()" [disabled]="!criteriaForm.valid">Submit</button>
-                                    <button class="btn btn-info" [routerLink]="['/ratesettings/ratingcriterialist']">Cancel</button>
+                                <div class="form-group  col-12 d-flex justify-content-end" style="padding-right:100px">
+                                  <button type="submit" style="background: rgb(228, 28, 28);border:none;" class="btn btn-info mr-4" (click)="submit()" [disabled]="!criteriaForm.valid">Submit</button>
+                                  <button class="btn btn-info" style="background: #637381;border:none" [routerLink]="['/ratesettings/ratingcriterialist']">Cancel</button>
+
                                 </div>
                             </div>
                         </div>

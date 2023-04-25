@@ -2,7 +2,7 @@
     <div class="container page-heading">
       <div class="row mb-2 mt-2">
         <div class="col-6">
-          <h4>Leads</h4>
+          <h4>Leads List</h4>
         </div>
         <div class="col-6 text-right">
           <span class="p-input-icon-right ml-5">
@@ -41,22 +41,8 @@
                   </div>
                 </div>
                 <div>
-                  <button
-                    pButton
-                    pTooltip="pdf"
-                    tooltipPosition="bottom"
-                    class="custom-image"
-                  >
-                    <img src="../../../../assets/images/pdf.svg" alt="Button Image" />
-                  </button>
-                  <button
-                    pButton
-                    pTooltip="Excel"
-                    tooltipPosition="bottom"
-                    class="custom-image"
-                  >
-                    <img src="../../../../assets/images/excel.svg" alt="Button Image" />
-                  </button>
+                  <button pButton type="button" pTooltip="Pdf" class="custom-image" tooltipPosition="bottom" (click)=" exportPdf()"> <img src="../../../../assets/images/pdf.svg" alt="Button Image" /></button>
+                  <button pButton type="button"   pTooltip="Excel" class="custom-image" tooltipPosition="bottom" (click)="exportExcel()"><img src="../../../../assets/images/excel.svg" alt="Button Image" /></button>
                   <button
                     pButton
                     pTooltip="print"
