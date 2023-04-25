@@ -1,7 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import {MatDialog} from '@angular/material/dialog';
 import { Table } from 'primeng/table';
-import { ratingStructure } from 'src/app/_models/rating'; 
+import { ratingStructure } from 'src/app/_models/rating';
 import { RatingService } from 'src/app/_services/rating.service';
 import { ExportDialogComponent } from '../export-dialog/export-dialog.component';
 import * as xlsxPackage from 'xlsx';
@@ -27,9 +27,9 @@ export class RatingListComponent implements OnInit {
   accessPermission:access
   @ViewChild('dt') dt:Table|undefined
 
-  constructor(private ratingService:RatingService, public dialog: MatDialog, 
+  constructor(private ratingService:RatingService, public dialog: MatDialog,
     private permissionService:ModulePermissionService) {
-    this.permissionService.getModulePermission().subscribe(res=>{ 
+    this.permissionService.getModulePermission().subscribe(res=>{
       this.accessPermission=res[0].ReviewList
       console.log( this.accessPermission)
     })
@@ -38,7 +38,7 @@ export class RatingListComponent implements OnInit {
   ngOnInit(): void {
     this.statusList=['Approved','Not Approved']
     this.sidebarSpacing = 'contracted';
-    
+
     this.cols=[{field:"rating", headers:"Rating"},
     {field:"review", headers:"Review Subject"},
     {field:"reviewer", headers:"Reviewer"},

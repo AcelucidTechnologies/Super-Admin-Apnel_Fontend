@@ -1,46 +1,69 @@
-  <div class="card col-sm-12">
-    <div class="row gutters">
-      <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12" style="background-color: #cccfcd; height: 100%;">
+<div class="page-heading"></div>
+
+<div class="button-heading-container">
+  <button
+    class="mb-2 p-1 back-button"
+    [routerLink]="['/roleandpermission/adminlist']"
+  >
+    <i class="material-icons">arrow_back</i>
+
+  </button>
+  <h5>&nbsp;User Details</h5>
+</div>
+  <div class="card" style="width: 1000px; margin-left: 80px; border: none;">
+    <div class="card-body" style="width: 1000px; margin: auto; border: none;">
+    <!-- <div class="row gutters"> -->
+      <!-- <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12" style="border: none; height: 100%; "> -->
         <form [formGroup]="userForm" novalidate>
-          <div class="card-body">
-            <mat-card>
+
+            <mat-card style="padding:60px">
                   <mat-card-title>
                     <div class="page-heading">
-                      <h6>{{title}}</h6>
+                      <h4>{{title}}</h4>
                     </div>
                   </mat-card-title>
                 <div class="row gutters">
                   <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
-                    <div class="form-group pt-3">
-                      <label for="user">Username</label>
-                      <input type="text" id="user"class="form-control" formControlName="username">
+                    <div class="form-row pt-5">
+                      <div class="col-4">
+                      <label for="user">Username</label></div>
+                      <div class="col-8">
+                      <input type="text" id="user"class="form-control" formControlName="username" placeholder="username">
                       <div *ngIf="!userForm.controls['username'].valid && (userForm.controls['username'].touched || userForm.controls['username'].dirty)">
                         <div [hidden]="!userForm.controls['username'].errors['required']" style="color: rgb(253, 122, 122);">
                           username is required
                         </div>
                       </div>
+                      </div>
                     </div>
                   </div>
                   <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
-                    <div class="form-group pt-3">
-                      <label for="email">Email Name</label>
-                      <input type="text" id="email" class="form-control" formControlName="emailname">
+                    <div class="form-row pt-5">
+                      <div class="col-3">
+                      <label for="email">Email</label>
+                      </div>
+                      <div class="col-9">
+                      <input type="text" id="email" class="form-control" formControlName="emailname" placeholder="email">
                       <div *ngIf="!userForm.controls['emailname'].valid && (userForm.controls['emailname'].touched || userForm.controls['emailname'].dirty)">
                         <div [hidden]="!userForm.controls['emailname'].errors['pattern']" style="color: rgb(253, 122, 122);">
-                          entered email is not valid 
+                          entered email is not valid
                         </div>
                         <div [hidden]="!userForm.controls['emailname'].errors['required']" style="color: rgb(253, 122, 122);">
                           emailname is required
                         </div>
+                      </div>
                       </div>
                     </div>
                   </div>
                 </div>
                 <div class="row gutters">
                   <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
-                    <div class="form-group pt-3">
+                    <div class="form-row pt-5">
+                      <div class="col-4">
                       <label for="phone">Phone Number</label>
-                      <input type="text" id="phone" class="form-control" formControlName="phonenumber">
+                      </div>
+                      <div class="col-8">
+                      <input type="text" id="phone" class="form-control" formControlName="phonenumber" placeholder="phone">
                       <div *ngIf="!userForm.controls['phonenumber'].valid && (userForm.controls['phonenumber'].touched || userForm.controls['phonenumber'].dirty)">
                         <div [hidden]="!userForm.controls['phonenumber'].errors['maxlength']" style="color: rgb(253, 122, 122);">
                           maxlength exceeded
@@ -52,11 +75,15 @@
                           phonenumber is required
                         </div>
                       </div>
+                      </div>
                     </div>
                   </div>
                   <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
-                    <div class="form-group pt-3">
+                    <div class="form-row pt-5">
+                      <div class="col-3">
                       <label for="role" style="display: block;">Role</label>
+                      </div>
+                      <div class="col-9">
                       <!-- <input type="text" id="role" class="form-control" formControlName="roleassigned"> -->
                       <p-dropdown [options]="roles" id="role" formControlName="roleassigned" placeholder="Select a Role"></p-dropdown>
                       <div *ngIf="!userForm.controls['roleassigned'].valid && (userForm.controls['roleassigned'].touched || userForm.controls['roleassigned'].dirty)">
@@ -65,13 +92,19 @@
                         </div>
                       </div>
                     </div>
+                    </div>
                   </div>
                 </div>
-                  <button type="submit" class="btn btn-info" [disabled]="!userForm.valid" (click)="submitForm()"> Submit </button>
+                <div class="d-flex justify-content-end col-12 mt-4 p-0">
+                  <button type="submit" style="background: rgb(228, 28, 28);border:none" class="btn btn-info mr-3" (click)="submitForm()" >Submit</button>
+                  <button class="btn btn-info" style="background: #637381;border:none" [routerLink]="['/user/userlist']">Cancel</button>
+              </div>
+                  <!-- <button type="submit" class="btn btn-info" [disabled]="!userForm.valid" (click)="submitForm()"> Submit </button> -->
             </mat-card>
-          </div>
+
         </form>
       </div>
-    </div>
+      <!-- </div> -->
+    <!-- </div> -->
   </div>
 

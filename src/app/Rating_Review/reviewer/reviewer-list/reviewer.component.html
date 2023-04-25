@@ -5,127 +5,81 @@
     </div>
     <div class="col-6 text-right">
       <span class="p-input-icon-right ml-5">
-        <button
-          pButton
-          type="button"
-          label=" + Add Reviewer"
-          class="add-button-rating"
-          [routerLink]="['/reviewer/reviewerform']" [disabled]="!accessPermission.add"
-        ></button>
+        <button pButton type="button" label=" + Add Reviewer" class="add-button-rating"
+          [routerLink]="['/reviewer/reviewerform']" [disabled]="!accessPermission.add"></button>
       </span>
     </div>
   </div>
 </div>
-        <p-table id="customerTable" #dt [columns]="cols" responsiveLayout="scroll" [paginator]="true" [rows]="10"
-        [showCurrentPageReport]="true" [value]="reviewerData"
-        currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries" [responsive]="true"
-        styleClass="p-datatable-striped" [globalFilterFields]="['name']">
-        <ng-template pTemplate="caption">
-          <div class="d-flex justify-content-between">
-            <div class="d-flex align-items-center p-0" >
-              <img
-                style="margin-right: 5px"
-                src="../assets/images/icons/filter.svg"
-                class="filter"
-                alt="img"
-              />
-              <div class="input-container">
-                <img
-                  src="../../../assets/images/search-white.svg"
-                  class="input-container-img"
-                />
-                <input #search pInputText type="text" placeholder="Search..."
-                (input)="applyFilterGlobal($event, 'contains')"/>
-              </div>
-            </div>
-            <div>
-
-              <button pButton type="button" pTooltip="Pdf" class="custom-image" tooltipPosition="bottom" (click)=" exportPdf()"> <img src="../../../../assets/images/pdf.svg" alt="Button Image" /></button>
-
-              <button pButton type="button"   pTooltip="Excel" class="custom-image" tooltipPosition="bottom" (click)="exportExcel()"><img src="../../../../assets/images/excel.svg" alt="Button Image" /></button>
-              <button
-                pButton
-                pTooltip="print"
-                tooltipPosition="bottom"
-                class="custom-image"
-              >
-                <img
-                  src="../../../../assets/images/printer.svg"
-                  alt="Button Image"
-                />
-              </button>
-            </div>
-          </div>
-        </ng-template>
-        <!-- <ng-template pTemplate="caption">
-            <div class="d-flex justify-content-between">
-            <div>
-                <input #search pInputText type="text" class="mr-2" placeholder="Search by Name">
-                <button pButton class="p-button-success" (click)="applyFilterGlobal(search.value, 'contains')">Search</button>
-            </div>
-            <div class="d-flex justify-content-between">
-                <div class="captionFilter">
-                    <p-columnFilter class="filterButton" field="status" matchMode="in" display="menu"
-                    [showMatchModes]="false" [showOperator]="false" [showAddButton]="false">
-                    <ng-template pTemplate="header">
-                        <div class="px-3 pt-3 pb-0">
-                            <span class="font-bold">Status Picker</span>
-                        </div>
-                    </ng-template>
-                    <ng-template pTemplate="filter" let-value let-filter="filterCallback">
-                        <p-multiSelect [ngModel]="value" [options]="statusList" placeholder="Any" (onChange)="[filter($event.value)]" >
-                            <ng-template let-option pTemplate="item">
-                                <div class="p-multiselect-representative-option">
-                                    <span class="ml-1">{{option}}</span>
-                                </div>
-                            </ng-template>
-                        </p-multiSelect>
-                    </ng-template>
-                </p-columnFilter>
-                    </div>
-                <button pButton [routerLink]="['/reviewer/reviewerform']" [disabled]="!accessPermission.add">Add</button>
-            </div>
+<p-table id="customerTable" #dt [columns]="cols" responsiveLayout="scroll" [paginator]="true" [rows]="10"
+  [showCurrentPageReport]="true" [value]="reviewerData"
+  currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries" [responsive]="true"
+  styleClass="p-datatable-striped" [globalFilterFields]="['name']">
+  <ng-template pTemplate="caption">
+    <div class="d-flex justify-content-between">
+      <div class="d-flex align-items-center p-0">
+        <img style="margin-right: 5px" src="../assets/images/icons/filter.svg" class="filter" alt="img" />
+        <div class="input-container">
+          <img src="../../../assets/images/search-white.svg" class="input-container-img" />
+          <input #search pInputText type="text" placeholder="Search..."
+            (input)="applyFilterGlobal($event, 'contains')" />
         </div>
-        </ng-template> -->
-        <ng-template pTemplate="header">
-            <tr>
-                <th class="text-center">Name</th>
-                <th class="text-center">Email</th>
-                <th class="text-center">Rating</th>
-                <th class="text-center">First Rating</th>
-                <th class="text-center">Status</th>
-                <th class="text-center">Action</th>
-            </tr>
-        </ng-template>
-        <ng-template pTemplate="body" let-reviewers>
-            <tr><td>{{reviewers.name}}</td>
-                <td>{{reviewers.email}}</td>
-                <td>{{reviewers.rating}}</td>
-                <td>{{reviewers.firstRating}}</td>
-                <td>{{reviewers.status}}</td>
-                <td>
-                  <a pTooltip="Edit Reviewer" tooltipPosition="bottom" style="margin-right: 15px; cursor: pointer;">
-                    <img src="../../../../assets/images/edit.svg" [routerLink]="['/reviewer/reviewerform']" [queryParams]="{serialno:reviewers.sno}"  alt="img">
-                  </a>
-                  <a pTooltip="Delete Reviewer" tooltipPosition="bottom" (click)="openDialog(reviewers.name)"
-                    class="me-3 confirm-text" href="javascript:void(0);" >
-                    <img src="../../../../assets/images/delete.svg" alt="img">
-                  </a>
-                    <!-- <button pButton icon="pi pi-user-edit" class="p-button-secondary mr-2" pTooltip="Edit Reviewer" tooltipPosition="bottom" [routerLink]="['/reviewer/reviewerform']" [queryParams]="{serialno:reviewers.sno}"  [disabled]="!accessPermission.edit"></button>
+      </div>
+      <div>
+
+        <button pButton type="button" pTooltip="Pdf" class="custom-image" tooltipPosition="bottom"
+          (click)=" exportPdf()"> <img src="../../../../assets/images/pdf.svg" alt="Button Image" /></button>
+
+        <button pButton type="button" pTooltip="Excel" class="custom-image" tooltipPosition="bottom"
+          (click)="exportExcel()"><img src="../../../../assets/images/excel.svg" alt="Button Image" /></button>
+        <button pButton pTooltip="print" tooltipPosition="bottom" class="custom-image">
+          <img src="../../../../assets/images/printer.svg" alt="Button Image" />
+        </button>
+      </div>
+    </div>
+  </ng-template>
+
+  <ng-template pTemplate="header">
+    <tr>
+      <th class="text-center">Name</th>
+      <th class="text-center">Email</th>
+      <th class="text-center">Rating</th>
+      <th class="text-center">First Rating</th>
+      <th class="text-center">Status</th>
+      <th class="text-center">Action</th>
+    </tr>
+  </ng-template>
+  <ng-template pTemplate="body" let-reviewers>
+    <tr>
+      <td>{{reviewers.name}}</td>
+      <td>{{reviewers.email}}</td>
+      <td>{{reviewers.rating}}</td>
+      <td>{{reviewers.firstRating}}</td>
+      <td>{{reviewers.status}}</td>
+      <td>
+        <a pTooltip="Edit Reviewer" tooltipPosition="bottom" style="margin-right: 15px; cursor: pointer;">
+          <img src="../../../../assets/images/edit.svg" [routerLink]="['/reviewer/reviewerform']"
+            [queryParams]="{serialno:reviewers.sno}" alt="img">
+        </a>
+        <a pTooltip="Delete Reviewer" tooltipPosition="bottom" (click)="openDialog(reviewers.name)"
+          class="me-3 confirm-text" href="javascript:void(0);">
+          <img src="../../../../assets/images/delete.svg" alt="img">
+        </a>
+        <!-- <button pButton icon="pi pi-user-edit" class="p-button-secondary mr-2" pTooltip="Edit Reviewer" tooltipPosition="bottom" [routerLink]="['/reviewer/reviewerform']" [queryParams]="{serialno:reviewers.sno}"  [disabled]="!accessPermission.edit"></button>
                     <button pButton icon="pi pi-trash" class="p-button-danger" pTooltip="Delete Reviewer" tooltipPosition="bottom" (click)="openDialog(reviewers.name)"  [disabled]="!accessPermission.delete"></button> -->
-                </td>
-            </tr>
-        </ng-template>
-        <!-- <ng-template pTemplate="summary">
+      </td>
+    </tr>
+  </ng-template>
+  <!-- <ng-template pTemplate="summary">
             <div>
                 <button pButton icon="pi pi-file" pTooltip="CSV" tooltipPosition="bottom" class="mr-2" (click)="dt.exportCSV()"></button>
                 <button pButton icon="pi pi-file-excel" pTooltip="excel" tooltipPosition="bottom" class="mr-2" (click)="exportExcel()"></button>
                 <button pButton icon="pi pi-file-pdf" pTooltip="pdf" tooltipPosition="bottom" (click)="exportPdf()" ></button>
             </div>
         </ng-template> -->
-        <ng-template pTemplate="emptymessage">
-            <tr>
-                <td colspan="12" class="text-danger">No records to show</td>
-            </tr>
-        </ng-template>
-        </p-table>
+  <ng-template pTemplate="emptymessage">
+    <tr>
+      <td colspan="12" class="text-danger">No records to show</td>
+    </tr>
+  </ng-template>
+</p-table>

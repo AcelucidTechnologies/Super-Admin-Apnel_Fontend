@@ -7,6 +7,12 @@ import { userStructure } from 'src/app/_models/user-management';
 import { UserService } from 'src/app/_services/user-mgmt.service';
 import { ModulePermissionService } from 'src/app/_services/module-permission.service';
 import { access } from 'src/app/_models/modulepermission';
+import * as xlsxPackage from 'xlsx';
+import * as FileSaver from 'file-saver';
+import jsPDF from 'jspdf';
+import autoTable from 'jspdf-autotable';
+import { DialogComponent } from '../dialog/dialog.component';
+import { MatDialog } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-user-list',
@@ -20,11 +26,14 @@ export class UserListComponent implements OnInit {
   userList:userStructure[] = []
   fgsType: any;
   userStatus:Boolean=false;
+  exportColumns: any[];
   accessPermission:access
+  userDetails: any[];
   constructor(private ngxLoader: NgxUiLoaderService,
     private UserService: UserService,
     private toastr: ToastrMsgService,
-    private permissionService: ModulePermissionService
+    private permissionService: ModulePermissionService,
+    public dialog: MatDialog,
   ) {
     this.permissionService.getModulePermission().subscribe(res => {
       this.accessPermission = res[0].UserList
@@ -61,7 +70,7 @@ export class UserListComponent implements OnInit {
       this.ngxLoader.stop();
     })
   }
-  
+
   retrieveUserDetails(userList: any) {
   this.ngxLoader.start();
   this.UserService.retrieveUser(userList.id).subscribe(res => {
@@ -82,8 +91,51 @@ if(res){
       }
     })
   }
+
+  // openDialog(List: any) {
+  //   const dialogRef = this.dialog.open(DialogComponent);
+  //   dialogRef.afterClosed().subscribe(result => {
+  //     if (result == true) {
+  //       this.deleteLeadDetails(leadList)
+  //     }
+  //   });
+  // }
   //Search functionality start here
   applyFilterGlobal($event, stringVal) {
     this.dt.filterGlobal(($event.target as HTMLInputElement).value, stringVal);
   }
+
+  exportExcel() {
+    const worksheet = xlsxPackage.utils.json_to_sheet(this.userList);
+    const workbook = { Sheets: { 'data': worksheet }, SheetNames: ['data'] };
+    const excelBuffer: any = xlsxPackage.write(workbook, { bookType: 'xlsx', type: 'array' });
+    this.saveAsExcelFile(excelBuffer, "userList");
+  }
+
+  saveAsExcelFile(buffer: any, fileName: string): void {
+    let EXCEL_TYPE = 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;charset=UTF-8';
+    let EXCEL_EXTENSION = '.xlsx';
+    const data: Blob = new Blob([buffer], {
+      type: EXCEL_TYPE
+    });
+    FileSaver.saveAs(data, fileName + '_export_' + new Date().getTime() + EXCEL_EXTENSION);
+  }
+
+  exportPdf() {
+    this.userDetails = this.userList
+            const doc = new jsPDF;
+           autoTable(doc, {
+            columns:this.exportColumns,
+            body:this.userDetails
+           });
+            doc.save('ratings.pdf');
+        }
+        openDialog(name: any) {
+          const dialogRef = this.dialog.open(DialogComponent);
+          dialogRef.afterClosed().subscribe(result => {
+            if (result == true) {
+              this.deleteUserDetails(this.userList)
+            }
+          });
+        }
 }

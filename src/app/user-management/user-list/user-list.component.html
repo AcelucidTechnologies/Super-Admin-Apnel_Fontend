@@ -1,5 +1,24 @@
-  <div class="page-heading">
+  <!-- <div class="page-heading">
     <h1 class="header-text-title" style="margin-left: 1%;">User</h1>
+  </div> -->
+
+  <div class="container page-heading">
+    <div class="row mb-2 mt-2">
+      <div class="col-6">
+        <h4>User List</h4>
+      </div>
+      <div class="col-6 text-right">
+        <span class="p-input-icon-right ml-5">
+          <button
+            pButton
+            type="button"
+            label=" + Create User"
+            class="add-button-rating"
+            [routerLink]="['/user/createuser']" [disabled]="!accessPermission.add"
+          ></button>
+        </span>
+      </div>
+    </div>
   </div>
   <div class="card col-sm-12" style="border:none;">
     <p-table id="customerTable" #dt [columns]="cols" responsiveLayout="scroll" [paginator]="true" [rows]="10"
@@ -7,6 +26,43 @@
       currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries" [responsive]="true"
       [globalFilterFields]="['name']" styleClass="p-datatable-striped">
       <ng-template pTemplate="caption">
+        <div class="d-flex justify-content-between">
+          <div class="d-flex align-items-center p-0" >
+            <img
+              style="margin-right: 5px"
+              src="../assets/images/icons/filter.svg"
+              class="filter"
+              alt="img"
+            />
+            <div class="input-container">
+              <img
+                src="../../../assets/images/search-white.svg"
+                class="input-container-img"
+              />
+              <input #search pInputText type="text" placeholder="Search..."
+              (input)="applyFilterGlobal($event, 'contains')"/>
+            </div>
+          </div>
+          <div>
+
+             <button pButton type="button" pTooltip="Pdf" class="custom-image" tooltipPosition="bottom" (click)=" exportPdf()"> <img src="../../../../assets/images/pdf.svg" alt="Button Image" /></button>
+
+            <button pButton type="button"   pTooltip="Excel" class="custom-image" tooltipPosition="bottom" (click)="exportExcel()"><img src="../../../../assets/images/excel.svg" alt="Button Image" /></button>
+            <button
+              pButton
+              pTooltip="print"
+              tooltipPosition="bottom"
+              class="custom-image"
+            >
+              <img
+                src="../../../../assets/images/printer.svg"
+                alt="Button Image"
+              />
+            </button>
+          </div>
+        </div>
+      </ng-template>
+      <!-- <ng-template pTemplate="caption">
         <div class="row">
           <span class="p-input-icon-right ml-5">
             <i class="pi pi-search"></i>
@@ -17,7 +73,7 @@
               [routerLink]="['/user/createuser']"></button>
           </span>
         </div>
-      </ng-template>
+      </ng-template> -->
 
       <ng-template pTemplate="header" let-columns>
         <tr>
@@ -36,16 +92,26 @@
           <td>{{usersList.role}}</td>
           <td>{{usersList.status}}</td>
           <td>
-            <div class="btn-grp" id="btn-grp">
-              <!-- <button class="p-button-primary" pButton type="button" icon="pi pi-eye" style="margin-right:5px">
-            </button> -->
-              <button class="p-button-secondary" pButton type="button" icon="pi pi-user-edit" pTooltip="Edit User"
+            <div class="btn-grp" id="btn-grp" style="justify-content: center;">
+              <a pTooltip="Edit User" tooltipPosition="bottom" style="margin-right: 15px; cursor: pointer;">
+                <img src="../../../../assets/images/edit.svg"  [queryParams]="{userid:usersList?.id}"
+                [routerLink]="['/user/createuser']" alt="img">
+              </a>
+              <a pTooltip="Retrieve User" tooltipPosition="bottom" (click)="retrieveUserDetails(usersList)"
+              class="me-3 mr-3" href="javascript:void(0);">
+              <img src="../../../../assets/images/retrieve-user.png" alt="img" width="25px" height="25px">
+            </a>
+              <a pTooltip="Delete User" tooltipPosition="bottom" (click)="openDialog(userList)"
+                class="me-3 confirm-text" href="javascript:void(0);">
+                <img src="../../../../assets/images/delete.svg" alt="img">
+              </a>
+              <!-- <button class="p-button-secondary" pButton type="button" icon="pi pi-user-edit" pTooltip="Edit User"
                 tooltipPosition="bottom" style="margin-right:5px" [routerLink]="['/user/createuser']" [disabled]="!(usersList?.status)||accessPermission.edit"
-                [queryParams]="{userid:usersList?.id}"></button>
-                <button class="p-button-info" pButton type="button" icon="pi pi-undo" pTooltip="Retrieve User"
-                tooltipPosition="bottom" style="margin-right:5px" (click)="retrieveUserDetails(usersList)" [disabled]="(usersList?.status)"></button>
-                <button class="p-button-danger" pButton type="button" icon="pi pi-trash" pTooltip="Delete User"
-                tooltipPosition="bottom" style="margin-right:5px" (click)="deleteUserDetails(usersList)" [disabled]="!(usersList?.status)||accessPermission.delete"></button>
+                [queryParams]="{userid:usersList?.id}"></button> -->
+                <!-- <button class="p-button-info" pButton type="button" icon="pi pi-undo" pTooltip="Retrieve User"
+                tooltipPosition="bottom" style="margin-right:5px" (click)="retrieveUserDetails(usersList)" ></button> -->
+                <!-- <button class="p-button-danger" pButton type="button" icon="pi pi-trash" pTooltip="Delete User"
+                tooltipPosition="bottom" style="margin-right:5px" (click)="deleteUserDetails(usersList)" [disabled]="!(usersList?.status)||accessPermission.delete"></button> -->
             </div>
           </td>
         </tr>

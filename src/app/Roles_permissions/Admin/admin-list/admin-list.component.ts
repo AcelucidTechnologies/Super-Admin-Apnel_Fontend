@@ -85,13 +85,13 @@ export class AdminListComponent implements OnInit {
     }
 
     exportPdf() {
-      // this.adminValue = this.adminDetails
-      //         const doc = new jsPDF.jsPDF('l', 'pt');
-      //        autoTable(doc, {
-      //         columns:this.exportColumns,
-      //         body:this.adminValue
-      //        });
-      //         doc.save('products.pdf');
+      this.adminValue = this.adminDetails
+              const doc = new jsPDF
+             autoTable(doc, {
+              columns:this.exportColumns,
+              body:this.adminValue
+             });
+              doc.save('admin.pdf');
           }
 
 }
