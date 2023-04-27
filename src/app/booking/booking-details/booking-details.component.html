@@ -438,7 +438,83 @@
         </ng-template>
     </p-table>
     </mat-tab>
-    <mat-tab label="Shiping and Biling">Shiping and Biling</mat-tab>
+    <mat-tab label="Shiping and Biling">
+        <div class="card col-sm-12">
+            <div class="row gutters">
+                <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+                    <div class="h-100 mt-3">
+                        <div class="card-body">
+                            <div class="row gutters">
+                                <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
+                                    <div class="form-group">
+                                        <label for="name" class="col-form-label text-left starlabel">Country
+                                            </label>
+                                        <input type="text" class="form-control" formControlName="country">
+                                    </div>
+                                </div>
+                                <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
+                                    <div class="form-group">
+                                        <label for="hyperlink" class="col-form-label text-left starlabel">State
+                                            </label>
+                                        <input type="text" class="form-control" formControlName="state">
+
+                                    </div>
+
+                                </div>
+                            </div>
+
+                            <div class="row gutters">
+                                <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
+                                    <div class="form-group">
+                                        <label for="name" class="col-form-label text-left starlabel">City
+                                            </label>
+                                        <input type="text" class="form-control" formControlName="city">
+                                    </div>
+                                </div>
+                                <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
+                                    <div class="form-group">
+                                        <label for="hyperlink" class="col-form-label text-left starlabel">ZipCode
+                                            </label>
+                                        <input type="text" class="form-control" formControlName="ZipCode">
+
+                                    </div>
+
+                                </div>
+                            </div>
+
+                            <div class="row gutters">
+                                <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
+                                    <div class="form-group">
+                                        <label for="name" class="col-form-label text-left starlabel">Address
+                                            </label>
+                                        <input type="text" class="form-control" formControlName="address">
+                                    </div>
+                                </div>
+                                <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
+                                    <div class="form-group">
+                                        <label for="name" class="col-form-label text-left starlabel">Landmark
+                                            </label>
+                                        <input type="text" class="form-control" formControlName="landmark">
+                                    </div>
+                                </div>
+                            </div>
+
+
+                            <div class="row gutters mt-4">
+                                <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 mt-4">
+                                  <div class="text-center">
+                                    <button pButton type="button" id="submit" name="submit" class="first-button mr-4"
+                                      (click)="submitForm()">Save</button>
+                                  </div>
+                                </div>
+                              </div>
+                            <!---------------------------------------- -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </mat-tab>
 </form>
 </mat-tab-group>
 

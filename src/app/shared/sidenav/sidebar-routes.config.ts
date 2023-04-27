@@ -51,29 +51,29 @@ export const SideNaveMenueRoute = [
         label: 'CMS',
         icon: 'pi pi-file',
         items: [
-            {
-                label: 'Banner',
-                items: [
-                    {
-                        icon: 'pi pi-fw pi-shopping-cart',
-                        label: 'Category',
-                        routerLink: ['/cms/category']
-                    }, 
-                    {
-                        icon: 'pi pi-fw pi-shopping-cart',
-                        label: 'SubCategory',
-                        routerLink: ['/cms/subcategory']
+            // {
+            //     label: 'Banner',
+            //     items: [
+            //         {
+            //             icon: 'pi pi-fw pi-shopping-cart',
+            //             label: 'Category',
+            //             routerLink: ['/cms/category']
+            //         }, 
+            //         {
+            //             icon: 'pi pi-fw pi-shopping-cart',
+            //             label: 'SubCategory',
+            //             routerLink: ['/cms/subcategory']
 
-                    },
+            //         },
 
-                    {
-                        icon: 'pi pi-fw pi-user-plus',
-                        label: 'Sponsor',
-                        routerLink: ['/cms/sponsor']
+            //         {
+            //             icon: 'pi pi-fw pi-user-plus',
+            //             label: 'Sponsor',
+            //             routerLink: ['/cms/sponsor']
 
-                    }
-                ]
-            },
+            //         }
+            //     ]
+            // },
             {
                 label: 'Banner Special',
 
@@ -139,17 +139,17 @@ export const SideNaveMenueRoute = [
 
         ]
     },
-    {
-        label: 'Booking',
-        icon: 'pi pi-folder',   
-        items: [
-            {
-                label: 'Order',
-                icon: 'pi pi-fw pi-shopping-cart',
-                routerLink: ['/booking/order-List']
-            },
-        ]
-    },
+    // {
+    //     label: 'Booking',
+    //     icon: 'pi pi-folder',   
+    //     items: [
+    //         {
+    //             label: 'Order',
+    //             icon: 'pi pi-fw pi-shopping-cart',
+    //             routerLink: ['/booking/order-List']
+    //         },
+    //     ]
+    // },
     {
         label: 'Marketing',
         icon: 'pi pi-id-card',
@@ -195,18 +195,18 @@ export const SideNaveMenueRoute = [
             },
         ]
     },
-    {
-        label: 'Appointment',
-        icon: 'pi pi-calendar',
-        items: [
-            {
-                label: 'Appointment',
-                icon: 'pi pi-fw pi-calendar',
-                routerLink: ['/appointment']
-            },
+    // {
+    //     label: 'Appointment',
+    //     icon: 'pi pi-calendar',
+    //     items: [
+    //         {
+    //             label: 'Appointment',
+    //             icon: 'pi pi-fw pi-calendar',
+    //             routerLink: ['/appointment']
+    //         },
 
-        ]
-    },
+    //     ]
+    // },
     {
         label: 'User',
         icon: 'pi pi-users',

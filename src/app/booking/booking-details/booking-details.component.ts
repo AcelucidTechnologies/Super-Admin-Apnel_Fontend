@@ -232,7 +232,13 @@ console.log("125");
         category: res.category,
         price: res.price,
         email: res.email,
-        contactNo: res.contactNo
+        contactNo: res.contactNo,
+        country: res.country,
+        state: res.state,
+        city: res.city,
+        ZipCode: res.ZipCode,
+        address: res.address,
+        landmark: res.landmark
       })
       this.ngxLoader.stop();
     })
