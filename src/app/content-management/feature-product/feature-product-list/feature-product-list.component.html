@@ -1,46 +1,4 @@
-<!-- 
 
-    <div class="page-heading">
-        <h1 class="header-text-title" style="margin-left: 1%;">Featured Product</h1>
-        <button pButton type="button" label="Add" class="p-button-success"
-        [routerLink]="['/cms/add-featured-product']"></button>
-      </div>
-      <div class="card col-sm-12" style="border:none; margin-top: 10px;">
-        <p-table id="customerTable" #dt [columns]="cols" responsiveLayout="scroll" [paginator]="true" [rows]="10"
-          [showCurrentPageReport]="true" [value]="featureList"
-          currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries" [responsive]="true" [globalFilterFields]="['id', 'name',]" styleClass="p-datatable-striped">
-          <ng-template pTemplate="header" let-columns>
-            <tr>
-              <th *ngFor="let col of columns">{{col.headers}}</th>
-             
-            </tr>
-          </ng-template>
-
-          <ng-template pTemplate="body" let-featureList>
-            <tr>
-              
-              <td>{{featureList.id}}</td>
-              <td>{{featureList.image}}</td>
-              <td>{{featureList.productName}}</td>
-              <td>{{featureList.modal}}</td>
-              <td>{{featureList.price}}</td>
-              <td>{{featureList.quantity}}</td>
-              <td>
-                <div class="btn-grp" id="btn-grp">
-                  
-                  <button class="p-button-warning" pButton type="button" icon="pi pi-user-edit" pTooltip="Edit Product"
-                  [queryParams]="{id:featureList?.id}" tooltipPosition="bottom" [routerLink]="['/cms/add-featured-product']" style="margin-right:5px"
-                 ></button>
-                  <button class="p-button-danger" pButton type="button" icon="pi pi-trash" pTooltip="Delete Product"
-                    tooltipPosition="bottom" style="margin-right:5px"  (click)="openDialog(featureList)" ></button>
-                </div>
-              </td>
-            </tr>
-          </ng-template>
-        </p-table>
-          
-    
-    </div> -->
 
     
   <div class="page-heading">

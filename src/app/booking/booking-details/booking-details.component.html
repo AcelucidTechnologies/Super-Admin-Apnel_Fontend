@@ -1,0 +1,509 @@
+<mat-tab-group>
+    <form [formGroup]="bookingForm">
+    <mat-tab label="Order">
+
+
+        <div class="page-heading col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+            <h1 class="header-text-title order mt-3">Edit Order Details
+            </h1>
+        </div>
+
+        <div class="card col-sm-12">
+            <div class="row gutters">
+                <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+                    <div class="h-100 mt-3">
+                        <div class="card-body">
+                            <div class="row gutters">
+                                <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
+                                    <div class="form-group">
+                                        <label for="name" class="col-form-label text-left starlabel">Created
+                                            At</label>
+                                        <input type="text" class="form-control" formControlName="cratedAt">
+                                    </div>
+                                </div>
+
+
+                                <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
+                                    <div class="form-group">
+                                        <label for="hyperlink" class="col-form-label text-left starlabel">Last
+                                            Login</label>
+                                        <input type="text" class="form-control" formControlName="lastLogin">
+
+                                    </div>
+
+                                </div>
+                            </div>
+
+
+                            <div class="row gutters">
+                                <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
+                                    <div class="form-group">
+                                        <label for="Name" class="col-form-label text-left starlabel">Order
+                                            Id</label><br>
+                                        <input type="text" class="form-control" formControlName="lastLogin">
+
+                                    </div>
+                                </div>
+
+                                <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
+                                    <div class="form-group">
+                                        <label for="Name" class="col-form-label text-left starlabel">Price</label><br>
+                                        <input type="text" class="form-control" formControlName="price">
+
+
+                                    </div>
+                                </div>
+
+                            </div>
+
+
+
+                            <div class="row gutters">
+                                <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
+                                    <div class="form-group">
+                                        <label for="Name" class="col-form-label text-left starlabel">Status</label><br>
+                                        <input type="text" class="form-control" formControlName="status">
+
+                                    </div>
+                                </div>
+
+                                <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
+                                    <div class="form-group">
+                                        <label for="Name"
+                                            class="col-form-label text-left starlabel">Category</label><br>
+                                        <input type="text" class="form-control" formControlName="category">
+
+                                    </div>
+                                </div>
+
+                            </div>
+
+
+                            <div class="row gutters">
+                                <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
+                                    <div class="form-group">
+                                        <label for="Name"
+                                            class="col-form-label text-left starlabel">Discount</label><br>
+                                        <input type="text" class="form-control" formControlName="discount">
+                                    </div>
+                                </div>
+                                <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
+                                    <div class="form-group">
+                                        <label for="Name" class="col-form-label text-left starlabel">Payment</label><br>
+                                        <input type="text" class="form-control" formControlName="payment">
+
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row gutters">
+                                <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
+                                    <div class="form-group">
+                                        <label for="Name"
+                                            class="col-form-label text-left starlabel">Shipping</label><br>
+                                        <input type="text" class="form-control" formControlName="shipping">
+                                    </div>
+                                </div>
+                                <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
+                                    <div class="form-group">
+                                        <label for="Name" class="col-form-label text-left starlabel">Voucher</label><br>
+                                        <input type="text" class="form-control" formControlName="voucher">
+
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row gutters">
+                                <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
+                                    <div class="form-group">
+                                        <label for="Name" class="col-form-label text-left starlabel">Tax</label><br>
+                                        <input type="text" class="form-control" formControlName="tax">
+                                    </div>
+                                </div>
+                                <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
+                                    <div class="form-group">
+                                        <label for="Name" class="col-form-label text-left starlabel">Payment</label><br>
+                                        <input type="text" class="form-control" formControlName="payment">
+
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row gutters">
+                                <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
+                                    <div class="form-group">
+                                        <label for="Name" class="col-form-label text-left starlabel">Shipping
+                                            Location</label><br>
+                                        <input type="text" class="form-control" formControlName="shippingLocation">
+                                    </div>
+                                </div>
+                                <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
+                                    <div class="form-group">
+                                        <label for="Name" class="col-form-label text-left starlabel">Total</label><br>
+                                        <input type="text" class="form-control" formControlName="total">
+                                    </div>
+                                </div>
+                            </div>
+
+                            
+                            <div class="row gutters">
+                                <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+                                    <div class="form-group">
+                                        <label for="Name" class="col-form-label text-left starlabel">Note</label><br>
+                                        <textarea name="" id="" cols="110" rows="8"></textarea>
+                                    </div>
+                                </div>
+                            </div>
+                            <!---------------------------------------- -->
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+<!-- ---------------------------------Product Table--------------------------------- -->
+
+  <div class="page-heading mt-4">
+    <h1 class="header-text-title" style="margin-left: 1%;">Product</h1>
+    <div class="page-btn">
+      <!-- <a class="btn btn-added" [routerLink]="['/cms/add-special-banner']">
+          <img src="../assets/images/icons/plus.svg" class="me-1" alt="img"> Add Banner
+      </a> -->
+      <button pButton type="button" class="me-1" (click)="openDialog()" label=" + Add Product" class="theme" ></button>
+  </div>
+  </div>
+
+  <p-table #dt [value]="bookingProduct" [(selection)]="selectedProduct" dataKey="id" [rowHover]="true"
+    [rows]="10" [showCurrentPageReport]="true" responsiveLayout="scroll"
+    [paginator]="true" currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
+    [filterDelay]="0" [globalFilterFields]="['url','description']" class="abc">
+    <ng-template pTemplate="caption">
+        <div class="table-header">
+            
+            <!-- <span style="display: flex; justify-content: center; align-items: center;" class="p-input-icon-left ">
+              <img style="margin-right: 5px;" src="../assets/images/icons/filter.svg" class="filter" alt="img">
+                <input style="outline: none; border-radius: 5px; border: 1px solid rgb(195, 183, 183); padding: 6px;" type="text" (input)="applyFilterGlobal($event, 'contains')" placeholder="Search..." />
+            </span> -->
+
+            <!-- <div class="d-flex justify-content-end align-items-end">
+              <button style="background-color: #f4f4f4; border: none;" type="button" pButton class="mr-1" pTooltip="Pdf"  (click)="exportPdf()" 
+                tooltipPosition="bottom"><img
+                src="../assets/images/icons/pdf.svg"></button>
+              <button type="button" style="background-color: #f4f4f4;; border: none;" pButton class="mr-1" pTooltip="excel"  (click)="exportExcel()"
+                tooltipPosition="bottom" ><img
+                src="../assets/images/icons/excel.svg"></button>
+                <button type="button" style="background-color: #f4f4f4;; border: none;" pButton class=" mr-1" pTooltip="print"
+                tooltipPosition="bottom" ><img
+                src="../assets/images/icons/printer.svg"></button>
+            </div> -->
+        </div>
+    </ng-template>
+    <ng-template  pTemplate="header">
+        <tr>
+            <th style="width: 3rem;">
+                <p-tableHeaderCheckbox></p-tableHeaderCheckbox>
+            </th>
+            <th pSortableColumn="id">
+                <div class="flex justify-content-between align-items-center head1">
+                    ID
+                    <p-sortIcon field="url"></p-sortIcon>
+                    
+                </div>
+            </th>
+            <th pSortableColumn="product">
+                <div class="flex justify-content-between align-items-center head1">
+                    Product
+                    <p-sortIcon field="product"></p-sortIcon>
+                    
+                </div>
+            </th>
+
+            <th pSortableColumn="quantitys">
+              <div class="flex justify-content-between align-items-center head1">
+                  Quantity
+                  <p-sortIcon field="sortby"></p-sortIcon>
+              </div>
+          </th>
+
+          <th>
+            <div class="flex justify-content-between align-items-center head1">
+                Price
+            </div>
+        </th>
+
+        <th>
+            <div class="flex justify-content-between align-items-center head1">
+                Sub Total
+            </div>
+        </th>
+        <th>
+          <div class="flex justify-content-between align-items-center head1">
+              Action
+              
+          </div>
+      </th>
+
+            
+        </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-bookingProduct>
+        <tr class="p-selectable-row">
+            <td>
+                <p-tableCheckbox [value]="bookingProduct"></p-tableCheckbox>
+            </td>
+            <td>
+                <span class="p-column-title">id</span>
+                {{bookingProduct.id}}
+            </td>
+            <td>
+                <span class="p-column-title">products</span>
+                
+                {{bookingProduct.product}}
+            </td>
+           
+            <td>
+                <span class="p-column-title">Prices</span>
+                {{bookingProduct.quantitys}}
+            </td>
+            <td>
+                {{bookingProduct.prices}}
+            </td>
+            <td>
+                <span class="p-column-title">subTotal</span>
+                {{bookingProduct.subTotal}}
+            </td>
+            <td>
+              <a pTooltip="Edit Banner" tooltipPosition="bottom" class="me-3" style="margin-right: 10px;">
+                  <img src="../assets/images/icons/edit.svg" [routerLink]="['/cms/add-special-banner']"  alt="img">
+              </a>
+              <a pTooltip="Delete Banner" tooltipPosition="bottom"  class="me-3 confirm-text" href="javascript:void(0);">
+                  <img src="../assets/images/icons/delete.svg" alt="img">
+              </a>
+          </td>
+           
+         
+        </tr>
+    </ng-template>
+
+    <ng-template pTemplate="emptymessage">
+        <tr>
+            <td colspan="8">No customers found.</td>
+        </tr>
+    </ng-template>
+</p-table>
+
+    </mat-tab>
+    <mat-tab label="Customer">
+        <div class="card col-sm-12">
+            <div class="row gutters">
+                <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+                    <div class="h-100 mt-3">
+                        <div class="card-body">
+                            <div class="row gutters">
+                                <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
+                                    <div class="form-group">
+                                        <label for="name" class="col-form-label text-left starlabel">Customer Name
+                                            </label>
+                                        <input type="text" class="form-control" formControlName="customerName">
+                                    </div>
+                                </div>
+                                <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
+                                    <div class="form-group">
+                                        <label for="hyperlink" class="col-form-label text-left starlabel">Email
+                                            </label>
+                                        <input type="text" class="form-control" formControlName="email">
+
+                                    </div>
+
+                                </div>
+                            </div>
+
+                            <div class="row gutters">
+                                <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
+                                    <div class="form-group">
+                                        <label for="name" class="col-form-label text-left starlabel">Contact No
+                                            </label>
+                                        <input type="text" class="form-control" formControlName="contactNo">
+                                    </div>
+                                </div>
+                            </div>
+
+
+                            <div class="row gutters mt-4">
+                                <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 mt-4">
+                                  <div class="text-center">
+                                    <button pButton type="button" id="submit" name="submit" class="first-button mr-4"
+                                      (click)="submitForm()">Save</button>
+                                  </div>
+                                </div>
+                              </div>
+                            <!---------------------------------------- -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="page-heading col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+            <h1 class="header-text-title order mt-3">Order
+            </h1>
+        </div>
+
+        <p-table #dt [value]="bookingList" [(selection)]="selectedProduct" dataKey="id" [rowHover]="true"
+        [rows]="10" [showCurrentPageReport]="true" responsiveLayout="scroll"
+        [paginator]="true" currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
+        [filterDelay]="0" [globalFilterFields]="['customerName','orderId']" class="abc">
+        <ng-template pTemplate="caption" style="background-color: #fff !important; ">
+            <div class="table-header">
+                <!-- <span style="display: flex; justify-content: center; align-items: center;" class="p-input-icon-left ">
+                  <img style="margin-right: 5px;" src="../assets/images/icons/filter.svg" class="filter" alt="img">
+                    <input style="outline: none; border-radius: 5px; border: 1px solid rgb(195, 183, 183); padding: 6px;" type="text" (input)="applyFilterGlobal($event, 'contains')" placeholder="Search..." />
+                </span> -->
+    
+                <!-- <div class="d-flex justify-content-end align-items-end">
+                  <button style="background-color: #f4f4f4; border: none;" type="button" pButton class="mr-1" pTooltip="Pdf" (click)="exportPdf()" 
+                    tooltipPosition="bottom"><img
+                    src="../assets/images/icons/pdf.svg"></button>
+                  <button type="button" style="background-color: #f4f4f4;; border: none;" pButton class="mr-1" pTooltip="excel" (click)="exportExcel()"
+                    tooltipPosition="bottom" ><img
+                    src="../assets/images/icons/excel.svg"></button>
+                    <button type="button" style="background-color: #f4f4f4;; border: none;" pButton class=" mr-1" pTooltip="print"
+                    tooltipPosition="bottom" ><img
+                    src="../assets/images/icons/printer.svg"></button>
+                </div> -->
+            </div>
+        </ng-template>
+        <ng-template  pTemplate="header">
+            <tr>
+                <th style="width: 3rem;">
+                    <p-tableHeaderCheckbox></p-tableHeaderCheckbox>
+                </th>
+                <th pSortableColumn="id">
+                    <div class="flex justify-content-between align-items-center head1">
+                        Order Id
+                        <p-sortIcon field="id"></p-sortIcon>
+                    </div>
+                </th>
+                <th pSortableColumn="createdAt">
+                    <div class="flex justify-content-between align-items-center head1">
+                        Created At
+                        <p-sortIcon field="cratedAt"></p-sortIcon>
+                        
+                    </div>
+                </th>
+              <th pSortableColumn="totalAmount">
+                <div class="flex justify-content-between align-items-center head1">
+                    Total Amount
+                    <p-sortIcon field="totalAmount"></p-sortIcon>
+                </div>
+            </th>
+    
+            <th pSortableColumn="status">
+                <div class="flex justify-content-between align-items-center head1">
+                    Status
+                    <p-sortIcon field="status"></p-sortIcon>
+                </div>
+            </th>
+      
+            </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-bookingList>
+            <tr class="p-selectable-row">
+                <td>
+                    <p-tableCheckbox [value]="bookingList"></p-tableCheckbox>
+                </td>
+                <td>
+                    <span class="p-column-title">Order Id</span>
+                    {{bookingList.id}}
+                </td>        
+                <td>
+                    <span class="p-column-title">Created At</span>
+                    {{bookingList.cratedAt}}
+                </td>
+    
+                <td>
+                  <span class="p-column-title">Total Amount</span>
+                  {{bookingList.totalAmount}}
+              </td>
+    
+                <td>
+                  <span class="p-column-title">Status</span>
+                    {{bookingList.status}}
+                </td>        
+            </tr>
+        </ng-template>
+        <ng-template pTemplate="emptymessage">
+            <tr>
+                <td colspan="8">No customers found.</td>
+            </tr>
+        </ng-template>
+    </p-table>
+    </mat-tab>
+    <mat-tab label="Shiping and Biling">Shiping and Biling</mat-tab>
+</form>
+</mat-tab-group>
+
+<ng-template #getData>
+    <div class="page-heading col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+        <h1 class="header-text-title">Product Form
+        </h1>
+    </div>
+
+
+<form [formGroup]="productForm"> 
+    <div class="card col-sm-12">
+        <div class="row gutters">
+            <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+                <div class="h-100 mt-3">
+                    <div class="card-body">
+                        <div class="row gutters">
+                            <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
+                                <div class="form-group">
+                                    <label for="name" class="col-form-label text-left starlabel">Product Name
+                                        </label>
+                                    <input type="text" class="form-control" formControlName="product">
+                                </div>
+                            </div>
+
+
+                            <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
+                                <div class="form-group">
+                                    <label for="hyperlink" class="col-form-label text-left starlabel">Quantity
+                                        </label>
+                                    <input type="text" class="form-control" formControlName="qty">
+
+                                </div>
+
+                            </div>
+                        </div>
+
+                        <div class="row gutters">
+                            <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
+                                <div class="form-group">
+                                    <label for="name" class="col-form-label text-left starlabel">Category
+                                        At</label>
+                                    <input type="text" class="form-control" formControlName="category">
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row gutters mt-4">
+                            <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 mt-4">
+                              <div class="text-center">
+                                <button pButton type="button" id="submit" name="submit" class="first-button mr-4"
+                                  (click)="submitData()" >Save</button>
+                                <button pButton type="button" id="submit" name="submit" class="p-button second-button "
+                                >Cancel</button>
+              
+                              </div>
+                            </div>
+                          </div>
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</form>
+    
+</ng-template>
