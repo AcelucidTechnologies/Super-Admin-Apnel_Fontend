@@ -1,1 +1,132 @@
-<p>booking-order-list works!</p>
+
+
+    
+  <div class="page-heading">
+    <h1 class="header-text-title" style="margin-left: 1%;">Order List</h1>
+    <div class="page-btn">
+      <button pButton type="button" [routerLink]="['/cms/add-featured-product']" class="me-1 theme" label=" + Add Product" class="theme" ></button>
+  </div>
+  </div>
+
+  <p-table #dt [value]="bookingList" [(selection)]="selectedProduct" dataKey="id" [rowHover]="true"
+    [rows]="10" [showCurrentPageReport]="true" responsiveLayout="scroll"
+    [paginator]="true" currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
+    [filterDelay]="0" [globalFilterFields]="['customerName','orderId']" class="abc">
+    <ng-template pTemplate="caption" style="background-color: #fff !important; ">
+        <div class="table-header">
+            <span style="display: flex; justify-content: center; align-items: center;" class="p-input-icon-left ">
+              <img style="margin-right: 5px;" src="../assets/images/icons/filter.svg" class="filter" alt="img">
+                <input style="outline: none; border-radius: 5px; border: 1px solid rgb(195, 183, 183); padding: 6px;" type="text" (input)="applyFilterGlobal($event, 'contains')" placeholder="Search..." />
+            </span>
+
+            <div class="d-flex justify-content-end align-items-end">
+              <button style="background-color: #f4f4f4; border: none;" type="button" pButton class="mr-1" pTooltip="Pdf" (click)="exportPdf()" 
+                tooltipPosition="bottom"><img
+                src="../assets/images/icons/pdf.svg"></button>
+              <button type="button" style="background-color: #f4f4f4;; border: none;" pButton class="mr-1" pTooltip="excel" (click)="exportExcel()"
+                tooltipPosition="bottom" ><img
+                src="../assets/images/icons/excel.svg"></button>
+                <button type="button" style="background-color: #f4f4f4;; border: none;" pButton class=" mr-1" pTooltip="print"
+                tooltipPosition="bottom" ><img
+                src="../assets/images/icons/printer.svg"></button>
+            </div>
+        </div>
+    </ng-template>
+    <ng-template  pTemplate="header">
+        <tr>
+            <th style="width: 3rem;">
+                <p-tableHeaderCheckbox></p-tableHeaderCheckbox>
+            </th>
+            <th pSortableColumn="orderId">
+                <div class="flex justify-content-between align-items-center head1">
+                    Order Id
+                    <p-sortIcon field="orderId"></p-sortIcon>
+                </div>
+            </th>
+            <th pSortableColumn="customerName">
+                <div class="flex justify-content-between align-items-center head1">
+                  Customer Name
+                    <p-sortIcon field="customerName"></p-sortIcon>
+                    
+                </div>
+            </th>
+            <th pSortableColumn="createdAt">
+                <div class="flex justify-content-between align-items-center head1">
+                    Created At
+                    <p-sortIcon field="cratedAt"></p-sortIcon>
+                    
+                </div>
+            </th>
+
+          <th pSortableColumn="totalAmount">
+            <div class="flex justify-content-between align-items-center head1">
+                Total Amount
+                <p-sortIcon field="totalAmount"></p-sortIcon>
+            </div>
+        </th>
+
+        <th pSortableColumn="status">
+            <div class="flex justify-content-between align-items-center head1">
+                Status
+                <p-sortIcon field="status"></p-sortIcon>
+            </div>
+        </th>
+        <th>
+          <div class="flex justify-content-between align-items-center head1">
+              Action            
+          </div>
+      </th>
+
+            
+        </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-bookingList>
+        <tr class="p-selectable-row">
+            <td>
+                <p-tableCheckbox [value]="bookingList"></p-tableCheckbox>
+            </td>
+            <td>
+                <span class="p-column-title">Order Id</span>
+                {{bookingList.id}}
+            </td>
+            <td>
+                <span class="p-column-title">Customer Name</span>
+                
+                {{bookingList.customerName}}
+            </td>
+           
+            <td>
+                <span class="p-column-title">Created At</span>
+                {{bookingList.cratedAt}}
+            </td>
+
+            <td>
+              <span class="p-column-title">Total Amount</span>
+              {{bookingList.totalAmount}}
+          </td>
+
+            <td>
+              <span class="p-column-title">Status</span>
+                {{bookingList.status}}
+            </td>
+
+            <td>
+              <a pTooltip="Edit Banner" tooltipPosition="bottom" class="me-3" style="margin-right: 10px;">
+                  <img src="../assets/images/icons/edit.svg" [queryParams]="{id:bookingList?.id}" [routerLink]="['/booking/booking-List']"  alt="img">
+              </a>
+              <a pTooltip="Delete Banner" tooltipPosition="bottom" class="me-3 confirm-text" href="javascript:void(0);">
+                  <img src="../assets/images/icons/delete.svg" alt="img">
+              </a>
+          </td>
+           
+         
+        </tr>
+    </ng-template>
+    <ng-template pTemplate="emptymessage">
+        <tr>
+            <td colspan="8">No customers found.</td>
+        </tr>
+    </ng-template>
+</p-table>
+
+

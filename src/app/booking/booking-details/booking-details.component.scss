@@ -1,3 +1,16 @@
+
+
+:host::ng-deep {
+    .card-body {
+        flex: 1 1 auto;
+        padding: -1.75rem;
+    }
+    .mat-tab-body-content {
+        height: 170%;
+        overflow: auto;
+    }
+}
+
 .page-heading {
     display: flex;
     justify-content: space-between;
@@ -24,19 +37,7 @@ p-sortIcon {
 
 .btn:hover {
     color: #fff;
-    background-color: rgb(245, 46, 46);
-}
-
-.theme{
-    background-color: rgb(245, 46, 46) ;
-    color: white;
-    border: none;
-}
-
-.theme:hover{
-    background-color: lightcoral !important;
-    color: rgb(245, 46, 46);
-    border: none;
+    background-color: rgb(245, 46, 46);;
 }
 
 p-table {
@@ -52,6 +53,17 @@ p-table {
     color: rgb(245, 46, 46);
 }
 
+.theme{
+    background-color: rgb(245, 46, 46) ;
+    color: white;
+    border: none;
+}
+
+.theme:hover{
+    background-color: lightcoral !important;
+    color: rgb(245, 46, 46);
+    border: none;
+}
 
 
 // .p-sortable-column, td {
@@ -90,4 +102,41 @@ td,th{
     .p-paginator .p-paginator-pages .p-paginator-page.p-highlight{
         background-color: rgb(228, 28, 28);
     }
+    .mat-tab-group.mat-primary .mat-ink-bar, .mat-tab-nav-bar.mat-primary .mat-ink-bar {
+        background-color: red;
+    }
 }
+
+:host::ng-deep {
+
+    label.starlabel::after {
+        content: "*";
+        color: rgb(228, 28, 28);
+    }
+}
+
+.form-control:active{
+    border-color:rgb(245, 46, 46) !important;
+    box-shadow: none !important;
+}
+
+.form-control:focus{
+    border-color:rgb(245, 46, 46) !important;
+    box-shadow:none !important;
+}
+.first-button{
+    background-color: rgb(245, 46, 46);
+    color: #fff;
+    outline: none !important;
+    padding: 10px 20px 10px 20px;
+}
+.second-button{
+    background-color: #424b52;
+    color: #fff;
+    outline: none !important;
+    padding: 10px 20px 10px 20px;
+}
+.p-button{
+    border: none !important;
+}
+

@@ -23,6 +23,7 @@ export class AddBannerSpecialComponent implements OnInit {
   image: File;
   status= false;
   id: any;
+  
   editMode: boolean = false
   payload: BANNERSPECIAL
   imageChangedEvent: any = '';
