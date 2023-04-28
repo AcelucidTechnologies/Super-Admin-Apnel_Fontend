@@ -14,11 +14,13 @@ import { ToastrModule } from 'ngx-toastr';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AuthenticationModule } from './authentication/authentication.module';
+import { BookingDetailsComponent } from './booking/booking-details/booking-details.component';
 
 
 @NgModule({
   declarations: [
     AppComponent,
+    BookingDetailsComponent,
     ],
   imports: [
     CommonModule,
