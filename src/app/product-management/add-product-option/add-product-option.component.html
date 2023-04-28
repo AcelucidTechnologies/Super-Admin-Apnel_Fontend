@@ -1,0 +1,32 @@
+<div class="page-heading"></div>
+<div class="button-heading-container">
+  <button class="mb-2 p-1 back-button" [routerLink]="['/product/productOptionList']">
+    <i class="material-icons">arrow_back</i>
+  </button>
+  <h5>&nbsp;Product Options</h5>
+</div>
+<div class="card col-sm-12" style="width: 1000px; margin: auto;">
+  <div class="h-100 mt-5">
+    <div class="card-body" style="width: 800px; margin: auto;">
+      <h5 class="header-text-title">
+
+    Add Product Options
+      </h5>
+      <div class="col-12 mt-5 mb-5">
+        <div class="form-row">
+          <div class="col-3">
+          <label for="image">Enter Option Name</label>
+          </div>
+          <div class="col-9">
+          <input type="text" class="form-control" >
+        </div>
+      </div>
+    </div>
+      </div>
+      <div class="d-flex justify-content-center col-12 p-0 mb-5 " style="margin:auto" >
+        <!-- <button type="submit" id="submit" name="submit" style="background: rgb(228, 28, 28);border:none; cursor:pointer" class="btn btn-info mr-3" (click)="submitForm()" [disabled]="!productForm.valid">Submit</button> -->
+        <button type="submit" id="submit" name="submit" style="background: rgb(228, 28, 28);border:none; cursor:pointer" class="btn btn-info mr-3" [routerLink]="['/product/productOptionList']" >Save</button>
+        <button class="btn btn-info" id="submit" name="submit" style="background: #637381;border:none" [routerLink]="['/product/productOptionList']">Cancel</button>
+    </div>
+      </div>
+      </div>

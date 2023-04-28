@@ -4,19 +4,38 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { NgxUiLoaderService, SPINNER } from 'ngx-ui-loader';
 import { ProductService } from 'src/app/_services/product.service';
 import { ToastrMsgService } from 'src/app/_services/toastr-msg.service';
-import { product, product_region, product_details, manufacturer, Description, prices, SEO, Satatus, Country_List } from 'src/app/_models/catalog'
+import { product, product_region, product_details, manufacturer, Description, prices, SEO, Satatus, Country_List, catalogExtraDetailsStructure } from 'src/app/_models/catalog'
 import { CommonService } from 'src/app/_services/common';
+import { MatDialog } from '@angular/material/dialog';
+import { DialogProductSubmitComponent } from '../dialog-product-submit/dialog-product-submit.component';
+import { DialogComponent } from '../dialog/dialog.component';
 @Component({
   selector: 'app-add-edit-product',
   templateUrl: './add-edit-product.component.html',
   styleUrls: ['./add-edit-product.component.scss']
 })
 export class AddEditProductComponent implements OnInit {
+  Category = [{ value: 'active', label: 'Active', inactive: false },
+  { value: 'inactive', label: 'Inactive', inactive: false }];
+
+  weightType = [{ value: '100', label:'weight A', inactive: false },
+  { value: '200', label: 'weight B', inactive: false },
+  { value: '300', label: 'weight C', inactive: false },
+];
+
+CatergoryName = [{ value: '100', label:'casual', inactive: false },
+{ value: '200', label: 'formal', inactive: false },
+{ value: '300', label: 'Sports Wear', inactive: false },
+{ value: '300', label: 'Gym Wear', inactive: false },
+];
+
   sidebarSpacing: string = "";
   fgsType: any;
   id: any
+  urls = [];
   title: string = " "
   editMode: boolean = false
+  categoryDetails: catalogExtraDetailsStructure[] = [];
   productForm: FormGroup
   payload
   product_region: product_region
@@ -25,6 +44,7 @@ export class AddEditProductComponent implements OnInit {
   manufacturer: manufacturer
   prices: prices
   SEO: SEO
+
   Image
   imageData: File
   Status = Satatus
@@ -37,32 +57,23 @@ export class AddEditProductComponent implements OnInit {
     private route: Router,
     private CommonService: CommonService,
     private toastr: ToastrMsgService,
-    private ProductService: ProductService
+    private ProductService: ProductService,
+    public dialog: MatDialog,
   ) {
     this.productForm = this.fb.group({
       country: ['', [Validators.required]],
       language: ['', [Validators.required]],
-      name: ['', [Validators.required]],
-      SKU: ['', [Validators.required]],
-      Status: ['', [Validators.required]],
-      category: ['', [Validators.required]],
-      is_featured: ['', [Validators.required]],
-      visible_individually: ['', [Validators.required]],
-      Quantity: ['', [Validators.required]],
-      brand: ['', [Validators.required]],
-      country_origin: ['', [Validators.required]],
-      short_description: ['', [Validators.required]],
-      description: ['', [Validators.required]],
-      price: ['', [Validators.required]],
-      cost: ['', [Validators.required]],
-      special_price: ['', [Validators.required]],
-      special_price_from: ['', [Validators.required]],
-      special_price_to: ['', [Validators.required]],
-      videos: ['', [Validators.required]],
-      meta_title: ['', [Validators.required]],
-      meta_description: ['', [Validators.required]],
-      meta_keywords: ['', [Validators.required]],
+      model: ['', [Validators.required]],
+      ourPrice: ['', [Validators.required]],
+      marketPrice: ['', [Validators.required]],
+      productWeight: ['', [Validators.required]],
+      weightType: ['', [Validators.required]],
+      productImage: ['', [Validators.required]],
+      productDescription: ['', [Validators.required]],
+      status: ['', [Validators.required]],
+
     })
+
   }
 
   ngOnInit(): void {
@@ -83,7 +94,20 @@ export class AddEditProductComponent implements OnInit {
 
       }
     });
-  }
+
+    this.productForm.patchValue({
+      country: this.categoryDetails[0].country,
+      language: this.categoryDetails[0].language,
+      model: this.categoryDetails[0].model,
+      ourPrice: this.categoryDetails[0].ourPrice,
+      marketPrice: this.categoryDetails[0].marketPrice,
+      productWeight: this.categoryDetails[0].productWeight,
+      productType: this.categoryDetails[0].productType,
+      productImage: this.categoryDetails[0].productImage,
+      productDescription: this.categoryDetails[0].productDescription,
+      status: this.categoryDetails[0].status
+    });
+}
 
   onToggleSidebar(sidebarState: any) {
     if (sidebarState === 'open') {
@@ -111,7 +135,7 @@ export class AddEditProductComponent implements OnInit {
       this.productForm.patchValue({
         country: res.Product_Region.country,
         language: res.Product_Region.language,
-        name: res.product_Detail.name,
+        model: res.product_Detail.name,
         SKU: res.product_Detail.SKU,
         Status: res.product_Detail.Status,
         category: res.product_Detail.category,
@@ -156,57 +180,72 @@ export class AddEditProductComponent implements OnInit {
   }
 
   submitForm() {
-    this.SEO = {
-      meta_title: this.productForm.controls['meta_description'].value,
-      meta_description: this.productForm.controls['meta_title'].value,
-      meta_keywords: this.productForm.controls['meta_keywords'].value
-    }
-    this.prices = {
-      price: this.productForm.controls['price'].value,
-      cost: this.productForm.controls['cost'].value,
-      special_price: this.productForm.controls['special_price'].value,
-      special_price_to: this.productForm.controls['special_price_to'].value,
-      special_price_from: this.productForm.controls['special_price_from'].value
-    }
-    this.Description = {
-      description: this.productForm.controls['description'].value,
-      short_description: this.productForm.controls['short_description'].value
-    }
-    this.product_region = {
+    let payload = {
       country: this.productForm.controls['country'].value,
       language: this.productForm.controls['language'].value,
+      model: this.productForm.controls['model'].value,
+      ourPrice: this.productForm.controls['ourPrice'].value,
+      marketPrice: this.productForm.controls['marketPrice'].value,
+      productWeight: this.productForm.controls['productWeight'].value,
+      productType: this.productForm.controls['productType'].value,
+      productImage: this.productForm.controls['productImage'].value,
+      productDescription: this.productForm.controls['productDescription'].value,
+      status: this.productForm.controls['status'].value,
+
     }
 
-    this.manufacturer = {
-      brand: this.productForm.controls['brand'].value,
-      country_origin: this.productForm.controls['country_origin'].value
-    }
-    this.product_details = {
-      name: this.productForm.controls['name'].value,
-      SKU: this.productForm.controls['SKU'].value,
-      category: this.productForm.controls['category'].value,
-      Quantity: this.productForm.controls['Quantity'].value,
-      is_featured: this.productForm.controls['is_featured'].value,
-      Status: this.productForm.controls['Status'].value,
-      is_new: true,
-      price: this.productForm.controls['price'].value,
-      visible_individually: this.productForm.controls['visible_individually'].value
-    }
-    this.payload = {
-      Product_Region: this.product_region,
-      product_Detail: this.product_details,
-      manufacturer: this.manufacturer,
-      description: this.Description,
-      price: this.prices,
-      seo: this.SEO,
-      image: ""
-    }
+    // this.SEO = {
+    //   meta_title: this.productForm.controls['meta_description'].value,
+    //   meta_description: this.productForm.controls['meta_title'].value,
+    //   meta_keywords: this.productForm.controls['meta_keywords'].value
+    // }
+    // this.prices = {
+    //   price: this.productForm.controls['price'].value,
+    //   cost: this.productForm.controls['cost'].value,
+    //   special_price: this.productForm.controls['special_price'].value,
+    //   special_price_to: this.productForm.controls['special_price_to'].value,
+    //   special_price_from: this.productForm.controls['special_price_from'].value
+    // }
+    // this.Description = {
+    //   description: this.productForm.controls['description'].value,
+    //   short_description: this.productForm.controls['short_description'].value
+    // }
+    // this.product_region = {
+    //   country: this.productForm.controls['country'].value,
+    //   language: this.productForm.controls['language'].value,
+    // }
+
+    // this.manufacturer = {
+    //   brand: this.productForm.controls['brand'].value,
+    //   country_origin: this.productForm.controls['country_origin'].value
+    // }
+    // this.product_details = {
+    //   name: this.productForm.controls['name'].value,
+    //   SKU: this.productForm.controls['SKU'].value,
+    //   category: this.productForm.controls['category'].value,
+    //   Quantity: this.productForm.controls['Quantity'].value,
+    //   is_featured: this.productForm.controls['is_featured'].value,
+    //   Status: this.productForm.controls['Status'].value,
+    //   is_new: true,
+    //   price: this.productForm.controls['price'].value,
+    //   visible_individually: this.productForm.controls['visible_individually'].value
+    // }
+    // this.payload = {
+    //   Product_Region: this.product_region,
+    //   product_Detail: this.product_details,
+    //   manufacturer: this.manufacturer,
+    //   description: this.Description,
+    //   price: this.prices,
+    //   seo: this.SEO,
+    //   image: ""
+    // }
     this.ngxLoader.start();
     if (this.editMode) {
       this.editProduct(this.payload)
     } else {
       this.addProduct(this.payload)
     }
+
   }
   OnChangesEvent(event) {
     this.imageData = event.target.files[0];
@@ -223,4 +262,30 @@ export class AddEditProductComponent implements OnInit {
       this.countryList = res
     })
   }
+
+  openDialog() {
+    const dialogRef = this.dialog.open(DialogProductSubmitComponent);
+    dialogRef.afterClosed().subscribe(result => {
+      if (result == true) {
+        this.submitForm()
+      }
+    });
+  }
+
+  onSelectFile(event) {
+    if (event.target.files && event.target.files[0]) {
+        var filesAmount = event.target.files.length;
+        for (let i = 0; i < filesAmount; i++) {
+                var reader = new FileReader();
+
+                reader.onload = (event:any) => {
+                  console.log(event.target.result);
+                   this.urls.push(event.target.result);
+                }
+
+                reader.readAsDataURL(event.target.files[i]);
+        }
+    }
+  }
+
 }

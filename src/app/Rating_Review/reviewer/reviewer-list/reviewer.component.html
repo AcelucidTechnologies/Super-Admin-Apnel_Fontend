@@ -41,27 +41,31 @@
 
   <ng-template pTemplate="header">
     <tr>
+      <th class="text-center">Sno</th>
       <th class="text-center">Name</th>
       <th class="text-center">Email</th>
       <th class="text-center">Rating</th>
       <th class="text-center">First Rating</th>
       <th class="text-center">Status</th>
       <th class="text-center">Action</th>
+
     </tr>
   </ng-template>
-  <ng-template pTemplate="body" let-reviewers>
+  <ng-template pTemplate="body" let-list let-i="rowIndex">
     <tr>
-      <td>{{reviewers.name}}</td>
-      <td>{{reviewers.email}}</td>
-      <td>{{reviewers.rating}}</td>
-      <td>{{reviewers.firstRating}}</td>
-      <td>{{reviewers.status}}</td>
+      <td>{{i+1}}</td>
+      <td>{{list.name}}</td>
+      <td>{{list.email}}</td>
+      <td>{{list.rating}}</td>
+      <td>{{list.firstRating}}</td>
+      <td>{{list.status}}</td>
+
       <td>
         <a pTooltip="Edit Reviewer" tooltipPosition="bottom" style="margin-right: 15px; cursor: pointer;">
           <img src="../../../../assets/images/edit.svg" [routerLink]="['/reviewer/reviewerform']"
-            [queryParams]="{serialno:reviewers.sno}" alt="img">
+            [queryParams]="{serialno:list.sno}" alt="img">
         </a>
-        <a pTooltip="Delete Reviewer" tooltipPosition="bottom" (click)="openDialog(reviewers.name)"
+        <a pTooltip="Delete Reviewer" tooltipPosition="bottom" (click)="openDialog(list.name)"
           class="me-3 confirm-text" href="javascript:void(0);">
           <img src="../../../../assets/images/delete.svg" alt="img">
         </a>

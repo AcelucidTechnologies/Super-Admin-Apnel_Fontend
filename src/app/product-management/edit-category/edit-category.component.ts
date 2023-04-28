@@ -9,21 +9,21 @@ import { ToastrMsgService } from 'src/app/_services/toastr-msg.service';
 import bsCustomFileInput from 'bs-custom-file-input';
 
 @Component({
-  selector: 'app-add-edit-category',
-  templateUrl: './add-edit-category.component.html',
-  styleUrls: ['./add-edit-category.component.scss']
+  selector: 'app-edit-category',
+  templateUrl: './edit-category.component.html',
+  styleUrls: ['./edit-category.component.scss']
 })
-export class AddEditCategoryComponent implements OnInit {
+export class EditCategoryComponent implements OnInit {
+
   CatergoryName = [{ value: '100', label:'casual', inactive: false },
 { value: '200', label: 'formal', inactive: false },
 { value: '300', label: 'Sports Wear', inactive: false },
 { value: '300', label: 'Gym Wear', inactive: false },
 ];
-
-  Category = [{ value: 'active', label: 'Active', inactive: false },
-  { value: 'inactive', label: 'Inactive', inactive: false }];
-
   selectedItem: any;
+  deals: any[];
+  technologies: any[];
+  sources: any[];
   sidebarSpacing: any;
   fgsType: any;
   id: any
@@ -36,7 +36,7 @@ export class AddEditCategoryComponent implements OnInit {
   image: File;
   imageUrl;
   seo: SEO
-  // Category: string[];
+  Category: string[];
   constructor(
     private fb: FormBuilder,
     private activateRoute: ActivatedRoute,
@@ -55,7 +55,12 @@ export class AddEditCategoryComponent implements OnInit {
       metaKeyword: ['', [Validators.required]],
       status: ['', [Validators.required]]
     })
-    // this.Category = ['Active', 'Inactive'];
+
+    this.sources = [ 'Site' , 'Linked In' , 'Newspaper','Other']
+    this.deals = ['Hot','Cold','Not Interested','Dead']
+    this.technologies = ['Front End','Back End']
+
+    this.Category = ['Active', 'Inactive'];
 
   }
 
@@ -168,8 +173,4 @@ export class AddEditCategoryComponent implements OnInit {
     }
   }
 }
-function addPayloadData(addPayloadData: any) {
-  throw new Error('Function not implemented.');
-}
-
 
