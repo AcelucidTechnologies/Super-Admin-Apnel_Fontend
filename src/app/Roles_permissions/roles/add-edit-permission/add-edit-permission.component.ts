@@ -18,21 +18,21 @@ export class AddEditPermissionComponent implements OnInit {
   isOn: boolean = false;
   
   permissionData = [
-    {
-      moduleName: 'Order',
-      subModuleName: 'Order List',
-      nameForForm: 'OrderList'
-    },
-    {
-      moduleName: 'Order',
-      subModuleName: 'Order Transaction',
-      nameForForm: 'OrderTransaction'
-    },
-    {
-      moduleName: 'Order',
-      subModuleName: 'Shipment',
-      nameForForm: 'OrderShipment'
-    },
+    // {
+    //   moduleName: 'Order',
+    //   subModuleName: 'Order List',
+    //   nameForForm: 'OrderList'
+    // },
+    // {
+    //   moduleName: 'Order',
+    //   subModuleName: 'Order Transaction',
+    //   nameForForm: 'OrderTransaction'
+    // },
+    // {
+    //   moduleName: 'Order',
+    //   subModuleName: 'Shipment',
+    //   nameForForm: 'OrderShipment'
+    // },
     {
       moduleName: 'Catalog',
       subModuleName: 'Category',
@@ -41,6 +41,11 @@ export class AddEditPermissionComponent implements OnInit {
     {
       moduleName: 'Catalog',
       subModuleName: 'Product',
+      nameForForm: 'CatalogProduct'
+    },
+    {
+      moduleName: 'Catalog',
+      subModuleName: 'ProductOption',
       nameForForm: 'CatalogProduct'
     },
     {
@@ -63,11 +68,11 @@ export class AddEditPermissionComponent implements OnInit {
     //   subModuleName:'Slider',
     //   nameForForm:'CmsSlider'
     // },
-    {
-      moduleName: 'Appointment',
-      subModuleName: '-',
-      nameForForm: 'AppointmentList'
-    },
+    // {
+    //   moduleName: 'Appointment',
+    //   subModuleName: '-',
+    //   nameForForm: 'AppointmentList'
+    // },
     {
       moduleName: 'User',
       subModuleName: 'User List',
