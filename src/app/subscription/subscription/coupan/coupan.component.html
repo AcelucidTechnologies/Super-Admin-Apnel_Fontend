@@ -1,0 +1,158 @@
+<form [formGroup]="coupanForm">
+    <div class="page-heading col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+        <h1 class="header-text-title">
+            Add Addons
+        </h1>
+    </div>
+    <div class="card col-sm-12">
+        <div class="row gutters">
+            <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+                <div class="h-100 mt-3">
+                    <div class="card-body">
+                        <div class="row gutters">
+                            <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
+                                <div class="form-group">
+                                    <label for="name" class="col-form-label text-left starlabel">Coupon Name</label>
+                                    <input type="text" class="form-control" formControlName="coupanName">
+                                    <div
+                                        *ngIf="!coupanForm.controls['coupanName'].valid && (coupanForm.controls['coupanName'].touched || coupanForm.controls['coupanName'].dirty)">
+                                        <div [hidden]="!coupanForm.controls['coupanName'].errors['required']"
+                                            style="color: rgb(253, 122, 122); font-size:small; font-style: italic;">
+                                            Coupon Name is required
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
+                                <div class="form-group">
+                                    <label for="hyperlink" class="col-form-label text-left starlabel">Coupan
+                                        Code</label>
+                                    <input type="text" class="form-control" formControlName="couponCode">
+                                    <div
+                                        *ngIf="!coupanForm.controls['couponCode'].valid && (coupanForm.controls['couponCode'].touched || coupanForm.controls['couponCode'].dirty)">
+                                        <div [hidden]="!coupanForm.controls['couponCode'].errors['required']"
+                                            style="color: rgb(253, 122, 122); font-size:small; font-style: italic;">
+                                            Coupon Code is required
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+
+                        <div class="row gutters mt-3">
+                            <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
+                                <div class="form-group">
+                                    <label class="col-form-label">Discount Price : </label> &nbsp; &nbsp;
+                                    <p-dropdown [options]="associatedPlan" id="associatedPlan"
+                                        placeholder="Select Discount Price"
+                                        formControlName="associatedPlan"></p-dropdown>
+                                    <!-- <div
+                                        *ngIf="!coupanForm.controls['pricingInterval'].valid && (coupanForm.controls['pricingInterval'].touched || coupanForm.controls['pricingInterval'].dirty)">
+                                        <div [hidden]="!coupanForm.controls['pricingInterval'].errors['required']"
+                                            style="color: rgb(253, 122, 122); font-size:small; font-style: italic;">
+                                            Price is required
+                                        </div>
+                                    </div> -->
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row gutters mt-3">
+                            <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
+                                <div class="form-group" style="width: 527px;">
+                                    <label for="hyperlink" class="col-form-label">Redemption
+                                        type : </label>&nbsp; &nbsp;
+                                    One time &nbsp;<input type="radio" formControlName="oneTime" name="oneTime"
+                                        value="oneTime">&nbsp;
+                                    Unlimited &nbsp;<input type="radio" formControlName="oneTime" name="oneTime"
+                                        value="unlimited">&nbsp;
+                                    Limited no of times &nbsp;<input type="radio" formControlName="oneTime"
+                                        name="oneTime" value="limited">
+                                </div>
+                            </div>
+                        </div>
+
+
+                        <div class="row gutters mt-3">
+                            <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
+                                <div class="form-group">
+                                    <label for="hyperlink" class="col-form-label">Associated Plans : </label>&nbsp;
+                                    &nbsp;
+                                    <p-dropdown [options]="associatedPlan" id="associatedPlan"
+                                        placeholder="Select Associated Plans"
+                                        formControlName="associatedPlan"></p-dropdown>
+                                    <!-- <div
+                                        *ngIf="!coupanForm.controls['pricingInterval'].valid && (coupanForm.controls['pricingInterval'].touched || coupanForm.controls['pricingInterval'].dirty)">
+                                        <div [hidden]="!coupanForm.controls['pricingInterval'].errors['required']"
+                                            style="color: rgb(253, 122, 122); font-size:small; font-style: italic;">
+                                            Price is required
+                                        </div>
+                                    </div> -->
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row gutters mt-3">
+                            <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+                                <div class="form-group">
+                                    <label for="comment" class="col-form-label">Associated Addons :</label>
+                                    <div class="col-12">
+                                        <ckeditor name="editor1" formControlName="associatedAddons"></ckeditor>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row gutters">
+                            <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
+                                <div class="form-group">
+                                    <label for="name" class="col-form-label">Valid upto :</label>
+                                    <input type="text" class="form-control" formControlName="validUpto">
+                                    <div
+                                        *ngIf="!coupanForm.controls['validUpto'].valid && (coupanForm.controls['validUpto'].touched || coupanForm.controls['validUpto'].dirty)">
+                                        <div [hidden]="!coupanForm.controls['validUpto'].errors['required']"
+                                            style="color: rgb(253, 122, 122); font-size:small; font-style: italic;">
+                                            Coupon Name is required
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
+                                <div class="form-group">
+                                    <label for="hyperlink" class="col-form-label">Maximum
+                                        Redemptions :</label>
+                                    <input type="text" class="form-control" formControlName="maximumRedemption">
+                                    <div
+                                        *ngIf="!coupanForm.controls['maximumRedemption'].valid && (coupanForm.controls['maximumRedemption'].touched || coupanForm.controls['maximumRedemption'].dirty)">
+                                        <div [hidden]="!coupanForm.controls['maximumRedemption'].errors['required']"
+                                            style="color: rgb(253, 122, 122); font-size:small; font-style: italic;">
+                                            Maximum Redemptions is required
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+
+                        <div class="row gutters mt-4">
+                            <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 mt-4">
+                                <div class="text-center">
+                                    <button pButton type="button" id="submit" name="submit"
+                                        class="p-button mr-4 first-button" (click)="submitForm()"
+                                        [disabled]="!(coupanForm.valid)"
+                                        [routerLink]="['/subscription/subscription-list']">Save</button>
+                                    <button pButton type="button" id="submit" name="submit"
+                                        class="p-button second-button "
+                                        [routerLink]="['/subscription/subscription-list']">Cancel</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>

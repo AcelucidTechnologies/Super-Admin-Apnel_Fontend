@@ -342,6 +342,34 @@ export const SideNaveMenueRoute = [
             },
         ]
     },
+
+    {
+        label: 'Subscription',
+        icon: 'pi pi-id-card',
+        items: [
+            {
+                label: 'Subscription',
+                icon: 'pi pi-fw pi-shopping-cart',
+                routerLink: ['/subscription/subscription-list']
+            },
+            {
+                label: 'Add coupan',
+                icon: 'pi pi-fw pi-shopping-cart',
+                routerLink: ['/subscription/add-coupan']
+            },
+            {
+                label: 'Add Addons',
+                icon: 'pi pi-fw pi-shopping-cart',
+                routerLink: ['/subscription/add-addons']
+            },
+            {
+                label: 'Payment',
+                icon: 'pi pi-fw pi-shopping-cart',
+                routerLink: ['/subscription/payment']
+            },
+        ]
+        },
+
     // {
     //     label: 'Appointment',
     //     icon: 'pi pi-calendar',

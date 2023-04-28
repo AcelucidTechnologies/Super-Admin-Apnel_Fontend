@@ -1,0 +1,142 @@
+<form [formGroup]="addonsForm">
+    <div class="page-heading col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+        <h1 class="header-text-title">
+            Add Adons
+        </h1>
+    </div>
+    <div class="card col-sm-12">
+        <div class="row gutters">
+            <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+                <div class="h-100 mt-3">
+                    <div class="card-body">
+                        <div class="row gutters">
+                            <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
+                                <div class="form-group">
+                                    <label for="name" class="col-form-label text-left starlabel">Addon Name</label>
+                                    <input type="text" class="form-control" formControlName="addonName">
+                                    <div
+                                        *ngIf="!addonsForm.controls['addonName'].valid && (addonsForm.controls['addonName'].touched || addonsForm.controls['addonName'].dirty)">
+                                        <div [hidden]="!addonsForm.controls['addonName'].errors['required']"
+                                            style="color: rgb(253, 122, 122); font-size:small; font-style: italic;">
+                                            Addon Name is required
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
+                                <div class="form-group">
+                                    <label for="hyperlink" class="col-form-label text-left starlabel">Addon Code</label>
+                                    <input type="text" class="form-control" formControlName="planCode">
+                                    <div
+                                        *ngIf="!addonsForm.controls['planCode'].valid && (addonsForm.controls['planCode'].touched || addonsForm.controls['planCode'].dirty)">
+                                        <div [hidden]="!addonsForm.controls['planCode'].errors['required']"
+                                            style="color: rgb(253, 122, 122); font-size:small; font-style: italic;">
+                                            Addon Code is required
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+
+                        <div class="row gutters">
+
+                            <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+                                <div class="form-group">
+                                    <label for="comment" class="col-form-label">Comment:</label>
+                                    <div class="col-12">
+
+                                        <ckeditor name="editor1" formControlName="description"></ckeditor>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <mat-divider></mat-divider>
+                        <h4>Price Details</h4>
+
+                        <div class="row gutters">
+                            <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
+                                <div class="form-group">
+                                    <label for="hyperlink" class="col-form-label text-left starlabel">Price</label>
+                                    <input type="text" class="form-control" formControlName="price">
+                                    <div
+                                        *ngIf="!addonsForm.controls['price'].valid && (addonsForm.controls['price'].touched || addonsForm.controls['price'].dirty)">
+                                        <div [hidden]="!addonsForm.controls['price'].errors['required']"
+                                            style="color: rgb(253, 122, 122); font-size:small; font-style: italic;">
+                                            Price is required
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <mat-divider></mat-divider>
+
+                        <h4>Billing Preference</h4>
+
+                        <div class="row gutters">
+                            <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
+                                <div class="form-group">
+                                    <label for="hyperlink" class="col-form-label">Addon
+                                        type : </label><br>
+                                    One Type: &nbsp;<input type="radio" formControlName="oneType" name="oneType" value="one">&nbsp;
+                                    Recurring: &nbsp;<input type="radio" formControlName="oneType" name="oneType" value="recurring"
+                                    >
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row gutters">
+                            <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
+                                <div class="form-group">
+                                    <p-dropdown [options]="pricingIterval" id="pricingIterval" placeholder="Select Pricing interval"
+                                    formControlName="pricingIterval"></p-dropdown>
+                                    <!-- <div
+                                        *ngIf="!addonsForm.controls['pricingInterval'].valid && (addonsForm.controls['pricingInterval'].touched || addonsForm.controls['pricingInterval'].dirty)">
+                                        <div [hidden]="!addonsForm.controls['pricingInterval'].errors['required']"
+                                            style="color: rgb(253, 122, 122); font-size:small; font-style: italic;">
+                                            Price is required
+                                        </div>
+                                    </div> -->
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row gutters">
+                            <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
+                                <div class="form-group">
+                                    <label for="hyperlink" class="col-form-label">Associated Plans : </label> &nbsp; &nbsp;
+                                    <input type="checkbox" formControlName="associatedPlans">
+                                    <!-- <div
+                                        *ngIf="!addonsForm.controls['pricingInterval'].valid && (addonsForm.controls['pricingInterval'].touched || addonsForm.controls['pricingInterval'].dirty)">
+                                        <div [hidden]="!addonsForm.controls['pricingInterval'].errors['required']"
+                                            style="color: rgb(253, 122, 122); font-size:small; font-style: italic;">
+                                            Price is required
+                                        </div>
+                                    </div> -->
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row gutters mt-4">
+                            <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 mt-4">
+                                <div class="text-center">
+                                    <button pButton type="button" id="submit" name="submit"
+                                        class="p-button mr-4 first-button" (click)="submitForm()"
+                                        [disabled]="!(addonsForm.valid)"
+                                        [routerLink]="['/subscription/subscription-list']">Save</button>
+                                    <button pButton type="button" id="submit" name="submit"
+                                        class="p-button second-button "
+                                        [routerLink]="['/subscription/subscription-list']">Cancel</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>

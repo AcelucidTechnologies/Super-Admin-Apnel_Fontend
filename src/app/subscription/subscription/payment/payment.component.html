@@ -1,0 +1,126 @@
+
+<div class="page-heading">
+    <h1 class="header-text-title" style="margin-left: 1%;">Payment</h1>
+
+  </div>
+
+  <p-table #dt [value]="paymentList" [(selection)]="selectedCustomers" dataKey="id" [rowHover]="true"
+    [rows]="10" [showCurrentPageReport]="true" responsiveLayout="scroll"
+    [paginator]="true" currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
+    [filterDelay]="0" [globalFilterFields]="['id']" styleClass="p-datatable" class="abc">
+    <ng-template pTemplate="caption">
+        <div class="table-header">
+            
+            <span style="display: flex; justify-content: center; align-items: center;" class="p-input-icon-left ">
+              <img style="margin-right: 5px;" src="../assets/images/icons/filter.svg" class="filter" alt="img">
+                <input style="outline: none; border-radius: 5px; border: 1px solid rgb(195, 183, 183); padding: 6px;" type="text" (input)="applyFilterGlobal($event, 'contains')" placeholder="Search..." />
+            </span>
+
+
+        </div>
+    </ng-template>
+    <ng-template  pTemplate="header">
+        <tr>
+            <th style="width: 3rem;">
+                <p-tableHeaderCheckbox></p-tableHeaderCheckbox>
+            </th>
+            <th pSortableColumn="id">
+                <div class="flex justify-content-between align-items-center head1">
+                    Sr.no
+                    <p-sortIcon field="id"></p-sortIcon>
+                    
+                </div>
+            </th>
+            <th pSortableColumn="description">
+                <div class="flex justify-content-between align-items-center head1">
+                    Payment
+                    <p-sortIcon field="payment"></p-sortIcon>
+                    
+                </div>
+            </th>
+
+            <th pSortableColumn="RefrenceNo">
+              <div class="flex justify-content-between align-items-center head1">
+                Refrence No
+                  <p-sortIcon field="RefrenceNo"></p-sortIcon>
+              </div>
+          </th>
+        <th>
+            <div class="flex justify-content-between align-items-center head1">
+                Customer Name
+            </div>
+        </th>
+        <th>
+            <div class="flex justify-content-between align-items-center head1">
+                Invoice No
+            </div>
+        </th>
+        <th>
+            <div class="flex justify-content-between align-items-center head1">
+                Mode
+            </div>
+        </th>
+        <th>
+            <div class="flex justify-content-between align-items-center head1">
+                Status
+            </div>
+        </th>
+        <th>
+            <div class="flex justify-content-between align-items-center head1">
+                Amount
+            </div>
+        </th>
+        <th>
+            <div class="flex justify-content-between align-items-center head1">
+                Unused Amount
+            </div>
+        </th>
+        </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-paymentList>
+        <tr class="p-selectable-row">
+            <td>
+                <p-tableCheckbox [value]="paymentList"></p-tableCheckbox>
+            </td>
+            <td>
+                <span class="p-column-title">Url</span>
+                {{paymentList.id}}
+            </td>
+            <td>
+                <span class="p-column-title">Description</span>
+                
+                {{paymentList.payment}}
+            </td>
+           
+            <td>
+                <span class="p-column-title">Date</span>
+                {{paymentList.RefrenceNo}}
+            </td>
+            <td>
+                {{paymentList.Customernme}}
+            </td>
+            <td>
+                {{paymentList.InvoiceNo}}
+            </td>
+            <td>
+                {{paymentList.mode}}
+            </td>
+            <td>
+                {{paymentList.status}}
+            </td>
+            <td>
+                {{paymentList.Amount}}
+            </td>
+            <td>
+                {{paymentList.UnusedAmount
+                }}
+            </td>
+            
+        </tr>
+    </ng-template>
+    <ng-template pTemplate="emptymessage">
+        <tr>
+            <td colspan="8">No customers found.</td>
+        </tr>
+    </ng-template>
+</p-table>

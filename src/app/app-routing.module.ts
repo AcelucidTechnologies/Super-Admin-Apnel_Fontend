@@ -45,6 +45,11 @@ const routes: Routes = [
   loadChildren: () => import('./booking/booking-routing.module').then(mod=>mod.BookingRoutingModule),
   canActivate: [AuthGuard]
  },
+ {
+  path: 'subscription',
+  loadChildren: () => import('./subscription/subscription.module').then(mod=>mod.SubscriptionModule),
+  canActivate: [AuthGuard]
+ },
   {
     path: 'appointment',
     loadChildren: () => import('./appoinment/appoinment.module').then(mod=>mod.AppoinmentModule),
