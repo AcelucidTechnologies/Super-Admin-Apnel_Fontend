@@ -1,0 +1,150 @@
+<form [formGroup]="subscriptionForm">
+    <div class="page-heading col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+        <h1 class="header-text-title">
+            <i pButton style="color: rgb(245, 46, 46);" class="pi pi-arrow-left p-button-text" [routerLink]="['/subscription/subscription-List']" pTooltip="Back"
+                tooltipPosition="bottom">
+            </i>{{title}}
+        </h1>
+    </div>
+    <div class="card col-sm-12">
+        <div class="row gutters">
+            <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+                <div class="h-100 mt-3">
+                    <div class="card-body">
+                        <div class="row gutters">
+                            <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
+                                <div class="form-group">
+                                    <label for="name" class="col-form-label text-left starlabel">Plan Name</label>
+                                    <input type="text" class="form-control" formControlName="planName">
+                                    <div
+                                        *ngIf="!subscriptionForm.controls['planName'].valid && (subscriptionForm.controls['planName'].touched || subscriptionForm.controls['planName'].dirty)">
+                                        <div [hidden]="!subscriptionForm.controls['planName'].errors['required']"
+                                            style="color: rgb(253, 122, 122); font-size:small; font-style: italic;">
+                                            Product Name is required
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
+                                <div class="form-group">
+                                    <label for="hyperlink" class="col-form-label text-left starlabel">Plan Code</label>
+                                    <input type="text" class="form-control" formControlName="planCode">
+                                    <div
+                                        *ngIf="!subscriptionForm.controls['planCode'].valid && (subscriptionForm.controls['planCode'].touched || subscriptionForm.controls['planCode'].dirty)">
+                                        <div [hidden]="!subscriptionForm.controls['planCode'].errors['required']"
+                                            style="color: rgb(253, 122, 122); font-size:small; font-style: italic;">
+                                            planCode is required
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+
+
+                        <div class="row gutters">
+                            <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
+                                <div class="form-group">
+                                    <label for="Name" class="col-form-label text-left starlabel">Price</label><br>
+                                    <input type="text" class="form-control" formControlName="price">
+                                      <div
+                                    *ngIf="(!subscriptionForm.controls['price'].valid) && (subscriptionForm.controls['price'].touched || subscriptionForm.controls['price'].dirty)">
+                                    <div [hidden]="!subscriptionForm.controls['price'].errors['required']"
+                                      style="color: rgb(253, 122, 122); font-size:small; font-style: italic;">
+                                      price is required
+                                    </div>
+                                    <div *ngIf="subscriptionForm.controls['price'].errors['pattern']"
+                                      style="color: rgb(253, 122, 122); font-size:small; font-style: italic;">
+                                      Please enter valid price
+                                    </div>
+                                  </div>
+                                </div>
+                            </div>
+
+                            <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
+                                <div class="form-group">
+                                    <label for="Name" class="col-form-label text-left starlabel">Bill Every</label><br>
+                                    <input type="text" class="form-control" formControlName="billEvery">
+                                    <div
+                                    *ngIf="(!subscriptionForm.controls['billEvery'].valid) && (subscriptionForm.controls['billEvery'].touched || subscriptionForm.controls['billEvery'].dirty)">
+                                    <div [hidden]="!subscriptionForm.controls['billEvery'].errors['required']"
+                                      style="color: rgb(253, 122, 122); font-size:small; font-style: italic;">
+                                      billEvery is required
+                                    </div>
+                                    <div *ngIf="subscriptionForm.controls['billEvery'].errors['pattern']"
+                                      style="color: rgb(253, 122, 122); font-size:small; font-style: italic;">
+                                      Please enter valid billEvery
+                                    </div>
+                                  </div>
+          
+                                </div>
+                            </div>
+
+                        </div>
+                        
+                        <div class="row gutters">
+                            <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
+                                <div class="form-group">
+                                    <label for="Name" class="col-form-label text-left starlabel">Billing Cycle</label><br>
+                                    <span>Auto renewal until cancelled</span>
+                                    
+                                    <input class="check" type="checkbox" formControlName="price"><br>
+                                    <span>Expires after a specific no of billing cycles</span>
+                                    
+                                    <input class="check" type="checkbox">
+                                </div>
+                            </div>
+
+                        </div>
+
+                        <div class="row gutters">
+                            <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+                                <div class="form-group">
+                                    <label for="Name" class="col-form-label text-left starlabel">Plan in days Every</label><br>
+                                    <input type="text" class="form-control" formControlName="planInDays">
+                                    <div
+                                    *ngIf="(!subscriptionForm.controls['planInDays'].valid) && (subscriptionForm.controls['planInDays'].touched || subscriptionForm.controls['planInDays'].dirty)">
+                                    <div [hidden]="!subscriptionForm.controls['planInDays'].errors['required']"
+                                      style="color: rgb(253, 122, 122); font-size:small; font-style: italic;">
+                                      planInDays is required
+                                    </div>
+                                  </div>
+          
+                                </div>
+                            </div>
+
+                        </div>
+
+                        <div class="row gutters">
+
+                            <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+                                <div class="form-group">
+                                  <label for="comment" class="col-form-label text-left starlabel">Comment:</label>
+                                  <div class="col-12">
+                                   
+                                    <ckeditor name="editor1" formControlName="description"></ckeditor>
+           
+                                  </div>
+                                </div>
+                              </div>
+                        </div>
+
+
+                        <div class="row gutters mt-4">
+                            <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 mt-4">
+                                <div class="text-center">
+                                    <button pButton type="button" id="submit" name="submit"
+                                        class="p-button mr-4 first-button" (click)="submitForm()"
+                                        [disabled]="!(subscriptionForm.valid)" [routerLink]="['/subscription/subscription-List']">Save</button>
+                                    <button pButton type="button" id="submit" name="submit" class="p-button second-button "
+                                        [routerLink]="['/subscription/subscription-List']">Cancel</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>

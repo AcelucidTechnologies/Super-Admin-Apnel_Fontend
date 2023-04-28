@@ -1,0 +1,135 @@
+
+<div class="page-heading">
+    <h1 class="header-text-title" style="margin-left: 1%;">Subscription</h1>
+    <div class="page-btn">
+
+      <button pButton type="button" [routerLink]="['/subscription/add-subscription']" class="me-1" label=" + Add Admin" class="theme" ></button>
+  </div>
+  </div>
+
+  <p-table #dt [value]="subscriptionList" [(selection)]="selectedCustomers" dataKey="id" [rowHover]="true"
+    [rows]="10" [showCurrentPageReport]="true" responsiveLayout="scroll"
+    [paginator]="true" currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
+    [filterDelay]="0" [globalFilterFields]="['url','description']" styleClass="p-datatable" class="abc">
+    <ng-template pTemplate="caption">
+        <div class="table-header">
+            
+            <span style="display: flex; justify-content: center; align-items: center;" class="p-input-icon-left ">
+              <img style="margin-right: 5px;" src="../assets/images/icons/filter.svg" class="filter" alt="img">
+                <input style="outline: none; border-radius: 5px; border: 1px solid rgb(195, 183, 183); padding: 6px;" type="text" (input)="applyFilterGlobal($event, 'contains')" placeholder="Search..." />
+            </span>
+
+
+        </div>
+    </ng-template>
+    <ng-template  pTemplate="header">
+        <tr>
+            <th style="width: 3rem;">
+                <p-tableHeaderCheckbox></p-tableHeaderCheckbox>
+            </th>
+            <th pSortableColumn="url">
+                <div class="flex justify-content-between align-items-center head1">
+                    Sr.no
+                    <p-sortIcon field="id"></p-sortIcon>
+                    
+                </div>
+            </th>
+            <th pSortableColumn="description">
+                <div class="flex justify-content-between align-items-center head1">
+                    Customer Name
+                    <p-sortIcon field="customerName"></p-sortIcon>
+                    
+                </div>
+            </th>
+
+            <th pSortableColumn="sortby">
+              <div class="flex justify-content-between align-items-center head1">
+                 Plan Name
+                  <p-sortIcon field="planName"></p-sortIcon>
+              </div>
+          </th>
+
+          <th>
+            <div class="flex justify-content-between align-items-center head1">
+                Addons
+            </div>
+        </th>
+        <th>
+            <div class="flex justify-content-between align-items-center head1">
+                Plan Duration
+            </div>
+        </th>
+        <th>
+            <div class="flex justify-content-between align-items-center head1">
+                Start Date
+            </div>
+        </th>
+        <th>
+            <div class="flex justify-content-between align-items-center head1">
+                End Date
+            </div>
+        </th>
+        <th>
+            <div class="flex justify-content-between align-items-center head1">
+                Status
+            </div>
+        </th>
+        <th>
+          <div class="flex justify-content-between align-items-center head1">
+              Action
+              
+          </div>
+      </th>   
+        </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-subscriptionList>
+        <tr class="p-selectable-row">
+            <td>
+                <p-tableCheckbox [value]="subscriptionList"></p-tableCheckbox>
+            </td>
+            <td>
+                <span class="p-column-title">Url</span>
+                {{subscriptionList.id}}
+            </td>
+            <td>
+                <span class="p-column-title">Description</span>
+                
+                {{subscriptionList.customerName}}
+            </td>
+           
+            <td>
+                <span class="p-column-title">Date</span>
+                {{subscriptionList.planName}}
+            </td>
+            <td>
+                {{subscriptionList.addons}}
+            </td>
+            <td>
+                {{subscriptionList.planDuration}}
+            </td>
+            <td>
+                {{subscriptionList.startDate}}
+            </td>
+            <td>
+                {{subscriptionList.endDate}}
+            </td>
+            <td>
+                {{subscriptionList.status}}
+            </td>
+            <td>
+              <a pTooltip="Edit Subscription" tooltipPosition="bottom" class="me-3" style="margin-right: 10px;">
+                  <img src="../assets/images/icons/edit.svg" [queryParams]="{id:subscriptionList?.id}" [routerLink]="['/subscription/add-subscription']" alt="img">
+              </a>
+              <a pTooltip="Delete Subscription" tooltipPosition="bottom" class="me-3 confirm-text" href="javascript:void(0);">
+                  <img src="../assets/images/icons/delete.svg" (click)="deleteBanner(subscriptionList)" alt="img">
+              </a>
+          </td>
+            
+        </tr>
+    </ng-template>
+    <ng-template pTemplate="emptymessage">
+        <tr>
+            <td colspan="8">No customers found.</td>
+        </tr>
+    </ng-template>
+</p-table>
