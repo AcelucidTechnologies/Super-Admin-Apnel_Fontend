@@ -25,28 +25,28 @@ export const SideNaveMenueRoute = [
             },
         ]
     },
-    {
-        label: 'Order',
-        icon: 'pi pi-shopping-cart',
-        items: [
-            {
-                label: 'OrderList',
-                icon: 'pi pi-fw pi-shopping-cart',
-                routerLink: ['/order']
-            },
-            {
-                label: 'orderTransaction',
-                icon: 'pi pi-fw pi-shopping-cart',
-                routerLink: ['/order/order-transaction']
-            },
-            {
-                label: 'shipment',
-                icon: 'pi pi-fw pi-shopping-cart',
-                routerLink: ['/order/shipment']
-            }
-        ],
+    // {
+    //     label: 'Order',
+    //     icon: 'pi pi-shopping-cart',
+    //     items: [
+    //         {
+    //             label: 'OrderList',
+    //             icon: 'pi pi-fw pi-shopping-cart',
+    //             routerLink: ['/order']
+    //         },
+    //         {
+    //             label: 'orderTransaction',
+    //             icon: 'pi pi-fw pi-shopping-cart',
+    //             routerLink: ['/order/order-transaction']
+    //         },
+    //         {
+    //             label: 'shipment',
+    //             icon: 'pi pi-fw pi-shopping-cart',
+    //             routerLink: ['/order/shipment']
+    //         }
+    //     ],
 
-    },
+    // },
     {
         label: 'CMS',
         icon: 'pi pi-file',
