@@ -15,12 +15,17 @@ import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AuthenticationModule } from './authentication/authentication.module';
 import { BookingDetailsComponent } from './booking/booking-details/booking-details.component';
-
+import { SubscriptionListComponent } from './subscription/subscription/subscription-list/subscription-list.component';
+import { AddSubscriptionComponent } from './subscription/subscription/add-subscription/add-subscription.component';
+import { AddCoupanComponent } from './subscription/addons/add-coupan/add-coupan.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     BookingDetailsComponent,
+    SubscriptionListComponent,
+    AddSubscriptionComponent,
+    AddCoupanComponent,
     ],
   imports: [
     CommonModule,

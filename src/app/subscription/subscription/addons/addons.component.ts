@@ -45,7 +45,6 @@ import { SubscriptionService } from 'src/app/_services/subscription.service';
           description: [''],
           price: ['', [Validators.required]],
           oneType: ['',],
-          recurring: ['',],
           pricingInterval: [''],
           associatedPlans:[''],
           addonType: [''],
