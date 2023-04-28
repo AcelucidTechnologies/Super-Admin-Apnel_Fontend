@@ -95,6 +95,7 @@ th {
 }
 ::ng-deep .p-paginator {
   background: white !important;
+  border: none;
 
 }
 ::ng-deep .p-button :hover {
@@ -124,3 +125,4 @@ th {
       word-spacing: 0.1rem;
   }
 }
+

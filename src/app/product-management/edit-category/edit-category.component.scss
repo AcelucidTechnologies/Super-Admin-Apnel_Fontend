@@ -35,16 +35,9 @@
       word-spacing: 0.1rem;
   }
 }
-::ng-deep.p-dropdown{
-  border: 1px solid lightgray;
+:host::ng-deep  {
+  starlabel::after {
+  content: "*";
+  color: rgb(228, 28, 28);
 }
-input::file-selector-button {
-  align-items: flex-end;
-
-  color: black;
-
-  // padding: ;
-  border: thin solid grey;
-  border-radius: 3px;
-  background-color: #eaeaea;;
 }
