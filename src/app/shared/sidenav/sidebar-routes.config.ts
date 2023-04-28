@@ -47,6 +47,12 @@ export const SideNaveMenueRoute = [
       icon: 'pi pi-list',
       routerLink: ['/cms/special-offer'],
     },
+    {
+      label: 'Page setup',
+  
+      icon: 'pi pi-list',
+      routerLink: ['/cms/page'],
+    },
     ]
   },
 
@@ -87,39 +93,39 @@ export const SideNaveMenueRoute = [
       },
     ],
   },
+  {
+    label: 'Marketing',
+    icon: 'pi pi-id-card',
+    items: [
+      {
+        label: 'Coupons',
+        icon: 'pi pi-fw pi-shopping-cart',
+        routerLink: ['/marketing'],
+      },
+      // {
+      //   label: 'Rewards',
+      //   items: [
+
+      //     {
+      //       label: 'Redemption',
+      //       icon: 'pi pi-fw pi-money-bill',
+      //       routerLink: ['/marketing/redemption'],
+      //     },
+      //   ],
+      // },
+    ],
+  },
   // {
-  //   label: 'Marketing',
-  //   icon: 'pi pi-id-card',
+  //   label: 'Appointment',
+  //   icon: 'pi pi-calendar',
   //   items: [
   //     {
-  //       label: 'Coupons',
-  //       icon: 'pi pi-fw pi-shopping-cart',
-  //       routerLink: ['/marketing'],
-  //     },
-  //     {
-  //       label: 'Rewards',
-  //       items: [
-
-  //         {
-  //           label: 'Redemption',
-  //           icon: 'pi pi-fw pi-money-bill',
-  //           routerLink: ['/marketing/redemption'],
-  //         },
-  //       ],
+  //       label: 'Appointment',
+  //       icon: 'pi pi-fw pi-calendar',
+  //       routerLink: ['/appointment'],
   //     },
   //   ],
   // },
-  {
-    label: 'Appointment',
-    icon: 'pi pi-calendar',
-    items: [
-      {
-        label: 'Appointment',
-        icon: 'pi pi-fw pi-calendar',
-        routerLink: ['/appointment'],
-      },
-    ],
-  },
   {
     label: 'User',
     icon: 'pi pi-users',
@@ -267,11 +273,11 @@ export const SideNaveMenueRoute = [
             icon: 'pi pi-list',
             routerLink: ['/user/userlist']
           },
-          {
-            label: 'Query List',
-            icon: 'pi pi-question-circle',
-            routerLink: ['/user/querycontent']
-          },
+          // {
+          //   label: 'Query List',
+          //   icon: 'pi pi-question-circle',
+          //   routerLink: ['/user/querycontent']
+          // },
         ]
       },
       // {
