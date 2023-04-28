@@ -56,24 +56,9 @@ export const SideNaveMenueRoute = [
     ]
   },
 
-  //         // {
-  //         //     label: 'Slider',
-  //         //     items: [
-  //         //         {
-  //         //             label: 'Slider1',
-  //         //             icon: 'pi pi-fw pi-user',
-  //         //             routerLink: ['/cms/slider']
-  //         //         },
-  //         //         {
-  //         //             label: 'Slider2',
-  //         //             icon: 'pi pi-fw pi-shopping-cart',
-  //         //             routerLink: ['/cms/slider']
-  //         //         },
-  //         //     ]
-  //         // },
-
+  
   {
-    label: 'Catalog',
+    label: 'Catalogue',
     icon: 'pi pi-folder',
     items: [
       {
@@ -93,6 +78,7 @@ export const SideNaveMenueRoute = [
       },
     ],
   },
+  
   {
     label: 'Marketing',
     icon: 'pi pi-id-card',
@@ -100,32 +86,46 @@ export const SideNaveMenueRoute = [
       {
         label: 'Coupons',
         icon: 'pi pi-fw pi-shopping-cart',
-        routerLink: ['/marketing'],
+        routerLink: ['/marketing/coupanList']
       },
       // {
-      //   label: 'Rewards',
-      //   items: [
-
-      //     {
-      //       label: 'Redemption',
-      //       icon: 'pi pi-fw pi-money-bill',
-      //       routerLink: ['/marketing/redemption'],
-      //     },
-      //   ],
+      //     label: 'Rewards',
+      //     items: [
+      //         {
+      //             label: 'Redemption',
+      //             icon: 'pi pi-fw pi-money-bill',
+      //             routerLink: ['/marketing/redemption']
+      //         }
+      //     ]
       // },
-    ],
+      {
+        label: 'Live Chat',
+
+        icon: 'pi pi-clone',
+        routerLink: ['/marketing/live-chat']
+      },
+      {
+        label: 'Push Notification',
+
+        icon: 'pi pi-clone',
+        routerLink: ['/marketing/push-notification']
+      },
+      {
+        label: 'Seo',
+
+        icon: 'pi pi-clone',
+        routerLink: ['/marketing/seo']
+      },
+      {
+        label: 'Analytics Tracking',
+
+        icon: 'pi pi-clone',
+        routerLink: ['/marketing/analytics-tracking']
+      },
+    ]
   },
-  // {
-  //   label: 'Appointment',
-  //   icon: 'pi pi-calendar',
-  //   items: [
-  //     {
-  //       label: 'Appointment',
-  //       icon: 'pi pi-fw pi-calendar',
-  //       routerLink: ['/appointment'],
-  //     },
-  //   ],
-  // },
+
+  
   {
     label: 'User',
     icon: 'pi pi-users',
@@ -135,11 +135,11 @@ export const SideNaveMenueRoute = [
         icon: 'pi pi-list',
         routerLink: ['/user/userlist'],
       },
-      {
-        label: 'Query List',
-        icon: 'pi pi-question-circle',
-        routerLink: ['/user/querycontent'],
-      },
+      // {
+      //   label: 'Query List',
+      //   icon: 'pi pi-question-circle',
+      //   routerLink: ['/user/querycontent'],
+      // },
     ],
   },
 
@@ -159,27 +159,30 @@ export const SideNaveMenueRoute = [
     icon: 'pi pi-id-card',
     items: [
       {
-        label: 'subscription',
-        icon: 'pi pi-fw pi-shopping-cart',
+        label: 'Subscription Plan',
+        icon: 'pi pi pi-list',
         routerLink: ['/subscription/subscription-list']
       },
       {
-        label: 'Add coupan',
-        icon: 'pi pi-fw pi-shopping-cart',
+        label: 'Add Coupon',
+        icon: 'pi pi pi-list',
         routerLink: ['/subscription/add-coupan']
       },
       {
         label: 'Add Addons',
-        icon: 'pi pi-fw pi-shopping-cart',
+        icon: 'pi pi pi-list',
         routerLink: ['/subscription/add-addons']
       },
       {
         label: 'Payment',
-        icon: 'pi pi-fw pi-shopping-cart',
+        icon: 'pi pi pi-list',
         routerLink: ['/subscription/payment']
       },
     ]
   },
+
+
+
   {
     label: 'Rating & Review',
     icon: 'pi pi-star',
@@ -200,86 +203,43 @@ export const SideNaveMenueRoute = [
         routerLink: ['/reviewer/reviewerlist'],
       },
       {
-        label: 'Settings',
+        label: 'Setting',
         icon: 'pi pi-star',
         items: [
+         
           {
-            label: 'Product',
-            icon: 'pi pi-fw pi-shopping-cart',
-            routerLink: ['/product/productlist ']
+            label: 'Rating Criteria List',
+            icon: 'pi pi-list',
+            routerLink: ['/ratesettings/ratingcriterialist'],
           },
           {
-            label: 'Category',
-            icon: 'pi pi-fw pi-user',
-            routerLink: ['/product/categorylist']
+            label: 'UserType List',
+            icon: 'pi pi-list',
+            routerLink: ['/usertypesettings/usertypelist'],
           },
-
+    
         ]
       },
-      {
-        label: 'Marketing',
-        icon: 'pi pi-id-card',
-        items: [
-          {
-            label: 'Coupons',
-            icon: 'pi pi-fw pi-shopping-cart',
-            routerLink: ['/marketing/coupanList']
-          },
-          // {
-          //     label: 'Rewards',
-          //     items: [
-          //         {
-          //             label: 'Redemption',
-          //             icon: 'pi pi-fw pi-money-bill',
-          //             routerLink: ['/marketing/redemption']
-          //         }
-          //     ]
-          // },
-          {
-            label: 'Live Chat',
-
-            icon: 'pi pi-clone',
-            routerLink: ['/marketing/live-chat']
-          },
-          {
-            label: 'Push Notification',
-
-            icon: 'pi pi-clone',
-            routerLink: ['/marketing/push-notification']
-          },
-          {
-            label: 'Seo',
-
-            icon: 'pi pi-clone',
-            routerLink: ['/marketing/seo']
-          },
-          {
-            label: 'Analytics Tracking',
-
-            icon: 'pi pi-clone',
-            routerLink: ['/marketing/analytics-tracking']
-          },
-        ]
-      },
-
+     
+      
      
       // },
-      {
-        label: 'User',
-        icon: 'pi pi-users',
-        items: [
-          {
-            label: 'User List',
-            icon: 'pi pi-list',
-            routerLink: ['/user/userlist']
-          },
-          // {
-          //   label: 'Query List',
-          //   icon: 'pi pi-question-circle',
-          //   routerLink: ['/user/querycontent']
-          // },
-        ]
-      },
+      // {
+      //   label: 'User',
+      //   icon: 'pi pi-users',
+      //   items: [
+      //     {
+      //       label: 'User List',
+      //       icon: 'pi pi-list',
+      //       routerLink: ['/user/userlist']
+      //     },
+      //     // {
+      //     //   label: 'Query List',
+      //     //   icon: 'pi pi-question-circle',
+      //     //   routerLink: ['/user/querycontent']
+      //     // },
+      //   ]
+      // },
       // {
       //     label: 'Bundle',
       //     items: [
@@ -310,23 +270,25 @@ export const SideNaveMenueRoute = [
       //         },
       //     ]
       // },
-      {
-        label: 'Leads',
-        icon: 'pi pi-user',
+      
+      // {
+      //   label: 'Leads',
+      //   icon: 'pi pi-user',
 
-        items: [
-          {
-            label: 'Rating Criteria List',
-            icon: 'pi pi-list',
-            routerLink: ['/ratesettings/ratingcriterialist'],
-          },
-          {
-            label: 'UserType List',
-            icon: 'pi pi-list',
-            routerLink: ['/usertypesettings/usertypelist'],
-          },
-        ],
-      },
+      //   items: [
+      //     {
+      //       label: 'Rating Criteria List',
+      //       icon: 'pi pi-list',
+      //       routerLink: ['/ratesettings/ratingcriterialist'],
+      //     },
+      //     {
+      //       label: 'UserType List',
+      //       icon: 'pi pi-list',
+      //       routerLink: ['/usertypesettings/usertypelist'],
+      //     },
+      //   ],
+      // },
     ],
   },
+  
 ];
