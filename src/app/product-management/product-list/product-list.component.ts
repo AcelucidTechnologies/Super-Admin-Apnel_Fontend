@@ -7,6 +7,12 @@ import { product } from 'src/app/_models/catalog';
 import { Table } from 'primeng/table';
 import { ModulePermissionService } from 'src/app/_services/module-permission.service';
 import { access } from 'src/app/_models/modulepermission';
+import { MatDialog } from '@angular/material/dialog';
+import { DialogComponent } from '../dialog/dialog.component';
+import * as xlsxPackage from 'xlsx'
+import * as FileSaver from 'file-saver';
+import autoTable from 'jspdf-autotable';
+import jsPDF from 'jspdf';
 @Component({
   selector: 'app-product-list',
   templateUrl: './product-list.component.html',
@@ -18,13 +24,16 @@ export class ProductListComponent implements OnInit {
   cols!: TABLE_HEADING[];
   productList:product []
   fgsType: any;
+  productDetails:any[];
+  exportColumns: any[];
   accessPermission:access
   constructor(private ngxLoader: NgxUiLoaderService,
     private ProductService: ProductService,
     private toastr: ToastrMsgService,
-    private permissionService:ModulePermissionService
+    private permissionService:ModulePermissionService,
+    public dialog: MatDialog,
        ){
-        this.permissionService.getModulePermission().subscribe(res=>{ 
+        this.permissionService.getModulePermission().subscribe(res=>{
           this.accessPermission=res[0].CatalogProduct
           console.log( this.accessPermission)
         })
@@ -59,17 +68,69 @@ export class ProductListComponent implements OnInit {
       this.ngxLoader.stop();
     })
   }
-  deleteProduct(id) {
+
+
+
+  // deleteProduct(id: any) {
+  //   console.log(id)
+  //   this.ngxLoader.start();
+  //   this.ProductService.deleteProduct(id).subscribe(res => {
+  //     if (res) {
+  //       this.toastr.showSuccess("Product deleted successfully", "Product delete")
+  //       this.getProductList()
+  //     }
+  //   })
+  // }
+    deleteProduct(productList: any) {
+    console.log("hello" + JSON.stringify(productList))
     this.ngxLoader.start();
-    this.ProductService.deleteProduct(id).subscribe(res => {
+    this.ProductService.deleteProduct(productList).subscribe(res => {
       if (res) {
         this.toastr.showSuccess("Product deleted successfully", "Product delete")
         this.getProductList()
       }
     })
   }
+
+
+
+
   // search functionality start here
   applyFilterGlobal($event, stringVal) {
     this.dt.filterGlobal(($event.target as HTMLInputElement).value, stringVal);
   }
+  openDialog(productList: any) {
+    const dialogRef = this.dialog.open(DialogComponent);
+    dialogRef.afterClosed().subscribe(result => {
+      if (result == true) {
+        this.deleteProduct(productList)
+      }
+    });
+  }
+
+  exportExcel() {
+    const worksheet = xlsxPackage.utils.json_to_sheet(this.productList);
+    const workbook = { Sheets: { 'data': worksheet }, SheetNames: ['data'] };
+    const excelBuffer: any = xlsxPackage.write(workbook, { bookType: 'xlsx', type: 'array' });
+    this.saveAsExcelFile(excelBuffer, "product");
+  }
+
+  saveAsExcelFile(buffer: any, fileName: string): void {
+    let EXCEL_TYPE = 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;charset=UTF-8';
+    let EXCEL_EXTENSION = '.xlsx';
+    const data: Blob = new Blob([buffer], {
+      type: EXCEL_TYPE
+    });
+    FileSaver.saveAs(data, fileName + '_export_' + new Date().getTime() + EXCEL_EXTENSION);
+  }
+
+  exportPdf() {
+    this.productDetails = this.productList
+            const doc = new jsPDF
+           autoTable(doc, {
+            columns:this.exportColumns,
+            body:this.productDetails
+           });
+            doc.save('ProductList.pdf');
+        }
 }

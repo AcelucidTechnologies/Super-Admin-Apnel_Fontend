@@ -1,18 +1,179 @@
-	<div class="page-heading">
-		<h1 class="header-text-title">
-			<i pButton class="pi pi-arrow-left p-button-text" [routerLink]="['/product/productlist']" pTooltip="Back"
-				tooltipPosition="bottom">
-			</i>{{title}}
-		</h1>
-	</div>
+<div style="overflow-y: auto; height: 700px; margin-bottom: 100px;">
+  <div class="page-heading">	</div>
+    <div class="button-heading-container " >
+
+      <button class="mb-2 p-1 back-button " [routerLink]="['/product/productlist']"><i class="material-icons">arrow_back</i>
+      </button>
+      <h5>&nbsp;Product Details</h5>
+    </div>
+
+
 	<form [formGroup]="productForm">
-		<div class="card col-sm-12">
-			<div class="row gutters">
-				<div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12" style="background-color: #cccfcd;">
+		<div class="card col-sm-12" style="width: 1000px; margin: auto;">
 					<div class="h-100 mt-5">
-						<div class="card-body">
-							<!-- Product_Region Start from Here -->
-							<mat-accordion>
+						<div class="card-body" style="width: 800px; margin: auto;">
+              <h5 class="header-text-title">
+
+            {{title}}
+              </h5>
+
+
+              <div class="row mt-5">
+                <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
+                  <div class="form-row">
+                    <div class="col-4">
+                    <label for="name" starlabel>Product Name</label>
+                    </div>
+                    <div class="col-8">
+                      <input type="text" class="form-control" formControlName="language" placeholder="enter product name">
+                    <!-- <select class="form-control" formControlName="country">
+                      <option value="null" selected>Select Country</option>
+                      <option value="country.text" *ngFor="let country of countryList ">{{ country.text }}
+                      </option>
+                    </select> -->
+                  </div>
+                  </div>
+                </div>
+                <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
+                  <div class="form-row">
+                    <div class="col-4">
+                    <label for="image">Category Name</label>
+                    </div>
+                    <div class="col-8">
+                    <!-- <input type="text" class="form-control" formControlName="language" placeholder="enter catergory name"> -->
+                    <select class="form-control" placeholder="select type" formControlName="status">
+                      <option value="null" selected>Select Type</option>
+                      <option *ngFor="let option of CatergoryName" [value]="option.value" [disabled]="option.inactive">
+                        {{ option.label }}
+
+                      </option>
+                    </select>
+                  </div>
+                </div>
+              </div>
+
+              </div>
+              <div class="row mt-5">
+                <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
+                  <div class="form-row">
+                    <div class="col-4">
+                    <label for="name">Model</label>
+                    </div>
+                    <div class="col-8">
+                      <input type="text" class="form-control" formControlName="model" placeholder="enter model">
+                  </div>
+                  </div>
+                </div>
+                <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
+                  <div class="form-row">
+                    <div class="col-4">
+                    <label for="image">Our Price</label>
+                    </div>
+                    <div class="col-8">
+                    <input type="text" class="form-control" formControlName="ourPrice" placeholder="enter our price">
+                  </div>
+                </div>
+              </div>
+              </div>
+              <div class="row mt-5">
+                <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
+                  <div class="form-row">
+                    <div class="col-4">
+                    <label for="name">Market Price</label>
+                    </div>
+                    <div class="col-8">
+                      <input type="text" class="form-control" formControlName="marketPrice" placeholder="enter market price">
+                  </div>
+                  </div>
+                </div>
+                <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
+                  <div class="form-row">
+                    <div class="col-4">
+                    <label for="image">Product Weight</label>
+                    </div>
+                    <div class="col-8">
+                    <input type="text" class="form-control" formControlName="productWeight" placeholder="enter product weight">
+                  </div>
+                </div>
+              </div>
+              </div>
+              <div class="form-row pt-5">
+                <div class="col-2">
+                  <label for="reviewer" class="col-form-label text-left">Weight Type</label>
+                </div>
+                <div class="col-10" >
+                  <select class="form-control" placeholder="select type" formControlName="status">
+                    <option value="null" selected>Select Type</option>
+                    <option *ngFor="let option of weightType" [value]="option.value" [disabled]="option.inactive">
+                      {{ option.label }}
+
+                    </option>
+                  </select>
+
+
+                </div>
+              </div>
+
+
+
+              <div class="form-row pt-5">
+                <div class="col-2">
+                  <label for="name">Product Image</label>
+                </div>
+                <div class="col-10" >
+                  <div class='flex'>
+                    <span class="card1">
+                      <img *ngFor='let url of urls' let i = index [src]="url" height="200" style="margin-right: 20px;" >
+                  </span>
+                  <ng-container *ngIf="urls.length <3; else limitReached">
+
+                    <span class="add" >
+                        <label for="upload">
+                          <span class="fa fa-plus">+</span>
+                    <input type='file' (change)="onSelectFile($event)" multiple hidden id="upload">
+                        </label>
+                    </span>
+
+               </ng-container>
+               <ng-template #limitReached>
+                <span class="limit-reached">Maximum 3 images can be choose.</span>
+              </ng-template>
+            </div>
+
+                </div>
+              </div>
+
+
+
+
+
+              <div class="form-row col-12 pt-5">
+                <div class="col-2" style="margin-top: 150px;">
+                  <label for="comment" class=" col-form-label text-left starlabel" style="margin-top: auto;">Product Description</label>
+                </div>
+                <div class="col-10 mb-3" formControlName="productDescription">
+                  <ckeditor ></ckeditor>
+
+                </div>
+              </div>
+
+
+              <div class="form-row pt-5">
+                <div class="col-2">
+                  <label for="weight" class="col-form-label text-left">status</label>
+                </div>
+                <div class="col-10" style="cursor: pointer;">
+                  <select class="form-control" placeholder="select type" formControlName="status">
+                    <option value="null" selected>Select Type</option>
+                    <option *ngFor="let option of Category" [value]="option.value" [disabled]="option.inactive">
+                      {{ option.label }}
+
+                    </option>
+                  </select>
+
+                </div>
+              </div>
+							<!-- <mat-accordion>
 								<mat-expansion-panel [expanded]="true">
 									<mat-expansion-panel-header>
 										<mat-panel-title>
@@ -25,7 +186,7 @@
 										<div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
 											<div class="form-group">
 												<label for="name">Country</label>
-												<!-- <input type="text" class="form-control" formControlName="country"> -->
+
 												<select class="form-control" formControlName="country">
 													<option value="null" selected>Select Country</option>
 													<option value="country.text" *ngFor="let country of countryList ">{{ country.text }}
@@ -42,7 +203,6 @@
 									</div>
 								</mat-expansion-panel>
 							</mat-accordion>
-							<!-- product_Detail Start from Here-->
 							<mat-accordion>
 								<mat-expansion-panel [expanded]="expand">
 									<mat-expansion-panel-header>
@@ -116,7 +276,6 @@
 									</div>
 								</mat-expansion-panel>
 							</mat-accordion>
-							<!-- Brand Start from Here-->
 							<mat-accordion>
 								<mat-expansion-panel [expanded]="expand">
 									<mat-expansion-panel-header>
@@ -142,7 +301,6 @@
 									</div>
 								</mat-expansion-panel>
 							</mat-accordion>
-							<!-- Price section Start from Here -->
 							<mat-accordion>
 								<mat-expansion-panel [expanded]="expand">
 									<mat-expansion-panel-header>
@@ -186,7 +344,6 @@
 									</div>
 								</mat-expansion-panel>
 							</mat-accordion>
-							<!-- Description Start from Here -->
 							<mat-accordion>
 								<mat-expansion-panel [expanded]="expand">
 									<mat-expansion-panel-header>
@@ -212,7 +369,6 @@
 									</div>
 								</mat-expansion-panel>
 							</mat-accordion>
-							<!-- Seo Start from Here -->
 							<mat-accordion>
 								<mat-expansion-panel [expanded]="expand">
 									<mat-expansion-panel-header>
@@ -244,20 +400,17 @@
 										</div>
 									</div>
 								</mat-expansion-panel>
-							</mat-accordion>
-							<div class="row gutters mt-4">
-								<div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 mt-4">
-									<div class="text-right">
-										<button pButton type="button" id="submit" name="submit" class="p-button-danger mr-4"
-											[routerLink]="['/product/productlist']">Cancel</button>
-										<button pButton type="button" id="submit" name="submit" class="p-button-success"
-											(click)="submitForm()">Submit</button>
-									</div>
-								</div>
-							</div>
+							</mat-accordion> -->
+
+              <div class="d-flex justify-content-end col-12 mt-5 p-0 pr-3">
+                <!-- <button type="submit" id="submit" name="submit" style="background: rgb(228, 28, 28);border:none; cursor:pointer" class="btn btn-info mr-3" (click)="submitForm()" [disabled]="!productForm.valid">Submit</button> -->
+                <button type="submit" id="submit" name="submit" style="background: rgb(228, 28, 28);border:none; cursor:pointer" class="btn btn-info mr-3" (click)="openDialog()" >Submit</button>
+                <button class="btn btn-info" id="submit" name="submit" style="background: #637381;border:none" [routerLink]="['/product/productlist']">Cancel</button>
+            </div>
 						</div>
 					</div>
 				</div>
-			</div>
-		</div>
+			<!-- </div> -->
+		<!-- </div> -->
 	</form>
+  </div>

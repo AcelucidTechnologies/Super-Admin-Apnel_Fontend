@@ -55,7 +55,8 @@ import { CalendarModule } from 'primeng/calendar';
     AccordionModule,
     FormsModule,
     ReactiveFormsModule,
-    CalendarModule
+    CalendarModule,
+
   ],
   exports: [
     HeaderComponent,
@@ -80,7 +81,7 @@ import { CalendarModule } from 'primeng/calendar';
     CalendarModule
   ]
 })
-export class SharedModule { 
+export class SharedModule {
   NgxUiLoaderConfig: NgxUiLoaderConfig =
   {
     "bgsColor": "rgba(15,1,1,0.99)",

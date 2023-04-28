@@ -18,6 +18,7 @@
       transition: background-color 0.2s, box-shadow 0.2s;
     }
 
+
 .p-panelmenu .p-panelmenu-header >a:hover{
       background-color: #ff2800 !important;
       color: white !important;
@@ -25,13 +26,22 @@
     }
 
 
-  .p-panelmenu .p-panelmenu-header.p-highlight:not(.p-disabled) > a:hover {
-      border-color: lightcoral!important;
-      background: none;
-      color: white;
-      border: none !important;
+  .p-panelmenu .p-panelmenu-header.p-highlight > a {
+    background-color: lightcoral !important;
+    color: white !important;
+    border:none !important;
+    padding: 0.857rem 1rem;
+    border: none;
+    font-weight: 400;
+    transition: background-color 0.2s, box-shadow 0.2s;
   }
 
+
+  .p-panelmenu .p-panelmenu-header:not(.p-highlight):not(.p-disabled) > a:hover {
+    background: #e9ecef;
+    border-color: #dee2e6;
+    color: #495057;
+}
      .p-panelmenu .p-panelmenu-content .p-menuitem .p-menuitem-link:hover {
     background-color: lightcoral !important;
     color: red!important;
@@ -142,44 +152,37 @@ color: white !important;
   }
 }
 
-// .sidebar-cont .sidebar .menu-list {
-//   padding: 0 1rem;
-//   margin-top: 2rem;
-//   list-style: none;
-// }
-
-// .menu-list .menu-item {
-//   display: flex;
-//   align-items: left;
-//   padding: 0;
-//   margin: 1.5rem 0;
-// }
-
-// .menu-list .menu-item .menu-link {
-//   display: block;
-//   text-decoration: none;
-//   color: #ffffff;
-//   font-size: 1rem;
-//   letter-spacing: .1rem;
-//   padding: 0 0 0 1rem;
-// }
 
 :host::ng-deep{
   .p-panelmenu .p-panelmenu-content .p-menuitem .p-menuitem-link :hover{
    color: red !important;
 }
 
-.pi-chevron-right:before {
+
+
+.pi-chevron-right:after {
+  content: "\e94a" !important;
+  display: end !important;
+}
+.pi-chevron-right:after {
   content: "\e94a" !important;
   display: none !important;
 }
 
-// .pi-chevron-right:before {
-//   content: "\e94a" !important;
-// }
+}
 
-// .pi-chevron-down:before {
-//   content: "\e94a";
-// }
+
+
+
+::ng-deep.active-link {
+  background-color: blue;
+}
+
+:host::ng-deep{
+  .p-panelmenu .p-panelmenu-content .p-menuitem .p-menuitem-link :hover{
+   color: red !important;
+}
 
 }
+
+

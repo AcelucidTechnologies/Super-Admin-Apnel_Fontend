@@ -53,6 +53,7 @@ export class SidenavComponent implements OnInit {
   iconColor: string = '';
   items!: MenuItem[];
   moduleList:string[]=[];
+
   username:string;
   image:string="https://source.unsplash.com/c_GmwfHBDzk/200x200";
   itemShow:any[]=[]
@@ -62,22 +63,24 @@ export class SidenavComponent implements OnInit {
 
   constructor(private observer: BreakpointObserver, private router: Router,
     private permissionService:ModulePermissionService,
-    private adminService:AdminService) { 
-    this.permissionService.getModulePermission().subscribe(res=>{ 
+    private adminService:AdminService) {
+    this.permissionService.getModulePermission().subscribe(res=>{
       this.moduleList=res[0].moduleList
       this.username=res[0].username;
+
       console.log("1234567890");
       
       console.log( res[0].moduleList);
       console.log("1234567890");
       this.items = SideNaveMenueRoute 
+
       this.items = this.items.filter(val=>{
         if(this.moduleList.includes(val.label))
         return val
         else
         return null
       })
-    }) 
+    })
 
       this.username = localStorage.getItem('UserData')
     this.getImage()
@@ -87,6 +90,9 @@ export class SidenavComponent implements OnInit {
   // ngDoCheck(){
   //   this.check = (window.location.href.split(environment.IP_ADDRESS)[1]=='/' || window.location.href.split(environment.IP_ADDRESS)[1]=='/login')?false:true;
   // }
+  isActive(route: string): boolean {
+    return this.router.isActive(route, false);
+  }
   getImage() {
     this.adminService.getAdminDetails(this.username).subscribe((res) => {
       if (res[0].image) {

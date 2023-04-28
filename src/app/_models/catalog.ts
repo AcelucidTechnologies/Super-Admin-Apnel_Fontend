@@ -63,9 +63,24 @@ export interface parent_category {
   name: string
 }
 export let Satatus = [
-  { name: 'true', code: 1 },
-  { name: 'false', code: 0 },
+  { name: 'active', code: 1 },
+  { name: 'Inactive', code: 0 },
 
 ]
 
 
+export interface catalogExtraDetailsStructure {
+
+  country:string,
+  language:string,
+  model:string,
+  ourPrice:string,
+  marketPrice:string,
+  productWeight: string,
+  weightType: string,
+  productType: string,
+  productImage: string,
+  productDescription: string,
+  status:string,
+
+}
