@@ -5,15 +5,16 @@
     </div> -->
     <!-- <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 d-flex justify-content-center " style=" height: 100%;">
       <div class="card-body " style="max-width: 950px;"> -->
-<div class="page-heading"></div>
-<div class="button-heading-container ">
+        <div style="overflow-y: auto; height: 700px; margin-bottom: 100px;">
+<div class="page-heading" ></div>
+<div class="button-heading-container " >
 
   <button class="mb-2 p-1 back-button " [routerLink]="['/leads/leadslist']"><i class="material-icons">arrow_back</i>
   </button>
   <h5>&nbsp;Lead Details</h5>
 </div>
         <form [formGroup]="leadForm" novalidate>
-          <mat-card class="add-lead-card">
+          <mat-card class="add-lead-card" >
             <mat-card-title>
               <!-- <div class="page-heading"> -->
                 <div class=" justify-content-between">
@@ -263,3 +264,4 @@
         </form>
       <!-- </div>
     </div> -->
+</div>

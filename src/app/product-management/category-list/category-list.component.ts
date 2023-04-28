@@ -7,6 +7,12 @@ import { ToastrMsgService } from 'src/app/_services/toastr-msg.service';
 import { Table } from 'primeng/table';
 import { ModulePermissionService } from 'src/app/_services/module-permission.service';
 import { access } from 'src/app/_models/modulepermission';
+import { MatDialog } from '@angular/material/dialog';
+import * as xlsxPackage from 'xlsx'
+import * as jsPDF from 'jspdf';
+import autoTable from 'jspdf-autotable'
+import * as FileSaver from 'file-saver';
+import { DialogComponent } from '../dialog/dialog.component';
 
 @Component({
   selector: 'app-category-list',
@@ -19,17 +25,21 @@ export class CategoryListComponent implements OnInit {
   cols!: TABLE_HEADING[];
   categoryList:category []= []
   fgsType: any;
+  exportColumns: any[];
+  categoryDetails:any[];
   accessPermission:access
   constructor(
     private ngxLoader: NgxUiLoaderService,
     private ProductService: ProductService,
     private toastr: ToastrMsgService,
-    private permissionService:ModulePermissionService
-  ) { 
-    this.permissionService.getModulePermission().subscribe(res=>{ 
+    private permissionService:ModulePermissionService,
+    public dialog: MatDialog,
+  ) {
+    this.permissionService.getModulePermission().subscribe(res=>{
       this.accessPermission=res[0].CatalogCategory
       console.log( this.accessPermission)
     })
+
   }
 
   ngOnInit(): void {
@@ -76,4 +86,39 @@ export class CategoryListComponent implements OnInit {
   applyFilterGlobal($event, stringVal) {
     this.dt.filterGlobal(($event.target as HTMLInputElement).value, stringVal);
   }
+
+  openDialog(categoryList: any) {
+    const dialogRef = this.dialog.open(DialogComponent);
+    dialogRef.afterClosed().subscribe(result => {
+      if (result == true) {
+        this.deleteCategory(categoryList)
+      }
+    });
+  }
+
+  exportExcel() {
+    const worksheet = xlsxPackage.utils.json_to_sheet(this.categoryList);
+    const workbook = { Sheets: { 'data': worksheet }, SheetNames: ['data'] };
+    const excelBuffer: any = xlsxPackage.write(workbook, { bookType: 'xlsx', type: 'array' });
+    this.saveAsExcelFile(excelBuffer, "category");
+  }
+
+  saveAsExcelFile(buffer: any, fileName: string): void {
+    let EXCEL_TYPE = 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;charset=UTF-8';
+    let EXCEL_EXTENSION = '.xlsx';
+    const data: Blob = new Blob([buffer], {
+      type: EXCEL_TYPE
+    });
+    FileSaver.saveAs(data, fileName + '_export_' + new Date().getTime() + EXCEL_EXTENSION);
+  }
+
+  exportPdf() {
+    this.categoryDetails = this.categoryList
+            const doc = new jsPDF.jsPDF('l', 'pt');
+           autoTable(doc, {
+            columns:this.exportColumns,
+            body:this.categoryDetails
+           });
+            doc.save('CategoryList.pdf');
+        }
 }

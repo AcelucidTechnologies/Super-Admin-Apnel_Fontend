@@ -40,23 +40,9 @@
                   </div>
                 </div>
                 <div>
-                  <!-- <button
-                    pButton
-                    pTooltip="pdf"
-                    class="custom-image"
 
-                  >
-                    <img src="../../../../assets/images/pdf.svg" alt="Button Image" />
-                  </button> -->
                   <button pButton type="button" pTooltip="Pdf" class="custom-image" tooltipPosition="bottom" (click)=" exportPdf()"> <img src="../../../../assets/images/pdf.svg" alt="Button Image" /></button>
-                  <!-- <button
-                    pButton
-                    pTooltip="Excel"
-                    tooltipPosition="bottom"
-                    class="custom-image"
-                  >
-                    <img src="../../../../assets/images/excel.svg" alt="Button Image" />
-                  </button> -->
+
                   <button pButton type="button"   pTooltip="Excel" class="custom-image" tooltipPosition="bottom" (click)="exportExcel()"><img src="../../../../assets/images/excel.svg" alt="Button Image" /></button>
                   <button
                     pButton
@@ -72,41 +58,9 @@
                 </div>
               </div>
             </ng-template>
-            <!-- <ng-template pTemplate="caption">
-                <div class="d-flex justify-content-between">
-                    <div class="d-flex align-items-center">
-                        <input #search pInputText type="text" type="text" placeholder='Search By Review Subject'
-                            class="mr-2">
-                        <button pButton type="button" class="p-button-success text-center"
-                            (click)="applyGlobalFilter(search.value,'contains')">Search</button>
-                    </div>
-                    <div class="d-flex align-items-center">
-
-                        <div class="captionFilter"><p-columnFilter class="filterButton" field="status" matchMode="in"
-                                display="menu" [showMatchModes]="false" [showOperator]="false" [showAddButton]="false">
-                                <ng-template pTemplate="header">
-                                    <div class="px-3 pt-3 pb-0">
-                                        <span class="font-bold">Status Picker</span>
-                                    </div>
-                                </ng-template>
-                                <ng-template pTemplate="filter" let-value let-filter="filterCallback">
-                                    <p-multiSelect [ngModel]="value" [options]="statusList" placeholder="Any"
-                                        (onChange)="[filter($event.value)]">
-                                        <ng-template let-option pTemplate="item">
-                                            <div class="p-multiselect-representative-option">
-                                                <span class="ml-1">{{option}}</span>
-                                            </div>
-                                        </ng-template>
-                                    </p-multiSelect>
-                                </ng-template>
-                            </p-columnFilter>
-                        </div>
-                        <button pButton type="button" [routerLink]="['/review/addreview']" [disabled]="!accessPermission.add">Add</button>
-                    </div>
-                </div>
-            </ng-template> -->
             <ng-template pTemplate="header">
                 <tr>
+                  <th class="text-center">Sno</th>
                     <th class="text-center">Review Subject</th>
                     <th class="text-center">Publishing Site Url</th>
                     <th class="text-center">Rating</th>
@@ -114,12 +68,13 @@
                     <th class="text-center">Actions</th>
                 </tr>
             </ng-template>
-            <ng-template pTemplate="body" let-reviews>
+            <ng-template pTemplate="body" let-list let-i="rowIndex">
                 <tr>
-                    <td>{{reviews.reviewSubject}}</td>
-                    <td>{{reviews.publishingsiteurl}}</td>
-                    <td>{{reviews.rating}}</td>
-                    <td>{{reviews.status}}</td>
+                  <td>{{i+1}}</td>
+                    <td>{{list.reviewSubject}}</td>
+                    <td>{{list.publishingsiteurl}}</td>
+                    <td>{{list.rating}}</td>
+                    <td>{{list.status}}</td>
                     <td>
                         <!-- <button pButton type="button" icon="pi pi-user-edit" pTooltip="Edit Review"
                             tooltipPosition="bottom" class="mr-2 p-button-secondary"
@@ -128,9 +83,9 @@
                             tooltipPosition="bottom" class="mr-2 p-button-danger"
                             (click)="openDialog(reviews.id)" [disabled]="!accessPermission.delete"></button> -->
                             <a pTooltip="Edit Review" tooltipPosition="bottom" style="margin-right: 15px; cursor: pointer;">
-                              <img src="../../../../assets/images/edit.svg" [routerLink]="['/review/editreview']" [queryParams]="{serialno:reviews.Sno}"  alt="img">
+                              <img src="../../../../assets/images/edit.svg" [routerLink]="['/review/editreview']" [queryParams]="{serialno:list.Sno}"  alt="img">
                             </a>
-                            <a pTooltip="Delete Review" tooltipPosition="bottom" (click)="openDialog(reviews.id)"
+                            <a pTooltip="Delete Review" tooltipPosition="bottom" (click)="openDialog(list.id)"
                               class="me-3 confirm-text" href="javascript:void(0);" >
                               <img src="../../../../assets/images/delete.svg" alt="img">
                             </a>

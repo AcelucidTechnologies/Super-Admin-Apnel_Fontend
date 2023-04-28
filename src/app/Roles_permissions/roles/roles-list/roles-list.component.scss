@@ -92,3 +92,7 @@ th {
       word-spacing: 0.1rem;
   }
 }
+::ng-deep.p-datatable .p-datatable-thead > tr > th {
+  text-align: center;
+  transition: background-color 0.2s, box-shadow 0.2s;
+}

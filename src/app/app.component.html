@@ -1,4 +1,6 @@
+
 <div class="main-wrapper" style="overflow-y: auto">
+
     <!-- <app-authentication></app-authentication> -->
     <!-- <app-header (toggleSidebar)="onToggleSidebar($event)"></app-header>
     <div class="bcard body" [ngClass]="sidebarSpacing"> -->
@@ -6,7 +8,7 @@
     <!-- </div> -->
     <div *ngIf="check; else other">
    <app-header (toggleSidebar)="onToggleSidebar($event)"></app-header>
-    <div class="bcard body" [ngClass]="sidebarSpacing">
+    <div class="bcard body" [ngClass]="sidebarSpacing" >
         <router-outlet></router-outlet>
     </div>
 </div>
