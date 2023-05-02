@@ -29,7 +29,7 @@ import { AdminService } from 'src/app/_services/admin.service';
   ]
 })
 export class DropdownMenuComponent implements OnInit {
-
+role: any;
   profile: any;
   profileAvatarUrl: any;
   menuState: string = '';
@@ -43,7 +43,9 @@ export class DropdownMenuComponent implements OnInit {
     private router: Router,
     private adminService:AdminService
   ) {
-    this.user =localStorage.getItem('role')
+    this.user = localStorage.getItem('UserData')
+    this.role = localStorage.getItem('role')
+    console.log("asdfghjk",this.user)
    }
 
   ngOnInit() {
