@@ -10,7 +10,7 @@ import { environment } from 'src/environments/environment';
 export class AppComponent implements DoCheck {
   constructor(private primeNgConfig: PrimeNGConfig) {
     // For Production
-    this.check = (window.location.href.split(environment.PROD_ADDRESS)[1] == '/' || window.location.href.split(environment.PROD_ADDRESS)[1] == '/login') ? false : true;
+    this.check = (window.location.href.split(environment.IP_ADDRESS)[1] == '/' || window.location.href.split(environment.IP_ADDRESS)[1] == '/login') ? false : true;
     // For Local
     // this.check = (window.location.href.split(environment.IP_ADDRESS)[1]=='/' || window.location.href.split(environment.IP_ADDRESS)[1]=='/login')?false:true;
   }
@@ -25,7 +25,7 @@ export class AppComponent implements DoCheck {
   }
   ngDoCheck() {
     //For Production
-    this.check = (window.location.href.split(environment.PROD_ADDRESS)[1] == '/' || window.location.href.split(environment.PROD_ADDRESS)[1] == '/login') ? false : true;
+    this.check = (window.location.href.split(environment.IP_ADDRESS)[1] == '/' || window.location.href.split(environment.IP_ADDRESS)[1] == '/login') ? false : true;
     // For Local
     // this.check = (window.location.href.split(environment.IP_ADDRESS)[1]=='/' || window.location.href.split(environment.IP_ADDRESS)[1]=='/login')?false:true;
   }
