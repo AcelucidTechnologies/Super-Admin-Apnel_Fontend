@@ -6,6 +6,7 @@ import { AuthenticationComponent } from './authentication/authentication.compone
 import { ContentComponent } from './content/content.component';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { RouterModule } from '@angular/router';
+import { ForgetPasswordComponent } from './forget-password/forget-password.component';
 
 
 
@@ -13,7 +14,8 @@ import { RouterModule } from '@angular/router';
   declarations: [
     LoginComponent,
     AuthenticationComponent,
-    ContentComponent
+    ContentComponent,
+    ForgetPasswordComponent
   ],
   imports: [
     CommonModule,

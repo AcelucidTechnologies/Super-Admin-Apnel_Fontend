@@ -1,12 +1,18 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { AuthenticationComponent } from './authentication/authentication/authentication.component';
+import { ForgetPasswordComponent } from './authentication/forget-password/forget-password.component';
 import { ProfileBasicInfoComponent } from './profile/profile-basic-info/profile-basic-info.component';
 import { AuthGuardService as AuthGuard} from './_services/auth-guard.service';
 
 const routes: Routes = [
   {
     path: 'dashboard',
+    loadChildren: () => import('./dashboard/dashboard.module').then(mod => mod.DashboardModule),
+    canActivate: [AuthGuard]
+  },
+  {
+    path: 'forgetPassword',
     loadChildren: () => import('./dashboard/dashboard.module').then(mod => mod.DashboardModule),
     canActivate: [AuthGuard]
   },
@@ -110,7 +116,9 @@ const routes: Routes = [
     loadChildren: () => import('./Roles_permissions/roles/roles.module').then(mod=>mod.RolesModule),
     canActivate: [AuthGuard]
   },
+
   { path: '', component: AuthenticationComponent },
+  { path: 'forgetPassword', component: ForgetPasswordComponent },
   { path: '',   redirectTo: '/login', pathMatch: 'full' },
   { path: '**', redirectTo: '', pathMatch: 'full' }
 ];
