@@ -8,20 +8,26 @@ import { environment } from 'src/environments/environment';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent implements DoCheck {
-  constructor(private primeNgConfig:PrimeNGConfig){
-    this.check = (window.location.href.split(environment.IP_ADDRESS)[1]=='/' || window.location.href.split(environment.IP_ADDRESS)[1]=='/login')?false:true;
+  constructor(private primeNgConfig: PrimeNGConfig) {
+    // For Production
+    this.check = (window.location.href.split(environment.IP_ADDRESS)[1] == '/' || window.location.href.split(environment.IP_ADDRESS)[1] == '/login') ? false : true;
+    // For Local
+    // this.check = (window.location.href.split(environment.IP_ADDRESS)[1]=='/' || window.location.href.split(environment.IP_ADDRESS)[1]=='/login')?false:true;
   }
-  sidebarSpacing:string='contracted'
+  sidebarSpacing: string = 'contracted'
   title = 'Admin_Panel';
   token = window.localStorage.getItem('token');
-  check:boolean
-  
-  ngOnInit(){
+  check: boolean
+
+  ngOnInit() {
     this.primeNgConfig.ripple = true;
-    console.log(this.token,this.check)
+    console.log(this.token, this.check)
   }
-  ngDoCheck(){
-    this.check = (window.location.href.split(environment.IP_ADDRESS)[1]=='/' || window.location.href.split(environment.IP_ADDRESS)[1]=='/login')?false:true;
+  ngDoCheck() {
+    //For Production
+    this.check = (window.location.href.split(environment.IP_ADDRESS)[1] == '/' || window.location.href.split(environment.IP_ADDRESS)[1] == '/login') ? false : true;
+    // For Local
+    // this.check = (window.location.href.split(environment.IP_ADDRESS)[1]=='/' || window.location.href.split(environment.IP_ADDRESS)[1]=='/login')?false:true;
   }
   onToggleSidebar(sidebarState: any) {
     if (sidebarState === 'open') {
