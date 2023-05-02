@@ -1,4 +1,4 @@
-export const environmentProd = {
+export const environment = {
   production: true,
   JSON_SERVER:"http://13.126.212.31:5000",
   BASE_URL:"http://13.126.212.31:5000",
