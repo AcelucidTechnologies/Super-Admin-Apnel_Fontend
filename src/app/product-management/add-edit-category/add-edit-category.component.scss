@@ -37,6 +37,7 @@
 }
 ::ng-deep.p-dropdown{
   border: 1px solid lightgray;
+  width: 100%;
 }
 input::file-selector-button {
   align-items: flex-end;
@@ -47,4 +48,17 @@ input::file-selector-button {
   border: thin solid grey;
   border-radius: 3px;
   background-color: #eaeaea;;
+}
+::ng-deep.p-dropdown{
+  border: 1px solid lightgray;
+  width: 100%;
+}
+:host::ng-deep  {
+  .starlabel::after {
+  content: "*";
+  color: rgb(228, 28, 28);
+}
+}
+.mat-error{
+  font-size: small;
 }

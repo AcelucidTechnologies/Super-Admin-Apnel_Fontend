@@ -5,7 +5,7 @@ import { LoginComponent } from './login/login.component';
 
 const routes: Routes = [
   // { path:'login', component:LoginComponent},
-  // { path:'forgetPassword', component:ForgetPasswordComponent},
+  { path:'forgetPassword', component:ForgetPasswordComponent},
 ];
 
 @NgModule({

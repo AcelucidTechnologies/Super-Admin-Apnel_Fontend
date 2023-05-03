@@ -15,19 +15,12 @@ import { DialogComponent } from '../dialog/dialog.component';
   styleUrls: ['./add-edit-product.component.scss']
 })
 export class AddEditProductComponent implements OnInit {
-  Category = [{ value: 'active', label: 'Active', inactive: false },
-  { value: 'inactive', label: 'Inactive', inactive: false }];
+  // Category = [{ value: 'active', label: 'Active', inactive: false },
+  // { value: 'inactive', label: 'Inactive', inactive: false }];
 
-  weightType = [{ value: '100', label:'weight A', inactive: false },
-  { value: '200', label: 'weight B', inactive: false },
-  { value: '300', label: 'weight C', inactive: false },
-];
 
-CatergoryName = [{ value: '100', label:'casual', inactive: false },
-{ value: '200', label: 'formal', inactive: false },
-{ value: '300', label: 'Sports Wear', inactive: false },
-{ value: '300', label: 'Gym Wear', inactive: false },
-];
+
+
 
   sidebarSpacing: string = "";
   fgsType: any;
@@ -44,6 +37,9 @@ CatergoryName = [{ value: '100', label:'casual', inactive: false },
   manufacturer: manufacturer
   prices: prices
   SEO: SEO
+  catergoryName:String[];
+  weightType:String[];
+  status:String[];
 
   Image
   imageData: File
@@ -61,6 +57,8 @@ CatergoryName = [{ value: '100', label:'casual', inactive: false },
     public dialog: MatDialog,
   ) {
     this.productForm = this.fb.group({
+      productName: ['', Validators.required],
+      categoryName: ['', Validators.required],
       country: ['', [Validators.required]],
       language: ['', [Validators.required]],
       model: ['', [Validators.required]],
@@ -73,6 +71,11 @@ CatergoryName = [{ value: '100', label:'casual', inactive: false },
       status: ['', [Validators.required]],
 
     })
+
+  this.catergoryName = ['casual', 'formal', 'Sports Wear', 'Gym Wear' ]
+  this.weightType = ['weight A', 'weight B', 'weight C', 'weight D' ]
+  this.status = ['active', 'Inactive']
+
 
   }
 

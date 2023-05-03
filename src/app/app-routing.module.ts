@@ -118,7 +118,7 @@ const routes: Routes = [
   },
 
   { path: '', component: AuthenticationComponent },
-  { path: 'forgetPassword', component: ForgetPasswordComponent },
+  // { path: 'forgetPassword', component: ForgetPasswordComponent },
   { path: '',   redirectTo: '/login', pathMatch: 'full' },
   { path: '**', redirectTo: '', pathMatch: 'full' }
 ];

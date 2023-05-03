@@ -35,6 +35,7 @@ export class EditCategoryComponent implements OnInit {
   parentId;
   image: File;
   imageUrl;
+  subCategory:String[];
   seo: SEO
   Category: string[];
   constructor(
@@ -49,12 +50,15 @@ export class EditCategoryComponent implements OnInit {
     this.productCategoryForm = this.fb.group({
       categoryName: ["", [Validators.required]],
       parentCategoryName: ['', [Validators.required]],
+      image: ['', [Validators.required]],
       description: ['', [Validators.required]],
       metaTitle: ['', [Validators.required]],
       metaDescription: ['', [Validators.required]],
       metaKeyword: ['', [Validators.required]],
       status: ['', [Validators.required]]
     })
+
+    this.subCategory = ['casual', 'formal', 'Gym Wear', 'Sports Wear']
 
     this.sources = [ 'Site' , 'Linked In' , 'Newspaper','Other']
     this.deals = ['Hot','Cold','Not Interested','Dead']
