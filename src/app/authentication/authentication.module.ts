@@ -7,6 +7,7 @@ import { ContentComponent } from './content/content.component';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { RouterModule } from '@angular/router';
 import { ForgetPasswordComponent } from './forget-password/forget-password.component';
+import { EmailVerificationComponent } from './email-verification/email-verification.component';
 
 
 
@@ -15,7 +16,8 @@ import { ForgetPasswordComponent } from './forget-password/forget-password.compo
     LoginComponent,
     AuthenticationComponent,
     ContentComponent,
-    ForgetPasswordComponent
+    ForgetPasswordComponent,
+    EmailVerificationComponent
   ],
   imports: [
     CommonModule,

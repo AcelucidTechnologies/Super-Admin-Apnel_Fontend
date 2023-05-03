@@ -1,7 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { AuthenticationComponent } from './authentication/authentication/authentication.component';
-import { ForgetPasswordComponent } from './authentication/forget-password/forget-password.component';
 import { ProfileBasicInfoComponent } from './profile/profile-basic-info/profile-basic-info.component';
 import { AuthGuardService as AuthGuard} from './_services/auth-guard.service';
 

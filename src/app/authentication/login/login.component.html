@@ -32,12 +32,13 @@
                     <mat-error *ngIf="!form.get['password']?.errors?.required ">
                       Please enter a password
                     </mat-error>
+
                   </mat-form-field>
 
                   <div class="text-center pt-1 mb-3 pb-1">
                     <button class="btn btn-block pt-1 mb-3" style="width: 100%; background-color: rgb(245, 46, 46); color: white;"
                     (click)="onSubmit()">Log In</button>
-                  <a class="text-black" style="color: black;" [routerLink]="['/forgetPassword']" >Forgot Password?</a>
+                  <a class="text-black" style="color: black;" (click)="getdata()" [routerLink]="['/forget']" >Forgot Password?</a>
 
                   </div>
                 </form>

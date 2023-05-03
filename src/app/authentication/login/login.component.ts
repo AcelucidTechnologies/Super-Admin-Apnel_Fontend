@@ -1,15 +1,18 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { faFacebook, faTwitter, faGoogle } from '@fortawesome/free-brands-svg-icons';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { AuthenticationService } from 'src/app/_services/authentication.service';
 import { Router } from '@angular/router';
 import { ToastrMsgService } from 'src/app/_services/toastr-msg.service';
+
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.scss']
 })
 export class LoginComponent implements OnInit {
+
+  @Output() forget = new EventEmitter()
 
   form: FormGroup;
   faFacebook = faFacebook;
@@ -27,6 +30,9 @@ export class LoginComponent implements OnInit {
 			email: ['', [Validators.required,Validators.email]],
 			password: ['', [Validators.required]],
 		});
+   }
+   getdata(){
+     this.forget.emit()
    }
 
    onSubmit () {
