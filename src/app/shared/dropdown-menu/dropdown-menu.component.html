@@ -1,12 +1,12 @@
 <div class="dropdown-menu-container" #dropdown >
   <div class="main-menu">
     <div class=" navigation-bar">
-      <span class="main-menu-btn f-btn " ><mat-icon style="color: #67748E;">fullscreen</mat-icon></span>
-      <span class="main-menu-btn f-btn mr-3 " matBadge="4" ><mat-icon style="color: #67748E;">notifications</mat-icon></span>
+      <!-- <span class="main-menu-btn f-btn " ><mat-icon style="color: #67748E;">fullscreen</mat-icon></span>
+      <span class="main-menu-btn f-btn mr-3 " matBadge="4" ><mat-icon style="color: #67748E;">notifications</mat-icon></span> -->
 
       <span class="user-info">
 
-        <img src="../../../assets/images/profile-img.jpeg" alt="Image">
+        <img style="border-radius: 17px !important;" src="{{this.image}}" alt="Image">
         <span class="user-detail" >
 
           <span class="user-name" style="display: flex;" (click)="toggleMenu()">{{user}}<mat-icon style="color: #212B36;" >expand_more</mat-icon></span>
