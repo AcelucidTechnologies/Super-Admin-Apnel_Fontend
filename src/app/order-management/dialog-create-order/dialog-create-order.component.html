@@ -1,1 +1,82 @@
-<p>dialog-create-order works!</p>
+<h2 mat-dialog-title>Create Order</h2>
+<mat-dialog-content class="mat-typography">
+
+  <div class="row">
+    <div class="form-row col-6 pt-5">
+      <div class="col-3">
+        <label for="reviewer" class="starlabel">First Name</label>
+      </div>
+      <div class="col-9">
+        <input  type="text" placeholder="enter first name...">
+      </div>
+
+      </div>
+      <div class="form-row col-6 pt-5">
+        <div class="col-3">
+          <label for="reviewer" class="starlabel">Last name</label>
+        </div>
+        <div class="col-9">
+          <input  type="text" placeholder="enter last name...">
+        </div>
+
+        </div>
+      </div>
+      <div class="row">
+        <div class="form-row col-6 pt-5">
+          <div class="col-3">
+            <label for="reviewer" class="starlabel">City</label>
+          </div>
+          <div class="col-9">
+            <input  type="text" placeholder="enter city...">
+          </div>
+
+          </div>
+          <div class="form-row col-6 pt-5">
+            <div class="col-3">
+              <label for="reviewer" class="starlabel">Pincode</label>
+            </div>
+            <div class="col-9">
+              <input  type="text" placeholder="enter pincode...">
+            </div>
+
+            </div>
+          </div>
+          <div class="row">
+            <div class="form-row col-6 pt-5">
+              <div class="col-3">
+                <label for="reviewer" class="starlabel">State</label>
+              </div>
+              <div class="col-9">
+                <input  type="text" placeholder="enter state...">
+              </div>
+
+              </div>
+              <div class="form-row col-6 pt-5">
+                <div class="col-3">
+                  <label for="reviewer" class="starlabel">Landmark</label>
+                </div>
+                <div class="col-9">
+                  <input  type="text" placeholder="enter landmark...">
+                </div>
+
+                </div>
+              </div>
+              <div class="row">
+                <div class="form-row col-12 pt-5 pb-4">
+                  <div class="col-2">
+                    <label for="reviewer" class="starlabel">Address</label>
+                  </div>
+                  <div class="col-10">
+                    <input  type="text" placeholder="enter address..." style="width: 420px;">
+                  </div>
+
+                  </div>
+
+                  </div>
+
+
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+    <button mat-button [mat-dialog-close]="true" class="dialog1 button-color mr-2 mb-4" [routerLink]="['/order/createOrderDeatils']">Submit</button>
+    <button mat-button mat-dialog-close class="dialog2 mb-4">Cancel</button>
+</mat-dialog-actions>

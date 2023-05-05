@@ -11,6 +11,8 @@ import { DeliveredOrderComponent } from './delivered-order/delivered-order.compo
 import { CancelOrderComponent } from './cancel-order/cancel-order.component';
 import { ConfirmedOrderComponent } from './confirmed-order/confirmed-order.component';
 import { PendingOrderComponent } from './pending-order/pending-order.component';
+import { CreateOrderDetailsComponent } from './create-order-details/create-order-details.component';
+import { CreateOrderListComponent } from './create-order-list/create-order-list.component';
 
 const routes: Routes = [
   {
@@ -47,6 +49,12 @@ const routes: Routes = [
   },
   {
     path: 'confirmOrder', component: ConfirmedOrderComponent
+  },
+  {
+    path: 'createOrderDeatils', component: CreateOrderDetailsComponent
+  },
+  {
+    path: 'createOrderList', component: CreateOrderListComponent
   }
 ];
 

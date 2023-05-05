@@ -18,6 +18,8 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { MatButtonModule } from '@angular/material/button';
 import { DialogOrderStatusComponent } from './dialog-order-status/dialog-order-status.component';
 import { DialogCreateOrderComponent } from './dialog-create-order/dialog-create-order.component';
+import { CreateOrderDetailsComponent } from './create-order-details/create-order-details.component';
+import { CreateOrderListComponent } from './create-order-list/create-order-list.component';
 
 @NgModule({
   declarations: [
@@ -32,7 +34,9 @@ import { DialogCreateOrderComponent } from './dialog-create-order/dialog-create-
     TransactionDetailsComponent,
     PendingOrderComponent,
     DialogOrderStatusComponent,
-    DialogCreateOrderComponent
+    DialogCreateOrderComponent,
+    CreateOrderDetailsComponent,
+    CreateOrderListComponent
   ],
   imports: [
     CommonModule,

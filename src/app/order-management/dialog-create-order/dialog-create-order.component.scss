@@ -1,0 +1,40 @@
+mat-dialog-content{
+  width:600px
+  }
+  :host::ng-deep.dialog1{
+      background: rgb(228, 28, 28);
+      color: white;
+            border-radius: 5px;
+            outline: none;
+        }
+        .dialog2{
+          color: #fff;
+          background: #637381;
+        border-radius: 5px;
+        outline: none;
+        }
+          .mat-dialog-title {
+            text-align: center;
+          }
+
+          .mat-dialog-content {
+            text-align: center;
+          }
+
+          .mat-dialog-actions {
+          display: flex;
+          justify-content: center;
+        }
+
+        .mat-dialog-actions button {
+          margin: 0 10px;
+        }
+input{
+  padding: 7px;
+  border: 1px solid grey;
+  border-radius: 5px;
+}
+input[type="text"] {
+  padding-left: 10px; /* adjust the padding to fit the image */
+  font-size: medium;
+}

@@ -50,20 +50,22 @@ export class BannerSpecialComponent implements OnInit {
   constructor(private ngxLoader: NgxUiLoaderService,
     private CmsService: CmsService,
     private toastr: ToastrMsgService,
-    
+
     private permissionService:ModulePermissionService,
     public dialog: MatDialog) {
-      this.permissionService.getModulePermission().subscribe(res=>{ 
+      this.permissionService.getModulePermission().subscribe(res=>{
         this.accessPermission=res[0].CmsBanner
-       
+
       })
+      const test = localStorage.getItem('email')
+      console.log("value test" + test)
      }
 
   ngOnInit(): void {
     this.fgsType = SPINNER.squareLoader
     this.ngxLoader.start();
     this.sidebarSpacing = 'contracted';
-   
+
     this.cols = [
       { field: 'bannerimage', show: true, headers: 'Banner Image' },
       { field: 'url', show: true, headers: 'URL' },
@@ -77,9 +79,9 @@ export class BannerSpecialComponent implements OnInit {
     //   $('#myInput').trigger('focus')
     // })
   }
-  
+
   getbannerList() {
-    this.CmsService.getSpecialBannerList().subscribe((res: BANNERSPECIAL[]) => {
+    this.CmsService.getSpecialBannerList().subscribe((res) => {
       this.bannerList = res
       console.log(this.bannerList,"--------------------")
       this.ngxLoader.stop();
@@ -91,10 +93,10 @@ export class BannerSpecialComponent implements OnInit {
     console.log("1");
     this.CmsService.deleteSpecialBanner(bannerList.id).subscribe(res => {
       if (res) {
-        
+
         this.toastr.showSuccess("bannerSpecial deleted successfully", "banner delete")
         this.getbannerList()
-        
+
       }
     })
   }
@@ -134,8 +136,8 @@ export class BannerSpecialComponent implements OnInit {
           const workbook = { Sheets: { 'data': worksheet }, SheetNames: ['data'] };
           const excelBuffer: any = xlsxPackage.write(workbook, { bookType: 'xlsx', type: 'array' });
           this.saveAsExcelFile(excelBuffer, "leads");
-        }   
-        
+        }
+
   saveAsExcelFile(buffer: any, fileName: string): void {
     let EXCEL_TYPE = 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;charset=UTF-8';
     let EXCEL_EXTENSION = '.xlsx';

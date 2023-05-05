@@ -16,7 +16,9 @@ import { specialOffer } from '../DummyData/special-offer';
 })
 export class CmsService {
 
-    constructor(private http: HttpClient) { }
+    constructor(private http: HttpClient) {
+
+     }
 
     getCategoryList(): Observable<CATEGORY[]> {
         const token = localStorage.getItem('token') || '';
@@ -162,20 +164,22 @@ export class CmsService {
     addSpecialBanner(specialData: any) {
         const token = localStorage.getItem('token') || '';
         let httpOptions = new HttpHeaders().set('x-access-token', token)
-        const endpointUrl = `${environment.JSON_SERVER}/bannerSpecialData`;
+        const endpointUrl = `${environment.JSON_SERVER}/createBannerSpecial?`;
         // return this.http.post<any>(endpointUrl, categoryData, { 'headers': httpOptions });
         specialData.id = bannerSpecialData.length + 1
         bannerSpecialData.push(specialData);
         return of(specialData)
     }
 
-    getSpecialBannerList(): Observable<BANNERSPECIAL[]> {
+    getSpecialBannerList(): Observable<any[]> {
         const token = localStorage.getItem('token') || '';
+        const email = localStorage.getItem('email')
         let httpOptions = new HttpHeaders().set('x-access-token', token)
-       // const endpointUrl = `${environment.JSON_SERVER}/category`;
-        // return this.http.get<CATEGORY[]>(endpointUrl, { 'headers': httpOptions });
-        return of(bannerSpecialData)
+       const endpointUrl = `${environment.JSON_SERVER}/getBannerSpecial?username=${email}`;
+       return this.http.get<any[]>(endpointUrl ,{ 'headers': httpOptions });
+        // return of(bannerSpecialData)
     }
+
 
     deleteSpecialBanner(id: number) {
         const token = localStorage.getItem('token') || '';

@@ -23,7 +23,7 @@ export class AddBannerSpecialComponent implements OnInit {
   image: File;
   status= false;
   id: any;
-  
+
   editMode: boolean = false
   payload: BANNERSPECIAL
   imageChangedEvent: any = '';
@@ -34,9 +34,9 @@ export class AddBannerSpecialComponent implements OnInit {
     language: 'en'
   }
   //var plainText = content.replace(/<[^>]*>/g, '');
-  
+
   reg = '(https?://)?([\\da-z.-]+)\\.([a-z.]{2,6})[/\\w .-]*/?';
-  
+
   constructor(private ngxLoader: NgxUiLoaderService,
     private fb: FormBuilder,
     private route: Router,
@@ -106,7 +106,7 @@ export class AddBannerSpecialComponent implements OnInit {
     description: this.bannerSpecialForm.controls['description'].value,
     sortby: this.bannerSpecialForm.controls['sortby'].value,
   }
- 
+
   this.ngxLoader.start();
   if (this.editMode) {
   this.editBanner();
@@ -114,7 +114,7 @@ export class AddBannerSpecialComponent implements OnInit {
     this.addCategory()
   }
   this.route.navigate[('/cms/banner')]
-  
+
   }
 
   addCategory() {
@@ -163,5 +163,5 @@ export class AddBannerSpecialComponent implements OnInit {
 
 
 
- 
+
 }
