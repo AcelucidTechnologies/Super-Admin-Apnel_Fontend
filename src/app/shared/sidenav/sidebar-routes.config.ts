@@ -62,37 +62,37 @@ export const SideNaveMenueRoute = [
       {
         label: 'Create Order',
         icon: 'pi pi-fw pi-shopping-cart',
-        routerLink: ['/product/productlist'],
+        routerLink: ['/order/editOrder'],
       },
       {
         label: 'Confirmed Order',
         icon: 'pi pi-fw pi-user',
-        routerLink: ['/product/categorylist'],
+        routerLink: ['/order/confirmOrder'],
       },
       {
         label: 'Delivered Order',
         icon: 'pi pi-fw pi-user',
-        routerLink: ['/product/productOptionList'],
+        routerLink: ['/order/deliveredOrder'],
       },
       {
         label: 'Return Order',
         icon: 'pi pi-fw pi-user',
-        routerLink: ['/product/productOptionList'],
+        routerLink: ['/order/returnOrder'],
       },
       {
         label: 'Pending Order',
         icon: 'pi pi-fw pi-user',
-        routerLink: ['/product/productOptionList'],
+        routerLink: ['/order/pendingOrder'],
       },
       {
         label: 'Order Status',
         icon: 'pi pi-fw pi-user',
-        routerLink: ['/product/productOptionList'],
+        routerLink: ['/order/order-status'],
       },
       {
         label: 'Shipping Order',
         icon: 'pi pi-fw pi-user',
-        routerLink: ['/product/productOptionList'],
+        routerLink: ['/order/shipment'],
       },
 
     ],

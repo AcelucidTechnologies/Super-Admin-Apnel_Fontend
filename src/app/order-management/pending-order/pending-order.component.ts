@@ -1,37 +1,32 @@
-import { Component, Input, OnInit, ViewChild } from '@angular/core';
-import { order } from 'src/app/_models/order';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { TABLE_HEADING } from 'src/app/_models/table_heading';
 import { OrdersService } from 'src/app/_services/orders.service';
 import { NgxUiLoaderService, SPINNER } from 'ngx-ui-loader';
-import { TABLE_HEADING } from '../../_models/table_heading';
-import { Table } from 'primeng/table';
-import { ToastrMsgService } from 'src/app/_services/toastr-msg.service';
+import { order } from 'src/app/_models/order';
 import * as xlsxPackage from 'xlsx';
 import * as FileSaver from 'file-saver';
 import jsPDF from 'jspdf';
 import autoTable from 'jspdf-autotable';
+import { Table } from 'primeng/table';
+
 @Component({
-  selector: 'app-delivered-order',
-  templateUrl: './delivered-order.component.html',
-  styleUrls: ['./delivered-order.component.scss'],
+  selector: 'app-pending-order',
+  templateUrl: './pending-order.component.html',
+  styleUrls: ['./pending-order.component.scss']
 })
-export class DeliveredOrderComponent implements OnInit {
+export class PendingOrderComponent implements OnInit {
   @ViewChild('dt') dt: Table | undefined;
   cols!: TABLE_HEADING[];
   deliveredOrder: order[] = [];
-  fgsType: any;
   exportColumns:any[];
-  orderValue:any[];
-  @Input() deleteAccess:boolean;
-  constructor(
-    private orderService: OrdersService,
-    private ngxLoader: NgxUiLoaderService,
-    private toastr: ToastrMsgService
-  ) {}
+  pendingValue:any[];
+  fgsType: any;
+
+  constructor(private orderService: OrdersService,  private ngxLoader: NgxUiLoaderService,) { }
 
   ngOnInit(): void {
     this.fgsType = SPINNER.squareLoader;
     this.ngxLoader.start();
-    this.getDeliveredOrderList();
 
     this.cols = [
       { field: 'orderId', show: true, headers: 'Order Id' },
@@ -41,29 +36,22 @@ export class DeliveredOrderComponent implements OnInit {
       { field: 'deliveryStatus', show: true, headers: 'Delivery Status' },
     ];
   }
-  applyFilterGlobal($event, stringVal) {
-    this.dt.filterGlobal(($event.target as HTMLInputElement).value, stringVal);
-  }
-  deleteOrder(order: number) {
-    this.ngxLoader.start();
-    this.orderService.deleteDeliveredOrder(order).subscribe((res) => {
-      if (res) {
-        this.toastr.showSuccess('delivered order deleted successfully', 'order deleted');
-        this.getDeliveredOrderList();
-      }
-    });
-  }
+
   getDeliveredOrderList() {
     this.orderService.getDeliveredOrderList().subscribe((data) => {
       this.deliveredOrder = data;
       this.ngxLoader.stop();
+      // console.log("deliveredOrder" + JSON.stringify(this.deliveredOrder))
     });
+  }
+  applyFilterGlobal($event, stringVal) {
+    this.dt.filterGlobal(($event.target as HTMLInputElement).value, stringVal);
   }
   exportExcel() {
     const worksheet = xlsxPackage.utils.json_to_sheet(this.deliveredOrder);
     const workbook = { Sheets: { 'data': worksheet }, SheetNames: ['data'] };
     const excelBuffer: any = xlsxPackage.write(workbook, { bookType: 'xlsx', type: 'array' });
-    this.saveAsExcelFile(excelBuffer, "order");
+    this.saveAsExcelFile(excelBuffer, "pending");
   }
   saveAsExcelFile(buffer: any, fileName: string): void {
     let EXCEL_TYPE = 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;charset=UTF-8';
@@ -75,13 +63,14 @@ export class DeliveredOrderComponent implements OnInit {
   }
 
   exportPdf() {
-    this.orderValue = this.deliveredOrder
+    this.pendingValue = this.deliveredOrder
             const doc = new jsPDF
            autoTable(doc, {
             columns:this.exportColumns,
-            body:this.orderValue
+            body:this.pendingValue
            });
-            doc.save('order.pdf');
+            doc.save('pending.pdf');
         }
+
 
 }

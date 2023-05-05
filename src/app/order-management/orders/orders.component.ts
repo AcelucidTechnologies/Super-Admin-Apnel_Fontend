@@ -27,7 +27,7 @@ export class OrdersComponent implements OnInit {
     private toastr: ToastrMsgService,
     private permissionService:ModulePermissionService
   ){
-      this.permissionService.getModulePermission().subscribe(res=>{ 
+      this.permissionService.getModulePermission().subscribe(res=>{
         this.accessPermission=res[0].OrderList
         console.log( this.accessPermission)
       })

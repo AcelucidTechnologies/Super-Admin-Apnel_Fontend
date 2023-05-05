@@ -7,6 +7,12 @@ import { Table } from 'primeng/table';
 import { ToastrMsgService } from 'src/app/_services/toastr-msg.service';
 import { ModulePermissionService } from 'src/app/_services/module-permission.service';
 import { access } from 'src/app/_models/modulepermission';
+import * as xlsxPackage from 'xlsx';
+import * as FileSaver from 'file-saver';
+import jsPDF from 'jspdf';
+import autoTable from 'jspdf-autotable';
+import { MatDialog } from '@angular/material/dialog';
+import { DialogOrderStatusComponent } from '../dialog-order-status/dialog-order-status.component';
 
 @Component({
   selector: 'app-order-transaction',
@@ -20,15 +26,19 @@ export class OrderTransactionComponent implements OnInit {
   cols: TABLE_HEADING[];
   orderTransactin: orderTransactin[] = [];
   accessPermission:access
+  exportColumns:any[];
+  orderValue:any[];
+  order:any
 
   constructor(private ngxLoader: NgxUiLoaderService,
     private orderService: OrdersService,
     private toastr: ToastrMsgService,
-    private permissionService:ModulePermissionService) { 
-      this.permissionService.getModulePermission().subscribe(res=>{ 
+    public dialog: MatDialog,
+    private permissionService:ModulePermissionService) {
+      this.permissionService.getModulePermission().subscribe(res=>{
         this.accessPermission=res[0].OrderTransaction
         console.log( this.accessPermission)
-      }) 
+      })
     }
 
   ngOnInit(): void {
@@ -38,15 +48,8 @@ export class OrderTransactionComponent implements OnInit {
     this.sidebarSpacing = 'contracted';
     this.getOrderTransactionList()
     this.cols = [
-      { field: ' transactionId', show: true, headers: 'transactionId' },
-      { field: 'orderId', show: true, headers: 'orderId' },
-      { field: 'productId', show: true, headers: 'productId' },
-      { field: 'discount', show: true, headers: 'discount' },
-      { field: 'deliveryCharge', show: true, headers: 'deliveryCharge' },
-      { field: 'productTotal', show: true, headers: 'productTotal' },
-      { field: 'tax', show: true, headers: 'tax' },
-      { field: 'totalAmountWith', show: true, headers: 'totalAmountWith' },
-      { field: 'methodOfPayment', show: true, headers: 'methodOfPayment' },
+      { field: 'Order Status', show: true, headers: 'Order Status' },
+      { field: 'Name', show: true, headers: 'Name' },
     ]
   }
   onToggleSidebar(sidebarState: any) {
@@ -63,6 +66,7 @@ export class OrderTransactionComponent implements OnInit {
     this.orderService.getOrderTransaction().subscribe((data) => {
       this.orderTransactin = data
       this.ngxLoader.stop();
+      console.log("orderlist" + JSON.stringify(this.orderTransactin))
     });
   }
   deteOrderTransactionBy(orderId: number) {
@@ -74,4 +78,37 @@ export class OrderTransactionComponent implements OnInit {
       }
     });
   }
+  exportExcel() {
+    const worksheet = xlsxPackage.utils.json_to_sheet(this.orderTransactin);
+    const workbook = { Sheets: { 'data': worksheet }, SheetNames: ['data'] };
+    const excelBuffer: any = xlsxPackage.write(workbook, { bookType: 'xlsx', type: 'array' });
+    this.saveAsExcelFile(excelBuffer, "order");
+  }
+  saveAsExcelFile(buffer: any, fileName: string): void {
+    let EXCEL_TYPE = 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;charset=UTF-8';
+    let EXCEL_EXTENSION = '.xlsx';
+    const data: Blob = new Blob([buffer], {
+      type: EXCEL_TYPE
+    });
+    FileSaver.saveAs(data, fileName + '_export_' + new Date().getTime() + EXCEL_EXTENSION);
+  }
+
+  exportPdf() {
+    this.orderValue = this.orderTransactin
+            const doc = new jsPDF
+           autoTable(doc, {
+            columns:this.exportColumns,
+            body:this.orderValue
+           });
+            doc.save('order.pdf');
+        }
+
+        openDialog(order: any) {
+          const dialogRef = this.dialog.open(DialogOrderStatusComponent);
+          dialogRef.afterClosed().subscribe(result => {
+            if (result == true) {
+              this.deteOrderTransactionBy(order)
+            }
+          });
+        }
 }

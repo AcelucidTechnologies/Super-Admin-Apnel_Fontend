@@ -8,6 +8,8 @@ import { NgxUiLoaderService, SPINNER } from 'ngx-ui-loader';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { product_details } from 'src/app/_models/catalog';
 import { CommonService } from 'src/app/_services/common';
+import { MatDialog } from '@angular/material/dialog';
+import { DialogCreateOrderComponent } from '../dialog-create-order/dialog-create-order.component';
 @Component({
   selector: 'app-add-edit-orders',
   templateUrl: './add-edit-orders.component.html',
@@ -36,8 +38,10 @@ export class AddEditOrdersComponent implements OnInit {
     private CommonService: CommonService,
     private route: Router,
     private toastr: ToastrMsgService,
+    public dialog: MatDialog,
     private ngxLoader: NgxUiLoaderService,) {
     this.ordersForm = this.fb.group({
+      mobileNumber: ['', [Validators.required, Validators.minLength(10), Validators.maxLength(10), Validators.pattern('^[0-9]*$')]],
       orderId: ['', [Validators.required]],
       customerId: ['', [Validators.required]],
       orderDate: ['', [Validators.required]],
@@ -141,6 +145,15 @@ export class AddEditOrdersComponent implements OnInit {
       console.log(this.ProductList)
       this.ngxLoader.stop();
     })
+  }
+
+  openDialog(order: any) {
+    const dialogRef = this.dialog.open(DialogCreateOrderComponent);
+    dialogRef.afterClosed().subscribe(result => {
+      if (result == true) {
+        this.submit()
+      }
+    });
   }
 
   closedModel() {
