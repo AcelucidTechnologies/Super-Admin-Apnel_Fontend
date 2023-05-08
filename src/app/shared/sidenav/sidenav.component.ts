@@ -68,11 +68,8 @@ export class SidenavComponent implements OnInit {
       this.moduleList=res[0].moduleList
       this.username=res[0].username;
 
-      console.log("1234567890");
-      
       console.log( res[0].moduleList);
-      console.log("1234567890");
-      this.items = SideNaveMenueRoute 
+      this.items = SideNaveMenueRoute
 
       this.items = this.items.filter(val=>{
         if(this.moduleList.includes(val.label))
