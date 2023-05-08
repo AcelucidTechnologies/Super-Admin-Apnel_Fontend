@@ -35,9 +35,12 @@ role: any;
   menuState: string = '';
   myTripsUrl: string = '';
   settingsClass: string = '';
+  UserData= localStorage.getItem("UserData")
+  image:string="https://source.unsplash.com/c_GmwfHBDzk/200x200";
   user:string=''
   @ViewChild('dropdown', { static: false }) dropdown!: ElementRef;
   @ViewChild('submenu', { static: false }) submenu!: ElementRef;
+  adminDetails: any;
 
   constructor(
     private router: Router,
@@ -49,7 +52,7 @@ role: any;
    }
 
   ngOnInit() {
-
+    this.getImage()
     this.settingsClass = '';
     this.menuState = 'close';
   }
@@ -67,12 +70,21 @@ role: any;
       this.menuState = 'close';
     }
   }
-  
+
 
   onLogout(){
     window.localStorage.removeItem('token');
     localStorage.clear();
     sessionStorage.clear();
     this.router.navigate(['/'])
+  }
+  getImage() {
+    this.adminService.getAdminDetails(this.UserData).subscribe((res) => {
+      if (res[0].image) {
+        console.log("datalocal",this.UserData)
+        this.image = res[0].image
+        console.log(this.image)
+      }
+    })
   }
 }
