@@ -1,6 +1,6 @@
 
 
-    
+
   <div class="page-heading">
     <h1 class="header-text-title" style="margin-left: 1%;">Feature Product</h1>
     <div class="page-btn">
@@ -20,7 +20,7 @@
             </span>
 
             <div class="d-flex justify-content-end align-items-end">
-              <button style="background-color: #f4f4f4; border: none;" type="button" pButton class="mr-1" pTooltip="Pdf" (click)="exportPdf()" 
+              <button style="background-color: #f4f4f4; border: none;" type="button" pButton class="mr-1" pTooltip="Pdf" (click)="exportPdf()"
                 tooltipPosition="bottom"><img
                 src="../assets/images/icons/pdf.svg"></button>
               <button type="button" style="background-color: #f4f4f4;; border: none;" pButton class="mr-1" pTooltip="excel" (click)="exportExcel()"
@@ -41,14 +41,14 @@
                 <div class="flex justify-content-between align-items-center head1">
                   Product Name
                     <p-sortIcon field="productName"></p-sortIcon>
-                    
+
                 </div>
             </th>
             <th pSortableColumn="modal">
                 <div class="flex justify-content-between align-items-center head1">
                     Modal
                     <p-sortIcon field="modal"></p-sortIcon>
-                    
+
                 </div>
             </th>
 
@@ -74,11 +74,11 @@
         <th>
           <div class="flex justify-content-between align-items-center head1">
               Action
-              
+
           </div>
       </th>
 
-            
+
         </tr>
     </ng-template>
     <ng-template pTemplate="body" let-featureList>
@@ -92,10 +92,10 @@
             </td>
             <td>
                 <span class="p-column-title">Modal</span>
-                
+
                 {{featureList.modal}}
             </td>
-           
+
             <td>
                 <span class="p-column-title">Price</span>
                 {{featureList.price}}
@@ -119,8 +119,8 @@
                   <img src="../assets/images/icons/delete.svg" alt="img">
               </a>
           </td>
-           
-         
+
+
         </tr>
     </ng-template>
     <ng-template pTemplate="emptymessage">

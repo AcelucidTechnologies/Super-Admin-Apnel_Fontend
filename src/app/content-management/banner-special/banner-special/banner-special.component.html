@@ -23,13 +23,13 @@
             </span>
 
             <div class="d-flex justify-content-end align-items-end">
-              <button style="background-color: #f4f4f4; border: none;" type="button" pButton class="mr-1" pTooltip="Pdf"  (click)="exportPdf()"
+              <button style=" border: none;" type="button" pButton class="mr-1 custom-image " pTooltip="Pdf"  (click)="exportPdf()"
                 tooltipPosition="bottom"><img
                 src="../assets/images/icons/pdf.svg"></button>
-              <button type="button" style="background-color: #f4f4f4;; border: none;" pButton class="mr-1" pTooltip="excel"  (click)="exportExcel()"
+              <button type="button" style=" border: none;" pButton class="mr-1 custom-image " pTooltip="excel"  (click)="exportExcel()"
                 tooltipPosition="bottom" ><img
                 src="../assets/images/icons/excel.svg"></button>
-                <button type="button" style="background-color: #f4f4f4;; border: none;" pButton class=" mr-1" pTooltip="print"
+                <button type="button" style="border: none;" pButton class=" mr-1 custom-image " pTooltip="print"
                 tooltipPosition="bottom" ><img
                 src="../assets/images/icons/printer.svg"></button>
             </div>
@@ -94,14 +94,14 @@
 
             <td>
                 <span class="p-column-title">Date</span>
-                {{bannerList.sortby}}
+                {{bannerList.bannerOrder}}
             </td>
             <td>
                 {{bannerList.image}}
             </td>
             <td>
               <a pTooltip="Edit Banner" tooltipPosition="bottom" class="me-3" style="margin-right: 10px;">
-                  <img src="../assets/images/icons/edit.svg" [queryParams]="{id:bannerList?.id}" [routerLink]="['/cms/add-special-banner']"  alt="img">
+                  <img src="../assets/images/icons/edit.svg" [queryParams]="{id:bannerList?._id}" [routerLink]="['/cms/add-special-banner']"  alt="img">
               </a>
               <a pTooltip="Delete Banner" tooltipPosition="bottom" (click)="openDialog(bannerList)"  class="me-3 confirm-text" href="javascript:void(0);">
                   <img src="../assets/images/icons/delete.svg" alt="img">

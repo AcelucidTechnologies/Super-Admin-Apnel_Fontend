@@ -89,9 +89,10 @@ export class BannerSpecialComponent implements OnInit {
   }
 
   deleteBanner(bannerList: any) {
+
     this.ngxLoader.start();
     console.log("1");
-    this.CmsService.deleteSpecialBanner(bannerList.id).subscribe(res => {
+    this.CmsService.deleteSpecialBanner(bannerList._id).subscribe(res => {
       if (res) {
 
         this.toastr.showSuccess("bannerSpecial deleted successfully", "banner delete")

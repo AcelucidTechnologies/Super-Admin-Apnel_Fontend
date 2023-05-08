@@ -77,7 +77,7 @@ td,th{
     .p-datatable .p-sortable-column.p-highlight{
         background-color: none;
     }
-   
+
     .p-datatable .p-sortable-column:focus {
          box-shadow:none
     }
@@ -91,3 +91,11 @@ td,th{
     }
 }
 
+::ng-deep.custom-image {
+  background: none;
+  border: none;
+  }
+::ng-deep.custom-image:hover {
+  background: none;
+  border: none;
+  }

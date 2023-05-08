@@ -15,6 +15,7 @@ import { CommonService } from 'src/app/_services/common';
   styleUrls: ['./add-banner-special.component.scss']
 })
 export class AddBannerSpecialComponent implements OnInit {
+  bannerListbyId: []=[]
 
   sidebarSpacing: any;
   title: string = " "
@@ -36,6 +37,7 @@ export class AddBannerSpecialComponent implements OnInit {
   //var plainText = content.replace(/<[^>]*>/g, '');
 
   reg = '(https?://)?([\\da-z.-]+)\\.([a-z.]{2,6})[/\\w .-]*/?';
+  test: BANNERSPECIAL;
 
   constructor(private ngxLoader: NgxUiLoaderService,
     private fb: FormBuilder,
@@ -65,12 +67,12 @@ export class AddBannerSpecialComponent implements OnInit {
         this.editMode = true
         this.title = "Edit Special Banner"
         this.getBannerById();
+        // this.editBanner()
       } else {
         this.editMode = false
         this.title = "Add New Special Banner"
       }
     });
-
   }
 
 
@@ -119,6 +121,9 @@ export class AddBannerSpecialComponent implements OnInit {
 
   addCategory() {
     this.CmsService.addSpecialBanner(this.bannerSpecialForm.value).subscribe(res => {
+      this.test = res
+
+      console.log(this.test,"--------------------")
        if (res) {
          this.toastr.showSuccess("Special banner added successfully", "banner Added")
          this.ngxLoader.stop()
@@ -133,13 +138,21 @@ export class AddBannerSpecialComponent implements OnInit {
    }
 
    editBanner(){
-    console.log(this.payload)
+    console.log(this.payload +"hello0")
     this.CmsService.editSpecialBanner(this.bannerSpecialForm.value, this.id).subscribe(res => {
+      this.bannerSpecialForm.patchValue({
+        id: res.id,
+        url: res.url,
+       image: res.image,
+        sortby: res.sortby,
+        description: res.description
+      })
       if (res) {
         this.toastr.showSuccess("Banner edit successfully", "banner edit")
         this.ngxLoader.stop()
         this.route.navigate(['/cms/banner'])
       }
+
       (error: any) => {
         this.toastr.showError("Somthing wrong Please check", "Error occured")
         this.ngxLoader.stop()
@@ -148,12 +161,33 @@ export class AddBannerSpecialComponent implements OnInit {
     })
    }
 
+
+  //  getAdmindetails(){
+  //   this.adminService.getAdminDetails(this.username).subscribe((res)=>{
+  //     if(res[0].image)
+  //     {this.Image=res[0].image
+  //     this.prevImageName=this.Image.toString().split('.com/')[1]
+  //     }
+  //     this.adminForm.patchValue({
+  //       userName:res[0].username,
+  //       userEmail:res[0].email,
+  //       contactNumber:res[0].phone,
+  //       adminRole:res[0].role
+  //   })
+  //   })
+  // }
+
+
    getBannerById() {
-    this.CmsService.getBannerById(this.id).subscribe((res: BANNERSPECIAL) => {
+    this.CmsService.editSpecialBanner(this.bannerSpecialForm.value,this.id).subscribe((res) => {
+      this.test = res
+
+      console.log(this.test,"hello latest edit banner--------------------")
+
       this.bannerSpecialForm.patchValue({
         id: res.id,
         url: res.url,
-       // image: res.image,
+       image: res.image,
         sortby: res.sortby,
         description: res.description
       })
