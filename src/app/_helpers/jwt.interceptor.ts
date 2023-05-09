@@ -1,13 +1,15 @@
 import { Injectable } from '@angular/core';
 import { HttpRequest, HttpHandler, HttpEvent, HttpInterceptor } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { Observable, catchError } from 'rxjs';
 
 import { environment } from '@environments/environment';
 import { AccountService } from '@app/_services';
+import { Router } from '@angular/router';
 
 @Injectable()
 export class JwtInterceptor implements HttpInterceptor {
-    constructor(private accountService: AccountService) { }
+    constructor(private accountService: AccountService,
+      private router: Router) { }
 
     intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
         // add auth header with jwt if user is logged in and request is to the api url
@@ -21,7 +23,14 @@ export class JwtInterceptor implements HttpInterceptor {
                 }
             });
         }
-
-        return next.handle(request);
-    }
+        return next.handle(request).pipe(
+          catchError((err) => {
+            // Unauthorized
+            if (err && err.status === 401) {
+              this.router.navigateByUrl("/login");
+            } else {
+              return next.handle(request);
+            }
+          })
+    )}
 }

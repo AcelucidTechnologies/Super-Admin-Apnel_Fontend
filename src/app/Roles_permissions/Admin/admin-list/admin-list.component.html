@@ -24,10 +24,9 @@
     <ng-template pTemplate="caption">
       <div class="d-flex justify-content-between">
         <div class="d-flex align-items-center p-0">
-          <img style="margin-right: 5px" src="../assets/images/icons/filter.svg" class="filter" alt="img" />
           <div class="input-container">
             <img src="../../../../assets/images/search-white.svg" class="input-container-img" />
-            <input #search pInputText type="text" placeholder="Search..."
+            <input style="border-radius: 20px; outline: none;" #search pInputText type="text" placeholder="Search..."
               (input)="applyFilterGlobal($event, 'contains')">
           </div>
         </div>
