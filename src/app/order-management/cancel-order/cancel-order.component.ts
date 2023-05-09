@@ -6,6 +6,10 @@ import { NgxUiLoaderService, SPINNER } from 'ngx-ui-loader';
 import { TABLE_HEADING } from '../../_models/table_heading'
 import { Table } from 'primeng/table';
 import { ToastrMsgService } from 'src/app/_services/toastr-msg.service';
+import * as xlsxPackage from 'xlsx';
+import * as FileSaver from 'file-saver';
+import jsPDF from 'jspdf';
+import autoTable from 'jspdf-autotable';
 
 @Component({
   selector: 'app-cancel-order',
@@ -17,6 +21,8 @@ export class CancelOrderComponent implements OnInit {
  cols!: TABLE_HEADING[];
   cancelOrder: cancelOrder[] = [];
   fgsType: any;
+  exportColumns:any[];
+  pendingValue:any[];
   @Input() deleteAccess:boolean;
   constructor(
     private orderService: OrdersService,
@@ -30,18 +36,22 @@ export class CancelOrderComponent implements OnInit {
     this.fgsType = SPINNER.squareLoader
     this.ngxLoader.start();
     this.getCancelOrderList();
-    
+
     this.cols = [
-      { field: 'cancelTransId', show: true, headers: 'cancelTransId' },
-      { field: 'orderId', show: true, headers: 'orderId' },
-      { field: 'total', show: true, headers: 'total' },
-      { field: 'refundInitiated', show: true, headers: 'refundInitiated' },
-      { field: 'productId', show: true, headers: 'productId' },
-      { field: 'deliveryCharge', show: true, headers: 'deliveryCharge' },
+      { field: 'Return Id', show: true, headers: 'Return Id' },
+      { field: 'Order Id', show: true, headers: 'Order Id' },
+
+      { field: 'Customer Name', show: true, headers: 'Customer Name' },
+      { field: 'Reason', show: true, headers: 'Reason' },
+      { field: 'Type', show: true, headers: 'Type' },
+
+      { field: 'Return status', show: true, headers: 'Return status' },
+      { field: 'Return Amount', show: true, headers: 'Return Amount' },
+      { field: 'Order Date', show: true, headers: 'Order Date' },
     ]
   }
 
-  
+
   applyFilterGlobal($event, stringVal) {
     this.dt.filterGlobal(($event.target as HTMLInputElement).value, stringVal);
     console.log($event)
@@ -59,6 +69,31 @@ export class CancelOrderComponent implements OnInit {
     this.orderService.getCancelOrderList().subscribe((data) => {
       this.cancelOrder = data
       this.ngxLoader.stop();
+      console.log("cancelorder" +  JSON.stringify(this.cancelOrder))
     });
   }
+  exportExcel() {
+    const worksheet = xlsxPackage.utils.json_to_sheet(this.cancelOrder);
+    const workbook = { Sheets: { 'data': worksheet }, SheetNames: ['data'] };
+    const excelBuffer: any = xlsxPackage.write(workbook, { bookType: 'xlsx', type: 'array' });
+    this.saveAsExcelFile(excelBuffer, "cancelOrder");
+  }
+  saveAsExcelFile(buffer: any, fileName: string): void {
+    let EXCEL_TYPE = 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;charset=UTF-8';
+    let EXCEL_EXTENSION = '.xlsx';
+    const data: Blob = new Blob([buffer], {
+      type: EXCEL_TYPE
+    });
+    FileSaver.saveAs(data, fileName + '_export_' + new Date().getTime() + EXCEL_EXTENSION);
+  }
+
+  exportPdf() {
+    this.pendingValue = this.cancelOrder
+            const doc = new jsPDF
+           autoTable(doc, {
+            columns:this.exportColumns,
+            body:this.pendingValue
+           });
+            doc.save('cancelOrder.pdf');
+        }
  }

@@ -7,6 +7,10 @@ import { Table } from 'primeng/table';
 import { ToastrMsgService } from 'src/app/_services/toastr-msg.service';
 import { ModulePermissionService } from 'src/app/_services/module-permission.service';
 import { access } from 'src/app/_models/modulepermission';
+import * as xlsxPackage from 'xlsx';
+import * as FileSaver from 'file-saver';
+import jsPDF from 'jspdf';
+import autoTable from 'jspdf-autotable';
 
 @Component({
   selector: 'app-shipment',
@@ -19,12 +23,14 @@ export class ShipmentComponent implements OnInit {
   cols!: TABLE_HEADING[];
   Shipments: Shipments[] = [];
   fgsType: any;
+  exportColumns:any[];
+  shipmentValue:any[];
   accessPermission:access
   constructor(private orderService: OrdersService,
     private ngxLoader: NgxUiLoaderService,
     private toastr: ToastrMsgService,
-    private permissionService:ModulePermissionService) { 
-      this.permissionService.getModulePermission().subscribe(res=>{ 
+    private permissionService:ModulePermissionService) {
+      this.permissionService.getModulePermission().subscribe(res=>{
         this.accessPermission=res[0].OrderShipment
         console.log( this.accessPermission)
       })
@@ -37,12 +43,12 @@ export class ShipmentComponent implements OnInit {
     this.getOrderShippingList()
     this.sidebarSpacing = 'contracted';
     this.cols = [
-      { field: 'Shipment Id', show: true, headers: 'shipment Id' },
       { field: 'Order Id', show: true, headers: 'Order Id' },
+
+      { field: 'Customer Name', show: true, headers: 'Customer Name' },
+      { field: 'Contact No', show: true, headers: 'Contact No' },
+      { field: 'Total', show: true, headers: 'Total' },
       { field: 'Order Date', show: true, headers: 'Order Date' },
-      { field: 'Total Quantity', show: true, headers: 'Total Quantity' },
-      { field: 'Shipment Date', show: true, headers: 'Shipment Date' },
-      { field: 'Shipping To', show: true, headers: 'Shipping To' },
     ]
   }
 
@@ -60,6 +66,7 @@ export class ShipmentComponent implements OnInit {
     this.orderService.getOrderShippingList().subscribe((data) => {
       this.Shipments =  data
      this.ngxLoader.stop();
+     console.log("shipment" + JSON.stringify(this.Shipments))
     });
   }
   deleteOrderShipping(shipmentId:number) {
@@ -71,4 +78,29 @@ export class ShipmentComponent implements OnInit {
       }
     })
   }
+
+exportExcel() {
+  const worksheet = xlsxPackage.utils.json_to_sheet(this.Shipments);
+  const workbook = { Sheets: { 'data': worksheet }, SheetNames: ['data'] };
+  const excelBuffer: any = xlsxPackage.write(workbook, { bookType: 'xlsx', type: 'array' });
+  this.saveAsExcelFile(excelBuffer, "shipment");
+}
+saveAsExcelFile(buffer: any, fileName: string): void {
+  let EXCEL_TYPE = 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;charset=UTF-8';
+  let EXCEL_EXTENSION = '.xlsx';
+  const data: Blob = new Blob([buffer], {
+    type: EXCEL_TYPE
+  });
+  FileSaver.saveAs(data, fileName + '_export_' + new Date().getTime() + EXCEL_EXTENSION);
+}
+
+exportPdf() {
+  this.shipmentValue = this.Shipments
+          const doc = new jsPDF
+         autoTable(doc, {
+          columns:this.exportColumns,
+          body:this.shipmentValue
+         });
+          doc.save('shipment.pdf');
+      }
 }

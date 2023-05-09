@@ -11,8 +11,15 @@ import { DeliveredOrderComponent } from './delivered-order/delivered-order.compo
 import { ShipmentComponent } from './shipment/shipment.component';
 import { ShipmentDetailsComponent } from './shipment-details/shipment-details.component';
 import { AddEditOrdersComponent } from './add-edit-orders/add-edit-orders.component';
-import {FormsModule,ReactiveFormsModule} from '@angular/forms';
+import {FormControl, FormGroup, FormsModule,PatternValidator,ReactiveFormsModule, Validators} from '@angular/forms';
 import { TransactionDetailsComponent } from './transaction-details/transaction-details.component';
+import { PendingOrderComponent } from './pending-order/pending-order.component';
+import { MatDialogModule } from '@angular/material/dialog';
+import { MatButtonModule } from '@angular/material/button';
+import { DialogOrderStatusComponent } from './dialog-order-status/dialog-order-status.component';
+import { DialogCreateOrderComponent } from './dialog-create-order/dialog-create-order.component';
+import { CreateOrderDetailsComponent } from './create-order-details/create-order-details.component';
+import { CreateOrderListComponent } from './create-order-list/create-order-list.component';
 
 @NgModule({
   declarations: [
@@ -24,14 +31,22 @@ import { TransactionDetailsComponent } from './transaction-details/transaction-d
     ShipmentComponent,
     ShipmentDetailsComponent,
     AddEditOrdersComponent,
-    TransactionDetailsComponent
+    TransactionDetailsComponent,
+    PendingOrderComponent,
+    DialogOrderStatusComponent,
+    DialogCreateOrderComponent,
+    CreateOrderDetailsComponent,
+    CreateOrderListComponent
   ],
   imports: [
     CommonModule,
     OrderManagementRoutingModule,
     SharedModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    MatDialogModule,
+    MatButtonModule,
+
   ]
 })
 export class OrderManagementModule { }

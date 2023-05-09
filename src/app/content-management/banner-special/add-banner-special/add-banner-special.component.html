@@ -1,4 +1,4 @@
-
+<div style="overflow-y: auto; height: 700px; margin-bottom: 100px;">
 <form [formGroup]="bannerSpecialForm">
 
   <div class="page-heading col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 mb-4" >
@@ -29,7 +29,7 @@
                       Please enter valid Url
                     </div>
                   </div>
-                  
+
 
                 </div>
               </div>
@@ -39,7 +39,7 @@
                   <input type="text" class="form-control" placeholder="Enter Only Number" formControlName="sortby">
                   <div
                   *ngIf="(!bannerSpecialForm.controls['sortby'].valid)">
-                 
+
                   <div *ngIf="bannerSpecialForm.controls['sortby'].errors['pattern']"
                     style="color: rgb(253, 122, 122); font-size:small; font-style: italic;">
                     Enter number only between 1 to 5
@@ -69,14 +69,14 @@
               <div class="col-9 form-group pt-3">
                 <label for="imageUpload" class="col-form-label">Image</label>
                 <div id="imageUpload" class="custom-file">
-                  <input type="file" class="custom-file-input" id="inputGroupFile01" (change)="fileChangeEvent($event)">
+                  <input type="file" class="custom-file-input" id="inputGroupFile01" formControlName="image" (change)="fileChangeEvent($event)">
                   <label class="custom-file-label" for="inputGroupFile01">Upload file</label>
                 </div>
               </div>
-  
+
               <div class="col-11 form-group mt-5">
                 <div class="card">
-                  <div class="card-body"> 
+                  <div class="card-body">
                     <div class="row" style="margin-top: 15px;">
                       <div class="text-center col-md-12">
                         <h5>Image Croppier</h5>
@@ -88,11 +88,11 @@
                     </div>
                   </div>
                 </div>
-  
+
               </div>
             </div>
 
-            
+
 
             <!-- ------------------------------------- -->
 
@@ -113,3 +113,4 @@
     </div>
   </div>
 </form>
+</div>

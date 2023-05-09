@@ -22,19 +22,7 @@
 			[showCurrentPageReport]="true" [value]="categoryList"
 			currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries" [responsive]="true"
 			[globalFilterFields]="['name', '_id', 'status']" styleClass="p-datatable-striped">
-			<!-- <ng-template pTemplate="caption">
-				<div class="row">
-					<span class="p-input-icon-right ml-5">
-						<i class="pi pi-search"></i>
-						<input pInputText type="text" (input)="applyFilterGlobal($event, 'contains')"
-							placeholder="Search by product Id and  product name" />
-					</span>
-					<span class="p-input-icon-right ml-5">
-						<button pButton type="button" label="Add Category" class="p-button-success"
-							[routerLink]="['/product/addcategory']" [disabled]="!accessPermission.add"></button>
-					</span>
-				</div>
-			</ng-template> -->
+
       <ng-template pTemplate="caption">
         <div class="d-flex justify-content-between">
           <div class="d-flex align-items-center p-0">

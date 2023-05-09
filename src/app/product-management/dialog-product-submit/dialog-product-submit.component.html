@@ -7,7 +7,7 @@
   <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
     <div class="form-row">
       <div class="col-5">
-      <label for="name">Follow-up Date</label>
+      <label for="name">Date</label>
       </div>
       <div class="col-7">
         <p-calendar styleClass="date-picker" ></p-calendar>
@@ -33,7 +33,16 @@
         <label for="image">Price/Quality</label>
         </div>
         <div class="col-7">
-        <input type="number" class="form-control" formControlName="productWeight">
+          <select class="form-control" placeholder="select type" formControlName="status">
+            <option value="null" selected>Select Type</option>
+            <option *ngFor="let option of Category" [value]="option.value" [disabled]="option.inactive">
+              {{ option.label }}
+
+            </option>
+          </select>
+        <!-- <input type="number" class="form-control" formControlName="productWeight"> -->
+        <!-- <p-dropdown [options]="price" id="role" formControlName="price" placeholder="Select price per quantity"></p-dropdown> -->
+
       </div>
     </div>
   </div>

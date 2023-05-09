@@ -64,14 +64,16 @@
       </tr>
 
     </ng-template>
-    <ng-template pTemplate="body" let-rowData let-i="rowIndex" >
-      <tr>
-        <td>{{ rowData.column1 }}</td>
-        <td>{{ rowData.column2 }}</td>
-
-
-      </tr>
-    </ng-template>
+    <ng-template pTemplate="body" let-option let-i="rowIndex">
+    <tr>
+      <td>{{i + 1}}</td>
+      <td>{{option.name}}</td>
+      <td>
+        <!-- <button (click)="editOption(option)">Edit</button>
+        <button (click)="deleteOption(option)">Delete</button> -->
+      </td>
+    </tr>
+  </ng-template>
     </p-table>
 
 
