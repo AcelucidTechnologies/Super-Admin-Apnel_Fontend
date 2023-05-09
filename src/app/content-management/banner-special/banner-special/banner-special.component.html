@@ -97,7 +97,9 @@
                 {{bannerList.bannerOrder}}
             </td>
             <td>
-                {{bannerList.image}}
+                <!--
+                  {{bannerList.image}} -->
+                  <div *ngIf="!!bannerList.image; else defaultImg"><img class="user-name-img" [src]="bannerList.image"></div>
             </td>
             <td>
               <a pTooltip="Edit Banner" tooltipPosition="bottom" class="me-3" style="margin-right: 10px;">
@@ -115,6 +117,9 @@
         <tr>
             <td colspan="8">No customers found.</td>
         </tr>
+    </ng-template>
+    <ng-template #defaultImg>
+      <div><img [src]="image" class="user-name-img"></div>
     </ng-template>
 </p-table>
 </div>
