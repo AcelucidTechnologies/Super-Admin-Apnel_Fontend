@@ -2,7 +2,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { of, Observable, from } from 'rxjs';
 import { environment } from '../../environments/environment';
-import { CATEGORY, SUB_CATEGORY, SPONSOR, BANNERSPECIAL, FEATURE, SPECIALOFFER } from '../_models/cms'
+import { CATEGORY, SUB_CATEGORY, SPONSOR, BANNERSPECIAL, FEATURE, SPECIALOFFER, DELETE_FEATURE_PRODUCT } from '../_models/cms'
 import { category, sub_category } from '../DummyData/category_subCategory';
 import {sponsors} from '../DummyData/sponsor'
 import { bannerSpecialData } from '../DummyData/bannerSpecial';
@@ -211,12 +211,13 @@ export class CmsService {
 
     // ----------------FEATURE API----------------
 
-    getFeatureList(): Observable<FEATURE[]> {
+    getFeatureList(): Observable<any[]> {
         const token = localStorage.getItem('token') || '';
+        const email = localStorage.getItem('email')
         let httpOptions = new HttpHeaders().set('x-access-token', token)
-       // const endpointUrl = `${environment.JSON_SERVER}/category`;
-        // return this.http.get<CATEGORY[]>(endpointUrl, { 'headers': httpOptions });
-        return of(featureData)
+       const endpointUrl = `${environment.JSON_SERVER}/getFeatureProduct?username=${email}`;
+        return this.http.get<any[]>(endpointUrl, { 'headers': httpOptions });
+        // return of(featureData)
     }
 
     addFeatureProduct(feature: any) {
@@ -250,14 +251,14 @@ export class CmsService {
     deleteProduct(id: number) {
         const token = localStorage.getItem('token') || '';
         let httpOptions = new HttpHeaders().set('x-access-token', token)
-        const endpointUrl = `${environment.JSON_SERVER}/category/${id}`;
-        //return this.http.delete<CATEGORY>(endpointUrl, { 'headers': httpOptions });
-        let productObj = featureData.map(item => {
-            item.id == id;
-            return item;
-        })
-        featureData.splice(featureData.findIndex((index) => index.id == id),1);
-        return of(productObj)
+        const endpointUrl = `${environment.JSON_SERVER}/deleteFeatureProduct?id=${id}`;
+        return this.http.delete<DELETE_FEATURE_PRODUCT>(endpointUrl, { 'headers': httpOptions });
+        // let productObj = featureData.map(item => {
+        //     item.id == id;
+        //     return item;
+        // })
+        // featureData.splice(featureData.findIndex((index) => index.id == id),1);
+        // return of(productObj)
     }
 
 

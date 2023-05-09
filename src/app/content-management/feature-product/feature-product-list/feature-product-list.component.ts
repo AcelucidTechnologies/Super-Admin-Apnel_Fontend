@@ -34,13 +34,13 @@ export class FeatureProductListComponent implements OnInit {
   statuses: any[];
 
   activityValues: number[] = [0, 100];
-  
+
   constructor(private ngxLoader: NgxUiLoaderService,
     private CmsService: CmsService,
     private toastr: ToastrMsgService,
     public dialog: MatDialog,
     private permissionService:ModulePermissionService) {
-      this.permissionService.getModulePermission().subscribe(res=>{ 
+      this.permissionService.getModulePermission().subscribe(res=>{
         this.accessPermission=res[0].CmsBanner
         console.log( this.accessPermission)
       })
@@ -70,7 +70,7 @@ export class FeatureProductListComponent implements OnInit {
 
   deleteProduct(featureList: any) {
     this.ngxLoader.start();
-    this.CmsService.deleteProduct(featureList.id).subscribe(res => {
+    this.CmsService.deleteProduct(featureList._id).subscribe(res => {
       if (res) {
         this.toastr.showSuccess("Feature Product deleted successfully", "Feature Product delete")
         this.getFeatureList()
@@ -86,7 +86,7 @@ export class FeatureProductListComponent implements OnInit {
       }
     });
   }
-  
+
   onToggleSidebar(sidebarState: any) {
     if (sidebarState === 'open') {
       this.sidebarSpacing = 'contracted';
@@ -110,8 +110,8 @@ export class FeatureProductListComponent implements OnInit {
           const workbook = { Sheets: { 'data': worksheet }, SheetNames: ['data'] };
           const excelBuffer: any = xlsxPackage.write(workbook, { bookType: 'xlsx', type: 'array' });
           this.saveAsExcelFile(excelBuffer, "leads");
-        }   
-        
+        }
+
   saveAsExcelFile(buffer: any, fileName: string): void {
     let EXCEL_TYPE = 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;charset=UTF-8';
     let EXCEL_EXTENSION = '.xlsx';

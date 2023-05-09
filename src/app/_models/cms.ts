@@ -41,7 +41,7 @@ export interface BANNERSPECIAL {
     sortby: string,
     image: File|any,
     description: string,
-    
+
 }
 
 export interface FEATURE {
@@ -58,12 +58,25 @@ export interface SPECIALOFFER {
     image: File|any,
     product: string,
     category: string,
-   
+
 }
 
 export interface PAGE {
     id: number,
     url: string
     page: string,
-    description: string, 
+    description: string,
+}
+
+export interface DELETE_FEATURE_PRODUCT{
+
+isSpecialProduct: boolean,
+_id: string,
+username: string,
+productName: string,
+productPrice: number,
+productModel: string,
+image: string,
+productQuantity: number,
+
 }

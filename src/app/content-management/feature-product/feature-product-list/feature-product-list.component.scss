@@ -78,7 +78,7 @@ td,th{
     .p-datatable .p-sortable-column.p-highlight{
         background-color: none;
     }
-   
+
     .p-datatable .p-sortable-column:focus {
          box-shadow:none
     }
@@ -90,4 +90,13 @@ td,th{
     .p-paginator .p-paginator-pages .p-paginator-page.p-highlight{
         background-color: rgb(228, 28, 28);
     }
+}
+::ng-deep.p-datatable .p-sortable-column.p-highlight .p-sortable-column-icon {
+  color: black !important;
+  background-color: none !important;
+}
+
+.custom-image {
+  background: none;
+  border: none;
 }
