@@ -24,12 +24,7 @@
             <ng-template pTemplate="caption">
               <div class="d-flex justify-content-between">
                 <div class="d-flex align-items-center p-0" >
-                  <img
-                    style="margin-right: 5px"
-                    src="../assets/images/icons/filter.svg"
-                    class="filter"
-                    alt="img"
-                  />
+
                   <div class="input-container">
                     <img
                       src="../../../assets/images/search-white.svg"
@@ -60,17 +55,45 @@
             </ng-template>
             <ng-template pTemplate="header">
                 <tr>
-                  <th class="text-center">Sno</th>
-                    <th class="text-center">Review Subject</th>
-                    <th class="text-center">Publishing Site Url</th>
-                    <th class="text-center">Rating</th>
-                    <th class="text-center">Status</th>
+
+                  <th pSortableColumn="reviewSubject">
+                    <div class="flex justify-content-between align-items-center head1">
+                      Review Subject
+                        <p-sortIcon field="reviewSubject"></p-sortIcon>
+
+                    </div>
+                </th>
+
+                <th pSortableColumn="publishingsiteurl">
+                  <div class="flex justify-content-between align-items-center head1">
+                    Publishing Site Url
+                      <p-sortIcon field="publishingsiteurl"></p-sortIcon>
+
+                  </div>
+              </th>
+
+              <th pSortableColumn="rating">
+                <div class="flex justify-content-between align-items-center head1">
+                  Rating
+                    <p-sortIcon field="rating"></p-sortIcon>
+
+                </div>
+            </th>
+
+            <th pSortableColumn="status">
+              <div class="flex justify-content-between align-items-center head1">
+                Status
+                  <p-sortIcon field="status"></p-sortIcon>
+
+              </div>
+          </th>
+
                     <th class="text-center">Actions</th>
                 </tr>
             </ng-template>
             <ng-template pTemplate="body" let-list let-i="rowIndex">
                 <tr>
-                  <td>{{i+1}}</td>
+
                     <td>{{list.reviewSubject}}</td>
                     <td>{{list.publishingsiteurl}}</td>
                     <td>{{list.rating}}</td>

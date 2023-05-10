@@ -1,4 +1,4 @@
-<div style="overflow-y: auto; height: 700px; margin-bottom: 100px;">
+<div style="height: 700px; margin-bottom: 100px;">
 <div class="page-heading"></div>
 
 <div class="button-heading-container">
@@ -27,7 +27,7 @@
             <button mat-button color="primary">
                 <mat-icon>camera</mat-icon>CHANGE
             </button> -->
-            <label>Profile Image</label>
+            <label class="bold-label">Profile Image</label>
             <div class="d-flex justify-content-start h-75"><img class="img-content" [src]="Image" /></div>
             <!-- <label for="imageUpload" class="col-form-label">Image</label> -->
            <div class="mt-1">
@@ -53,7 +53,7 @@
                     <div [hidden]="!adminForm.controls['userEmail'].errors['required']" style="font-size:smaller; color: rgb(253, 122, 122); font-style: italic;">User's Email is required</div>
                 </div>
             </div>
-            </div>
+          </div>
         </div>
         <!-- <div class="form-group col-6">
             <label for="username" class="col-form-label starlabel">User Email</label>

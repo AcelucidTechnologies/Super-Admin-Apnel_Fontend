@@ -59,18 +59,18 @@ export class AddCoupanComponent implements OnInit {
       this.id = params.get('id');
       if (this.id && this.id != undefined) {
         this.editMode = true
-        this.title = "Edit Coupan"
+        this.title = "Edit Coupon"
         this.getFeatureById()
       } else {
         this.editMode = false
-        this.title = "Add New Coupan Name"
+        this.title = "Add New Coupon Name"
       }
     });
   }
 
   submitForm(){
     console.log("1234567890",this.coupanForm.value);
-    
+
     this.payload = {
       id: this.coupanForm.controls['id'].value,
       coupanName: this.coupanForm.controls['coupanName'].value,
@@ -128,7 +128,7 @@ export class AddCoupanComponent implements OnInit {
 
    getFeatureById() {
     console.log("dfghjkldfghjk");
-    
+
     this.markettingService.getcoupanById(this.id).subscribe((res:COUPANCODEDATA) => {
       this.coupanForm.patchValue({
         id: res.id,

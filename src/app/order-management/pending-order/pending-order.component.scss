@@ -96,3 +96,33 @@ th {
 ::ng-deep.p-datatable .p-datatable-thead > tr > th {
   text-align: center;
 }
+
+:host::ng-deep {
+  .p-datatable .p-datatable-header,.p-paginator{
+      background-color: #fff !important;
+      border: none !important;
+  }
+
+  .p-datatable .p-sortable-column .p-sortable-column-icon{
+      color: #848484;
+  }
+
+  .p-datatable .p-sortable-column.p-highlight:hover{
+      background-color: none;
+  }
+  .p-datatable .p-sortable-column.p-highlight{
+      background-color: none;
+  }
+
+  .p-datatable .p-sortable-column:focus {
+       box-shadow:none
+  }
+
+  .p-datatable .p-sortable-column.p-highlight:hover .p-sortable-column-icon {
+      color: #848484;
+  }
+
+  .p-paginator .p-paginator-pages .p-paginator-page.p-highlight{
+      background-color: rgb(228, 28, 28);
+  }
+}
