@@ -99,3 +99,22 @@ td,th{
   background: none;
   border: none;
   }
+  .input-container {
+    position: relative;
+    border: 0.5px solid rgba(145, 158, 171, 0.32) !important;
+    }
+
+    .input-container-img {
+    position: absolute;
+    left: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 20px;
+    height: 20px;
+    cursor: pointer;
+    }
+
+    .input-container input[type="text"] {
+    padding-left: 30px; /* adjust the padding to fit the image */
+    font-size: 0.875rem;
+    }

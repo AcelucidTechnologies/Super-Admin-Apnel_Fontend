@@ -1,12 +1,28 @@
 <div style="overflow-y: auto; height: 700px; margin-bottom: 100px;">
 <form [formGroup]="bannerSpecialForm">
 
-  <div class="page-heading col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 mb-4" >
+  <!-- <div class="page-heading col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 mb-4" >
     <h1 class="header-text-title">
-      <i pButton style="color: rgb(245, 46, 46);" class="pi pi-arrow-left p-button-text" [routerLink]="['/cms/banner']" pTooltip="Back"
-        tooltipPosition="bottom">
-      </i>{{title}}
+      <button
+      class="mb-2 p-1 back-button"
+      [routerLink]="['/cms/banner']"
+    >
+      <i class="material-icons">arrow_back</i>
+
+    </button>
+
+      <h5>&nbsp;{{title}}</h5>
     </h1>
+  </div> -->
+  <div class="button-heading-container">
+    <button
+      class="mb-2 p-1 back-button"
+      [routerLink]="['/cms/banner']"
+    >
+      <i class="material-icons">arrow_back</i>
+
+    </button>
+    <h5>&nbsp;{{title}}</h5>
   </div>
   <div class="card col-sm-12">
     <div class="row gutters">

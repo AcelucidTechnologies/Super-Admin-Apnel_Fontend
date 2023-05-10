@@ -120,10 +120,10 @@ export class BannerSpecialComponent implements OnInit {
     }
   }
 
-  applyFilterGlobal($event, stringVal) {
+   //Search functionality start here
+   applyFilterGlobal($event, stringVal) {
     this.dt.filterGlobal(($event.target as HTMLInputElement).value, stringVal);
   }
-
   exportPdf() {
     this.bannerDetails = this.bannerList
             const doc = new jsPDF.jsPDF('l', 'pt');

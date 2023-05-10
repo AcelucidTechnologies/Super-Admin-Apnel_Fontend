@@ -68,6 +68,18 @@ export interface PAGE {
     description: string,
 }
 
+export interface DELETE_FEATURE_PRODUCT{
+
+isSpecialProduct: boolean,
+_id: string,
+username: string,
+productName: string,
+productPrice: number,
+productModel: string,
+image: string,
+productQuantity: number,
+
+}
 export interface Admin{
   id: string,
   sortby: number,
