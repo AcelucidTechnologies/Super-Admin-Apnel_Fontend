@@ -41,16 +41,17 @@ export class LoginComponent implements OnInit {
             this.toastr.showError("Login failed", "Login");
           }
           else{
-            localStorage.setItem('UserData', res.username); 
+            localStorage.setItem('UserData', res.username);
             localStorage.setItem('token', res.token);
-            localStorage.setItem('role', res.role); 
+            localStorage.setItem('role', res.role);
+            localStorage.setItem('email', res.email);
             this.router.navigateByUrl("/dashboard");
             // console.log(res.body.data)
             // localStorage.setItem('UserData', res.username);
             let email = localStorage.getItem('email');
             this.toastr.showSuccess("Login Success", "Login");
           }
-        }); 
+        });
 	}
 
   ngOnInit(): void {

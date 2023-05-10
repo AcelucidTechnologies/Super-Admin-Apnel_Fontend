@@ -264,12 +264,13 @@ export class CmsService {
 
      // ------------------------Slider Api-------------------------
 
-     getSliderList(): Observable<SLIDER[]> {
+     getSliderList(): Observable<any[]> {
         const token = localStorage.getItem('token') || '';
+        const email = localStorage.getItem('email') || '';
         let httpOptions = new HttpHeaders().set('x-access-token', token)
-       // const endpointUrl = `${environment.JSON_SERVER}/category`;
-        // return this.http.get<CATEGORY[]>(endpointUrl, { 'headers': httpOptions });
-        return of(sliderData)
+       const endpointUrl = `${environment.JSON_SERVER}/getSlider?username=${email}`;
+        return this.http.get<CATEGORY[]>(endpointUrl, { 'headers': httpOptions });
+        // return of(sliderData)
     }
 
     addSlider(slider: any) {
@@ -295,14 +296,14 @@ export class CmsService {
     deleteSlider(id: number) {
         const token = localStorage.getItem('token') || '';
         let httpOptions = new HttpHeaders().set('x-access-token', token)
-        const endpointUrl = `${environment.JSON_SERVER}/slider/${id}`;
-        //return this.http.delete<CATEGORY>(endpointUrl, { 'headers': httpOptions });
-        let sliderObj = sliderData.map(item => {
-            item.id == id;
-            return item;
-        })
-        sliderData.splice(sliderData.findIndex((index) => index.id == id),1);
-        return of(sliderObj)
+        const endpointUrl = `${environment.JSON_SERVER}/deleteSlider?id=${id}`;
+        return this.http.delete<any[]>(endpointUrl, { 'headers': httpOptions });
+        // let sliderObj = sliderData.map(item => {
+        //     item.id == id;
+        //     return item;
+        // })
+        // sliderData.splice(sliderData.findIndex((index) => index.id == id),1);
+        // return of(sliderObj)
     }
 
     getSliderById(id: number): Observable<SLIDER> {
