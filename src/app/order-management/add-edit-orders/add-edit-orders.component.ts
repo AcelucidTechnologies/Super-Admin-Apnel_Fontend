@@ -8,6 +8,8 @@ import { NgxUiLoaderService, SPINNER } from 'ngx-ui-loader';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { product_details } from 'src/app/_models/catalog';
 import { CommonService } from 'src/app/_services/common';
+import { MatDialog } from '@angular/material/dialog';
+import { DialogCreateOrderComponent } from '../dialog-create-order/dialog-create-order.component';
 @Component({
   selector: 'app-add-edit-orders',
   templateUrl: './add-edit-orders.component.html',
@@ -36,8 +38,10 @@ export class AddEditOrdersComponent implements OnInit {
     private CommonService: CommonService,
     private route: Router,
     private toastr: ToastrMsgService,
+    public dialog: MatDialog,
     private ngxLoader: NgxUiLoaderService,) {
     this.ordersForm = this.fb.group({
+      mobileNumber: ['', [Validators.required, Validators.minLength(10), Validators.maxLength(10), Validators.pattern('^[0-9]*$')]],
       orderId: ['', [Validators.required]],
       customerId: ['', [Validators.required]],
       orderDate: ['', [Validators.required]],
@@ -143,6 +147,15 @@ export class AddEditOrdersComponent implements OnInit {
     })
   }
 
+  openDialog(order: any) {
+    const dialogRef = this.dialog.open(DialogCreateOrderComponent);
+    dialogRef.afterClosed().subscribe(result => {
+      if (result == true) {
+        this.submit()
+      }
+    });
+  }
+
   closedModel() {
     let productName = this.ordersForm.controls['productName'].value;
     let productDetails = this.ProductList.filter(item => item.name == productName);
@@ -153,52 +166,52 @@ export class AddEditOrdersComponent implements OnInit {
     this.showdialog = false
   }
   submit() {
-    this.Billing_Address = {
-      billingPinCode: this.ordersForm.controls['billingPinCode'].value,
-      billingFlatNo: this.ordersForm.controls['billingFlatNo'].value,
-      billingArea: this.ordersForm.controls['billingArea'].value,
-      billingLandmark: this.ordersForm.controls['billingLandmark'].value,
-      billingCity: this.ordersForm.controls['billingCity'].value,
-      billingTown: this.ordersForm.controls['billingTown'].value,
-      billingState: this.ordersForm.controls['billingState'].value,
-    }
-    this.Shipping_Address = {
-      shippingPinCode: this.ordersForm.controls['billingPinCode'].value,
-      shippingFlatNo: this.ordersForm.controls['billingFlatNo'].value,
-      shippingArea: this.ordersForm.controls['billingArea'].value,
-      shippingLandmark: this.ordersForm.controls['billingLandmark'].value,
-      shippingCity: this.ordersForm.controls['billingCity'].value,
-      shippingTown: this.ordersForm.controls['billingTown'].value,
-      shippingState: this.ordersForm.controls['billingState'].value,
-      shippingAddressType: ""
-    }
-    this.payload = {
-      orderId: parseInt(this.CommonService.generateRandomeOrderId()),
-      customerId: "1053",
-      orderDate: this.CommonService.getCurrentDate(),
-      orderNo: this.CommonService.generateRandomNo(),
-      orderStatus: "Confirmed",
-      paymentStatus: "Pending",
-      deliveryType: "standard",
-      deliveryStatus: "Inprogress",
-      paymentType: "Cash",
-      total: this.ordersForm.controls['total'].value,
-      country: "India",
-      email: this.ordersForm.controls['email'].value,
-      mobileNo: this.ordersForm.controls['mobileNo'].value,
-      product_details: this.products,
-      Billing_Address: this.Billing_Address,
-      Shipping_Address: this.Shipping_Address
-    }
-    this.ordersService.createNewOrder(this.payload).subscribe(res => {
-      if (res) {
-        this.toastr.showSuccess("Order Created successfully", "Order Added")
-        this.route.navigate(['/order'])
-      } else {
-        this.toastr.showError("Somthing going wron ", "Order Issue")
-        this.route.navigate(['/order'])
-      }
-    })
+    // this.Billing_Address = {
+    //   billingPinCode: this.ordersForm.controls['billingPinCode'].value,
+    //   billingFlatNo: this.ordersForm.controls['billingFlatNo'].value,
+    //   billingArea: this.ordersForm.controls['billingArea'].value,
+    //   billingLandmark: this.ordersForm.controls['billingLandmark'].value,
+    //   billingCity: this.ordersForm.controls['billingCity'].value,
+    //   billingTown: this.ordersForm.controls['billingTown'].value,
+    //   billingState: this.ordersForm.controls['billingState'].value,
+    // }
+    // this.Shipping_Address = {
+    //   shippingPinCode: this.ordersForm.controls['billingPinCode'].value,
+    //   shippingFlatNo: this.ordersForm.controls['billingFlatNo'].value,
+    //   shippingArea: this.ordersForm.controls['billingArea'].value,
+    //   shippingLandmark: this.ordersForm.controls['billingLandmark'].value,
+    //   shippingCity: this.ordersForm.controls['billingCity'].value,
+    //   shippingTown: this.ordersForm.controls['billingTown'].value,
+    //   shippingState: this.ordersForm.controls['billingState'].value,
+    //   shippingAddressType: ""
+    // }
+    // this.payload = {
+    //   orderId: parseInt(this.CommonService.generateRandomeOrderId()),
+    //   customerId: "1053",
+    //   orderDate: this.CommonService.getCurrentDate(),
+    //   orderNo: this.CommonService.generateRandomNo(),
+    //   orderStatus: "Confirmed",
+    //   paymentStatus: "Pending",
+    //   deliveryType: "standard",
+    //   deliveryStatus: "Inprogress",
+    //   paymentType: "Cash",
+    //   total: this.ordersForm.controls['total'].value,
+    //   country: "India",
+    //   email: this.ordersForm.controls['email'].value,
+    //   mobileNo: this.ordersForm.controls['mobileNo'].value,
+    //   product_details: this.products,
+    //   Billing_Address: this.Billing_Address,
+    //   Shipping_Address: this.Shipping_Address
+    // }
+    // this.ordersService.createNewOrder(this.payload).subscribe(res => {
+    //   if (res) {
+    //     this.toastr.showSuccess("Order Created successfully", "Order Added")
+    //     this.route.navigate(['/order'])
+    //   } else {
+    //     this.toastr.showError("Somthing going wron ", "Order Issue")
+    //     this.route.navigate(['/order'])
+    //   }
+    // })
   }
 
   calCulateTotalAmount() {

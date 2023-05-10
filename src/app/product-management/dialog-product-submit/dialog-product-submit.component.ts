@@ -7,7 +7,12 @@ import { Component, OnInit } from '@angular/core';
 })
 export class DialogProductSubmitComponent implements OnInit {
 
-  constructor() { }
+  Category = [{ value: 'active', label: 'Rs 1000', inactive: false },
+  { value: 'inactive', label: 'Rs 2000', inactive: false }];
+  price:String[];
+  constructor() {
+    this.price = ['Rs 1000', 'Rs 2000', 'Rs 3000', 'Rs 4000' ]
+  }
 
   ngOnInit(): void {
   }

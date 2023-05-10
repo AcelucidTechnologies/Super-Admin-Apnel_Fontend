@@ -15,6 +15,8 @@ import { EditCategoryComponent } from './edit-category/edit-category.component';
 import { DialogProductSubmitComponent } from './dialog-product-submit/dialog-product-submit.component';
 import { ProductOptionListComponent } from './product-option-list/product-option-list.component';
 import { AddProductOptionComponent } from './add-product-option/add-product-option.component';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
 
 @NgModule({
   declarations: [
@@ -37,6 +39,8 @@ import { AddProductOptionComponent } from './add-product-option/add-product-opti
     MatDialogModule,
     MatButtonModule,
     MatCardModule,
+    MatFormFieldModule,
+    MatInputModule
 
   ]
 })

@@ -70,6 +70,7 @@ export let Satatus = [
 
 
 export interface catalogExtraDetailsStructure {
+  productName: any;
 
   country:string,
   language:string,

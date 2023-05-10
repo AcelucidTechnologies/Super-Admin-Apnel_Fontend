@@ -1,0 +1,85 @@
+:host::ng-deep {
+  .p-paginator .p-paginator-pages .p-paginator-page.p-highlight {
+    background-color: rgb(228, 28, 28);
+    margin-bottom: 10px;
+    margin-top: 10px;
+    border-radius: 5px;
+  }
+}
+::ng-deep .p-paginator {
+  background: white !important;
+  border: none !important;
+}
+.head1 {
+  color: black;
+  text-align: center;
+}
+td,
+th {
+  border: none !important;
+  border-bottom: 1px solid rgb(215, 198, 198) !important;
+  background-color: white !important;
+  color: black !important;
+  justify-content: center;
+}
+::ng-deep.edit-delete-button{
+  background-color: white!important;
+  border: none !important;
+}
+::ng-deep .p-datatable .p-datatable-header {
+  background: white;
+  border: none;
+
+}
+.order-input{
+  width: 100px;
+  margin-left: 30px;
+  padding: 5px;
+  text-align: center;
+  border: 1px solid lightgray;
+}
+.custmer-input{
+  width: 100%;
+  padding: 5px;
+  border: 1px solid lightgray;
+}
+.p-dropdown{
+  width: 100%;
+}
+::ng-deep.p-dropdown{
+  border: 1px solid lightgray;
+  width: 100%;
+}
+.flex{
+  display: flex;
+  flex-wrap: wrap;
+}
+.mat-error{
+  font-size: small;
+}
+
+
+.card img{
+  width: 100px;
+  height: 100px;
+  border: 1px solid #D9D9D9;
+  border-radius: 5px;
+  margin-right: 1px;
+}
+.card1{
+  display: inline;
+}
+.add{
+  width:100px;
+  height:100px;
+  border: 1px solid #D9D9D9;
+  border-radius: 5px;
+}
+.add .fa{
+cursor: pointer;
+ padding: 32px;
+  font-size: 3em;
+}
+label{
+  margin-top: 0.5rem;
+}

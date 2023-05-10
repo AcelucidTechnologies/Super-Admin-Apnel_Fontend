@@ -89,7 +89,7 @@ export class AddSliderComponent implements OnInit {
     description: this.sliderForm.controls['description'].value,
     sortby: this.sliderForm.controls['sortby'].value,
   }
- 
+
   this.ngxLoader.start();
   if (this.editMode) {
    this.editSlider();
@@ -97,7 +97,7 @@ export class AddSliderComponent implements OnInit {
     this.addCategory()
   }
   this.route.navigate[('/cms/slider')]
-  
+
   }
 
   addCategory() {
@@ -132,13 +132,13 @@ export class AddSliderComponent implements OnInit {
    }
 
    getSliderById() {
-    this.CmsService.getBannerById(this.id).subscribe((res: SLIDER) => {
+    this.CmsService.getBannerById(this.id).subscribe((res) => {
       this.sliderForm.patchValue({
-        id: res.id,
-        url: res.url,
-       // image: res.image,
-        sortby: res.sortby,
-        description: res.description
+      //   id: res.id,
+      //   url: res.url,
+      //  image: res.image,
+      //   sortby: res.sortby,
+      //   description: res.description
       })
       this.ngxLoader.stop();
     })

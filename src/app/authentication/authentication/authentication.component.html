@@ -1,3 +1,15 @@
 <div class="col-sm-12">
-    <app-login></app-login>
+
+    <app-login *ngIf="isLogin" (forget)="forget()"></app-login>
+
+    <ng-container [ngSwitch]="selectedOption"  *ngIf="!isLogin">
+
+      <app-forget-password *ngSwitchCase="'option1'"  ></app-forget-password>
+      <app-email-verification *ngSwitchCase="'option2'"  ></app-email-verification>
+      <!-- <app-login *ngSwitchDefault></app-login> -->
+    </ng-container>
+
+    <!-- <app-forget-password *ngIf="!isLogin == forget"  ></app-forget-password> -->
+    <!-- <app-email-verification *ngSwitch="!isLogin == emailverification"  ></app-email-verification> -->
+
 </div>

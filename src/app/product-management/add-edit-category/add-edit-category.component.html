@@ -27,25 +27,28 @@
     <div class="row">
       <div class="form-row col-6 pt-3">
         <div class="col-4">
-          <label for="category" class="col-form-label text-left">Category Name</label>
+          <label for="category" class="col-form-label text-left starlabel">Category Name</label>
         </div>
         <div class="col-8">
           <input type="text" class="form-control" formControlName="categoryName" placeholder="enter category name" />
+          <mat-error *ngIf="productCategoryForm.get('categoryName')?.errors?.['required']  && productCategoryForm.get('categoryName').touched"><span>Category Name is required</span></mat-error>
         </div>
       </div>
       <div class="form-row col-6 pt-3">
         <div class="col-4">
-          <label for="category" class="col-form-label text-left">Parent Name/Sub Category</label>
+          <label for="category" class="col-form-label text-left starlabel">Parent Name/Sub Category</label>
         </div>
         <div class="col-8">
           <!-- <input type="text" class="form-control" formControlName="parentCategoryName" placeholder="enter sub category" /> -->
-          <select class="form-control" placeholder="select type" formControlName="status">
+          <!-- <select class="form-control" placeholder="select type" formControlName="status">
             <option value="null" selected>Select Type</option>
             <option *ngFor="let option of CatergoryName" [value]="option.value" [disabled]="option.inactive">
               {{ option.label }}
 
             </option>
-          </select>
+          </select> -->
+          <p-dropdown [options]="subCategory" id="role" formControlName="parentCategoryName" placeholder="Select category Type"></p-dropdown>
+          <mat-error *ngIf="productCategoryForm.get('parentCategoryName')?.errors?.['required']  && productCategoryForm.get('parentCategoryName').touched"><span>Category Name is required</span></mat-error>
         </div>
       </div>
     </div>
@@ -60,12 +63,16 @@
       </div>
       <div class="form-row col-6 pt-4">
         <div class="col-4">
-          <label for="file" class="col-form-label">Image</label>
+          <label for="file" class="col-form-label starlabel">Category Image</label>
         </div>
         <div class="col-8" style="position:relative;">
 
 
-          <input type="file" class="form-control" id="file" color="primary" (change)="OnChange($event)">
+
+
+
+          <input type="file" class="form-control" id="file" color="primary" formControlName="image" (change)="OnChange($event)">
+          <mat-error *ngIf="productCategoryForm.get('image')?.errors?.['required']  && productCategoryForm.get('image').touched"><span> Image is required</span></mat-error>
           <!-- <div>
             <input type="text" placeholder="Choose image" [value]="selectedItem?.name" readonly>
             <button (click)="fileInput.click()">Choose</button>
@@ -118,110 +125,20 @@
           <label for="weight" class="col-form-label text-left">Status</label>
         </div>
         <div class="col-10" style="cursor: pointer;">
-          <select class="form-control" formControlName="statusType" placeholder="select type">
+          <p-dropdown [options]="status" id="role" formControlName="status" placeholder="Select Status Type"></p-dropdown>
+          <!-- <select class="form-control" formControlName="statusType" placeholder="select type">
             <option value="null" selected>Select Country</option>
             <option *ngFor="let option of Category" [value]="option.value" [disabled]="option.inactive">
               {{ option.label }}
 
             </option>
-          </select>
+          </select> -->
 
         </div>
       </div>
 
     </div>
 
-		<!-- <div class="card col-sm-12" style="width: 1000px; height: 650px;">
-			<div class="row gutters">
-				<div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
-					<div class="h-100 mt-5">
-						<div class="card-body">
-
-							<div class="row gutters">
-								<div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
-									<div class="form-group">
-										<label for="name">Name</label>
-										<input type="text" class="form-control" formControlName="categoryName">
-									</div>
-								</div>
-								<div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
-									<div class="form-group">
-										<label for="image">Parent Category Name </label>
-										<input type="text" class="form-control" formControlName="parentCategoryName">
-									</div>
-								</div>
-								<div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
-									<div class="form-group">
-										<label for="Name">Status</label>
-										<input type="text" class="form-control" formControlName="status">
-									</div>
-								</div>
-								<div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
-									<div class="row gutters">
-										<div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
-											<div class="form-group">
-												<label for="Name">Image</label>
-												<input type="file" class="form-control" (change)="OnChange($event)">
-											</div>
-										</div>
-
-										<div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12" *ngIf=" imageUrl !=undefined">
-											<div class="form-group">
-												<img [src]="imageUrl" class="form-control" style="width: 100%; height: 30vh;">
-											</div>
-										</div>
-									</div>
-								</div>
-							</div>
-
-							<div class="page-heading">
-								<h4 class="header-text-title">Description</h4>
-							</div>
-							<div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
-								<div class="form-group">
-									<label for="image">Description</label>
-									<ckeditor formControlName="description"></ckeditor>
-								</div>
-							</div>
-							<div class="page-heading">
-								<h4 class="header-text-title">Meta Description</h4>
-							</div>
-							<div class="row gutters">
-								<div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
-									<div class="form-group">
-										<label for="name">Meta_Title</label>
-										<textarea class="form-control" formControlName="metaTitle"></textarea>
-									</div>
-								</div>
-								<div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
-									<div class="form-group">
-										<label for="name">Meta_Keywords</label>
-										<textarea class="form-control" formControlName="metaKeyword"></textarea>
-									</div>
-								</div>
-								<div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
-									<div class="form-group">
-										<label for="image">Meta_Description</label>
-										<textarea class="form-control" formControlName="metaDescription"></textarea>
-
-									</div>
-								</div>
-							</div>
-							<div class="row gutters mt-4">
-								<div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 mt-4">
-									<div class="text-right">
-										<button pButton type="button" id="submit" name="submit" class="p-button-danger mr-4"
-											[routerLink]="['/product/categorylist']">Cancel</button>
-										<button pButton type="button" id="submit" name="submit" class="p-button-success"
-											(click)="submitForm()">Submit</button>
-									</div>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div> -->
     <div class="d-flex justify-content-end col-12 mt-5 p-0 pr-3">
       <button type="submit" id="submit" name="submit" style="background: rgb(228, 28, 28);border:none; cursor:pointer" class="btn btn-info mr-3" (click)="submitForm()" [disabled]="!productCategoryForm.valid">Submit</button>
       <button class="btn btn-info" id="submit" name="submit" style="background: #637381;border:none" [routerLink]="['/product/categorylist']">Cancel</button>

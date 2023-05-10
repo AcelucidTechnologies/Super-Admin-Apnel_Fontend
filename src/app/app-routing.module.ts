@@ -11,6 +11,11 @@ const routes: Routes = [
     canActivate: [AuthGuard]
   },
   {
+    path: 'forgetPassword',
+    loadChildren: () => import('./dashboard/dashboard.module').then(mod => mod.DashboardModule),
+    canActivate: [AuthGuard]
+  },
+  {
     path: 'profile',
     loadChildren: () => import('./profile/profile.module').then(mod => mod.ProfileModule),
     canActivate: [AuthGuard]
@@ -110,7 +115,9 @@ const routes: Routes = [
     loadChildren: () => import('./Roles_permissions/roles/roles.module').then(mod=>mod.RolesModule),
     canActivate: [AuthGuard]
   },
+
   { path: '', component: AuthenticationComponent },
+  // { path: 'forgetPassword', component: ForgetPasswordComponent },
   { path: '',   redirectTo: '/login', pathMatch: 'full' },
   { path: '**', redirectTo: '', pathMatch: 'full' }
 ];

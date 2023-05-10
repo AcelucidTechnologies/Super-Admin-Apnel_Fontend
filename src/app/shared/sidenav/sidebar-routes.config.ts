@@ -26,13 +26,13 @@ export const SideNaveMenueRoute = [
     items: [
     {
       label: 'Banner Special',
-  
+
       icon: 'pi pi-clone',
       routerLink: ['/cms/banner'],
     },
     {
       label: 'Feature Product',
-  
+
       icon: 'pi pi-list',
       routerLink: ['/cms/feature'],
     },
@@ -43,20 +43,62 @@ export const SideNaveMenueRoute = [
     },
     {
       label: 'Special-Offer',
-  
+
       icon: 'pi pi-list',
       routerLink: ['/cms/special-offer'],
     },
     {
       label: 'Page setup',
-  
+
       icon: 'pi pi-list',
       routerLink: ['/cms/page'],
     },
     ]
   },
+  {
+    label: 'Order',
+    icon: 'pi pi-shopping-cart',
+    items: [
+      {
+        label: 'Create Order',
+        icon: 'pi pi-fw pi-shopping-cart',
+        routerLink: ['/order/editOrder'],
+      },
+      {
+        label: 'Confirmed Order',
+        icon: 'pi pi-fw pi-user',
+        routerLink: ['/order/confirmOrder'],
+      },
+      {
+        label: 'Delivered Order',
+        icon: 'pi pi-fw pi-user',
+        routerLink: ['/order/deliveredOrder'],
+      },
+      {
+        label: 'Return Order',
+        icon: 'pi pi-fw pi-user',
+        routerLink: ['/order/returnOrder'],
+      },
+      {
+        label: 'Pending Order',
+        icon: 'pi pi-fw pi-user',
+        routerLink: ['/order/pendingOrder'],
+      },
+      {
+        label: 'Order Status',
+        icon: 'pi pi-fw pi-user',
+        routerLink: ['/order/order-status'],
+      },
+      {
+        label: 'Shipping Order',
+        icon: 'pi pi-fw pi-user',
+        routerLink: ['/order/shipment'],
+      },
 
-  
+    ],
+  },
+
+
   {
     label: 'Catalogue',
     icon: 'pi pi-folder',
@@ -78,7 +120,7 @@ export const SideNaveMenueRoute = [
       },
     ],
   },
-  
+
   {
     label: 'Marketing',
     icon: 'pi pi-id-card',
@@ -125,7 +167,7 @@ export const SideNaveMenueRoute = [
     ]
   },
 
-  
+
   {
     label: 'User',
     icon: 'pi pi-users',
@@ -206,7 +248,7 @@ export const SideNaveMenueRoute = [
         label: 'Setting',
         icon: 'pi pi-star',
         items: [
-         
+
           {
             label: 'Rating Criteria List',
             icon: 'pi pi-list',
@@ -217,12 +259,12 @@ export const SideNaveMenueRoute = [
             icon: 'pi pi-list',
             routerLink: ['/usertypesettings/usertypelist'],
           },
-    
+
         ]
       },
-     
-      
-     
+
+
+
       // },
       // {
       //   label: 'User',
@@ -270,7 +312,7 @@ export const SideNaveMenueRoute = [
       //         },
       //     ]
       // },
-      
+
       // {
       //   label: 'Leads',
       //   icon: 'pi pi-user',
@@ -290,5 +332,5 @@ export const SideNaveMenueRoute = [
       // },
     ],
   },
-  
+
 ];

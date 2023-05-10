@@ -18,6 +18,7 @@ import { BookingDetailsComponent } from './booking/booking-details/booking-detai
 import { SubscriptionListComponent } from './subscription/subscription/subscription-list/subscription-list.component';
 import { AddSubscriptionComponent } from './subscription/subscription/add-subscription/add-subscription.component';
 import { AddCoupanComponent } from './subscription/addons/add-coupan/add-coupan.component';
+import { CreateOrderComponent } from './order-detail/create-order/create-order.component';
 
 @NgModule({
   declarations: [
@@ -26,6 +27,7 @@ import { AddCoupanComponent } from './subscription/addons/add-coupan/add-coupan.
     SubscriptionListComponent,
     AddSubscriptionComponent,
     AddCoupanComponent,
+    CreateOrderComponent,
     ],
   imports: [
     CommonModule,

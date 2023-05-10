@@ -32,9 +32,10 @@ mat-accordion .mat-expansion-panel:last-of-type {
 }
 ::ng-deep.p-dropdown{
   border: 1px solid lightgray;
+  width: 100%;
 }
 :host::ng-deep  {
-  starlabel::after {
+  .starlabel::after {
   content: "*";
   color: rgb(228, 28, 28);
 }
@@ -43,6 +44,10 @@ mat-accordion .mat-expansion-panel:last-of-type {
   display: flex;
   flex-wrap: wrap;
 }
+.mat-error{
+  font-size: small;
+}
+
 
 .card img{
   width: 100px;
