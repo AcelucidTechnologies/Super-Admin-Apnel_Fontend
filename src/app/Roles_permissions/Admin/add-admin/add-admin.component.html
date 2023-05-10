@@ -32,8 +32,8 @@
             <!-- <label for="imageUpload" class="col-form-label">Image</label> -->
            <div class="mt-1">
             <div id="imageUpload" class="custom-file col-8 ">
-              <input type="file" class="custom-file-input" id="inputGroupFile01" (change)="OnChangesEvent($event)">
-              <label class="custom-file-label" for="inputGroupFile01">Choose file</label>
+              <input type="file" class="custom-file-input" id="inputGroupFile01" >
+              <label class="custom-file-label" for="inputGroupFile01" (change)="OnChangesEvent($event)">Choose file</label>
             </div>
         </div>
         </div>
@@ -126,7 +126,7 @@
         </div>
     </div>
     <div class="d-flex justify-content-end ">
-        <button type="submit" style="background: rgb(228, 28, 28);border:none" class="btn btn-info mr-3" [disabled]="(!adminForm.valid)"(click)="submit()">Submit</button>
+        <button type="submit" style="background: rgb(228, 28, 28);border:none" class="btn btn-info mr-3" [disabled]="(!adminForm.valid)" (click)="submit()">Submit</button>
         <button class="btn btn-info" style="background: #637381;border:none" [routerLink]="['/roleandpermission/adminlist']">Cancel</button>
     </div>
 </form>

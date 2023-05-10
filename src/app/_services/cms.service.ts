@@ -2,7 +2,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { of, Observable, from } from 'rxjs';
 import { environment } from '../../environments/environment';
-import { CATEGORY, SUB_CATEGORY, SPONSOR, BANNERSPECIAL, FEATURE, SPECIALOFFER } from '../_models/cms'
+import { CATEGORY, SUB_CATEGORY, SPONSOR, BANNERSPECIAL, FEATURE, SPECIALOFFER, Admin, DELETE_FEATURE_PRODUCT } from '../_models/cms'
 import { category, sub_category } from '../DummyData/category_subCategory';
 import {sponsors} from '../DummyData/sponsor'
 import { bannerSpecialData } from '../DummyData/bannerSpecial';
@@ -10,6 +10,7 @@ import { featureData } from '../DummyData/feature';
 import { SLIDER } from '../_models/slider';
 import { sliderData } from '../DummyData/slider';
 import { specialOffer } from '../DummyData/special-offer';
+import { access } from 'fs';
 
 @Injectable({
     providedIn: 'root'
@@ -161,17 +162,19 @@ export class CmsService {
         return of(sponsorObj)
     }
 
-    addSpecialBanner(specialData: any) {
+    addSpecialBanner(payload: any) {
         const token = localStorage.getItem('token') || '';
+        console.log("add admin todkemn"  + token)
         let httpOptions = new HttpHeaders().set('x-access-token', token)
-        const endpointUrl = `${environment.JSON_SERVER}/createBannerSpecial?`;
-        return this.http.post<any>(endpointUrl, { 'headers': httpOptions });
+        const endpointUrl = `${environment.JSON_SERVER}/createBannerSpecial`;
+        // return this.http.post<any>(endpointUrl, {'headers': {'x-access-token': token}})
+        return this.http.post<any>(endpointUrl, payload,{ 'headers': httpOptions });
         // specialData.id = bannerSpecialData.length + 1
         // bannerSpecialData.push(specialData);
         // return of(specialData)
     }
 
-    getSpecialBannerList(): Observable<any[]> {
+    getSpecialBannerList(id:string): Observable<any[]> {
         const token = localStorage.getItem('token') || '';
         const email = localStorage.getItem('email')
         let httpOptions = new HttpHeaders().set('x-access-token', token)
@@ -187,7 +190,7 @@ export class CmsService {
       const token = localStorage.getItem('token') || '';
       let httpOptions = new HttpHeaders().set('x-access-token', token)
       const endpointUrl = `${environment.JSON_SERVER}/getBannerSpecial?id=${id}`;
-      let indexObj = bannerSpecialData.findIndex((obj)=>obj.id==id);
+      // let indexObj = bannerSpecialData.findIndex((obj)=>obj.id==id);
       return this.http.get<any[]>(endpointUrl,{ 'headers': httpOptions });
       // return of(bannerSpecialData[indexObj])
   }
@@ -199,7 +202,7 @@ export class CmsService {
         let httpOptions = new HttpHeaders().set('x-access-token', token)
         // const endpointUrl = `${environment.JSON_SERVER}/category/${id}`;
         const endpointUrl = `${environment.JSON_SERVER}/deleteBannerSpecial?id=${id}`;
-        return this.http.delete<CATEGORY>(endpointUrl, { 'headers': httpOptions });
+        return this.http.delete<Admin>(endpointUrl, { 'headers': httpOptions });
         // let bannerObj = bannerSpecialData.map(item => {
         //     item.id == id;
         //     return item;
@@ -208,26 +211,38 @@ export class CmsService {
         // return of(bannerObj)
     }
 
-    editSpecialBanner(bannerData: BANNERSPECIAL, id: number) {
+    editSpecialBanner(payload: any, id: number) {
         const token = localStorage.getItem('token') || '';
+
+
+
         let httpOptions = new HttpHeaders().set('x-access-token', token)
         const endpointUrl = `${environment.JSON_SERVER}/updateBannerSpecial?id=${id}`;
-        // return this.http.put<CATEGORY>(endpointUrl, categoryData, { 'headers': httpOptions });
-        let bannerObj = bannerSpecialData.findIndex((obj) => obj.id == id);
-        bannerSpecialData[bannerObj] = bannerData
-        return of(bannerData)
+        const formData = new FormData();
+        formData.append('username', payload.username);
+        formData.append('bannerName', payload.bannerName);
+          formData.append('bannerDescription', payload.bannerDescription);
+          formData.append('bannerOrder', payload.bannerOrder);
+          formData.append('image', payload.image);
+        return this.http.put<Admin>(endpointUrl,payload, { 'headers': httpOptions });
+
+        // let bannerObj = bannerSpecialData.findIndex((obj) => obj.id == id);
+        // bannerSpecialData[bannerObj] = bannerData
+        // return of(bannerData)
+
     }
 
 
 
     // ----------------FEATURE API----------------
 
-    getFeatureList(): Observable<FEATURE[]> {
+    getFeatureList(): Observable<any[]> {
         const token = localStorage.getItem('token') || '';
+        const email = localStorage.getItem('email')
         let httpOptions = new HttpHeaders().set('x-access-token', token)
-       // const endpointUrl = `${environment.JSON_SERVER}/category`;
-        // return this.http.get<CATEGORY[]>(endpointUrl, { 'headers': httpOptions });
-        return of(featureData)
+       const endpointUrl = `${environment.JSON_SERVER}/getFeatureProduct?username=${email}`;
+        return this.http.get<any[]>(endpointUrl, { 'headers': httpOptions });
+        // return of(featureData)
     }
 
     addFeatureProduct(feature: any) {
@@ -261,25 +276,26 @@ export class CmsService {
     deleteProduct(id: number) {
         const token = localStorage.getItem('token') || '';
         let httpOptions = new HttpHeaders().set('x-access-token', token)
-        const endpointUrl = `${environment.JSON_SERVER}/category/${id}`;
-        //return this.http.delete<CATEGORY>(endpointUrl, { 'headers': httpOptions });
-        let productObj = featureData.map(item => {
-            item.id == id;
-            return item;
-        })
-        featureData.splice(featureData.findIndex((index) => index.id == id),1);
-        return of(productObj)
+        const endpointUrl = `${environment.JSON_SERVER}/deleteFeatureProduct?id=${id}`;
+        return this.http.delete<DELETE_FEATURE_PRODUCT>(endpointUrl, { 'headers': httpOptions });
+        // let productObj = featureData.map(item => {
+        //     item.id == id;
+        //     return item;
+        // })
+        // featureData.splice(featureData.findIndex((index) => index.id == id),1);
+        // return of(productObj)
     }
 
 
      // ------------------------Slider Api-------------------------
 
-     getSliderList(): Observable<SLIDER[]> {
+     getSliderList(): Observable<any[]> {
         const token = localStorage.getItem('token') || '';
+        const email = localStorage.getItem('email') || '';
         let httpOptions = new HttpHeaders().set('x-access-token', token)
-       // const endpointUrl = `${environment.JSON_SERVER}/category`;
-        // return this.http.get<CATEGORY[]>(endpointUrl, { 'headers': httpOptions });
-        return of(sliderData)
+       const endpointUrl = `${environment.JSON_SERVER}/getSlider?username=${email}`;
+        return this.http.get<CATEGORY[]>(endpointUrl, { 'headers': httpOptions });
+        // return of(sliderData)
     }
 
     addSlider(slider: any) {
@@ -305,14 +321,14 @@ export class CmsService {
     deleteSlider(id: number) {
         const token = localStorage.getItem('token') || '';
         let httpOptions = new HttpHeaders().set('x-access-token', token)
-        const endpointUrl = `${environment.JSON_SERVER}/slider/${id}`;
-        //return this.http.delete<CATEGORY>(endpointUrl, { 'headers': httpOptions });
-        let sliderObj = sliderData.map(item => {
-            item.id == id;
-            return item;
-        })
-        sliderData.splice(sliderData.findIndex((index) => index.id == id),1);
-        return of(sliderObj)
+        const endpointUrl = `${environment.JSON_SERVER}/deleteSlider?id=${id}`;
+        return this.http.delete<any[]>(endpointUrl, { 'headers': httpOptions });
+        // let sliderObj = sliderData.map(item => {
+        //     item.id == id;
+        //     return item;
+        // })
+        // sliderData.splice(sliderData.findIndex((index) => index.id == id),1);
+        // return of(sliderObj)
     }
 
     getSliderById(id: number): Observable<SLIDER> {

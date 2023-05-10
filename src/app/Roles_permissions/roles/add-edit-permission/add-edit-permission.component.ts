@@ -16,7 +16,7 @@ export class AddEditPermissionComponent implements OnInit {
   title: string
   isChecked = true;
   isOn: boolean = false;
-  
+
   permissionData = [
     // {
     //   moduleName: 'Order',
@@ -34,17 +34,17 @@ export class AddEditPermissionComponent implements OnInit {
     //   nameForForm: 'OrderShipment'
     // },
     {
-      moduleName: 'Catalog',
+      moduleName: 'Catalogue',
       subModuleName: 'Category',
       nameForForm: 'CatalogCategory'
     },
     {
-      moduleName: 'Catalog',
+      moduleName: 'Catalogue',
       subModuleName: 'Product',
       nameForForm: 'CatalogProduct'
     },
     {
-      moduleName: 'Catalog',
+      moduleName: 'Catalogue',
       subModuleName: 'ProductOption',
       nameForForm: 'CatalogProduct'
     },
@@ -516,7 +516,7 @@ export class AddEditPermissionComponent implements OnInit {
       // })
     }
     if (Object.values(catalogProductFormGroup.value).includes(true) || Object.values(catalogCategoryFormGroup.value).includes(true)) {
-      modules.push('Catalog')
+      modules.push('Catalogue')
       // Object.assign(payload, {
       //   CatalogProduct: {
       //     add: catalogProductFormGroup.controls['add'].value,
@@ -756,5 +756,4 @@ export class AddEditPermissionComponent implements OnInit {
           this.route.navigate(['/modulepermission/rolelist']);
     })
   }
-
 }

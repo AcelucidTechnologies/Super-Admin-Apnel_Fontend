@@ -46,9 +46,9 @@ export class Slider1Component implements OnInit {
     private toastr: ToastrMsgService,
     private permissionService:ModulePermissionService,
     public dialog: MatDialog) {
-      this.permissionService.getModulePermission().subscribe(res=>{ 
+      this.permissionService.getModulePermission().subscribe(res=>{
         this.accessPermission=res[0].CmsBanner
-       
+
       })
      }
 
@@ -56,7 +56,7 @@ export class Slider1Component implements OnInit {
     this.fgsType = SPINNER.squareLoader
     this.ngxLoader.start();
     this.sidebarSpacing = 'contracted';
-   
+
     this.cols = [
       { field: 'image', show: true, headers: 'Image' },
       { field: 'url', show: true, headers: 'URL' },
@@ -67,18 +67,18 @@ export class Slider1Component implements OnInit {
     this.getSliderList();
 
   }
-  
+
   getSliderList() {
-    this.CmsService.getSliderList().subscribe((res: SLIDER[]) => {
+    this.CmsService.getSliderList().subscribe((res) => {
       this.sliderList = res
-      //console.log(this.bannerList,"--------------------")
+      console.log(this.sliderList,"--------------------")
       this.ngxLoader.stop();
     })
   }
 
   deleteSlider(sliderList: any) {
     this.ngxLoader.start();
-    this.CmsService.deleteSlider(sliderList.id).subscribe(res => {
+    this.CmsService.deleteSlider(sliderList._id).subscribe(res => {
       if (res) {
         this.toastr.showSuccess("bannerSpecial deleted successfully", "banner delete")
         this.getSliderList()
@@ -122,8 +122,8 @@ export class Slider1Component implements OnInit {
           const workbook = { Sheets: { 'data': worksheet }, SheetNames: ['data'] };
           const excelBuffer: any = xlsxPackage.write(workbook, { bookType: 'xlsx', type: 'array' });
           this.saveAsExcelFile(excelBuffer, "leads");
-        }   
-        
+        }
+
   saveAsExcelFile(buffer: any, fileName: string): void {
     let EXCEL_TYPE = 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;charset=UTF-8';
     let EXCEL_EXTENSION = '.xlsx';

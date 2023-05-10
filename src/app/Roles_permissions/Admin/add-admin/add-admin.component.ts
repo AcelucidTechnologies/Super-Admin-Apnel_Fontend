@@ -4,6 +4,7 @@ import { ActivatedRoute, Route, Router } from '@angular/router';
 import { AdminService } from 'src/app/_services/admin.service';
 import { passcheck } from '../password.validator';
 import bsCustomFileInput from 'bs-custom-file-input';
+import { ToastrMsgService } from 'src/app/_services/toastr-msg.service';
 
 @Component({
   selector: 'app-add-admin',
@@ -49,7 +50,8 @@ export class AddAdminComponent implements OnInit {
   constructor(private activatedroute:ActivatedRoute,
     // private fb:FormGroup,
     private adminService:AdminService,
-    private route:Router) {
+    private route:Router,
+    private toastr: ToastrMsgService,) {
     this.adminForm=new FormGroup({
       userName: new FormControl('',[Validators.required]),
       userEmail: new FormControl('',[Validators.required]),
@@ -107,7 +109,6 @@ console.log()
     // console.log(data)
     // this.id?this.submitEditedDetails(payload):
     this.submitDetails(payload)
-
   }
 
   OnChangesEvent(event) {
@@ -136,6 +137,9 @@ submitDetails(recievedValue:any){
     console.log(res)
     if (res) {
       this.route.navigate(['/roleandpermission/adminlist']);
+    }
+    else{
+      this.toastr.showError("Somthing wrong Please check", "Error occured")
     }
   });
 }

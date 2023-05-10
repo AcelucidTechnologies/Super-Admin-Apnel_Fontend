@@ -1,31 +1,32 @@
 mat-dialog-content{
-    width:550px;
+  width:600px
+  }
+  :host::ng-deep.dialog1{
+    background: rgb(228, 28, 28);
+    color: white;
+          border-radius: 5px;
+          outline: none;
+      }
+      .dialog2{
+        color: #fff;
+        background: #637381;
+      border-radius: 5px;
+      outline: none;
+      }
+      .mat-dialog-title {
+        text-align: center;
+      }
+
+      .mat-dialog-content {
+        text-align: center;
+      }
+
+      .mat-dialog-actions {
+      display: flex;
+      justify-content: center;
     }
-    :host::ng-deep .dialog1{
-            background-color: rgb(212, 214, 214);
-            border-radius: 5px;
-            outline: none;
-        }
-        div{
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            flex-direction: column;
-        }
-        .mat-typography{
-            display: flex;
-            justify-content: center;
-        }
-        mat-dialog-actions{
-            margin-bottom: 3px;
-        }
-        .bt-1{
-                background-color: #ff9f43;
-                color: #fff;
-                font-size: 20px;
-        }
-        .bt-2{
-            background-color: rgb(228, 28, 28);
-            color: #fff;
-            font-size: 20px;
-        }
+
+    .mat-dialog-actions button {
+      margin: 0 10px;
+    }
+
