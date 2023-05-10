@@ -13,6 +13,31 @@
     </div>
   </div>
 </div>
+<div class="card col-sm-12" style="border: 1px solid #e9ecef; margin-top: 10px;">
+  <p-table #dt responsiveLayout="scroll" [paginator]="true" [rows]="10" [showCurrentPageReport]="true"
+    [value]="adminDetails" currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
+    [responsive]="true" [globalFilterFields]="['username']" borderless="true" [scrollable]="true"
+    [scrollHeight]="'520px'">
+
+    <ng-template pTemplate="caption">
+      <div class="d-flex justify-content-between">
+        <div class="d-flex align-items-center p-0">
+          <div class="input-container">
+            <img src="../../../../assets/images/search-white.svg" class="input-container-img" />
+            <input style="border-radius: 20px; outline: none;" #search pInputText type="text" placeholder="Search..."
+              (input)="applyFilterGlobal($event, 'contains')">
+          </div>
+        </div>
+        <div>
+          <button pButton type="button" pTooltip="Pdf" class="custom-image" tooltipPosition="bottom" (click)=" exportPdf()"> <img src="../../../../assets/images/pdf.svg" alt="Button Image" /></button>
+          <!-- <button pButton pTooltip="Excel" tooltipPosition="bottom" class="custom-image">
+            <img src="../../../../assets/images/excel.svg" alt="Button Image" />
+          </button> -->
+          <button pButton type="button"   pTooltip="Excel" class="custom-image" tooltipPosition="bottom" (click)="exportExcel()"><img src="../../../../assets/images/excel.svg" alt="Button Image" /></button>
+          <button pButton pTooltip="print" tooltipPosition="bottom" class="custom-image">
+            <img src="../../../../assets/images/printer.svg" alt="Button Image" />
+          </button>
+          </div>
 <p-table id="customerTable" #dt  responsiveLayout="scroll" [paginator]="true" [rows]="10"
   [showCurrentPageReport]="true" [value]="adminDetails"
   currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries" [responsive]="true"

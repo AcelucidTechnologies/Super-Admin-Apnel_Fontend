@@ -11,7 +11,7 @@ export class CommonService {
     constructor(
         private http:HttpClient
     ) {
-       
+
     }
     generateRandomNo() {
         var date = new Date()
