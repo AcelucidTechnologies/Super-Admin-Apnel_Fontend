@@ -34,7 +34,11 @@
     </ng-template>
     <ng-template  pTemplate="header">
         <tr>
-
+            <th style="width: 3rem;" >
+              <p-tableHeaderCheckbox type="checkbox" [(ngModel)]="isChecked" [disabled]="!isSpecialProduct"></p-tableHeaderCheckbox>
+                <!-- <label>Is special product?</label>
+<input type="checkbox" [(ngModel)]="isSpecialProduct"> -->
+            </th>
             <th pSortableColumn="productName">
                 <div class="flex justify-content-between align-items-center head1">
                   Product Name
@@ -79,9 +83,16 @@
     </ng-template>
     <ng-template pTemplate="body" let-featureList>
         <tr class="p-selectable-row">
+<<<<<<< Updated upstream
 
 =======
 
+=======
+          <td></td>
+            <!-- <td>
+                <p-tableCheckbox [value]="featureList"></p-tableCheckbox>
+            </td> -->
+>>>>>>> Stashed changes
             <td>
                 <span class="p-column-title">Product Name</span>
                 {{featureList.productName}}

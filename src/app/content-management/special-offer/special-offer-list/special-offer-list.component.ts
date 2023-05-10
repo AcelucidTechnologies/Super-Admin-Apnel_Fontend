@@ -21,9 +21,10 @@ import { DialogSpecialOfferComponent } from '../dialog-special-offer/dialog-spec
 })
 export class SpecialOfferListComponent implements OnInit {
 
- 
+
 
   @ViewChild('dt') dt: Table | undefined;
+  isSpecialProduct = false;
   sidebarSpacing: any;
   cols!: TABLE_HEADING[];
   offerList : SPECIALOFFER[]=[]
@@ -36,13 +37,13 @@ export class SpecialOfferListComponent implements OnInit {
   statuses: any[];
 
   activityValues: number[] = [0, 100];
-  
+
   constructor(private ngxLoader: NgxUiLoaderService,
     private CmsService: CmsService,
     private toastr: ToastrMsgService,
     public dialog: MatDialog,
     private permissionService:ModulePermissionService) {
-      this.permissionService.getModulePermission().subscribe(res=>{ 
+      this.permissionService.getModulePermission().subscribe(res=>{
         this.accessPermission=res[0].CmsBanner
         console.log( this.accessPermission)
       })
@@ -62,10 +63,14 @@ export class SpecialOfferListComponent implements OnInit {
     this.getofferList();
   }
 
+
+
+
+
   getofferList(){
-    this.CmsService.getOfferList().subscribe((res: []) => {
+    this.CmsService.getOfferList().subscribe((res) => {
       this.offerList = res
-      //console.log(this.bannerList,"--------------------")
+      console.log(this.offerList,"--------------------")
       this.ngxLoader.stop();
     })
   }
@@ -88,7 +93,7 @@ export class SpecialOfferListComponent implements OnInit {
       }
     });
   }
-  
+
   onToggleSidebar(sidebarState: any) {
     if (sidebarState === 'open') {
       this.sidebarSpacing = 'contracted';
@@ -112,8 +117,8 @@ export class SpecialOfferListComponent implements OnInit {
           const workbook = { Sheets: { 'data': worksheet }, SheetNames: ['data'] };
           const excelBuffer: any = xlsxPackage.write(workbook, { bookType: 'xlsx', type: 'array' });
           this.saveAsExcelFile(excelBuffer, "leads");
-        }   
-        
+        }
+
   saveAsExcelFile(buffer: any, fileName: string): void {
     let EXCEL_TYPE = 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;charset=UTF-8';
     let EXCEL_EXTENSION = '.xlsx';

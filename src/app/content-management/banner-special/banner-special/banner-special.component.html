@@ -1,5 +1,4 @@
-
-    <div style="height: 700px; margin-bottom: 100px;">
+<div style="height: 700px; margin-bottom: 100px;">
   <div class="page-heading">
     <h1 class="header-text-title" style="margin-left: 1%;">Banner Special</h1>
     <div class="page-btn">
@@ -28,27 +27,24 @@
               <button type="button" style=" border: none;" pButton class="mr-1 custom-image " pTooltip="excel"  (click)="exportExcel()"
                 tooltipPosition="bottom" ><img
                 src="../assets/images/icons/excel.svg"></button>
-
+                <button type="button" style="border: none;" pButton class=" mr-1 custom-image " pTooltip="print"
+                tooltipPosition="bottom" ><img
+                src="../assets/images/icons/printer.svg"></button>
             </div>
         </div>
     </ng-template>
     <ng-template  pTemplate="header">
         <tr>
-
             <th pSortableColumn="bannerName">
                 <div class="flex justify-content-between align-items-center head1">
                     Banner Name
-
-
                     <p-sortIcon field="bannerName"></p-sortIcon>
 
                 </div>
             </th>
             <th pSortableColumn="bannerDescription">
                 <div class="flex justify-content-between align-items-center head1">
-
                     Banner Description
-
                     <p-sortIcon field="bannerDescription"></p-sortIcon>
 
                 </div>
@@ -76,12 +72,10 @@
 
         </tr>
     </ng-template>
-    <ng-template pTemplate="body" let-bannerList let-i="rowIndex">
+    <ng-template pTemplate="body" let-bannerList>
         <tr class="p-selectable-row">
-
             <td>
                 <span class="p-column-title">bannerName</span>
-
                 {{bannerList.bannerName}}
             </td>
             <td>
@@ -94,10 +88,8 @@
                 <span class="p-column-title">Sort </span>
                 {{bannerList.bannerOrder}}
             </td>
-
               <td>
                 <img class="user-name-img" src={{this.imgbucket}}{{bannerList.image}}>
-
             </td>
             <td>
               <a pTooltip="Edit Banner" tooltipPosition="bottom" class="me-3" style="margin-right: 10px;">
@@ -115,9 +107,6 @@
         <tr>
             <td colspan="8">No customers found.</td>
         </tr>
-    </ng-template>
-    <ng-template #defaultImg>
-      <div><img [src]="image" class="user-name-img"></div>
     </ng-template>
 </p-table>
 </div>

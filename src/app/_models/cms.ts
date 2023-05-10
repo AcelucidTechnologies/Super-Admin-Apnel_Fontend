@@ -54,10 +54,19 @@ export interface FEATURE {
 }
 
 export interface SPECIALOFFER {
-    id: number,
-    image: File|any,
-    product: string,
-    category: string,
+    // id: number,
+    // image: File|any,
+    // product: string,
+    // category: string,
+
+   _id:number,
+           username:string,
+           productName:string,
+           productPrice: number,
+           productModel:string,
+           image: File|any,
+           productQuantity: number,
+           isSpecialProduct: boolean,
 
 }
 

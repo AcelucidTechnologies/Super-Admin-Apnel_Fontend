@@ -186,12 +186,12 @@ export class CmsService {
       const url = `https://jsonplaceholder.typicode.com/posts/${id}`;
       return this.http.get<any>(url);
     }
-    getBannerById(id: number): Observable<any[]> {
+    getBannerById(id: number): Observable<any> {
       const token = localStorage.getItem('token') || '';
       let httpOptions = new HttpHeaders().set('x-access-token', token)
-      const endpointUrl = `${environment.JSON_SERVER}/getBannerSpecial?id=${id}`;
+      const endpointUrl = `${environment.JSON_SERVER}/getBannerById?id=${id}`;
       // let indexObj = bannerSpecialData.findIndex((obj)=>obj.id==id);
-      return this.http.get<any[]>(endpointUrl,{ 'headers': httpOptions });
+      return this.http.get<any>(endpointUrl,{ 'headers': httpOptions });
       // return of(bannerSpecialData[indexObj])
   }
 
@@ -218,12 +218,12 @@ export class CmsService {
 
         let httpOptions = new HttpHeaders().set('x-access-token', token)
         const endpointUrl = `${environment.JSON_SERVER}/updateBannerSpecial?id=${id}`;
-        const formData = new FormData();
-        formData.append('username', payload.username);
-        formData.append('bannerName', payload.bannerName);
-          formData.append('bannerDescription', payload.bannerDescription);
-          formData.append('bannerOrder', payload.bannerOrder);
-          formData.append('image', payload.image);
+        // const formData = new FormData();
+        // formData.append('username', payload.username);
+        // formData.append('bannerName', payload.bannerName);
+        //   formData.append('bannerDescription', payload.bannerDescription);
+        //   formData.append('bannerOrder', payload.bannerOrder);
+        //   formData.append('image', payload.image);
         return this.http.put<Admin>(endpointUrl,payload, { 'headers': httpOptions });
 
         // let bannerObj = bannerSpecialData.findIndex((obj) => obj.id == id);
@@ -245,32 +245,30 @@ export class CmsService {
         // return of(featureData)
     }
 
-    addFeatureProduct(feature: any) {
+    addFeatureProduct(payload: any) {
         const token = localStorage.getItem('token') || '';
         let httpOptions = new HttpHeaders().set('x-access-token', token)
-        const endpointUrl = `${environment.JSON_SERVER}/feature`;
-        // return this.http.post<any>(endpointUrl, categoryData, { 'headers': httpOptions });
-        feature.id = featureData.length + 1
-        featureData.push(feature);
-        return of(feature)
+        const endpointUrl = `${environment.JSON_SERVER}/createFeatureProduct`;
+        return this.http.post<any>(endpointUrl, payload, { 'headers': httpOptions });
+
     }
-    editFeature(featuresData: FEATURE, id: number) {
+    editFeature(payload: any, id: number) {
         const token = localStorage.getItem('token') || '';
         let httpOptions = new HttpHeaders().set('x-access-token', token)
-        const endpointUrl = `${environment.JSON_SERVER}/category/${id}`;
-        // return this.http.put<CATEGORY>(endpointUrl, categoryData, { 'headers': httpOptions });
-        let featureObj = featureData.findIndex((obj) => obj.id == id);
-        featureData[featureObj] = featuresData
-        return of(featuresData)
+        const endpointUrl = `${environment.JSON_SERVER}/updateFeatureProduct?id=${id}`;
+        return this.http.put<any>(endpointUrl,payload, { 'headers': httpOptions });
+        // let featureObj = featureData.findIndex((obj) => obj.id == id);
+        // featureData[featureObj] = featuresData
+        // return of(featuresData)
     }
 
-    getFeatureById(id: number): Observable<FEATURE> {
+    getFeatureById(id: number): Observable<any> {
         const token = localStorage.getItem('token') || '';
         let httpOptions = new HttpHeaders().set('x-access-token', token)
-        const endpointUrl = `${environment.JSON_SERVER}/category/${id}`;
-        let indexObj = featureData.findIndex((obj)=>obj.id==id);
-        //return this.http.get<CATEGORY>(endpointUrl,{ 'headers': httpOptions });
-        return of(featureData[indexObj])
+        const endpointUrl = `${environment.JSON_SERVER}/getFeatureProductById?id=${id}`;
+        // let indexObj = featureData.findIndex((obj)=>obj.id==id);
+        return this.http.get<any>(endpointUrl,{ 'headers': httpOptions });
+        // return of(featureData[indexObj])
     }
 
     deleteProduct(id: number) {
@@ -298,24 +296,24 @@ export class CmsService {
         // return of(sliderData)
     }
 
-    addSlider(slider: any) {
+    addSlider(payload: any) {
         const token = localStorage.getItem('token') || '';
         let httpOptions = new HttpHeaders().set('x-access-token', token)
-        const endpointUrl = `${environment.JSON_SERVER}/slider`;
-        // return this.http.post<any>(endpointUrl, categoryData, { 'headers': httpOptions });
-        slider.id = sliderData.length + 1
-        sliderData.push(slider);
-        return of(slider)
+        const endpointUrl = `${environment.JSON_SERVER}/createSlider`;
+        return this.http.post<any>(endpointUrl, payload, { 'headers': httpOptions });
+        // slider.id = sliderData.length + 1
+        // sliderData.push(slider);
+        // return of(slider)
     }
 
-    editSlider(slidersData: SLIDER, id: number) {
+    editSlider(payload: any, id: number) {
         const token = localStorage.getItem('token') || '';
         let httpOptions = new HttpHeaders().set('x-access-token', token)
         const endpointUrl = `${environment.JSON_SERVER}/category/${id}`;
-        // return this.http.put<CATEGORY>(endpointUrl, categoryData, { 'headers': httpOptions });
-        let sliderObj = sliderData.findIndex((obj) => obj.id == id);
-        sliderData[sliderObj] = slidersData
-        return of(slidersData)
+        return this.http.put<any>(endpointUrl, payload, { 'headers': httpOptions });
+        // let sliderObj = sliderData.findIndex((obj) => obj.id == id);
+        // sliderData[sliderObj] = slidersData
+        // return of(slidersData)
     }
 
     deleteSlider(id: number) {
@@ -342,12 +340,12 @@ export class CmsService {
 
     // -----------------special offer Api------------------------------
 
-    getOfferList(): Observable<SPECIALOFFER[]> {
+    getOfferList(): Observable<any[]> {
         const token = localStorage.getItem('token') || '';
         let httpOptions = new HttpHeaders().set('x-access-token', token)
-       // const endpointUrl = `${environment.JSON_SERVER}/category`;
-        // return this.http.get<CATEGORY[]>(endpointUrl, { 'headers': httpOptions });
-        return of(specialOffer)
+       const endpointUrl = `${environment.JSON_SERVER}/getSpecialProduct`;
+        return this.http.get<any[]>(endpointUrl, { 'headers': httpOptions });
+        // return of(specialOffer)
     }
 
     addOffer(offer: any) {
@@ -364,10 +362,10 @@ export class CmsService {
         const token = localStorage.getItem('token') || '';
         let httpOptions = new HttpHeaders().set('x-access-token', token)
         const endpointUrl = `${environment.JSON_SERVER}/category/${id}`;
-        // return this.http.put<CATEGORY>(endpointUrl, categoryData, { 'headers': httpOptions });
-        let sliderObj = specialOffer.findIndex((obj) => obj.id == id);
-        specialOffer[sliderObj] = offersData
-        return of(offersData)
+        return this.http.put<any>(endpointUrl, { 'headers': httpOptions });
+        // let sliderObj = specialOffer.findIndex((obj) => obj.id == id);
+        // specialOffer[sliderObj] = offersData
+        // return of(offersData)
     }
 
     deleteOffer(id: number) {
@@ -388,8 +386,8 @@ export class CmsService {
         let httpOptions = new HttpHeaders().set('x-access-token', token)
         const endpointUrl = `${environment.JSON_SERVER}/slider/${id}`;
         let indexObj = specialOffer.findIndex((obj)=>obj.id==id);
-        //return this.http.get<CATEGORY>(endpointUrl,{ 'headers': httpOptions });
-        return of(specialOffer[indexObj])
+        return this.http.get<any>(endpointUrl,{ 'headers': httpOptions });
+        // return of(specialOffer[indexObj])
     }
 }
 // function categoryData<T>(endpointUrl: string, categoryData: any, arg2: { headers: HttpHeaders; }) {

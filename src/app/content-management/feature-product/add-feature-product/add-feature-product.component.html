@@ -1,10 +1,22 @@
+<div style="overflow-y: auto; height: 700px; margin-bottom: 100px;">
 <form [formGroup]="featureForm">
-    <div class="page-heading col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+    <!-- <div class="page-heading col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
         <h1 class="header-text-title">
             <i pButton style="color: rgb(245, 46, 46);" class="pi pi-arrow-left p-button-text" [routerLink]="['/cms/feature']" pTooltip="Back"
                 tooltipPosition="bottom">
             </i>{{title}}
         </h1>
+    </div> -->
+    <div class="button-heading-container">
+      <button
+        class="mb-2 p-1 back-button"
+        [routerLink]="['/cms/feature']"  pTooltip="Back"
+        tooltipPosition="bottom"
+      >
+        <i class="material-icons">arrow_back</i>
+
+      </button>
+      <h5>&nbsp;{{title}}</h5>
     </div>
     <div class="card col-sm-12">
         <div class="row gutters">
@@ -32,10 +44,10 @@
                             <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
                                 <div class="form-group">
                                     <label for="hyperlink" class="col-form-label text-left starlabel">Modal</label>
-                                    <input type="text" class="form-control" formControlName="modal">
+                                    <input type="text" class="form-control" formControlName="productModel">
                                     <div
-                                        *ngIf="!featureForm.controls['modal'].valid && (featureForm.controls['modal'].touched || featureForm.controls['modal'].dirty)">
-                                        <div [hidden]="!featureForm.controls['modal'].errors['required']"
+                                        *ngIf="!featureForm.controls['productModel'].valid && (featureForm.controls['productModel'].touched || featureForm.controls['productModel'].dirty)">
+                                        <div [hidden]="!featureForm.controls['productModel'].errors['required']"
                                             style="color: rgb(253, 122, 122); font-size:small; font-style: italic;">
                                             Modal is required
                                         </div>
@@ -50,16 +62,16 @@
                             <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
                                 <div class="form-group">
                                     <label for="Name" class="col-form-label text-left starlabel">Price</label><br>
-                                    <input type="text" class="form-control" formControlName="price">
+                                    <input type="text" class="form-control" formControlName="productPrice">
                                       <div
-                                    *ngIf="(!featureForm.controls['price'].valid) && (featureForm.controls['price'].touched || featureForm.controls['price'].dirty)">
-                                    <div [hidden]="!featureForm.controls['price'].errors['required']"
+                                    *ngIf="(!featureForm.controls['productPrice'].valid) && (featureForm.controls['productPrice'].touched || featureForm.controls['productPrice'].dirty)">
+                                    <div [hidden]="!featureForm.controls['productPrice'].errors['required']"
                                       style="color: rgb(253, 122, 122); font-size:small; font-style: italic;">
-                                      price is required
+                                      productPrice is required
                                     </div>
-                                    <div *ngIf="featureForm.controls['price'].errors['pattern']"
+                                    <div *ngIf="featureForm.controls['productPrice'].errors['pattern']"
                                       style="color: rgb(253, 122, 122); font-size:small; font-style: italic;">
-                                      Please enter valid price
+                                      Please enter valid productPrice
                                     </div>
                                   </div>
                                 </div>
@@ -68,19 +80,19 @@
                             <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
                                 <div class="form-group">
                                     <label for="Name" class="col-form-label text-left starlabel">Quantity</label><br>
-                                    <input type="text" class="form-control" formControlName="quantity">
+                                    <input type="text" class="form-control" formControlName="productQuantity">
                                     <div
-                                    *ngIf="(!featureForm.controls['quantity'].valid) && (featureForm.controls['quantity'].touched || featureForm.controls['quantity'].dirty)">
-                                    <div [hidden]="!featureForm.controls['quantity'].errors['required']"
+                                    *ngIf="(!featureForm.controls['productQuantity'].valid) && (featureForm.controls['productQuantity'].touched || featureForm.controls['productQuantity'].dirty)">
+                                    <div [hidden]="!featureForm.controls['productQuantity'].errors['required']"
                                       style="color: rgb(253, 122, 122); font-size:small; font-style: italic;">
                                       quantity is required
                                     </div>
-                                    <div *ngIf="featureForm.controls['quantity'].errors['pattern']"
+                                    <div *ngIf="featureForm.controls['productQuantity'].errors['pattern']"
                                       style="color: rgb(253, 122, 122); font-size:small; font-style: italic;">
                                       Please enter valid quantity
                                     </div>
                                   </div>
-          
+
                                 </div>
                             </div>
 
@@ -101,7 +113,7 @@
                         <div class="row gutters">
                             <div class="col-11 form-group mt-5">
                                 <div class="card">
-                                  <div class="card-body"> 
+                                  <div class="card-body">
                                     <div class="row" style="margin-top: 15px;">
                                       <div class="text-center col-md-12">
                                         <h5>Image Croppier</h5>
@@ -110,11 +122,11 @@
                                           (imageLoaded)="imageLoaded()" (cropperReady)="cropperReady()"
                                           (loadImageFailed)="loadImageFailed()"></image-cropper>
                                       </div>
-                  
+
                                     </div>
                                   </div>
                                 </div>
-                  
+
                               </div>
                         </div>
                         <!-- ------------------------------------- -->
@@ -137,3 +149,4 @@
         </div>
     </div>
 </form>
+</div>

@@ -19,7 +19,7 @@ export class AddSpecialOfferComponent implements OnInit {
   title: string = " "
   imageChangedEvent: any = '';
   id: any;
-  payload: SPECIALOFFER;
+  payload: any;
   image: File;
   editMode: boolean = false
   reg= '([A-Za-z0-9]+)';
@@ -34,7 +34,7 @@ export class AddSpecialOfferComponent implements OnInit {
       id:[''],
       product: ['', [Validators.required, Validators.pattern(this.reg)]],
       category: ['', [Validators.required]],
-     
+
     })
     console.log(this.specialOfferForm)
   }
@@ -58,13 +58,13 @@ export class AddSpecialOfferComponent implements OnInit {
 
   submitForm(){
     this.payload = {
-      id: this.specialOfferForm.controls['id'].value,
-      product: this.specialOfferForm.controls['product'].value,
+      _id: this.specialOfferForm.controls['id'].value,
+      productName: this.specialOfferForm.controls['product'].value,
       image: this.image,
-      category: this.specialOfferForm.controls['category'].value,
+      productModel: this.specialOfferForm.controls['category'].value,
     }
 
-    
+
   this.ngxLoader.start();
   if (this.editMode) {
   this.editOffer()
@@ -108,16 +108,16 @@ export class AddSpecialOfferComponent implements OnInit {
    getOfferById() {
     this.CmsService.getOfferById(this.id).subscribe((res: SPECIALOFFER) => {
       this.specialOfferForm.patchValue({
-        id: res.id,
-        product: res.product,
+        // id: res.id,
+        // product: res.product,
        // image: res.image,
-        category: res.category,
+        // category: res.category,
       })
       this.ngxLoader.stop();
     })
   }
 
-  
+
   fileChangeEvent(event: any): void {
     this.imageChangedEvent = event;
 }

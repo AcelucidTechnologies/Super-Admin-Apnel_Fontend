@@ -18,8 +18,10 @@ export class AddFeatureProductComponent implements OnInit {
   title: string = " "
   imageChangedEvent: any = '';
   id: any;
-  payload: FEATURE;
+  // payload: FEATURE;
+  payload:any
   image: File;
+  testApi:any
   editMode: boolean = false
   reg= '([A-Za-z0-9]+)';
   croppedImage: any = '';
@@ -32,9 +34,9 @@ export class AddFeatureProductComponent implements OnInit {
     this.featureForm = this.fb.group({
       id:[''],
       productName: ['', [Validators.required, Validators.pattern(this.reg)]],
-      modal: ['', [Validators.required]],
-      price: ['', [Validators.required,Validators.pattern("(\.[0-9]{0,9})?")]],
-      quantity: ['', [Validators.required,Validators.pattern("(\[0-9]{0,9})?")]],
+      productModel: ['', [Validators.required]],
+      productPrice: ['', [Validators.required,Validators.pattern("(\.[0-9]{0,9})?")]],
+      productQuantity: ['', [Validators.required,Validators.pattern("(\[0-9]{0,9})?")]],
     })
     console.log(this.featureForm)
   }
@@ -58,15 +60,15 @@ export class AddFeatureProductComponent implements OnInit {
 
   submitForm(){
     this.payload = {
-      id: this.featureForm.controls['id'].value,
+      // id: this.featureForm.controls['id'].value,
       productName: this.featureForm.controls['productName'].value,
       image: this.image,
-      price: this.featureForm.controls['price'].value,
-      quantity: this.featureForm.controls['quantity'].value,
-      modal: this.featureForm.controls['modal'].value,
+      productPrice: this.featureForm.controls['productPrice'].value,
+      productQuantity: this.featureForm.controls['productQuantity'].value,
+      productModel: this.featureForm.controls['productModel'].value,
     }
 
-    
+
   this.ngxLoader.start();
   if (this.editMode) {
   this.editProduct()
@@ -108,20 +110,21 @@ export class AddFeatureProductComponent implements OnInit {
    }
 
    getFeatureById() {
-    this.CmsService.getFeatureById(this.id).subscribe((res: FEATURE) => {
+    this.CmsService.getFeatureById(this.id).subscribe((res) => {
+      this.testApi=res
+      console.log("featur edit apis"+ JSON.stringify(this.testApi))
       this.featureForm.patchValue({
-        id: res.id,
         productName: res.productName,
-       // image: res.image,
-        modal: res.modal,
-        price: res.price,
-        quantity: res.quantity
+       image: res.image,
+       productModel: res.productModel,
+        productPrice: res.productPrice,
+        productQuantity: res.productQuantity,
       })
       this.ngxLoader.stop();
     })
   }
 
-  
+
   fileChangeEvent(event: any): void {
     this.imageChangedEvent = event;
 }

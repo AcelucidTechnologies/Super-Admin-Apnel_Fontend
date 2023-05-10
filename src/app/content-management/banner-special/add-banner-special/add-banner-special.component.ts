@@ -27,6 +27,9 @@ payload:any
   image: File;
   status= false;
   id: any;
+  apiId:any
+
+  testapi:any
 
   editMode: boolean = false
   imageChangedEvent: any = '';
@@ -65,7 +68,8 @@ payload:any
      }
 
   ngOnInit(): void {
-    this.getbannerList()
+    // this.getbannerList()
+
     this.fgsType = SPINNER.squareLoader
     this.ngxLoader.start();
     bsCustomFileInput.init();
@@ -83,6 +87,7 @@ payload:any
         this.addCategory()
       }
     });
+    this.getBannerById()
   }
 
 
@@ -112,11 +117,11 @@ payload:any
 
   submitForm(){
    this.payload = {
-    id: this.bannerSpecialForm.controls['id'].value,
-    url: this.bannerSpecialForm.controls['url'].value,
+    // id: this.bannerSpecialForm.controls['id'].value,
+    bannerName: this.bannerSpecialForm.controls['bannerName'].value,
     image: this.image,
-    description: this.bannerSpecialForm.controls['description'].value,
-    sortby: this.bannerSpecialForm.controls['sortby'].value,
+    bannerOrder: this.bannerSpecialForm.controls['bannerOrder'].value,
+    bannerDescription: this.bannerSpecialForm.controls['bannerDescription'].value,
   }
 
   this.ngxLoader.start();
@@ -166,20 +171,35 @@ payload:any
     })
    }
 
-   getbannerList() {
-    this.CmsService.getSpecialBannerList(this.id).subscribe((res) => {
+  //  getbannerList() {
+  //   this.CmsService.getSpecialBannerList(this.apiId).subscribe((res) => {
 
 
-      this.bannerList = res
+  //     this.bannerList = res
 
-      console.log(this.bannerList,"bannerlist  --------------------")
+  //     console.log(this.bannerList,"bannerlist hello  --------------------")
+  //     this.bannerSpecialForm.patchValue({
+  //       id: res[0].id,
+  //         bannerName: res[0].bannerName,
+  //         image: res[0].image,
+  //        bannerOrder: res[0].bannerOrder,
+  //         bannerDescription: res[0].bannerDescription,
+  //       })
+  //   })
+  // }
+
+  getBannerById() {
+    this.CmsService.getBannerById(this.id).subscribe((res) => {
+      this.testapi = res
+
+      console.log("testing apis" + JSON.stringify(this.testapi))
       this.bannerSpecialForm.patchValue({
-        // id: res[0].id,
-          bannerName: res[0].bannerName,
-          image: res[0].image,
-         bannerOrder: res[0].bannerOrder,
-          bannerDescription: res[0].bannerDescription,
-        })
+        bannerName: res.bannerName,
+       image: res.image,
+       bannerOrder: res.bannerOrder,
+       bannerDescription: res.bannerDescription
+      })
+      this.ngxLoader.stop();
     })
   }
 
@@ -188,10 +208,8 @@ payload:any
   editBannerData(){
 
       this.editData = this.bannerList.filter(item =>
-
         item._id = this.id
       )
-
       this.bannerSpecialForm.patchValue({
         id: this.editData[0].id,
         bannerName: this.editData[0].bannerName,

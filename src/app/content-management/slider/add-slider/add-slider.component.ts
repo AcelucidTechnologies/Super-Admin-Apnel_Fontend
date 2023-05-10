@@ -33,8 +33,8 @@ export class AddSliderComponent implements OnInit {
     private CmsService: CmsService
     ) {
       this.sliderForm = this.fb.group({
-        id:['',],
-        url: ['', [Validators.required, Validators.pattern(this.reg)]],
+        // id:['',],
+        url: ['', [Validators.required]],
         sortby: ['', [Validators.pattern("^[1-5]\d*$")]],
         description: ['', [Validators.required]],
       })
