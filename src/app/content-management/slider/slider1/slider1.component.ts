@@ -31,6 +31,8 @@ export class Slider1Component implements OnInit {
   accessPermission:access;
   exportColumns: any[];
   sliderDetails:any[];
+  imgbucket="https://adminpanelbucket.s3.amazonaws.com/Slider/";
+
   // ----------------------------
 
   customers: SLIDER[];

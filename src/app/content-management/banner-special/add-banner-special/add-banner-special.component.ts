@@ -23,11 +23,15 @@ payload:any
   sidebarSpacing: any;
   title: string = " "
   bannerSpecialForm: FormGroup;
+  bannerImage: any=null;
+  Image:any;
   fgsType: any;
-  image: File;
+
+  Image1:any
   status= false;
   id: any;
   apiId:any
+  imgbucket="https://adminpanelbucket.s3.amazonaws.com/Banner/";
 
   testapi:any
 
@@ -56,7 +60,7 @@ payload:any
       this.bannerSpecialForm = this.fb.group({
         // _id:[''],
         // username: ['', [Validators.required, Validators.pattern(this.reg)]],
-        // bannerOrder: ['', [Validators.pattern("^[1-5]\d*$")]],
+        image: [''],
         bannerName: ['',[Validators.required]],
         bannerOrder: ['',[Validators.required]],
         bannerDescription: ['', [Validators.required]],
@@ -92,8 +96,19 @@ payload:any
 
 
 
-  fileChangeEvent(event: any): void {
-      this.imageChangedEvent = event;
+  fileChangeEvent(event) {
+    this.bannerImage = event.target.files[0];
+    var reader = new FileReader();
+    reader.readAsDataURL(event.target.files[0]);
+
+    reader.onload = (data) => {
+      this.Image = data.target.result;
+      console.log("hello image" + data.target.result)
+      // this.imageChangedEvent = event;
+    }
+
+
+
   }
   imageCropped(event: ImageCroppedEvent) {
       this.croppedImage = event.base64;
@@ -119,10 +134,12 @@ payload:any
    this.payload = {
     // id: this.bannerSpecialForm.controls['id'].value,
     bannerName: this.bannerSpecialForm.controls['bannerName'].value,
-    image: this.image,
+    image: this.Image,
     bannerOrder: this.bannerSpecialForm.controls['bannerOrder'].value,
     bannerDescription: this.bannerSpecialForm.controls['bannerDescription'].value,
   }
+
+  console.log("payload data for submit button" +  JSON.stringify(this.payload))
 
   this.ngxLoader.start();
   if (this.editMode) {
@@ -188,11 +205,12 @@ payload:any
   //   })
   // }
 
+
   getBannerById() {
     this.CmsService.getBannerById(this.id).subscribe((res) => {
       this.testapi = res
 
-      console.log("testing apis" + JSON.stringify(this.testapi))
+      console.log("testing apis" + JSON.stringify(this.testapi.image))
       this.bannerSpecialForm.patchValue({
         bannerName: res.bannerName,
        image: res.image,
@@ -211,7 +229,7 @@ payload:any
         item._id = this.id
       )
       this.bannerSpecialForm.patchValue({
-        id: this.editData[0].id,
+        // id: this.editData[0].id,
         bannerName: this.editData[0].bannerName,
         image: this.editData[0].image,
         bannerOrder: this.editData[0].bannerOrder,

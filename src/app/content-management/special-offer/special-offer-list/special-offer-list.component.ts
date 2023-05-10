@@ -11,7 +11,7 @@ import * as jsPDF from 'jspdf';
 import autoTable from 'jspdf-autotable'
 import * as FileSaver from 'file-saver';
 import * as xlsxPackage from 'xlsx'
-import { SPECIALOFFER } from 'src/app/_models/cms';
+import { ApiResponse, ApiResponseWithResponse, SPECIALOFFER } from 'src/app/_models/cms';
 import { DialogSpecialOfferComponent } from '../dialog-special-offer/dialog-special-offer.component';
 
 @Component({
@@ -27,7 +27,7 @@ export class SpecialOfferListComponent implements OnInit {
   isSpecialProduct = false;
   sidebarSpacing: any;
   cols!: TABLE_HEADING[];
-  offerList : SPECIALOFFER[]=[]
+  offerList : any[]=[]
   accessPermission:access
   productDetails:any[];
   exportColumns: any[];
@@ -65,15 +65,36 @@ export class SpecialOfferListComponent implements OnInit {
 
 
 
+  // getofferList() {
+  //   this.CmsService.getOfferList().subscribe((res: ApiResponse[]) => {
+  //     this.offerList = res.map((item) => {
+  //       return {
+  //         productName: item.productName,
+  //         productPrice: item.productPrice
+  //       };
+  //     });
+  //     console.log(this.offerList, "offer list--------------------");
+  //     this.ngxLoader.stop();
+  //   });
+  // }
 
 
-  getofferList(){
+  getofferList() {
     this.CmsService.getOfferList().subscribe((res) => {
+
+      console.log(this.offerList, "offer list--------------------");
       this.offerList = res
-      console.log(this.offerList,"--------------------")
+      const username = res;
       this.ngxLoader.stop();
-    })
+    });
   }
+
+
+
+
+
+
+
 
   deleteProduct(offerList: any) {
     this.ngxLoader.start();

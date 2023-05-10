@@ -80,13 +80,24 @@
                   </div>
                 </div>
               </div>
-              <div class="col-9 form-group pt-3">
+              <!-- <div class="col-9 form-group pt-3">
                 <label for="imageUpload" class="col-form-label">Image</label>
                 <div id="imageUpload" class="custom-file">
-                  <input type="file" class="custom-file-input" id="inputGroupFile01" (change)="fileChangeEvent($event)">
+                  <input type="file" class="custom-file-input" id="inputGroupFile01"  src={{this.imgbucket}}{{testapi.image}} (change)="fileChangeEvent($event)">
+
                   <label class="custom-file-label" for="inputGroupFile01">Upload file</label>
                 </div>
+              </div> -->
+              <div class="col-9 form-group pt-3">
+                <label for="imageUpload" class="col-form-label">Image</label>
+                <div class="d-flex justify-content-start h-75"><img class="img-content" [src]="Image" /></div>
+                <div id="imageUpload" class="custom-file">
+                  <input type="file" class="custom-file-input" id="inputGroupFile01"  (change)="fileChangeEvent($event)">
+                  <label class="custom-file-label" for="inputGroupFile01">Upload file</label>
+                </div>
+                <!-- <img class="img-content" /> -->
               </div>
+
 
               <div class="col-11 form-group mt-5">
                 <div class="card">

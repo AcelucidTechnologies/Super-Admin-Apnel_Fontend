@@ -14,7 +14,8 @@ import { log } from 'console';
 import * as jsPDF from 'jspdf';
 import autoTable from 'jspdf-autotable'
 import * as FileSaver from 'file-saver';
-import * as xlsxPackage from 'xlsx'
+import * as xlsxPackage from 'xlsx';
+import { ApiResponse } from 'src/app/_models/cms';
 
 
 @Component({
@@ -28,7 +29,7 @@ export class BannerSpecialComponent implements OnInit {
   sidebarSpacing: any;
   cols!: TABLE_HEADING[];
   fgsType: any;
-  bannerList: BANNERSPECIAL[]=[]
+  bannerList: any[]=[]
   accessPermission:access
   bannerDetails:any[];
   exportColumns: any[];
@@ -84,7 +85,8 @@ export class BannerSpecialComponent implements OnInit {
 
   getbannerList() {
     this.CmsService.getSpecialBannerList(this.id).subscribe((res) => {
-      this.bannerList = res
+      // this.bannerList = res
+      this.bannerList = res.filter((item) => item);
       console.log(this.bannerList,"--------------------")
       this.ngxLoader.stop();
     })

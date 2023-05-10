@@ -35,6 +35,7 @@ export class FeatureProductListComponent implements OnInit {
 
   selectedProduct: FEATURE[]=[]
   statuses: any[];
+  imgbucket="https://adminpanelbucket.s3.amazonaws.com/Feature/";
 
   activityValues: number[] = [0, 100];
 

@@ -106,3 +106,39 @@ export interface USER_BANNER_LIST{
    bannerOrder:string,
    image:string,
 }
+export interface ApiResponse {
+
+    _id: string;
+    username: string;
+    productName: string; // add this line
+    productPrice: number;
+    productModel: string;
+    image: string;
+    productQuantity: number;
+    isSpecialProduct: boolean;
+
+
+
+
+  // response:[ { _id: string;
+  //   username: string;
+  //   productName: string;
+  //   productPrice: number;
+  //   productModel: string;
+  // }];
+}
+
+
+export interface ApiResponseWithResponse {
+  response: [{
+    _id: string;
+    username: string;
+    productName: string;
+    productPrice: number;
+    productModel: string;
+    image: string;
+    productQuantity: number;
+    isSpecialProduct: boolean;
+    __v: number;
+  }];
+}
