@@ -26,12 +26,6 @@
       <ng-template pTemplate="caption">
         <div class="d-flex justify-content-between">
           <div class="d-flex align-items-center p-0" >
-            <img
-              style="margin-right: 5px"
-              src="../assets/images/icons/filter.svg"
-              class="filter"
-              alt="img"
-            />
             <div class="input-container">
               <img
                 src="../../../assets/images/search-white.svg"
@@ -75,13 +69,50 @@
 
       <ng-template pTemplate="header" let-columns>
         <tr>
-          <th *ngFor="let col of columns">{{col.headers}}</th>
+
+        <th pSortableColumn="name">
+          <div class="flex justify-content-between align-items-center head1">
+            UserName
+              <p-sortIcon field="name"></p-sortIcon>
+
+          </div>
+      </th>
+
+      <th pSortableColumn="email">
+        <div class="flex justify-content-between align-items-center head1">
+          Email
+            <p-sortIcon field="email"></p-sortIcon>
+
+        </div>
+    </th>
+
+    <th pSortableColumn="phone">
+      <div class="flex justify-content-between align-items-center head1">
+        Phone
+          <p-sortIcon field="phone"></p-sortIcon>
+      </div>
+  </th>
+
+  <th pSortableColumn="role">
+    <div class="flex justify-content-between align-items-center head1">
+      Role
+        <p-sortIcon field="role"></p-sortIcon>
+
+    </div>
+</th>
+
+<th pSortableColumn="status">
+  <div class="flex justify-content-between align-items-center head1">
+  Status
+      <p-sortIcon field="status"></p-sortIcon>
+
+  </div>
+</th>
           <th>Options</th>
         </tr>
       </ng-template>
       <ng-template pTemplate="body" let-i="rowIndex" let-usersList>
         <tr>
-          <td>{{usersList.id}}</td>
           <td>{{usersList.name}}</td>
           <td>
             {{usersList.email}}

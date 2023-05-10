@@ -13,9 +13,9 @@
     [filterDelay]="0" [globalFilterFields]="['url','description']" styleClass="p-datatable" class="abc">
     <ng-template pTemplate="caption">
         <div class="table-header">
-            
+
             <span style="display: flex; justify-content: center; align-items: center;" class="p-input-icon-left ">
-              <img style="margin-right: 5px;" src="../assets/images/icons/filter.svg" class="filter" alt="img">
+
                 <input style="outline: none; border-radius: 5px; border: 1px solid rgb(195, 183, 183); padding: 6px;" type="text" (input)="applyFilterGlobal($event, 'contains')" placeholder="Search..." />
             </span>
 
@@ -24,25 +24,15 @@
     </ng-template>
     <ng-template  pTemplate="header">
         <tr>
-            <th style="width: 3rem;">
-                <p-tableHeaderCheckbox></p-tableHeaderCheckbox>
-            </th>
-            <th pSortableColumn="url">
-                <div class="flex justify-content-between align-items-center head1">
-                    Sr.no
-                    <p-sortIcon field="id"></p-sortIcon>
-                    
-                </div>
-            </th>
-            <th pSortableColumn="description">
+            <th pSortableColumn="customerName">
                 <div class="flex justify-content-between align-items-center head1">
                     Customer Name
                     <p-sortIcon field="customerName"></p-sortIcon>
-                    
+
                 </div>
             </th>
 
-            <th pSortableColumn="sortby">
+            <th pSortableColumn="planName">
               <div class="flex justify-content-between align-items-center head1">
                  Plan Name
                   <p-sortIcon field="planName"></p-sortIcon>
@@ -71,26 +61,19 @@
         <th>
           <div class="flex justify-content-between align-items-center head1">
               Action
-              
+
           </div>
-      </th>   
+      </th>
         </tr>
     </ng-template>
     <ng-template pTemplate="body" let-subscriptionList>
         <tr class="p-selectable-row">
             <td>
-                <p-tableCheckbox [value]="subscriptionList"></p-tableCheckbox>
-            </td>
-            <td>
-                <span class="p-column-title">Url</span>
-                {{subscriptionList.id}}
-            </td>
-            <td>
                 <span class="p-column-title">Description</span>
-                
+
                 {{subscriptionList.customerName}}
             </td>
-           
+
             <td>
                 <span class="p-column-title">Date</span>
                 {{subscriptionList.planName}}
@@ -115,7 +98,7 @@
                   <img src="../assets/images/icons/delete.svg" (click)="deleteBanner(subscriptionList)" alt="img">
               </a>
           </td>
-            
+
         </tr>
     </ng-template>
     <ng-template pTemplate="emptymessage">

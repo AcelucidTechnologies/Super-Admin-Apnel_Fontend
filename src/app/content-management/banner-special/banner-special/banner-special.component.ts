@@ -33,7 +33,10 @@ export class BannerSpecialComponent implements OnInit {
   accessPermission:access
   bannerDetails:any[];
   exportColumns: any[];
-  id:string
+
+  imgbucket="https://adminpanelbucket.s3.amazonaws.com/Banner/";
+=======
+
   // ----------------------------
 
   customers: BANNERSPECIAL[];

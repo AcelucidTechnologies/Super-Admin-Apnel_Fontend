@@ -13,9 +13,8 @@
 			[globalFilterFields]="['shipmentId','orderId']" styleClass="p-datatable-striped">
 
       <ng-template pTemplate="caption">
-        <div class="d-flex justify-content-between">
+        <div class="d-flex justify-content-between"  style="margin-left: 20px;">
           <div class="d-flex align-items-center p-0">
-            <img style="margin-right: 5px" src="../assets/images/icons/filter.svg" class="filter" alt="img" />
             <div class="input-container">
               <img src="../../../../assets/images/search-white.svg" class="input-container-img" />
               <input #search pInputText type="text" placeholder="Search..."
@@ -32,15 +31,49 @@
       </ng-template>
 			<ng-template pTemplate="header" let-columns>
 				<tr>
-					<th>S.No</th>
-					<th *ngFor="let col of columns">{{col.headers}}</th>
+          <th pSortableColumn="orderId">
+            <div class="flex justify-content-between align-items-center head1">
+              Order Id
+                <p-sortIcon field="orderId"></p-sortIcon>
 
-				</tr>
+            </div>
+        </th>
+
+        <th pSortableColumn="Shippingto">
+          <div class="flex justify-content-between align-items-center head1">
+            Customer Name
+              <p-sortIcon field="Shippingto"></p-sortIcon>
+
+          </div>
+      </th>
+
+      <th pSortableColumn="mobileNo">
+        <div class="flex justify-content-between align-items-center head1">
+          Contact No
+            <p-sortIcon field="mobileNo"></p-sortIcon>
+
+        </div>
+    </th>
+
+    <th pSortableColumn="Totalquantity">
+      <div class="flex justify-content-between align-items-center head1">
+        Total
+          <p-sortIcon field="Totalquantity"></p-sortIcon>
+
+      </div>
+  </th>
+  <th pSortableColumn="ShipmentDate">
+    <div class="flex justify-content-between align-items-center head1">
+      Order Date
+        <p-sortIcon field="ShipmentDate"></p-sortIcon>
+
+    </div>
+</th>
+</tr>
+
 			</ng-template>
 			<ng-template pTemplate="body" let-i="rowIndex" let-shippingData>
 				<tr>
-					<td>{{i+1}}</td>
-
 					<td>{{shippingData?.OrderDetails?.orderId}}</td>
 					<td>{{shippingData.Shippingto}}</td>
 					<td>{{shippingData?.OrderDetails?.mobileNo}}</td>

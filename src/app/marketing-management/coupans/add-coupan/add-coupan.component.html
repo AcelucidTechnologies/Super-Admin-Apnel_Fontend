@@ -23,13 +23,13 @@
                         <div class="row gutters">
                             <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
                                 <div class="form-group">
-                                    <label for="name" class="col-form-label text-left starlabel">Coupan Name</label>
+                                    <label for="name" class="col-form-label text-left starlabel">Coupon Name</label>
                                     <input type="text" class="form-control" placeholder="Enter Coupan Name" formControlName="coupanName">
                                     <div
                                         *ngIf="!coupanForm.controls['coupanName'].valid && (coupanForm.controls['coupanName'].touched || coupanForm.controls['coupanName'].dirty)">
                                         <div [hidden]="!coupanForm.controls['coupanName'].errors['required']"
                                             style="color: rgb(253, 122, 122); font-size:small; font-style: italic;">
-                                            Coupan Name is required
+                                            Coupon Name is required
                                         </div>
                                     </div>
                                     <!-- <div *ngIf="coupanForm.controls['coupanName'].errors['pattern']"
@@ -42,14 +42,14 @@
 
                             <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
                                 <div class="form-group">
-                                    <label for="hyperlink" class="col-form-label text-left starlabel">Coupan
+                                    <label for="hyperlink" class="col-form-label text-left starlabel">Coupon
                                         Code</label>
                                     <input type="text" class="form-control" placeholder="Enter Coupan Code" formControlName="coupanCode">
                                     <div
                                         *ngIf="!coupanForm.controls['coupanCode'].valid && (coupanForm.controls['coupanCode'].touched || coupanForm.controls['coupanCode'].dirty)">
                                         <div [hidden]="!coupanForm.controls['coupanCode'].errors['required']"
                                             style="color: rgb(253, 122, 122); font-size:small; font-style: italic;">
-                                            Coupan Code is required
+                                            Coupon Code is required
                                         </div>
                                     </div>
                                 </div>

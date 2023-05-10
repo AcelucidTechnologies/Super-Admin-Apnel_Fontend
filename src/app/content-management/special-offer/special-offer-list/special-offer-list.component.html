@@ -1,24 +1,23 @@
- 
+
     <div class="page-heading">
         <h1 class="header-text-title" style="margin-left: 1%;">Special Offer</h1>
         <div class="page-btn">
           <button pButton type="button" [routerLink]="['/cms/add-special-offer']" class="me-1" label=" + Add Offer" class="theme" ></button>
       </div>
       </div>
-    
+
       <p-table #dt [value]="offerList" [(selection)]="selectedOffer" dataKey="id" [rowHover]="true"
         [rows]="10" [showCurrentPageReport]="true" responsiveLayout="scroll"
         [paginator]="true" currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
         [filterDelay]="0" [globalFilterFields]="['category','product']" class="abc">
         <ng-template pTemplate="caption" style="background-color: #fff !important; ">
             <div class="table-header">
-                <span style="display: flex; justify-content: center; align-items: center;" class="p-input-icon-left ">
-                  <img style="margin-right: 5px;" src="../assets/images/icons/filter.svg" class="filter" alt="img">
+                <span style="display: flex; justify-content: center; align-items: center; margin-left: 20px;" class="p-input-icon-left ">
                     <input style="outline: none; border-radius: 5px; border: 1px solid rgb(195, 183, 183); padding: 6px;" type="text" (input)="applyFilterGlobal($event, 'contains')" placeholder="Search..." />
                 </span>
-    
+
                 <div class="d-flex justify-content-end align-items-end">
-                  <button style="background-color: #f4f4f4; border: none;" type="button" pButton class="mr-1" pTooltip="Pdf" (click)="exportPdf()" 
+                  <button style="background-color: #f4f4f4; border: none;" type="button" pButton class="mr-1" pTooltip="Pdf" (click)="exportPdf()"
                     tooltipPosition="bottom"><img
                     src="../assets/images/icons/pdf.svg"></button>
                   <button type="button" style="background-color: #f4f4f4;; border: none;" pButton class="mr-1" pTooltip="excel" (click)="exportExcel()"
@@ -32,25 +31,23 @@
         </ng-template>
         <ng-template  pTemplate="header">
             <tr>
-                <th style="width: 3rem;">
-                    <p-tableHeaderCheckbox></p-tableHeaderCheckbox>
-                </th>
+
                 <th pSortableColumn="product">
                     <div class="flex justify-content-between align-items-center head1">
                       Product Name
                         <p-sortIcon field="product"></p-sortIcon>
-                        
+
                     </div>
                 </th>
                 <th pSortableColumn="category">
                     <div class="flex justify-content-between align-items-center head1">
                         Category
                         <p-sortIcon field="category"></p-sortIcon>
-                        
+
                     </div>
                 </th>
-    
-    
+
+
               <th>
                 <div class="flex justify-content-between align-items-center head1">
                     Image
@@ -59,18 +56,16 @@
             <th>
               <div class="flex justify-content-between align-items-center head1">
                   Action
-                  
+
               </div>
           </th>
-    
-                
+
+
             </tr>
         </ng-template>
         <ng-template pTemplate="body" let-offerList>
             <tr class="p-selectable-row">
-                <td>
-                    <p-tableCheckbox [value]="offerList"></p-tableCheckbox>
-                </td>
+                
                 <td>
                     <span class="p-column-title">Product Name</span>
                     {{offerList.product}}
@@ -79,12 +74,12 @@
                     <span class="p-column-title">Category</span>
                     {{offerList.category}}
                 </td>
-    
+
                 <td>
                   <span class="p-column-title">Image</span>
                     {{offerList.image}}
                 </td>
-    
+
                 <td>
                   <a pTooltip="Edit Banner" tooltipPosition="bottom" class="me-3" style="margin-right: 10px;">
                       <img src="../assets/images/icons/edit.svg" [queryParams]="{id:offerList?.id}"  [routerLink]="['/cms/add-special-offer']"   alt="img">
@@ -93,8 +88,8 @@
                       <img src="../assets/images/icons/delete.svg" alt="img">
                   </a>
               </td>
-               
-             
+
+
             </tr>
         </ng-template>
         <ng-template pTemplate="emptymessage">
@@ -103,5 +98,4 @@
             </tr>
         </ng-template>
     </p-table>
-    
-    
+

@@ -25,12 +25,6 @@
             <ng-template pTemplate="caption">
               <div class="d-flex justify-content-between">
                 <div class="d-flex align-items-center p-0" >
-                  <img
-                    style="margin-right: 5px"
-                    src="../assets/images/icons/filter.svg"
-                    class="filter"
-                    alt="img"
-                  />
                   <div class="input-container">
                     <img
                       src="../../../assets/images/search-white.svg"
@@ -61,19 +55,44 @@
             </ng-template>
             <ng-template pTemplate="header" let-columns>
                 <tr>
-                  <th class="text-center">Sno</th>
-                    <th class="text-center">Rating</th>
-                    <th class="text-center">Review Subject</th>
-                    <th class="text-center">Reviewer</th>
-                    <th class="text-center">Status</th>
-                    <th class="text-center">Date<p-columnFilter class="column-subhead" type="date" field="date" display="menu"></p-columnFilter></th>
+                  <th pSortableColumn="rating">
+                    <div class="flex justify-content-between align-items-center head1">
+                      Rating
+                        <p-sortIcon field="rating"></p-sortIcon>
+
+                    </div>
+                </th>
+
+                <th pSortableColumn="review">
+                  <div class="flex justify-content-between align-items-center head1">
+                    Review Subject
+                      <p-sortIcon field="review"></p-sortIcon>
+
+                  </div>
+              </th>
+              <th pSortableColumn="reviewer">
+                <div class="flex justify-content-between align-items-center head1">
+                  Reviewer
+                    <p-sortIcon field="reviewer"></p-sortIcon>
+
+                </div>
+            </th>
+
+            <th pSortableColumn="Totalquantity">
+              <div class="flex justify-content-between align-items-center head1">
+                Status
+                  <p-sortIcon field="Totalquantity"></p-sortIcon>
+
+              </div>
+          </th>
+          <th class="text-center">Date<p-columnFilter class="column-subhead" type="date" field="date" display="menu"></p-columnFilter></th>
+
+
                     <th class="text-center">Actions</th>
                 </tr>
             </ng-template>
             <ng-template pTemplate="body" let-list let-i="rowIndex" >
-
                 <tr>
-                    <td>{{i+1}}</td>
                     <td>{{list.rating}}</td>
                     <td>{{list.review}}</td>
                     <td>{{list.reviewer}}</td>
