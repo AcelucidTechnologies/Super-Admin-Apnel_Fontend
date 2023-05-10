@@ -1,0 +1,89 @@
+.btn-grp{
+  display: flex;
+}
+.add-button-category {
+  background-color: rgb(245, 46, 46);
+  color: white;
+  border: none;
+}
+.add-button-category:hover {
+  background-color: lightcoral;
+  color: white;
+  border: none;
+}
+
+.input-container {
+  position: relative;
+  border: 0.5px solid rgba(145, 158, 171, 0.32) !important;
+}
+
+.input-container-img {
+  position: absolute;
+  left: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 20px;
+  height: 20px;
+  cursor: pointer;
+}
+
+.input-container input[type="text"] {
+  padding-left: 30px; /* adjust the padding to fit the image */
+  font-size: 0.875rem;
+}
+.custom-image {
+  background: none;
+  border: none;
+}
+
+:host::ng-deep {
+  .p-paginator .p-paginator-pages .p-paginator-page.p-highlight {
+    background-color: rgb(228, 28, 28);
+    margin-bottom: 10px;
+    margin-top: 10px;
+    border-radius: 5px;
+  }
+}
+::ng-deep .p-paginator {
+  background: white !important;
+  border: none !important;
+}
+.head1 {
+  color: black;
+  text-align: center;
+}
+td,
+th {
+  border: none !important;
+  border-bottom: 1px solid rgb(215, 198, 198) !important;
+  background-color: white !important;
+  color: black !important;
+  justify-content: center !important;
+}
+::ng-deep.edit-delete-button{
+  background-color: white!important;
+  border: none !important;
+}
+::ng-deep .p-datatable .p-datatable-header {
+  background: white;
+  border: none;
+
+}
+.custom-image:hover{
+  background: none;
+  border: none;
+}
+.page-heading {
+  // margin-top: 200px;
+
+  h1 {
+      font-size: 1.5rem;
+      font-weight: 700;
+      letter-spacing: 1.2px;
+      word-spacing: 0.1rem;
+  }
+}
+::ng-deep.p-datatable .p-datatable-thead > tr > th {
+  text-align: center;
+  transition: background-color 0.2s, box-shadow 0.2s;
+}

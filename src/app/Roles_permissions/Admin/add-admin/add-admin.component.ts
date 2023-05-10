@@ -55,7 +55,7 @@ export class AddAdminComponent implements OnInit {
     this.adminForm=new FormGroup({
       userName: new FormControl('',[Validators.required]),
       userEmail: new FormControl('',[Validators.required]),
-      contactNumber: new FormControl('',[Validators.required]),
+      contactNumber: new FormControl('',[Validators.required, Validators.pattern(/^[0-9]{10}$/)]),
       password: new FormControl('',[Validators.required]),
       confirmPassword: new FormControl('',[Validators.required]),
       adminRole: new FormControl('',[Validators.required,this.rolecheck]),

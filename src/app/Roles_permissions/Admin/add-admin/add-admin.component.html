@@ -1,4 +1,4 @@
-<div style=" height: 700px; margin-bottom: 100px; ">
+<div style="overflow-y: auto; height: 700px; margin-bottom: 100px;">
 <div class="page-heading"></div>
 
 <div class="button-heading-container">
@@ -66,13 +66,30 @@
 
     </div>
     <div class="row mb-4">
-        <div class="form-group col-6">
+        <!-- <div class="form-group col-6">
             <label for="username" class="col-form-label starlabel">Contact Number</label>
             <input id="username" type="number" class="form-control" formControlName="contactNumber" placeholder="contact number">
             <div *ngIf="!adminForm.controls['contactNumber'].valid && adminForm.controls['contactNumber'].touched ">
                 <div [hidden]="!adminForm.controls['contactNumber'].errors['required']" style="font-size:smaller; color: rgb(253, 122, 122); font-style: italic;">Contact Number is required</div>
             </div>
-        </div>
+        </div> -->
+        <div class="form-group col-6">
+          <label for="username" class="col-form-label starlabel">Contact Number</label>
+          <input id="username" type="number" class="form-control" formControlName="contactNumber" placeholder="contact number">
+          <div *ngIf="!adminForm.controls['contactNumber'].valid && adminForm.controls['contactNumber'].dirty ||  adminForm.controls['contactNumber'].touched ">
+              <div [hidden]="!adminForm.controls['contactNumber'].errors['required']" style="font-size:smaller; color: rgb(253, 122, 122); font-style: italic;">Contact Number is required</div>
+              <div *ngIf="adminForm.controls['contactNumber'].errors['pattern']" style="font-size:smaller; color: rgb(253, 122, 122); font-style: italic;">Contact Number must be 10 digits</div>
+          </div>
+      </div>
+
+
+
+
+
+
+
+
+
         <div class="form-group col-6">
             <label for="username" class="col-form-label starlabel">Password</label>
             <input id="username" type="password" class="form-control" formControlName="password" placeholder="password">
@@ -117,3 +134,4 @@
 </div>
 </div>
 </div>
+

@@ -8,6 +8,7 @@ import { ToastrMsgService } from 'src/app/_services/toastr-msg.service';
 import { CmsService } from '../../../_services/cms.service'
 import bsCustomFileInput from 'bs-custom-file-input';
 import { CommonService } from 'src/app/_services/common';
+import { ThisReceiver, Token } from '@angular/compiler';
 //import * as customBuild from ""
 @Component({
   selector: 'app-add-banner-special',
@@ -15,7 +16,10 @@ import { CommonService } from 'src/app/_services/common';
   styleUrls: ['./add-banner-special.component.scss']
 })
 export class AddBannerSpecialComponent implements OnInit {
-
+  bannerListbyId: []=[]
+  bannerList: any[]=[]
+  editData : any[]=[]
+payload:any
   sidebarSpacing: any;
   title: string = " "
   bannerSpecialForm: FormGroup;
@@ -23,9 +27,8 @@ export class AddBannerSpecialComponent implements OnInit {
   image: File;
   status= false;
   id: any;
-  
+
   editMode: boolean = false
-  payload: BANNERSPECIAL
   imageChangedEvent: any = '';
   croppedImage: any = '';
   //public Editor = customBuild;
@@ -34,9 +37,11 @@ export class AddBannerSpecialComponent implements OnInit {
     language: 'en'
   }
   //var plainText = content.replace(/<[^>]*>/g, '');
-  
+
   reg = '(https?://)?([\\da-z.-]+)\\.([a-z.]{2,6})[/\\w .-]*/?';
-  
+  test: any;
+  testadd : any
+
   constructor(private ngxLoader: NgxUiLoaderService,
     private fb: FormBuilder,
     private route: Router,
@@ -46,14 +51,21 @@ export class AddBannerSpecialComponent implements OnInit {
     private common: CommonService
     ) {
       this.bannerSpecialForm = this.fb.group({
-        id:['',],
-        url: ['', [Validators.required, Validators.pattern(this.reg)]],
-        sortby: ['', [Validators.pattern("^[1-5]\d*$")]],
-        description: ['', [Validators.required]],
+        // _id:[''],
+        // username: ['', [Validators.required, Validators.pattern(this.reg)]],
+        // bannerOrder: ['', [Validators.pattern("^[1-5]\d*$")]],
+        bannerName: ['',[Validators.required]],
+        bannerOrder: ['',[Validators.required]],
+        bannerDescription: ['', [Validators.required]],
       })
+
+      const token = localStorage.getItem('token')
+      console.log("hellotoken" + token)
+
      }
 
   ngOnInit(): void {
+    this.getbannerList()
     this.fgsType = SPINNER.squareLoader
     this.ngxLoader.start();
     bsCustomFileInput.init();
@@ -64,13 +76,13 @@ export class AddBannerSpecialComponent implements OnInit {
       if (this.id && this.id != undefined) {
         this.editMode = true
         this.title = "Edit Special Banner"
-        this.getBannerById();
+        this.editBannerData()
       } else {
         this.editMode = false
         this.title = "Add New Special Banner"
+        this.addCategory()
       }
     });
-
   }
 
 
@@ -106,7 +118,7 @@ export class AddBannerSpecialComponent implements OnInit {
     description: this.bannerSpecialForm.controls['description'].value,
     sortby: this.bannerSpecialForm.controls['sortby'].value,
   }
- 
+
   this.ngxLoader.start();
   if (this.editMode) {
   this.editBanner();
@@ -114,11 +126,16 @@ export class AddBannerSpecialComponent implements OnInit {
     this.addCategory()
   }
   this.route.navigate[('/cms/banner')]
-  
+
   }
 
   addCategory() {
-    this.CmsService.addSpecialBanner(this.bannerSpecialForm.value).subscribe(res => {
+    this.CmsService.addSpecialBanner(this.bannerSpecialForm.value)
+    .subscribe(res => {
+      this.testadd = res
+
+      console.log(this.testadd,"testadd--------------------")
+
        if (res) {
          this.toastr.showSuccess("Special banner added successfully", "banner Added")
          this.ngxLoader.stop()
@@ -129,12 +146,13 @@ export class AddBannerSpecialComponent implements OnInit {
          this.ngxLoader.stop()
         this.route.navigate(['/'])
        }
-     })
+     }
+     )
    }
 
    editBanner(){
-    console.log(this.payload)
-    this.CmsService.editSpecialBanner(this.bannerSpecialForm.value, this.id).subscribe(res => {
+    this.CmsService.editSpecialBanner(this.payload,this.id).subscribe(res => {
+      console.log(this.test,"copy hello latest edit banner--------------------")
       if (res) {
         this.toastr.showSuccess("Banner edit successfully", "banner edit")
         this.ngxLoader.stop()
@@ -148,20 +166,42 @@ export class AddBannerSpecialComponent implements OnInit {
     })
    }
 
-   getBannerById() {
-    this.CmsService.getBannerById(this.id).subscribe((res: BANNERSPECIAL) => {
+   getbannerList() {
+    this.CmsService.getSpecialBannerList(this.id).subscribe((res) => {
+
+
+      this.bannerList = res
+
+      console.log(this.bannerList,"bannerlist  --------------------")
       this.bannerSpecialForm.patchValue({
-        id: res.id,
-        url: res.url,
-       // image: res.image,
-        sortby: res.sortby,
-        description: res.description
-      })
-      this.ngxLoader.stop();
+        // id: res[0].id,
+          bannerName: res[0].bannerName,
+          image: res[0].image,
+         bannerOrder: res[0].bannerOrder,
+          bannerDescription: res[0].bannerDescription,
+        })
     })
   }
 
 
 
- 
+  editBannerData(){
+
+      this.editData = this.bannerList.filter(item =>
+
+        item._id = this.id
+      )
+
+      this.bannerSpecialForm.patchValue({
+        id: this.editData[0].id,
+        bannerName: this.editData[0].bannerName,
+        image: this.editData[0].image,
+        bannerOrder: this.editData[0].bannerOrder,
+        descrbannerDescriptioniption: this.editData[0].bannerDescription,
+      })
+  }
+
+
 }
+
+

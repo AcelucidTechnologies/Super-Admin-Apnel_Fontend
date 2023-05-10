@@ -1,4 +1,5 @@
 
+    <div style="overflow-y: auto; height: 700px; margin-bottom: 100px;">
   <div class="page-heading">
     <h1 class="header-text-title" style="margin-left: 1%;">Banner Special</h1>
     <div class="page-btn">
@@ -15,20 +16,20 @@
     [filterDelay]="0" [globalFilterFields]="['url','description']" class="abc">
     <ng-template pTemplate="caption">
         <div class="table-header">
-            
+
             <span style="display: flex; justify-content: center; align-items: center;" class="p-input-icon-left ">
               <img style="margin-right: 5px;" src="../assets/images/icons/filter.svg" class="filter" alt="img">
                 <input style="outline: none; border-radius: 5px; border: 1px solid rgb(195, 183, 183); padding: 6px;" type="text" (input)="applyFilterGlobal($event, 'contains')" placeholder="Search..." />
             </span>
 
             <div class="d-flex justify-content-end align-items-end">
-              <button style="background-color: #f4f4f4; border: none;" type="button" pButton class="mr-1" pTooltip="Pdf"  (click)="exportPdf()" 
+              <button style=" border: none;" type="button" pButton class="mr-1 custom-image " pTooltip="Pdf"  (click)="exportPdf()"
                 tooltipPosition="bottom"><img
                 src="../assets/images/icons/pdf.svg"></button>
-              <button type="button" style="background-color: #f4f4f4;; border: none;" pButton class="mr-1" pTooltip="excel"  (click)="exportExcel()"
+              <button type="button" style=" border: none;" pButton class="mr-1 custom-image " pTooltip="excel"  (click)="exportExcel()"
                 tooltipPosition="bottom" ><img
                 src="../assets/images/icons/excel.svg"></button>
-                <button type="button" style="background-color: #f4f4f4;; border: none;" pButton class=" mr-1" pTooltip="print"
+                <button type="button" style="border: none;" pButton class=" mr-1 custom-image " pTooltip="print"
                 tooltipPosition="bottom" ><img
                 src="../assets/images/icons/printer.svg"></button>
             </div>
@@ -43,14 +44,14 @@
                 <div class="flex justify-content-between align-items-center head1">
                     Name
                     <p-sortIcon field="url"></p-sortIcon>
-                    
+
                 </div>
             </th>
             <th pSortableColumn="description">
                 <div class="flex justify-content-between align-items-center head1">
                     Description
                     <p-sortIcon field="description"></p-sortIcon>
-                    
+
                 </div>
             </th>
 
@@ -69,11 +70,11 @@
         <th>
           <div class="flex justify-content-between align-items-center head1">
               Action
-              
+
           </div>
       </th>
 
-            
+
         </tr>
     </ng-template>
     <ng-template pTemplate="body" let-bannerList>
@@ -83,31 +84,33 @@
             </td>
             <td>
                 <span class="p-column-title">Url</span>
-                {{bannerList.url}}
+                {{bannerList.bannerName}}
             </td>
             <td>
                 <span class="p-column-title">Description</span>
-                
-                {{bannerList.description}}
+
+                {{bannerList.bannerDescription}}
             </td>
-           
+
             <td>
                 <span class="p-column-title">Date</span>
-                {{bannerList.sortby}}
+                {{bannerList.bannerOrder}}
             </td>
             <td>
-                {{bannerList.image}}
+                <!--
+                  {{bannerList.image}} -->
+                  <div *ngIf="!!bannerList.image; else defaultImg"><img class="user-name-img" [src]="bannerList.image"></div>
             </td>
             <td>
               <a pTooltip="Edit Banner" tooltipPosition="bottom" class="me-3" style="margin-right: 10px;">
-                  <img src="../assets/images/icons/edit.svg" [queryParams]="{id:bannerList?.id}" [routerLink]="['/cms/add-special-banner']"  alt="img">
+                  <img src="../assets/images/icons/edit.svg" [queryParams]="{id:bannerList?._id}" [routerLink]="['/cms/add-special-banner']"  alt="img">
               </a>
               <a pTooltip="Delete Banner" tooltipPosition="bottom" (click)="openDialog(bannerList)"  class="me-3 confirm-text" href="javascript:void(0);">
                   <img src="../assets/images/icons/delete.svg" alt="img">
               </a>
           </td>
-           
-         
+
+
         </tr>
     </ng-template>
     <ng-template pTemplate="emptymessage">
@@ -115,4 +118,8 @@
             <td colspan="8">No customers found.</td>
         </tr>
     </ng-template>
+    <ng-template #defaultImg>
+      <div><img [src]="image" class="user-name-img"></div>
+    </ng-template>
 </p-table>
+</div>

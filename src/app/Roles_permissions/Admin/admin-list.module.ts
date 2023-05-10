@@ -37,7 +37,8 @@ import { EditSuperAdminComponent } from './edit-super-admin/edit-super-admin.com
     MatDialogModule,
     MatButtonModule,
     InputNumberModule,
-    MatIconModule
+    MatIconModule,
+
   ]
 })
 export class AdminListModule { }

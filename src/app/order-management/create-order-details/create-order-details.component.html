@@ -1,0 +1,181 @@
+<div class="container page-heading">
+  <div class="row mb-2 mt-2">
+    <div class="col-6">
+      <h4>Create Order</h4>
+    </div>
+  </div>
+</div>
+<div class="card col-sm-12" style="border:none; margin: auto; height: 100%;">
+<div class="row mt-4 mb-4" >
+
+  <div class="col-md-6" style="border: 1px solid grey; margin: 10px;">
+    <div class="row mb-2 mt-2 ">
+      <div class="col-6">
+        <h4>Order Details</h4>
+      </div>
+    </div>
+    <p-table [value]="cars"  [rows]="10">
+      <ng-template pTemplate="header">
+          <tr>
+              <th>S No</th>
+              <th>Product</th>
+              <th>Price</th>
+              <th>Quality</th>
+              <th>Total</th>
+          </tr>
+      </ng-template>
+      <ng-template pTemplate="body" let-car>
+          <tr>
+              <!-- <td>{{car.brand}}</td>
+              <td>{{car.year}}</td>
+              <td>{{car.color}}</td> -->
+          </tr>
+      </ng-template>
+  </p-table>
+
+  <div class="row" >
+    <div class="form-row col-6 pt-5">
+      </div>
+      <div class="form-row col-6 pt-5">
+        <div class="col-4">
+          <label for="amount" class="starlabel">Amount</label>
+        </div>
+        <div class="col-6">
+          <input  type="text" placeholder="0" class="order-input">
+        </div>
+
+        </div>
+      </div>
+      <div class="row">
+        <div class="form-row col-6 pt-5">
+          </div>
+          <div class="form-row col-6 pt-5">
+            <div class="col-4">
+              <label for="discount" class="starlabel">Discount</label>
+            </div>
+            <div class="col-6">
+              <input  type="text" placeholder="0" class="order-input">
+            </div>
+
+            </div>
+          </div>
+          <div class="row">
+            <div class="form-row col-6 pt-5">
+              </div>
+              <div class="form-row col-6 pt-5">
+                <div class="col-4">
+                  <label for="total amount" class="starlabel">Total Amount</label>
+                </div>
+                <div class="col-6 ">
+                  <input  type="text" placeholder="0" class="order-input">
+                </div>
+
+                </div>
+              </div>
+              <div class="d-flex justify-content-center col-12 mt-5 p-0 pr-3 mb-4">
+
+                <button type="submit" id="submit" name="submit" style="background: rgb(228, 28, 28);border:none; cursor:pointer" class="btn btn-info mr-3"  [routerLink]="['/order/createOrderList']">Place Order</button>
+
+              </div>
+  </div>
+  <div class="col-md-5" style="border: 1px solid grey; margin: 10px;">
+    <div class="row mb-2 mt-2">
+      <div class="col-6">
+        <h4>Customer Details</h4>
+      </div>
+    </div>
+    <div class="row">
+
+        <div class="form-row col-12 pt-3">
+          <div class="col-4">
+            <label for="total amount" class="starlabel">Name</label>
+          </div>
+          <div class="col-8 ">
+            <input  type="text" placeholder="" class="custmer-input">
+          </div>
+
+          </div>
+        </div>
+        <div class="row">
+
+          <div class="form-row col-12 pt-4">
+            <div class="col-4">
+              <label for="total amount" class="starlabel">Contact Number</label>
+            </div>
+            <div class="col-8 ">
+              <input  type="text" placeholder="" class="custmer-input">
+            </div>
+
+            </div>
+          </div>
+          <div class="row">
+
+            <div class="form-row col-12 pt-4">
+              <div class="col-4">
+                <label for="total amount" class="starlabel">Address</label>
+              </div>
+              <div class="col-8 ">
+                <input  type="text" placeholder="" class="custmer-input">
+              </div>
+
+              </div>
+            </div>
+            <div class="row">
+
+              <div class="form-row col-12 pt-4">
+                <div class="col-4">
+                  <label for="total amount" class="starlabel">Select payment Mode</label>
+                </div>
+                <div class="col-8 ">
+                  <p-dropdown [options]="paymentOptions" id="review" placeholder="Select" styleClass="review-dropdown"
+                  formControlName="review"></p-dropdown>
+                </div>
+
+                </div>
+              </div>
+              <div class="row">
+
+                <div class="form-row col-12 pt-4 mb-4">
+                  <!-- <div class="col-4">
+                    <label for="total amount" class="starlabel">Add Product</label>
+                  </div> -->
+                  <div class="col-12 ">
+                    <div class="form-row pt-5">
+                      <div class="col-2">
+                        <label for="name" class="starlabel">Product Image</label>
+                      </div>
+                      <div class="col-10" >
+                        <div class='flex'>
+                          <span class="card1">
+                            <img *ngFor='let url of urls' let i = index [src]="url" height="200" style="margin-right: 20px;" >
+                        </span>
+                        <ng-container *ngIf="urls.length <3; else limitReached">
+
+                          <span class="add" >
+                              <label for="upload">
+                                <span class="fa fa-plus">+</span>
+                          <input type='file' (change)="onSelectFile($event)" multiple hidden id="upload" formControlName="productImage">
+                          <!-- <mat-error *ngIf="productForm.get('productImage')?.errors?.['required'] && (productForm.get('productImage').touched)">
+                            <span>Product image is required</span>
+                          </mat-error> -->
+                              </label>
+                          </span>
+
+                     </ng-container>
+                     <ng-template #limitReached>
+                      <span class="limit-reached">Maximum 3 images can be choose.</span>
+                    </ng-template>
+                  </div>
+
+                      </div>
+                    </div>
+                  </div>
+
+                  </div>
+                </div>
+
+
+  </div>
+</div>
+
+</div>

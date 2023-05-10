@@ -41,7 +41,7 @@ export interface BANNERSPECIAL {
     sortby: string,
     image: File|any,
     description: string,
-    
+
 }
 
 export interface FEATURE {
@@ -58,12 +58,30 @@ export interface SPECIALOFFER {
     image: File|any,
     product: string,
     category: string,
-   
+
 }
 
 export interface PAGE {
     id: number,
     url: string
     page: string,
-    description: string, 
+    description: string,
+}
+
+export interface Admin{
+  id: string,
+  sortby: number,
+  url: string,
+  description: string,
+  image: File|any,
+}
+
+
+export interface USER_BANNER_LIST{
+   _id: string,
+   username:string,
+   bannerName:string,
+   bannerDescription:string,
+   bannerOrder:string,
+   image:string,
 }

@@ -22,33 +22,36 @@
                 <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
                   <div class="form-row">
                     <div class="col-4">
-                    <label for="name" starlabel>Product Name</label>
+                    <label for="name" class="starlabel">Product Name</label>
                     </div>
-                    <div class="col-8">
-                      <input type="text" class="form-control" formControlName="language" placeholder="enter product name">
-                    <!-- <select class="form-control" formControlName="country">
-                      <option value="null" selected>Select Country</option>
-                      <option value="country.text" *ngFor="let country of countryList ">{{ country.text }}
-                      </option>
-                    </select> -->
+
+                  <div class="col-8" style="width: 100%;">
+                    <input type="text" class="form-control" formControlName="productName" placeholder="Enter product name">
+                    <mat-error *ngIf="productForm.get('productName')?.errors?.['required']  && productForm.get('productName').touched"><span>Product Name is required</span></mat-error>
                   </div>
                   </div>
                 </div>
                 <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
                   <div class="form-row">
                     <div class="col-4">
-                    <label for="image">Category Name</label>
+                    <label for="image" class="starlabel">Category Name</label>
                     </div>
-                    <div class="col-8">
-                    <!-- <input type="text" class="form-control" formControlName="language" placeholder="enter catergory name"> -->
-                    <select class="form-control" placeholder="select type" formControlName="status">
-                      <option value="null" selected>Select Type</option>
-                      <option *ngFor="let option of CatergoryName" [value]="option.value" [disabled]="option.inactive">
-                        {{ option.label }}
+                    <div class="col-8 p-0">
+                      <p-dropdown [options]="catergoryName" id="role" formControlName="categoryName" placeholder="Select Category Type"></p-dropdown>
+                      <div *ngIf="!productForm.controls['categoryName'].valid && (productForm.controls['categoryName'].touched || productForm.controls['productName'].dirty)">
+                        <div [hidden]="!productForm.controls['categoryName'].errors['required']" style="color: rgb(253, 122, 122);">
+                          Select a category type
+                        </div>
+                      </div>
+                      <!-- <select class="form-control" placeholder="select type" formControlName="status">
+                        <option value="NULL" selected>Select Type</option>
+                        <option *ngFor="let option of CatergoryName" [value]="option.value" [disabled]="option.inactive">
+                          {{ option.label }}
 
-                      </option>
-                    </select>
-                  </div>
+                        </option>
+                      </select> -->
+                      <mat-error *ngIf="productForm.get('status')?.errors?.['required'] && productForm.get('status').touched">Please select a type.</mat-error>
+                    </div>
                 </div>
               </div>
 
@@ -67,10 +70,11 @@
                 <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
                   <div class="form-row">
                     <div class="col-4">
-                    <label for="image">Our Price</label>
+                    <label for="image" class="starlabel">Our Price</label>
                     </div>
                     <div class="col-8">
                     <input type="text" class="form-control" formControlName="ourPrice" placeholder="enter our price">
+                    <mat-error *ngIf="productForm.get('ourPrice')?.errors?.['required']  && productForm.get('ourPrice').touched"><span>our price is required</span></mat-error>
                   </div>
                 </div>
               </div>
@@ -79,10 +83,11 @@
                 <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
                   <div class="form-row">
                     <div class="col-4">
-                    <label for="name">Market Price</label>
+                    <label for="name"  class="starlabel">Market Price</label>
                     </div>
                     <div class="col-8">
                       <input type="text" class="form-control" formControlName="marketPrice" placeholder="enter market price">
+                      <mat-error *ngIf="productForm.get('marketPrice')?.errors?.['required']  && productForm.get('marketPrice').touched"><span>Market price is required</span></mat-error>
                   </div>
                   </div>
                 </div>
@@ -102,13 +107,15 @@
                   <label for="reviewer" class="col-form-label text-left">Weight Type</label>
                 </div>
                 <div class="col-10" >
-                  <select class="form-control" placeholder="select type" formControlName="status">
+                  <p-dropdown [options]="weightType" id="role" formControlName="weightType" placeholder="Select weight Type"></p-dropdown>
+                  <!-- <select class="form-control" placeholder="select type" formControlName="weightType">
                     <option value="null" selected>Select Type</option>
                     <option *ngFor="let option of weightType" [value]="option.value" [disabled]="option.inactive">
                       {{ option.label }}
 
                     </option>
-                  </select>
+                  </select> -->
+                  <mat-error *ngIf="productForm.get('weightType')?.errors?.['required'] && productForm.get('weightType').touched">Please select a weight type.</mat-error>
 
 
                 </div>
@@ -118,7 +125,7 @@
 
               <div class="form-row pt-5">
                 <div class="col-2">
-                  <label for="name">Product Image</label>
+                  <label for="name" class="starlabel">Product Image</label>
                 </div>
                 <div class="col-10" >
                   <div class='flex'>
@@ -130,7 +137,10 @@
                     <span class="add" >
                         <label for="upload">
                           <span class="fa fa-plus">+</span>
-                    <input type='file' (change)="onSelectFile($event)" multiple hidden id="upload">
+                    <input type='file' (change)="onSelectFile($event)" multiple hidden id="upload" formControlName="productImage">
+                    <mat-error *ngIf="productForm.get('productImage')?.errors?.['required'] && (productForm.get('productImage').touched)">
+                      <span>Product image is required</span>
+                    </mat-error>
                         </label>
                     </span>
 
@@ -149,11 +159,10 @@
 
               <div class="form-row col-12 pt-5">
                 <div class="col-2" style="margin-top: 150px;">
-                  <label for="comment" class=" col-form-label text-left starlabel" style="margin-top: auto;">Product Description</label>
+                  <label for="comment" class=" col-form-label text-left" style="margin-top: auto;">Product Description</label>
                 </div>
                 <div class="col-10 mb-3" formControlName="productDescription">
                   <ckeditor ></ckeditor>
-
                 </div>
               </div>
 
@@ -163,248 +172,26 @@
                   <label for="weight" class="col-form-label text-left">status</label>
                 </div>
                 <div class="col-10" style="cursor: pointer;">
-                  <select class="form-control" placeholder="select type" formControlName="status">
+                  <p-dropdown [options]="status" id="role" formControlName="status" placeholder="Select status Type"></p-dropdown>
+
+                  <mat-error *ngIf="productForm.get('status')?.errors?.['required'] && productForm.get('status').touched">Please select status</mat-error>
+
+
+                  <!-- <select class="form-control" placeholder="select type" formControlName="status">
                     <option value="null" selected>Select Type</option>
                     <option *ngFor="let option of Category" [value]="option.value" [disabled]="option.inactive">
                       {{ option.label }}
 
                     </option>
-                  </select>
+                  </select> -->
 
                 </div>
               </div>
-							<!-- <mat-accordion>
-								<mat-expansion-panel [expanded]="true">
-									<mat-expansion-panel-header>
-										<mat-panel-title>
-											<div class="page-heading">
-												<h6 class="header-text-title">Product_Region</h6>
-											</div>
-										</mat-panel-title>
-									</mat-expansion-panel-header>
-									<div class="row gutters">
-										<div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
-											<div class="form-group">
-												<label for="name">Country</label>
 
-												<select class="form-control" formControlName="country">
-													<option value="null" selected>Select Country</option>
-													<option value="country.text" *ngFor="let country of countryList ">{{ country.text }}
-													</option>
-												</select>
-											</div>
-										</div>
-										<div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
-											<div class="form-group">
-												<label for="image">language</label>
-												<input type="text" class="form-control" formControlName="language">
-											</div>
-										</div>
-									</div>
-								</mat-expansion-panel>
-							</mat-accordion>
-							<mat-accordion>
-								<mat-expansion-panel [expanded]="expand">
-									<mat-expansion-panel-header>
-										<mat-panel-title>
-											<div class="page-heading">
-												<h6 class="header-text-title">Product_Detail</h6>
-											</div>
-										</mat-panel-title>
-									</mat-expansion-panel-header>
-									<div class="row gutters">
-										<div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
-											<div class="form-group">
-												<label for="name">Name</label>
-												<input type="text" class="form-control" formControlName="name">
-											</div>
-										</div>
-										<div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
-											<div class="form-group">
-												<label for="image">SKUs </label>
-												<input type="text" class="form-control" formControlName="SKU">
-											</div>
-										</div>
-										<div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
-											<div class="form-group">
-												<label for="Name">Category </label>
-												<input type="text" class="form-control" formControlName="category">
-											</div>
-										</div>
-										<div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
-											<div class="form-group">
-												<label for="Name">Featured </label>
-												<input type="text" class="form-control" formControlName="is_featured">
-											</div>
-										</div>
-										<div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
-											<div class="form-group">
-												<label for="Name">visible_individually</label>
-												<input type="text" class="form-control" formControlName="visible_individually">
-											</div>
-										</div>
-										<div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
-											<div class="form-group">
-												<label for="Name">Quantity</label>
-												<input type="text" class="form-control" formControlName="Quantity">
-											</div>
-										</div>
-										<div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
-											<div class="form-group">
-												<label for="Name">status</label>
-												<select class="form-control" formControlName="Status" placeholder="select Status">
-													<option *ngFor="let c of Status" [value]="c.name">{{ c.name }}</option>
-												</select>
-											</div>
-										</div>
-										<div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
-											<div class="row gutters">
-												<div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
-													<div class="form-group">
-														<label for="Name">Image</label>
-														<input type="file" class="form-control" (change)="OnChangesEvent($event)">
-													</div>
-												</div>
-												<div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
-													<div class="form-group">
-														<img [src]="Image" alt="product image"
-															style="width:250px;height: 180px; border-radius: 5px;">
-													</div>
-												</div>
-											</div>
-										</div>
-									</div>
-								</mat-expansion-panel>
-							</mat-accordion>
-							<mat-accordion>
-								<mat-expansion-panel [expanded]="expand">
-									<mat-expansion-panel-header>
-										<mat-panel-title>
-											<div class="page-heading">
-												<h6 class="header-text-title">Brand</h6>
-											</div>
-										</mat-panel-title>
-									</mat-expansion-panel-header>
-									<div class="row gutters">
-										<div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
-											<div class="form-group">
-												<label for="name">Brands</label>
-												<input type="text" class="form-control" formControlName="brand">
-											</div>
-										</div>
-										<div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
-											<div class="form-group">
-												<label for="image">country_origin</label>
-												<input type="text" class="form-control" formControlName="country_origin">
-											</div>
-										</div>
-									</div>
-								</mat-expansion-panel>
-							</mat-accordion>
-							<mat-accordion>
-								<mat-expansion-panel [expanded]="expand">
-									<mat-expansion-panel-header>
-										<mat-panel-title>
-											<div class="page-heading">
-												<h6 class="header-text-title">Price</h6>
-											</div>
-										</mat-panel-title>
-									</mat-expansion-panel-header>
-									<div class="row gutters">
-										<div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
-											<div class="form-group">
-												<label for="name">Price</label>
-												<input type="text" class="form-control" formControlName="price">
-											</div>
-										</div>
-										<div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
-											<div class="form-group">
-												<label for="image">Cost </label>
-												<input type="text" class="form-control" formControlName="cost">
-											</div>
-										</div>
-										<div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
-											<div class="form-group">
-												<label for="Name">Special_Price </label>
-												<input type="text" class="form-control" formControlName="special_price">
-											</div>
-										</div>
-										<div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
-											<div class="form-group">
-												<label for="Name">Special_Price_From </label>
-												<input type="text" class="form-control" formControlName="special_price_from">
-											</div>
-										</div>
-										<div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
-											<div class="form-group">
-												<label for="Name">Special_Price_To </label>
-												<input type="text" class="form-control" formControlName="special_price_to">
-											</div>
-										</div>
-									</div>
-								</mat-expansion-panel>
-							</mat-accordion>
-							<mat-accordion>
-								<mat-expansion-panel [expanded]="expand">
-									<mat-expansion-panel-header>
-										<mat-panel-title>
-											<div class="page-heading">
-												<h6 class="header-text-title">Description</h6>
-											</div>
-										</mat-panel-title>
-									</mat-expansion-panel-header>
-									<div class="row gutters">
-										<div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
-											<div class="form-group">
-												<label for="name">Short_Description</label>
-												<ckeditor formControlName="short_description"></ckeditor>
-											</div>
-										</div>
-										<div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
-											<div class="form-group">
-												<label for="image">Description</label>
-												<ckeditor formControlName="description"></ckeditor>
-											</div>
-										</div>
-									</div>
-								</mat-expansion-panel>
-							</mat-accordion>
-							<mat-accordion>
-								<mat-expansion-panel [expanded]="expand">
-									<mat-expansion-panel-header>
-										<mat-panel-title>
-											<div class="page-heading">
-												<h6 class="header-text-title">Seo</h6>
-											</div>
-										</mat-panel-title>
-									</mat-expansion-panel-header>
-									<div class="row gutters">
-										<div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
-											<div class="form-group">
-												<label for="name">Meta_Title</label>
-												<textarea class="form-control" formControlName="meta_title"></textarea>
-											</div>
-										</div>
-										<div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
-											<div class="form-group">
-												<label for="name">Meta_Keywords</label>
-												<textarea class="form-control" formControlName="meta_keywords"></textarea>
-											</div>
-										</div>
-										<div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
-											<div class="form-group">
-												<label for="image">Meta_Description</label>
-												<textarea class="form-control" formControlName="meta_description"></textarea>
-
-											</div>
-										</div>
-									</div>
-								</mat-expansion-panel>
-							</mat-accordion> -->
 
               <div class="d-flex justify-content-end col-12 mt-5 p-0 pr-3">
                 <!-- <button type="submit" id="submit" name="submit" style="background: rgb(228, 28, 28);border:none; cursor:pointer" class="btn btn-info mr-3" (click)="submitForm()" [disabled]="!productForm.valid">Submit</button> -->
-                <button type="submit" id="submit" name="submit" style="background: rgb(228, 28, 28);border:none; cursor:pointer" class="btn btn-info mr-3" (click)="openDialog()" >Submit</button>
+                <button type="submit" id="submit" name="submit" style="background: rgb(228, 28, 28);border:none; cursor:pointer" class="btn btn-info mr-3" (click)="openDialog()" [disabled]="!productForm.valid" >Submit</button>
                 <button class="btn btn-info" id="submit" name="submit" style="background: #637381;border:none" [routerLink]="['/product/productlist']">Cancel</button>
             </div>
 						</div>

@@ -36,6 +36,8 @@ export class AddEditCategoryComponent implements OnInit {
   image: File;
   imageUrl;
   seo: SEO
+  subCategory:String[];
+  status:string[];
   // Category: string[];
   constructor(
     private fb: FormBuilder,
@@ -49,12 +51,16 @@ export class AddEditCategoryComponent implements OnInit {
     this.productCategoryForm = this.fb.group({
       categoryName: ["", [Validators.required]],
       parentCategoryName: ['', [Validators.required]],
+      image: ['', [Validators.required]],
       description: ['', [Validators.required]],
       metaTitle: ['', [Validators.required]],
       metaDescription: ['', [Validators.required]],
       metaKeyword: ['', [Validators.required]],
       status: ['', [Validators.required]]
     })
+    this.subCategory = ['casual', 'formal', 'Gym Wear', 'Sports Wear']
+    this.status = ['Active', 'Inactive']
+
     // this.Category = ['Active', 'Inactive'];
 
   }

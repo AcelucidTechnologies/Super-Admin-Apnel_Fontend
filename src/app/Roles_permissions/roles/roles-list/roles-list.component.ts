@@ -42,7 +42,7 @@ export class RolesListComponent implements OnInit {
   getPermittedModuleList(){
     this.permissionService.getPermittedModuleList().subscribe(res => {
      this.modulePermissionList=res
-     console.log( this.modulePermissionList)
+     console.log("modulelist" + JSON.stringify(this.modulePermissionList))
     })
   }
 

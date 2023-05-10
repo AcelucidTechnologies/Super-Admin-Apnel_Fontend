@@ -7,6 +7,8 @@ import { Router, ActivatedRoute } from '@angular/router';
   styleUrls: ['./authentication.component.scss']
 })
 export class AuthenticationComponent implements OnInit {
+  selectedOption: string = 'option1';
+  isLogin = true;
 
   currentRoute: any;
   // @Output() loggedinFlag:EventEmitter<boolean>
@@ -15,6 +17,11 @@ export class AuthenticationComponent implements OnInit {
   ngOnInit(): void {
     this.currentRoute = this.router.url;
     console.log(this.currentRoute)
+  }
+
+  forget(): void {
+    this.isLogin = false;
+    console.log("hello" + this.isLogin)
   }
 
 }
