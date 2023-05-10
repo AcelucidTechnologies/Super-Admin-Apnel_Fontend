@@ -80,3 +80,20 @@ image: string,
 productQuantity: number,
 
 }
+export interface Admin{
+  id: string,
+  sortby: number,
+  url: string,
+  description: string,
+  image: File|any,
+}
+
+
+export interface USER_BANNER_LIST{
+   _id: string,
+   username:string,
+   bannerName:string,
+   bannerDescription:string,
+   bannerOrder:string,
+   image:string,
+}

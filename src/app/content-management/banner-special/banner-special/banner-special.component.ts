@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { BANNERSPECIAL } from 'src/app/_models/cms';
+import { BANNERSPECIAL, USER_BANNER_LIST } from 'src/app/_models/cms';
 import { TABLE_HEADING } from 'src/app/_models/table_heading';
 import { Table } from 'primeng/table';
 import { NgxUiLoaderService, SPINNER } from 'ngx-ui-loader';
@@ -28,10 +28,12 @@ export class BannerSpecialComponent implements OnInit {
   sidebarSpacing: any;
   cols!: TABLE_HEADING[];
   fgsType: any;
-  bannerList: BANNERSPECIAL[]=[]
+   image:any="https://adminpanelbucket.s3.amazonaws.com/Slider/pencil-bulb-creative-idea-pen-tool-created-clipping-path-included-jpeg-easy-composite.jpg"
+  bannerList: USER_BANNER_LIST[]=[]
   accessPermission:access
   bannerDetails:any[];
   exportColumns: any[];
+  id:string
   // ----------------------------
 
   customers: BANNERSPECIAL[];
@@ -81,7 +83,7 @@ export class BannerSpecialComponent implements OnInit {
   }
 
   getbannerList() {
-    this.CmsService.getSpecialBannerList().subscribe((res) => {
+    this.CmsService.getSpecialBannerList(this.id).subscribe((res) => {
       this.bannerList = res
       console.log(this.bannerList,"--------------------")
       this.ngxLoader.stop();
@@ -118,10 +120,10 @@ export class BannerSpecialComponent implements OnInit {
     }
   }
 
-  applyFilterGlobal($event, stringVal) {
+   //Search functionality start here
+   applyFilterGlobal($event, stringVal) {
     this.dt.filterGlobal(($event.target as HTMLInputElement).value, stringVal);
   }
-
   exportPdf() {
     this.bannerDetails = this.bannerList
             const doc = new jsPDF.jsPDF('l', 'pt');
