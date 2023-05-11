@@ -105,9 +105,10 @@ export class Slider1Component implements OnInit {
     }
   }
 
-  applyFilterGlobal($event, stringVal) {
-    this.dt.filterGlobal(($event.target as HTMLInputElement).value, stringVal);
-  }
+     //Search functionality start here
+     applyFilterGlobal($event, stringVal) {
+      this.dt.filterGlobal(($event.target as HTMLInputElement).value, stringVal);
+    }
 
   exportPdf() {
     this.sliderDetails = this.sliderList

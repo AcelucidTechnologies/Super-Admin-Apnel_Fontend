@@ -129,6 +129,7 @@ export class AddFeatureProductComponent implements OnInit {
    }
 
   fileChangeEvent(event) {
+    this.imageChangedEvent = event;
     this.imageData = event.target.files[0];
     var reader = new FileReader();
     reader.readAsDataURL(event.target.files[0]);

@@ -16,6 +16,13 @@ import { ThisReceiver, Token } from '@angular/compiler';
   styleUrls: ['./add-banner-special.component.scss']
 })
 export class AddBannerSpecialComponent implements OnInit {
+  transform = {
+    flipH: false,
+    flipV: false,
+    rotate: 0,
+    scale: 1,
+  };
+
   bannerListbyId: []=[]
   bannerList: any[]=[]
   editData : any[]=[]
@@ -85,30 +92,40 @@ username: any;
       if (this.id && this.id != undefined) {
         this.editMode = true
         this.title = "Edit Special Banner"
-        this.editBannerData()
+        // this.editBannerData()
+        this.getBannerById()
       } else {
         this.editMode = false
         this.title = "Add New Special Banner"
         //this.addCategory()
       }
     });
-    this.getBannerById()
+
   }
 
   fileChangeEvent(event) {
+    this.imageChangedEvent = event;
     this.imageData = event.target.files[0];
     var reader = new FileReader();
     reader.readAsDataURL(event.target.files[0]);
     reader.onload = (data) => {
       this.Image = data.target.result;
+      console.log("image is coming" + this.Image)
     }
   }
 
+
+
   imageCropped(event: ImageCroppedEvent) {
       this.croppedImage = event.base64;
+      console.log("image cropped" + this.croppedImage)
   }
   imageLoaded() {
-      / show cropper /
+    if (this.Image === this.Image) {
+      // hide cropper
+    } else {
+      // show cropper
+    }
   }
   cropperReady() {
       / cropper ready /
@@ -214,7 +231,7 @@ username: any;
         item._id = this.id
       )
       this.bannerSpecialForm.patchValue({
-        // id: this.editData[0].id,
+
         bannerName: this.editData[0].bannerName,
         image: this.editData[0].image,
         bannerOrder: this.editData[0].bannerOrder,

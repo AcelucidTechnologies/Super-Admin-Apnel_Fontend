@@ -1,11 +1,21 @@
 <div style="overflow-y: auto; height: 700px; margin-bottom: 100px;">
 <form [formGroup]="sliderForm">
-    <div class="page-heading col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+    <!-- <div class="page-heading col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
       <h1 class="header-text-title">
         <i pButton style="color: rgb(245, 46, 46);" class="pi pi-arrow-left p-button-text" [routerLink]="['/cms/banner']" pTooltip="Back"
           tooltipPosition="bottom">
         </i>{{title}}
       </h1>
+    </div> -->
+    <div class="button-heading-container">
+      <button
+        class="mb-2 p-1 back-button"
+        [routerLink]="['/cms/banner']"
+      >
+        <i class="material-icons">arrow_back</i>
+
+      </button>
+      <h5>&nbsp;{{title}}</h5>
     </div>
     <div class="card col-sm-12">
       <div class="row gutters">
@@ -66,7 +76,7 @@
                 </div>
               </div>
 
-              <div class="col-9 form-group pt-3">
+              <div class="col-12 form-group pt-3">
                 <label for="imageUpload" class="col-form-label">Image</label>
                 <div id="imageUpload" class="custom-file">
                   <input type="file" class="custom-file-input" id="inputGroupFile01" (change)="fileChangeEvent($event)">
@@ -74,7 +84,7 @@
                 </div>
               </div>
 
-              <div class="col-11 form-group mt-5">
+              <div class="col-12 form-group mt-5">
                 <div class="card">
                   <div class="card-body">
                     <div class="row" style="margin-top: 15px;">

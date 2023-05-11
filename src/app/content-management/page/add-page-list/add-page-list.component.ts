@@ -9,6 +9,7 @@ import { SLIDER } from 'src/app/_models/slider';
 import { PAGE } from 'src/app/_models/cms';
 import { DialogSelectComponent } from '../dialog-select/dialog-select.component';
 import { MatDialog } from '@angular/material/dialog';
+import { SelectItem } from 'primeng/api';
 
 @Component({
   selector: 'app-add-page-list',
@@ -17,6 +18,7 @@ import { MatDialog } from '@angular/material/dialog';
 })
 export class AddPageListComponent implements OnInit {
 
+  pages: SelectItem[];
   sidebarSpacing: any;
   title: string = " "
   pageForm: FormGroup;
@@ -43,6 +45,10 @@ export class AddPageListComponent implements OnInit {
         page: ['', [Validators.pattern("^[1-5]\d*$")]],
         description: ['', [Validators.required]],
       })
+      this.pages = [
+        { label: 'Select Page', value: 'home' },
+
+      ];
      }
 
   ngOnInit(): void {

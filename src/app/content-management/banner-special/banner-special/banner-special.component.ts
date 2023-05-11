@@ -31,6 +31,7 @@ export class BannerSpecialComponent implements OnInit {
   fgsType: any;
   bannerList: any[]=[]
   accessPermission:access
+  bannerList1:any[]=[]
   bannerDetails:any[];
   exportColumns: any[];
   id:string
@@ -62,10 +63,11 @@ export class BannerSpecialComponent implements OnInit {
       })
       const test = localStorage.getItem('email')
       console.log("value test" + test)
-      this.getbannerList();
+
      }
 
   ngOnInit(): void {
+    this.getbannerList();
     this.fgsType = SPINNER.squareLoader
     this.ngxLoader.start();
     this.sidebarSpacing = 'contracted';
@@ -84,14 +86,20 @@ export class BannerSpecialComponent implements OnInit {
     // })
   }
 
+
   getbannerList() {
     this.CmsService.getSpecialBannerList(this.id).subscribe((res) => {
-      // this.bannerList = res
-      this.bannerList = res.filter((item) => item);
+      this.bannerList = res.map((item) => {
+              const cleanResponse = item.bannerDescription.replace(/<\/?p>/g, '');
+              return { ...item, bannerDescription: cleanResponse };
+            });
+
       console.log(this.bannerList,"--------------------")
       this.ngxLoader.stop();
     })
   }
+
+
 
   deleteBanner(bannerList: any) {
 
