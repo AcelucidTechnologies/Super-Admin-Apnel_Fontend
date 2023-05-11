@@ -162,16 +162,23 @@ export class CmsService {
         return of(sponsorObj)
     }
 
-    addSpecialBanner(payload: any) {
+
+
+
+    addSpecialBanner(payload: any): Observable<any[]> {
         const token = localStorage.getItem('token') || '';
         console.log("add admin todkemn"  + token)
         let httpOptions = new HttpHeaders().set('x-access-token', token)
-        const endpointUrl = `${environment.JSON_SERVER}/createBannerSpecial`;
-        // return this.http.post<any>(endpointUrl, {'headers': {'x-access-token': token}})
-        return this.http.post<any>(endpointUrl, payload,{ 'headers': httpOptions });
-        // specialData.id = bannerSpecialData.length + 1
-        // bannerSpecialData.push(specialData);
-        // return of(specialData)
+
+        const formData = new FormData();
+        formData.append('bannerName', payload.bannerName);
+          formData.append('bannerDescription', payload.bannerDescription);
+          formData.append('bannerOrder', payload.bannerOrder);
+          formData.append('image', payload.image);
+          console.log("add special banner" + formData)
+          const endpointUrl = `${environment.JSON_SERVER}/createBannerSpecial`;
+        return this.http.post<any>(endpointUrl, formData,{ 'headers': httpOptions });
+
     }
 
     getSpecialBannerList(id:string): Observable<any[]> {
@@ -213,23 +220,15 @@ export class CmsService {
 
     editSpecialBanner(payload: any, id: number) {
         const token = localStorage.getItem('token') || '';
-
-
-
         let httpOptions = new HttpHeaders().set('x-access-token', token)
         const endpointUrl = `${environment.JSON_SERVER}/updateBannerSpecial?id=${id}`;
-        // const formData = new FormData();
-        // formData.append('username', payload.username);
-        // formData.append('bannerName', payload.bannerName);
-        //   formData.append('bannerDescription', payload.bannerDescription);
-        //   formData.append('bannerOrder', payload.bannerOrder);
-        //   formData.append('image', payload.image);
-        return this.http.put<Admin>(endpointUrl,payload, { 'headers': httpOptions });
-
-        // let bannerObj = bannerSpecialData.findIndex((obj) => obj.id == id);
-        // bannerSpecialData[bannerObj] = bannerData
-        // return of(bannerData)
-
+        const formData = new FormData();
+        formData.append('username', payload.username);
+        formData.append('bannerName', payload.bannerName);
+          formData.append('bannerDescription', payload.bannerDescription);
+          formData.append('bannerOrder', payload.bannerOrder);
+          formData.append('image', payload.image);
+        return this.http.put<Admin>(endpointUrl,formData, { 'headers': httpOptions });
     }
 
 
@@ -249,9 +248,15 @@ export class CmsService {
         const token = localStorage.getItem('token') || '';
         let httpOptions = new HttpHeaders().set('x-access-token', token)
         const endpointUrl = `${environment.JSON_SERVER}/createFeatureProduct`;
-        return this.http.post<any>(endpointUrl, payload, { 'headers': httpOptions });
-
+        const formData = new FormData();
+        formData.append('productName', payload.productName);
+        formData.append('productQuantity', payload.productQuantity);
+          formData.append('productModel', payload.productModel);
+          formData.append('productPrice', payload.productPrice);
+          formData.append('image', payload.image);
+        return this.http.post<any>(endpointUrl, formData, { 'headers': httpOptions });
     }
+
     editFeature(payload: any, id: number) {
         const token = localStorage.getItem('token') || '';
         let httpOptions = new HttpHeaders().set('x-access-token', token)

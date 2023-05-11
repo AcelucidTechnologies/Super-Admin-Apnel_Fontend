@@ -17,11 +17,15 @@ export class AddFeatureProductComponent implements OnInit {
   fgsType: any;
   title: string = " "
   imageChangedEvent: any = '';
+  imgbucket="https://adminpanelbucket.s3.amazonaws.com/Feature/";
   id: any;
   // payload: FEATURE;
+  isChecked = false;
   payload:any
   image: File;
-  testApi:any
+  testApi:any;
+  featureImage: any=null;
+  Image:any;
   editMode: boolean = false
   reg= '([A-Za-z0-9]+)';
   croppedImage: any = '';
@@ -32,11 +36,14 @@ export class AddFeatureProductComponent implements OnInit {
     private CmsService: CmsService
     ) {
     this.featureForm = this.fb.group({
-      id:[''],
+      // id:[''],
+      image: [''],
       productName: ['', [Validators.required, Validators.pattern(this.reg)]],
       productModel: ['', [Validators.required]],
       productPrice: ['', [Validators.required,Validators.pattern("(\.[0-9]{0,9})?")]],
       productQuantity: ['', [Validators.required,Validators.pattern("(\[0-9]{0,9})?")]],
+      isSpecialProduct:[''],
+      // imageProduct:['']
     })
     console.log(this.featureForm)
   }
@@ -60,25 +67,30 @@ export class AddFeatureProductComponent implements OnInit {
 
   submitForm(){
     this.payload = {
-      // id: this.featureForm.controls['id'].value,
       productName: this.featureForm.controls['productName'].value,
-      image: this.image,
+      imageProduct: this.featureImage,
       productPrice: this.featureForm.controls['productPrice'].value,
       productQuantity: this.featureForm.controls['productQuantity'].value,
       productModel: this.featureForm.controls['productModel'].value,
     }
 
 
+
+
   this.ngxLoader.start();
   if (this.editMode) {
   this.editProduct()
   } else {
-    this.addproduct()
+    // this.addproduct()
+    this.addproduct(this.payload)
   }
   this.route.navigate[('/cms/feature')]
   }
 
-  addproduct() {
+
+
+  addproduct(recievedValue) {
+    let newPayload= Object.assign({},recievedValue)
     this.CmsService.addFeatureProduct(this.featureForm.value).subscribe(res => {
        if (res) {
          this.toastr.showSuccess("Feature Product added successfully", "Product Added")
@@ -88,14 +100,13 @@ export class AddFeatureProductComponent implements OnInit {
        (error: any) => {
          this.toastr.showError("Somthing wrong Please check", "Error occured")
          this.ngxLoader.stop()
-        // this.route.navigate(['/'])
        }
      })
    }
 
    editProduct(){
     console.log(this.payload)
-    this.CmsService.editFeature(this.featureForm.value, this.id).subscribe(res => {
+    this.CmsService.editFeature(this.payload, this.id).subscribe(res => {
       if (res) {
         this.toastr.showSuccess("Feature product edit successfully", "Feature edit")
         this.ngxLoader.stop()
@@ -108,6 +119,17 @@ export class AddFeatureProductComponent implements OnInit {
       }
     })
    }
+   fileChangeEvent(event) {
+    this.featureImage = event.target.files[0];
+    console.log("festure image" + this.featureImage)
+    var reader = new FileReader();
+    reader.readAsDataURL(event.target.files[0]);
+    reader.onload = (data) => {
+      this.Image = data.target.result;
+      // console.log("image value===>" + this.Image)
+    }
+  }
+
 
    getFeatureById() {
     this.CmsService.getFeatureById(this.id).subscribe((res) => {
@@ -119,15 +141,15 @@ export class AddFeatureProductComponent implements OnInit {
        productModel: res.productModel,
         productPrice: res.productPrice,
         productQuantity: res.productQuantity,
+        isSpecialProduct: res.isSpecialProduct
       })
+      this.Image = this.imgbucket.concat(res.image)
+
       this.ngxLoader.stop();
     })
   }
 
 
-  fileChangeEvent(event: any): void {
-    this.imageChangedEvent = event;
-}
 imageCropped(event: ImageCroppedEvent) {
     this.croppedImage = event.base64;
 }

@@ -85,10 +85,10 @@ export class AddPageListComponent implements OnInit {
     description: this.pageForm.controls['description'].value,
     page: this.pageForm.controls['page'].value,
   }
- 
+
   this.ngxLoader.start();
   this.route.navigate[('/cms/page')]
-  
+
   }
 
   addCategory() {

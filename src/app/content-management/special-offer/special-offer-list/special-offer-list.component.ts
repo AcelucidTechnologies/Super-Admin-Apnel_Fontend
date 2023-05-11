@@ -65,34 +65,18 @@ export class SpecialOfferListComponent implements OnInit {
 
 
 
-  // getofferList() {
-  //   this.CmsService.getOfferList().subscribe((res: ApiResponse[]) => {
-  //     this.offerList = res.map((item) => {
-  //       return {
-  //         productName: item.productName,
-  //         productPrice: item.productPrice
-  //       };
-  //     });
-  //     console.log(this.offerList, "offer list--------------------");
-  //     this.ngxLoader.stop();
-  //   });
-  // }
+
 
 
   getofferList() {
-    this.CmsService.getOfferList().subscribe((res) => {
+    this.CmsService.getOfferList().subscribe((res:any) => {
+      this.offerList = res.response.filter(item=>item.isSpecialProduct === true)
+      console.log(res.response.filter(item=>item.isSpecialProduct === true), "offer list--------------------");
 
-      console.log(this.offerList, "offer list--------------------");
-      this.offerList = res
-      const username = res;
+
       this.ngxLoader.stop();
     });
   }
-
-
-
-
-
 
 
 

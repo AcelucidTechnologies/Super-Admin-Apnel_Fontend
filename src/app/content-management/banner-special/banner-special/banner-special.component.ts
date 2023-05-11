@@ -62,6 +62,7 @@ export class BannerSpecialComponent implements OnInit {
       })
       const test = localStorage.getItem('email')
       console.log("value test" + test)
+      this.getbannerList();
      }
 
   ngOnInit(): void {
@@ -76,7 +77,7 @@ export class BannerSpecialComponent implements OnInit {
       { field: 'sortby', show: true, headers: 'Sort By' },
     ]
     this.exportColumns = this.cols.map(col => ({title: col.headers,dataKey: col.field}))
-    this.getbannerList();
+
 
     // $('#myModal').on('shown.bs.modal', function () {
     //   $('#myInput').trigger('focus')
