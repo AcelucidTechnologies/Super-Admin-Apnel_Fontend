@@ -2,9 +2,13 @@
     width: 100%;
     display: block;
     // zoom: 0.95;
+
+
 }
-.bcard{
+::ng-deep.bcard{
     background-color: rgb(240, 242, 248);
+    min-height: 100vh!important;
+    background-color: #f0f2f8 !important;
 
     // padding: 0px;
 }

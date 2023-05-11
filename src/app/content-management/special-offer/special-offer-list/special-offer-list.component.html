@@ -91,10 +91,14 @@
                   <span class="p-column-title">productPrice</span>
                     {{offerList.productPrice}}
                 </td>
-                <td>
+                <!-- <td>
                   <span class="p-column-title">Image</span>
                     {{offerList.image}}
-                </td>
+                </td> -->
+                <td>
+                  <span class="p-column-title">Image</span>
+                  <img class="user-name-img" src={{this.imgbucket}}{{offerList.image}}>
+              </td>
 
                 <td>
                   <a pTooltip="Edit Banner" tooltipPosition="bottom" class="me-3" style="margin-right: 10px;">

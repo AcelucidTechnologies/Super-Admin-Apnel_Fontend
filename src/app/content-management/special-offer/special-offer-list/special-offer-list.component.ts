@@ -28,6 +28,8 @@ export class SpecialOfferListComponent implements OnInit {
   sidebarSpacing: any;
   cols!: TABLE_HEADING[];
   offerList : any[]=[]
+  imgbucket="https://adminpanelbucket.s3.amazonaws.com/Feature/";
+
   accessPermission:access
   productDetails:any[];
   exportColumns: any[];
@@ -63,11 +65,6 @@ export class SpecialOfferListComponent implements OnInit {
     this.getofferList();
   }
 
-
-
-
-
-
   getofferList() {
     this.CmsService.getOfferList().subscribe((res:any) => {
       this.offerList = res.response.filter(item=>item.isSpecialProduct === true)
@@ -77,8 +74,6 @@ export class SpecialOfferListComponent implements OnInit {
       this.ngxLoader.stop();
     });
   }
-
-
 
   deleteProduct(offerList: any) {
     this.ngxLoader.start();
