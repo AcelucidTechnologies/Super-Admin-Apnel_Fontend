@@ -16,6 +16,7 @@ import { SpecialOfferListComponent } from './special-offer/special-offer-list/sp
 import { AddSpecialOfferComponent } from './special-offer/add-special-offer/add-special-offer.component';
 import { PageListComponent } from './page/page-list/page-list.component';
 import { AddPageListComponent } from './page/add-page-list/add-page-list.component';
+import { DialogSelectComponent } from './page/dialog-select/dialog-select.component';
 const routes: Routes = [
   {
     path:'category', component: CategoryComponent
@@ -69,8 +70,12 @@ const routes: Routes = [
     path: 'add-special-offer', component: AddSpecialOfferComponent
   },
   {
+    path: 'edit-special-offer', component: AddSpecialOfferComponent
+  },
+  {
     path: 'page', component: AddPageListComponent
   },
+  { path: 'option1', component: DialogSelectComponent },
 //  {
 //     path: 'add-page', component: AddPageListComponent
 //   },

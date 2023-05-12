@@ -71,10 +71,11 @@ export interface SPECIALOFFER {
 }
 
 export interface PAGE {
-    id: number,
-    url: string
-    page: string,
-    description: string,
+  _id: number,
+    username: string
+    pageTitle: string,
+    pageLink: string,
+    pageContent: string
 }
 
 export interface DELETE_FEATURE_PRODUCT{

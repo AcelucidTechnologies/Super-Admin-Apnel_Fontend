@@ -163,6 +163,32 @@ export class CmsService {
     }
 
 
+addPageLink(payload:any): Observable<any[]> {
+  const token = localStorage.getItem('token') || '';
+        const email = localStorage.getItem('email') || '';
+        console.log("add page link"  + email)
+        let httpOptions = new HttpHeaders().set('x-access-token', token)
+          const endpointUrl = `${environment.JSON_SERVER}/createPageSetUp`;
+        return this.http.post<any>(endpointUrl, payload,{ 'headers': httpOptions });
+
+}
+getPageValue(payload:any): Observable<any[]>{
+
+    const token = localStorage.getItem('token') || '';
+    const email = localStorage.getItem('email')
+    let httpOptions = new HttpHeaders().set('x-access-token', token)
+   const endpointUrl = `${environment.JSON_SERVER}/getPageSetUp?username=${email}`;
+   return this.http.get<any[]>(endpointUrl ,{ 'headers': httpOptions });
+}
+
+getPageById(id: number): Observable<any> {
+  const token = localStorage.getItem('token') || '';
+  let httpOptions = new HttpHeaders().set('x-access-token', token)
+  const endpointUrl = `${environment.JSON_SERVER}/getPageSetUpById?id=${id}`;
+  // let indexObj = bannerSpecialData.findIndex((obj)=>obj.id==id);
+  return this.http.get<any>(endpointUrl,{ 'headers': httpOptions });
+  // return of(bannerSpecialData[indexObj])
+}
 
 
     addSpecialBanner(payload: any): Observable<any[]> {
@@ -253,6 +279,7 @@ export class CmsService {
         const formData = new FormData();
         formData.append('username', email);
         formData.append('productName', payload.productName);
+        formData.append('isSpecialProduct', payload.isSpecialProduct);
         formData.append('productQuantity', payload.productQuantity);
           formData.append('productModel', payload.productModel);
           formData.append('productPrice', payload.productPrice);
@@ -314,15 +341,27 @@ export class CmsService {
         const email = localStorage.getItem('email') || '';
         let httpOptions = new HttpHeaders().set('x-access-token', token)
        const endpointUrl = `${environment.JSON_SERVER}/getSlider?username=${email}`;
-        return this.http.get<CATEGORY[]>(endpointUrl, { 'headers': httpOptions });
+        return this.http.get<any[]>(endpointUrl, { 'headers': httpOptions });
         // return of(sliderData)
     }
 
+
+
     addSlider(payload: any) {
         const token = localStorage.getItem('token') || '';
+        const email = localStorage.getItem('email') || '';
         let httpOptions = new HttpHeaders().set('x-access-token', token)
-        const endpointUrl = `${environment.JSON_SERVER}/createSlider`;
-        return this.http.post<any>(endpointUrl, payload, { 'headers': httpOptions });
+
+        const formData = new FormData();
+        formData.append('username', email);
+        formData.append('sliderName', payload.sliderName);
+          formData.append('sliderDiscription', payload.sliderDiscription);
+          formData.append('sliderOrder', payload.sliderOrder);
+          formData.append('image', payload.image);
+          console.log("add special banner" + formData)
+          const endpointUrl = `${environment.JSON_SERVER}/createSlider`;
+
+        return this.http.post<any>(endpointUrl, formData, { 'headers': httpOptions });
         // slider.id = sliderData.length + 1
         // sliderData.push(slider);
         // return of(slider)
@@ -330,9 +369,16 @@ export class CmsService {
 
     editSlider(payload: any, id: number) {
         const token = localStorage.getItem('token') || '';
+        const email = localStorage.getItem('email') || '';
         let httpOptions = new HttpHeaders().set('x-access-token', token)
-        const endpointUrl = `${environment.JSON_SERVER}/category/${id}`;
-        return this.http.put<any>(endpointUrl, payload, { 'headers': httpOptions });
+        const endpointUrl = `${environment.JSON_SERVER}/updateSlider?id=${id}`;
+        const formData = new FormData();
+        formData.append('username', email);
+        formData.append('sliderName', payload.sliderName);
+        formData.append('sliderDiscription', payload.sliderDiscription);
+          formData.append('sliderOrder', payload.sliderOrder);
+          formData.append('image', payload.image);
+        return this.http.put<any>(endpointUrl, formData, { 'headers': httpOptions });
         // let sliderObj = sliderData.findIndex((obj) => obj.id == id);
         // sliderData[sliderObj] = slidersData
         // return of(slidersData)
@@ -351,13 +397,13 @@ export class CmsService {
         // return of(sliderObj)
     }
 
-    getSliderById(id: number): Observable<SLIDER> {
+    getSliderById(id: number): Observable<any> {
         const token = localStorage.getItem('token') || '';
         let httpOptions = new HttpHeaders().set('x-access-token', token)
-        const endpointUrl = `${environment.JSON_SERVER}/slider/${id}`;
-        let indexObj = sliderData.findIndex((obj)=>obj.id==id);
-        //return this.http.get<CATEGORY>(endpointUrl,{ 'headers': httpOptions });
-        return of(sliderData[indexObj])
+        const endpointUrl = `${environment.JSON_SERVER}/getSliderById?id=${id}`;
+        // let indexObj = sliderData.findIndex((obj)=>obj.id==id);
+        return this.http.get<CATEGORY>(endpointUrl,{ 'headers': httpOptions });
+        // return of(sliderData[indexObj])
     }
 
     // -----------------special offer Api------------------------------
@@ -406,9 +452,10 @@ export class CmsService {
     getOfferById(id: number): Observable<SPECIALOFFER> {
         const token = localStorage.getItem('token') || '';
         let httpOptions = new HttpHeaders().set('x-access-token', token)
-        const endpointUrl = `${environment.JSON_SERVER}/slider/${id}`;
-        let indexObj = specialOffer.findIndex((obj)=>obj.id==id);
+        const endpointUrl = `${environment.JSON_SERVER}/getSliderById?id=${id}`;
         return this.http.get<any>(endpointUrl,{ 'headers': httpOptions });
+        // let indexObj = specialOffer.findIndex((obj)=>obj.id==id);
+        // return this.http.get<any>(endpointUrl,{ 'headers': httpOptions });
         // return of(specialOffer[indexObj])
     }
 }

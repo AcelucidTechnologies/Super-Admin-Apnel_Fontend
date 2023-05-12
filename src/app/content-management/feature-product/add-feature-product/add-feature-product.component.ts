@@ -23,7 +23,7 @@ export class AddFeatureProductComponent implements OnInit {
   id: any;
   imageData: any=null;
   // payload: FEATURE;
-  isChecked = false;
+  isChecked = true;
   payload:any
   image: File;
   testApi:any;
@@ -32,6 +32,7 @@ export class AddFeatureProductComponent implements OnInit {
   editMode: boolean = false
   reg= '([A-Za-z0-9]+)';
   croppedImage: any = '';
+
   constructor(private ngxLoader: NgxUiLoaderService, private fb: FormBuilder,
     private route: Router,
     private activateRoute: ActivatedRoute,

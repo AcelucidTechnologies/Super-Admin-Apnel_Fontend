@@ -42,3 +42,20 @@
     border: 1px solid #ced4da;
     border-radius: 0.25rem;
 }
+.page-heading {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 20px;
+}
+.theme{
+  background-color: rgb(245, 46, 46) ;
+  color: white;
+  border: none;
+}
+
+.theme:hover{
+  background-color: lightcoral !important;
+  color: rgb(245, 46, 46);
+  border: none;
+}
+

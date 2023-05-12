@@ -30,6 +30,7 @@ export class BannerSpecialComponent implements OnInit {
   cols!: TABLE_HEADING[];
   fgsType: any;
   bannerList: any[]=[]
+  banner: any[]=[]
   accessPermission:access
   bannerList1:any[]=[]
   bannerDetails:any[];
@@ -89,6 +90,7 @@ export class BannerSpecialComponent implements OnInit {
 
   getbannerList() {
     this.CmsService.getSpecialBannerList(this.id).subscribe((res) => {
+      this.banner =res
       this.bannerList = res.map((item) => {
               const cleanResponse = item.bannerDescription.replace(/<\/?p>/g, '');
               return { ...item, bannerDescription: cleanResponse };
@@ -135,18 +137,31 @@ export class BannerSpecialComponent implements OnInit {
     this.dt.filterGlobal(($event.target as HTMLInputElement).value, stringVal);
   }
 
-  exportPdf() {
-    this.bannerDetails = this.bannerList
-            const doc = new jsPDF.jsPDF('l', 'pt');
-           autoTable(doc, {
-            columns:this.exportColumns,
-            body:this.bannerDetails
-           });
-            doc.save('products.pdf');
+  // exportPdf() {
+  //   this.bannerDetails = this.banner
+  //           const doc = new jsPDF.jsPDF('l', 'pt');
+  //          autoTable(doc, {
+  //           columns:this.exportColumns,
+  //           body:this.bannerDetails
+  //          });
+  //           doc.save('banner.pdf');
+  //       }
+
+        exportPdf() {
+          this.bannerDetails = this.banner;
+          const doc = new jsPDF.jsPDF('l', 'pt');
+          const data = this.bannerDetails.map(obj => [obj.bannerName, obj.bannerDescription, obj.bannerOrder, obj.image]); // replace with actual property names
+          autoTable(doc, {
+            columns: this.exportColumns,
+            body: data
+          });
+          doc.save('banner.pdf');
         }
 
+
+
         exportExcel() {
-          const worksheet = xlsxPackage.utils.json_to_sheet(this.bannerList);
+          const worksheet = xlsxPackage.utils.json_to_sheet(this.banner);
           const workbook = { Sheets: { 'data': worksheet }, SheetNames: ['data'] };
           const excelBuffer: any = xlsxPackage.write(workbook, { bookType: 'xlsx', type: 'array' });
           this.saveAsExcelFile(excelBuffer, "leads");

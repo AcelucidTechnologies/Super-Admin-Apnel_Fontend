@@ -10,6 +10,7 @@ import { PAGE } from 'src/app/_models/cms';
 import { DialogSelectComponent } from '../dialog-select/dialog-select.component';
 import { MatDialog } from '@angular/material/dialog';
 import { SelectItem } from 'primeng/api';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-add-page-list',
@@ -17,6 +18,10 @@ import { SelectItem } from 'primeng/api';
   styleUrls: ['./add-page-list.component.scss']
 })
 export class AddPageListComponent implements OnInit {
+  options: any[] = [
+    { label: 'Select Page', value: 'option1' },
+  ];
+
 
   pages: SelectItem[];
   sidebarSpacing: any;
@@ -27,10 +32,12 @@ export class AddPageListComponent implements OnInit {
   status= false;
   id: any;
   editMode: boolean = false
-  payload: PAGE
+  payload: any
   imageChangedEvent: any = '';
   croppedImage: any = '';
   reg = '(https?://)?([\\da-z.-]+)\\.([a-z.]{2,6})[/\\w .-]*/?';
+  private dialogRefSubscription: Subscription;
+  testapi: any;
 
   constructor(private ngxLoader: NgxUiLoaderService, private fb: FormBuilder,
     private route: Router,
@@ -40,15 +47,13 @@ export class AddPageListComponent implements OnInit {
     private CmsService: CmsService
     ) {
       this.pageForm = this.fb.group({
-        id:['',],
-        link: ['', [Validators.required, Validators.pattern(this.reg)]],
-        page: ['', [Validators.pattern("^[1-5]\d*$")]],
-        description: ['', [Validators.required]],
-      })
-      this.pages = [
-        { label: 'Select Page', value: 'home' },
 
-      ];
+        pageTitle: ['', [Validators.required]],
+        pageLink: ['', [Validators.required]],
+        pageContent: ['', [Validators.required]],
+      })
+      // this.getPageId()
+
      }
 
   ngOnInit(): void {
@@ -58,6 +63,8 @@ export class AddPageListComponent implements OnInit {
     this.activateRoute.queryParamMap.subscribe(params => {
       this.id = params.get('id');
     });
+
+    // this.getPageId()
 
   }
 
@@ -84,38 +91,103 @@ export class AddPageListComponent implements OnInit {
     }
   }
 
+  // submitForm(){
+  //  this.payload = {
+  //   id: this.pageForm.controls['id'].value,
+  //   url: this.pageForm.controls['url'].value,
+  //   description: this.pageForm.controls['description'].value,
+  //   page: this.pageForm.controls['page'].value,
+  // }
+
+  // this.ngxLoader.start();
+  // this.route.navigate[('/cms/page')]
+
+  // }
   submitForm(){
-   this.payload = {
-    id: this.pageForm.controls['id'].value,
-    url: this.pageForm.controls['url'].value,
-    description: this.pageForm.controls['description'].value,
-    page: this.pageForm.controls['page'].value,
-  }
+    this.payload = {
+      pageTitle: this.pageForm.controls['pageTitle'].value,
+      pageLink: this.pageForm.controls['pageLink'].value,
+      pageContent: this.pageForm.controls['pageContent'].value,
 
-  this.ngxLoader.start();
-  this.route.navigate[('/cms/page')]
+   }
+   this.submitDetails(this.payload)
+   console.log("payload", this.payload)
+   this.ngxLoader.start();
 
-  }
+     this.addPage()
 
-  addCategory() {
-    this.CmsService.addSlider(this.pageForm.value).subscribe(res => {
+   console.log("payload data for submit button" +  JSON.stringify(this.payload))
+
+
+   this.route.navigate[('/cms/page')]
+
+   }
+   addPage() {
+    this.CmsService.addPageLink(this.pageForm.value).subscribe(res => {
        if (res) {
-         this.toastr.showSuccess("Slider added successfully", "slider Added")
+         this.toastr.showSuccess("page added successfully", "Product Added")
          this.ngxLoader.stop()
-         this.route.navigate(['/cms/slider'])
+         this.route.navigate(['/cms/page'])
        }
        (error: any) => {
          this.toastr.showError("Somthing wrong Please check", "Error occured")
          this.ngxLoader.stop()
-        this.route.navigate(['/'])
        }
      })
    }
+
+
+   submitDetails(recievedValue:any){
+    let newPayload= Object.assign({},recievedValue)
+    this.CmsService.addPageLink(newPayload)
+    .subscribe((res) => {
+      console.log(res)
+    });
+  }
+
+  // addPageSetUp() {
+  //   this.CmsService.getPageValue(this.pageForm.value).subscribe(res => {
+  //      if (res) {
+  //        this.toastr.showSuccess("Slider added successfully", "slider Added")
+  //        this.ngxLoader.stop()
+  //        this.route.navigate(['/cms/slider'])
+  //      }
+  //      (error: any) => {
+  //        this.toastr.showError("Somthing wrong Please check", "Error occured")
+  //        this.ngxLoader.stop()
+  //       this.route.navigate(['/'])
+  //      }
+  //    })
+  //  }
 
    openDialog() {
     const dialogRef = this.dialog.open(DialogSelectComponent);
     dialogRef.afterClosed().subscribe(result => {
     });
   }
+
+
+  // getPageId() {
+  //   this.CmsService.getPageById(this.id).subscribe((res) => {
+  //     this.testapi = res
+
+  //     console.log("testing apis" + JSON.stringify(this.testapi))
+  //     const test =this.pageForm.patchValue({
+  //       _id: res._id,
+  //       pageTitle: res.pageTitle,
+  //       pageLink: res.pageLink,
+  //       pageContent: res.pageContent,
+  //     })
+
+
+  //     this.ngxLoader.stop();
+  //   })
+  // }
+
+
+
+
+
+
 
 }

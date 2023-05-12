@@ -41,22 +41,12 @@
         </div>
       </div>
       <div>
-        <button
-          pButton
-          pTooltip="pdf"
-          tooltipPosition="bottom"
-          class="custom-image"
-        >
-          <img src="../../../../assets/images/pdf.svg" alt="Button Image" />
-        </button>
-        <button
-          pButton
-          pTooltip="Excel"
-          tooltipPosition="bottom"
-          class="custom-image"
-        >
-          <img src="../../../../assets/images/excel.svg" alt="Button Image" />
-        </button>
+
+        <button pButton type="button" pTooltip="Pdf" class="custom-image" tooltipPosition="bottom"
+        (click)=" exportPdf()"> <img src="../../../../assets/images/pdf.svg" alt="Button Image" /></button>
+        <button pButton type="button" pTooltip="Excel" class="custom-image" tooltipPosition="bottom"
+        (click)="exportExcel()"><img src="../../../../assets/images/excel.svg" alt="Button Image" /></button>
+
       </div>
     </div>
   </ng-template>
