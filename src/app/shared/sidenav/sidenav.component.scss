@@ -19,6 +19,8 @@
     }
 
 
+
+
 .p-panelmenu .p-panelmenu-header >a:hover{
       background-color: #ff2800 !important;
       color: white !important;
@@ -156,6 +158,7 @@ color: white !important;
 :host::ng-deep{
   .p-panelmenu .p-panelmenu-content .p-menuitem .p-menuitem-link :hover{
    color: red !important;
+
 }
 
 
@@ -179,10 +182,11 @@ color: white !important;
 }
 
 :host::ng-deep{
-  .p-panelmenu .p-panelmenu-content .p-menuitem .p-menuitem-link :hover{
+  .p-panelmenu .p-panelmenu-content .p-menuitem .p-menuitem-link :active{
    color: red !important;
 }
 
 }
+
 
 

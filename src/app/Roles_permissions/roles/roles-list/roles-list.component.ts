@@ -4,7 +4,11 @@ import { Table } from 'primeng/table';
 import { modulePermissionList } from 'src/app/DummyData/permissionList';
 import { PermissionService } from 'src/app/_services/permission.service';
 import { DialogComponent } from '../dialog/dialog.component';
-
+import * as xlsxPackage from 'xlsx';
+import * as FileSaver from 'file-saver';
+import jsPDF from 'jspdf';
+import autoTable from 'jspdf-autotable';
+import { TABLE_HEADING } from 'src/app/_models/table_heading';
 @Component({
   selector: 'app-roles-list',
   templateUrl: './roles-list.component.html',
@@ -12,12 +16,23 @@ import { DialogComponent } from '../dialog/dialog.component';
 })
 export class RolesListComponent implements OnInit {
   @ViewChild('dt') dt:Table
+  adminDetails: any[];
+  adminValue:any[];
+  cols!: TABLE_HEADING[];
+  exportColumns:any[];
   modulePermissionList:any[]
   constructor(private dialog:MatDialog,private permissionService:PermissionService) {
     this.getPermittedModuleList()
   }
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.cols = [
+      { field: 'username', show: true, headers: 'Username' },
+      { field: 'moduleList', show: true, headers: 'Module List' },
+    ]
+      this.exportColumns = this.cols.map(col => ({title: col.headers,dataKey: col.field}))
+
+  }
 
   openDialog(name: any) {
     const dialogRef = this.dialog.open(DialogComponent);
@@ -42,7 +57,7 @@ export class RolesListComponent implements OnInit {
   getPermittedModuleList(){
     this.permissionService.getPermittedModuleList().subscribe(res => {
      this.modulePermissionList=res
-     console.log( this.modulePermissionList)
+     console.log( "moduleListdata",this.modulePermissionList)
     })
   }
 
@@ -54,4 +69,31 @@ export class RolesListComponent implements OnInit {
   applyFilterGlobal($event, stringVal) {
     this.dt.filterGlobal(($event.target as HTMLInputElement).value, stringVal);
   }
+  exportExcel() {
+    const worksheet = xlsxPackage.utils.json_to_sheet(this.modulePermissionList);
+    const workbook = { Sheets: { 'data': worksheet }, SheetNames: ['data'] };
+    const excelBuffer: any = xlsxPackage.write(workbook, { bookType: 'xlsx', type: 'array' });
+    this.saveAsExcelFile(excelBuffer, "admin");
+  }
+  saveAsExcelFile(buffer: any, fileName: string): void {
+    let EXCEL_TYPE = 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;charset=UTF-8';
+    let EXCEL_EXTENSION = '.xlsx';
+    const data: Blob = new Blob([buffer], {
+      type: EXCEL_TYPE
+    });
+    FileSaver.saveAs(data, fileName + '_export_' + new Date().getTime() + EXCEL_EXTENSION);
+  }
+
+  exportPdf() {
+    console.log("pdf");
+
+    this.adminValue = this.modulePermissionList
+            const doc = new jsPDF
+           autoTable(doc, {
+            columns:this.exportColumns,
+            body:this.adminValue
+           });
+            doc.save('role.pdf');
+        }
+
 }

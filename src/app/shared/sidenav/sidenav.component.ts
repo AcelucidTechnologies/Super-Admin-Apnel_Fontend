@@ -149,5 +149,23 @@ export class SidenavComponent implements OnInit {
       width: '200px'
     };
   }
-
+  activeMenu(event) {
+    //console.log(event.target.classList);
+    let node;
+    if (event.target.classList.contains("p-submenu-header") == true) {
+      node = "submenu";
+    } else if (event.target.tagName === "SPAN") {
+      node = event.target.parentNode.parentNode;
+    } else {
+      node = event.target.parentNode;
+    }
+    //console.log(node);
+    if (node != "submenu") {
+      let menuitem = document.getElementsByClassName("p-menuitem");
+      for (let i = 0; i < menuitem.length; i++) {
+        menuitem[i].classList.remove("active");
+      }
+      node.classList.add("active");
+    }
+  }
 }

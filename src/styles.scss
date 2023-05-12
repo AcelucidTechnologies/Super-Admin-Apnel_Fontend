@@ -10,7 +10,7 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
     height: 100%;
     padding: 0;
     margin: 0;
-    
+
 }
 
 .bcard {
@@ -250,4 +250,11 @@ mat-accordion .mat-expansion-panel:last-of-type {
 }
 #search-box{
     width: 280px
+}
+
+::ng-deep
+{
+  .p-menuitem.active {
+    background-color: orange !important;
+  }
 }
