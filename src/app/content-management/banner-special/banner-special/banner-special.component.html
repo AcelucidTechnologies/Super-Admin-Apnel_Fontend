@@ -1,5 +1,4 @@
-
-    <div style="height: 700px; margin-bottom: 100px;">
+<div style="height: 700px; margin-bottom: 100px;">
   <div class="page-heading">
     <h1 class="header-text-title" style="margin-left: 1%;">Banner Special</h1>
     <div class="page-btn">
@@ -11,15 +10,21 @@
   </div>
 
   <p-table #dt [value]="bannerList" [(selection)]="selectedCustomers" dataKey="id" [rowHover]="true"
-    [rows]="10" [showCurrentPageReport]="true" responsiveLayout="scroll"
+    [rows]="8" [showCurrentPageReport]="true" responsiveLayout="scroll"
     [paginator]="true" currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
     [filterDelay]="0" [globalFilterFields]="['bannerName','bannerOrder']" class="abc">
     <ng-template pTemplate="caption">
         <div class="table-header">
 
-            <span style="display: flex; justify-content: center; align-items: center; margin-left: 20px;" class="p-input-icon-left ">
+            <!-- <span style="display: flex; justify-content: center; align-items: center; margin-left: 20px;" class="p-input-icon-left ">
                 <input style="outline: none; border-radius: 5px; border: 1px solid rgb(195, 183, 183); padding: 6px;" type="text" (input)="applyFilterGlobal($event, 'contains')" placeholder="Search..." />
-            </span>
+            </span> -->
+
+            <div class="input-container">
+              <img src="../../../assets/images/search-white.svg" class="input-container-img" />
+              <input #search pInputText type="text" placeholder="Search..."
+                (input)="applyFilterGlobal($event, 'contains')" />
+            </div>
 
             <div class="d-flex justify-content-end align-items-end">
               <button style=" border: none;" type="button" pButton class="mr-1 custom-image " pTooltip="Pdf"  (click)="exportPdf()"
@@ -28,27 +33,21 @@
               <button type="button" style=" border: none;" pButton class="mr-1 custom-image " pTooltip="excel"  (click)="exportExcel()"
                 tooltipPosition="bottom" ><img
                 src="../assets/images/icons/excel.svg"></button>
-
             </div>
         </div>
     </ng-template>
     <ng-template  pTemplate="header">
         <tr>
-
             <th pSortableColumn="bannerName">
                 <div class="flex justify-content-between align-items-center head1">
                     Banner Name
-
-
                     <p-sortIcon field="bannerName"></p-sortIcon>
 
                 </div>
             </th>
             <th pSortableColumn="bannerDescription">
                 <div class="flex justify-content-between align-items-center head1">
-
                     Banner Description
-
                     <p-sortIcon field="bannerDescription"></p-sortIcon>
 
                 </div>
@@ -76,28 +75,23 @@
 
         </tr>
     </ng-template>
-    <ng-template pTemplate="body" let-bannerList let-i="rowIndex">
+    <ng-template pTemplate="body" let-bannerList>
         <tr class="p-selectable-row">
-
             <td>
                 <span class="p-column-title">bannerName</span>
-
                 {{bannerList.bannerName}}
             </td>
             <td>
-                <span class="p-column-title">Description</span>
-
-                {{bannerList.bannerDescription}}
-            </td>
+              <span class="p-column-title">Description</span>
+              {{ bannerList.bannerDescription  }}
+          </td>
 
             <td>
                 <span class="p-column-title">Sort </span>
                 {{bannerList.bannerOrder}}
             </td>
-
               <td>
                 <img class="user-name-img" src={{this.imgbucket}}{{bannerList.image}}>
-
             </td>
             <td>
               <a pTooltip="Edit Banner" tooltipPosition="bottom" class="me-3" style="margin-right: 10px;">
@@ -115,9 +109,6 @@
         <tr>
             <td colspan="8">No customers found.</td>
         </tr>
-    </ng-template>
-    <ng-template #defaultImg>
-      <div><img [src]="image" class="user-name-img"></div>
     </ng-template>
 </p-table>
 </div>

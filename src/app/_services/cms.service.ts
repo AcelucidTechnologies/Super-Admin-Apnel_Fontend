@@ -162,16 +162,51 @@ export class CmsService {
         return of(sponsorObj)
     }
 
-    addSpecialBanner(payload: any) {
-        const token = localStorage.getItem('token') || '';
-        console.log("add admin todkemn"  + token)
+
+addPageLink(payload:any): Observable<any[]> {
+  const token = localStorage.getItem('token') || '';
+        const email = localStorage.getItem('email') || '';
+        console.log("add page link"  + email)
         let httpOptions = new HttpHeaders().set('x-access-token', token)
-        const endpointUrl = `${environment.JSON_SERVER}/createBannerSpecial`;
-        // return this.http.post<any>(endpointUrl, {'headers': {'x-access-token': token}})
+          const endpointUrl = `${environment.JSON_SERVER}/createPageSetUp`;
         return this.http.post<any>(endpointUrl, payload,{ 'headers': httpOptions });
-        // specialData.id = bannerSpecialData.length + 1
-        // bannerSpecialData.push(specialData);
-        // return of(specialData)
+
+}
+getPageValue(payload:any): Observable<any[]>{
+
+    const token = localStorage.getItem('token') || '';
+    const email = localStorage.getItem('email')
+    let httpOptions = new HttpHeaders().set('x-access-token', token)
+   const endpointUrl = `${environment.JSON_SERVER}/getPageSetUp?username=${email}`;
+   return this.http.get<any[]>(endpointUrl ,{ 'headers': httpOptions });
+}
+
+getPageById(id: number): Observable<any> {
+  const token = localStorage.getItem('token') || '';
+  let httpOptions = new HttpHeaders().set('x-access-token', token)
+  const endpointUrl = `${environment.JSON_SERVER}/getPageSetUpById?id=${id}`;
+  // let indexObj = bannerSpecialData.findIndex((obj)=>obj.id==id);
+  return this.http.get<any>(endpointUrl,{ 'headers': httpOptions });
+  // return of(bannerSpecialData[indexObj])
+}
+
+
+    addSpecialBanner(payload: any): Observable<any[]> {
+        const token = localStorage.getItem('token') || '';
+        const email = localStorage.getItem('email') || '';
+        console.log("add admin todkemn"  + email)
+        let httpOptions = new HttpHeaders().set('x-access-token', token)
+
+        const formData = new FormData();
+        formData.append('username', email);
+        formData.append('bannerName', payload.bannerName);
+          formData.append('bannerDescription', payload.bannerDescription);
+          formData.append('bannerOrder', payload.bannerOrder);
+          formData.append('image', payload.image);
+          console.log("add special banner" + formData)
+          const endpointUrl = `${environment.JSON_SERVER}/createBannerSpecial`;
+        return this.http.post<any>(endpointUrl, formData,{ 'headers': httpOptions });
+
     }
 
     getSpecialBannerList(id:string): Observable<any[]> {
@@ -186,12 +221,12 @@ export class CmsService {
       const url = `https://jsonplaceholder.typicode.com/posts/${id}`;
       return this.http.get<any>(url);
     }
-    getBannerById(id: number): Observable<any[]> {
+    getBannerById(id: number): Observable<any> {
       const token = localStorage.getItem('token') || '';
       let httpOptions = new HttpHeaders().set('x-access-token', token)
-      const endpointUrl = `${environment.JSON_SERVER}/getBannerSpecial?id=${id}`;
+      const endpointUrl = `${environment.JSON_SERVER}/getBannerById?id=${id}`;
       // let indexObj = bannerSpecialData.findIndex((obj)=>obj.id==id);
-      return this.http.get<any[]>(endpointUrl,{ 'headers': httpOptions });
+      return this.http.get<any>(endpointUrl,{ 'headers': httpOptions });
       // return of(bannerSpecialData[indexObj])
   }
 
@@ -213,23 +248,16 @@ export class CmsService {
 
     editSpecialBanner(payload: any, id: number) {
         const token = localStorage.getItem('token') || '';
-
-
-
+        const email = localStorage.getItem('email') || '';
         let httpOptions = new HttpHeaders().set('x-access-token', token)
         const endpointUrl = `${environment.JSON_SERVER}/updateBannerSpecial?id=${id}`;
         const formData = new FormData();
-        formData.append('username', payload.username);
+        formData.append('username', email);
         formData.append('bannerName', payload.bannerName);
           formData.append('bannerDescription', payload.bannerDescription);
           formData.append('bannerOrder', payload.bannerOrder);
           formData.append('image', payload.image);
-        return this.http.put<Admin>(endpointUrl,payload, { 'headers': httpOptions });
-
-        // let bannerObj = bannerSpecialData.findIndex((obj) => obj.id == id);
-        // bannerSpecialData[bannerObj] = bannerData
-        // return of(bannerData)
-
+        return this.http.put<Admin>(endpointUrl,formData, { 'headers': httpOptions });
     }
 
 
@@ -245,32 +273,51 @@ export class CmsService {
         // return of(featureData)
     }
 
-    addFeatureProduct(feature: any) {
+    addFeatureProduct(payload: any) {
         const token = localStorage.getItem('token') || '';
+        const email = localStorage.getItem('email') || '';
+        const formData = new FormData();
+        formData.append('username', email);
+        formData.append('productName', payload.productName);
+        formData.append('isSpecialProduct', payload.isSpecialProduct);
+        formData.append('productQuantity', payload.productQuantity);
+          formData.append('productModel', payload.productModel);
+          formData.append('productPrice', payload.productPrice);
+          formData.append('image', payload.image);
+
+
+
         let httpOptions = new HttpHeaders().set('x-access-token', token)
-        const endpointUrl = `${environment.JSON_SERVER}/feature`;
-        // return this.http.post<any>(endpointUrl, categoryData, { 'headers': httpOptions });
-        feature.id = featureData.length + 1
-        featureData.push(feature);
-        return of(feature)
-    }
-    editFeature(featuresData: FEATURE, id: number) {
-        const token = localStorage.getItem('token') || '';
-        let httpOptions = new HttpHeaders().set('x-access-token', token)
-        const endpointUrl = `${environment.JSON_SERVER}/category/${id}`;
-        // return this.http.put<CATEGORY>(endpointUrl, categoryData, { 'headers': httpOptions });
-        let featureObj = featureData.findIndex((obj) => obj.id == id);
-        featureData[featureObj] = featuresData
-        return of(featuresData)
+        const endpointUrl = `${environment.JSON_SERVER}/createFeatureProduct`;
+
+        return this.http.post<any>(endpointUrl, formData,{ 'headers': httpOptions });
     }
 
-    getFeatureById(id: number): Observable<FEATURE> {
+    editFeature(payload: any, id: number) {
+        const token = localStorage.getItem('token') || '';
+        const email = localStorage.getItem('email') || '';
+        let httpOptions = new HttpHeaders().set('x-access-token', token)
+        const endpointUrl = `${environment.JSON_SERVER}/updateFeatureProduct?id=${id}`;
+        const formData = new FormData();
+        formData.append('username', email);
+        formData.append('productName', payload.productName);
+        formData.append('productQuantity', payload.productQuantity);
+          formData.append('productModel', payload.productModel);
+          formData.append('productPrice', payload.productPrice);
+          formData.append('image', payload.image);
+        return this.http.put<any>(endpointUrl,formData, { 'headers': httpOptions });
+        // let featureObj = featureData.findIndex((obj) => obj.id == id);
+        // featureData[featureObj] = featuresData
+        // return of(featuresData)
+    }
+
+    getFeatureById(id: number): Observable<any> {
         const token = localStorage.getItem('token') || '';
         let httpOptions = new HttpHeaders().set('x-access-token', token)
-        const endpointUrl = `${environment.JSON_SERVER}/category/${id}`;
-        let indexObj = featureData.findIndex((obj)=>obj.id==id);
-        //return this.http.get<CATEGORY>(endpointUrl,{ 'headers': httpOptions });
-        return of(featureData[indexObj])
+        const endpointUrl = `${environment.JSON_SERVER}/getFeatureProductById?id=${id}`;
+        // let indexObj = featureData.findIndex((obj)=>obj.id==id);
+        return this.http.get<any>(endpointUrl,{ 'headers': httpOptions });
+        // return of(featureData[indexObj])
     }
 
     deleteProduct(id: number) {
@@ -294,28 +341,47 @@ export class CmsService {
         const email = localStorage.getItem('email') || '';
         let httpOptions = new HttpHeaders().set('x-access-token', token)
        const endpointUrl = `${environment.JSON_SERVER}/getSlider?username=${email}`;
-        return this.http.get<CATEGORY[]>(endpointUrl, { 'headers': httpOptions });
+        return this.http.get<any[]>(endpointUrl, { 'headers': httpOptions });
         // return of(sliderData)
     }
 
-    addSlider(slider: any) {
+
+
+    addSlider(payload: any) {
         const token = localStorage.getItem('token') || '';
+        const email = localStorage.getItem('email') || '';
         let httpOptions = new HttpHeaders().set('x-access-token', token)
-        const endpointUrl = `${environment.JSON_SERVER}/slider`;
-        // return this.http.post<any>(endpointUrl, categoryData, { 'headers': httpOptions });
-        slider.id = sliderData.length + 1
-        sliderData.push(slider);
-        return of(slider)
+
+        const formData = new FormData();
+        formData.append('username', email);
+        formData.append('sliderName', payload.sliderName);
+          formData.append('sliderDiscription', payload.sliderDiscription);
+          formData.append('sliderOrder', payload.sliderOrder);
+          formData.append('image', payload.image);
+          console.log("add special banner" + formData)
+          const endpointUrl = `${environment.JSON_SERVER}/createSlider`;
+
+        return this.http.post<any>(endpointUrl, formData, { 'headers': httpOptions });
+        // slider.id = sliderData.length + 1
+        // sliderData.push(slider);
+        // return of(slider)
     }
 
-    editSlider(slidersData: SLIDER, id: number) {
+    editSlider(payload: any, id: number) {
         const token = localStorage.getItem('token') || '';
+        const email = localStorage.getItem('email') || '';
         let httpOptions = new HttpHeaders().set('x-access-token', token)
-        const endpointUrl = `${environment.JSON_SERVER}/category/${id}`;
-        // return this.http.put<CATEGORY>(endpointUrl, categoryData, { 'headers': httpOptions });
-        let sliderObj = sliderData.findIndex((obj) => obj.id == id);
-        sliderData[sliderObj] = slidersData
-        return of(slidersData)
+        const endpointUrl = `${environment.JSON_SERVER}/updateSlider?id=${id}`;
+        const formData = new FormData();
+        formData.append('username', email);
+        formData.append('sliderName', payload.sliderName);
+        formData.append('sliderDiscription', payload.sliderDiscription);
+          formData.append('sliderOrder', payload.sliderOrder);
+          formData.append('image', payload.image);
+        return this.http.put<any>(endpointUrl, formData, { 'headers': httpOptions });
+        // let sliderObj = sliderData.findIndex((obj) => obj.id == id);
+        // sliderData[sliderObj] = slidersData
+        // return of(slidersData)
     }
 
     deleteSlider(id: number) {
@@ -331,23 +397,23 @@ export class CmsService {
         // return of(sliderObj)
     }
 
-    getSliderById(id: number): Observable<SLIDER> {
+    getSliderById(id: number): Observable<any> {
         const token = localStorage.getItem('token') || '';
         let httpOptions = new HttpHeaders().set('x-access-token', token)
-        const endpointUrl = `${environment.JSON_SERVER}/slider/${id}`;
-        let indexObj = sliderData.findIndex((obj)=>obj.id==id);
-        //return this.http.get<CATEGORY>(endpointUrl,{ 'headers': httpOptions });
-        return of(sliderData[indexObj])
+        const endpointUrl = `${environment.JSON_SERVER}/getSliderById?id=${id}`;
+        // let indexObj = sliderData.findIndex((obj)=>obj.id==id);
+        return this.http.get<CATEGORY>(endpointUrl,{ 'headers': httpOptions });
+        // return of(sliderData[indexObj])
     }
 
     // -----------------special offer Api------------------------------
 
-    getOfferList(): Observable<SPECIALOFFER[]> {
+    getOfferList(): Observable<any[]> {
         const token = localStorage.getItem('token') || '';
         let httpOptions = new HttpHeaders().set('x-access-token', token)
-       // const endpointUrl = `${environment.JSON_SERVER}/category`;
-        // return this.http.get<CATEGORY[]>(endpointUrl, { 'headers': httpOptions });
-        return of(specialOffer)
+       const endpointUrl = `${environment.JSON_SERVER}/getSpecialProduct`;
+        return this.http.get<any[]>(endpointUrl, { 'headers': httpOptions });
+        // return of(specialOffer)
     }
 
     addOffer(offer: any) {
@@ -364,32 +430,33 @@ export class CmsService {
         const token = localStorage.getItem('token') || '';
         let httpOptions = new HttpHeaders().set('x-access-token', token)
         const endpointUrl = `${environment.JSON_SERVER}/category/${id}`;
-        // return this.http.put<CATEGORY>(endpointUrl, categoryData, { 'headers': httpOptions });
-        let sliderObj = specialOffer.findIndex((obj) => obj.id == id);
-        specialOffer[sliderObj] = offersData
-        return of(offersData)
+        return this.http.put<any>(endpointUrl, { 'headers': httpOptions });
+        // let sliderObj = specialOffer.findIndex((obj) => obj.id == id);
+        // specialOffer[sliderObj] = offersData
+        // return of(offersData)
     }
 
     deleteOffer(id: number) {
         const token = localStorage.getItem('token') || '';
         let httpOptions = new HttpHeaders().set('x-access-token', token)
         const endpointUrl = `${environment.JSON_SERVER}/slider/${id}`;
-        //return this.http.delete<CATEGORY>(endpointUrl, { 'headers': httpOptions });
-        let offerObj = specialOffer.map(item => {
-            item.id == id;
-            return item;
-        })
-        specialOffer.splice(specialOffer.findIndex((index) => index.id == id),1);
-        return of(offerObj)
+        return this.http.delete<any>(endpointUrl, { 'headers': httpOptions });
+        // let offerObj = specialOffer.map(item => {
+        //     item.id == id;
+        //     return item;
+        // })
+        // specialOffer.splice(specialOffer.findIndex((index) => index.id == id),1);
+        // return of(offerObj)
     }
 
     getOfferById(id: number): Observable<SPECIALOFFER> {
         const token = localStorage.getItem('token') || '';
         let httpOptions = new HttpHeaders().set('x-access-token', token)
-        const endpointUrl = `${environment.JSON_SERVER}/slider/${id}`;
-        let indexObj = specialOffer.findIndex((obj)=>obj.id==id);
-        //return this.http.get<CATEGORY>(endpointUrl,{ 'headers': httpOptions });
-        return of(specialOffer[indexObj])
+        const endpointUrl = `${environment.JSON_SERVER}/getSliderById?id=${id}`;
+        return this.http.get<any>(endpointUrl,{ 'headers': httpOptions });
+        // let indexObj = specialOffer.findIndex((obj)=>obj.id==id);
+        // return this.http.get<any>(endpointUrl,{ 'headers': httpOptions });
+        // return of(specialOffer[indexObj])
     }
 }
 // function categoryData<T>(endpointUrl: string, categoryData: any, arg2: { headers: HttpHeaders; }) {

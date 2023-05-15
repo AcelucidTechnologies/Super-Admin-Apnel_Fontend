@@ -1,10 +1,21 @@
 <form [formGroup]="specialOfferForm">
-    <div class="page-heading col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+    <!-- <div class="page-heading col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
         <h1 class="header-text-title">
             <i pButton class="pi pi-arrow-left p-button-text" [routerLink]="['/cms/feature']" pTooltip="Back"
                 tooltipPosition="bottom">
             </i>{{title}}
         </h1>
+    </div> -->
+    <div class="button-heading-container">
+      <button
+        class="mb-2 p-1 back-button"
+        [routerLink]="['/cms/special-offer']" pTooltip="Back"
+        tooltipPosition="bottom"
+      >
+        <i class="material-icons">arrow_back</i>
+
+      </button>
+      <h5>&nbsp;{{title}}</h5>
     </div>
     <div class="card col-sm-12">
         <div class="row gutters">
@@ -18,10 +29,10 @@
                             <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
                                 <div class="form-group">
                                     <label for="hyperlink" class="col-form-label text-left starlabel">Category</label>
-                                    <input type="text" class="form-control" formControlName="category">
+                                    <input type="text" class="form-control" formControlName="productModel">
                                     <div
-                                        *ngIf="!specialOfferForm.controls['category'].valid && (specialOfferForm.controls['category'].touched || specialOfferForm.controls['category'].dirty)">
-                                        <div [hidden]="!specialOfferForm.controls['category'].errors['required']"
+                                        *ngIf="!specialOfferForm.controls['productModel'].valid && (specialOfferForm.controls['productModel'].touched || specialOfferForm.controls['productModel'].dirty)">
+                                        <div [hidden]="!specialOfferForm.controls['productModel'].errors['required']"
                                             style="color: rgb(253, 122, 122); font-size:small; font-style: italic;">
                                             Category is required
                                         </div>
@@ -33,10 +44,10 @@
                             <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
                                 <div class="form-group">
                                     <label for="name" class="col-form-label text-left starlabel">Product Name</label>
-                                    <input type="text" class="form-control" formControlName="product">
+                                    <input type="text" class="form-control" formControlName="productName">
                                     <div
-                                        *ngIf="!specialOfferForm.controls['product'].valid && (specialOfferForm.controls['product'].touched || specialOfferForm.controls['product'].dirty)">
-                                        <div [hidden]="!specialOfferForm.controls['product'].errors['required']"
+                                        *ngIf="!specialOfferForm.controls['productName'].valid && (specialOfferForm.controls['productName'].touched || specialOfferForm.controls['productName'].dirty)">
+                                        <div [hidden]="!specialOfferForm.controls['productName'].errors['required']"
                                             style="color: rgb(253, 122, 122); font-size:small; font-style: italic;">
                                             Product Name is required
                                         </div>
@@ -49,24 +60,37 @@
                             </div>
                         </div>
 
+                        <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
+                          <div class="form-group">
+                            <label>
+                              <input type="checkbox" [(ngModel)]="isChecked" formControlName="isSpecialProduct" >
+                              Product Special Offer
+                            </label>
+                            <!-- <mat-checkbox [checked]="myModel" class="example-margin"/> -->
+
+
+                          </div>
+                      </div>
 
 
 
-                        <div class="row gutters">
-                            <div class="col-9 form-group pt-3">
-                                <label for="imageUpload" class="col-form-label">Image</label>
-                                <div id="imageUpload" class="custom-file">
-                                    <input type="file" class="custom-file-input" id="inputGroupFile01"
-                                        (change)="fileChangeEvent($event)">
-                                    <label class="custom-file-label" for="inputGroupFile01">Upload file</label>
-                                </div>
-                            </div>
-                        </div>
+                        <!-- <div class="row gutters">
+                          <div class="col-9 form-group pt-3">
+                              <label for="imageUpload" class="col-form-label">Image</label>
+                              <div class="d-flex justify-content-start h-75"><img class="img-content" [src]="Image" /></div>
+                              <div id="imageUpload" class="custom-file">
+                                  <input type="file" class="custom-file-input" id="inputGroupFile01"
+                                  (change)="fileChangeEvent($event)" >
+                                  <label class="custom-file-label" for="inputGroupFile01">Upload file</label>
+                              </div>
+                          </div>
+                      </div> -->
 
-                        <div class="row gutters">
+
+                        <!-- <div class="row gutters">
                             <div class="col-11 form-group mt-5">
                                 <div class="card">
-                                  <div class="card-body"> 
+                                  <div class="card-body">
                                     <div class="row" style="margin-top: 15px;">
                                       <div class="text-center col-md-12">
                                         <h5>Image Croppier</h5>
@@ -75,19 +99,56 @@
                                           (imageLoaded)="imageLoaded()" (cropperReady)="cropperReady()"
                                           (loadImageFailed)="loadImageFailed()"></image-cropper>
                                       </div>
-                  
+
                                     </div>
                                   </div>
                                 </div>
-                  
+
                               </div>
-                        </div>
+                        </div> -->
+
+                        <div class="row gutters">
+                          <div class="col-12 form-group pt-3">
+                              <label for="imageUpload" class="col-form-label">Image</label>
+                              <!-- <div class="d-flex justify-content-start h-75"><img class="img-content" [src]="Image" /></div> -->
+                              <div id="imageUpload" class="custom-file">
+                                  <input type="file" class="custom-file-input" id="inputGroupFile01"
+                                  (change)="fileChangeEvent($event)" >
+                                  <label class="custom-file-label" for="inputGroupFile01">Upload file</label>
+                              </div>
+                          </div>
+                      </div>
+
+
+                      <div class="row gutters">
+                          <div class="col-12 form-group mt-5">
+                              <div class="card" >
+                                <div class="card-body">
+                                  <div class="row" style="margin-top: 15px;">
+                                    <div class="text-center col-md-12">
+                                      <h5>Image Croppier</h5>
+                                      <img class="img-content" [src]="croppedImage ? croppedImage : Image" />
+                                      <image-cropper [imageChangedEvent]="imageChangedEvent" [maintainAspectRatio]="true"
+                                        [aspectRatio]="4 / 3" [resizeToWidth]="400" format="png" (imageCropped)="imageCropped($event)"
+                                        (imageLoaded)="imageLoaded()" (cropperReady)="cropperReady()"
+                                        (loadImageFailed)="loadImageFailed()"></image-cropper>
+                                    </div>
+
+                                  </div>
+                                </div>
+                              </div>
+
+                            </div>
+                      </div>
                         <!-- ------------------------------------- -->
 
                         <div class="row gutters mt-4">
                             <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 mt-4">
                                 <div class="text-center">
-                                    <button pButton type="button" id="submit" name="submit"
+                                    <!-- <button pButton type="button" id="submit" name="submit"
+                                        class="p-button mr-4 first-button" (click)="submitForm()"
+                                        [disabled]="!(specialOfferForm.valid)">Save</button> -->
+                                        <button pButton type="button" id="submit" name="submit"
                                         class="p-button mr-4 first-button" (click)="submitForm()"
                                         [disabled]="!(specialOfferForm.valid)">Save</button>
                                     <button pButton type="button" id="submit" name="submit" class="p-button second-button "

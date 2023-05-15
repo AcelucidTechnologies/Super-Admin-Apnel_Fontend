@@ -54,18 +54,28 @@ export interface FEATURE {
 }
 
 export interface SPECIALOFFER {
-    id: number,
-    image: File|any,
-    product: string,
-    category: string,
+    // id: number,
+    // image: File|any,
+    // product: string,
+    // category: string,
+
+   _id:number,
+           username:string,
+           productName:string,
+           productPrice: number,
+           productModel:string,
+           image: File|any,
+           productQuantity: number,
+           isSpecialProduct: boolean,
 
 }
 
 export interface PAGE {
-    id: number,
-    url: string
-    page: string,
-    description: string,
+  _id: number,
+    username: string
+    pageTitle: string,
+    pageLink: string,
+    pageContent: string
 }
 
 export interface DELETE_FEATURE_PRODUCT{
@@ -96,4 +106,40 @@ export interface USER_BANNER_LIST{
    bannerDescription:string,
    bannerOrder:string,
    image:string,
+}
+export interface ApiResponse {
+
+    _id: string;
+    username: string;
+    productName: string; // add this line
+    productPrice: number;
+    productModel: string;
+    image: string;
+    productQuantity: number;
+    isSpecialProduct: boolean;
+
+
+
+
+  // response:[ { _id: string;
+  //   username: string;
+  //   productName: string;
+  //   productPrice: number;
+  //   productModel: string;
+  // }];
+}
+
+
+export interface ApiResponseWithResponse {
+  response: [{
+    _id: string;
+    username: string;
+    productName: string;
+    productPrice: number;
+    productModel: string;
+    image: string;
+    productQuantity: number;
+    isSpecialProduct: boolean;
+    __v: number;
+  }];
 }

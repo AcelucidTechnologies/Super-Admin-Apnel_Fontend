@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { BANNERSPECIAL, FEATURE } from 'src/app/_models/cms';
+import { BANNERSPECIAL, FEATURE, SPECIALOFFER } from 'src/app/_models/cms';
 import { TABLE_HEADING } from 'src/app/_models/table_heading';
 import { Table } from 'primeng/table';
 import { NgxUiLoaderService } from 'ngx-ui-loader';
@@ -29,9 +29,13 @@ export class FeatureProductListComponent implements OnInit {
   productDetails:any[];
   exportColumns: any[];
   customers:FEATURE[]=[]
+  offerList : SPECIALOFFER[]=[]
+  isSpecialProduct = true;
+  isChecked = this.isSpecialProduct;
 
   selectedProduct: FEATURE[]=[]
   statuses: any[];
+  imgbucket="https://adminpanelbucket.s3.amazonaws.com/Feature/";
 
   activityValues: number[] = [0, 100];
 
@@ -61,11 +65,20 @@ export class FeatureProductListComponent implements OnInit {
   }
 
   getFeatureList(){
-    this.CmsService.getFeatureList().subscribe((res: FEATURE[]) => {
+    // if (this.isSpecialProduct) {
+    this.CmsService.getFeatureList().subscribe((res) => {
       this.featureList = res
-      //console.log(this.bannerList,"--------------------")
+      console.log(this.featureList," feature list--------------------")
       this.ngxLoader.stop();
     })
+  // }
+  // else {
+  //   this.CmsService.getOfferList().subscribe((res) => {
+  //     this.offerList = res
+  //     console.log(this.offerList," offer list--------------------")
+  //     this.ngxLoader.stop();
+  //   })
+  // }
   }
 
   deleteProduct(featureList: any) {

@@ -12,41 +12,53 @@
         [filterDelay]="0" [globalFilterFields]="['category','product']" class="abc">
         <ng-template pTemplate="caption" style="background-color: #fff !important; ">
             <div class="table-header">
-                <span style="display: flex; justify-content: center; align-items: center; margin-left: 20px;" class="p-input-icon-left ">
+                <!-- <span style="display: flex; justify-content: center; align-items: center; margin-left: 20px;" class="p-input-icon-left ">
                     <input style="outline: none; border-radius: 5px; border: 1px solid rgb(195, 183, 183); padding: 6px;" type="text" (input)="applyFilterGlobal($event, 'contains')" placeholder="Search..." />
-                </span>
+                </span> -->
+                <div class="input-container">
+                  <img src="../../../assets/images/search-white.svg" class="input-container-img" />
+                  <input #search pInputText type="text" placeholder="Search..."
+                    (input)="applyFilterGlobal($event, 'contains')" />
+                </div>
 
                 <div class="d-flex justify-content-end align-items-end">
-                  <button style="background-color: #f4f4f4; border: none;" type="button" pButton class="mr-1" pTooltip="Pdf" (click)="exportPdf()"
+                  <button style=" border: none;" class="custom-image" type="button" pButton class="mr-1 custom-image " pTooltip="Pdf"  (click)="exportPdf()"
                     tooltipPosition="bottom"><img
                     src="../assets/images/icons/pdf.svg"></button>
-                  <button type="button" style="background-color: #f4f4f4;; border: none;" pButton class="mr-1" pTooltip="excel" (click)="exportExcel()"
+                  <button type="button" style=" border: none;" class="custom-image" pButton class="mr-1 custom-image " pTooltip="excel"  (click)="exportExcel()"
                     tooltipPosition="bottom" ><img
                     src="../assets/images/icons/excel.svg"></button>
-                    <button type="button" style="background-color: #f4f4f4;; border: none;" pButton class=" mr-1" pTooltip="print"
-                    tooltipPosition="bottom" ><img
-                    src="../assets/images/icons/printer.svg"></button>
                 </div>
             </div>
         </ng-template>
-        <ng-template  pTemplate="header">
+        <ng-template  pTemplate="header" >
             <tr>
 
-                <th pSortableColumn="product">
+                <!-- <th style="width: 3rem;">
+                    <p-tableHeaderCheckbox></p-tableHeaderCheckbox>
+                </th> -->
+                <th pSortableColumn="productName">
                     <div class="flex justify-content-between align-items-center head1">
                       Product Name
-                        <p-sortIcon field="product"></p-sortIcon>
+                        <p-sortIcon field="productName"></p-sortIcon>
 
                     </div>
                 </th>
-                <th pSortableColumn="category">
+                <th pSortableColumn="productModel">
                     <div class="flex justify-content-between align-items-center head1">
-                        Category
-                        <p-sortIcon field="category"></p-sortIcon>
+                      product Model
+                        <p-sortIcon field="productModel"></p-sortIcon>
 
                     </div>
                 </th>
 
+                <th pSortableColumn="productPrice">
+                  <div class="flex justify-content-between align-items-center head1">
+                    product Price
+                      <p-sortIcon field="productPrice"></p-sortIcon>
+
+                  </div>
+              </th>
 
               <th>
                 <div class="flex justify-content-between align-items-center head1">
@@ -63,28 +75,38 @@
 
             </tr>
         </ng-template>
-        <ng-template pTemplate="body" let-offerList>
+        <ng-template pTemplate="body" let-offerList >
             <tr class="p-selectable-row">
-                
+                <!-- <td>
+                    <p-tableCheckbox [value]="offerList"></p-tableCheckbox>
+                </td> -->
                 <td>
                     <span class="p-column-title">Product Name</span>
-                    {{offerList.product}}
+                    {{offerList.productName}}
                 </td>
                 <td>
-                    <span class="p-column-title">Category</span>
-                    {{offerList.category}}
+                    <span class="p-column-title">product Model</span>
+                    {{offerList.productModel}}
                 </td>
 
                 <td>
+                  <span class="p-column-title">productPrice</span>
+                    {{offerList.productPrice}}
+                </td>
+                <!-- <td>
                   <span class="p-column-title">Image</span>
                     {{offerList.image}}
-                </td>
+                </td> -->
+                <td>
+                  <span class="p-column-title">Image</span>
+                  <img class="user-name-img" src={{this.imgbucket}}{{offerList.image}}>
+              </td>
 
                 <td>
-                  <a pTooltip="Edit Banner" tooltipPosition="bottom" class="me-3" style="margin-right: 10px;">
-                      <img src="../assets/images/icons/edit.svg" [queryParams]="{id:offerList?.id}"  [routerLink]="['/cms/add-special-offer']"   alt="img">
+                  <a pTooltip="Edit Special" tooltipPosition="bottom" class="me-3" style="margin-right: 10px;">
+                      <img src="../assets/images/icons/edit.svg" [queryParams]="{id:offerList?._id}"  [routerLink]="['/cms/edit-special-offer']"   alt="img">
                   </a>
-                  <a pTooltip="Delete Banner" tooltipPosition="bottom" (click)="openDialog(offerList)"   class="me-3 confirm-text"   href="javascript:void(0);">
+                  <a pTooltip="Delete Special" tooltipPosition="bottom" (click)="openDialog(offerList)"   class="me-3 confirm-text"   href="javascript:void(0);">
                       <img src="../assets/images/icons/delete.svg" alt="img">
                   </a>
               </td>

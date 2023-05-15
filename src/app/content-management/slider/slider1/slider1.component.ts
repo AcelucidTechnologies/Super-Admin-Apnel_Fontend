@@ -31,6 +31,8 @@ export class Slider1Component implements OnInit {
   accessPermission:access;
   exportColumns: any[];
   sliderDetails:any[];
+  imgbucket="https://adminpanelbucket.s3.amazonaws.com/Slider/";
+
   // ----------------------------
 
   customers: SLIDER[];
@@ -53,6 +55,7 @@ export class Slider1Component implements OnInit {
      }
 
   ngOnInit(): void {
+    this.getSliderList();
     this.fgsType = SPINNER.squareLoader
     this.ngxLoader.start();
     this.sidebarSpacing = 'contracted';
@@ -64,17 +67,23 @@ export class Slider1Component implements OnInit {
       { field: 'sortby', show: true, headers: 'Sort By' },
       { field: 'action', show: true, headers: 'Action' },
     ]
-    this.getSliderList();
+
 
   }
 
   getSliderList() {
     this.CmsService.getSliderList().subscribe((res) => {
-      this.sliderList = res
+      this.sliderList = res.map((item) => {
+        const cleanResponse = item.sliderDiscription.replace(/<\/?p>/g, '');
+        return { ...item, sliderDiscription: cleanResponse };
+      });
+
       console.log(this.sliderList,"--------------------")
       this.ngxLoader.stop();
     })
   }
+
+
 
   deleteSlider(sliderList: any) {
     this.ngxLoader.start();
@@ -103,9 +112,10 @@ export class Slider1Component implements OnInit {
     }
   }
 
-  applyFilterGlobal($event, stringVal) {
-    this.dt.filterGlobal(($event.target as HTMLInputElement).value, stringVal);
-  }
+     //Search functionality start here
+     applyFilterGlobal($event, stringVal) {
+      this.dt.filterGlobal(($event.target as HTMLInputElement).value, stringVal);
+    }
 
   exportPdf() {
     this.sliderDetails = this.sliderList

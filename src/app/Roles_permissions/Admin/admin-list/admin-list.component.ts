@@ -7,6 +7,7 @@ import * as xlsxPackage from 'xlsx';
 import * as FileSaver from 'file-saver';
 import jsPDF from 'jspdf';
 import autoTable from 'jspdf-autotable';
+import { TABLE_HEADING } from 'src/app/_models/table_heading';
 
 @Component({
   selector: 'app-admin-list',
@@ -21,13 +22,22 @@ export class AdminListComponent implements OnInit {
   item:any
   exportColumns:any[];
   @ViewChild('dt') dt:Table|undefined
+  cols!: TABLE_HEADING[];
+
 
   constructor(private dialog:MatDialog
     ,private adminService: AdminService) {
     this.getAdminListDetail();
   }
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.cols = [
+      { field: 'username', show: true, headers: 'Username' },
+      { field: 'email', show: true, headers: 'Email' },
+      { field: 'role', show: true, headers: 'Role' },
+    ]
+      this.exportColumns = this.cols.map(col => ({title: col.headers,dataKey: col.field}))
+  }
 
 
   getAdminListDetail() {

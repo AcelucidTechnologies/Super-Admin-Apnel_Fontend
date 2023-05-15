@@ -69,3 +69,13 @@ input[type=number] {
   -moz-appearance: textfield !important;
 
 }
+
+.custom-file-input {
+  position: relative;
+  z-index: 2;
+  width: 100%;
+  height: calc(1.5em + 0.75rem + 2px);
+  margin-left: 83px !important;
+  opacity: 0;
+  cursor: pointer;
+}

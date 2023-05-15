@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { BANNERSPECIAL, USER_BANNER_LIST } from 'src/app/_models/cms';
+import { BANNERSPECIAL } from 'src/app/_models/cms';
 import { TABLE_HEADING } from 'src/app/_models/table_heading';
 import { Table } from 'primeng/table';
 import { NgxUiLoaderService, SPINNER } from 'ngx-ui-loader';
@@ -14,7 +14,8 @@ import { log } from 'console';
 import * as jsPDF from 'jspdf';
 import autoTable from 'jspdf-autotable'
 import * as FileSaver from 'file-saver';
-import * as xlsxPackage from 'xlsx'
+import * as xlsxPackage from 'xlsx';
+import { ApiResponse } from 'src/app/_models/cms';
 
 
 @Component({
@@ -28,15 +29,14 @@ export class BannerSpecialComponent implements OnInit {
   sidebarSpacing: any;
   cols!: TABLE_HEADING[];
   fgsType: any;
-   image:any="https://adminpanelbucket.s3.amazonaws.com/Slider/pencil-bulb-creative-idea-pen-tool-created-clipping-path-included-jpeg-easy-composite.jpg"
-  bannerList: USER_BANNER_LIST[]=[]
+  bannerList: any[]=[]
+  banner: any[]=[]
   accessPermission:access
+  bannerList1:any[]=[]
   bannerDetails:any[];
   exportColumns: any[];
-
+  id:string
   imgbucket="https://adminpanelbucket.s3.amazonaws.com/Banner/";
-=======
-
   // ----------------------------
 
   customers: BANNERSPECIAL[];
@@ -64,9 +64,11 @@ export class BannerSpecialComponent implements OnInit {
       })
       const test = localStorage.getItem('email')
       console.log("value test" + test)
+
      }
 
   ngOnInit(): void {
+    this.getbannerList();
     this.fgsType = SPINNER.squareLoader
     this.ngxLoader.start();
     this.sidebarSpacing = 'contracted';
@@ -78,20 +80,28 @@ export class BannerSpecialComponent implements OnInit {
       { field: 'sortby', show: true, headers: 'Sort By' },
     ]
     this.exportColumns = this.cols.map(col => ({title: col.headers,dataKey: col.field}))
-    this.getbannerList();
+
 
     // $('#myModal').on('shown.bs.modal', function () {
     //   $('#myInput').trigger('focus')
     // })
   }
 
+
   getbannerList() {
     this.CmsService.getSpecialBannerList(this.id).subscribe((res) => {
-      this.bannerList = res
+      this.banner =res
+      this.bannerList = res.map((item) => {
+              const cleanResponse = item.bannerDescription.replace(/<\/?p>/g, '');
+              return { ...item, bannerDescription: cleanResponse };
+            });
+
       console.log(this.bannerList,"--------------------")
       this.ngxLoader.stop();
     })
   }
+
+
 
   deleteBanner(bannerList: any) {
 
@@ -123,22 +133,35 @@ export class BannerSpecialComponent implements OnInit {
     }
   }
 
-   //Search functionality start here
-   applyFilterGlobal($event, stringVal) {
+  applyFilterGlobal($event, stringVal) {
     this.dt.filterGlobal(($event.target as HTMLInputElement).value, stringVal);
   }
-  exportPdf() {
-    this.bannerDetails = this.bannerList
-            const doc = new jsPDF.jsPDF('l', 'pt');
-           autoTable(doc, {
-            columns:this.exportColumns,
-            body:this.bannerDetails
-           });
-            doc.save('products.pdf');
+
+  // exportPdf() {
+  //   this.bannerDetails = this.banner
+  //           const doc = new jsPDF.jsPDF('l', 'pt');
+  //          autoTable(doc, {
+  //           columns:this.exportColumns,
+  //           body:this.bannerDetails
+  //          });
+  //           doc.save('banner.pdf');
+  //       }
+
+        exportPdf() {
+          this.bannerDetails = this.banner;
+          const doc = new jsPDF.jsPDF('l', 'pt');
+          const data = this.bannerDetails.map(obj => [obj.bannerName, obj.bannerDescription, obj.bannerOrder, obj.image]); // replace with actual property names
+          autoTable(doc, {
+            columns: this.exportColumns,
+            body: data
+          });
+          doc.save('banner.pdf');
         }
 
+
+
         exportExcel() {
-          const worksheet = xlsxPackage.utils.json_to_sheet(this.bannerList);
+          const worksheet = xlsxPackage.utils.json_to_sheet(this.banner);
           const workbook = { Sheets: { 'data': worksheet }, SheetNames: ['data'] };
           const excelBuffer: any = xlsxPackage.write(workbook, { bookType: 'xlsx', type: 'array' });
           this.saveAsExcelFile(excelBuffer, "leads");
