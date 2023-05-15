@@ -1,11 +1,21 @@
-  <div class="page-heading">
+  <!-- <div class="page-heading">
     <h1 class="header-text-title">
       <i pButton class="pi pi-arrow-left p-button-text" [routerLink]="['/marketing']" pTooltip="Back"
         tooltipPosition="bottom">
       </i>{{title}}
     </h1>
-  </div>
+  </div> -->
   <form [formGroup]="promotionForm">
+    <div class="button-heading-container">
+      <button
+        class="mb-2 p-1 back-button"
+        [routerLink]="['/marketting']"
+      >
+        <i class="material-icons">arrow_back</i>
+
+      </button>
+      <h5>&nbsp;{{title}}</h5>
+    </div>
     <div class="card col-sm-12">
       <div class="row gutters">
         <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12 mt-4">
@@ -151,7 +161,7 @@
       </div>
 
       <div class="text-right mt-4">
-        <button class="btn btn-danger mb-4 mr-2" type="submit" [routerLink]="['/marketing']">Back</button>
+        <button class="btn btn-danger mb-4 mr-2" type="submit" [routerLink]="['/marketting']">Back</button>
         <button class="btn btn-success mb-4" type="submit">Submit</button>
       </div>
     </div>
