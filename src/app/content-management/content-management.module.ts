@@ -30,6 +30,8 @@ import { DialogSpecialOfferComponent } from './special-offer/dialog-special-offe
 import { PageListComponent } from './page/page-list/page-list.component';
 import { AddPageListComponent } from './page/add-page-list/add-page-list.component';
 import { DialogSelectComponent } from './page/dialog-select/dialog-select.component';
+import { CmsLandingPageComponent } from './cms-landing-page/cms-landing-page.component';
+import { CarouselModule } from 'primeng/carousel';
 
 
 @NgModule({
@@ -55,7 +57,8 @@ import { DialogSelectComponent } from './page/dialog-select/dialog-select.compon
     PageListComponent,
     AddPageListComponent,
     DialogSelectComponent,
-    
+    CmsLandingPageComponent,
+
   ],
   imports: [
     CommonModule,
@@ -67,6 +70,7 @@ import { DialogSelectComponent } from './page/dialog-select/dialog-select.compon
     MatDialogModule,
     MatButtonModule,
     CKEditorModule,
+    CarouselModule
   ]
 })
 export class ContentManagementModule { }

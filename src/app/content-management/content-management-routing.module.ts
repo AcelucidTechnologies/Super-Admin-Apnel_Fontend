@@ -17,6 +17,7 @@ import { AddSpecialOfferComponent } from './special-offer/add-special-offer/add-
 import { PageListComponent } from './page/page-list/page-list.component';
 import { AddPageListComponent } from './page/add-page-list/add-page-list.component';
 import { DialogSelectComponent } from './page/dialog-select/dialog-select.component';
+import { CmsLandingPageComponent } from './cms-landing-page/cms-landing-page.component';
 const routes: Routes = [
   {
     path:'category', component: CategoryComponent
@@ -75,7 +76,10 @@ const routes: Routes = [
   {
     path: 'page', component: AddPageListComponent
   },
-  { path: 'option1', component: DialogSelectComponent },
+  { path: 'option1', component: DialogSelectComponent
+},
+  { path: 'cms-landing', component: CmsLandingPageComponent
+},
 //  {
 //     path: 'add-page', component: AddPageListComponent
 //   },

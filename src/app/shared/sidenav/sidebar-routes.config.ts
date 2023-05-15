@@ -24,6 +24,12 @@ export const SideNaveMenueRoute = [
     label: 'CMS',
     icon: 'pi pi-file',
     items: [
+      {
+        label: 'Landing-page',
+
+        icon: 'pi pi-clone',
+        routerLink: ['/cms/cms-landing'],
+      },
     {
       label: 'Banner Special',
 
