@@ -1,99 +1,135 @@
-
 <form [formGroup]="trackingForm">
+  <div class="page-heading col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 mb-4">
+    <h1 class="header-text-title">Analytics Tracking</h1>
+  </div>
 
-    <div class="page-heading col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 mb-4" >
-      <h1 class="header-text-title">
-        Analytics Tracking
-      </h1>
-    </div>
-    
-    <div class="card col-sm-12">
-      <div class="row gutters">
-        <h3>Google Analytics Key</h3>
-        <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
-          <div class="h-100 mt-3">
-            <div class="card-body">
-              <div class="row gutters">
-                <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
-                  <div class="form-group">
-                    <label for="name" class="col-form-label text-left starlabel">Google Analytics key</label>
-                    <input type="url" class="form-control" placeholder="Enter Google Analytics key Id">   
-                    <!-- <div
-                    *ngIf="!trackingForm.controls['googleKey'].valid && (trackingForm.controls['googleKey'].touched || trackingForm.controls['googleKey'].dirty)">
-                    <div [hidden]="!trackingForm.controls['googleKey'].errors['required']"
-                        style="color: rgb(253, 122, 122); font-size:small; font-style: italic;">
-                        Google Analytics key
-                    </div>
-                </div>            -->
+  <div class="card col-sm-12">
+    <div class="row gutters">
+      <h5 class="mt-2 ml-2">Google Analytics Key</h5>
+      <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+        <div class="h-100 mt-3">
+          <div class="card-body">
+            <div class="row gutters">
+              <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+                <div class="form-group">
+                  <label for="name" class="col-form-label text-left starlabel"
+                    >Google Analytics key</label
+                  >
+                  <input
+                    type="url"
+                    class="form-control"
+                    placeholder="Enter Google Analytics key Id"
+                  />
+                  <!-- <div
+                  *ngIf="!trackingForm.controls['googleKey'].valid && (trackingForm.controls['googleKey'].touched || trackingForm.controls['googleKey'].dirty)">
+                  <div [hidden]="!trackingForm.controls['googleKey'].errors['required']"
+                      style="color: rgb(253, 122, 122); font-size:small; font-style: italic;">
+                      Google Analytics key
                   </div>
+              </div>            -->
                 </div>
-              </div> 
-              <!-- ------------------------------------- -->
+              </div>
             </div>
+            <!-- ------------------------------------- -->
           </div>
         </div>
       </div>
+    </div>
 
-
-      
-      <div class="row gutters mb-3">
-        <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
-            <div class="text-center">
-                <button pButton type="button" id="submit" name="submit"
-                    class="p-button mr-4 first-button"
-                    ><a style="text-decoration: none !important; color: #fff !important" href="https://analytics.google.com/analytics/web/provision/#/provision">Go to Web</a></button>
-                    <button pButton type="button" id="submit" name="submit"
-                    class="p-button mr-4 first-button" (click)="submitForm()"
-                    >Save</button>
-            </div>
-           
+    <div class="row gutters mb-3">
+      <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+        <div class="text-center">
+          <button
+            pButton
+            type="button"
+            id="submit"
+            name="submit"
+            class="p-button mr-4 first-button"
+          >
+            <a
+              style="text-decoration: none !important; color: #fff !important"
+              href="https://analytics.google.com/analytics/web/provision/#/provision"
+              target="_blank"
+              >Go to Web</a
+            >
+          </button>
+          <button
+            pButton
+            type="button"
+            id="submit"
+            name="submit"
+            class="p-button mr-4 first-button"
+            (click)="submitForm()"
+          >
+            Save
+          </button>
         </div>
-       
+      </div>
     </div>
 
     <!-- ------------------------------- -->
 
     <div class="row gutters">
-        <h3>Meta Analytics Key</h3>
-        <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
-          <div class="h-100 mt-3">
-            <div class="card-body">
-              <div class="row gutters">
-                <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
-                  <div class="form-group">
-                    <label for="name" class="col-form-label text-left starlabel">Meta Analytics key</label>
-                    <input type="url" class="form-control" placeholder="Enter Meta Analytics key Id">   
-                    <!-- <div
-                    *ngIf="!trackingForm.controls['metaKey'].valid && (trackingForm.controls['metaKey'].touched || trackingForm.controls['metaKey'].dirty)">
-                    <div [hidden]="!trackingForm.controls['metaKey'].errors['required']"
-                        style="color: rgb(253, 122, 122); font-size:small; font-style: italic;">
-                        Google Analytics key
-                    </div>
-                </div>            -->
+      <h5 class="mt-2 ml-2">Meta Analytics Key</h5>
+      <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+        <div class="h-100 mt-3">
+          <div class="card-body">
+            <div class="row gutters">
+              <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+                <div class="form-group">
+                  <label for="name" class="col-form-label text-left starlabel"
+                    >Meta Analytics key</label
+                  >
+                  <input
+                    type="url"
+                    class="form-control"
+                    placeholder="Enter Meta Analytics key Id"
+                  />
+                  <!-- <div
+                  *ngIf="!trackingForm.controls['metaKey'].valid && (trackingForm.controls['metaKey'].touched || trackingForm.controls['metaKey'].dirty)">
+                  <div [hidden]="!trackingForm.controls['metaKey'].errors['required']"
+                      style="color: rgb(253, 122, 122); font-size:small; font-style: italic;">
+                      Google Analytics key
                   </div>
+              </div>            -->
                 </div>
-              </div> 
-              <!-- ------------------------------------- -->
+              </div>
             </div>
+            <!-- ------------------------------------- -->
           </div>
         </div>
       </div>
+    </div>
 
-
-      
-      <div class="row gutters mb-3">
-        <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
-            <div class="text-center">
-                <button pButton type="button" id="submit" name="submit"
-                    class="p-button mr-4 first-button"
-                    ><a style="text-decoration: none !important; color: #fff !important" href="https://www.facebook.com/business/tools/meta-business-suite"></a>Go to Web</button>
-                    <button pButton type="button" id="submit" name="submit"
-                    class="p-button mr-4 first-button" (click)="submitForm()"
-                    >Save</button>
-            </div>
-           
+    <div class="row gutters mb-3">
+      <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+        <div class="text-center">
+          <button
+            pButton
+            type="button"
+            id="submit"
+            name="submit"
+            class="p-button mr-4 first-button"
+          >
+            <a
+              style="text-decoration: none !important; color: #fff !important"
+              href="https://www.facebook.com/business/tools/meta-business-suite"
+              target="_blank"
+              >Go to Web</a
+            >
+          </button>
+          <button
+            pButton
+            type="button"
+            id="submit"
+            name="submit"
+            class="p-button mr-4 first-button"
+            (click)="submitForm()"
+          >
+            Save
+          </button>
         </div>
-       
+      </div>
     </div>
-    </div>
-  </form>
+  </div>
+</form>
