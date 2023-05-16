@@ -67,7 +67,9 @@ export class AddSpecialOfferComponent implements OnInit {
         productName: this.specialOfferForm.controls['productName'].value,
         image:this.imageData,
         productModel: this.specialOfferForm.controls['productModel'].value,
-        // isSpecialProduct: this.specialOfferForm.controls['isSpecialProduct'].value,
+        isSpecialProduct: true,
+        productQuantity: null,
+        productPrice: null
       }
 
       this.submitDetails(this.payload)
@@ -182,7 +184,7 @@ export class AddSpecialOfferComponent implements OnInit {
         productName: res.productName,
        image: res.image,
        productModel: res.productModel,
-        isSpecialProduct: res.isSpecialProduct
+        isSpecialProduct: true
       })
       this.Image = this.imgbucket.concat(res.image)
       console.log("patch value for feature" + test)

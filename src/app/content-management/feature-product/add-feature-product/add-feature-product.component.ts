@@ -73,6 +73,7 @@ export class AddFeatureProductComponent implements OnInit {
       productPrice: this.featureForm.controls['productPrice'].value,
       productQuantity: this.featureForm.controls['productQuantity'].value,
       productModel: this.featureForm.controls['productModel'].value,
+      isSpecialProduct: true
     }
 
     this.submitDetails(this.payload)
