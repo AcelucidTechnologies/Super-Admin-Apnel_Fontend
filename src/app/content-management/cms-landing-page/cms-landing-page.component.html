@@ -1,0 +1,144 @@
+<div >
+<div class="page-heading" style="background-color: white;">
+  <div class="user-info">
+  <img src="../../../assets/images/acelucid-logo-1.png">
+</div>
+  <div class="page-btn" >
+    <a href="/cms/cms-landing">Home</a>
+    <a href="cms/cms-landing">About US</a>
+
+    <a href="cms/cms-landing">Contact Us</a>
+
+
+
+</div>
+</div>
+<div class="special-list">
+<p-carousel [value]="cmsLanding">
+  <ng-template let-car pTemplate="item">
+      <div class="product-item">
+          <div class="product-item-content">
+
+              <div class="slider-image">
+                <img [src]="car.imageUrl" alt="Car Image" [style.height.px]="400" [style.width.px]="1052">
+              </div>
+          </div>
+      </div>
+  </ng-template>
+</p-carousel>
+</div>
+<div  class="special-list">
+  <h4 style="padding-left: 20px;">Feature Product</h4>
+  <p-carousel
+    [value]="featureList"
+    [numVisible]="3"
+    [numScroll]="3"
+    [circular]="false">
+    <ng-template let-product pTemplate="itaem">
+        <div class="product-item">
+            <div class="product-item-content">
+                <div class="p-mb-3"></div>
+                <div>
+                    <p
+                        class="p-mb-1">
+                        <img class="user-name-img" src={{this.imgbucket}}{{product.image}}>
+                </p>
+                    <p
+                        class="p-mb-1">
+                        {{ product.productName }}
+              </p>
+                    <p
+                        class="p-mb-1">
+                        Rs {{ product.productPrice }}
+            </p>
+
+
+                </div>
+            </div>
+        </div>
+    </ng-template>
+</p-carousel>
+
+</div>
+
+<div class="special-list">
+  <h4 style="padding-left: 20px;">Special Offer</h4>
+  <p-carousel
+    [value]="offerList"
+    [numVisible]="3"
+    [numScroll]="3"
+    [circular]="false">
+    <ng-template let-offer pTemplate="itaem">
+        <div class="product-item">
+            <div class="product-item-content">
+                <div class="p-mb-3"></div>
+                <div>
+                    <p
+                        class="p-mb-1">
+                        <img class="user-name-img" src={{this.imgbucket}}{{offer.image}}>
+                </p>
+                    <p
+                        class="p-mb-1">
+                        {{ offer.productName }}
+              </p>
+                    <p
+                        class="p-mb-1">
+                        Rs {{ offer.productPrice }}
+            </p>
+
+
+                </div>
+            </div>
+        </div>
+    </ng-template>
+</p-carousel>
+
+</div>
+<div class="special-list">
+  <p-carousel [value]="cmsLanding">
+    <ng-template let-car pTemplate="item">
+        <div class="product-item">
+            <div class="product-item-content">
+
+                <div class="slider-image">
+                  <img [src]="car.imageUrl" alt="Car Image" [style.height.px]="300" [style.width.px]="1052">
+                </div>
+            </div>
+        </div>
+    </ng-template>
+  </p-carousel>
+</div>
+
+
+</div>
+
+<footer style=" background-color: #f52e2e; color: white; ">
+  <div class="row" style="justify-content: space-between;">
+    <div class="col-3">
+      <div class="user-info-footer" >
+        <img src="../../../assets/images/acelucid-logo-1.png" width="220" height="60">
+        <p style="font-size: 16px; padding-top: 10px; padding-left: 20px;">Innovation driven technology company</p>
+      </div>
+    </div>
+    <div class="col-3">
+      <h3 routerLinkActive="router-link-active" style="cursor: pointer;">About Us</h3>
+      <p>We believe in leveraging the latest open source technologies to build & optimise products across various domains which we have been part for more than 10 years..</p>
+    </div>
+    <!-- <div class="col-3"><p>Privacy Policy</p></div> -->
+    <div class="col-3" [routerLink]="['/cms/cms-landing']" style="cursor: pointer;" > <h3>Contact Us</h3>
+      <p>Bhive HSR Campus, AKR Tech Park</p>
+      <p>+91 733808581</p>
+      <p>hello@acelucid.com</p>
+    </div>
+
+  </div>
+  <div class="conditions">
+    <a style="border-right: 2px solid lightgrey; padding-right: 20px;">
+Privacy Policy
+    </a>
+    <a style="padding-left: 20px;"> Terms and Conditions</a>
+  </div>
+  <div class="container footer-companyname" >
+    <p>&copy; 2023 AceLucid Technologies pvt Limited. All rights reserved.</p>
+  </div>
+</footer>
