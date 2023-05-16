@@ -37,7 +37,7 @@
                 </div>
                 <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
                   <div class="form-group">
-                    <label for="hyperlink" class="col-form-label">Sort by</label>
+                    <label for="hyperlink" class="col-form-label starlabel">Sort by</label>
                     <input type="text" class="form-control" placeholder="Enter Only Number" formControlName="bannerOrder">
                     <div
                     *ngIf="(!bannerSpecialForm.controls['bannerOrder'].valid)">
@@ -70,10 +70,12 @@
                 </div>
 
                 <div class="col-12 form-group pt-3 pl-3">
-                  <label for="imageUpload" class="col-form-label">Image</label>
-                  <!-- <div class="d-flex justify-content-start h-75"><img class="img-content" [src]="Image" /></div> -->
+                  <label for="imageUpload" class="col-form-label starlabel" >Image</label>
                   <div id="imageUpload" class="custom-file">
-                    <input type="file" class="custom-file-input" id="inputGroupFile01"  (change)="fileChangeEvent($event)">
+                    <input type="file" class="custom-file-input" id="inputGroupFile01"  (change)="fileChangeEvent($event)" formControlName="image" required>
+
+
+
                     <label class="custom-file-label" for="inputGroupFile01" >Upload file</label>
 
                   </div>
@@ -88,7 +90,7 @@
                         <div class="text-center col-md-12">
                           <h5>Image Croppier</h5>
                           <!-- <img class="img-content" [src]="Image" /> -->
-                          <img class="img-content" [src]="croppedImage ? croppedImage : Image" />
+                          <img class="img-content" [src]="croppedImage ? croppedImage : Image" >
                           <image-cropper [imageChangedEvent]="imageChangedEvent"   [resizeToWidth]="200" [maintainAspectRatio]="true"
                             [aspectRatio]="4 / 3" [resizeToWidth]="400" format="png" (imageCropped)="imageCropped($event)"
                             (imageLoaded)="imageLoaded()" (cropperReady)="cropperReady()"
@@ -108,7 +110,7 @@
                 <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 mt-4">
                   <div class="text-center">
                       <button pButton type="button" id="submit" name="submit" class="first-button mr-4"
-                      (click)="submitForm()" >Save</button>
+                      (click)="submitForm()"  [disabled]="!(bannerSpecialForm.valid)">Save</button>
                     <button pButton type="button" id="submit" name="submit" class="p-button second-button "
                       [routerLink]="['/cms/banner']">Cancel</button>
 

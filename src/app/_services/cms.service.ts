@@ -1,6 +1,6 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { of, Observable, from } from 'rxjs';
+import { of, Observable, from, BehaviorSubject } from 'rxjs';
 import { environment } from '../../environments/environment';
 import { CATEGORY, SUB_CATEGORY, SPONSOR, BANNERSPECIAL, FEATURE, SPECIALOFFER, Admin, DELETE_FEATURE_PRODUCT } from '../_models/cms'
 import { category, sub_category } from '../DummyData/category_subCategory';
@@ -16,10 +16,12 @@ import { access } from 'fs';
     providedIn: 'root'
 })
 export class CmsService {
+  BehaviouralSubject = new BehaviorSubject({
+    pageTitle: "",
+    pageLink: ""
+  })
 
-    constructor(private http: HttpClient) {
-
-     }
+  constructor(private http: HttpClient) {}
 
     getCategoryList(): Observable<CATEGORY[]> {
         const token = localStorage.getItem('token') || '';

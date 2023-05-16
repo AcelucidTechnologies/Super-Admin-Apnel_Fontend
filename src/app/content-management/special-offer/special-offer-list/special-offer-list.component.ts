@@ -101,6 +101,9 @@ export class SpecialOfferListComponent implements OnInit {
       this.sidebarSpacing = 'expanded';
     }
   }
+  applyFilterGlobal($event, stringVal) {
+    this.dt.filterGlobal(($event.target as HTMLInputElement).value, stringVal);
+  }
 
   exportPdf() {
     this.productDetails = this.offerList
@@ -128,8 +131,6 @@ export class SpecialOfferListComponent implements OnInit {
     FileSaver.saveAs(data, fileName + '_export_' + new Date().getTime() + EXCEL_EXTENSION);
   }
 
-  applyFilterGlobal($event, stringVal) {
-    this.dt.filterGlobal(($event.target as HTMLInputElement).value, stringVal);
-  }
+
 
 }

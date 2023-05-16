@@ -14,6 +14,7 @@ import { FEATURE } from 'src/app/_models/cms';
 export class AddFeatureProductComponent implements OnInit {
   featureForm: FormGroup;
   sidebarSpacing: any;
+  ImagePath:string;
   fgsType: any;
   title: string = " "
   imageChangedEvent: any = '';
@@ -23,7 +24,9 @@ export class AddFeatureProductComponent implements OnInit {
   id: any;
   imageData: any=null;
   // payload: FEATURE;
-  isChecked = true;
+  isSpecialProductChecked: boolean = false
+
+
   payload:any
   image: File;
   testApi:any;
@@ -39,15 +42,20 @@ export class AddFeatureProductComponent implements OnInit {
     private toastr: ToastrMsgService,
     private CmsService: CmsService
     ) {
+
     this.featureForm = this.fb.group({
       productName: ['', [Validators.required, Validators.pattern(this.reg)]],
       productModel: ['', [Validators.required]],
-      productPrice: ['', [Validators.required,Validators.pattern("(\.[0-9]{0,9})?")]],
-      productQuantity: ['', [Validators.required,Validators.pattern("(\[0-9]{0,9})?")]],
-      isSpecialProduct:[''],
+      productPrice: ['', [Validators.required, Validators.pattern(/^[0-9]+$/)]],
+      productQuantity: ['', [Validators.required, Validators.pattern(/^[0-9]+$/)]],
+      // productQuantity: ['', [Validators.required,Validators.pattern("(\[0-9]{0,9})?")]],
+      isSpecialProduct:[false],
     })
+
     console.log(this.featureForm)
   }
+
+
 
   ngOnInit(): void {
     this.fgsType = SPINNER.squareLoader
@@ -73,7 +81,10 @@ export class AddFeatureProductComponent implements OnInit {
       productPrice: this.featureForm.controls['productPrice'].value,
       productQuantity: this.featureForm.controls['productQuantity'].value,
       productModel: this.featureForm.controls['productModel'].value,
-      isSpecialProduct: true
+      isSpecialProduct: this.featureForm.controls['isSpecialProduct'].value || false,
+    }
+    if(this.payload.image  == null){
+      this.payload.image = this.ImagePath
     }
 
     this.submitDetails(this.payload)
@@ -88,7 +99,9 @@ export class AddFeatureProductComponent implements OnInit {
   } else {
     this.addproduct()
   }
-  this.route.navigate[('/cms/feature')]
+
+  this.route.navigate(['/cms/feature']);
+
   }
 
 
@@ -155,6 +168,7 @@ export class AddFeatureProductComponent implements OnInit {
         isSpecialProduct: res.isSpecialProduct
       })
       this.Image = this.imgbucket.concat(res.image)
+      this.ImagePath = res.image
       console.log("patch value for feature" + test)
 
       this.ngxLoader.stop();

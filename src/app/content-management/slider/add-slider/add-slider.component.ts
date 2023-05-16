@@ -16,6 +16,7 @@ export class AddSliderComponent implements OnInit {
   sidebarSpacing: any;
   title: string = " "
   sliderForm: FormGroup;
+  ImagePath: string;
   fgsType: any;
   image: File;
   status= false;
@@ -93,6 +94,9 @@ export class AddSliderComponent implements OnInit {
     sliderOrder: this.sliderForm.controls['sliderOrder'].value,
     sliderDiscription: this.sliderForm.controls['sliderDiscription'].value,
   }
+  if(this.payload.image  == null){
+    this.payload.image = this.ImagePath
+  }
 
   this.submitDetails(this.payload)
 
@@ -104,7 +108,7 @@ export class AddSliderComponent implements OnInit {
   } else {
     this.addCategory()
   }
-  this.route.navigate[('/cms/slider')]
+  this.route.navigate(['/cms/slider'])
 
   }
   submitDetails(recievedValue:any){
@@ -157,6 +161,7 @@ export class AddSliderComponent implements OnInit {
         sliderDiscription: res.sliderDiscription
       })
       this.Image = this.imgbucket.concat(res.image)
+      this.ImagePath = res.image
       console.log("get slider bu id image" + this.Image)
       this.ngxLoader.stop();
     })

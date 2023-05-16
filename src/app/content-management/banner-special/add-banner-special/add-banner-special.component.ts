@@ -43,7 +43,8 @@ payload:any
 
 username: any;
 
-  testapi:any
+  testapi:any;
+  ImagePath: string;
 
   editMode: boolean = false
   imageChangedEvent: any = '';
@@ -142,6 +143,7 @@ username: any;
   }
 
   submitForm(){
+
    this.payload = {
     username: localStorage.getItem("username"),
     bannerName: this.bannerSpecialForm.controls['bannerName'].value,
@@ -149,6 +151,9 @@ username: any;
     bannerOrder: this.bannerSpecialForm.controls['bannerOrder'].value,
     bannerDescription: this.bannerSpecialForm.controls['bannerDescription'].value,
 
+  }
+  if(this.payload.image  == null){
+    this.payload.image = this.ImagePath
   }
   this.submitDetails(this.payload)
   console.log("payload", this.payload)
@@ -161,7 +166,7 @@ username: any;
   } else {
     this.addCategory()
   }
-  this.route.navigate[('/cms/banner')]
+  this.route.navigate(['/cms/banner']);
 
   }
 
@@ -217,6 +222,7 @@ username: any;
        bannerDescription: res.bannerDescription,
       })
       this.Image = this.imgbucket.concat(res.image)
+      this.ImagePath = res.image
       console.log("username value" + test)
 
       this.ngxLoader.stop();
@@ -244,12 +250,7 @@ username: any;
     this.CmsService.addSpecialBanner(newPayload)
     .subscribe((res) => {
       console.log(res)
-      // if (res) {
-      //   this.route.navigate(['/roleandpermission/adminlist']);
-      // }
-      // else{
-      //   this.toastr.showError("Somthing wrong Please check", "Error occured")
-      // }
+
     });
   }
 

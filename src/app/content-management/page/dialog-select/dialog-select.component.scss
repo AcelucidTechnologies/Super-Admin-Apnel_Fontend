@@ -30,3 +30,10 @@ mat-dialog-content{
             color: #fff;
             font-size: 20px;
         }
+        :host::ng-deep {
+
+          label.starlabel::after {
+              content: "*";
+              color: rgb(228, 28, 28);
+          }
+      }

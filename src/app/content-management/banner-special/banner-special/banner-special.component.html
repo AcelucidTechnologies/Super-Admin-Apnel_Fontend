@@ -5,7 +5,7 @@
       <!-- <a class="btn btn-added" [routerLink]="['/cms/add-special-banner']">
           <img src="../assets/images/icons/plus.svg" class="me-1" alt="img"> Add Banner
       </a> -->
-      <button pButton type="button" [routerLink]="['/cms/add-special-banner']" class="me-1" label=" + Add Admin" class="theme" ></button>
+      <button pButton type="button" [routerLink]="['/cms/add-special-banner']" class="me-1" label=" + Add Banner" class="theme" ></button>
   </div>
   </div>
 
@@ -38,6 +38,8 @@
     </ng-template>
     <ng-template  pTemplate="header">
         <tr>
+          <th> <div class="flex justify-content-between align-items-center head1">Sno.</div></th>
+
             <th pSortableColumn="bannerName">
                 <div class="flex justify-content-between align-items-center head1">
                     Banner Name
@@ -75,8 +77,12 @@
 
         </tr>
     </ng-template>
-    <ng-template pTemplate="body" let-bannerList>
+    <ng-template pTemplate="body" let-bannerList let-i="rowIndex">
         <tr class="p-selectable-row">
+          <td>
+
+            {{i+1}}
+        </td>
             <td>
                 <span class="p-column-title">bannerName</span>
                 {{bannerList.bannerName}}

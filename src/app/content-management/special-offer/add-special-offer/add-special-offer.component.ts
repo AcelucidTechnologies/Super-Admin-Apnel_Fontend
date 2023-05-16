@@ -14,6 +14,7 @@ import { SPECIALOFFER } from 'src/app/_models/cms';
 export class AddSpecialOfferComponent implements OnInit {
 
   specialOfferForm: FormGroup;
+  ImagePath: string
   sidebarSpacing: any;
   fgsType: any;
   isChecked = true;
@@ -72,16 +73,13 @@ export class AddSpecialOfferComponent implements OnInit {
         productPrice: null
       }
 
+      if(this.payload.image  == null){
+        this.payload.image = this.ImagePath
+      }
+
       this.submitDetails(this.payload)
 
       console.log("payload data for submit button feature"  +  JSON.stringify(this.payload))
-
-    // this.payload = {
-    //   _id: this.specialOfferForm.controls['id'].value,
-    //   productName: this.specialOfferForm.controls['product'].value,
-    //   image: this.image,
-    //   productModel: this.specialOfferForm.controls['category'].value,
-    // }
 
 
 
@@ -91,7 +89,7 @@ export class AddSpecialOfferComponent implements OnInit {
   } else {
     this.addOffer()
   }
-  this.route.navigate[('/cms/special-offer')]
+  this.route.navigate(['/cms/special-offer']);
   }
 
   submitDetails(recievedValue:any){
@@ -187,6 +185,7 @@ export class AddSpecialOfferComponent implements OnInit {
         isSpecialProduct: true
       })
       this.Image = this.imgbucket.concat(res.image)
+      this.ImagePath = res.image
       console.log("patch value for feature" + test)
 
       this.ngxLoader.stop();

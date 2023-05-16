@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { NgxUiLoaderService } from 'ngx-ui-loader';
 import { ToastrMsgService } from 'src/app/_services/toastr-msg.service';
+import { runInThisContext } from 'vm';
 import { CmsService } from '../../../_services/cms.service'
 
 @Component({
@@ -13,6 +14,8 @@ import { CmsService } from '../../../_services/cms.service'
 export class DialogSelectComponent implements OnInit {
    selectForm: FormGroup;
    payload:any
+   pageTitle:string
+   pageLink:string
   constructor(private fb: FormBuilder,
     private CmsService: CmsService,
     private toastr: ToastrMsgService,
@@ -29,20 +32,12 @@ export class DialogSelectComponent implements OnInit {
   }
 
   submitForm(){
-    this.payload = {
+    this.CmsService.BehaviouralSubject.next({
       pageTitle: this.selectForm.controls['pageTitle'].value,
-      pageLink: this.selectForm.controls['pageLink'].value,
-
-   }
-   this.submitDetails(this.payload)
-   console.log("payload", this.payload)
+      pageLink: this.selectForm.controls['pageLink'].value
+    })
    this.ngxLoader.start();
-
      this.addPage()
-
-   console.log("payload data for submit button" +  JSON.stringify(this.payload))
-
-
    this.route.navigate[('/cms/page')]
 
    }
@@ -61,11 +56,5 @@ export class DialogSelectComponent implements OnInit {
      })
    }
 
-  submitDetails(recievedValue:any){
-    let newPayload= Object.assign({},recievedValue)
-    this.CmsService.addPageLink(newPayload)
-    .subscribe((res) => {
-      console.log(res)
-    });
-  }
+
 }
