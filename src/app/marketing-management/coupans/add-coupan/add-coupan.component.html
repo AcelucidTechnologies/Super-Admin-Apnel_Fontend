@@ -1,12 +1,22 @@
 <form [formGroup]="coupanForm">
-    <div class="page-heading col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+    <!-- <div class="page-heading col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
         <h1 class="header-text-title">
             <i pButton style="color: #fff; background-color: red !important;" class="pi pi-arrow-left p-button-text"
-                [routerLink]="['/cms/coupanList']" pTooltip="Back" tooltipPosition="bottom">
+                [routerLink]="['/marketing/coupanList']" pTooltip="Back" tooltipPosition="bottom">
             </i>&nbsp;{{title}}
         </h1>
-    </div>
+    </div> -->
 
+    <div class="button-heading-container">
+      <button
+        class="mb-2 p-1 back-button"
+        [routerLink]="['/marketing/coupanList']"
+      >
+        <i class="material-icons">arrow_back</i>
+
+      </button>
+      <h5>&nbsp;{{title}}</h5>
+    </div>
     <!-- <div class="button-heading-container ">
 
         <button class="mb-2 p-1 back-button " [routerLink]="['/leads/leadslist']"><i class="material-icons">arrow_back</i>
