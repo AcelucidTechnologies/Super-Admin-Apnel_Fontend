@@ -4,6 +4,7 @@
         content: "*";
         color: rgb(228, 28, 28);
     }
+
 }
 
 .form-control:active{
@@ -54,5 +55,18 @@
     .p-inputtext:enabled:hover {
          border-color: #ced4da !important;
     }
+
+}
+:host::ng-deep .dta{
+  .p-inputtext{
+      width: 444px !important;
+  }
+  .p-inputtext{
+      border: none !important;
+  }
+  .p-inputtext:enabled:hover {
+       border-color: red !important;
+  }
+
 }
 

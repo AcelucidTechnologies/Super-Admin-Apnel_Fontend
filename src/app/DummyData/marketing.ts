@@ -161,6 +161,7 @@ export let couponAllData = [
         products: "campus",
         status: "true",
         usesPerCoupan: "Save upto  Rs 85",
+        userPerCoupan: "Save upto  Rs 85"
     },
     {
         id: 2,
@@ -175,6 +176,7 @@ export let couponAllData = [
         products: "campus",
         status: "true",
         usesPerCoupan: "Save upto  Rs 85",
+        userPerCoupan: "Save upto  Rs 85"
     },
     {
         id: 3,
@@ -189,6 +191,7 @@ export let couponAllData = [
         products: "campus",
         status: "true",
         usesPerCoupan: "Save upto  Rs 85",
+        userPerCoupan: "Save upto  Rs 85"
     },
     {
         id: 4,
@@ -203,6 +206,7 @@ export let couponAllData = [
         products: "campus",
         status: "true",
         usesPerCoupan: "Save upto  Rs 85",
+        userPerCoupan: "Save upto  Rs 85"
     },
     {
         id: 5,
@@ -217,6 +221,7 @@ export let couponAllData = [
         products: "campus",
         status: "true",
         usesPerCoupan: "Save upto  Rs 85",
+        userPerCoupan: "Save upto  Rs 85"
     }
 ]
 

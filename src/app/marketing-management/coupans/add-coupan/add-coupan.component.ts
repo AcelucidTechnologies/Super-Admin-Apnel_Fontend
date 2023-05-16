@@ -25,6 +25,8 @@ export class AddCoupanComponent implements OnInit {
   editMode: boolean = false
   reg= '([A-Za-z0-9]+)';
   dateFieldDate: Date = new Date();
+  type: string[];
+  update: any;
 
   constructor(private ngxLoader: NgxUiLoaderService, private fb: FormBuilder,
     private route: Router,
@@ -46,6 +48,7 @@ export class AddCoupanComponent implements OnInit {
       product: ['', [Validators.required]],
       status: ['',],
       usesPerCoupan: ['', [Validators.required]],
+      userPerCoupan: ['', [Validators.required]]
      // quantity: ['', [Validators.required,Validators.pattern("(\[0-9]{0,9})?")]],
     })
     console.log(this.coupanForm)
@@ -60,12 +63,15 @@ export class AddCoupanComponent implements OnInit {
       if (this.id && this.id != undefined) {
         this.editMode = true
         this.title = "Edit Coupon"
+        this.update= "Update"
         this.getFeatureById()
       } else {
         this.editMode = false
         this.title = "Add New Coupon Name"
+        this.update= "Save"
       }
     });
+    this.type=["Flat","Percentage(%)"]
   }
 
   submitForm(){
@@ -83,7 +89,8 @@ export class AddCoupanComponent implements OnInit {
       products: this.coupanForm.controls['product'].value,
       status: this.coupanForm.controls['status'].value,
       usesPerCoupan: this.coupanForm.controls['usesPerCoupan'].value,
-      maxDiscount: this.coupanForm.controls['maxDiscount'].value
+      maxDiscount: this.coupanForm.controls['maxDiscount'].value,
+      userPerCoupan: this.coupanForm.controls['usesPerCoupan'].value,
     }
 
   this.ngxLoader.start();
@@ -143,6 +150,7 @@ export class AddCoupanComponent implements OnInit {
        product: res.products,
        status: res.status,
        usesPerCoupan: res.usesPerCoupan,
+       userPerCoupan: res.userPerCoupan
       })
       this.ngxLoader.stop();
     })
