@@ -34,7 +34,7 @@
                             <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
                                 <div class="form-group">
                                     <label for="name" class="col-form-label text-left starlabel">Coupon Name</label>
-                                    <input type="text" class="form-control" placeholder="Enter Coupan Name" formControlName="coupanName">
+                                    <input type="text" class="form-control" placeholder="Enter Coupon Name" formControlName="coupanName">
                                     <div
                                         *ngIf="!coupanForm.controls['coupanName'].valid && (coupanForm.controls['coupanName'].touched || coupanForm.controls['coupanName'].dirty)">
                                         <div [hidden]="!coupanForm.controls['coupanName'].errors['required']"
@@ -54,7 +54,7 @@
                                 <div class="form-group">
                                     <label for="hyperlink" class="col-form-label text-left starlabel">Coupon
                                         Code</label>
-                                    <input type="text" class="form-control" placeholder="Enter Coupan Code" formControlName="coupanCode">
+                                    <input type="text" class="form-control" placeholder="Enter Coupon Code" formControlName="coupanCode">
                                     <div
                                         *ngIf="!coupanForm.controls['coupanCode'].valid && (coupanForm.controls['coupanCode'].touched || coupanForm.controls['coupanCode'].dirty)">
                                         <div [hidden]="!coupanForm.controls['coupanCode'].errors['required']"
@@ -70,9 +70,12 @@
 
                         <div class="row gutters">
                             <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
-                                <div class="form-group">
+                                <div class="form-group dta">
                                     <label for="Name" class="col-form-label text-left starlabel">Type</label><br>
-                                    <input type="text" class="form-control" placeholder="Type" formControlName="type">
+
+                                    <p-dropdown [options]="type" id="type"
+                                        placeholder="Select Type"
+                                        formControlName="type"></p-dropdown>
                                     <div
                                         *ngIf="(!coupanForm.controls['type'].valid) && (coupanForm.controls['type'].touched || coupanForm.controls['type'].dirty)">
                                         <div [hidden]="!coupanForm.controls['type'].errors['required']"
@@ -159,7 +162,7 @@
                                     <label class="col-form-label text-left starlabel">Start Date</label>
                                     <div>
                                         <p-calendar [minDate]="dateFieldDate" styleClass="date-picker"
-                                            formControlName="startDate"></p-calendar>
+                                            formControlName="startDate" placeholder="Enter Date"></p-calendar>
                                     </div>
                                     <div
                                         *ngIf="!coupanForm.controls['startDate'].valid && (coupanForm.controls['startDate'].touched || coupanForm.controls['startDate'].dirty)">
@@ -181,7 +184,7 @@
                                     <label class="col-form-label text-left starlabel">End Date</label>
                                     <div>
                                         <p-calendar [minDate]="dateFieldDate" styleClass="date-picker"
-                                            formControlName="endDate"></p-calendar>
+                                            formControlName="endDate" placeholder="Enter Date"></p-calendar>
                                     </div>
                                     <div
                                         *ngIf="!coupanForm.controls['endDate'].valid && (coupanForm.controls['endDate'].touched || coupanForm.controls['endDate'].dirty)">
@@ -196,14 +199,14 @@
 
                             <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
                                 <div class="form-group">
-                                    <label for="Name" class="col-form-label text-left starlabel">uses per
-                                        Coupan</label><br>
-                                    <input type="text" class="form-control" placeholder="Enter Uses per Coupan" formControlName="usesPerCoupan">
+                                    <label for="Name" class="col-form-label text-left starlabel">Uses per
+                                        Coupon</label><br>
+                                    <input type="text" class="form-control" placeholder="Enter Uses per Coupon" formControlName="usesPerCoupan">
                                     <div
                                         *ngIf="(!coupanForm.controls['usesPerCoupan'].valid) && (coupanForm.controls['usesPerCoupan'].touched || coupanForm.controls['usesPerCoupan'].dirty)">
                                         <div [hidden]="!coupanForm.controls['usesPerCoupan'].errors['required']"
                                             style="color: rgb(253, 122, 122); font-size:small; font-style: italic;">
-                                            uses per coupan is required
+                                            uses per coupon is required
                                         </div>
 
                                     </div>
@@ -212,6 +215,23 @@
 
                         </div>
 
+                        <div class="row gutters">
+                        <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
+                          <div class="form-group">
+                              <label for="Name" class="col-form-label text-left starlabel">User per
+                                  Coupon</label><br>
+                              <input type="text" class="form-control" placeholder="Enter User per Coupon" formControlName="userPerCoupan">
+                              <div
+                                  *ngIf="(!coupanForm.controls['userPerCoupan'].valid) && (coupanForm.controls['userPerCoupan'].touched || coupanForm.controls['usesPerCoupan'].dirty)">
+                                  <div [hidden]="!coupanForm.controls['userPerCoupan'].errors['required']"
+                                      style="color: rgb(253, 122, 122); font-size:small; font-style: italic;">
+                                      User per coupon is required
+                                  </div>
+
+                              </div>
+                          </div>
+                      </div>
+</div>
 
 
 
@@ -223,7 +243,7 @@
                                 <div class="text-center">
                                     <button pButton maxDiscount="button" id="submit" name="submit"
                                         class="p-button mr-4 first-button" (click)="submitForm()"
-                                        [disabled]="!(coupanForm.valid)">Save</button>
+                                        [disabled]="!(coupanForm.valid)">{{update}}</button>
                                     <button pButton maxDiscount="button" id="submit" name="submit"
                                         class="p-button second-button "
                                         [routerLink]="['/marketing/coupanList']">Cancel</button>

@@ -39,4 +39,5 @@ export interface COUPANCODEDATA {
     products: string,
     usesPerCoupan: string,
     status:string;
+    userPerCoupan: string
 }
