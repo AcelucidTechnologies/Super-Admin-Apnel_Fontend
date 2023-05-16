@@ -24,7 +24,7 @@ export class FeatureProductListComponent implements OnInit {
   @ViewChild('dt') dt: Table | undefined;
   sidebarSpacing: any;
   cols!: TABLE_HEADING[];
-  featureList : FEATURE[]=[]
+  featureList : any[]=[]
   accessPermission:access
   productDetails:any[];
   exportColumns: any[];
@@ -65,20 +65,12 @@ export class FeatureProductListComponent implements OnInit {
   }
 
   getFeatureList(){
-    // if (this.isSpecialProduct) {
     this.CmsService.getFeatureList().subscribe((res) => {
       this.featureList = res
       console.log(this.featureList," feature list--------------------")
       this.ngxLoader.stop();
     })
-  // }
-  // else {
-  //   this.CmsService.getOfferList().subscribe((res) => {
-  //     this.offerList = res
-  //     console.log(this.offerList," offer list--------------------")
-  //     this.ngxLoader.stop();
-  //   })
-  // }
+
   }
 
   deleteProduct(featureList: any) {
