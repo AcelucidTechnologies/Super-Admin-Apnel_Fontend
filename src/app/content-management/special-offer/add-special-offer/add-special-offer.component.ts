@@ -100,20 +100,7 @@ export class AddSpecialOfferComponent implements OnInit {
     });
   }
 
-  // addOffer() {
-  //   this.CmsService.addFeatureProduct(this.specialOfferForm.value).subscribe(res => {
-  //      if (res) {
-  //        this.toastr.showSuccess("Special product added successfully", "Special offer Added")
-  //        this.ngxLoader.stop()
-  //        this.route.navigate(['/cms/special-offer'])
-  //      }
-  //      (error: any) => {
-  //        this.toastr.showError("Somthing wrong Please check", "Error occured")
-  //        this.ngxLoader.stop()
-  //       // this.route.navigate(['/'])
-  //      }
-  //    })
-  //  }
+
 
   addOffer()  {
     this.CmsService.addFeatureProduct(this.specialOfferForm.value).subscribe(res => {
@@ -129,21 +116,7 @@ export class AddSpecialOfferComponent implements OnInit {
      })
    }
 
-  //  editOffer(){
-  //   console.log(this.payload)
-  //   this.CmsService.editOffer(this.specialOfferForm.value, this.id).subscribe(res => {
-  //     if (res) {
-  //       this.toastr.showSuccess("Special product edit successfully", "Special product edit")
-  //       this.ngxLoader.stop()
-  //       this.route.navigate(['/cms/add-special-offer'])
-  //     }
-  //     (error: any) => {
-  //       this.toastr.showError("Somthing wrong Please check", "Error occured")
-  //       this.ngxLoader.stop()
-  //       this.route.navigate(['/'])
-  //     }
-  //   })
-  //  }
+
   editOffer(){
     console.log(this.payload)
     this.CmsService.editFeature(this.payload, this.id).subscribe(res => {
@@ -163,16 +136,7 @@ export class AddSpecialOfferComponent implements OnInit {
     })
    }
 
-  //  getOfferById() {
-  //   this.CmsService.getOfferById(this.id).subscribe((res: SPECIALOFFER) => {
-  //     this.specialOfferForm.patchValue({
-  //       id: res.productName,
-  //       product: res.productModel,
-  //      image: res.image,
-  //     })
-  //     this.ngxLoader.stop();
-  //   })
-  // }
+
 
   getFeatureById() {
     this.CmsService.getFeatureById(this.id).subscribe((res) => {
@@ -185,7 +149,8 @@ export class AddSpecialOfferComponent implements OnInit {
         isSpecialProduct: true
       })
       this.Image = this.imgbucket.concat(res.image)
-      this.ImagePath = res.image
+      // this.ImagePath = res.image
+      this.ImagePath = this.imgbucket.concat(res.image)
       console.log("patch value for feature" + test)
 
       this.ngxLoader.stop();
@@ -198,6 +163,7 @@ export class AddSpecialOfferComponent implements OnInit {
   fileChangeEvent(event) {
     this.imageChangedEvent = event;
     this.imageData = event.target.files[0];
+    this.ImagePath = event.target.files[0];
     var reader = new FileReader();
     reader.readAsDataURL(event.target.files[0]);
     reader.onload = (data) => {

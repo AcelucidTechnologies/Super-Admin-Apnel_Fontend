@@ -37,6 +37,13 @@
                 <!-- <th style="width: 3rem;">
                     <p-tableHeaderCheckbox></p-tableHeaderCheckbox>
                 </th> -->
+                <th >
+                  <div class="flex justify-content-between align-items-center head1">
+                    SNo.
+
+
+                  </div>
+              </th>
                 <th pSortableColumn="productName">
                     <div class="flex justify-content-between align-items-center head1">
                       Product Name
@@ -75,11 +82,11 @@
 
             </tr>
         </ng-template>
-        <ng-template pTemplate="body" let-offerList >
+        <ng-template pTemplate="body" let-offerList let-i="rowIndex">
             <tr class="p-selectable-row">
-                <!-- <td>
-                    <p-tableCheckbox [value]="offerList"></p-tableCheckbox>
-                </td> -->
+                <td>
+                    {{i+1}}
+                </td>
                 <td>
                     <span class="p-column-title">Product Name</span>
                     {{offerList.productName}}

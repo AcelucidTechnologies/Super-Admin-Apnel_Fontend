@@ -9,6 +9,7 @@ import { CmsService } from '../../../_services/cms.service'
 import bsCustomFileInput from 'bs-custom-file-input';
 import { CommonService } from 'src/app/_services/common';
 import { ThisReceiver, Token } from '@angular/compiler';
+import { HttpClient } from '@angular/common/http';
 //import * as customBuild from ""
 @Component({
   selector: 'app-add-banner-special',
@@ -66,14 +67,15 @@ username: any;
     private activateRoute: ActivatedRoute,
     private toastr: ToastrMsgService,
     private CmsService: CmsService,
-    private common: CommonService
+    private common: CommonService,
+    private http: HttpClient
     ) {
       this.bannerSpecialForm = this.fb.group({
 
-        // username: ['', [Validators.required, Validators.pattern(this.reg)]],
         // imagebanner: [''],
-        bannerName: ['',[Validators.required]],
-        bannerOrder: ['',[Validators.required]],
+        // bannerName: ['',[Validators.required]],
+        bannerName: ['', [Validators.required, Validators.pattern('^(https?://)?([\\da-z.-]+)\\.([a-z.]{2,6})([/\\w .-]*)*/?$')]],
+        bannerOrder: ['', [Validators.required, Validators.pattern('[0-9]+')]],
         bannerDescription: ['', [Validators.required]],
       })
       console.log("hellotoken" + this.bannerSpecialForm)
@@ -107,6 +109,7 @@ username: any;
   fileChangeEvent(event) {
     this.imageChangedEvent = event;
     this.imageData = event.target.files[0];
+    this.ImagePath = event.target.files[0];
     var reader = new FileReader();
     reader.readAsDataURL(event.target.files[0]);
     reader.onload = (data) => {
@@ -170,6 +173,8 @@ username: any;
 
   }
 
+
+
   addCategory() {
     this.CmsService.addSpecialBanner(this.bannerSpecialForm.value)
     .subscribe(res => {
@@ -220,10 +225,12 @@ username: any;
        image: res.image,
        bannerOrder: res.bannerOrder,
        bannerDescription: res.bannerDescription,
-      })
+      });
+
       this.Image = this.imgbucket.concat(res.image)
-      this.ImagePath = res.image
-      console.log("username value" + test)
+      // this.ImagePath = res.image
+      this.ImagePath = this.imgbucket.concat(res.image)
+      console.log("image path value" + this.ImagePath)
 
       this.ngxLoader.stop();
     })

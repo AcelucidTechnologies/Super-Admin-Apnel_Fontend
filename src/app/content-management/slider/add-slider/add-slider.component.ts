@@ -41,8 +41,8 @@ export class AddSliderComponent implements OnInit {
     ) {
       this.sliderForm = this.fb.group({
         // id:['',],
-        sliderName: ['', [Validators.required]],
-        sliderOrder: ['',[Validators.required]],
+        sliderName: ['', [Validators.required, Validators.pattern('^(https?://)?([\\da-z.-]+)\\.([a-z.]{2,6})([/\\w .-]*)*/?$')]],
+        sliderOrder: ['',[Validators.required, Validators.pattern('[0-9]+')]],
         sliderDiscription: ['', [Validators.required]],
       })
      }
@@ -161,7 +161,8 @@ export class AddSliderComponent implements OnInit {
         sliderDiscription: res.sliderDiscription
       })
       this.Image = this.imgbucket.concat(res.image)
-      this.ImagePath = res.image
+      // this.ImagePath = res.image
+      this.ImagePath = this.imgbucket.concat(res.image)
       console.log("get slider bu id image" + this.Image)
       this.ngxLoader.stop();
     })
@@ -170,6 +171,7 @@ export class AddSliderComponent implements OnInit {
   fileChangeEvent(event) {
     this.imageChangedEvent = event;
     this.imageData = event.target.files[0];
+    this.ImagePath = event.target.files[0];
     var reader = new FileReader();
     reader.readAsDataURL(event.target.files[0]);
     reader.onload = (data) => {

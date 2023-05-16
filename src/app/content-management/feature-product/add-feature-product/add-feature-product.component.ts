@@ -146,6 +146,7 @@ export class AddFeatureProductComponent implements OnInit {
   fileChangeEvent(event) {
     this.imageChangedEvent = event;
     this.imageData = event.target.files[0];
+    this.ImagePath = event.target.files[0];
     var reader = new FileReader();
     reader.readAsDataURL(event.target.files[0]);
     reader.onload = (data) => {
@@ -168,7 +169,8 @@ export class AddFeatureProductComponent implements OnInit {
         isSpecialProduct: res.isSpecialProduct
       })
       this.Image = this.imgbucket.concat(res.image)
-      this.ImagePath = res.image
+      // this.ImagePath = res.image
+      this.ImagePath = this.imgbucket.concat(res.image)
       console.log("patch value for feature" + test)
 
       this.ngxLoader.stop();
