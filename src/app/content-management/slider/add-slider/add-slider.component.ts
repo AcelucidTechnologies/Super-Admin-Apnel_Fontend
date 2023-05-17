@@ -18,6 +18,7 @@ export class AddSliderComponent implements OnInit {
   sliderForm: FormGroup;
   ImagePath: string;
   fgsType: any;
+  sliderList: SLIDER[]=[]
   image: File;
   status= false;
   id: any;
@@ -118,6 +119,20 @@ export class AddSliderComponent implements OnInit {
       console.log(res)
     });
   }
+
+
+  getSliderList() {
+    this.CmsService.getSliderList().subscribe((res) => {
+      this.sliderList = res.map((item) => {
+        const cleanResponse = item.sliderDiscription.replace(/<\/?p>/g, '');
+        return { ...item, sliderDiscription: cleanResponse };
+      });
+
+      console.log(this.sliderList,"--------------------")
+      this.ngxLoader.stop();
+    })
+  }
+
   addCategory() {
     this.CmsService.addSlider(this.sliderForm.value).subscribe(res => {
        if (res) {

@@ -25,6 +25,7 @@ export class AddBannerSpecialComponent implements OnInit {
   };
 
   bannerListbyId: []=[]
+  banner: any[]=[]
   bannerList: any[]=[]
   editData : any[]=[]
 payload:any
@@ -70,6 +71,7 @@ username: any;
     private common: CommonService,
     private http: HttpClient
     ) {
+      this.getbannerList()
       this.bannerSpecialForm = this.fb.group({
 
         // imagebanner: [''],
@@ -83,6 +85,7 @@ username: any;
      }
 
   ngOnInit(): void {
+
     // this.getbannerList()
 
     this.fgsType = SPINNER.squareLoader
@@ -104,6 +107,19 @@ username: any;
       }
     });
 
+  }
+
+  getbannerList() {
+    this.CmsService.getSpecialBannerList(this.id).subscribe((res) => {
+      this.banner =res
+      this.bannerList = res.map((item) => {
+              const cleanResponse = item.bannerDescription.replace(/<\/?p>/g, '');
+              return { ...item, bannerDescription: cleanResponse };
+            });
+
+      console.log(this.bannerList,"--------------------")
+      this.ngxLoader.stop();
+    })
   }
 
   fileChangeEvent(event) {
@@ -166,10 +182,12 @@ username: any;
   this.ngxLoader.start();
   if (this.editMode) {
   this.editBanner();
+
   } else {
     this.addCategory()
   }
   this.route.navigate(['/cms/banner']);
+  this.getbannerList()
 
   }
 
@@ -228,8 +246,8 @@ username: any;
       });
 
       this.Image = this.imgbucket.concat(res.image)
-      // this.ImagePath = res.image
-      this.ImagePath = this.imgbucket.concat(res.image)
+      this.ImagePath = res.image
+      // this.ImagePath = this.imgbucket.concat(res.image)
       console.log("image path value" + this.ImagePath)
 
       this.ngxLoader.stop();

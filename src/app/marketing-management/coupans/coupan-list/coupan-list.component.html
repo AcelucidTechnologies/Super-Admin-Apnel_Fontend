@@ -10,7 +10,7 @@
       <p-table #dt [value]="coupanList" [(selection)]="selectedProduct" dataKey="id" [rowHover]="true"
         [rows]="10" [showCurrentPageReport]="true" responsiveLayout="scroll"
         [paginator]="true" currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
-        [filterDelay]="0" [globalFilterFields]="['coupanName','coupanCode']" class="abc">
+        [filterDelay]="0" [globalFilterFields]="['coupanName','couponCode']" class="abc">
         <ng-template pTemplate="caption" style="background-color: #fff !important; ">
             <div class="table-header">
                 <span style="display: flex; justify-content: center; align-items: center; margin-left: 20px;" class="p-input-icon-left ">
@@ -39,14 +39,14 @@
               </th>
                 <th pSortableColumn="coupanName">
                     <div class="flex justify-content-between align-items-center head1">
-                      Coupan Name
+                      Coupon Name
                         <p-sortIcon field="coupanName"></p-sortIcon>
 
                     </div>
                 </th>
                 <th pSortableColumn="couponCode">
                     <div class="flex justify-content-between align-items-center head1">
-                        Coupan Code
+                        Coupon Code
                         <p-sortIcon field="couponCode"></p-sortIcon>
 
                     </div>

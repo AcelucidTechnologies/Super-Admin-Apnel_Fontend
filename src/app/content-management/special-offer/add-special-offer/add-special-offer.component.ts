@@ -20,6 +20,7 @@ export class AddSpecialOfferComponent implements OnInit {
   isChecked = true;
   title: string = " "
   imageChangedEvent: any = '';
+  offerList : any[]=[]
   id: any;
   payload: any;
   image: File;
@@ -40,6 +41,8 @@ export class AddSpecialOfferComponent implements OnInit {
 
       productName: ['', [Validators.required]],
       productModel: ['', [Validators.required]],
+      productPrice: ['', [Validators.required]],
+      productQuantity: ['', [Validators.required]],
 
     })
     console.log(this.specialOfferForm)
@@ -69,8 +72,8 @@ export class AddSpecialOfferComponent implements OnInit {
         image:this.imageData,
         productModel: this.specialOfferForm.controls['productModel'].value,
         isSpecialProduct: true,
-        productQuantity: null,
-        productPrice: null
+        productPrice: this.specialOfferForm.controls['productPrice'].value,
+        productQuantity: this.specialOfferForm.controls['productQuantity'].value,
       }
 
       if(this.payload.image  == null){
@@ -92,6 +95,8 @@ export class AddSpecialOfferComponent implements OnInit {
   this.route.navigate(['/cms/special-offer']);
   }
 
+
+
   submitDetails(recievedValue:any){
     let newPayload= Object.assign({},recievedValue)
     this.CmsService.addFeatureProduct(newPayload)
@@ -100,6 +105,15 @@ export class AddSpecialOfferComponent implements OnInit {
     });
   }
 
+ getofferList() {
+    this.CmsService.getOfferList().subscribe((res:any) => {
+      this.offerList = res.response.filter(item=>item.isSpecialProduct === true)
+      console.log(res.response.filter(item=>item.isSpecialProduct === true), "offer list--------------------");
+
+
+      this.ngxLoader.stop();
+    });
+  }
 
 
   addOffer()  {
@@ -107,7 +121,7 @@ export class AddSpecialOfferComponent implements OnInit {
        if (res) {
          this.toastr.showSuccess("Feature Product added successfully", "Product Added")
          this.ngxLoader.stop()
-         this.route.navigate(['/cms/feature'])
+         this.route.navigate(['/cms/special-offer'])
        }
        (error: any) => {
          this.toastr.showError("Somthing wrong Please check", "Error occured")
@@ -126,7 +140,7 @@ export class AddSpecialOfferComponent implements OnInit {
       if (res) {
         this.toastr.showSuccess("Feature product edit successfully", "Feature edit")
         this.ngxLoader.stop()
-        this.route.navigate(['/cms/feature'])
+        this.route.navigate(['/cms/special-offer'])
       }
       (error: any) => {
         this.toastr.showError("Somthing wrong Please check", "Error occured")
@@ -144,9 +158,15 @@ export class AddSpecialOfferComponent implements OnInit {
       console.log("featur edit apis"+ testApi)
       const test =this.specialOfferForm.patchValue({
         productName: res.productName,
-       image: res.image,
-       productModel: res.productModel,
-        isSpecialProduct: true
+        image: res.image,
+        productModel: res.productModel,
+         productPrice: res.productPrice,
+         productQuantity: res.productQuantity,
+         isSpecialProduct: res.isSpecialProduct
+      //   productName: res.productName,
+      //  image: res.image,
+      //  productModel: res.productModel,
+      //   isSpecialProduct: true
       })
       this.Image = this.imgbucket.concat(res.image)
       // this.ImagePath = res.image

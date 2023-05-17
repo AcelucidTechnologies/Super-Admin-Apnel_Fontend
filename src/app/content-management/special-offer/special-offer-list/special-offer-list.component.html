@@ -7,7 +7,7 @@
       </div>
 
       <p-table #dt [value]="offerList" [(selection)]="selectedOffer" dataKey="id" [rowHover]="true"
-        [rows]="10" [showCurrentPageReport]="true" responsiveLayout="scroll"
+        [rows]="8" [showCurrentPageReport]="true" responsiveLayout="scroll"
         [paginator]="true" currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
         [filterDelay]="0" [globalFilterFields]="['productName','product']" class="abc">
         <ng-template pTemplate="caption" style="background-color: #fff !important; ">

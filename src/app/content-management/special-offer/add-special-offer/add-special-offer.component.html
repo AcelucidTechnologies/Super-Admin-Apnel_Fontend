@@ -52,13 +52,65 @@
                                             Product Name is required
                                         </div>
                                     </div>
-                                    <!-- <div *ngIf="specialOfferForm.controls['productName'].errors['pattern']"
-                                    style="color: rgb(253, 122, 122); font-size:small; font-style: italic;">
-                                    please enter only alphabet and number
-                                  </div> -->
+
                                 </div>
                             </div>
                         </div>
+
+
+
+
+
+
+
+                        <div class="row gutters">
+
+
+
+                          <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
+                              <div class="form-group">
+                                  <label for="hyperlink" class="col-form-label text-left starlabel">Price</label>
+                                  <input type="text" class="form-control" formControlName="productPrice">
+                                  <div
+                                      *ngIf="!specialOfferForm.controls['productPrice'].valid && (specialOfferForm.controls['productPrice'].touched || specialOfferForm.controls['productPrice'].dirty)">
+                                      <div [hidden]="!specialOfferForm.controls['productPrice'].errors['required']"
+                                          style="color: rgb(253, 122, 122); font-size:small; font-style: italic;">
+                                          Price is required
+                                      </div>
+                                  </div>
+                              </div>
+
+                          </div>
+
+                          <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
+                              <div class="form-group">
+                                  <label for="name" class="col-form-label text-left starlabel">Quantity</label>
+                                  <input type="text" class="form-control" formControlName="productQuantity">
+                                  <div
+                                      *ngIf="!specialOfferForm.controls['productQuantity'].valid && (specialOfferForm.controls['productQuantity'].touched || specialOfferForm.controls['productQuantity'].dirty)">
+                                      <div [hidden]="!specialOfferForm.controls['productQuantity'].errors['required']"
+                                          style="color: rgb(253, 122, 122); font-size:small; font-style: italic;">
+                                          Quantity is required
+                                      </div>
+                                  </div>
+
+                              </div>
+                          </div>
+                      </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

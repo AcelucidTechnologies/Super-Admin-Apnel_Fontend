@@ -56,8 +56,8 @@ export class AddPageListComponent implements OnInit {
   ngOnInit(): void {
 
     this.pageForm = this.fb.group({
-      pageTitle: ['', Validators.required],
-      pageLink: ['', Validators.required],
+      pageTitle: ['', [Validators.required, Validators.pattern('^(https?://)?([\\da-z.-]+)\\.([a-z.]{2,6})([/\\w .-]*)*/?$')]],
+      pageLink: ['', [Validators.required, Validators.pattern('^(http:\/\/www\.|https:\/\/www\.|http:\/\/|https:\/\/)?[a-z0-9]+([\-\.]{1}[a-z0-9]+)*\.[a-z]{2,5}(:[0-9]{1,5})?(\/.*)?$')]],
       pageContent: ['', Validators.required]
     });
     this.CmsService.BehaviouralSubject.subscribe(res=>{
