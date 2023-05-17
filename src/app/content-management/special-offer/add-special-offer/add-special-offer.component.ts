@@ -14,11 +14,13 @@ import { SPECIALOFFER } from 'src/app/_models/cms';
 export class AddSpecialOfferComponent implements OnInit {
 
   specialOfferForm: FormGroup;
+  ImagePath: string
   sidebarSpacing: any;
   fgsType: any;
   isChecked = true;
   title: string = " "
   imageChangedEvent: any = '';
+  offerList : any[]=[]
   id: any;
   payload: any;
   image: File;
@@ -39,6 +41,8 @@ export class AddSpecialOfferComponent implements OnInit {
 
       productName: ['', [Validators.required]],
       productModel: ['', [Validators.required]],
+      productPrice: ['', [Validators.required]],
+      productQuantity: ['', [Validators.required]],
 
     })
     console.log(this.specialOfferForm)
@@ -68,20 +72,17 @@ export class AddSpecialOfferComponent implements OnInit {
         image:this.imageData,
         productModel: this.specialOfferForm.controls['productModel'].value,
         isSpecialProduct: true,
-        productQuantity: null,
-        productPrice: null
+        productPrice: this.specialOfferForm.controls['productPrice'].value,
+        productQuantity: this.specialOfferForm.controls['productQuantity'].value,
+      }
+
+      if(this.payload.image  == null){
+        this.payload.image = this.ImagePath
       }
 
       this.submitDetails(this.payload)
 
       console.log("payload data for submit button feature"  +  JSON.stringify(this.payload))
-
-    // this.payload = {
-    //   _id: this.specialOfferForm.controls['id'].value,
-    //   productName: this.specialOfferForm.controls['product'].value,
-    //   image: this.image,
-    //   productModel: this.specialOfferForm.controls['category'].value,
-    // }
 
 
 
@@ -91,8 +92,10 @@ export class AddSpecialOfferComponent implements OnInit {
   } else {
     this.addOffer()
   }
-  this.route.navigate[('/cms/special-offer')]
+  this.route.navigate(['/cms/special-offer']);
   }
+
+
 
   submitDetails(recievedValue:any){
     let newPayload= Object.assign({},recievedValue)
@@ -102,27 +105,23 @@ export class AddSpecialOfferComponent implements OnInit {
     });
   }
 
-  // addOffer() {
-  //   this.CmsService.addFeatureProduct(this.specialOfferForm.value).subscribe(res => {
-  //      if (res) {
-  //        this.toastr.showSuccess("Special product added successfully", "Special offer Added")
-  //        this.ngxLoader.stop()
-  //        this.route.navigate(['/cms/special-offer'])
-  //      }
-  //      (error: any) => {
-  //        this.toastr.showError("Somthing wrong Please check", "Error occured")
-  //        this.ngxLoader.stop()
-  //       // this.route.navigate(['/'])
-  //      }
-  //    })
-  //  }
+ getofferList() {
+    this.CmsService.getOfferList().subscribe((res:any) => {
+      this.offerList = res.response.filter(item=>item.isSpecialProduct === true)
+      console.log(res.response.filter(item=>item.isSpecialProduct === true), "offer list--------------------");
+
+
+      this.ngxLoader.stop();
+    });
+  }
+
 
   addOffer()  {
     this.CmsService.addFeatureProduct(this.specialOfferForm.value).subscribe(res => {
        if (res) {
          this.toastr.showSuccess("Feature Product added successfully", "Product Added")
          this.ngxLoader.stop()
-         this.route.navigate(['/cms/feature'])
+         this.route.navigate(['/cms/special-offer'])
        }
        (error: any) => {
          this.toastr.showError("Somthing wrong Please check", "Error occured")
@@ -131,21 +130,7 @@ export class AddSpecialOfferComponent implements OnInit {
      })
    }
 
-  //  editOffer(){
-  //   console.log(this.payload)
-  //   this.CmsService.editOffer(this.specialOfferForm.value, this.id).subscribe(res => {
-  //     if (res) {
-  //       this.toastr.showSuccess("Special product edit successfully", "Special product edit")
-  //       this.ngxLoader.stop()
-  //       this.route.navigate(['/cms/add-special-offer'])
-  //     }
-  //     (error: any) => {
-  //       this.toastr.showError("Somthing wrong Please check", "Error occured")
-  //       this.ngxLoader.stop()
-  //       this.route.navigate(['/'])
-  //     }
-  //   })
-  //  }
+
   editOffer(){
     console.log(this.payload)
     this.CmsService.editFeature(this.payload, this.id).subscribe(res => {
@@ -155,7 +140,7 @@ export class AddSpecialOfferComponent implements OnInit {
       if (res) {
         this.toastr.showSuccess("Feature product edit successfully", "Feature edit")
         this.ngxLoader.stop()
-        this.route.navigate(['/cms/feature'])
+        this.route.navigate(['/cms/special-offer'])
       }
       (error: any) => {
         this.toastr.showError("Somthing wrong Please check", "Error occured")
@@ -165,16 +150,7 @@ export class AddSpecialOfferComponent implements OnInit {
     })
    }
 
-  //  getOfferById() {
-  //   this.CmsService.getOfferById(this.id).subscribe((res: SPECIALOFFER) => {
-  //     this.specialOfferForm.patchValue({
-  //       id: res.productName,
-  //       product: res.productModel,
-  //      image: res.image,
-  //     })
-  //     this.ngxLoader.stop();
-  //   })
-  // }
+
 
   getFeatureById() {
     this.CmsService.getFeatureById(this.id).subscribe((res) => {
@@ -182,11 +158,19 @@ export class AddSpecialOfferComponent implements OnInit {
       console.log("featur edit apis"+ testApi)
       const test =this.specialOfferForm.patchValue({
         productName: res.productName,
-       image: res.image,
-       productModel: res.productModel,
-        isSpecialProduct: true
+        image: res.image,
+        productModel: res.productModel,
+         productPrice: res.productPrice,
+         productQuantity: res.productQuantity,
+         isSpecialProduct: res.isSpecialProduct
+      //   productName: res.productName,
+      //  image: res.image,
+      //  productModel: res.productModel,
+      //   isSpecialProduct: true
       })
       this.Image = this.imgbucket.concat(res.image)
+      // this.ImagePath = res.image
+      this.ImagePath = this.imgbucket.concat(res.image)
       console.log("patch value for feature" + test)
 
       this.ngxLoader.stop();
@@ -199,6 +183,7 @@ export class AddSpecialOfferComponent implements OnInit {
   fileChangeEvent(event) {
     this.imageChangedEvent = event;
     this.imageData = event.target.files[0];
+    this.ImagePath = event.target.files[0];
     var reader = new FileReader();
     reader.readAsDataURL(event.target.files[0]);
     reader.onload = (data) => {

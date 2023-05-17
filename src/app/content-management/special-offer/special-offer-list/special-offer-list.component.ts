@@ -77,13 +77,15 @@ export class SpecialOfferListComponent implements OnInit {
 
   deleteProduct(offerList: any) {
     this.ngxLoader.start();
-    this.CmsService.deleteOffer(offerList.id).subscribe(res => {
+    this.CmsService.deleteProduct(offerList._id).subscribe(res => {
       if (res) {
         this.toastr.showSuccess("Special Product deleted successfully", "Special product delete")
         this.getofferList()
       }
     })
   }
+
+
 
   openDialog(offerList: any) {
     const dialogRef = this.dialog.open(DialogSpecialOfferComponent);
@@ -100,6 +102,9 @@ export class SpecialOfferListComponent implements OnInit {
     } else {
       this.sidebarSpacing = 'expanded';
     }
+  }
+  applyFilterGlobal($event, stringVal) {
+    this.dt.filterGlobal(($event.target as HTMLInputElement).value, stringVal);
   }
 
   exportPdf() {
@@ -128,8 +133,6 @@ export class SpecialOfferListComponent implements OnInit {
     FileSaver.saveAs(data, fileName + '_export_' + new Date().getTime() + EXCEL_EXTENSION);
   }
 
-  applyFilterGlobal($event, stringVal) {
-    this.dt.filterGlobal(($event.target as HTMLInputElement).value, stringVal);
-  }
+
 
 }

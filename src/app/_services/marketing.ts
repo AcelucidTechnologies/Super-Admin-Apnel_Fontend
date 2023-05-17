@@ -75,13 +75,15 @@ export class MarketingService {
 
             //    ---------------------marketting apis---------------
 
-            
+
     getCouponsList(): Observable<COUPANCODEDATA[]> {
         const token = localStorage.getItem('token') || '';
+        const email = localStorage.getItem('email') || '';
         let httpOptions = new HttpHeaders().set('x-access-token', token)
-        const endpointUrl = `${environment.JSON_SERVER}/coupons`;
-        //return this.http.get(endpointUrl, { 'headers': httpOptions }).pipe(map(res => res));
-        return of(couponAllData)
+        const endpointUrl = `${environment.JSON_SERVER}/coupons?username=${email}`;
+        return this.http.get<any[]>(endpointUrl, { 'headers': httpOptions });
+        // return this.http.get(endpointUrl, { 'headers': httpOptions }).pipe(map(res => res));
+        // return of(couponAllData)
     }
 
     addCoupon(Data: any) {

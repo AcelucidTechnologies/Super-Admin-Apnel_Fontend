@@ -9,7 +9,7 @@
 <p-table #dt [value]="sliderList" [(selection)]="selectedCustomers" dataKey="id" [rowHover]="true"
   [rows]="10" [showCurrentPageReport]="true" responsiveLayout="scroll"
   [paginator]="true" currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
-  [filterDelay]="0" [globalFilterFields]="['url','description']" class="abc">
+  [filterDelay]="0" [globalFilterFields]="['sliderName','description']" class="abc">
   <ng-template pTemplate="caption">
       <div class="table-header">
 
@@ -36,6 +36,13 @@
   </ng-template>
   <ng-template  pTemplate="header">
       <tr>
+        <th >
+          <div class="flex justify-content-between align-items-center head1">
+
+             SNo.
+
+          </div>
+      </th>
           <th pSortableColumn="sliderName">
               <div class="flex justify-content-between align-items-center head1">
                   Name
@@ -77,12 +84,16 @@
 
       </tr>
   </ng-template>
-  <ng-template pTemplate="body" let-sliderList>
+  <ng-template pTemplate="body" let-sliderList let-i="rowIndex">
       <tr class="p-selectable-row">
 
           <!-- <td>
               <p-tableCheckbox [value]="sliderList"></p-tableCheckbox>
           </td> -->
+          <td>
+            <span class="p-column-title"></span>
+            {{i+1}}
+        </td>
 
           <td>
               <span class="p-column-title">Url</span>

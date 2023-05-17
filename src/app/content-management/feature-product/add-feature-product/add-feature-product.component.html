@@ -1,4 +1,4 @@
-<div style="overflow-y: auto; height: 700px; margin-bottom: 100px;">
+<!-- <div style="overflow-y: auto; height: 700px; margin-bottom: 100px;"> -->
 <form [formGroup]="featureForm">
 
     <div class="button-heading-container">
@@ -54,7 +54,7 @@
                                 <div class="form-group">
                                     <label for="Name" class="col-form-label text-left starlabel">Price</label><br>
                                     <input type="text" class="form-control" formControlName="productPrice">
-                                      <div
+                                      <!-- <div
                                     *ngIf="(!featureForm.controls['productPrice'].valid) && (featureForm.controls['productPrice'].touched || featureForm.controls['productPrice'].dirty)">
                                     <div [hidden]="!featureForm.controls['productPrice'].errors['required']"
                                       style="color: rgb(253, 122, 122); font-size:small; font-style: italic;">
@@ -64,9 +64,20 @@
                                       style="color: rgb(253, 122, 122); font-size:small; font-style: italic;">
                                       Please enter valid productPrice
                                     </div>
+                                  </div> -->
+                                  <div *ngIf="!featureForm.controls['productPrice'].valid && (featureForm.controls['productPrice'].touched || featureForm.controls['productPrice'].dirty)">
+                                    <div [hidden]="!featureForm.controls['productPrice'].errors['required']"
+                                      style="color: rgb(253, 122, 122); font-size: small; font-style: italic;">
+                                      productPrice is required
+                                    </div>
+                                    <div *ngIf="featureForm.controls['productPrice'].errors['pattern']"
+                                      style="color: rgb(253, 122, 122); font-size: small; font-style: italic;">
+                                      Please enter a valid product price (only digits from 0 to 9 are allowed)
+                                    </div>
                                   </div>
                                 </div>
                             </div>
+
 
                             <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
                                 <div class="form-group">
@@ -79,9 +90,9 @@
                                       quantity is required
                                     </div>
                                     <div *ngIf="featureForm.controls['productQuantity'].errors['pattern']"
-                                      style="color: rgb(253, 122, 122); font-size:small; font-style: italic;">
-                                      Please enter valid quantity
-                                    </div>
+                                    style="color: rgb(253, 122, 122); font-size: small; font-style: italic;">
+                                    Please enter a valid product price (only digits from 0 to 9 are allowed)
+                                  </div>
                                   </div>
 
                                 </div>
@@ -89,11 +100,9 @@
                             <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
                               <div class="form-group">
                                 <label>
-                                  <input type="checkbox" [(ngModel)]="isChecked" formControlName="isSpecialProduct" >
+                                  <input type="checkbox" formControlName="isSpecialProduct" >
                                   Product Special Offer
                                 </label>
-                                <!-- <mat-checkbox [checked]="myModel" class="example-margin"/> -->
-
 
                               </div>
                           </div>
@@ -103,7 +112,7 @@
 
                         <div class="row gutters">
                             <div class="col-12 form-group pt-3">
-                                <label for="imageUpload" class="col-form-label">Image</label>
+                                <label for="imageUpload" class="col-form-label starlabel">Image</label>
                                 <!-- <div class="d-flex justify-content-start h-75"><img class="img-content" [src]="Image" /></div> -->
                                 <div id="imageUpload" class="custom-file">
                                     <input type="file" class="custom-file-input" id="inputGroupFile01"
@@ -143,7 +152,7 @@
                                         class="p-button mr-4 first-button" (click)="submitForm()"
                                         [disabled]="!(featureForm.valid)">Save</button> -->
                                         <button pButton type="button" id="submit" name="submit"
-                                        class="p-button mr-4 first-button" (click)="submitForm()"
+                                        class="p-button mr-4 first-button" (click)="submitForm()" [disabled]="!(featureForm.valid)"
                                         >Save</button>
                                     <button pButton type="button" id="submit" name="submit" class="p-button second-button "
                                         [routerLink]="['/cms/feature']">Cancel</button>
@@ -157,4 +166,4 @@
         </div>
     </div>
 </form>
-</div>
+<!-- </div> -->

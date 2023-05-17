@@ -16,7 +16,9 @@ export class AddSliderComponent implements OnInit {
   sidebarSpacing: any;
   title: string = " "
   sliderForm: FormGroup;
+  ImagePath: string;
   fgsType: any;
+  sliderList: SLIDER[]=[]
   image: File;
   status= false;
   id: any;
@@ -40,8 +42,8 @@ export class AddSliderComponent implements OnInit {
     ) {
       this.sliderForm = this.fb.group({
         // id:['',],
-        sliderName: ['', [Validators.required]],
-        sliderOrder: ['',[Validators.required]],
+        sliderName: ['', [Validators.required, Validators.pattern('^(https?://)?([\\da-z.-]+)\\.([a-z.]{2,6})([/\\w .-]*)*/?$')]],
+        sliderOrder: ['',[Validators.required, Validators.pattern('[0-9]+')]],
         sliderDiscription: ['', [Validators.required]],
       })
      }
@@ -93,6 +95,9 @@ export class AddSliderComponent implements OnInit {
     sliderOrder: this.sliderForm.controls['sliderOrder'].value,
     sliderDiscription: this.sliderForm.controls['sliderDiscription'].value,
   }
+  if(this.payload.image  == null){
+    this.payload.image = this.ImagePath
+  }
 
   this.submitDetails(this.payload)
 
@@ -104,7 +109,7 @@ export class AddSliderComponent implements OnInit {
   } else {
     this.addCategory()
   }
-  this.route.navigate[('/cms/slider')]
+  this.route.navigate(['/cms/slider'])
 
   }
   submitDetails(recievedValue:any){
@@ -114,6 +119,20 @@ export class AddSliderComponent implements OnInit {
       console.log(res)
     });
   }
+
+
+  getSliderList() {
+    this.CmsService.getSliderList().subscribe((res) => {
+      this.sliderList = res.map((item) => {
+        const cleanResponse = item.sliderDiscription.replace(/<\/?p>/g, '');
+        return { ...item, sliderDiscription: cleanResponse };
+      });
+
+      console.log(this.sliderList,"--------------------")
+      this.ngxLoader.stop();
+    })
+  }
+
   addCategory() {
     this.CmsService.addSlider(this.sliderForm.value).subscribe(res => {
        if (res) {
@@ -157,6 +176,8 @@ export class AddSliderComponent implements OnInit {
         sliderDiscription: res.sliderDiscription
       })
       this.Image = this.imgbucket.concat(res.image)
+      // this.ImagePath = res.image
+      this.ImagePath = this.imgbucket.concat(res.image)
       console.log("get slider bu id image" + this.Image)
       this.ngxLoader.stop();
     })
@@ -165,6 +186,7 @@ export class AddSliderComponent implements OnInit {
   fileChangeEvent(event) {
     this.imageChangedEvent = event;
     this.imageData = event.target.files[0];
+    this.ImagePath = event.target.files[0];
     var reader = new FileReader();
     reader.readAsDataURL(event.target.files[0]);
     reader.onload = (data) => {

@@ -22,53 +22,67 @@
                           <img src="../assets/images/icons/plus.svg" class="me-1" alt="img"> Add Banner
                       </a> -->
                       <button pButton type="button" (click)="openDialog()"  class="me-1" label=" + Add Page" class="theme" >
-                        <div
-                        *ngIf="(!pageForm.controls['pageTitle'].valid) && (pageForm.controls['pageTitle'].touched || pageForm.controls['pageTitle'].dirty)">
-                        <div [hidden]="!pageForm.controls['pageTitle'].errors['required']"
-                          style="color: rgb(253, 122, 122); font-size:small; font-style: italic;">
-                          pageTitle is required
-                        </div>
-                        <div *ngIf="pageForm.controls['pageTitle'].errors['pattern']"
-                          style="color: rgb(253, 122, 122); font-size:small; font-style: italic;">
-                          Please enter valid pageTitle
-                        </div>
-                      </div>
+
                       </button>
                   </div>
                   </div>
-                  <div class="form-group">
+                  <!-- <div class="form-group">
                     <label for="name" class="col-form-label text-left starlabel">Select Page</label>
-                    <input type="text" class="form-control"  placeholder="Enter pageTitle" formControlName="pageTitle">
 
-                    <div
+                    <input type="text" class="form-control" placeholder="Enter pageTitle" formControlName="pageTitle">
+
+
+                      <div
                       *ngIf="(!pageForm.controls['pageTitle'].valid) && (pageForm.controls['pageTitle'].touched || pageForm.controls['pageTitle'].dirty)">
                       <div [hidden]="!pageForm.controls['pageTitle'].errors['required']"
                         style="color: rgb(253, 122, 122); font-size:small; font-style: italic;">
                         pageTitle is required
                       </div>
-                      <div *ngIf="pageForm.controls['pageTitle'].errors['pattern']"
+                    </div>
+                    <div *ngIf="pageForm.controls['pageTitle'].errors['pattern']"
+                    style="color: rgb(253, 122, 122); font-size:small; font-style: italic;">
+                    Please enter valid Url
+                  </div>
+
+
+                  </div> -->
+                  <div class="form-group">
+                    <label for="name" class="col-form-label text-left starlabel">Page Title</label>
+                    <input type="pageTitle" class="form-control" placeholder="Enter URL" formControlName="pageTitle">
+                    <div
+                        *ngIf="(!pageForm.controls['pageTitle'].valid) && (pageForm.controls['pageTitle'].touched || pageForm.controls['pageTitle'].dirty)">
+                        <div [hidden]="!pageForm.controls['pageTitle'].errors['required']"
+                            style="color: rgb(253, 122, 122); font-size:small; font-style: italic;">
+                            Url is required
+                        </div>
+                        <div *ngIf="pageForm.controls['pageTitle'].errors['pattern']"
                         style="color: rgb(253, 122, 122); font-size:small; font-style: italic;">
-                        Please enter valid pageTitle
+                        Please enter valid Url
                       </div>
                     </div>
 
 
-                  </div>
+                </div>
 
                 </div>
                 <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
                   <div class="form-group">
-                    <label for="hyperlink" class="col-form-label">Link</label>
-                    <input type="text" class="form-control" placeholder="Enter Only pageLink" formControlName="pageLink">
+                    <label for="name" class="col-form-label text-left starlabel">Page Link</label>
+                    <input type="pageTitle" class="form-control" placeholder="Enter pageLink" formControlName="pageLink">
                     <div
-                    *ngIf="(!pageForm.controls['pageLink'].valid) && (pageForm.controls['pageLink'].touched || pageForm.controls['pageLink'].dirty)">
-                    <div [hidden]="!pageForm.controls['pageLink'].errors['required']"
-                      style="color: rgb(253, 122, 122); font-size:small; font-style: italic;">
-                      pageTitle is required
+                        *ngIf="(!pageForm.controls['pageLink'].valid) && (pageForm.controls['pageLink'].touched || pageForm.controls['pageLink'].dirty)">
+                        <div [hidden]="!pageForm.controls['pageLink'].errors['required']"
+                            style="color: rgb(253, 122, 122); font-size:small; font-style: italic;">
+                        pageLink is required
+                        </div>
+                        <div *ngIf="pageForm.controls['pageLink'].errors['pattern']"
+                            style="color: rgb(253, 122, 122); font-size:small; font-style: italic;">
+                            Please enter valid pageLink
+                        </div>
                     </div>
 
-                  </div>
-                  </div>
+
+                </div>
                 </div>
 
                 <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
@@ -93,10 +107,9 @@
               <div class="row gutters mt-4">
                 <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 mt-4">
                   <div class="text-center">
-                    <!-- <button pButton type="button" id="submit" name="submit" class="first-button mr-4"
-                      (click)="submitForm()" [disabled]="!(pageForm.valid)">Save</button> -->
-                      <button pButton type="button" id="submit" name="submit" class="first-button mr-4"
-                      (click)="submitForm()" >Save</button>
+                    <button pButton type="button" id="submit" name="submit" class="first-button mr-4"
+                      (click)="submitForm()" [disabled]="!(pageForm.valid)">Save</button>
+
                     <button pButton type="button" id="submit" name="submit" class="p-button second-button "
                       >Cancel</button>
 

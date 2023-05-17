@@ -9,6 +9,7 @@ import { CmsService } from '../../../_services/cms.service'
 import bsCustomFileInput from 'bs-custom-file-input';
 import { CommonService } from 'src/app/_services/common';
 import { ThisReceiver, Token } from '@angular/compiler';
+import { HttpClient } from '@angular/common/http';
 //import * as customBuild from ""
 @Component({
   selector: 'app-add-banner-special',
@@ -24,6 +25,7 @@ export class AddBannerSpecialComponent implements OnInit {
   };
 
   bannerListbyId: []=[]
+  banner: any[]=[]
   bannerList: any[]=[]
   editData : any[]=[]
 payload:any
@@ -43,7 +45,8 @@ payload:any
 
 username: any;
 
-  testapi:any
+  testapi:any;
+  ImagePath: string;
 
   editMode: boolean = false
   imageChangedEvent: any = '';
@@ -65,14 +68,16 @@ username: any;
     private activateRoute: ActivatedRoute,
     private toastr: ToastrMsgService,
     private CmsService: CmsService,
-    private common: CommonService
+    private common: CommonService,
+    private http: HttpClient
     ) {
+      this.getbannerList()
       this.bannerSpecialForm = this.fb.group({
 
-        // username: ['', [Validators.required, Validators.pattern(this.reg)]],
         // imagebanner: [''],
-        bannerName: ['',[Validators.required]],
-        bannerOrder: ['',[Validators.required]],
+        // bannerName: ['',[Validators.required]],
+        bannerName: ['', [Validators.required, Validators.pattern('^(https?://)?([\\da-z.-]+)\\.([a-z.]{2,6})([/\\w .-]*)*/?$')]],
+        bannerOrder: ['', [Validators.required, Validators.pattern('[0-9]+')]],
         bannerDescription: ['', [Validators.required]],
       })
       console.log("hellotoken" + this.bannerSpecialForm)
@@ -80,6 +85,7 @@ username: any;
      }
 
   ngOnInit(): void {
+
     // this.getbannerList()
 
     this.fgsType = SPINNER.squareLoader
@@ -103,9 +109,23 @@ username: any;
 
   }
 
+  getbannerList() {
+    this.CmsService.getSpecialBannerList(this.id).subscribe((res) => {
+      this.banner =res
+      this.bannerList = res.map((item) => {
+              const cleanResponse = item.bannerDescription.replace(/<\/?p>/g, '');
+              return { ...item, bannerDescription: cleanResponse };
+            });
+
+      console.log(this.bannerList,"--------------------")
+      this.ngxLoader.stop();
+    })
+  }
+
   fileChangeEvent(event) {
     this.imageChangedEvent = event;
     this.imageData = event.target.files[0];
+    this.ImagePath = event.target.files[0];
     var reader = new FileReader();
     reader.readAsDataURL(event.target.files[0]);
     reader.onload = (data) => {
@@ -142,6 +162,7 @@ username: any;
   }
 
   submitForm(){
+
    this.payload = {
     username: localStorage.getItem("username"),
     bannerName: this.bannerSpecialForm.controls['bannerName'].value,
@@ -149,6 +170,9 @@ username: any;
     bannerOrder: this.bannerSpecialForm.controls['bannerOrder'].value,
     bannerDescription: this.bannerSpecialForm.controls['bannerDescription'].value,
 
+  }
+  if(this.payload.image  == null){
+    this.payload.image = this.ImagePath
   }
   this.submitDetails(this.payload)
   console.log("payload", this.payload)
@@ -158,12 +182,16 @@ username: any;
   this.ngxLoader.start();
   if (this.editMode) {
   this.editBanner();
+
   } else {
     this.addCategory()
   }
-  this.route.navigate[('/cms/banner')]
+  this.route.navigate(['/cms/banner']);
+  this.getbannerList()
 
   }
+
+
 
   addCategory() {
     this.CmsService.addSpecialBanner(this.bannerSpecialForm.value)
@@ -215,9 +243,12 @@ username: any;
        image: res.image,
        bannerOrder: res.bannerOrder,
        bannerDescription: res.bannerDescription,
-      })
+      });
+
       this.Image = this.imgbucket.concat(res.image)
-      console.log("username value" + test)
+      this.ImagePath = res.image
+      // this.ImagePath = this.imgbucket.concat(res.image)
+      console.log("image path value" + this.ImagePath)
 
       this.ngxLoader.stop();
     })
@@ -244,12 +275,7 @@ username: any;
     this.CmsService.addSpecialBanner(newPayload)
     .subscribe((res) => {
       console.log(res)
-      // if (res) {
-      //   this.route.navigate(['/roleandpermission/adminlist']);
-      // }
-      // else{
-      //   this.toastr.showError("Somthing wrong Please check", "Error occured")
-      // }
+
     });
   }
 

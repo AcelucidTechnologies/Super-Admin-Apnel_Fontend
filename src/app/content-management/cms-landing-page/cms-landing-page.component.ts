@@ -45,6 +45,7 @@ export class CmsLandingPageComponent implements OnInit  {
   getFeatureList(){
     this.CmsService.getFeatureList().subscribe((res) => {
       this.featureList = res
+      this.featureList = res.filter(item=>item.isSpecialProduct === false)
       console.log(this.featureList," feature list--------------------")
       this.ngxLoader.stop();
     })
