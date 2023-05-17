@@ -37,14 +37,14 @@ export class CoupanListComponent implements OnInit {
   statuses: any[];
 
   activityValues: number[] = [0, 100];
-  
+
   constructor(private ngxLoader: NgxUiLoaderService,
     private CmsService: CmsService,
     private markettingService: MarketingService,
     private toastr: ToastrMsgService,
     public dialog: MatDialog,
     private permissionService:ModulePermissionService) {
-      this.permissionService.getModulePermission().subscribe(res=>{ 
+      this.permissionService.getModulePermission().subscribe(res=>{
         this.accessPermission=res[0].CmsBanner
         console.log( this.accessPermission)
       })
@@ -67,7 +67,7 @@ export class CoupanListComponent implements OnInit {
   getMarkettingList(){
     this.markettingService.getCouponsList().subscribe((res: COUPANCODEDATA[]) => {
       this.coupanList = res
-      //console.log(this.bannerList,"--------------------")
+      console.log(this.coupanList,"--------------------")
       this.ngxLoader.stop();
     })
   }
@@ -90,7 +90,7 @@ export class CoupanListComponent implements OnInit {
       }
     });
   }
-  
+
   onToggleSidebar(sidebarState: any) {
     if (sidebarState === 'open') {
       this.sidebarSpacing = 'contracted';
@@ -114,8 +114,8 @@ export class CoupanListComponent implements OnInit {
           const workbook = { Sheets: { 'data': worksheet }, SheetNames: ['data'] };
           const excelBuffer: any = xlsxPackage.write(workbook, { bookType: 'xlsx', type: 'array' });
           this.saveAsExcelFile(excelBuffer, "leads");
-        }   
-        
+        }
+
   saveAsExcelFile(buffer: any, fileName: string): void {
     let EXCEL_TYPE = 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;charset=UTF-8';
     let EXCEL_EXTENSION = '.xlsx';

@@ -38,6 +38,8 @@ export class AddPageListComponent implements OnInit {
   reg = '(https?://)?([\\da-z.-]+)\\.([a-z.]{2,6})[/\\w .-]*/?';
   private dialogRefSubscription: Subscription;
   testapi: any;
+  pageTitle: string;
+  pageLink: string;
 
   constructor(private ngxLoader: NgxUiLoaderService, private fb: FormBuilder,
     private route: Router,
@@ -46,17 +48,29 @@ export class AddPageListComponent implements OnInit {
     public dialog: MatDialog,
     private CmsService: CmsService
     ) {
-      this.pageForm = this.fb.group({
-
-        pageTitle: ['', [Validators.required]],
-        pageLink: ['', [Validators.required]],
-        pageContent: ['', [Validators.required]],
-      })
-      // this.getPageId()
 
      }
 
+
+
   ngOnInit(): void {
+
+    this.pageForm = this.fb.group({
+      pageTitle: ['', [Validators.required, Validators.pattern('^(https?://)?([\\da-z.-]+)\\.([a-z.]{2,6})([/\\w .-]*)*/?$')]],
+      pageLink: ['', [Validators.required, Validators.pattern('^(http:\/\/www\.|https:\/\/www\.|http:\/\/|https:\/\/)?[a-z0-9]+([\-\.]{1}[a-z0-9]+)*\.[a-z]{2,5}(:[0-9]{1,5})?(\/.*)?$')]],
+      pageContent: ['', Validators.required]
+    });
+    this.CmsService.BehaviouralSubject.subscribe(res=>{
+      this.pageForm.patchValue({
+        pageTitle: res.pageTitle,
+        pageLink: res.pageLink
+      });
+    })
+    console.log("page set up value" + this.pageForm.controls)
+
+
+
+
     this.fgsType = SPINNER.squareLoader
     this.ngxLoader.start();
     this.sidebarSpacing = 'contracted';
@@ -91,25 +105,18 @@ export class AddPageListComponent implements OnInit {
     }
   }
 
-  // submitForm(){
-  //  this.payload = {
-  //   id: this.pageForm.controls['id'].value,
-  //   url: this.pageForm.controls['url'].value,
-  //   description: this.pageForm.controls['description'].value,
-  //   page: this.pageForm.controls['page'].value,
-  // }
 
-  // this.ngxLoader.start();
-  // this.route.navigate[('/cms/page')]
-
-  // }
   submitForm(){
-    this.payload = {
-      pageTitle: this.pageForm.controls['pageTitle'].value,
-      pageLink: this.pageForm.controls['pageLink'].value,
-      pageContent: this.pageForm.controls['pageContent'].value,
 
-   }
+
+    this.payload = {
+
+      pageContent: this.pageForm.controls['pageContent'].value,
+      pageTitle:this.pageTitle,
+      pageLink: this.pageLink
+    }
+
+
    this.submitDetails(this.payload)
    console.log("payload", this.payload)
    this.ngxLoader.start();
@@ -183,7 +190,6 @@ export class AddPageListComponent implements OnInit {
   //     this.ngxLoader.stop();
   //   })
   // }
-
 
 
 

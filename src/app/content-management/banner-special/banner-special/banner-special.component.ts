@@ -62,13 +62,13 @@ export class BannerSpecialComponent implements OnInit {
         this.accessPermission=res[0].CmsBanner
 
       })
-      const test = localStorage.getItem('email')
-      console.log("value test" + test)
+      this.getbannerList();
 
      }
 
+
   ngOnInit(): void {
-    this.getbannerList();
+
     this.fgsType = SPINNER.squareLoader
     this.ngxLoader.start();
     this.sidebarSpacing = 'contracted';
@@ -100,8 +100,6 @@ export class BannerSpecialComponent implements OnInit {
       this.ngxLoader.stop();
     })
   }
-
-
 
   deleteBanner(bannerList: any) {
 
@@ -137,15 +135,7 @@ export class BannerSpecialComponent implements OnInit {
     this.dt.filterGlobal(($event.target as HTMLInputElement).value, stringVal);
   }
 
-  // exportPdf() {
-  //   this.bannerDetails = this.banner
-  //           const doc = new jsPDF.jsPDF('l', 'pt');
-  //          autoTable(doc, {
-  //           columns:this.exportColumns,
-  //           body:this.bannerDetails
-  //          });
-  //           doc.save('banner.pdf');
-  //       }
+
 
         exportPdf() {
           this.bannerDetails = this.banner;

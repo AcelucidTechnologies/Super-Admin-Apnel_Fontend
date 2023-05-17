@@ -1,46 +1,3 @@
-<!--
-
-    <div class="page-heading">
-        <h1 class="header-text-title" style="margin-left: 1%;">Featured Product</h1>
-        <button pButton type="button" label="Add" class="p-button-success"
-        [routerLink]="['/cms/add-featured-product']"></button>
-      </div>
-      <div class="card col-sm-12" style="border:none; margin-top: 10px;">
-        <p-table id="customerTable" #dt [columns]="cols" responsiveLayout="scroll" [paginator]="true" [rows]="10"
-          [showCurrentPageReport]="true" [value]="coupanList"
-          currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries" [responsive]="true" [globalFilterFields]="['id', 'name',]" styleClass="p-datatable-striped">
-          <ng-template pTemplate="header" let-columns>
-            <tr>
-              <th *ngFor="let col of columns">{{col.headers}}</th>
-
-            </tr>
-          </ng-template>
-
-          <ng-template pTemplate="body" let-coupanList>
-            <tr>
-
-              <td>{{coupanList.id}}</td>
-              <td>{{coupanList.image}}</td>
-              <td>{{coupanList.productName}}</td>
-              <td>{{coupanList.modal}}</td>
-              <td>{{coupanList.price}}</td>
-              <td>{{coupanList.quantity}}</td>
-              <td>
-                <div class="btn-grp" id="btn-grp">
-
-                  <button class="p-button-warning" pButton type="button" icon="pi pi-user-edit" pTooltip="Edit Product"
-                  [queryParams]="{id:coupanList?.id}" tooltipPosition="bottom" [routerLink]="['/cms/add-featured-product']" style="margin-right:5px"
-                 ></button>
-                  <button class="p-button-danger" pButton type="button" icon="pi pi-trash" pTooltip="Delete Product"
-                    tooltipPosition="bottom" style="margin-right:5px"  (click)="openDialog(coupanList)" ></button>
-                </div>
-              </td>
-            </tr>
-          </ng-template>
-        </p-table>
-
-
-    </div> -->
 
 
     <div class="page-heading">
@@ -53,7 +10,7 @@
       <p-table #dt [value]="coupanList" [(selection)]="selectedProduct" dataKey="id" [rowHover]="true"
         [rows]="10" [showCurrentPageReport]="true" responsiveLayout="scroll"
         [paginator]="true" currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
-        [filterDelay]="0" [globalFilterFields]="['coupanName','coupanCode']" class="abc">
+        [filterDelay]="0" [globalFilterFields]="['coupanName','couponCode']" class="abc">
         <ng-template pTemplate="caption" style="background-color: #fff !important; ">
             <div class="table-header">
                 <span style="display: flex; justify-content: center; align-items: center; margin-left: 20px;" class="p-input-icon-left ">
@@ -61,13 +18,13 @@
                 </span>
 
                 <div class="d-flex justify-content-end align-items-end">
-                  <button style="background-color: #f4f4f4; border: none;" type="button" pButton class="mr-1" pTooltip="Pdf" (click)="exportPdf()"
+                  <button style=" border: none;" type="button" pButton class="mr-1" pTooltip="Pdf" (click)="exportPdf()"
                     tooltipPosition="bottom"><img
                     src="../assets/images/icons/pdf.svg"></button>
-                  <button type="button" style="background-color: #f4f4f4;; border: none;" pButton class="mr-1" pTooltip="excel" (click)="exportExcel()"
+                  <button type="button" style="border: none;" pButton class="mr-1" pTooltip="excel" (click)="exportExcel()"
                     tooltipPosition="bottom" ><img
                     src="../assets/images/icons/excel.svg"></button>
-                    
+
                 </div>
             </div>
         </ng-template>
@@ -77,21 +34,20 @@
                 <th pSortableColumn="id">
                   <div class="flex justify-content-between align-items-center head1">
                     Sr.no
-                      <p-sortIcon field="id"></p-sortIcon>
 
                   </div>
               </th>
                 <th pSortableColumn="coupanName">
                     <div class="flex justify-content-between align-items-center head1">
-                      Coupan Name
+                      Coupon Name
                         <p-sortIcon field="coupanName"></p-sortIcon>
 
                     </div>
                 </th>
-                <th pSortableColumn="coupanCode">
+                <th pSortableColumn="couponCode">
                     <div class="flex justify-content-between align-items-center head1">
-                        Coupan Code
-                        <p-sortIcon field="coupanCode"></p-sortIcon>
+                        Coupon Code
+                        <p-sortIcon field="couponCode"></p-sortIcon>
 
                     </div>
                 </th>
@@ -103,19 +59,22 @@
                 </div>
             </th>
 
-              <th>
+              <th pSortableColumn="startDate">
                 <div class="flex justify-content-between align-items-center head1">
                     Start data
+                    <p-sortIcon field="startDate"></p-sortIcon>
                 </div>
             </th>
-            <th>
+            <th pSortableColumn="endDate">
               <div class="flex justify-content-between align-items-center head1">
                   End data
+                  <p-sortIcon field="endDate"></p-sortIcon>
               </div>
           </th>
-          <th>
+          <th pSortableColumn="status">
             <div class="flex justify-content-between align-items-center head1">
                 Status
+                <p-sortIcon field="status"></p-sortIcon>
             </div>
         </th>
             <th>
@@ -127,26 +86,26 @@
 
             </tr>
         </ng-template>
-        <ng-template pTemplate="body" let-coupanList>
+        <ng-template pTemplate="body" let-coupanList let-i="rowIndex">
             <tr class="p-selectable-row">
 
                 <td>
                   <span class="p-column-title">Sr.no</span>
-                  {{coupanList.id}}
+                  {{i+1}}
               </td>
                 <td>
                     <span class="p-column-title">Coupan Name</span>
-                    {{coupanList.coupanName}}
+                    {{coupanList.name}}
                 </td>
                 <td>
                     <span class="p-column-title">Coupan Code</span>
 
-                    {{coupanList.coupanCode}}
+                    {{coupanList.couponCode}}
                 </td>
 
                 <td>
                     <span class="p-column-title">Discount</span>
-                    {{coupanList.discount}}
+                    {{coupanList.discount}} %
                 </td>
 
                 <td>

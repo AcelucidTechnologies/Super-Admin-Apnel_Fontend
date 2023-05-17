@@ -20,9 +20,9 @@
                                 Url is required
                             </div>
                             <div *ngIf="selectForm.controls['pageTitle'].errors['pattern']"
-                                style="color: rgb(253, 122, 122); font-size:small; font-style: italic;">
-                                Please enter valid Url
-                            </div>
+                            style="color: rgb(253, 122, 122); font-size:small; font-style: italic;">
+                            Please enter valid Url
+                          </div>
                         </div>
 
 
@@ -37,7 +37,7 @@
                             *ngIf="(!selectForm.controls['pageLink'].valid) && (selectForm.controls['pageLink'].touched || selectForm.controls['pageLink'].dirty)">
                             <div [hidden]="!selectForm.controls['pageLink'].errors['required']"
                                 style="color: rgb(253, 122, 122); font-size:small; font-style: italic;">
-                              page pageLink is required
+                            pageLink is required
                             </div>
                             <div *ngIf="selectForm.controls['pageLink'].errors['pattern']"
                                 style="color: rgb(253, 122, 122); font-size:small; font-style: italic;">
@@ -52,8 +52,9 @@
         </form>
     </mat-dialog-content>
     <mat-dialog-actions>
-        <button mat-button [mat-dialog-close]="true" class="dialog1 mr-2 bt-1" (click)="submitForm()">Save</button>
-        <button mat-button mat-dialog-close class="dialog1 bt-2">Cancel</button>
+        <button mat-button [mat-dialog-close]="true" class="dialog1  mr-2 bt-1" (click)="submitForm()"  [disabled]="!(selectForm.valid)">Save</button>
+        <button mat-button mat-dialog-close class="dialog2 bt-2">Cancel</button>
     </mat-dialog-actions>
+
 
 </div>
