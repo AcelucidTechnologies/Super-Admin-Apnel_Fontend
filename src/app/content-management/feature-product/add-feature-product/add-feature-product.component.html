@@ -68,11 +68,11 @@
                                   <div *ngIf="!featureForm.controls['productPrice'].valid && (featureForm.controls['productPrice'].touched || featureForm.controls['productPrice'].dirty)">
                                     <div [hidden]="!featureForm.controls['productPrice'].errors['required']"
                                       style="color: rgb(253, 122, 122); font-size: small; font-style: italic;">
-                                      productPrice is required
+                                      Product Price is required
                                     </div>
                                     <div *ngIf="featureForm.controls['productPrice'].errors['pattern']"
                                       style="color: rgb(253, 122, 122); font-size: small; font-style: italic;">
-                                      Please enter a valid product price (only digits from 0 to 9 are allowed)
+                                      Please enter a valid product price
                                     </div>
                                   </div>
                                 </div>
@@ -91,7 +91,7 @@
                                     </div>
                                     <div *ngIf="featureForm.controls['productQuantity'].errors['pattern']"
                                     style="color: rgb(253, 122, 122); font-size: small; font-style: italic;">
-                                    Please enter a valid product price (only digits from 0 to 9 are allowed)
+                                    Please enter a valid product quantity
                                   </div>
                                   </div>
 
@@ -166,4 +166,5 @@
         </div>
     </div>
 </form>
+<ngx-ui-loader [fgsColor]="'#000000'" [fgsType]="fgsType"></ngx-ui-loader>
 <!-- </div> -->

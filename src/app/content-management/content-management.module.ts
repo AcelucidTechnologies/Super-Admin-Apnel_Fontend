@@ -58,7 +58,6 @@ import { CarouselModule } from 'primeng/carousel';
     AddPageListComponent,
     DialogSelectComponent,
     CmsLandingPageComponent,
-
   ],
   imports: [
     CommonModule,

@@ -97,7 +97,7 @@
                 {{bannerList.bannerOrder}}
             </td>
               <td>
-                <img class="user-name-img" src={{this.imgbucket}}{{bannerList.image}}>
+                <img class="user-name-img" [src]="bannerList.image">
             </td>
             <td>
               <a pTooltip="Edit Banner" tooltipPosition="bottom" class="me-3" style="margin-right: 10px;">
@@ -117,4 +117,5 @@
         </tr>
     </ng-template>
 </p-table>
+<ngx-ui-loader [fgsColor]="'#000000'" [fgsType]="fgsType"></ngx-ui-loader>
 </div>

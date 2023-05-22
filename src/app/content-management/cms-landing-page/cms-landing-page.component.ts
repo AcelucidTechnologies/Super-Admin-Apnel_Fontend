@@ -15,7 +15,8 @@ export class CmsLandingPageComponent implements OnInit  {
   featureList : any[]
   offerList : any[]=[]
   imgbucket="https://adminpanelbucket.s3.amazonaws.com/Feature/";
-
+  bannerList: any;
+sliderList:any;
 
   constructor(
     private CmsService: CmsService,
@@ -39,14 +40,16 @@ export class CmsLandingPageComponent implements OnInit  {
       }
   ];
   this.getFeatureList();
-  this.getofferList()
+  this.getofferList();
+  this.getBannerList();
+  this.getSliderList();
   }
 
   getFeatureList(){
     this.CmsService.getFeatureList().subscribe((res) => {
       this.featureList = res
       this.featureList = res.filter(item=>item.isSpecialProduct === false)
-      console.log(this.featureList," feature list--------------------")
+     
       this.ngxLoader.stop();
     })
 
@@ -55,12 +58,24 @@ export class CmsLandingPageComponent implements OnInit  {
   getofferList() {
     this.CmsService.getOfferList().subscribe((res:any) => {
       this.offerList = res.response.filter(item=>item.isSpecialProduct === true)
-      console.log(res.response.filter(item=>item.isSpecialProduct === true), "offer list--------------------");
 
 
       this.ngxLoader.stop();
     });
   }
 
+  getBannerList(){
+    this.CmsService.getbannerList().subscribe((res)=>{
 
-}
+      this.bannerList= res
+    })
+  }
+
+  getSliderList(){
+    this.CmsService.getSliderList().subscribe((res)=>{
+
+      this.sliderList= res
+    })
+  }
+  }
+

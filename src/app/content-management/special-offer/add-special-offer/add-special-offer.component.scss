@@ -44,6 +44,8 @@
 }
 ::ng-deep.back-button:hover {
   background-color: lightcoral !important;
+
+
 }
 .img-content {
   width: 70px;
@@ -51,3 +53,13 @@
   border-radius: 10px;
   text-align: center;
 }
+
+::ng-deep{
+  .p-dropdown {
+    width: 482px;
+  }
+  .p-dropdown:not(.p-disabled):hover {
+    border-color: red;
+}
+}
+

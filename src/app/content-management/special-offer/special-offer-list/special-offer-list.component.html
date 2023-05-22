@@ -2,7 +2,7 @@
     <div class="page-heading">
         <h1 class="header-text-title" style="margin-left: 1%;">Special Offer</h1>
         <div class="page-btn">
-          <button pButton type="button" [routerLink]="['/cms/add-special-offer']" class="me-1" label=" + Add Offer" class="theme" ></button>
+          <button pButton type="button" [routerLink]="['/cms/add-special-offer']" class="me-1" label=" + Add Special Offer" class="theme" ></button>
       </div>
       </div>
 
@@ -98,7 +98,7 @@
 
                 <td>
                   <span class="p-column-title">productPrice</span>
-                    {{offerList.productPrice}}
+                    {{offerList.productPrice | currency:'INR'}}
                 </td>
                 <!-- <td>
                   <span class="p-column-title">Image</span>
@@ -128,3 +128,4 @@
         </ng-template>
     </p-table>
 
+    <ngx-ui-loader [fgsColor]="'#000000'" [fgsType]="fgsType"></ngx-ui-loader>

@@ -31,6 +31,7 @@ export class FeatureProductListComponent implements OnInit {
   customers:FEATURE[]=[]
   offerList : SPECIALOFFER[]=[]
   isSpecialProduct = true;
+  fgsType: any;
   isChecked = this.isSpecialProduct;
 
   selectedProduct: FEATURE[]=[]

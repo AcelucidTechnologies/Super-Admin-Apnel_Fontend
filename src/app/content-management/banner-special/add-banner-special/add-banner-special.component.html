@@ -1,7 +1,5 @@
 <!-- <div style="overflow-y: auto; height: 700px; margin-bottom: 100px;"> -->
   <form [formGroup]="bannerSpecialForm">
-
-
     <div class="button-heading-container">
       <button
         class="mb-2 p-1 back-button"
@@ -53,7 +51,6 @@
                     <div class="col-12">
                       <!-- <textarea rows="10" formControlName="commentGiven"></textarea> -->
                       <ckeditor name="editor1" formControlName="bannerDescription"></ckeditor>
-
                       <div
                       *ngIf="(!bannerSpecialForm.controls['bannerDescription'].valid) && (bannerSpecialForm.controls['bannerDescription'].touched || bannerSpecialForm.controls['bannerDescription'].dirty)">
                         <div [hidden]="!bannerSpecialForm.controls['bannerDescription'].errors['required']"
@@ -68,41 +65,35 @@
                 <div class="col-12 form-group pt-3 pl-3">
                   <label for="imageUpload" class="col-form-label starlabel" >Image</label>
                   <div id="imageUpload" class="custom-file">
-                    <input type="file" class="custom-file-input" id="inputGroupFile01"  (change)="fileChangeEvent($event)" >
+                    <input type="file" class="custom-file-input" id="inputGroupFile01" [src]="Image" (change)="fileChangeEvent($event)">
+                    <!-- <div
+                    *ngIf="(!bannerSpecialForm.controls['documents'].valid) && (bannerSpecialForm.controls['documents'].touched || bannerSpecialForm.controls['documents'].dirty)">
+                      <div [hidden]="!bannerSpecialForm.controls['documents'].errors['required']"
+                        style="color: rgb(253, 122, 122); font-size:small; font-style: italic;">
+                        Image is required
+                      </div>
+                    </div> -->
                     <!-- <input type="file" (change)="onFileSelected($event)" #fileInput> -->
-
-
-
                     <label class="custom-file-label" for="inputGroupFile01" >Upload file</label>
-
                   </div>
-
                 </div>
-
-
          <div class="col-12 form-group mt-5">
                   <div class="card">
-                    <div class="card-body">
-                      <div class="row" style="margin-top: 15px;">
+                    <div class="card-body" style="padding-bottom: 33px !important">
+                      <div class="row" style="margin-top: 6px;">
                         <div class="text-center col-md-12">
                           <h5>Image Croppier</h5>
-                          <!-- <img class="img-content" [src]="Image" /> -->
-                          <img class="img-content" [src]="croppedImage ? croppedImage : Image" >
-                          <image-cropper [imageChangedEvent]="imageChangedEvent"   [resizeToWidth]="200" [maintainAspectRatio]="true"
-                            [aspectRatio]="4 / 3" [resizeToWidth]="400" format="png" (imageCropped)="imageCropped($event)"
-                            (imageLoaded)="imageLoaded()" (cropperReady)="cropperReady()"
-                            (loadImageFailed)="loadImageFailed()"></image-cropper>
+                          <img #image class="img-content" [src]="Image" >
+                          <image-cropper #cropper1 [imageChangedEvent]="imageChangedEvent" [maintainAspectRatio]="true"
+                                          [aspectRatio]="4 / 3" [resizeToWidth]="400" format="png" (imageCropped)="imageCropped($event)"
+                                          (imageLoaded)="imageLoaded()" (cropperReady)="cropperReady()"
+                                          (loadImageFailed)="loadImageFailed()"></image-cropper>
                         </div>
                       </div>
                     </div>
                   </div>
-
                 </div>
               </div>
-
-
-
-
               <div class="row gutters mt-4">
                 <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 mt-4">
                   <div class="text-center">
@@ -110,7 +101,6 @@
                       (click)="submitForm()"  [disabled]="!(bannerSpecialForm.valid)">Save</button>
                     <button pButton type="button" id="submit" name="submit" class="p-button second-button "
                       [routerLink]="['/cms/banner']">Cancel</button>
-
                   </div>
                 </div>
               </div>
@@ -120,4 +110,5 @@
       </div>
     </div>
   </form>
+  <ngx-ui-loader [fgsColor]="'#000000'" [fgsType]="fgsType"></ngx-ui-loader>
   <!-- </div> -->

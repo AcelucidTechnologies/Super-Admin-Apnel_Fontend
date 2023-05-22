@@ -1,9 +1,9 @@
 
 <form [formGroup]="pageForm">
     <div class="pageTitle-heading col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 mb-3" >
-      <h1 class="header-text-title">
+      <h4 class="header-text-title">
         Page Set Up
-      </h1>
+      </h4>
     </div>
     <div class="card col-sm-12">
       <div class="row gutters">
@@ -16,22 +16,14 @@
 
                   <div class="form-group page-heading">
                     <h1></h1>
-                    <!-- <h1 class="header-text-title" style="margin-left: 1%;">Banner Special</h1> -->
                     <div class="pageTitle-btn">
-                      <!-- <a class="btn btn-added" [routerLink]="['/cms/add-special-banner']">
-                          <img src="../assets/images/icons/plus.svg" class="me-1" alt="img"> Add Banner
-                      </a> -->
                       <button pButton type="button" (click)="openDialog()"  class="me-1" label=" + Add Page" class="theme" >
-
                       </button>
                   </div>
                   </div>
                   <!-- <div class="form-group">
                     <label for="name" class="col-form-label text-left starlabel">Select Page</label>
-
                     <input type="text" class="form-control" placeholder="Enter pageTitle" formControlName="pageTitle">
-
-
                       <div
                       *ngIf="(!pageForm.controls['pageTitle'].valid) && (pageForm.controls['pageTitle'].touched || pageForm.controls['pageTitle'].dirty)">
                       <div [hidden]="!pageForm.controls['pageTitle'].errors['required']"
@@ -48,17 +40,20 @@
                   </div> -->
                   <div class="form-group">
                     <label for="name" class="col-form-label text-left starlabel">Page Title</label>
-                    <input type="pageTitle" class="form-control" placeholder="Enter URL" formControlName="pageTitle">
+                    <div>
+                      <select (change)="changeCountry($any($event).target.value)" formControlName="pageTitle">
+                        <option>Enter Page Title</option>
+                        <option *ngFor ="let count of page">
+                          {{count.pageTitle}}
+                        </option>
+                    </select>
+                  </div>
                     <div
                         *ngIf="(!pageForm.controls['pageTitle'].valid) && (pageForm.controls['pageTitle'].touched || pageForm.controls['pageTitle'].dirty)">
                         <div [hidden]="!pageForm.controls['pageTitle'].errors['required']"
                             style="color: rgb(253, 122, 122); font-size:small; font-style: italic;">
-                            Url is required
+                            Page title is required
                         </div>
-                        <div *ngIf="pageForm.controls['pageTitle'].errors['pattern']"
-                        style="color: rgb(253, 122, 122); font-size:small; font-style: italic;">
-                        Please enter valid Url
-                      </div>
                     </div>
 
 
@@ -68,22 +63,34 @@
                 <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
                   <div class="form-group">
                     <label for="name" class="col-form-label text-left starlabel">Page Link</label>
-                    <input type="pageTitle" class="form-control" placeholder="Enter pageLink" formControlName="pageLink">
+                    <div>
+                      <select placeholder="Phantasyland" formControlName="pageLink">
+                        <option value="">Enter Page Link</option>
+                        <option>{{pageTitleData}}</option>
+                      </select>
+
+                  </div>
                     <div
                         *ngIf="(!pageForm.controls['pageLink'].valid) && (pageForm.controls['pageLink'].touched || pageForm.controls['pageLink'].dirty)">
-                        <div [hidden]="!pageForm.controls['pageLink'].errors['required']"
+                        <!-- <div [hidden]="!pageForm.controls['pageLink'].errors['required']"
                             style="color: rgb(253, 122, 122); font-size:small; font-style: italic;">
                         pageLink is required
-                        </div>
-                        <div *ngIf="pageForm.controls['pageLink'].errors['pattern']"
+                        </div> -->
+                        <!-- <div *ngIf="pageForm.controls['pageLink'].errors['pattern']"
                             style="color: rgb(253, 122, 122); font-size:small; font-style: italic;">
                             Please enter valid pageLink
-                        </div>
+                        </div> -->
                     </div>
 
 
                 </div>
                 </div>
+
+
+
+
+
+
 
                 <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
                   <div class="form-group">
@@ -120,5 +127,8 @@
           </div>
         </div>
       </div>
+
+
     </div>
   </form>
+  <ngx-ui-loader [fgsColor]="'#000000'" [fgsType]="fgsType"></ngx-ui-loader>

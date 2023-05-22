@@ -150,4 +150,19 @@ export class SidenavComponent implements OnInit {
     };
   }
 
+  // activeMenu(event) {
+
+  //   let node;
+  //   if (event.target.tagName === "A") {
+  //     node = event.target;
+  //   } else {
+  //     node = event.target.parentNode;
+  //   }
+  //   let menuitem = document.getElementsByClassName("ui-menuitem-link");
+  //   for (let i = 0; i < menuitem.length; i++) {
+  //     menuitem[i].classList.remove("active");
+  //   }
+  //   node.classList.add("active")
+  //   }
+
 }
