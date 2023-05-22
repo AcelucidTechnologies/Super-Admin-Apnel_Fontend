@@ -79,7 +79,7 @@ export class AddBannerSpecialComponent implements OnInit {
   ) {
     this.getbannerList();
     this.bannerSpecialForm = this.fb.group({
-      documents: ['',[Validators.compose([Validators.required])]],
+     // documents: ['',[Validators.compose([Validators.required])]],
       bannerName: [
         '',
         [
@@ -269,7 +269,6 @@ export class AddBannerSpecialComponent implements OnInit {
     this.img = base64ToFile(this.croppedImage);
       this.blobImage=this.blobToFile(this.img,this.imageName);
     }
-
   imageLoaded() {
 
   }

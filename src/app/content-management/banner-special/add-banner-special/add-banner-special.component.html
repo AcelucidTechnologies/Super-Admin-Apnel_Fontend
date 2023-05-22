@@ -84,7 +84,7 @@
                         <div class="text-center col-md-12">
                           <h5>Image Croppier</h5>
                           <img #image class="img-content" [src]="Image" >
-                          <image-cropper #cropper1 [imageChangedEvent]="imageChangedEvent" [maintainAspectRatio]="true"
+                          <image-cropper  #cropper1 [imageChangedEvent]="imageChangedEvent" [maintainAspectRatio]="true"
                                           [aspectRatio]="4 / 3" [resizeToWidth]="400" format="png" (imageCropped)="imageCropped($event)"
                                           (imageLoaded)="imageLoaded()" (cropperReady)="cropperReady()"
                                           (loadImageFailed)="loadImageFailed()"></image-cropper>
