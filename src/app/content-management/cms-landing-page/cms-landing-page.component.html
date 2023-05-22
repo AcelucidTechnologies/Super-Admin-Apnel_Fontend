@@ -13,18 +13,39 @@
 
 </div>
 </div>
-<div class="special-list">
-<p-carousel [value]="cmsLanding">
+<!-- <div class="special-list">
+<p-carousel [value]="cmsLanding" >
   <ng-template let-car pTemplate="item">
-      <div class="product-item">
+      <div class="product-item" *ngFor="let data of bannerList">
           <div class="product-item-content">
 
-              <div class="slider-image">
-                <img [src]="car.imageUrl" alt="Car Image" [style.height.px]="400" [style.width.px]="1052">
+              <div  class="slider-image">
+                <img [src]="data.image" alt="Car Image" [style.height.px]="400" [style.width.px]="1052">
               </div>
           </div>
       </div>
   </ng-template>
+</p-carousel>
+</div> -->
+<div  class="special-list">
+  <h4 style="padding-left: 20px;">Banner List</h4>
+  <p-carousel
+    [value]="bannerList"
+    [numVisible]="1"
+    [numScroll]="1"
+    [circular]="true">
+    <ng-template let-bannerList pTemplate="itaem">
+        <div class="product-item">
+            <div class="product-item-content">
+                <div>
+                    <p
+                        class="p-mb-1">
+                        <img class="user-name-img img-fluid" src={{bannerList.image}} [style.height.px]="400" [style.width.px]="800">
+                    </p>
+                </div>
+            </div>
+        </div>
+    </ng-template>
 </p-carousel>
 </div>
 <div  class="special-list">
@@ -94,19 +115,26 @@
 </p-carousel>
 
 </div>
-<div class="special-list">
-  <p-carousel [value]="cmsLanding">
-    <ng-template let-car pTemplate="item">
+<div  class="special-list">
+  <h4 style="padding-left: 20px;">Slider List</h4>
+  <p-carousel
+    [value]="sliderList"
+    [numVisible]="1"
+    [numScroll]="1"
+    [circular]="true">
+    <ng-template let-sliderList pTemplate="itaem">
         <div class="product-item">
             <div class="product-item-content">
-
-                <div class="slider-image">
-                  <img [src]="car.imageUrl" alt="Car Image" [style.height.px]="300" [style.width.px]="1052">
+                <div>
+                    <p
+                        class="p-mb-1">
+                        <img class="user-name-img img-fluid" src={{this.imgbucket}}{{sliderList.image}} [style.height.px]="400" [style.width.px]="800">
+                    </p>
                 </div>
             </div>
         </div>
     </ng-template>
-  </p-carousel>
+</p-carousel>
 </div>
 
 

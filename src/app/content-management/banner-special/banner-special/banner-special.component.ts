@@ -58,11 +58,12 @@ export class BannerSpecialComponent implements OnInit {
 
     private permissionService:ModulePermissionService,
     public dialog: MatDialog) {
+      this.fgsType = SPINNER.squareLoader;
       this.permissionService.getModulePermission().subscribe(res=>{
         this.accessPermission=res[0].CmsBanner
 
       })
-      this.getbannerList();
+
 
      }
 
@@ -80,23 +81,22 @@ export class BannerSpecialComponent implements OnInit {
       { field: 'sortby', show: true, headers: 'Sort By' },
     ]
     this.exportColumns = this.cols.map(col => ({title: col.headers,dataKey: col.field}))
-
+    this.getbannerList();
 
     // $('#myModal').on('shown.bs.modal', function () {
     //   $('#myInput').trigger('focus')
     // })
   }
 
-
   getbannerList() {
     this.CmsService.getSpecialBannerList(this.id).subscribe((res) => {
-      this.banner =res
+      this.bannerList =res
       this.bannerList = res.map((item) => {
               const cleanResponse = item.bannerDescription.replace(/<\/?p>/g, '');
               return { ...item, bannerDescription: cleanResponse };
             });
 
-      console.log(this.bannerList,"--------------------")
+
       this.ngxLoader.stop();
     })
   }
@@ -104,13 +104,12 @@ export class BannerSpecialComponent implements OnInit {
   deleteBanner(bannerList: any) {
 
     this.ngxLoader.start();
-    console.log("1");
+  
     this.CmsService.deleteSpecialBanner(bannerList._id).subscribe(res => {
       if (res) {
 
         this.toastr.showSuccess("bannerSpecial deleted successfully", "banner delete")
         this.getbannerList()
-
       }
     })
   }

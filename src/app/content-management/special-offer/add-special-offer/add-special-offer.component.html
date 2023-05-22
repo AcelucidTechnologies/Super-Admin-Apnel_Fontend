@@ -1,173 +1,289 @@
 <form [formGroup]="specialOfferForm">
-    <!-- <div class="page-heading col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+  <!-- <div class="page-heading col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
         <h1 class="header-text-title">
             <i pButton class="pi pi-arrow-left p-button-text" [routerLink]="['/cms/feature']" pTooltip="Back"
                 tooltipPosition="bottom">
             </i>{{title}}
         </h1>
     </div> -->
-    <div class="button-heading-container">
-      <button
-        class="mb-2 p-1 back-button"
-        [routerLink]="['/cms/special-offer']" pTooltip="Back"
-        tooltipPosition="bottom"
-      >
-        <i class="material-icons">arrow_back</i>
+  <div class="button-heading-container">
+    <button
+      class="mb-2 p-1 back-button"
+      [routerLink]="['/cms/special-offer']"
+      pTooltip="Back"
+      tooltipPosition="bottom"
+    >
+      <i class="material-icons">arrow_back</i>
+    </button>
+    <h5>&nbsp;{{ title }}</h5>
+  </div>
+  <div class="card col-sm-12">
+    <div class="row gutters">
+      <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+        <div class="h-100 mt-3">
+          <div class="card-body">
+            <div class="row gutters">
+              <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
+                <div class="form-group">
+                  <label
+                    for="hyperlink"
+                    class="col-form-label text-left starlabel"
+                    >Category</label
+                  >
+                  <p-dropdown
+                    [options]="categoryDrop"
+                    id="type"
+                    placeholder="Select Type"
+                    formControlName="productModel"
+                  ></p-dropdown>
+                  <div
+                    *ngIf="
+                      !specialOfferForm.controls['productModel'].valid &&
+                      (specialOfferForm.controls['productModel'].touched ||
+                        specialOfferForm.controls['productModel'].dirty)
+                    "
+                  >
+                    <div
+                      [hidden]="
+                        !specialOfferForm.controls['productModel'].errors[
+                          'required'
+                        ]
+                      "
+                      style="
+                        color: rgb(253, 122, 122);
+                        font-size: small;
+                        font-style: italic;
+                      "
+                    >
+                      Category is required
+                    </div>
+                  </div>
+                </div>
+              </div>
 
-      </button>
-      <h5>&nbsp;{{title}}</h5>
-    </div>
-    <div class="card col-sm-12">
-        <div class="row gutters">
-            <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
-                <div class="h-100 mt-3">
-                    <div class="card-body">
-                        <div class="row gutters">
+              <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
+                <div class="form-group">
+                  <label for="name" class="col-form-label text-left starlabel"
+                    >Product Name</label
+                  >
+                  <p-dropdown
+                    [options]="ProductDrop"
+                    id="type"
+                    placeholder="Select Product Type"
+                    formControlName="productName"
+                  ></p-dropdown>
+                  <div
+                    *ngIf="
+                      !specialOfferForm.controls['productName'].valid &&
+                      (specialOfferForm.controls['productName'].touched ||
+                        specialOfferForm.controls['productName'].dirty)
+                    "
+                  >
+                    <div
+                      [hidden]="
+                        !specialOfferForm.controls['productName'].errors[
+                          'required'
+                        ]
+                      "
+                      style="
+                        color: rgb(253, 122, 122);
+                        font-size: small;
+                        font-style: italic;
+                      "
+                    >
+                      Product Name is required
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
 
+            <div class="row gutters">
+              <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
+                <div class="form-group">
+                  <label
+                    for="hyperlink"
+                    class="col-form-label text-left starlabel"
+                    >Price</label
+                  >
+                  <input
+                    type="text"
+                    class="form-control"
+                    formControlName="productPrice"
+                  />
+                  <div
+                    *ngIf="
+                      !specialOfferForm.controls['productPrice'].valid &&
+                      (specialOfferForm.controls['productPrice'].touched ||
+                        specialOfferForm.controls['productPrice'].dirty)
+                    "
+                  >
+                    <div
+                      [hidden]="
+                        !specialOfferForm.controls['productPrice'].errors[
+                          'required'
+                        ]
+                      "
+                      style="
+                        color: rgb(253, 122, 122);
+                        font-size: small;
+                        font-style: italic;
+                      "
+                    >
+                      Price is required
+                    </div>
+                    <div
+                      *ngIf="
+                        specialOfferForm.controls['productPrice'].errors[
+                          'pattern'
+                        ]
+                      "
+                      style="
+                        color: rgb(253, 122, 122);
+                        font-size: small;
+                        font-style: italic;
+                      "
+                    >
+                      Please enter a valid product price
+                    </div>
+                  </div>
+                </div>
+              </div>
 
+              <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
+                <div class="form-group">
+                  <label for="name" class="col-form-label text-left starlabel"
+                    >Quantity</label
+                  >
+                  <input
+                    type="text"
+                    class="form-control"
+                    formControlName="productQuantity"
+                  />
+                  <div
+                    *ngIf="
+                      !specialOfferForm.controls['productQuantity'].valid &&
+                      (specialOfferForm.controls['productQuantity'].touched ||
+                        specialOfferForm.controls['productQuantity'].dirty)
+                    "
+                  >
+                    <div
+                      [hidden]="
+                        !specialOfferForm.controls['productQuantity'].errors[
+                          'required'
+                        ]
+                      "
+                      style="
+                        color: rgb(253, 122, 122);
+                        font-size: small;
+                        font-style: italic;
+                      "
+                    >
+                      Quantity is required
+                    </div>
+                    <div
+                      *ngIf="
+                        specialOfferForm.controls['productQuantity'].errors[
+                          'pattern'
+                        ]
+                      "
+                      style="
+                        color: rgb(253, 122, 122);
+                        font-size: small;
+                        font-style: italic;
+                      "
+                    >
+                      Please enter a valid Quantity
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
 
-                            <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
-                                <div class="form-group">
-                                    <label for="hyperlink" class="col-form-label text-left starlabel">Category</label>
-                                    <input type="text" class="form-control" formControlName="productModel">
-                                    <div
-                                        *ngIf="!specialOfferForm.controls['productModel'].valid && (specialOfferForm.controls['productModel'].touched || specialOfferForm.controls['productModel'].dirty)">
-                                        <div [hidden]="!specialOfferForm.controls['productModel'].errors['required']"
-                                            style="color: rgb(253, 122, 122); font-size:small; font-style: italic;">
-                                            Category is required
-                                        </div>
-                                    </div>
-                                </div>
+            <div class="row gutters">
+              <div class="col-12 form-group pt-3">
+                <label for="imageUpload" class="col-form-label starlabel"
+                  >Image</label
+                >
+                <!-- <div class="d-flex justify-content-start h-75"><img class="img-content" [src]="Image" /></div> -->
+                <div id="imageUpload" class="custom-file">
+                  <input
+                    type="file"
+                    class="custom-file-input"
+                    id="inputGroupFile01"
+                    (change)="fileChangeEvent($event)"
+                  />
+                  <label class="custom-file-label" for="inputGroupFile01"
+                    >Upload file</label
+                  >
+                </div>
+              </div>
+            </div>
 
-                            </div>
-
-                            <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
-                                <div class="form-group">
-                                    <label for="name" class="col-form-label text-left starlabel">Product Name</label>
-                                    <input type="text" class="form-control" formControlName="productName">
-                                    <div
-                                        *ngIf="!specialOfferForm.controls['productName'].valid && (specialOfferForm.controls['productName'].touched || specialOfferForm.controls['productName'].dirty)">
-                                        <div [hidden]="!specialOfferForm.controls['productName'].errors['required']"
-                                            style="color: rgb(253, 122, 122); font-size:small; font-style: italic;">
-                                            Product Name is required
-                                        </div>
-                                    </div>
-
-                                </div>
-                            </div>
-                        </div>
-
-
-
-
-
-
-
-                        <div class="row gutters">
-
-
-
-                          <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
-                              <div class="form-group">
-                                  <label for="hyperlink" class="col-form-label text-left starlabel">Price</label>
-                                  <input type="text" class="form-control" formControlName="productPrice">
-                                  <div
-                                      *ngIf="!specialOfferForm.controls['productPrice'].valid && (specialOfferForm.controls['productPrice'].touched || specialOfferForm.controls['productPrice'].dirty)">
-                                      <div [hidden]="!specialOfferForm.controls['productPrice'].errors['required']"
-                                          style="color: rgb(253, 122, 122); font-size:small; font-style: italic;">
-                                          Price is required
-                                      </div>
-                                  </div>
-                              </div>
-
-                          </div>
-
-                          <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
-                              <div class="form-group">
-                                  <label for="name" class="col-form-label text-left starlabel">Quantity</label>
-                                  <input type="text" class="form-control" formControlName="productQuantity">
-                                  <div
-                                      *ngIf="!specialOfferForm.controls['productQuantity'].valid && (specialOfferForm.controls['productQuantity'].touched || specialOfferForm.controls['productQuantity'].dirty)">
-                                      <div [hidden]="!specialOfferForm.controls['productQuantity'].errors['required']"
-                                          style="color: rgb(253, 122, 122); font-size:small; font-style: italic;">
-                                          Quantity is required
-                                      </div>
-                                  </div>
-
-                              </div>
-                          </div>
+            <div class="row gutters">
+              <div class="col-12 form-group mt-5">
+                <div class="card">
+                  <div class="card-body">
+                    <div class="row" style="margin-top: 15px">
+                      <div class="text-center col-md-12">
+                        <h5>Image Croppier</h5>
+                        <img
+                          class="img-content"
+                          [src]="croppedImage ? croppedImage : Image"
+                        />
+                        <image-cropper
+                          [imageChangedEvent]="imageChangedEvent"
+                          [maintainAspectRatio]="true"
+                          [aspectRatio]="4 / 3"
+                          [resizeToWidth]="400"
+                          format="png"
+                          (imageCropped)="imageCropped($event)"
+                          (imageLoaded)="imageLoaded()"
+                          (cropperReady)="cropperReady()"
+                          (loadImageFailed)="loadImageFailed()"
+                        ></image-cropper>
                       </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!-- ------------------------------------- -->
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                        <div class="row gutters">
-                          <div class="col-12 form-group pt-3">
-                              <label for="imageUpload" class="col-form-label starlabel">Image</label>
-                              <!-- <div class="d-flex justify-content-start h-75"><img class="img-content" [src]="Image" /></div> -->
-                              <div id="imageUpload" class="custom-file">
-                                  <input type="file" class="custom-file-input" id="inputGroupFile01"
-                                  (change)="fileChangeEvent($event)" >
-                                  <label class="custom-file-label" for="inputGroupFile01">Upload file</label>
-                              </div>
-                          </div>
-                      </div>
-
-
-                      <div class="row gutters">
-                          <div class="col-12 form-group mt-5">
-                              <div class="card" >
-                                <div class="card-body">
-                                  <div class="row" style="margin-top: 15px;">
-                                    <div class="text-center col-md-12">
-                                      <h5>Image Croppier</h5>
-                                      <img class="img-content" [src]="croppedImage ? croppedImage : Image" />
-                                      <image-cropper [imageChangedEvent]="imageChangedEvent" [maintainAspectRatio]="true"
-                                        [aspectRatio]="4 / 3" [resizeToWidth]="400" format="png" (imageCropped)="imageCropped($event)"
-                                        (imageLoaded)="imageLoaded()" (cropperReady)="cropperReady()"
-                                        (loadImageFailed)="loadImageFailed()"></image-cropper>
-                                    </div>
-
-                                  </div>
-                                </div>
-                              </div>
-
-                            </div>
-                      </div>
-                        <!-- ------------------------------------- -->
-
-                        <div class="row gutters mt-4">
-                            <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 mt-4">
-                                <div class="text-center">
-                                    <!-- <button pButton type="button" id="submit" name="submit"
+            <div class="row gutters mt-4">
+              <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 mt-4">
+                <div class="text-center">
+                  <!-- <button pButton type="button" id="submit" name="submit"
                                         class="p-button mr-4 first-button" (click)="submitForm()"
                                         [disabled]="!(specialOfferForm.valid)">Save</button> -->
-                                        <button pButton type="button" id="submit" name="submit"
-                                        class="p-button mr-4 first-button" (click)="submitForm()"
-                                        [disabled]="!(specialOfferForm.valid)">Save</button>
-                                    <button pButton type="button" id="submit" name="submit" class="p-button second-button "
-                                        [routerLink]="['/cms/special-offer']">Cancel</button>
-
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                  <button
+                    pButton
+                    type="button"
+                    id="submit"
+                    name="submit"
+                    class="p-button mr-4 first-button"
+                    (click)="submitForm()"
+                    [disabled]="!specialOfferForm.valid"
+                  >
+                    Save
+                  </button>
+                  <button
+                    pButton
+                    type="button"
+                    id="submit"
+                    name="submit"
+                    class="p-button second-button"
+                    [routerLink]="['/cms/special-offer']"
+                  >
+                    Cancel
+                  </button>
                 </div>
+              </div>
             </div>
+          </div>
         </div>
+      </div>
     </div>
+  </div>
 </form>
+<ngx-ui-loader [fgsColor]="'#000000'" [fgsType]="fgsType"></ngx-ui-loader>

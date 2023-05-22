@@ -44,6 +44,7 @@ export class AdminListComponent implements OnInit {
     this.adminService.getAdminList().subscribe((res:any) => {
       this.adminDetails = res.data;
       this.item= this.adminDetails
+      console.log("adminData", this.adminDetails)
       console.log("hello admin list" + JSON.stringify(this.item))
 
     });

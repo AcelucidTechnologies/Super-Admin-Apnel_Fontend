@@ -55,9 +55,10 @@ export class Slider1Component implements OnInit {
      }
 
   ngOnInit(): void {
+    this.ngxLoader.stop();
     this.getSliderList();
     this.fgsType = SPINNER.squareLoader
-    this.ngxLoader.start();
+
     this.sidebarSpacing = 'contracted';
 
     this.cols = [
@@ -78,7 +79,6 @@ export class Slider1Component implements OnInit {
         return { ...item, sliderDiscription: cleanResponse };
       });
 
-      console.log(this.sliderList,"--------------------")
       this.ngxLoader.stop();
     })
   }
@@ -89,7 +89,7 @@ export class Slider1Component implements OnInit {
     this.ngxLoader.start();
     this.CmsService.deleteSlider(sliderList._id).subscribe(res => {
       if (res) {
-        this.toastr.showSuccess("bannerSpecial deleted successfully", "banner delete")
+        this.toastr.showSuccess("Slider deleted successfully", "Slider delete")
         this.getSliderList()
       }
     })

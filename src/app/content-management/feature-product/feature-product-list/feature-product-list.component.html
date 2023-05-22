@@ -1,7 +1,7 @@
 <div class="page-heading">
     <h1 class="header-text-title" style="margin-left: 1%;">Feature Product</h1>
     <div class="page-btn">
-      <button pButton type="button" [routerLink]="['/cms/add-featured-product']" class="me-1 theme" label=" + Add Product" class="theme" ></button>
+      <button pButton type="button" [routerLink]="['/cms/add-featured-product']" class="me-1 theme" label=" + Add Feature Product" class="theme" ></button>
   </div>
   </div>
   <p-table #dt [value]="featureList" [(selection)]="selectedProduct" dataKey="id" [rowHover]="true"
@@ -10,8 +10,6 @@
     [filterDelay]="0" [globalFilterFields]="['productName','modal']" class="abc">
     <ng-template pTemplate="caption" style="background-color: #fff !important; ">
         <div class="table-header">
-
-
             <div class="input-container">
               <img src="../../../assets/images/search-white.svg" class="input-container-img" />
               <input #search pInputText type="text" placeholder="Search..."
@@ -101,7 +99,7 @@
 
             <td>
                 <span class="p-column-title">Price</span>
-                {{featureList.productPrice}}
+                {{featureList.productPrice | currency:'INR'}}
             </td>
 
             <td>
@@ -112,7 +110,6 @@
             <td>
               <img class="user-name-img" src={{this.imgbucket}}{{featureList.image}}>
           </td>
-
             <td>
               <a pTooltip="Edit Feature" tooltipPosition="bottom" class="me-3" style="margin-right: 10px;">
                   <img src="../assets/images/icons/edit.svg" [queryParams]="{id:featureList?._id}" [routerLink]="['/cms/add-featured-product']"  alt="img">
@@ -129,4 +126,5 @@
         </tr>
     </ng-template>
 </p-table>
+<ngx-ui-loader [fgsColor]="'#000000'" [fgsType]="fgsType"></ngx-ui-loader>
 

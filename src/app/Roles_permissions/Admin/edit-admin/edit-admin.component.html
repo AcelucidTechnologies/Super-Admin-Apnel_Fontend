@@ -17,19 +17,12 @@
         </div>
         <form [formGroup]="adminForm">
         <div class="row mt-2 mb-2">
-            <!-- <div class="form-group col-3">
-                <div class="d-flex justify-content-start"><img  src="https://source.unsplash.com/c_GmwfHBDzk/200x200" /></div>
-         </div> -->
             <div class="form-group col-4">
-                <!-- div><img class="avatar mat-elevation-z8" src="https://source.unsplash.com/c_GmwfHBDzk/200x200" /></div>
-                <button mat-button color="primary">
-                    <mat-icon>camera</mat-icon>CHANGE
-                </button> -->
                 <label class="bold-label">Profile Image</label>
-             
+
 
                 <div class="d-flex justify-content-start h-75"><img class="img-content" [src]="Image" /></div>
-                <!-- <label for="imageUpload" class="col-form-label">Image</label> -->
+               
                <div class="mt-1">
                 <div id="imageUpload" class="custom-file col-8 ">
                   <input type="file" class="custom-file-input" id="inputGroupFile01" (change)="OnChangesEvent($event)">

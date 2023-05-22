@@ -45,9 +45,12 @@ export class EditAdminComponent implements OnInit {
 
   getAdmindetails(){
     this.adminService.getAdminDetails(this.username).subscribe((res)=>{
+      console.log("ertyuhgvcvhjhb",res)
       if(res[0].image)
       {this.Image=res[0].image
       this.prevImageName=this.Image.toString().split('.com/')[1]
+      console.log("image",this.Image)
+      console.log("previmage",this.prevImageName)
       }
       this.adminForm.patchValue({
         userName:res[0].username,

@@ -19,6 +19,8 @@ import { SubscriptionListComponent } from './subscription/subscription/subscript
 import { AddSubscriptionComponent } from './subscription/subscription/add-subscription/add-subscription.component';
 import { AddCoupanComponent } from './subscription/addons/add-coupan/add-coupan.component';
 import { CreateOrderComponent } from './order-detail/create-order/create-order.component';
+import { NgxUiLoaderModule, NgxUiLoaderConfig, SPINNER, POSITION,PB_DIRECTION, NgxUiLoaderRouterModule, NgxUiLoaderHttpModule } from 'ngx-ui-loader';
+
 
 @NgModule({
   declarations: [
@@ -42,6 +44,7 @@ import { CreateOrderComponent } from './order-detail/create-order/create-order.c
     SharedModule,
     FontAwesomeModule,
     HttpClientModule,
+    NgxUiLoaderModule,
     ToastrModule.forRoot()
   ],
   providers: [],

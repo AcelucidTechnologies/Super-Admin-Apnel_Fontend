@@ -12,19 +12,14 @@
                 <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
                     <div class="form-group">
                         <label for="name" class="col-form-label text-left starlabel">Page Title</label>
-                        <input type="pageTitle" class="form-control" placeholder="Enter URL" formControlName="pageTitle">
+                        <input type="text" class="form-control" placeholder="Enter Page Title" formControlName="pageTitle">
                         <div
                             *ngIf="(!selectForm.controls['pageTitle'].valid) && (selectForm.controls['pageTitle'].touched || selectForm.controls['pageTitle'].dirty)">
                             <div [hidden]="!selectForm.controls['pageTitle'].errors['required']"
                                 style="color: rgb(253, 122, 122); font-size:small; font-style: italic;">
-                                Url is required
+                                Page title is required
                             </div>
-                            <div *ngIf="selectForm.controls['pageTitle'].errors['pattern']"
-                            style="color: rgb(253, 122, 122); font-size:small; font-style: italic;">
-                            Please enter valid Url
-                          </div>
                         </div>
-
 
                     </div>
                 </div>
@@ -32,16 +27,16 @@
                 <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
                     <div class="form-group">
                         <label for="name" class="col-form-label text-left starlabel">Page Link</label>
-                        <input type="pageTitle" class="form-control" placeholder="Enter pageLink" formControlName="pageLink">
+                        <input type="pageTitle" class="form-control" placeholder="Enter Page Link" formControlName="pageLink">
                         <div
                             *ngIf="(!selectForm.controls['pageLink'].valid) && (selectForm.controls['pageLink'].touched || selectForm.controls['pageLink'].dirty)">
                             <div [hidden]="!selectForm.controls['pageLink'].errors['required']"
                                 style="color: rgb(253, 122, 122); font-size:small; font-style: italic;">
-                            pageLink is required
+                          Page Link is required
                             </div>
                             <div *ngIf="selectForm.controls['pageLink'].errors['pattern']"
                                 style="color: rgb(253, 122, 122); font-size:small; font-style: italic;">
-                                Please enter valid pageLink
+                                Please enter valid Page Link
                             </div>
                         </div>
 
@@ -52,9 +47,11 @@
         </form>
     </mat-dialog-content>
     <mat-dialog-actions>
-        <button mat-button [mat-dialog-close]="true" class="dialog1  mr-2 bt-1" (click)="submitForm()"  [disabled]="!(selectForm.valid)">Save</button>
+        <button mat-button [mat-dialog-close]="true" class="dialog1  mr-2 bt-1" (click)="submitForm()">Save</button>
         <button mat-button mat-dialog-close class="dialog2 bt-2">Cancel</button>
     </mat-dialog-actions>
 
 
 </div>
+<ngx-ui-loader [fgsColor]="'#000000'" [fgsType]="fgsType"></ngx-ui-loader>
+

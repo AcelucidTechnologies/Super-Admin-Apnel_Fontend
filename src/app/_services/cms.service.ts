@@ -11,17 +11,18 @@ import { SLIDER } from '../_models/slider';
 import { sliderData } from '../DummyData/slider';
 import { specialOffer } from '../DummyData/special-offer';
 import { access } from 'fs';
+import { Router } from '@angular/router';
 
 @Injectable({
     providedIn: 'root'
 })
 export class CmsService {
-  BehaviouralSubject = new BehaviorSubject({
-    pageTitle: "",
-    pageLink: ""
-  })
+  // BehaviouralSubject = new BehaviorSubject({
+  //   pageTitle: "",
+  //   pageLink: ""
+  // })
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient,private router: Router) {}
 
     getCategoryList(): Observable<CATEGORY[]> {
         const token = localStorage.getItem('token') || '';
@@ -165,7 +166,15 @@ export class CmsService {
     }
 
 
-addPageLink(payload:any): Observable<any[]> {
+    createPageSetUpData(payload:any): Observable<any[]> {
+      const token = localStorage.getItem('token') || '';
+            const email = localStorage.getItem('email') || '';
+            let httpOptions = new HttpHeaders().set('x-access-token', token)
+              const endpointUrl = `${environment.JSON_SERVER}/createPageSetUpData`;
+            return this.http.post<any>(endpointUrl, payload,{ 'headers': httpOptions });
+    }
+
+ addPageLink(payload:any): Observable<any[]> {
   const token = localStorage.getItem('token') || '';
         const email = localStorage.getItem('email') || '';
         console.log("add page link"  + email)
@@ -174,8 +183,7 @@ addPageLink(payload:any): Observable<any[]> {
         return this.http.post<any>(endpointUrl, payload,{ 'headers': httpOptions });
 
 }
-getPageValue(payload:any): Observable<any[]>{
-
+ getPageValue(): Observable<any[]>{
     const token = localStorage.getItem('token') || '';
     const email = localStorage.getItem('email')
     let httpOptions = new HttpHeaders().set('x-access-token', token)
@@ -261,6 +269,16 @@ getPageById(id: number): Observable<any> {
           formData.append('image', payload.image);
         return this.http.put<Admin>(endpointUrl,formData, { 'headers': httpOptions });
     }
+
+    getbannerList(): Observable<any[]> {
+      const token = localStorage.getItem('token') || '';
+      const email = localStorage.getItem('email')
+      let httpOptions = new HttpHeaders().set('x-access-token', token)
+     const endpointUrl = `${environment.JSON_SERVER}/getBannerSpecial?username=${email}`;
+      return this.http.get<any[]>(endpointUrl, { 'headers': httpOptions });
+      // return of(featureData)
+  }
+
 
 
 

@@ -1,7 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { TABLE_HEADING } from 'src/app/_models/table_heading';
 import { Table } from 'primeng/table';
-import { NgxUiLoaderService } from 'ngx-ui-loader';
+import { NgxUiLoaderService, SPINNER } from 'ngx-ui-loader';
 import { ToastrMsgService } from 'src/app/_services/toastr-msg.service';
 import { ModulePermissionService } from 'src/app/_services/module-permission.service';
 import { CmsService } from '../../../_services/cms.service';
@@ -21,15 +21,13 @@ import { DialogSpecialOfferComponent } from '../dialog-special-offer/dialog-spec
 })
 export class SpecialOfferListComponent implements OnInit {
 
-
-
   @ViewChild('dt') dt: Table | undefined;
   isSpecialProduct = false;
   sidebarSpacing: any;
   cols!: TABLE_HEADING[];
   offerList : any[]=[]
   imgbucket="https://adminpanelbucket.s3.amazonaws.com/Feature/";
-
+  fgsType:any;
   accessPermission:access
   productDetails:any[];
   exportColumns: any[];
@@ -53,6 +51,7 @@ export class SpecialOfferListComponent implements OnInit {
 
   ngOnInit(): void {
     this.sidebarSpacing = 'contracted';
+    this.fgsType = SPINNER.squareLoader
     this.ngxLoader.start();
     this.sidebarSpacing = 'contracted';
     this.cols = [
@@ -68,9 +67,6 @@ export class SpecialOfferListComponent implements OnInit {
   getofferList() {
     this.CmsService.getOfferList().subscribe((res:any) => {
       this.offerList = res.response.filter(item=>item.isSpecialProduct === true)
-      console.log(res.response.filter(item=>item.isSpecialProduct === true), "offer list--------------------");
-
-
       this.ngxLoader.stop();
     });
   }
