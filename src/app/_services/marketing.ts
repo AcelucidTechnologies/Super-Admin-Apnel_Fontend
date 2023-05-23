@@ -10,6 +10,9 @@ import { COUPANCODEDATA, } from '../_models/marketingModule';
     providedIn: 'root'
 })
 export class MarketingService {
+    editListCoupon(payload: any, id: any) {
+      throw new Error('Method not implemented.');
+    }
 
     constructor(private http: HttpClient) {
 
@@ -69,12 +72,48 @@ export class MarketingService {
         const token = localStorage.getItem('token') || '';
         let httpOptions = new HttpHeaders().set('x-access-token', token)
         const endpointUrl = `${environment.JSON_SERVER}/coupons`;
-        //return this.http.get(endpointUrl, { 'headers': httpOptions }).pipe(map(res => res));
         return of(rewardsRedemptionData)
     }
 
-            //    ---------------------marketting apis---------------
+    // Push Notification
 
+    pushNotification(payload: any): Observable<any>  {
+      const token = localStorage.getItem('token') || '';
+      let httpOptions = new HttpHeaders().set('x-access-token', token)
+      const endpointUrl = `${environment.JSON_SERVER}/createPushNotification`;
+      return this.http.post(endpointUrl, payload, { 'headers': httpOptions });
+  }
+
+    metaAnalytics(payload: any): Observable<any>  {
+      const token = localStorage.getItem('token') || '';
+      let httpOptions = new HttpHeaders().set('x-access-token', token)
+      const endpointUrl = `${environment.JSON_SERVER}/CreateMetaAnalyticsTracking`;
+      return this.http.post(endpointUrl, payload, { 'headers': httpOptions });
+  }
+
+  googleAnalytics(payload: any): Observable<any>  {
+    const token = localStorage.getItem('token') || '';
+    let httpOptions = new HttpHeaders().set('x-access-token', token);
+    const endpointUrl = `${environment.JSON_SERVER}/CreateGoogleAnalyticsTracking`;
+    return this.http.post(endpointUrl, payload, { 'headers': httpOptions });
+}
+
+    seo(payload: any): Observable<any>  {
+      const token = localStorage.getItem('token') || '';
+      let httpOptions = new HttpHeaders().set('x-access-token', token)
+      const endpointUrl = `${environment.JSON_SERVER}/createSeo`;
+      return this.http.post(endpointUrl, payload, { 'headers': httpOptions });
+  }
+
+    // liveChat
+    liveChat(payload: any): Observable<any>  {
+      const token = localStorage.getItem('token') || '';
+      let httpOptions = new HttpHeaders().set('x-access-token', token)
+      const endpointUrl = `${environment.JSON_SERVER}/creteLiveChat`;
+      return this.http.post(endpointUrl, payload, { 'headers': httpOptions });
+  }
+
+            //    ---------------------marketting apis---------------
 
     getCouponsList(): Observable<COUPANCODEDATA[]> {
         const token = localStorage.getItem('token') || '';
@@ -82,48 +121,37 @@ export class MarketingService {
         let httpOptions = new HttpHeaders().set('x-access-token', token)
         const endpointUrl = `${environment.JSON_SERVER}/coupons?username=${email}`;
         return this.http.get<any[]>(endpointUrl, { 'headers': httpOptions });
-        // return this.http.get(endpointUrl, { 'headers': httpOptions }).pipe(map(res => res));
-        // return of(couponAllData)
     }
 
-    addCoupon(Data: any) {
+    addListCoupon(payload: any): Observable<any[]>  {
         const token = localStorage.getItem('token') || '';
         let httpOptions = new HttpHeaders().set('x-access-token', token)
-        const endpointUrl = `${environment.JSON_SERVER}/coupons`;
-        //return this.http.get(endpointUrl, { 'headers': httpOptions }).pipe(map(res => res));
-        couponAllData.push(Data)
-        return of(Data)
+        const endpointUrl = `${environment.JSON_SERVER}/createcoupons`;
+        return this.http.post<any>(endpointUrl, payload, { 'headers': httpOptions });
     }
 
-    editCoupon(coupanData: COUPANCODEDATA, id: number) {
-        const token = localStorage.getItem('token') || '';
-        let httpOptions = new HttpHeaders().set('x-access-token', token)
-        const endpointUrl = `${environment.JSON_SERVER}/coupons`;
-        //return this.http.get(endpointUrl, { 'headers': httpOptions }).pipe(map(res => res));
-        let indeofCoupon = couponAllData.findIndex((obj) => obj.id == id);
-        couponAllData[indeofCoupon] = coupanData
-        return of(coupanData)
+
+    editListsCoupan(payload, id: number) {
+      const token = localStorage.getItem('token') || '';
+      const httpOptions = new HttpHeaders().set('x-access-token', token);
+      const endpointUrl = `${environment.JSON_SERVER}/updateCoupons?id=${id}`;
+
+      return this.http.put<any>(endpointUrl, payload, { headers: httpOptions });
     }
+
+
 
     deleteCoupan(id: number) {
         const token = localStorage.getItem('token') || '';
         let httpOptions = new HttpHeaders().set('x-access-token', token)
-        const endpointUrl = `${environment.JSON_SERVER}/category/${id}`;
-        //return this.http.delete<CATEGORY>(endpointUrl, { 'headers': httpOptions });
-        let productObj = couponAllData.map(item => {
-            item.id == id;
-            return item;
-        })
-        couponAllData.splice(couponAllData.findIndex((index) => index.id == id),1);
-        return of(productObj)
+        const endpointUrl = `${environment.JSON_SERVER}/deleteCoupons?id=${id}`;
+        return this.http.delete<any>(endpointUrl, { 'headers': httpOptions });
     }
 
-    getcoupanById(id: number): Observable<COUPANCODEDATA> {
+    getcoupanById(id: number): Observable<any> {
         const token = localStorage.getItem('token') || '';
         let httpOptions = new HttpHeaders().set('x-access-token', token)
-        const endpointUrl = `${environment.JSON_SERVER}/slider/${id}`;
-        let indexObj = couponAllData.findIndex((obj)=>obj.id==id);
-        //return this.http.get<CATEGORY>(endpointUrl,{ 'headers': httpOptions });
-        return of(couponAllData[indexObj])
+        const endpointUrl = `${environment.JSON_SERVER}/getCouponDataById?id=${id}`;
+        return this.http.get<any>(endpointUrl,{ 'headers': httpOptions });
     }
 }

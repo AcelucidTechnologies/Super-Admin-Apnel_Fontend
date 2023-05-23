@@ -5,9 +5,8 @@ import { ImageCroppedEvent } from 'ngx-image-cropper';
 import { NgxUiLoaderService, SPINNER } from 'ngx-ui-loader';
 import { ToastrMsgService } from 'src/app/_services/toastr-msg.service';
 import { CmsService } from '../../../_services/cms.service'
-import { COUPANCODEDATA } from 'src/app/_models/marketingModule';
+// import { COUPANCODEDATA } from 'src/app/_models/marketingModule';
 import { MarketingService } from 'src/app/_services/marketing';
-import { log } from 'console';
 
 @Component({
   selector: 'app-add-coupan',
@@ -21,7 +20,7 @@ export class AddCoupanComponent implements OnInit {
   title: string = " "
   imageChangedEvent: any = '';
   id: any;
-  payload: COUPANCODEDATA;
+  payload: any;
   editMode: boolean = false
   reg= '([A-Za-z0-9]+)';
   dateFieldDate: Date = new Date();
@@ -32,31 +31,27 @@ export class AddCoupanComponent implements OnInit {
     private route: Router,
     private activateRoute: ActivatedRoute,
     private toastr: ToastrMsgService,
-    private CmsService: CmsService,
     private markettingService : MarketingService
     ) {
     this.coupanForm = this.fb.group({
-      id:[''],
-      coupanName: ['', [Validators.required]],
-      coupanCode: ['', [Validators.required]],
-      type: ['', [Validators.required]],
-      startDate: ['', [Validators.required]],
-      endDate: ['', [Validators.required]],
-      maxDiscount: ['', [Validators.required]],
-      discount: ['', [Validators.required]],
+      couponName: ['', [Validators.required]],
+      couponCode: ['', [Validators.required]],
+      coupontype: ['', [Validators.required]],
+      discount: ['', [Validators.required,Validators.pattern(/^[0-9]+$/)]],
+      maxDiscount: ['', [Validators.required,Validators.pattern(/^[0-9]+$/)]],
       category: ['', [Validators.required]],
       product: ['', [Validators.required]],
-      status: ['',],
-      usesPerCoupan: ['', [Validators.required]],
-      userPerCoupan: ['', [Validators.required]]
-     // quantity: ['', [Validators.required,Validators.pattern("(\[0-9]{0,9})?")]],
+      startDate: ['', [Validators.required]],
+      endDate: ['', [Validators.required]],
+      username:[''],
+      usesPerCoupon: ['', [Validators.required]],
+      userPerCoupon: ['', [Validators.required]]
+
     })
     console.log(this.coupanForm)
   }
-
   ngOnInit(): void {
     this.fgsType = SPINNER.squareLoader
-    this.ngxLoader.start();
     this.sidebarSpacing = 'contracted';
     this.activateRoute.queryParamMap.subscribe(params => {
       this.id = params.get('id');
@@ -64,7 +59,7 @@ export class AddCoupanComponent implements OnInit {
         this.editMode = true
         this.title = "Edit Coupon"
         this.update= "Update"
-        this.getFeatureById()
+        this.getCouponById()
       } else {
         this.editMode = false
         this.title = "Add New Coupon Name"
@@ -74,36 +69,39 @@ export class AddCoupanComponent implements OnInit {
     this.type=["Flat","Percentage(%)"]
   }
 
+
   submitForm(){
-    console.log("1234567890",this.coupanForm.value);
+    this.ngxLoader.start();
+    this.coupanForm.patchValue({
+      username: localStorage.getItem('email')|| ''
+    });
 
     this.payload = {
-      id: this.coupanForm.controls['id'].value,
-      coupanName: this.coupanForm.controls['coupanName'].value,
-      coupanCode: this.coupanForm.controls['coupanCode'].value,
-      type: this.coupanForm.controls['type'].value,
+      username: this.coupanForm.controls['username'].value,
+      couponName: this.coupanForm.controls['couponName'].value,
+      couponCode: this.coupanForm.controls['couponCode'].value,
+      coupontype: this.coupanForm.controls['coupontype'].value,
+      discount: this.coupanForm.controls['discount'].value,
+      maxDiscount: this.coupanForm.controls['maxDiscount'].value,
+      category: this.coupanForm.controls['category'].value,
+      product: this.coupanForm.controls['product'].value,
       startDate: this.coupanForm.controls['startDate'].value,
       endDate: this.coupanForm.controls['endDate'].value,
-      discount: this.coupanForm.controls['discount'].value,
-      category: this.coupanForm.controls['category'].value,
-      products: this.coupanForm.controls['product'].value,
-      status: this.coupanForm.controls['status'].value,
-      usesPerCoupan: this.coupanForm.controls['usesPerCoupan'].value,
-      maxDiscount: this.coupanForm.controls['maxDiscount'].value,
-      userPerCoupan: this.coupanForm.controls['usesPerCoupan'].value,
+      usesPerCoupon: this.coupanForm.controls['usesPerCoupon'].value,
+      userPerCoupon: this.coupanForm.controls['userPerCoupon'].value,
+
     }
 
-  this.ngxLoader.start();
   if (this.editMode) {
   this.editCoupan()
   } else {
     this.addCoupan()
   }
-  this.route.navigate[('/marketing/coupanList')]
+  // this.route.navigate[('/marketing/coupanList')]
   }
 
   addCoupan() {
-    this.markettingService.addCoupon(this.coupanForm.value).subscribe(res => {
+    this.markettingService.addListCoupon(this.coupanForm.value).subscribe(res => {
        if (res) {
          this.toastr.showSuccess("Coupan added successfully", "Coupan Added")
          this.ngxLoader.stop()
@@ -118,12 +116,13 @@ export class AddCoupanComponent implements OnInit {
    }
 
    editCoupan(){
-    console.log(this.payload)
-    this.markettingService.editCoupon(this.coupanForm.value, this.id).subscribe(res => {
+    console.log("edit payload"+JSON.stringify(this.payload))
+    this.markettingService.editListsCoupan(this.payload, this.id).subscribe(res => {
       if (res) {
         this.toastr.showSuccess("Coupan edit successfully", "Coupan edit")
         this.ngxLoader.stop()
         this.route.navigate(['/marketing/coupanList'])
+
       }
       (error: any) => {
         this.toastr.showError("Somthing wrong Please check", "Error occured")
@@ -133,24 +132,29 @@ export class AddCoupanComponent implements OnInit {
     })
    }
 
-   getFeatureById() {
-    console.log("dfghjkldfghjk");
 
-    this.markettingService.getcoupanById(this.id).subscribe((res:COUPANCODEDATA) => {
+
+
+   getCouponById() {
+    this.markettingService.getcoupanById(this.id).subscribe((res) => {
+      const testapi = res
+      console.log("testapis for getcouponbyid" +  JSON.stringify(testapi))
+      const startDate = new Date(res.startDate);
+      const endDate = new Date(res.endDate);
       this.coupanForm.patchValue({
-        id: res.id,
-        coupanName: res.coupanName,
-       // image: res.image,
-       startDate: res.startDate,
-       coupanCode: res.coupanCode,
-       endDate: res.endDate,
-       maxDiscount: res.maxDiscount,
-       discount: res.discount,
-       category: res.category,
-       product: res.products,
-       status: res.status,
-       usesPerCoupan: res.usesPerCoupan,
-       userPerCoupan: res.userPerCoupan
+        _id: res._id,
+        username: res.username,
+        couponName: res.couponName,
+        couponCode: res.couponCode,
+        startDate: startDate,
+        endDate: endDate,
+        maxDiscount: res.maxDiscount,
+        coupontype: res.coupontype,
+        discount: res.discount,
+        category: res.category,
+        product: res.product,
+        usesPerCoupon: res.usesPerCoupon,
+        userPerCoupon: res.userPerCoupon
       })
       this.ngxLoader.stop();
     })

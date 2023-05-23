@@ -27,7 +27,7 @@ export class CoupanListComponent implements OnInit {
   @ViewChild('dt') dt: Table | undefined;
   sidebarSpacing: any;
   cols!: TABLE_HEADING[];
-  coupanList : COUPANCODEDATA[]=[]
+  coupanList : any[]=[]
   accessPermission:access
   productDetails:any[];
   exportColumns: any[];
@@ -55,38 +55,38 @@ export class CoupanListComponent implements OnInit {
     this.ngxLoader.start();
     this.sidebarSpacing = 'contracted';
     this.cols = [
-      { field: 'image', show: true, headers: 'Image' },
-      { field: 'product name', show: true, headers: 'Product Name' },
-      { field: 'Modal', show: true, headers: 'Modal' },
-      { field: 'price', show: true, headers: 'Price' },
-      { field: 'quantity', show: true, headers: 'Quantity' },
+      { field: 'couponName', show: true, headers: 'Coupon Name' },
+      { field: 'couponCode', show: true, headers: 'Coupon Code' },
+      { field: 'discount', show: true, headers: 'Discount' },
     ]
+    this.exportColumns = this.cols.map(col => ({title: col.headers,dataKey: col.field}))
     this.getMarkettingList();
   }
 
   getMarkettingList(){
     this.markettingService.getCouponsList().subscribe((res: COUPANCODEDATA[]) => {
       this.coupanList = res
-      console.log(this.coupanList,"--------------------")
+      console.log(this.coupanList,"coupan list--------------------")
       this.ngxLoader.stop();
     })
   }
 
-  deleteProduct(featureList: any) {
+  deleteProduct(couponList: any) {
     this.ngxLoader.start();
-    this.markettingService.deleteCoupan(featureList.id).subscribe(res => {
+    console.log("1 delte button");
+    this.markettingService.deleteCoupan(couponList._id).subscribe(res => {
       if (res) {
-        this.toastr.showSuccess("Coupan deleted successfully", "Coupan delete")
+        this.toastr.showSuccess("Coupan deleted successfully", "Coupon delete")
         this.getMarkettingList();
       }
     })
   }
 
-  openDialog(coupanList: any) {
+  openDialog(deleteList: any) {
     const dialogRef = this.dialog.open(CoupanDialogComponent);
     dialogRef.afterClosed().subscribe(result => {
       if (result == true) {
-        this.deleteProduct(coupanList)
+        this.deleteProduct(deleteList)
       }
     });
   }
@@ -106,7 +106,7 @@ export class CoupanListComponent implements OnInit {
             columns:this.exportColumns,
             body:this.productDetails
            });
-            doc.save('products.pdf');
+            doc.save('coupons.pdf');
         }
 
         exportExcel() {

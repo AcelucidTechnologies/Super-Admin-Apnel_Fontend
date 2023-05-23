@@ -56,12 +56,12 @@ export class FeatureProductListComponent implements OnInit {
     this.ngxLoader.start();
     this.sidebarSpacing = 'contracted';
     this.cols = [
-      { field: 'image', show: true, headers: 'Image' },
-      { field: 'product name', show: true, headers: 'Product Name' },
-      { field: 'Modal', show: true, headers: 'Modal' },
-      { field: 'price', show: true, headers: 'Price' },
-      { field: 'quantity', show: true, headers: 'Quantity' },
+      { field: 'productName', show: true, headers: 'Product Name' },
+      { field: 'productModel', show: true, headers: 'Product Modal' },
+      { field: 'productPrice', show: true, headers: 'Product Price' },
+      { field: 'productQuantity', show: true, headers: 'Product Quantity' },
     ]
+    this.exportColumns = this.cols.map(col => ({title: col.headers,dataKey: col.field}))
     this.getFeatureList();
   }
 

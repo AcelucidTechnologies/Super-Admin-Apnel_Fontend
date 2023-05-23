@@ -1,117 +1,109 @@
 <form [formGroup]="seoForm">
-    <div class="page-heading col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
-        <h1 class="header-text-title">
-           SEO
-        </h1>
-    </div>
-    <div class="card col-sm-12">
-        <div class="row gutters">
-            <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
-                <div class="h-100 mt-3">
-                    <div class="card-body">
-                        <div class="row gutters">
+  <div class="page-heading col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+      <h1 class="header-text-title">
+         SEO
+      </h1>
+  </div>
+  <div class="card col-sm-12">
+      <div class="row gutters">
+          <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+              <div class="h-100 mt-3">
+                  <div class="card-body">
+                      <div class="row gutters">
+                          <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+                              <div class="form-group">
+                                  <label for="hyperlink" class="col-form-label text-left starlabel">Select Page</label><br>
+                                  <select class="form-group" aria-label="Default select example" formControlName="selectPage">
+                                    <option>Select Page</option>
+                                    <option *ngFor="let pageLink of pageList">{{pageLink.pageLink}}</option>
+                                  </select>
+                                  <div
+                                      *ngIf="!seoForm.controls['selectPage'].valid && (seoForm.controls['selectPage'].touched || seoForm.controls['selectPage'].dirty)">
+                                      <div [hidden]="!seoForm.controls['selectPage'].errors['required']"
+                                          style="color: rgb(253, 122, 122); font-size:small; font-style: italic;">
+                                          Page is required
+                                      </div>
+                                  </div>
+                              </div>
+                          </div>
+                      </div>
 
-                            <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
-                                <div class="form-group">
-                                    <label for="hyperlink" class="col-form-label text-left starlabel">Select Page</label>
-                                    <input type="text" class="form-control" formControlName="page">
-                                    <div
-                                        *ngIf="!seoForm.controls['page'].valid && (seoForm.controls['page'].touched || seoForm.controls['page'].dirty)">
-                                        <div [hidden]="!seoForm.controls['page'].errors['required']"
-                                            style="color: rgb(253, 122, 122); font-size:small; font-style: italic;">
-                                            Page is required
-                                        </div>
-                                    </div>
-                                </div>
+                      <div class="row gutters">
+                          <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+                              <div class="form-group">
+                                  <label for="hyperlink" class="col-form-label text-left starlabel">Meta Title</label>
+                                  <input type="text" class="form-control" placeholder="Enter Meta Title" formControlName="metaTitle">
+                                  <div
+                                      *ngIf="!seoForm.controls['metaTitle'].valid && (seoForm.controls['metaTitle'].touched || seoForm.controls['metaTitle'].dirty)">
+                                      <div [hidden]="!seoForm.controls['metaTitle'].errors['required']"
+                                          style="color: rgb(253, 122, 122); font-size:small; font-style: italic;">
+                                          Meta title is required
+                                      </div>
+                                  </div>
+                              </div>
+                          </div>
+                      </div>
+                      <div class="row gutters">
+                      <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+                          <div class="form-group">
+                              <label for="name" class="col-form-label text-left starlabel">Meta keyword</label><br>
 
-                            </div>
-                        </div>
-
-
-                        <div class="row gutters">
-
-
-
-                            <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
-                                <div class="form-group">
-                                    <label for="hyperlink" class="col-form-label text-left starlabel">Meta Title</label>
-                                    <input type="text" class="form-control" formControlName="title">
-                                    <div
-                                        *ngIf="!seoForm.controls['title'].valid && (seoForm.controls['title'].touched || seoForm.controls['title'].dirty)">
-                                        <div [hidden]="!seoForm.controls['title'].errors['required']"
-                                            style="color: rgb(253, 122, 122); font-size:small; font-style: italic;">
-                                            title is required
-                                        </div>
-                                    </div>
-                                </div>
-
-                            </div>
-
-
-                        </div>
-
-                        <div class="row gutters">
-
-                        <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
-                            <div class="form-group">
-                                <label for="name" class="col-form-label text-left starlabel">Meta keyword</label><br>
-                             
-                                <textarea id="" class="form-control" cols="112" rows="8" formControlName="metaKeyword"></textarea>
-                                <div
-                                    *ngIf="!seoForm.controls['metaKeyword'].valid && (seoForm.controls['metaKeyword'].touched || seoForm.controls['metaKeyword'].dirty)">
-                                    <div [hidden]="!seoForm.controls['metaKeyword'].errors['required']"
-                                        style="color: rgb(253, 122, 122); font-size:small; font-style: italic;">
-                                        metaKeyword Name is required
-                                    </div>
-                                </div>
-                                <!-- <div *ngIf="seoForm.controls['metaKeywordName'].errors['pattern']"
-                                style="color: rgb(253, 122, 122); font-size:small; font-style: italic;">
-                                please enter only alphabet and number
-                              </div> -->
-                            </div>
-                        </div>
-                        </div>
+                              <textarea id="" class="form-control" cols="112" rows="8" formControlName="metaKeyword"></textarea>
+                              <div
+                                  *ngIf="!seoForm.controls['metaKeyword'].valid && (seoForm.controls['metaKeyword'].touched || seoForm.controls['metaKeyword'].dirty)">
+                                  <div [hidden]="!seoForm.controls['metaKeyword'].errors['required']"
+                                      style="color: rgb(253, 122, 122); font-size:small; font-style: italic;">
+                                      metaKeyword Name is required
+                                  </div>
+                              </div>
+                              <!-- <div *ngIf="seoForm.controls['metaKeywordName'].errors['pattern']"
+                              style="color: rgb(253, 122, 122); font-size:small; font-style: italic;">
+                              please enter only alphabet and number
+                            </div> -->
+                          </div>
+                      </div>
+                      </div>
 
 
-                        <div class="row gutters">
+                      <div class="row gutters">
 
-                            <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
-                                <div class="form-group">
-                                    <label for="name" class="col-form-label text-left starlabel">Meta Discription</label><br>
-                                 
-                                    <textarea id="" class="form-control" cols="112" rows="8" formControlName="metaDiscription"></textarea>
-                                    <div
-                                        *ngIf="!seoForm.controls['metaDiscription'].valid && (seoForm.controls['metaDiscription'].touched || seoForm.controls['metaDiscription'].dirty)">
-                                        <div [hidden]="!seoForm.controls['metaDiscription'].errors['required']"
-                                            style="color: rgb(253, 122, 122); font-size:small; font-style: italic;">
-                                            metaKeyword Name is required
-                                        </div>
-                                    </div>
-                                    <!-- <div *ngIf="seoForm.controls['metaKeywordName'].errors['pattern']"
-                                    style="color: rgb(253, 122, 122); font-size:small; font-style: italic;">
-                                    please enter only alphabet and number
-                                  </div> -->
-                                </div>
-                            </div>
-                            </div>
+                          <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+                              <div class="form-group">
+                                  <label for="name" class="col-form-label text-left starlabel">Meta Description</label><br>
 
+                                  <textarea id="" class="form-control" cols="112" rows="8" formControlName="metaDescription"></textarea>
+                                  <div
+                                      *ngIf="!seoForm.controls['metaDescription'].valid && (seoForm.controls['metaDescription'].touched || seoForm.controls['metaDescription'].dirty)">
+                                      <div [hidden]="!seoForm.controls['metaDescription'].errors['required']"
+                                          style="color: rgb(253, 122, 122); font-size:small; font-style: italic;">
+                                          metaDiscription is required
+                                      </div>
+                                  </div>
+                                  <!-- <div *ngIf="seoForm.controls['metaKeywordName'].errors['pattern']"
+                                  style="color: rgb(253, 122, 122); font-size:small; font-style: italic;">
+                                  please enter only alphabet and number
+                                </div> -->
+                              </div>
+                          </div>
+                          </div>
+                      <!-- ------------------------------------- -->
 
-                        <!-- ------------------------------------- -->
-
-                        <div class="row gutters mt-4">
-                            <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 mt-4">
-                                <div class="text-center">
-                                    <button pButton type="button" id="submit" name="submit"
-                                        class="p-button mr-4 first-button" (click)="submitForm()"
-                                        [disabled]="!(seoForm.valid)">Save</button>
-                                   
-
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
+                      <div class="row gutters mt-4">
+                          <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 mt-4">
+                              <div class="text-center">
+                                  <button pButton type="button" id="submit" name="submit"
+                                      class="p-button mr-4 first-button" (click)="submitForm()"
+                                      [disabled]="!(seoForm.valid)">Save</button>
+                              </div>
+                          </div>
+                      </div>
+                  </div>
+              </div>
+          </div>
+      </div>
+  </div>
 </form>
+<!-- <ngx-ui-loader
+          [fgsColor]="'#000000'"
+          [fgsType]="fgsType"
+        ></ngx-ui-loader> -->

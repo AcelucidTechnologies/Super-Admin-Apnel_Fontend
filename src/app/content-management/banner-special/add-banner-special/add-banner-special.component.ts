@@ -149,11 +149,10 @@ export class AddBannerSpecialComponent implements OnInit {
       image: this.blobImage,
       bannerOrder: this.bannerSpecialForm.controls['bannerOrder'].value,
       bannerDescription:this.bannerSpecialForm.controls['bannerDescription'].value,
-    };
+    }
     if (this.payload.image == null) {
       this.payload.image = this.Image;
     }
-
     this.ngxLoader.start();
     if (this.editMode) {
       this.editBanner();

@@ -62,6 +62,12 @@ td,th{
     border-bottom: 1px solid rgb(215, 198, 198) !important;
 }
 :host::ng-deep {
+
+    .p-button:enabled:hover {
+        background: none;
+        color: #ffffff;
+        border-color: none;
+    }
     .p-datatable .p-datatable-header,.p-paginator{
         background-color: #fff !important;
         border: none !important;
@@ -77,7 +83,7 @@ td,th{
     .p-datatable .p-sortable-column.p-highlight{
         background-color: none;
     }
-   
+
     .p-datatable .p-sortable-column:focus {
          box-shadow:none
     }
@@ -90,3 +96,31 @@ td,th{
         background-color: rgb(228, 28, 28);
     }
 }
+
+::ng-deep.custom-image {
+  background: none;
+  border: none;
+  }
+::ng-deep.custom-image:hover {
+  background: none;
+  border: none;
+  }
+  .input-container {
+    position: relative;
+    border: 0.5px solid rgba(145, 158, 171, 0.32) !important;
+    }
+
+    .input-container-img {
+    position: absolute;
+    left: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 20px;
+    height: 20px;
+    cursor: pointer;
+    }
+
+    .input-container input[type="text"] {
+    padding-left: 30px; /* adjust the padding to fit the image */
+    font-size: 0.875rem;
+    }

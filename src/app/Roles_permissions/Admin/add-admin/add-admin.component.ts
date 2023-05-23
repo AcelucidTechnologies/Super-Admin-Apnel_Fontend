@@ -54,14 +54,12 @@ export class AddAdminComponent implements OnInit {
     this.adminForm=new FormGroup({
       userName: new FormControl('',[Validators.required]),
       userEmail: new FormControl('',[Validators.required]),
-      contactNumber: new FormControl(''),
+      contactNumber: new FormControl('',[Validators.required]),
       password: new FormControl('',[Validators.required]),
       confirmPassword: new FormControl('',[Validators.required]),
       adminRole: new FormControl('',[Validators.required,this.rolecheck]),
     },passcheck)
-
     this.roleListData=["admin","user"]
-
     // activatedroute.queryParamMap.subscribe((params)=>{
     //   this.id = parseInt(params.get('serialno'))
     //   if(this.id)
@@ -75,7 +73,6 @@ export class AddAdminComponent implements OnInit {
     // })
 
   }
-
   ngOnInit(): void {
     bsCustomFileInput.init();
     console.log()

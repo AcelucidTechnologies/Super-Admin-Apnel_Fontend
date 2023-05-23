@@ -55,12 +55,12 @@ export class SpecialOfferListComponent implements OnInit {
     this.ngxLoader.start();
     this.sidebarSpacing = 'contracted';
     this.cols = [
-      { field: 'image', show: true, headers: 'Image' },
-      { field: 'product name', show: true, headers: 'Product Name' },
-      { field: 'Modal', show: true, headers: 'Modal' },
-      { field: 'price', show: true, headers: 'Price' },
-      { field: 'quantity', show: true, headers: 'Quantity' },
+
+      { field: 'productName', show: true, headers: 'Special Product Name' },
+      { field: 'productModel', show: true, headers: 'Special Product Modal' },
+      { field: 'productPrice', show: true, headers: 'Special Product Price' },
     ]
+    this.exportColumns = this.cols.map(col => ({title: col.headers,dataKey: col.field}))
     this.getofferList();
   }
 
@@ -110,7 +110,7 @@ export class SpecialOfferListComponent implements OnInit {
             columns:this.exportColumns,
             body:this.productDetails
            });
-            doc.save('products.pdf');
+            doc.save('Special products.pdf');
         }
 
         exportExcel() {

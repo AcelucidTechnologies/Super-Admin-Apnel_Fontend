@@ -75,10 +75,10 @@ export class BannerSpecialComponent implements OnInit {
     this.sidebarSpacing = 'contracted';
 
     this.cols = [
-      { field: 'bannerimage', show: true, headers: 'Banner Image' },
-      { field: 'url', show: true, headers: 'URL' },
-      { field: 'description', show: true, headers: 'Description' },
-      { field: 'sortby', show: true, headers: 'Sort By' },
+      { field: 'bannerName', show: true, headers: 'Banner Image' },
+
+      { field: 'bannerDescription', show: true, headers: ' Banner Description' },
+      { field: 'bannerOrder', show: true, headers: 'Sort By' },
     ]
     this.exportColumns = this.cols.map(col => ({title: col.headers,dataKey: col.field}))
     this.getbannerList();
@@ -104,7 +104,7 @@ export class BannerSpecialComponent implements OnInit {
   deleteBanner(bannerList: any) {
 
     this.ngxLoader.start();
-  
+
     this.CmsService.deleteSpecialBanner(bannerList._id).subscribe(res => {
       if (res) {
 
@@ -137,9 +137,9 @@ export class BannerSpecialComponent implements OnInit {
 
 
         exportPdf() {
-          this.bannerDetails = this.banner;
+          this.bannerDetails = this.bannerList;
           const doc = new jsPDF.jsPDF('l', 'pt');
-          const data = this.bannerDetails.map(obj => [obj.bannerName, obj.bannerDescription, obj.bannerOrder, obj.image]); // replace with actual property names
+          const data = this.bannerDetails  // replace with actual property names
           autoTable(doc, {
             columns: this.exportColumns,
             body: data
