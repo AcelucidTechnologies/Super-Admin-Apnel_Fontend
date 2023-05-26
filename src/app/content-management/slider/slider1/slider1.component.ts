@@ -62,13 +62,12 @@ export class Slider1Component implements OnInit {
     this.sidebarSpacing = 'contracted';
 
     this.cols = [
-      { field: 'image', show: true, headers: 'Image' },
-      { field: 'url', show: true, headers: 'URL' },
-      { field: 'description', show: true, headers: 'Description' },
-      { field: 'sortby', show: true, headers: 'Sort By' },
-      { field: 'action', show: true, headers: 'Action' },
-    ]
+      { field: 'sliderName', show: true, headers: 'Slider Name' },
+      { field: 'sliderDiscription', show: true, headers: 'Slider Description' },
+      { field: 'sliderOrder', show: true, headers: 'Slider Order' },
 
+    ]
+    this.exportColumns = this.cols.map(col => ({title: col.headers,dataKey: col.field}))
 
   }
 
@@ -124,7 +123,7 @@ export class Slider1Component implements OnInit {
             columns:this.exportColumns,
             body:this.sliderDetails
            });
-            doc.save('products.pdf');
+            doc.save('Slider.pdf');
         }
 
         exportExcel() {

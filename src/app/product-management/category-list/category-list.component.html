@@ -38,17 +38,6 @@
           <div>
             <button pButton type="button" pTooltip="Pdf" class="custom-image" tooltipPosition="bottom" (click)=" exportPdf()"> <img src="../../../../assets/images/pdf.svg" alt="Button Image" /></button>
             <button pButton type="button"   pTooltip="Excel" class="custom-image" tooltipPosition="bottom" (click)="exportExcel()"><img src="../../../../assets/images/excel.svg" alt="Button Image" /></button>
-            <button
-              pButton
-              pTooltip="print"
-              tooltipPosition="bottom"
-              class="custom-image"
-            >
-              <img
-                src="../../../../assets/images/printer.svg"
-                alt="Button Image"
-              />
-            </button>
           </div>
         </div>
       </ng-template>
@@ -86,9 +75,9 @@
 				<tr>
 					<td>{{i+1}}</td>
           <td><img src={{categoryList.image}} style="width: 50px; height: 50px; border-radius: 50px;"></td>
-					<td>{{categoryList?.name}}</td>
-          <td></td>
-          <td></td>
+					<td>{{categoryList?.categoryName}}</td>
+          <td>{{categoryList?.subCategory}}</td>
+          <td>{{categoryList?.categoryOrder}}</td>
 					<!-- <td>{{categoryList?.name}}</td>
 					<td>{{categoryList?.parentCategoryId}}</td> -->
 
@@ -102,7 +91,6 @@
                 class="me-3 confirm-text" href="javascript:void(0);">
                 <img src="../../../../assets/images/delete.svg" alt="img">
               </a> -->
-
 							<!-- <button class="p-button-warning" pButton type="button" icon="pi pi-user-edit" pTooltip="Edit category"
 								tooltipPosition="bottom" style="margin-right:5px" [routerLink]="['/product/editcategory']"
 								[queryParams]="{id:categoryList?.id}" [disabled]="!accessPermission.edit"></button>

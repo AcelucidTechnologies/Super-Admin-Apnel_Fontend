@@ -1,144 +1,148 @@
 
 
-    <div class="page-heading">
-        <h1 class="header-text-title" style="margin-left: 1%;">Coupon List</h1>
-        <div class="page-btn">
-          <button pButton type="button" [routerLink]="['/marketing/add-coupan']" class="me-1" label=" + Add Coupon" class="theme" ></button>
+<div class="page-heading">
+  <h1 class="header-text-title" style="margin-left: 1%;">Coupon List</h1>
+  <div class="page-btn">
+    <button pButton type="button" [routerLink]="['/marketing/add-coupan']" class="me-1" label=" + Add Coupon" class="theme" ></button>
+</div>
+</div>
+
+<p-table #dt [value]="coupanList" [(selection)]="selectedProduct" dataKey="id" [rowHover]="true"
+  [rows]="10" [showCurrentPageReport]="true" responsiveLayout="scroll"
+  [paginator]="true" currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
+  [filterDelay]="0" [globalFilterFields]="['couponName','couponCode']" class="abc">
+  <ng-template pTemplate="caption" style="background-color: #fff !important; ">
+      <div class="table-header">
+        <div class="input-container">
+          <img src="../../../assets/images/search-white.svg" class="input-container-img" />
+          <input #search pInputText type="text" placeholder="Search..."
+            (input)="applyFilterGlobal($event, 'contains')" />
+        </div>
+          <!-- <span style="display: flex; justify-content: center; align-items: center; margin-left: 20px;" class="p-input-icon-left ">
+              <input style="outline: none; border-radius: 5px; border: 1px solid rgb(195, 183, 183); padding: 6px;" type="text" (input)="applyFilterGlobal($event, 'contains')" placeholder="Search..." />
+          </span> -->
+
+          <div class="d-flex justify-content-end align-items-end">
+            <button style=" border: none;" type="button" pButton class="mr-1 custom-image" pTooltip="Pdf" (click)="exportPdf()"
+              tooltipPosition="bottom"><img
+              src="../assets/images/icons/pdf.svg"></button>
+            <button type="button" style="border: none;" pButton class="mr-1 custom-image" pTooltip="excel" (click)="exportExcel()"
+              tooltipPosition="bottom" ><img
+              src="../assets/images/icons/excel.svg"></button>
+          </div>
       </div>
-      </div>
+  </ng-template>
+  <ng-template  pTemplate="header">
+      <tr>
 
-      <p-table #dt [value]="coupanList" [(selection)]="selectedProduct" dataKey="id" [rowHover]="true"
-        [rows]="10" [showCurrentPageReport]="true" responsiveLayout="scroll"
-        [paginator]="true" currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
-        [filterDelay]="0" [globalFilterFields]="['coupanName','couponCode']" class="abc">
-        <ng-template pTemplate="caption" style="background-color: #fff !important; ">
-            <div class="table-header">
-                <span style="display: flex; justify-content: center; align-items: center; margin-left: 20px;" class="p-input-icon-left ">
-                    <input style="outline: none; border-radius: 5px; border: 1px solid rgb(195, 183, 183); padding: 6px;" type="text" (input)="applyFilterGlobal($event, 'contains')" placeholder="Search..." />
-                </span>
-
-                <div class="d-flex justify-content-end align-items-end">
-                  <button style=" border: none;" type="button" pButton class="mr-1" pTooltip="Pdf" (click)="exportPdf()"
-                    tooltipPosition="bottom"><img
-                    src="../assets/images/icons/pdf.svg"></button>
-                  <button type="button" style="border: none;" pButton class="mr-1" pTooltip="excel" (click)="exportExcel()"
-                    tooltipPosition="bottom" ><img
-                    src="../assets/images/icons/excel.svg"></button>
-
-                </div>
-            </div>
-        </ng-template>
-        <ng-template  pTemplate="header">
-            <tr>
-
-                <th pSortableColumn="id">
-                  <div class="flex justify-content-between align-items-center head1">
-                    Sr.no
-
-                  </div>
-              </th>
-                <th pSortableColumn="coupanName">
-                    <div class="flex justify-content-between align-items-center head1">
-                      Coupon Name
-                        <p-sortIcon field="coupanName"></p-sortIcon>
-
-                    </div>
-                </th>
-                <th pSortableColumn="couponCode">
-                    <div class="flex justify-content-between align-items-center head1">
-                        Coupon Code
-                        <p-sortIcon field="couponCode"></p-sortIcon>
-
-                    </div>
-                </th>
-
-              <th pSortableColumn="discount">
-                <div class="flex justify-content-between align-items-center head1">
-                    Discount
-                    <p-sortIcon field="discount"></p-sortIcon>
-                </div>
-            </th>
-
-              <th pSortableColumn="startDate">
-                <div class="flex justify-content-between align-items-center head1">
-                    Start data
-                    <p-sortIcon field="startDate"></p-sortIcon>
-                </div>
-            </th>
-            <th pSortableColumn="endDate">
-              <div class="flex justify-content-between align-items-center head1">
-                  End data
-                  <p-sortIcon field="endDate"></p-sortIcon>
-              </div>
-          </th>
-          <th pSortableColumn="status">
+          <th pSortableColumn="id">
             <div class="flex justify-content-between align-items-center head1">
-                Status
-                <p-sortIcon field="status"></p-sortIcon>
+              Sr.no
+
             </div>
         </th>
-            <th>
+          <th pSortableColumn="couponName">
               <div class="flex justify-content-between align-items-center head1">
-                  Action
+                Coupon Name
+                  <p-sortIcon field="coupanName"></p-sortIcon>
+
+              </div>
+          </th>
+          <th pSortableColumn="couponCode">
+              <div class="flex justify-content-between align-items-center head1">
+                  Coupon Code
+                  <p-sortIcon field="couponCode"></p-sortIcon>
+
               </div>
           </th>
 
+        <th pSortableColumn="discount">
+          <div class="flex justify-content-between align-items-center head1">
+              Discount
+              <p-sortIcon field="discount"></p-sortIcon>
+          </div>
+      </th>
 
-            </tr>
-        </ng-template>
-        <ng-template pTemplate="body" let-coupanList let-i="rowIndex">
-            <tr class="p-selectable-row">
-
-                <td>
-                  <span class="p-column-title">Sr.no</span>
-                  {{i+1}}
-              </td>
-                <td>
-                    <span class="p-column-title">Coupan Name</span>
-                    {{coupanList.name}}
-                </td>
-                <td>
-                    <span class="p-column-title">Coupan Code</span>
-
-                    {{coupanList.couponCode}}
-                </td>
-
-                <td>
-                    <span class="p-column-title">Discount</span>
-                    {{coupanList.discount}} %
-                </td>
-
-                <td>
-                  <span class="p-column-title">Start Date</span>
-                  {{coupanList.startDate | date: 'dd/MM/yyyy'}}
-              </td>
-
-              <td>
-                <span class="p-column-title">End Date</span>
-                {{coupanList.endDate | date: 'dd/MM/yyyy'}}
-            </td>
-
-                <td>
-                  <span class="p-column-title">Status</span>
-                    {{coupanList.status}}
-                </td>
-
-                <td>
-                  <a pTooltip="Edit Coupan" tooltipPosition="bottom" class="me-3" style="margin-right: 10px;">
-                      <img src="../assets/images/icons/edit.svg" [queryParams]="{id:coupanList?.id}" [routerLink]="['/marketing/add-coupan']"  alt="img">
-                  </a>
-                  <a pTooltip="Delete Coupan" tooltipPosition="bottom" (click)="openDialog(coupanList)" class="me-3 confirm-text">
-                      <img src="../assets/images/icons/delete.svg"  alt="img">
-                  </a>
-              </td>
+        <th pSortableColumn="startDate">
+          <div class="flex justify-content-between align-items-center head1">
+              Start data
+              <p-sortIcon field="startDate"></p-sortIcon>
+          </div>
+      </th>
+      <th pSortableColumn="endDate">
+        <div class="flex justify-content-between align-items-center head1">
+            End data
+            <p-sortIcon field="endDate"></p-sortIcon>
+        </div>
+    </th>
+    <th pSortableColumn="status">
+      <div class="flex justify-content-between align-items-center head1">
+          Status
+          <p-sortIcon field="status"></p-sortIcon>
+      </div>
+  </th>
+      <th>
+        <div class="flex justify-content-between align-items-center head1">
+            Action
+        </div>
+    </th>
 
 
-            </tr>
-        </ng-template>
-        <ng-template pTemplate="emptymessage">
-            <tr>
-                <td colspan="8">No customers found.</td>
-            </tr>
-        </ng-template>
-    </p-table>
+      </tr>
+  </ng-template>
+  <ng-template pTemplate="body" let-coupanList let-i="rowIndex">
+      <tr class="p-selectable-row">
+
+          <td>
+            <span class="p-column-title">Sr.no</span>
+            {{i+1}}
+        </td>
+          <td>
+              <span class="p-column-title">Coupan Name</span>
+              {{coupanList.couponName}}
+          </td>
+          <td>
+              <span class="p-column-title">Coupan Code</span>
+
+              {{coupanList.couponCode}}
+          </td>
+
+          <td>
+              <span class="p-column-title">Discount</span>
+              {{coupanList.discount}} %
+          </td>
+
+          <td>
+            <span class="p-column-title">Start Date</span>
+            {{coupanList.startDate | date: 'dd/MM/yyyy'}}
+        </td>
+
+        <td>
+          <span class="p-column-title">End Date</span>
+          {{coupanList.endDate | date: 'dd/MM/yyyy'}}
+      </td>
+
+          <td>
+            <span class="p-column-title">Status</span>
+              {{coupanList.status}}
+          </td>
+
+          <td>
+            <a pTooltip="Edit Coupon" tooltipPosition="bottom" class="me-3" style="margin-right: 10px;">
+                <img src="../assets/images/icons/edit.svg" [queryParams]="{id:coupanList?._id}" [routerLink]="['/marketing/add-coupan']"  alt="img">
+            </a>
+            <a pTooltip="Delete Coupon" tooltipPosition="bottom" (click)="openDialog(coupanList)" class="me-3 confirm-text">
+                <img src="../assets/images/icons/delete.svg"  alt="img">
+            </a>
+        </td>
+
+
+      </tr>
+  </ng-template>
+  <ng-template pTemplate="emptymessage">
+      <tr>
+          <td colspan="8">No customers found.</td>
+      </tr>
+  </ng-template>
+</p-table>
 

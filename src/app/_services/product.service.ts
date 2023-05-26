@@ -67,6 +67,7 @@ export class ProductService {
         //return this.http.get<CATEGORY>(endpointUrl,{ 'headers': httpOptions });
         return of(categoryObj)
     }
+
     addCategory(categoryData: any) {
         const token = localStorage.getItem('token') || '';
         let httpOptions = new HttpHeaders().set('x-access-token', token)
@@ -76,6 +77,7 @@ export class ProductService {
         categories.push(categoryData);
         return of(categoryData)
     }
+    
     editCategory(categoryData: any, id: number) {
         const token = localStorage.getItem('token') || '';
         let httpOptions = new HttpHeaders().set('x-access-token', token)

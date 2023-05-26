@@ -10,7 +10,7 @@ import { ImageCroppedEvent, base64ToFile } from 'ngx-image-cropper';
 import { NgxUiLoaderService, SPINNER } from 'ngx-ui-loader';
 import { ToastrMsgService } from 'src/app/_services/toastr-msg.service';
 import { CmsService } from '../../../_services/cms.service';
-import { SPECIALOFFER } from 'src/app/_models/cms';
+
 @Component({
   selector: 'app-add-special-offer',
   templateUrl: './add-special-offer.component.html',

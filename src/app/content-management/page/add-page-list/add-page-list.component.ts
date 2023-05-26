@@ -69,11 +69,6 @@ export class AddPageListComponent implements OnInit {
     // })
     console.log("page set up value" + this.pageForm.controls)
 
-
-
-
-
-
     this.sidebarSpacing = 'contracted';
     this.activateRoute.queryParamMap.subscribe(params => {
       this.id = params.get('id');
@@ -108,8 +103,6 @@ export class AddPageListComponent implements OnInit {
 
 
   submitForm(){
-
-
     this.payload = {
       username: localStorage.getItem("email"),
       pageContent: this.pageForm.controls['pageContent'].value,

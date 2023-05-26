@@ -30,3 +30,15 @@
 .p-button{
     border: none !important;
 }
+
+select {
+  width: 100%;
+  height: 41px;
+  border: 1px solid #ced4da;
+  border-radius: 4px;
+}
+
+select:focus-visible{
+border-color: 1px solid #ced4da !important;
+}
+

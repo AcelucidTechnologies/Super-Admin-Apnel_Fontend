@@ -17,11 +17,6 @@ import { DialogComponent } from '../dialog/dialog.component';
 export class AddEditProductComponent implements OnInit {
   // Category = [{ value: 'active', label: 'Active', inactive: false },
   // { value: 'inactive', label: 'Inactive', inactive: false }];
-
-
-
-
-
   sidebarSpacing: string = "";
   fgsType: any;
   id: any

@@ -80,7 +80,6 @@
     <ng-template pTemplate="body" let-bannerList let-i="rowIndex">
         <tr class="p-selectable-row">
           <td>
-
             {{i+1}}
         </td>
             <td>
@@ -89,9 +88,8 @@
             </td>
             <td>
               <span class="p-column-title">Description</span>
-              {{ bannerList.bannerDescription  }}
+              {{ bannerList.bannerDescription }}
           </td>
-
             <td>
                 <span class="p-column-title">Sort </span>
                 {{bannerList.bannerOrder}}
@@ -107,8 +105,6 @@
                   <img src="../assets/images/icons/delete.svg" alt="img">
               </a>
           </td>
-
-
         </tr>
     </ng-template>
     <ng-template pTemplate="emptymessage">

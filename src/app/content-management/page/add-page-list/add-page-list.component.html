@@ -1,27 +1,30 @@
-
 <form [formGroup]="pageForm">
-    <div class="pageTitle-heading col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 mb-3" >
-      <h4 class="header-text-title">
-        Page Set Up
-      </h4>
-    </div>
-    <div class="card col-sm-12">
-      <div class="row gutters">
-        <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
-          <div class="h-100 mt-3">
-            <div class="card-body">
-              <div class="row gutters">
-                <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
-
-
-                  <div class="form-group page-heading">
-                    <h1></h1>
-                    <div class="pageTitle-btn">
-                      <button pButton type="button" (click)="openDialog()"  class="me-1" label=" + Add Page" class="theme" >
-                      </button>
+  <div
+    class="pageTitle-heading col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 mb-3"
+  >
+    <h4 class="header-text-title">Page Set Up</h4>
+  </div>
+  <div class="card col-sm-12">
+    <div class="row gutters">
+      <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+        <div class="h-100 mt-3">
+          <div class="card-body">
+            <div class="row gutters">
+              <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+                <div class="form-group page-heading">
+                  <h1></h1>
+                  <div class="pageTitle-btn">
+                    <button
+                      pButton
+                      type="button"
+                      (click)="openDialog()"
+                      class="me-1"
+                      label=" + Add Page"
+                      class="theme"
+                    ></button>
                   </div>
-                  </div>
-                  <!-- <div class="form-group">
+                </div>
+                <!-- <div class="form-group">
                     <label for="name" class="col-form-label text-left starlabel">Select Page</label>
                     <input type="text" class="form-control" placeholder="Enter pageTitle" formControlName="pageTitle">
                       <div
@@ -38,97 +41,146 @@
 
 
                   </div> -->
-                  <div class="form-group">
-                    <label for="name" class="col-form-label text-left starlabel">Page Title</label>
-                    <div>
-                      <select (change)="changeCountry($any($event).target.value)" formControlName="pageTitle">
-                        <option>Enter Page Title</option>
-                        <option *ngFor ="let count of page">
-                          {{count.pageTitle}}
-                        </option>
+                <div class="form-group">
+                  <label for="name" class="col-form-label text-left starlabel"
+                    >Page Title</label
+                  >
+                  <div>
+                    <select
+                      class="form-group"
+                      (change)="changeCountry($any($event).target.value)"
+                      formControlName="pageTitle"
+                    >
+                      <option>Enter Page Title</option>
+                      <option *ngFor="let count of page">
+                        {{ count.pageTitle }}
+                      </option>
                     </select>
                   </div>
+                  <div
+                    *ngIf="
+                      !pageForm.controls['pageTitle'].valid &&
+                      (pageForm.controls['pageTitle'].touched ||
+                        pageForm.controls['pageTitle'].dirty)
+                    "
+                  >
                     <div
-                        *ngIf="(!pageForm.controls['pageTitle'].valid) && (pageForm.controls['pageTitle'].touched || pageForm.controls['pageTitle'].dirty)">
-                        <div [hidden]="!pageForm.controls['pageTitle'].errors['required']"
-                            style="color: rgb(253, 122, 122); font-size:small; font-style: italic;">
-                            Page title is required
-                        </div>
+                      [hidden]="
+                        !pageForm.controls['pageTitle'].errors['required']
+                      "
+                      style="
+                        color: rgb(253, 122, 122);
+                        font-size: small;
+                        font-style: italic;
+                      "
+                    >
+                      Page title is required
                     </div>
-
-
-                </div>
-
-                </div>
-                <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
-                  <div class="form-group">
-                    <label for="name" class="col-form-label text-left starlabel">Page Link</label>
-                    <div>
-                      <select placeholder="Phantasyland" formControlName="pageLink">
-                        <option value="">Enter Page Link</option>
-                        <option>{{pageTitleData}}</option>
-                      </select>
-
                   </div>
-                    <div
-                        *ngIf="(!pageForm.controls['pageLink'].valid) && (pageForm.controls['pageLink'].touched || pageForm.controls['pageLink'].dirty)">
-                        <!-- <div [hidden]="!pageForm.controls['pageLink'].errors['required']"
+                </div>
+              </div>
+              <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+                <div class="form-group">
+                  <label for="name" class="col-form-label text-left starlabel"
+                    >Page Link</label
+                  >
+                  <div>
+                    <select
+                      class="form-group"
+                      placeholder="Phantasyland"
+                      formControlName="pageLink"
+                    >
+                      <option>{{ pageTitleData }}</option>
+                    </select>
+                  </div>
+                  <div
+                    *ngIf="
+                      !pageForm.controls['pageLink'].valid &&
+                      (pageForm.controls['pageLink'].touched ||
+                        pageForm.controls['pageLink'].dirty)
+                    "
+                  >
+                    <!-- <div [hidden]="!pageForm.controls['pageLink'].errors['required']"
                             style="color: rgb(253, 122, 122); font-size:small; font-style: italic;">
                         pageLink is required
                         </div> -->
-                        <!-- <div *ngIf="pageForm.controls['pageLink'].errors['pattern']"
+                    <!-- <div *ngIf="pageForm.controls['pageLink'].errors['pattern']"
                             style="color: rgb(253, 122, 122); font-size:small; font-style: italic;">
                             Please enter valid pageLink
                         </div> -->
-                    </div>
-
-
+                  </div>
                 </div>
-                </div>
+              </div>
 
+              <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+                <div class="form-group">
+                  <label
+                    for="comment"
+                    class="col-form-label text-left starlabel"
+                    >Comment:</label
+                  >
+                  <div class="col-12">
+                    <ckeditor
+                      name="editor1"
+                      formControlName="pageContent"
+                    ></ckeditor>
 
-
-
-
-
-
-                <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
-                  <div class="form-group">
-                    <label for="comment" class="col-form-label text-left starlabel">Comment:</label>
-                    <div class="col-12">
-
-                      <ckeditor name="editor1" formControlName="pageContent"></ckeditor>
-
+                    <div
+                      *ngIf="
+                        !pageForm.controls['pageContent'].valid &&
+                        (pageForm.controls['pageContent'].touched ||
+                          pageForm.controls['pageContent'].dirty)
+                      "
+                    >
                       <div
-                      *ngIf="(!pageForm.controls['pageContent'].valid) && (pageForm.controls['pageContent'].touched || pageForm.controls['pageContent'].dirty)">
-                        <div [hidden]="!pageForm.controls['pageContent'].errors['required']"
-                          style="color: rgb(253, 122, 122); font-size:small; font-style: italic;">
-                          Comment is required
-                        </div>
+                        [hidden]="
+                          !pageForm.controls['pageContent'].errors['required']
+                        "
+                        style="
+                          color: rgb(253, 122, 122);
+                          font-size: small;
+                          font-style: italic;
+                        "
+                      >
+                        Comment is required
                       </div>
                     </div>
                   </div>
                 </div>
               </div>
+            </div>
 
-              <div class="row gutters mt-4">
-                <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 mt-4">
-                  <div class="text-center">
-                    <button pButton type="button" id="submit" name="submit" class="first-button mr-4"
-                      (click)="submitForm()" [disabled]="!(pageForm.valid)">Save</button>
+            <div class="row gutters mt-4">
+              <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 mt-4">
+                <div class="text-center">
+                  <button
+                    pButton
+                    type="button"
+                    id="submit"
+                    name="submit"
+                    class="first-button mr-4"
+                    (click)="submitForm()"
+                    [disabled]="!pageForm.valid"
+                  >
+                    Save
+                  </button>
 
-                    <button pButton type="button" id="submit" name="submit" class="p-button second-button "
-                      >Cancel</button>
-
-                  </div>
+                  <button
+                    pButton
+                    type="button"
+                    id="submit"
+                    name="submit"
+                    class="p-button second-button"
+                  >
+                    Cancel
+                  </button>
                 </div>
               </div>
             </div>
           </div>
         </div>
       </div>
-
-
     </div>
-  </form>
-  <ngx-ui-loader [fgsColor]="'#000000'" [fgsType]="fgsType"></ngx-ui-loader>
+  </div>
+</form>
+<ngx-ui-loader [fgsColor]="'#000000'" [fgsType]="fgsType"></ngx-ui-loader>

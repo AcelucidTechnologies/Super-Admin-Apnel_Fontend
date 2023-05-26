@@ -1,11 +1,13 @@
-<form [formGroup]="trackingForm">
+
   <div class="page-heading col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 mb-4">
     <h1 class="header-text-title">Analytics Tracking</h1>
   </div>
 
   <div class="card col-sm-12">
+<form [formGroup]="googleTrackingForm">
     <div class="row gutters">
       <h5 class="mt-2 ml-2">Google Analytics Key</h5>
+
       <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
         <div class="h-100 mt-3">
           <div class="card-body">
@@ -19,14 +21,15 @@
                     type="url"
                     class="form-control"
                     placeholder="Enter Google Analytics key Id"
+                    formControlName="googleAnalyticskey"
                   />
-                  <!-- <div
-                  *ngIf="!trackingForm.controls['googleKey'].valid && (trackingForm.controls['googleKey'].touched || trackingForm.controls['googleKey'].dirty)">
-                  <div [hidden]="!trackingForm.controls['googleKey'].errors['required']"
+                  <div
+                  *ngIf="!googleTrackingForm.controls['googleAnalyticskey'].valid && (googleTrackingForm.controls['googleAnalyticskey'].touched || googleTrackingForm.controls['googleAnalyticskey'].dirty)">
+                  <div [hidden]="!googleTrackingForm.controls['googleAnalyticskey'].errors['required']"
                       style="color: rgb(253, 122, 122); font-size:small; font-style: italic;">
-                      Google Analytics key
+                      Google Analytics key is required
                   </div>
-              </div>            -->
+              </div>
                 </div>
               </div>
             </div>
@@ -59,16 +62,20 @@
             id="submit"
             name="submit"
             class="p-button mr-4 first-button"
-            (click)="submitForm()"
+            [disabled]="!(googleTrackingForm.valid)"
+            (click)="submitGoogle()"
           >
             Save
           </button>
         </div>
-      </div>
-    </div>
 
+      </div>
+
+    </div>
+  </form>
     <!-- ------------------------------- -->
 
+  <form [formGroup]="trackingForm">
     <div class="row gutters">
       <h5 class="mt-2 ml-2">Meta Analytics Key</h5>
       <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
@@ -83,15 +90,15 @@
                   <input
                     type="url"
                     class="form-control"
-                    placeholder="Enter Meta Analytics key Id"
+                    placeholder="Enter Meta Analytics key Id" formControlName="metaAnalyticsKey"
                   />
-                  <!-- <div
-                  *ngIf="!trackingForm.controls['metaKey'].valid && (trackingForm.controls['metaKey'].touched || trackingForm.controls['metaKey'].dirty)">
-                  <div [hidden]="!trackingForm.controls['metaKey'].errors['required']"
+                  <div
+                  *ngIf="!trackingForm.controls['metaAnalyticsKey'].valid && (trackingForm.controls['metaAnalyticsKey'].touched || trackingForm.controls['metaAnalyticsKey'].dirty)">
+                  <div [hidden]="!trackingForm.controls['metaAnalyticsKey'].errors['required']"
                       style="color: rgb(253, 122, 122); font-size:small; font-style: italic;">
-                      Google Analytics key
+                      Meta Analytics key is required
                   </div>
-              </div>            -->
+              </div>
                 </div>
               </div>
             </div>
@@ -124,12 +131,12 @@
             id="submit"
             name="submit"
             class="p-button mr-4 first-button"
-            (click)="submitForm()"
+            (click)="submitMeta()" [disabled]="!(trackingForm.valid)"
           >
             Save
           </button>
         </div>
       </div>
     </div>
-  </div>
 </form>
+
