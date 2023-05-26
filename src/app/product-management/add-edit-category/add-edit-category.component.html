@@ -47,7 +47,7 @@
             </option>
           </select> -->
           <p-dropdown [options]="subCategory" id="role" formControlName="parentCategoryName" placeholder="Select category Type"></p-dropdown>
-          <mat-error *ngIf="productCategoryForm.get('parentCategoryName')?.errors?.['required']  && productCategoryForm.get('parentCategoryName').touched"><span>Category Name is required</span></mat-error>
+          <mat-error *ngIf="productCategoryForm.get('parentCategoryName')?.errors?.['required']  && productCategoryForm.get('parentCategoryName').touched"><span>Parent Name/Sub Category is required</span></mat-error>
         </div>
       </div>
     </div>
@@ -66,11 +66,7 @@
         </div>
         <div class="col-8" style="position:relative;">
 
-
-
-
-
-          <input type="file" class="form-control" id="file" color="primary" formControlName="image" (change)="OnChange($event)">
+          <input type="file" class="form-control" accept="image/png, image/gif, image/jpeg" id="file" color="primary" formControlName="image" (change)="OnChange($event)">
           <mat-error *ngIf="productCategoryForm.get('image')?.errors?.['required']  && productCategoryForm.get('image').touched"><span> Image is required</span></mat-error>
           <!-- <div>
             <input type="text" placeholder="Choose image" [value]="selectedItem?.name" readonly>

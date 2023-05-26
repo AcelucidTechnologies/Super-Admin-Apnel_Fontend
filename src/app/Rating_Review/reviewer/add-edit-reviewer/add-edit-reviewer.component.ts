@@ -14,11 +14,12 @@ statusList:string[]=['Active','Inactive']
 title:string;
 id:number;
 reviewerForm:FormGroup
+  change: string;
 constructor(private reviewerService:ReviewerService,
   private fb:FormBuilder,
   private route:Router,
-  private activatedRoute:ActivatedRoute) { 
-  
+  private activatedRoute:ActivatedRoute) {
+
   this.reviewerForm = this.fb.group({
     name: ['', [Validators.required]],
     email: ['', [Validators.required]],
@@ -29,9 +30,11 @@ constructor(private reviewerService:ReviewerService,
     this.id = parseInt(params.get('serialno'))
     if (this.id && this.id != undefined) {
       this.title = "Edit"
+      this.change="Update"
       this.getReviewerDetail();
     } else {
       this.title = "Add"
+      this.change="Submit"
     }
   })
 

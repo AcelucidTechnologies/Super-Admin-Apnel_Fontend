@@ -64,7 +64,7 @@
           <div class="row">
             <div class="d-flex justify-content-end col-11 mt-4">
               <button type="submit" style="background: rgb(228, 28, 28);border:none" class="btn btn-info mr-3"
-                (click)="submit()" [disabled]="!reviewerForm.valid">Submit</button>
+                (click)="submit()" [disabled]="!reviewerForm.valid">{{change}}</button>
               <button class="btn btn-info" style="background: #637381;border:none"
                 [routerLink]="['/reviewer/reviewerlist']">Cancel</button>
             </div>

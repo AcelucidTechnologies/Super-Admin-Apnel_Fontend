@@ -76,13 +76,11 @@ export class BannerSpecialComponent implements OnInit {
 
     this.cols = [
       { field: 'bannerName', show: true, headers: 'Banner Image' },
-
       { field: 'bannerDescription', show: true, headers: ' Banner Description' },
       { field: 'bannerOrder', show: true, headers: 'Sort By' },
     ]
     this.exportColumns = this.cols.map(col => ({title: col.headers,dataKey: col.field}))
     this.getbannerList();
-
     // $('#myModal').on('shown.bs.modal', function () {
     //   $('#myInput').trigger('focus')
     // })

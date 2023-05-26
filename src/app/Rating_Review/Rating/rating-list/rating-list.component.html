@@ -39,17 +39,6 @@
                   <button pButton type="button" pTooltip="Pdf" class="custom-image" tooltipPosition="bottom" (click)=" exportPdf()"> <img src="../../../../assets/images/pdf.svg" alt="Button Image" /></button>
 
                   <button pButton type="button"   pTooltip="Excel" class="custom-image" tooltipPosition="bottom" (click)="exportExcel()"><img src="../../../../assets/images/excel.svg" alt="Button Image" /></button>
-                  <button
-                    pButton
-                    pTooltip="print"
-                    tooltipPosition="bottom"
-                    class="custom-image"
-                  >
-                    <img
-                      src="../../../../assets/images/printer.svg"
-                      alt="Button Image"
-                    />
-                  </button>
                 </div>
               </div>
             </ng-template>
@@ -59,7 +48,6 @@
                     <div class="flex justify-content-between align-items-center head1">
                       Rating
                         <p-sortIcon field="rating"></p-sortIcon>
-
                     </div>
                 </th>
 
@@ -67,7 +55,6 @@
                   <div class="flex justify-content-between align-items-center head1">
                     Review Subject
                       <p-sortIcon field="review"></p-sortIcon>
-
                   </div>
               </th>
               <th pSortableColumn="reviewer">
