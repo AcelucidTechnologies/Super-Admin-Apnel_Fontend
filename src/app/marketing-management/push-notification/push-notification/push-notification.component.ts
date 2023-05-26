@@ -41,11 +41,11 @@ export class PushNotificationComponent implements OnInit {
        if (res) {
          this.toastr.showSuccess("Push Notification added successfully", "Push Notification Added")
          this.ngxLoader.stop()
+         this.pushNotificationForm.reset();
        }
        (error: any) => {
          this.toastr.showError("Somthing wrong Please check", "Error occured")
          this.ngxLoader.stop()
-
        }
      })
    }

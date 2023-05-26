@@ -23,7 +23,7 @@
                   <input
                     type="text"
                     class="form-control"
-                    placeholder="Enter Discount"
+                    placeholder="Enter Coupon Name"
                     formControlName="couponName"
                   />
                   <div
@@ -57,7 +57,7 @@
                   <input
                     type="text"
                     class="form-control"
-                    placeholder="Enter Discount"
+                    placeholder="Enter Coupon Code"
                     formControlName="couponCode"
                   />
                   <div
@@ -90,12 +90,13 @@
                   <label for="Name" class="col-form-label text-left starlabel"
                     >Type</label
                   ><br />
-                  <input
+                  <!-- <input
                     type="text"
                     class="form-control"
-                    placeholder="Enter Discount"
+                    placeholder="Enter Type"
                     formControlName="coupontype"
-                  />
+                  /> -->
+                  <p-dropdown [options]="type" id="role" formControlName="coupontype" placeholder="Select Type"></p-dropdown>
 
                   <!-- <p-dropdown [options]="type" id="type"
                                       placeholder="Select Type"
@@ -223,7 +224,7 @@
                   <input
                     type="text"
                     class="form-control"
-                    placeholder="Enter Discount"
+                    placeholder="Enter Category"
                     formControlName="category"
                   />
                   <div

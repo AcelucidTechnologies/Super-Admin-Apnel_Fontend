@@ -23,13 +23,13 @@
                     placeholder="Enter Google Analytics key Id"
                     formControlName="googleAnalyticskey"
                   />
-                  <!-- <div
-                  *ngIf="!trackingForm.controls['googleKey'].valid && (trackingForm.controls['googleKey'].touched || trackingForm.controls['googleKey'].dirty)">
-                  <div [hidden]="!trackingForm.controls['googleKey'].errors['required']"
+                  <div
+                  *ngIf="!googleTrackingForm.controls['googleAnalyticskey'].valid && (googleTrackingForm.controls['googleAnalyticskey'].touched || googleTrackingForm.controls['googleAnalyticskey'].dirty)">
+                  <div [hidden]="!googleTrackingForm.controls['googleAnalyticskey'].errors['required']"
                       style="color: rgb(253, 122, 122); font-size:small; font-style: italic;">
-                      Google Analytics key
+                      Google Analytics key is required
                   </div>
-              </div>            -->
+              </div>
                 </div>
               </div>
             </div>
@@ -62,6 +62,7 @@
             id="submit"
             name="submit"
             class="p-button mr-4 first-button"
+            [disabled]="!(googleTrackingForm.valid)"
             (click)="submitGoogle()"
           >
             Save
@@ -91,13 +92,13 @@
                     class="form-control"
                     placeholder="Enter Meta Analytics key Id" formControlName="metaAnalyticsKey"
                   />
-                  <!-- <div
-                  *ngIf="!trackingForm.controls['metaKey'].valid && (trackingForm.controls['metaKey'].touched || trackingForm.controls['metaKey'].dirty)">
-                  <div [hidden]="!trackingForm.controls['metaKey'].errors['required']"
+                  <div
+                  *ngIf="!trackingForm.controls['metaAnalyticsKey'].valid && (trackingForm.controls['metaAnalyticsKey'].touched || trackingForm.controls['metaAnalyticsKey'].dirty)">
+                  <div [hidden]="!trackingForm.controls['metaAnalyticsKey'].errors['required']"
                       style="color: rgb(253, 122, 122); font-size:small; font-style: italic;">
-                      Google Analytics key
+                      Meta Analytics key is required
                   </div>
-              </div>            -->
+              </div>
                 </div>
               </div>
             </div>
@@ -120,7 +121,7 @@
             <a
               style="text-decoration: none !important; color: #fff !important"
               href="https://www.facebook.com/business/tools/meta-business-suite"
-              [routerLink]="['/marketing/analytics-tracking']"
+              target="_blank"
               >Go to Web</a
             >
           </button>

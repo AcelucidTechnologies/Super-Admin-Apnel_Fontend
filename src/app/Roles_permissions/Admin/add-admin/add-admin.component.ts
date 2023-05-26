@@ -45,7 +45,6 @@ export class AddAdminComponent implements OnInit {
   //   let val=this.pass.value
   //   passcheck(val)
   // }
-
   constructor(private activatedroute:ActivatedRoute,
     // private fb:FormGroup,
     private adminService:AdminService,
@@ -71,7 +70,6 @@ export class AddAdminComponent implements OnInit {
     //     this.title='Add';
     //   }
     // })
-
   }
   ngOnInit(): void {
     bsCustomFileInput.init();

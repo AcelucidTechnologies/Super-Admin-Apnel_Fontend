@@ -15,7 +15,7 @@
                                   <label for="hyperlink" class="col-form-label text-left starlabel">Select Page</label><br>
                                   <select class="form-group" aria-label="Default select example" formControlName="selectPage">
                                     <option>Select Page</option>
-                                    <option *ngFor="let pageLink of pageList">{{pageLink.pageLink}}</option>
+                                    <option *ngFor="let pageLink of pageList">{{pageLink.pageTitle}}</option>
                                   </select>
                                   <div
                                       *ngIf="!seoForm.controls['selectPage'].valid && (seoForm.controls['selectPage'].touched || seoForm.controls['selectPage'].dirty)">
@@ -48,7 +48,7 @@
                           <div class="form-group">
                               <label for="name" class="col-form-label text-left starlabel">Meta keyword</label><br>
 
-                              <textarea id="" class="form-control" cols="112" rows="8" formControlName="metaKeyword"></textarea>
+                              <textarea id="" class="form-control" cols="112" rows="8" placeholder="Enter Meta Keyword" formControlName="metaKeyword"></textarea>
                               <div
                                   *ngIf="!seoForm.controls['metaKeyword'].valid && (seoForm.controls['metaKeyword'].touched || seoForm.controls['metaKeyword'].dirty)">
                                   <div [hidden]="!seoForm.controls['metaKeyword'].errors['required']"
@@ -71,7 +71,7 @@
                               <div class="form-group">
                                   <label for="name" class="col-form-label text-left starlabel">Meta Description</label><br>
 
-                                  <textarea id="" class="form-control" cols="112" rows="8" formControlName="metaDescription"></textarea>
+                                  <textarea id="" class="form-control" cols="112" rows="8" placeholder="Enter Meta Description" formControlName="metaDescription"></textarea>
                                   <div
                                       *ngIf="!seoForm.controls['metaDescription'].valid && (seoForm.controls['metaDescription'].touched || seoForm.controls['metaDescription'].dirty)">
                                       <div [hidden]="!seoForm.controls['metaDescription'].errors['required']"

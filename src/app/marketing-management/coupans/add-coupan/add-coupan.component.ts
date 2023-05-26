@@ -24,7 +24,7 @@ export class AddCoupanComponent implements OnInit {
   editMode: boolean = false
   reg= '([A-Za-z0-9]+)';
   dateFieldDate: Date = new Date();
-  type: string[];
+  type: any;
   update: any;
 
   constructor(private ngxLoader: NgxUiLoaderService, private fb: FormBuilder,
@@ -48,7 +48,6 @@ export class AddCoupanComponent implements OnInit {
       userPerCoupon: ['', [Validators.required]]
 
     })
-    console.log(this.coupanForm)
   }
   ngOnInit(): void {
     this.fgsType = SPINNER.squareLoader
