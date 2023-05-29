@@ -13,50 +13,53 @@ export class RatingCriteriaService {
 
   getCriteriaList():Observable<any[]>{
     const token = localStorage.getItem('token') || '';
+    const email = localStorage.getItem('email') || '';
     let httpOptions = new HttpHeaders().set('x-access-token',token);
-    const endpointUrl = `${environment.JSON_SERVER}/reviewlist`
-    // return this.http.get<any[]>(endpointUrl,payload ,{ 'headers': httpOptions });
-    return of(ratingCriteriaList)
+    const endpointUrl = `${environment.JSON_SERVER}/getRatingCriteria?username=${email}`
+    return this.http.get<any[]>(endpointUrl,{ 'headers': httpOptions });
+
   }
 
-  getCriteriaDetails(serialno:number):Observable<any[]>{
+  getCriteriaDetails(id:number):Observable<any>{
     const token = localStorage.getItem('token') || '';
     let httpOptions = new HttpHeaders().set('x-access-token',token);
-    const endpointUrl = `${environment.JSON_SERVER}/reviewDetail`
-    // return this.http.get<any[]>(endpointUrl,payload ,{ 'headers': httpOptions });
-    
-    console.log(ratingCriteriaList)
-    let filteredValue=ratingCriteriaList.filter(val=>{
-      return (val.sno == serialno)
-    })
-    return of(filteredValue)
-    }
+    const endpointUrl = `${environment.JSON_SERVER}/getRatingCriteriaById?id=${id}`
+    return this.http.get<any[]>(endpointUrl,{ 'headers': httpOptions });
+
+    // console.log(ratingCriteriaList)
+    // let filteredValue=ratingCriteriaList.filter(val=>{
+    //   return (val.sno == serialno)
+    // })
+    // return of(filteredValue)
+     }
 
   submitCriteriaDetail(payload:any):Observable<any[]>{
     const token = localStorage.getItem('token') || '';
-    let httpOption = new HttpHeaders().set('x-access-token', token)
-    const endpointUrl = `${environment.JSON_SERVER}/add`;
-    payload.sno=ratingCriteriaList.length+1;
+    let httpOptions = new HttpHeaders().set('x-access-token', token)
+    const endpointUrl = `${environment.JSON_SERVER}/createRatingCriteria`;
+    return this.http.post<any>(endpointUrl, payload, { 'headers': httpOptions });
+    // payload.sno=ratingCriteriaList.length+1;
     // let date = new Date();
     // payload.firstRating = date.toISOString().split('T')[0];
     // payload.rating = '4';
-    ratingCriteriaList.push(payload);
-    console.log(ratingCriteriaList)
-    return of(ratingCriteriaList);
+    // ratingCriteriaList.push(payload);
+    // console.log(ratingCriteriaList)
+    // return of(ratingCriteriaList);
   }
 
-  submitEditedCriteriaDetail(payload:any,serialno:number)
+  submitEditedCriteriaDetail(payload:any,id:number)
 {
   const token = localStorage.getItem('token') || '';
-  let httpOption = new HttpHeaders().set('x-access-token', token)
-  const endpointUrl = `${environment.JSON_SERVER}/edit`;
-  ratingCriteriaList.map((res)=>{
-    if (res.sno == serialno) {
-      res.ratingCriteria = payload.ratingCriteria,
-      res.status = payload.status
-    }
-  }) 
-  return of(ratingCriteriaList)
+  let httpOptions = new HttpHeaders().set('x-access-token', token)
+  const endpointUrl = `${environment.JSON_SERVER}/updateRatingCriteria?id=${id}`;
+  return this.http.put<any>(endpointUrl, payload, { headers: httpOptions });
+  // ratingCriteriaList.map((res)=>{
+  //   if (res.sno == serialno) {
+  //     res.ratingCriteria = payload.ratingCriteria,
+  //     res.status = payload.status
+  //   }
+  // })
+  // return of(ratingCriteriaList)
 }
 
 deleteCriteriaDetails(name:string):Observable<any[]>{

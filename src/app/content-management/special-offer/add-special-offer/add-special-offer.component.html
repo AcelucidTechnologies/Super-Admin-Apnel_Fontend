@@ -42,9 +42,7 @@
                             <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
                                 <div class="form-group">
                                     <label for="name" class="col-form-label text-left starlabel">Product Name</label>
-                                    <p-dropdown [options]="ProductDrop" id="type"
-                                        placeholder="Select Product Type"
-                                        formControlName="productName"></p-dropdown>
+                                    <input type="text" class="form-control" formControlName="productName">
                                     <div
                                         *ngIf="!specialOfferForm.controls['productName'].valid && (specialOfferForm.controls['productName'].touched || specialOfferForm.controls['productName'].dirty)">
                                         <div [hidden]="!specialOfferForm.controls['productName'].errors['required']"
@@ -55,12 +53,6 @@
                                 </div>
                             </div>
                         </div>
-
-
-
-
-
-
 
                         <div class="row gutters">
                           <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
@@ -104,11 +96,55 @@
                           <div class="col-12 form-group pt-3">
                               <label for="imageUpload" class="col-form-label starlabel">Image</label>
                               <!-- <div class="d-flex justify-content-start h-75"><img class="img-content" [src]="Image" /></div> -->
-                              <div id="imageUpload" class="custom-file">
-                                  <input type="file" class="custom-file-input" id="inputGroupFile01"
-                                  (change)="fileChangeEvent($event)" >
-                                  <label class="custom-file-label" for="inputGroupFile01">Upload file</label>
+
+                              <div *ngIf="check; else other">
+                                <div id="imageUpload" class="custom-file">
+                                  <input
+                                    formControlName="image"
+                                    type="file"
+                                    class="custom-file-input"
+                                    id="inputGroupFile01"
+
+                                    (change)="fileChangeEvent($event)"
+                                  />
+                                  <div
+                                    *ngIf="
+                                      !specialOfferForm.controls['image'].valid &&
+                                      (specialOfferForm.controls['image'].touched ||
+                                      specialOfferForm.controls['image'].dirty)
+                                    "
+                                  >
+                                    <div
+                                      [hidden]="
+                                        !specialOfferForm.controls['image'].errors['required']
+                                      "
+                                      style="
+                                        color: rgb(253, 122, 122);
+                                        font-size: small;
+                                        font-style: italic;
+                                      "
+                                    >
+                                      Image is required
+                                    </div>
+                                  </div>
+                                  <label class="custom-file-label" for="inputGroupFile01">Upload image</label>
+
+                                </div>
                               </div>
+
+                              <ng-template #other>
+                                <div id="imageUpload" class="custom-file">
+                                  <input
+                                    type="file"
+                                    class="custom-file-input"
+                                    id="inputGroupFile01"
+                                    (change)="fileChangeEvent($event)"
+                                  />
+
+                                  <label class="custom-file-label" for="inputGroupFile01">Upload image</label>
+
+                                </div>
+                              </ng-template>
                           </div>
                       </div>
 

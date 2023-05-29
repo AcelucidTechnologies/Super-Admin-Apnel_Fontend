@@ -12,29 +12,32 @@ export class AddEditRatingCriteriaComponent implements OnInit {
   sidebarSpacing: string = 'contracted';
   criteriaForm: FormGroup;
   title:string;
-  id:number;
+  id:any;
+  editMode: boolean = false;
   constructor(
     private ratingCriteriaService: RatingCriteriaService,
     private fb: FormBuilder,
     private route: Router,
     private activatedRoute:ActivatedRoute) {
       this.criteriaForm = fb.group({
-        name: ['', [Validators.required]],
+        ratingCriteria: ['', [Validators.required]],
         status: ['', [Validators.required]],
       });
-      
+
       this.activatedRoute.queryParamMap.subscribe((params)=>{
-      this.id = parseInt(params.get('serialno'))
-      if(this.id)
+      this.id = params.get('id');
+      if(this.id && this.id != undefined)
       {
+        this.editMode = true
         this.title = 'Edit';
-        this.getRatingCriteriaDetail()
+        this.getRatingCriteriaDetail();
       }
       else{
+        this.editMode = false
         this.title = "Add";
       }
     })
-   
+
   }
   statusList: string[] = ['Active', 'Inactive'];
   ngOnInit(): void {}
@@ -47,23 +50,14 @@ export class AddEditRatingCriteriaComponent implements OnInit {
     }
   }
 
-  getRatingCriteriaDetail(){
-    this.ratingCriteriaService.getCriteriaDetails(this.id).subscribe((res)=>{
-      console.log(res[0].ratingCriteria)
-      this.criteriaForm.patchValue({
-      name:res[0].ratingCriteria,
-      status:res[0].status
-    })
-    })
-    }
-
   submit() {
     let payload = {
-      ratingCriteria: this.criteriaForm.controls['name'].value,
+      username: localStorage.getItem("email"),
+      ratingCriteria: this.criteriaForm.controls['ratingCriteria'].value,
       status: this.criteriaForm.controls['status'].value,
     };
     this.id?this.submitEditedDetails(payload):this.submitDetails(payload)
-   
+
   }
 
 
@@ -85,5 +79,18 @@ submitDetails(recievedValue:any){
     }
   });
 }
+
+getRatingCriteriaDetail(){
+  this.ratingCriteriaService.getCriteriaDetails(this.id).subscribe((res)=>{
+    console.log("----45----->",res);
+    this.criteriaForm.patchValue({
+      _id: res._id,
+      ratingCriteria :res.ratingCriteria,
+      status: res.status
+    })
+  })
+}
+
+
 
 }

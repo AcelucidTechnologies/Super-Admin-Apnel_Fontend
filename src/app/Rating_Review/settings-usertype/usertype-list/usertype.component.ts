@@ -10,6 +10,7 @@ import { Table } from 'primeng/table';
 import { UsertypeService } from 'src/app/_services/usertype.service';
 import { ModulePermissionService } from 'src/app/_services/module-permission.service';
 import { access } from 'src/app/_models/modulepermission';
+import { ToastrMsgService } from 'src/app/_services/toastr-msg.service';
 
 @Component({
   selector: 'app-usertype',
@@ -27,8 +28,9 @@ export class UserTypeComponent implements OnInit {
   statusList:string[]=['Active','Inactive']
   constructor( private usertypeService: UsertypeService,
     private dialog:MatDialog,
+    private toastr: ToastrMsgService,
     private permissionService:ModulePermissionService) {
-      this.permissionService.getModulePermission().subscribe(res=>{ 
+      this.permissionService.getModulePermission().subscribe(res=>{
         this.accessPermission=res[0].RatingSetting
         console.log( this.accessPermission)
         this.getUsertypeList()
@@ -54,22 +56,23 @@ export class UserTypeComponent implements OnInit {
   getUsertypeList(){
     this.usertypeService.getUsertypeList().subscribe((res)=>{
       this.usertypeSettingData=res
+      console.log("---------->",this.usertypeSettingData)
     })
   }
 
-  openDialog(name: any) {
+  openDialog(deleteList: any) {
     const dialogRef = this.dialog.open(DialogComponent);
     dialogRef.afterClosed().subscribe(result => {
       if (result == true) {
-        this.deleteUsertypeDetails(name)
+        this.deleteUsertypeDetails(deleteList)
       }
     });
   }
 
-  deleteUsertypeDetails(name:string){
-    this.usertypeService.deleteUsertypeDetails(name).subscribe(res => {
+  deleteUsertypeDetails(types: any){
+    this.usertypeService.deleteUsertypeDetails(types._id).subscribe(res => {
       if (res) {
-        // this.toastr.showSuccess("lead deleted successfully", "lead deleted")
+        this.toastr.showSuccess("UserType deleted successfully", "lead deleted")
         this.getUsertypeList();
       }
   })}
@@ -80,7 +83,7 @@ export class UserTypeComponent implements OnInit {
     const excelBuffer: any = xlsxPackage.write(workbook, { bookType: 'xlsx', type: 'array' });
     this.saveAsExcelFile(excelBuffer, "usertype");
   }
-  
+
   saveAsExcelFile(buffer: any, fileName: string): void {
     let EXCEL_TYPE = 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;charset=UTF-8';
     let EXCEL_EXTENSION = '.xlsx';
@@ -89,7 +92,7 @@ export class UserTypeComponent implements OnInit {
     });
     FileSaver.saveAs(data, fileName + '_export_' + new Date().getTime() + EXCEL_EXTENSION);
   }
-  
+
   exportPdf() {
     this.usertypeData = this.usertypeSettingData
             const doc = new jsPDF.jsPDF('l', 'pt');

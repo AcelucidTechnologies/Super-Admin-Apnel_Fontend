@@ -26,13 +26,13 @@ export class ReviewListComponent implements OnInit {
   accessPermission:access
   constructor(private reviewsService:ReviewsService,
     public dialog:MatDialog,private permissionService:ModulePermissionService) {
-      this.permissionService.getModulePermission().subscribe(res=>{ 
+      this.permissionService.getModulePermission().subscribe(res=>{
         this.accessPermission=res[0].RatingList
         console.log( this.accessPermission)
         this.getReviewList()
       })
     }
-   
+
 
   ngOnInit(): void {
     this.cols = [{ field: "reviewSubject", headers: "Review Subject" },
@@ -52,6 +52,7 @@ export class ReviewListComponent implements OnInit {
 getReviewList(){
   this.reviewsService.getReviewList().subscribe((res)=>{
     this.reviewListValue=res
+    console.log(this.reviewListValue)
   })
 }
 

@@ -13,10 +13,11 @@ export class UsertypeService {
 
   getUsertypeList():Observable<any[]>{
     const token = localStorage.getItem('token') || '';
+    const email = localStorage.getItem('email') || '';
     let httpOptions = new HttpHeaders().set('x-access-token',token);
-    const endpointUrl = `${environment.JSON_SERVER}/reviewlist`
-    // return this.http.get<any[]>(endpointUrl,payload ,{ 'headers': httpOptions });
-    return of(usertypeList)
+    const endpointUrl = `${environment.JSON_SERVER}/getUserTypeList?username=${email}`
+    return this.http.get<any[]>(endpointUrl,{ 'headers': httpOptions });
+
   }
 
   getUsertypeDetails(serialno:number):Observable<any[]>{
@@ -24,7 +25,7 @@ export class UsertypeService {
     let httpOptions = new HttpHeaders().set('x-access-token',token);
     const endpointUrl = `${environment.JSON_SERVER}/reviewDetail`
     // return this.http.get<any[]>(endpointUrl,payload ,{ 'headers': httpOptions });
-    
+
     console.log(usertypeList)
     let filteredValue=usertypeList.filter(val=>{
       return (val.sno == serialno)
@@ -32,40 +33,48 @@ export class UsertypeService {
     return of(filteredValue)
     }
 
-  submitUsertypeDetail(payload:any):Observable<any[]>{
-    const token = localStorage.getItem('token') || '';
-    let httpOption = new HttpHeaders().set('x-access-token', token)
-    const endpointUrl = `${environment.JSON_SERVER}/add`;
-    payload.sno=usertypeList.length+1;
-    // let date = new Date();
-    // payload.firstRating = date.toISOString().split('T')[0];
-    // payload.rating = '4';
-    usertypeList.push(payload);
-    console.log(usertypeList)
-    return of(usertypeList);
+  // submitUsertypeDetail(payload:any):Observable<any[]>{
+  //   const token = localStorage.getItem('token') || '';
+  //   let httpOption = new HttpHeaders().set('x-access-token', token)
+  //   const endpointUrl = `${environment.JSON_SERVER}/add`;
+  //   payload.sno=usertypeList.length+1;
+  //   // let date = new Date();
+  //   // payload.firstRating = date.toISOString().split('T')[0];
+  //   // payload.rating = '4';
+  //   usertypeList.push(payload);
+  //   console.log(usertypeList)
+  //   return of(usertypeList);
+  // }
+
+  createUserTypeList(payload: any): Observable<any[]>  {
+
+      const token = localStorage.getItem('token') || '';
+      let httpOptions = new HttpHeaders().set('x-access-token', token)
+      const endpointUrl = `${environment.JSON_SERVER}/createUserTypeList`;
+      return this.http.post<any>(endpointUrl, payload, { 'headers': httpOptions });
+
   }
 
-  submitEditedUsertypeDetail(payload:any,serialno:number)
+  editUserType(payload:any,id:any)
 {
   const token = localStorage.getItem('token') || '';
-  let httpOption = new HttpHeaders().set('x-access-token', token)
-  const endpointUrl = `${environment.JSON_SERVER}/edit`;
-  usertypeList.map((res)=>{
-    if (res.sno == serialno) {
-      res.usertype = payload.usertype,
-      res.status = payload.status
-    }
-  }) 
-  return of(usertypeList)
+  let httpOptions = new HttpHeaders().set('x-access-token', token)
+  const endpointUrl = `${environment.JSON_SERVER}/updateUserTypeList?id=${id}`;
+  return this.http.put<any>(endpointUrl, payload, { headers: httpOptions });
 }
 
-deleteUsertypeDetails(name:string):Observable<any[]>{
+deleteUsertypeDetails(id:number):Observable<any[]>{
   const token =localStorage.getItem('token') || '';
   let httpOptions = new HttpHeaders().set('x-access-token',token)
-  const endpointUrl = `${environment.JSON_SERVER}/delete`
-  let filteredreviewer = usertypeList.splice(usertypeList.findIndex((index) => index.usertype == name),1);
-        return of(filteredreviewer)
+  const endpointUrl = `${environment.JSON_SERVER}/deleteUserTypeList?id=${id}`
+  return this.http.delete<any>(endpointUrl, { 'headers': httpOptions });
 }
 
 
+getUserTypeById(id: number): Observable<any>{
+  const token = localStorage.getItem('token') || '';
+        let httpOptions = new HttpHeaders().set('x-access-token', token)
+        const endpointUrl = `${environment.JSON_SERVER}/getUserTypeListById?id=${id}`;
+        return this.http.get<any>(endpointUrl,{ 'headers': httpOptions });
+}
 }

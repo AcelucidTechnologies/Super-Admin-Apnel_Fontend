@@ -26,14 +26,13 @@ export class RatingCriteriaComponent implements OnInit {
   statusList:string[]=['Active','Inactive']
   constructor( private ratingCriteriaService: RatingCriteriaService,
     private dialog:MatDialog,private permissionService:ModulePermissionService) {
-      this.permissionService.getModulePermission().subscribe(res=>{ 
+      this.permissionService.getModulePermission().subscribe(res=>{
         this.accessPermission=res[0].RatingSetting
         console.log( this.accessPermission)
         this.getCriteriaList()
       })
     }
   
-
   ngOnInit(): void {
     this.cols=[{field:"ratingCriteria",headers:"Rating Criteria"},
     {field:"status",headers:"Status"}]
@@ -78,7 +77,7 @@ export class RatingCriteriaComponent implements OnInit {
     const excelBuffer: any = xlsxPackage.write(workbook, { bookType: 'xlsx', type: 'array' });
     this.saveAsExcelFile(excelBuffer, "ratingCriterias");
   }
-  
+
   saveAsExcelFile(buffer: any, fileName: string): void {
     let EXCEL_TYPE = 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;charset=UTF-8';
     let EXCEL_EXTENSION = '.xlsx';
@@ -87,7 +86,7 @@ export class RatingCriteriaComponent implements OnInit {
     });
     FileSaver.saveAs(data, fileName + '_export_' + new Date().getTime() + EXCEL_EXTENSION);
   }
-  
+
   exportPdf() {
     this.ratingData = this.ratingSettingData
             const doc = new jsPDF.jsPDF('l', 'pt');

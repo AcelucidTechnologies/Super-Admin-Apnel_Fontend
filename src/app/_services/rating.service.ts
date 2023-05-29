@@ -79,7 +79,7 @@ getRatingDetails(name:string):Observable<any[]>{
   let filteredData = ratingDetails.filter((data)=>{
 
           return data.reviewer==name
-        
+
   })
   return of(filteredData)
 }

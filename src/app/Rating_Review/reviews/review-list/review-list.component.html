@@ -10,7 +10,8 @@
           type="button"
           label=" + Add Review"
           class="add-button-review"
-          [routerLink]="['/review/addreview']" [disabled]="!accessPermission.add"
+          [routerLink]="['/review/addreview']"
+
         ></button>
       </span>
     </div>
@@ -76,15 +77,13 @@
 
               </div>
           </th>
-
                     <th class="text-center">Actions</th>
                 </tr>
             </ng-template>
             <ng-template pTemplate="body" let-list let-i="rowIndex">
                 <tr>
-
                     <td>{{list.reviewSubject}}</td>
-                    <td>{{list.publishingsiteurl}}</td>
+                    <td>{{list.publishingSiteUrl}}</td>
                     <td>{{list.rating}}</td>
                     <td>{{list.status}}</td>
                     <td>

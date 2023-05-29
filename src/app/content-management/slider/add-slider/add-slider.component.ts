@@ -23,7 +23,8 @@ export class AddSliderComponent implements OnInit {
   status= false;
   id: any;
   editMode: boolean = false
-  payload: any
+  payload: any;
+  check: boolean;
   imageChangedEvent: any = '';
   croppedImage: any = '';
   Image: any =
@@ -36,6 +37,7 @@ export class AddSliderComponent implements OnInit {
 
   reg = '(https?://)?([\\da-z.-]+)\\.([a-z.]{2,6})[/\\w .-]*/?';
   test: any;
+  imagePatch: any;
 
   constructor(private ngxLoader: NgxUiLoaderService, private fb: FormBuilder,
     private route: Router,
@@ -45,6 +47,7 @@ export class AddSliderComponent implements OnInit {
     ) {
       this.sliderForm = this.fb.group({
         // id:['',],
+        image: ['',Validators.compose([Validators.required])],
         sliderName: ['', [Validators.required, Validators.pattern('^(https?://)?([\\da-z.-]+)\\.([a-z.]{2,6})([/\\w .-]*)*/?$')]],
         sliderOrder: ['',[Validators.required, Validators.pattern('[0-9]+')]],
         sliderDiscription: ['', [Validators.required]],
@@ -63,6 +66,7 @@ export class AddSliderComponent implements OnInit {
         this.getSliderById();
       } else {
         this.editMode = false
+        this.check=true;
         this.title = "Add New Slider"
       }
     });
@@ -168,16 +172,20 @@ export class AddSliderComponent implements OnInit {
    getSliderById() {
     this.CmsService.getSliderById(this.id).subscribe((res) => {
        this.test = res;
-     const test1= this.sliderForm.patchValue({
+       this.check=true;
+      //  this.imagePatch=res.image
+     this.sliderForm.patchValue({
       sliderName: res.sliderName,
        image: res.image,
        sliderOrder: res.sliderOrder,
         sliderDiscription: res.sliderDiscription
       })
+
       this.Image = this.imgbucket.concat(res.image)
       // this.ImagePath = res.image
       this.ImagePath = this.imgbucket.concat(res.image)
       this.ngxLoader.stop();
+
     })
   }
 
