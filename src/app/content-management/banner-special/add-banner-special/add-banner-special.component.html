@@ -72,6 +72,13 @@
                     placeholder="Enter Only Number"
                     formControlName="bannerOrder"
                   />
+
+                  <div
+                  *ngIf="!bannerSpecialForm.controls['bannerOrder'].valid && (bannerSpecialForm.controls['bannerOrder'].touched || bannerSpecialForm.controls['bannerOrder'].dirty)">
+                  <div [hidden]="!bannerSpecialForm.controls['bannerOrder'].errors['required']"
+                      style="color: rgb(253, 122, 122); font-size:small; font-style: italic;">
+                      Sort by is required
+                  </div>
                   <div *ngIf="!bannerSpecialForm.controls['bannerOrder'].valid">
                     <div
                       *ngIf="bannerSpecialForm.controls['bannerOrder'].errors?.['pattern']"
@@ -84,6 +91,11 @@
                       Enter a number between 1 to 9 only.
                     </div>
                   </div>
+              </div>
+
+
+
+
                 </div>
               </div>
               <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">

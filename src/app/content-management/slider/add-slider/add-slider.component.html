@@ -40,13 +40,24 @@
                     <label for="hyperlink" class="col-form-label starlabel">Sort by</label>
                     <input type="text" class="form-control" placeholder="Enter Only Number" formControlName="sliderOrder">
                     <div
-                    *ngIf="(!sliderForm.controls['sliderOrder'].valid)">
-
-                    <div *ngIf="sliderForm.controls['sliderOrder'].errors['pattern']"
-                      style="color: rgb(253, 122, 122); font-size:small; font-style: italic;">
-                      Enter number only between 1 to 9
+                    *ngIf="!sliderForm.controls['sliderOrder'].valid && (sliderForm.controls['sliderOrder'].touched || sliderForm.controls['sliderOrder'].dirty)">
+                    <div [hidden]="!sliderForm.controls['sliderOrder'].errors['required']"
+                        style="color: rgb(253, 122, 122); font-size:small; font-style: italic;">
+                        Sort by is required
                     </div>
-                  </div>
+                    <div *ngIf="!sliderForm.controls['sliderOrder'].valid">
+                      <div
+                        *ngIf="sliderForm.controls['sliderOrder'].errors?.['pattern']"
+                        style="
+                          color: rgb(253, 122, 122);
+                          font-size: small;
+                          font-style: italic;
+                        "
+                      >
+                        Enter a number between 1 to 9 only.
+                      </div>
+                    </div>
+                </div>
                   </div>
 
                 </div>
