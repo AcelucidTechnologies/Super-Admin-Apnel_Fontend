@@ -254,5 +254,11 @@ mat-accordion .mat-expansion-panel:last-of-type {
 
 .bold-label{
   font-weight: bold;
-
 }
+
+:host::ng-deep{
+  .p-menuitem-link-active{
+    color: green !important;
+  }
+}
+

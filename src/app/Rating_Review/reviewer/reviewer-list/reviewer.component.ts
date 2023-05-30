@@ -26,7 +26,7 @@ export class ReviewerComponent implements OnInit {
 
 statusList=['Active','Inactive']
   constructor(private reviewerService:ReviewerService,private dialog:MatDialog,private permissionService:ModulePermissionService) {
-    this.permissionService.getModulePermission().subscribe(res=>{ 
+    this.permissionService.getModulePermission().subscribe(res=>{
       this.accessPermission=res[0].ReviewerList
       console.log( this.accessPermission)
     })
@@ -44,10 +44,11 @@ statusList=['Active','Inactive']
   ]
   this.exportColumns = this.cols.map(col => ({title: col.headers,dataKey: col.field}))
   }
-  
+
   getReviewerData(){
     this.reviewerService.getReviewerList().subscribe((res)=>{
     this.reviewerData=res
+    console.log("51",this.reviewerData)
     })
   }
 

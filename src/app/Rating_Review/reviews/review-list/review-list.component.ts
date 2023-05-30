@@ -52,7 +52,7 @@ export class ReviewListComponent implements OnInit {
 getReviewList(){
   this.reviewsService.getReviewList().subscribe((res)=>{
     this.reviewListValue=res
-    console.log(this.reviewListValue)
+    console.log("55",this.reviewListValue)
   })
 }
 

@@ -23,7 +23,7 @@ getRatingList():Observable<any[]>{
 submitRatingData(payloadData:any):Observable<any[]>{
   const token = localStorage.getItem('token') || '';
   let httpOptions = new HttpHeaders().set('x-access-token',token);
-  const endpointUrl = `${environment.JSON_SERVER}/leadlist`
+  const endpointUrl = `${environment.JSON_SERVER}/createRating`
    // return this.http.post<any[]>(endpointUrl,payload ,{ 'headers': httpOptions });
   let date = new Date()
   payloadData.date = date.toISOString().split('T')[0];
@@ -102,4 +102,19 @@ deleteRatingDetails(name:string)
       return this.http.post<any>(endpointUrl, payload, { 'headers': httpOptions });
     }
 
+    getReviewList():Observable<any[]>{
+      const token = localStorage.getItem('token') || '';
+      const username= localStorage.getItem("email")
+      let httpOptions = new HttpHeaders().set('x-access-token',token);
+      const endpointUrl = `${environment.JSON_SERVER}/getReviewList?username=${username}`
+       return this.http.get<any[]>(endpointUrl,{ 'headers': httpOptions });
+  }
+
+  getName(){
+    const token = localStorage.getItem('token') || '';
+    const username= localStorage.getItem("email")
+    let httpOptions = new HttpHeaders().set('x-access-token',token);
+    const endpointUrl = `${environment.JSON_SERVER}/getReviewerList?username=${username}`
+     return this.http.get<any[]>(endpointUrl,{ 'headers': httpOptions });
+  }
 }

@@ -125,4 +125,5 @@ export class RatingListComponent implements OnInit {
       this.dt.filterGlobal(data, stringVal);
     }
 
+    
 }

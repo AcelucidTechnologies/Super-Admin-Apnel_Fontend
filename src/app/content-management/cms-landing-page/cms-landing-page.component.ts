@@ -13,6 +13,7 @@ export class CmsLandingPageComponent implements OnInit  {
   featureList : any[]
   offerList : any[]=[]
   imgbucket="https://adminpanelbucket.s3.amazonaws.com/Feature/";
+  imgbuckett="https://adminpanelbucket.s3.amazonaws.com/Slider/";
   bannerList: any;
   sliderList:any;
   page: any;
@@ -58,6 +59,7 @@ export class CmsLandingPageComponent implements OnInit  {
   getSliderList(){
     this.CmsService.getSliderList().subscribe((res)=>{
       this.sliderList= res;
+      console.log("slider data",this.sliderList)
     })
   }
 
