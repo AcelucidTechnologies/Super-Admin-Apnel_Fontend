@@ -28,6 +28,7 @@ export class AddSpecialOfferComponent implements OnInit {
   id: any;
   payload: any;
   image: File;
+  check: boolean;
   editMode: boolean = false;
   reg = '([A-Za-z0-9]+)';
   Image: any =
@@ -50,6 +51,7 @@ export class AddSpecialOfferComponent implements OnInit {
     private CmsService: CmsService
   ) {
     this.specialOfferForm = this.fb.group({
+      image: ['',Validators.compose([Validators.required])],
       productName: ['', [Validators.required]],
       productModel: ['', [Validators.required]],
       productPrice: ['', [Validators.required, Validators.pattern(/^[0-9]+$/)]],
@@ -72,16 +74,17 @@ export class AddSpecialOfferComponent implements OnInit {
         this.getFeatureById();
       } else {
         this.editMode = false;
+        this.check=true;
         this.title = 'Add New Special offer';
       }
     });
-
     this.categoryDrop = ['Shoes', 'Mobile', 'TV', 'Earphone'];
     this.ProductDrop = ['Campus', 'Apple', 'Samsung', 'One Plus'];
   }
 
   submitForm() {
     this.payload = {
+      username: localStorage.getItem('email'),
       productName: this.specialOfferForm.controls['productName'].value,
       image: this.blobImage,
       productModel: this.specialOfferForm.controls['productModel'].value,

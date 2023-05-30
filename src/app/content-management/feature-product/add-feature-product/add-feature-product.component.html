@@ -113,11 +113,53 @@
                             <div class="col-12 form-group pt-3">
                                 <label for="imageUpload" class="col-form-label starlabel">Image</label>
                                 <!-- <div class="d-flex justify-content-start h-75"><img class="img-content" [src]="Image" /></div> -->
-                                <div id="imageUpload" class="custom-file">
-                                    <input type="file" class="custom-file-input" id="inputGroupFile01"
-                                    (change)="fileChangeEvent($event)" >
-                                    <label class="custom-file-label" for="inputGroupFile01">Upload file</label>
+                                <div *ngIf="check; else other">
+                                  <div id="imageUpload" class="custom-file">
+                                    <input
+                                      formControlName="image"
+                                      type="file"
+                                      class="custom-file-input"
+                                      id="inputGroupFile01"
+
+                                      (change)="fileChangeEvent($event)"
+                                    />
+                                    <div
+                                      *ngIf="
+                                        !featureForm.controls['image'].valid &&
+                                        (featureForm.controls['image'].touched ||
+                                        featureForm.controls['image'].dirty)
+                                      "
+                                    >
+                                      <div
+                                        [hidden]="
+                                          !featureForm.controls['image'].errors['required']
+                                        "
+                                        style="
+                                          color: rgb(253, 122, 122);
+                                          font-size: small;
+                                          font-style: italic;
+                                        "
+                                      >
+                                        Image is required
+                                      </div>
+                                    </div>
+                                    <label class="custom-file-label" for="inputGroupFile01">Upload image</label>
+                                  </div>
                                 </div>
+
+                                <ng-template #other>
+                                  <div id="imageUpload" class="custom-file">
+                                    <input
+                                      type="file"
+                                      class="custom-file-input"
+                                      id="inputGroupFile01"
+                                      (change)="fileChangeEvent($event)"
+                                    />
+
+                                    <label class="custom-file-label" for="inputGroupFile01">Upload image</label>
+
+                                  </div>
+                                </ng-template>
                             </div>
                         </div>
 

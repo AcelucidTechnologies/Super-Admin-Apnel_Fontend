@@ -38,7 +38,7 @@ export class AddBannerSpecialComponent implements OnInit {
   sidebarSpacing: any;
   title: string = ' ';
   bannerSpecialForm: FormGroup;
-  prevImageName: string = '';
+  prevImageName: any;
   Image: any =
     'data:image/jpeg;base64,iVBORw0KGgoAAAANSUhEUgAAAEAAAABACAYAAACqaXHeAAAACXBIWXMAAAsTAAALEwEAmpwYAAADp0lEQVR4nO2bSWhUQRCGvyhuiaKCREER94MeAipiEPHmJWrUix4URFFxS4xxuQQdF9zXk4wSQURvbrgvuIEXT17F6MntIEb04JK4FdQLZfscM+Msb3reD8U8eqr7vfq7q7uq+z2IESNGjBgxLCqAWmAdsMkTaQBmAeWkQBmwAXgP/PBUWoFGtfU3dAHOROAB8yWnXRI2OAotQBLY7Ykk1SZro7h4h8/bYX8c6IF/EJuaHXcoRyeHoPCpp8YHENueGXtnSOF6U3AU/5F03SBhCuTad/xhbyImgIxHwEBgvg6ldXpdSQmMgCrgCvAtZI2Vssuq4yUBy4CvnQg22oB6PCNghWPkF+AasF/lupZZneV4QkCV0/N3gWEhesOBew5J4/CAgEtGTwzsnkJX/rtv9M9S5AQMANpNj0ov/wsjzYiR+aAfRUzAXKNzNY2bXTf1JOQuWgLqjc7ONG62x9RbRRETUGd0dmVIwBo8cYFradzshqk3B48mwRGduNEoMwm2axtFvQxeSXMZfGD0pS7FTsB4Xc4C3fvayy5GOca3aV0vQuEGJ8yVIX4TOAAcBG6F5AlSx6tkaKOZD1JJu2625hp909zGy0o6XO2Euq7IHDGZ7EBcah7QBJwCHure5du/pOOfgRfAYx2RJ7XuPHXFfdkgIICExEu0nsjivyRI6UBC5kV6TvGyEyPtfyQRlS2xLhprXNAeTNeQD8CnDOptKTQB4rtLgScpHvKN5h87gAXANGA00CekPTnt6Q8MBiZo/rFaD0cuAs+B79qu/E4vJAG1zh69XTbv6BnemBzctzcwCRgbFOSbgKHao67hr4Ct2nt5RSKPBNTo7G0Nf61bbd0oEBJ5IEB8c5vxv2Co79AhWVAkckyAGH/E6XXx/SlEBIkcEtBVz+Kt8ef1RJpSIOCQY/wRJYVSIGClY7ysxVGAjL7DKhW5IqDaSZ2bw97LKRDq3G26RJYJ6K3JStDm7YgN+5wfjyedMHYQ0UJOCZgYFmuXEgEPTFuy/FFKBMw27XwsRExfaAIemXY2E13khICpzuaE5OQlRcA508Zeoo0/7G00BbKEpYtKs0ssv0MosvcEZ5qClgzeFLUhr5wRRBk9dVsseN4a9H3ZVids7ZHh0reQaBt/wjzrO6BX8GdjSL6e7MSHCE3O3vz2CHwcESbHnJ4XWWvZKQvJ232WU2HJWZlOCtYdfJN32vMpM9NynRgbIvChQ7akQV+N7/D5GDFixIjxi4GfxUF9ZJ3ajNUAAAAASUVORK5CYII';
   fgsType: any;
@@ -52,6 +52,9 @@ export class AddBannerSpecialComponent implements OnInit {
   ImagePath: string;
   blobImage:any
   editMode: boolean = false;
+  imageMode= false;
+  check: boolean;
+  fileHolder: File | null;
   imageChangedEvent: any = '';
   croppedImage: any = '';
   public config = {
@@ -63,6 +66,7 @@ export class AddBannerSpecialComponent implements OnInit {
   test: any;
   testadd: any;
   img: any;
+  imgpatch: any;
   public imageName: string;
   imagehide: false;
   imageShow: true;
@@ -77,9 +81,10 @@ export class AddBannerSpecialComponent implements OnInit {
     private common: CommonService,
     private http: HttpClient
   ) {
+    this.fileHolder = null;
     this.getbannerList();
     this.bannerSpecialForm = this.fb.group({
-     // documents: ['',[Validators.compose([Validators.required])]],
+      image: ['',Validators.compose([Validators.required])],
       bannerName: [
         '',
         [
@@ -89,7 +94,7 @@ export class AddBannerSpecialComponent implements OnInit {
           ),
         ],
       ],
-      bannerOrder: ['', [Validators.required, Validators.pattern('[0-9]+')]],
+      bannerOrder: ['', [Validators.required, Validators.pattern('[1-9]+')]],
       bannerDescription: ['', [Validators.required]],
     });
     console.log('hellotoken' + this.bannerSpecialForm);
@@ -107,6 +112,7 @@ export class AddBannerSpecialComponent implements OnInit {
       this.id = params.get('id');
       if (this.id && this.id != undefined) {
         this.editMode = true;
+
         this.title = 'Edit Special Banner';
         this.imagehide=false
         this.imageShow=true
@@ -114,6 +120,7 @@ export class AddBannerSpecialComponent implements OnInit {
         this.getBannerById();
       } else {
         this.editMode = false;
+        this.check=true;
         this.imageShow= true
         this.imagehide=false
         this.title = 'Add New Special Banner';
@@ -142,6 +149,7 @@ export class AddBannerSpecialComponent implements OnInit {
     }
   }
   submitForm() {
+
     this.ngxLoader.start();
     this.payload = {
       username: localStorage.getItem('email'),
@@ -155,9 +163,12 @@ export class AddBannerSpecialComponent implements OnInit {
     }
     this.ngxLoader.start();
     if (this.editMode) {
+
       this.editBanner();
     } else {
       this.submitDetails(this.payload);
+      this.check=true
+
       // this.addCategory()
     }
     this.getbannerList();
@@ -204,21 +215,28 @@ export class AddBannerSpecialComponent implements OnInit {
   getBannerById() {
     this.CmsService.getBannerById(this.id).subscribe((res) => {
       this.testapi = res;
+      console.log("response",res)
       if (res.image) {
         this.Image = res.image;
         this.prevImageName = this.Image.toString().split('.com/Banner/')[1];
         this.imageLoaded();
       }
+      console.log("34567890",this.prevImageName)
       this.bannerSpecialForm.patchValue({
         username: res.username,
         bannerName: res.bannerName,
-        image: res.prevImageName,
+        image: this.prevImageName,
         bannerOrder: res.bannerOrder,
         bannerDescription: res.bannerDescription,
       });
-
-      this.ngxLoader.stop();
+      console.log("group",this.bannerSpecialForm);
+      // this.bannerSpecialForm.controls['image'].patchValue({
+      //   name: this.prevImageName
+      // })
+      // console.log(this.bannerSpecialForm)
+      // this.ngxLoader.stop();
     });
+
   }
 
   // editBannerData(){
@@ -252,6 +270,7 @@ export class AddBannerSpecialComponent implements OnInit {
     var reader = new FileReader();
     reader.readAsDataURL(event.target.files[0]);
     this.imageName = event.target.files[0].name;
+    this.fileHolder = event.target.files[0];
     reader.onload = (data) => {
       this.Image = data.target.result;
     };

@@ -37,16 +37,27 @@
                 </div>
                 <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
                   <div class="form-group">
-                    <label for="hyperlink" class="col-form-label">Sort by</label>
+                    <label for="hyperlink" class="col-form-label starlabel">Sort by</label>
                     <input type="text" class="form-control" placeholder="Enter Only Number" formControlName="sliderOrder">
                     <div
-                    *ngIf="(!sliderForm.controls['sliderOrder'].valid)">
-
-                    <div *ngIf="sliderForm.controls['sliderOrder'].errors['pattern']"
-                      style="color: rgb(253, 122, 122); font-size:small; font-style: italic;">
-                      Enter number only between 1 to 9
+                    *ngIf="!sliderForm.controls['sliderOrder'].valid && (sliderForm.controls['sliderOrder'].touched || sliderForm.controls['sliderOrder'].dirty)">
+                    <div [hidden]="!sliderForm.controls['sliderOrder'].errors['required']"
+                        style="color: rgb(253, 122, 122); font-size:small; font-style: italic;">
+                        Sort by is required
                     </div>
-                  </div>
+                    <div *ngIf="!sliderForm.controls['sliderOrder'].valid">
+                      <div
+                        *ngIf="sliderForm.controls['sliderOrder'].errors?.['pattern']"
+                        style="
+                          color: rgb(253, 122, 122);
+                          font-size: small;
+                          font-style: italic;
+                        "
+                      >
+                        Enter a number between 1 to 9 only.
+                      </div>
+                    </div>
+                </div>
                   </div>
 
                 </div>
@@ -81,11 +92,60 @@
                 <div class="col-12 form-group pt-3">
                     <label for="imageUpload" class="col-form-label starlabel">Image</label>
                     <!-- <div class="d-flex justify-content-start h-75"><img class="img-content" [src]="Image" /></div> -->
-                    <div id="imageUpload" class="custom-file">
-                        <input type="file" class="custom-file-input" id="inputGroupFile01"
-                        (change)="fileChangeEvent($event)" >
-                        <label class="custom-file-label" for="inputGroupFile01">Upload file</label>
+                    <div *ngIf="check; else other">
+                      <div id="imageUpload" class="custom-file">
+                        <input
+                          formControlName="image"
+                          type="file"
+                          class="custom-file-input"
+                          id="inputGroupFile01"
+
+                          (change)="fileChangeEvent($event)"
+                        />
+                        <div
+                          *ngIf="
+                            !sliderForm.controls['image'].valid &&
+                            (sliderForm.controls['image'].touched ||
+                            sliderForm.controls['image'].dirty)
+                          "
+                        >
+                          <div
+                            [hidden]="
+                              !sliderForm.controls['image'].errors['required']
+                            "
+                            style="
+                              color: rgb(253, 122, 122);
+                              font-size: small;
+                              font-style: italic;
+                            "
+                          >
+                            Image is required
+                          </div>
+                        </div>
+                        <label class="custom-file-label" for="inputGroupFile01">Upload image</label>
+                        <!-- <input type="file" (change)="onFileSelected($event)" #fileInput> -->
+                        <!-- <div *ngIf="check; else other">
+
+                        </div> -->
+                        <!-- <ng-template #other>
+                          <label class="custom-file-label" for="inputGroupFile01">Upload File</label>
+                        </ng-template> -->
+                      </div>
                     </div>
+
+                    <ng-template #other>
+                      <div id="imageUpload" class="custom-file">
+                        <input
+                          type="file"
+                          class="custom-file-input"
+                          id="inputGroupFile01"
+                          (change)="fileChangeEvent($event)"
+                        />
+
+                        <label class="custom-file-label" for="inputGroupFile01">Upload image</label>
+
+                      </div>
+                    </ng-template>
                 </div>
             </div>
 

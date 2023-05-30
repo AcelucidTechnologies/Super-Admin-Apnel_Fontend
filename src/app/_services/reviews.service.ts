@@ -10,13 +10,13 @@ import { reviewList } from '../DummyData/review';
 export class ReviewsService {
 
   constructor(private http:HttpClient) { }
- 
+
   getReviewList():Observable<any[]>{
     const token = localStorage.getItem('token') || '';
+    const username= localStorage.getItem("email")
     let httpOptions = new HttpHeaders().set('x-access-token',token);
-    const endpointUrl = `${environment.JSON_SERVER}/reviewlist`
-    // return this.http.get<any[]>(endpointUrl,payload ,{ 'headers': httpOptions });
-    return of(reviewList)
+    const endpointUrl = `${environment.JSON_SERVER}/getReviewList?username=${username}`
+     return this.http.get<any[]>(endpointUrl,{ 'headers': httpOptions });
 }
 
 submitReviewDetail(payload:any):Observable<any[]>{
@@ -53,7 +53,7 @@ submitEditDetail(payload:any,serialno:number){
       res.publishingsiteurl = payload.publishingsiteurl,
       res.status = payload.status
     }
-  }) 
+  })
   return of(reviewList)
 }
 
@@ -65,7 +65,7 @@ getReviewDetail(serialno:number){
   const endpointUrl = `${environment.JSON_SERVER}/edit`;
   let filtered =reviewList.filter((res)=>{
     return res.Sno == serialno
-  }) 
+  })
 
   console.log(serialno)
   return of(filtered)

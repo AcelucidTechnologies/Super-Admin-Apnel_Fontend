@@ -9,6 +9,8 @@ import { MatDialog } from '@angular/material/dialog';
 import { ExportDialogComponent } from '../export-dialog/export-dialog.component';
 import { RatingService } from 'src/app/_services/rating.service';
 import { Router } from '@angular/router';
+import { RatingCriteriaService } from 'src/app/_services/rating-criteria.service';
+import { ReviewsService } from 'src/app/_services/reviews.service';
 @Component({
   selector: 'app-add-rating',
   templateUrl: './add-rating.component.html',
@@ -18,6 +20,8 @@ export class AddRatingComponent implements OnInit {
   sidebarSpacing: string = 'contracted';
   ratingForm: FormGroup;
   reviewerOptions: string[] = [];
+  ratingSettingData:any;
+  CriteriaList: any;
   reviewOptions: string[] = ['Hotel Plaza', 'Palm Hotel', 'Prince Hotel'];
   statusOptions: string[] = ['Approved', 'Not Approved'];
   userTypeOptions: string[] = ['Business Trip', 'Couple', 'Family', 'Group'];
@@ -26,7 +30,9 @@ export class AddRatingComponent implements OnInit {
     public dialog: MatDialog,
     public fb: FormBuilder,
     private ratingService: RatingService,
-    private route: Router
+    private reviewsService:ReviewsService,
+    private route: Router,
+    private ratingCriteriaService: RatingCriteriaService
   ) {
     this.ratingForm = this.fb.group({
       reviewer: ['', [Validators.required]],
@@ -90,9 +96,26 @@ export class AddRatingComponent implements OnInit {
   ngOnInit(): void {
     // let formpart= this.ratingForm.controls['ratingType']as FormGroup
     // formpart.controls['cleaniness']
+    this.getReviewList();
+    this.getCriteriaList();
   }
 
   show(data) {
     console.log(data);
   }
+
+  getReviewList(){
+    this.reviewsService.getReviewList().subscribe((res)=>{
+      this.ratingSettingData=res
+      console.log("--------->107",this.ratingSettingData)
+    })
+  }
+
+  getCriteriaList(){
+    this.ratingCriteriaService.getCriteriaList().subscribe((res)=>{
+      this.CriteriaList=res
+      console.log("----> 98",this.CriteriaList)
+    })
+  }
+
 }

@@ -11,7 +11,7 @@
               type="button"
               label=" + Add Criteria"
               class="add-button-rating"
-              [routerLink]="['/ratesettings/ratingcriteriaform']" [disabled]="!accessPermission.add"
+              [routerLink]="['/ratesettings/ratingcriteriaform']" [disabled]="!accessPermission?.add"
             ></button>
           </span>
         </div>
@@ -100,7 +100,7 @@ styleClass="p-datatable-striped" [globalFilterFields]="['ratingCriteria']">
     <td>
         <div>
           <a pTooltip="Edit Criteria" tooltipPosition="bottom" style="margin-right: 15px; cursor: pointer;">
-            <img src="../../../../assets/images/edit.svg" [routerLink]="['/ratesettings/ratingcriteriaform']" [queryParams]="{serialno:criterias.sno}"  alt="img">
+            <img src="../../../../assets/images/edit.svg" [routerLink]="['/ratesettings/ratingcriteriaform']" [queryParams]="{id:criterias?._id}"  alt="img">
           </a>
           <a pTooltip="Delete Criteria" tooltipPosition="bottom" (click)="openDialog(criterias.ratingCriteria)"
             class="me-3 confirm-text" href="javascript:void(0);" >

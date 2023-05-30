@@ -79,7 +79,7 @@ getRatingDetails(name:string):Observable<any[]>{
   let filteredData = ratingDetails.filter((data)=>{
 
           return data.reviewer==name
-        
+
   })
   return of(filteredData)
 }
@@ -93,6 +93,13 @@ deleteRatingDetails(name:string)
         // leads.push(payload);
        let filteredrate = ratingDetails.splice(ratingDetails.findIndex((index) => index.reviewer == name),1);
         return of(filteredrate)
+    }
+
+    createNewReviewername(payload:any):Observable<any>{
+      const token = localStorage.getItem('token') || '';
+      let httpOptions = new HttpHeaders().set('x-access-token', token)
+      const endpointUrl = `${environment.JSON_SERVER}/createNewReviewerName`;
+      return this.http.post<any>(endpointUrl, payload, { 'headers': httpOptions });
     }
 
 }
