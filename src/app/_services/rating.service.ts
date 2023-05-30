@@ -95,4 +95,11 @@ deleteRatingDetails(name:string)
         return of(filteredrate)
     }
 
+    createNewReviewername(payload:any):Observable<any>{
+      const token = localStorage.getItem('token') || '';
+      let httpOptions = new HttpHeaders().set('x-access-token', token)
+      const endpointUrl = `${environment.JSON_SERVER}/createNewReviewerName`;
+      return this.http.post<any>(endpointUrl, payload, { 'headers': httpOptions });
+    }
+
 }

@@ -71,4 +71,6 @@ deleteCriteriaDetails(name:string):Observable<any[]>{
 }
 
 
+
+
 }
