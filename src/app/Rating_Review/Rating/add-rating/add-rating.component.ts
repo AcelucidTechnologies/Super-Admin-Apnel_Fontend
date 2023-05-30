@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {
+  FormArray,
   FormBuilder,
   FormControl,
   FormGroup,
@@ -20,8 +21,10 @@ export class AddRatingComponent implements OnInit {
   sidebarSpacing: string = 'contracted';
   ratingForm: FormGroup;
   reviewerOptions: string[] = [];
-  ratingSettingData:any;
+  ratingSettingData: any;
   CriteriaList: any;
+  reviewerData: any;
+  ratingdata: any;
   reviewOptions: string[] = ['Hotel Plaza', 'Palm Hotel', 'Prince Hotel'];
   statusOptions: string[] = ['Approved', 'Not Approved'];
   userTypeOptions: string[] = ['Business Trip', 'Couple', 'Family', 'Group'];
@@ -30,7 +33,7 @@ export class AddRatingComponent implements OnInit {
     public dialog: MatDialog,
     public fb: FormBuilder,
     private ratingService: RatingService,
-    private reviewsService:ReviewsService,
+    private reviewsService: ReviewsService,
     private route: Router,
     private ratingCriteriaService: RatingCriteriaService
   ) {
@@ -40,13 +43,10 @@ export class AddRatingComponent implements OnInit {
       overall: ['', [Validators.required]],
       pros: [''],
       cons: [''],
-      ratingType: this.fb.group({
-        Cleaniness: [0],
-        Comfort: [0],
-        Facilities: [0],
-        Location: [0],
-        Staff: [0],
-      }),
+      ratingType: this.fb.array([
+
+      ]
+      ),
       userType: ['', [Validators.required]],
       status: ['', [Validators.required]],
     });
@@ -97,6 +97,7 @@ export class AddRatingComponent implements OnInit {
     // let formpart= this.ratingForm.controls['ratingType']as FormGroup
     // formpart.controls['cleaniness']
     this.getReviewList();
+    this.getReviewerData();
     this.getCriteriaList();
   }
 
@@ -104,18 +105,39 @@ export class AddRatingComponent implements OnInit {
     console.log(data);
   }
 
-  getReviewList(){
-    this.reviewsService.getReviewList().subscribe((res)=>{
-      this.ratingSettingData=res
-      console.log("--------->107",this.ratingSettingData)
-    })
+  getCriteriaList() {
+    this.ratingCriteriaService.getCriteriaList().subscribe((res) => {
+      this.CriteriaList = res;
+      console.log('----> 98', this.CriteriaList);
+    });
   }
 
-  getCriteriaList(){
-    this.ratingCriteriaService.getCriteriaList().subscribe((res)=>{
-      this.CriteriaList=res
-      console.log("----> 98",this.CriteriaList)
-    })
+  getReviewerData() {
+    this.ratingService.getName().subscribe((res) => {
+      this.reviewerData = res;
+      console.log('51', this.reviewerData);
+    });
   }
 
+  getReviewList() {
+    this.reviewsService.getReviewList().subscribe((res) => {
+      this.ratingSettingData = res;
+      console.log('--------->107', this.ratingSettingData);
+    });
+  }
+
+  get ratingType() : FormArray {
+    return this.ratingForm.get("ratingType") as FormArray
+  }
+
+  newSkill(): FormGroup {
+    return this.fb.group({
+      value: '',
+
+    })
+ }
+
+addSkills() {
+   this.ratingType.push(this.newSkill());
+}
 }

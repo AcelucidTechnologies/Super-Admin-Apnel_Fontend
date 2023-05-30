@@ -9,19 +9,16 @@
     <mat-divider></mat-divider>
 
     <p-panelMenu
-
+    (click) = "activeMenu($event)"
       [model]="items"
       [style]="{
-
         width: '230px',
         'margin-bottom': '20px',
         'margin-left': '10px',
         'margin-right': '10px',
-
         height: 'auto'
       }"
       [multiple]="false"
-      
     ></p-panelMenu>
   </div>
 </div>
@@ -37,6 +34,6 @@
     <h4 class="name">{{ username }}</h4>
 
     <mat-divider></mat-divider>
-    <p-panelMenu [model]="items" [style]="{ width: '230px' }"></p-panelMenu>
+    <p-panelMenu [model]="items" [style]="{ width: '230px' }" ></p-panelMenu>
   </div>
 </div>

@@ -60,7 +60,6 @@ export class SidenavComponent implements OnInit {
 
   @ViewChild(MatSidenav) sidenav!: MatSidenav;
 
-
   constructor(private observer: BreakpointObserver, private router: Router,
     private permissionService:ModulePermissionService,
     private adminService:AdminService) {
@@ -70,7 +69,6 @@ export class SidenavComponent implements OnInit {
 
       console.log( res[0].moduleList);
       this.items = SideNaveMenueRoute
-
       this.items = this.items.filter(val=>{
         if(this.moduleList.includes(val.label))
         return val
@@ -164,5 +162,23 @@ export class SidenavComponent implements OnInit {
   //   }
   //   node.classList.add("active")
   //   }
-
+  activeMenu(event) {
+    //console.log(event.target.classList);
+    let node;
+    if (event.target.classList.contains("p-submenu-header") == true) {
+      node = "submenu";
+    } else if (event.target.tagName === "SPAN") {
+      node = event.target.parentNode.parentNode;
+    } else {
+      node = event.target.parentNode;
+    }
+    //console.log(node);
+    if (node != "submenu") {
+      let menuitem = document.getElementsByClassName("p-menuitem-text");
+      for (let i = 0; i < menuitem.length; i++) {
+        menuitem[i].classList.remove("active");
+      }
+      node.classList.add("active");
+    }
+  }
 }
