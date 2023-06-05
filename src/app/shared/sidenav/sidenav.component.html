@@ -9,7 +9,7 @@
     <mat-divider></mat-divider>
 
     <p-panelMenu
-    (click) = "activeMenu($event)"
+
       [model]="items"
       [style]="{
         width: '230px',
@@ -19,6 +19,7 @@
         height: 'auto'
       }"
       [multiple]="false"
+      (click) = "activeMenu($event)"
     ></p-panelMenu>
   </div>
 </div>

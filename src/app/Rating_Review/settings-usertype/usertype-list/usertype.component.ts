@@ -104,7 +104,7 @@ export class UserTypeComponent implements OnInit {
         }
 
           // search functionality start here
-   applyFilterGlobal(data, stringVal) {
-    this.dt.filterGlobal(data, stringVal);
-  }
+          applyFilterGlobal($event, stringVal) {
+            this.dt.filterGlobal(($event.target as HTMLInputElement).value, stringVal);
+          }
 }

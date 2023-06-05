@@ -76,16 +76,14 @@ Email
 
   </div>
 </th>
-
       <th class="text-center">Action</th>
-
     </tr>
   </ng-template>
   <ng-template pTemplate="body" let-list let-i="rowIndex">
     <tr>
       <td>{{list.name}}</td>
       <td>{{list.email}}</td>
-      <td>{{list.rating}}</td>
+      <td>{{list.ratingCount}}</td>
       <td>{{list.firstRating}}</td>
       <td>{{list.status}}</td>
 
@@ -94,7 +92,7 @@ Email
           <img src="../../../../assets/images/edit.svg" [routerLink]="['/reviewer/reviewerform']"
             [queryParams]="{serialno:list.sno}" alt="img">
         </a>
-        <a pTooltip="Delete Reviewer" tooltipPosition="bottom" (click)="openDialog(list.name)"
+        <a pTooltip="Delete Reviewer" tooltipPosition="bottom" (click)="openDialog(list)"
           class="me-3 confirm-text" href="javascript:void(0);">
           <img src="../../../../assets/images/delete.svg" alt="img">
         </a>

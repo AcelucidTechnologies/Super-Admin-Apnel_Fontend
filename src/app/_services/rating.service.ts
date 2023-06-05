@@ -12,23 +12,21 @@ export class RatingService {
 
   constructor(private http:HttpClient) { }
 
-getRatingList():Observable<any[]>{
+getRatingList():Observable<any>{
     const token = localStorage.getItem('token') || '';
+    const email = localStorage.getItem("email")
     let httpOptions = new HttpHeaders().set('x-access-token',token);
-    const endpointUrl = `${environment.JSON_SERVER}/leadlist`
-    // return this.http.get<any[]>(endpointUrl,payload ,{ 'headers': httpOptions });
-    return of(ratingDetails)
+    const endpointUrl = `${environment.JSON_SERVER}/getRating?username=${email}`
+     return this.http.get<any[]>(endpointUrl,{ 'headers': httpOptions });
+
 }
 
 submitRatingData(payloadData:any):Observable<any[]>{
   const token = localStorage.getItem('token') || '';
   let httpOptions = new HttpHeaders().set('x-access-token',token);
   const endpointUrl = `${environment.JSON_SERVER}/createRating`
-   // return this.http.post<any[]>(endpointUrl,payload ,{ 'headers': httpOptions });
-  let date = new Date()
-  payloadData.date = date.toISOString().split('T')[0];
-  ratingDetails.push(payloadData);
-  return of(ratingDetails)
+    return this.http.post<any[]>(endpointUrl,payloadData ,{ 'headers': httpOptions });
+
 }
 
 submitRatingEditData(payload:any,name:string):Observable<any[]>{
@@ -84,15 +82,15 @@ getRatingDetails(name:string):Observable<any[]>{
   return of(filteredData)
 }
 
-deleteRatingDetails(name:string)
+deleteRatingDetails(id:string)
     {
         const token = localStorage.getItem('token') || '';
         let httpOptions = new HttpHeaders().set('x-access-token',token);
-        const endpointUrl = `${environment.JSON_SERVER}/leadlist`
-        // return this.http.get<any[]>(endpointUrl,payload ,{ 'headers': httpOptions });
+        const endpointUrl = `${environment.JSON_SERVER}/deleteRating?id=${id}`
+         return this.http.delete<any[]>(endpointUrl,{ 'headers': httpOptions });
         // leads.push(payload);
-       let filteredrate = ratingDetails.splice(ratingDetails.findIndex((index) => index.reviewer == name),1);
-        return of(filteredrate)
+      //  let filteredrate = ratingDetails.splice(ratingDetails.findIndex((index) => index.reviewer == name),1);
+      //   return of(filteredrate)
     }
 
     createNewReviewername(payload:any):Observable<any>{
@@ -115,6 +113,14 @@ deleteRatingDetails(name:string)
     const username= localStorage.getItem("email")
     let httpOptions = new HttpHeaders().set('x-access-token',token);
     const endpointUrl = `${environment.JSON_SERVER}/getReviewerList?username=${username}`
+     return this.http.get<any[]>(endpointUrl,{ 'headers': httpOptions });
+  }
+
+  getAllRatingDetails():Observable<any>{
+    const token = localStorage.getItem('token') || '';
+    const username= localStorage.getItem("email");
+    let httpOptions = new HttpHeaders().set('x-access-token',token);
+    const endpointUrl = `${environment.JSON_SERVER}/getAllRating`
      return this.http.get<any[]>(endpointUrl,{ 'headers': httpOptions });
   }
 }

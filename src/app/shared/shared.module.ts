@@ -23,6 +23,7 @@ import {MatTabsModule} from '@angular/material/tabs';
 import {DialogModule} from 'primeng/dialog';
 import {FormsModule,ReactiveFormsModule} from '@angular/forms';
 import { CalendarModule } from 'primeng/calendar';
+import { ProgressBarModule } from 'primeng/progressbar';
 @NgModule({
   declarations: [
     SidenavComponent,
@@ -56,6 +57,7 @@ import { CalendarModule } from 'primeng/calendar';
     FormsModule,
     ReactiveFormsModule,
     CalendarModule,
+    ProgressBarModule
 
   ],
   exports: [

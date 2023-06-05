@@ -38,9 +38,11 @@
                 </div>
               </div> -->
 
-                             <div class="col-9">
-                <p-dropdown [options]="reviewerData" id="name" optionLabel="name" placeholder="Select"
-                  styleClass="reviewer-dropdown" formControlName="reviewer"></p-dropdown>
+                 <div class="col-9">
+                  <select class="form-group" aria-label="Default select example" formControlName="reviewer">
+                    <option>Select</option>
+                    <option *ngFor="let review of reviewerData">{{review.name}}</option>
+                  </select>
                 <div *ngIf="
                   !ratingForm.controls['reviewer'].valid &&
                   (ratingForm.controls['reviewer'].touched ||
@@ -61,8 +63,10 @@
                 <label for="review" class="starlabel">Review Subject</label>
               </div>
               <div class="col-9">
-                <p-dropdown [options]="ratingSettingData" optionLabel="reviewSubject" placeholder="Select" styleClass="review-dropdown"
-                  formControlName="review"></p-dropdown>
+                <select class="form-group" aria-label="Default select example" formControlName="review">
+                  <option>Select</option>
+                  <option *ngFor="let review of ratingSettingData">{{review.reviewSubject}}</option>
+                </select>
                 <div *ngIf="
                   !ratingForm.controls['review'].valid &&
                   (ratingForm.controls['review'].touched ||
@@ -85,7 +89,7 @@
               <label for="reviewer" class="col-form-label text-left starlabel">Overall</label>
             </div>
             <div class="col-11" style="padding-left: 35px">
-              <input type="text" class="form-control" formControlName="overall" placeholder="enter overall rating" />
+              <p-dropdown [options]="overAll" formControlName="overall" styleClass="reviewer-dropdown" placeholder="enter overall rating"></p-dropdown>
               <div *ngIf="
                 !ratingForm.controls['review'].valid &&
                 (ratingForm.controls['review'].touched ||
@@ -214,18 +218,32 @@
 
   </div> -->
 
-          <div class="row" formGroupName="ratingType">
+          <div class="row">
             <div class="form-row col-6 pt-5">
               <div class="col-5">
                 <label for="ratingType" class="col-form-label text-left starlabel">Rating Type</label>
               </div>
+              <div>
 
-              <div formArrayName="skills" class="d-flex justify-content-between" *ngFor="let data of CriteriaList; let index as i ">
+                <div formArrayName="ratings">
+
+                  <div *ngFor="let rating of ratingForm.get('ratings')['controls']; let i = index">
+                    <div [formGroupName]="i">
+                      <!-- <input type="number" formControlName="rating" [value]="rating.value.rating" /> -->
+                      <p-rating [cancel]="false" formControlName="rating"></p-rating>
+                    </div>
+                  </div>
+                </div>
+                <!-- <div formArrayName="ratingType">
+              <div class="d-flex justify-content-between" *ngFor="let data of CriteriaList; let i = index ">
                 <div class="mr-5" style="width: 100px">{{data.ratingCriteria}}</div>
                 <div>
-                  <p-rating [cancel]="false" formControlName="Cleaniness"></p-rating>
+                  <p-rating [cancel]="false" [formControlName]="i"></p-rating>
                 </div>
               </div>
+            </div> -->
+            </div>
+
               <!-- <div class="d-flex justify-content-between">
                 <div class="mr-5" style="width: 100px">Comfort</div>
                 <div>
@@ -261,8 +279,10 @@
                 <label for="ratingType" class="col-form-label text-left starlabel">User Type</label>
               </div>
               <div class="col-9">
-                <p-dropdown [options]="userTypeOptions" id="ratingType" placeholder="Select"
-                  styleClass="userType-dropdown" formControlName="userType"></p-dropdown>
+                <select class="form-group" aria-label="Default select example" formControlName="userType">
+                  <option>Select</option>
+                  <option *ngFor="let userType of usertypeSettingData">{{userType.userType}}</option>
+                </select>
                 <div *ngIf="
                   !ratingForm.controls['userType'].valid &&
                   (ratingForm.controls['userType'].touched ||
@@ -273,7 +293,7 @@
                     font-size: small;
                     font-style: italic;
                   ">
-                    Status is required
+                    User Type is required
                   </div>
                 </div>
               </div>
@@ -318,3 +338,5 @@
     </div>
   </div>
 </div>
+
+

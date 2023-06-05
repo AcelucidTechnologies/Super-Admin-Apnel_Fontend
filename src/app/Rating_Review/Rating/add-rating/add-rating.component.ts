@@ -12,6 +12,7 @@ import { RatingService } from 'src/app/_services/rating.service';
 import { Router } from '@angular/router';
 import { RatingCriteriaService } from 'src/app/_services/rating-criteria.service';
 import { ReviewsService } from 'src/app/_services/reviews.service';
+import { UsertypeService } from 'src/app/_services/usertype.service';
 @Component({
   selector: 'app-add-rating',
   templateUrl: './add-rating.component.html',
@@ -25,11 +26,15 @@ export class AddRatingComponent implements OnInit {
   CriteriaList: any;
   reviewerData: any;
   ratingdata: any;
+  overAll: any;
+  usertypeSettingData: any;
   reviewOptions: string[] = ['Hotel Plaza', 'Palm Hotel', 'Prince Hotel'];
   statusOptions: string[] = ['Approved', 'Not Approved'];
   userTypeOptions: string[] = ['Business Trip', 'Couple', 'Family', 'Group'];
+  dta: any;
 
   constructor(
+    private usertypeService: UsertypeService,
     public dialog: MatDialog,
     public fb: FormBuilder,
     private ratingService: RatingService,
@@ -43,16 +48,18 @@ export class AddRatingComponent implements OnInit {
       overall: ['', [Validators.required]],
       pros: [''],
       cons: [''],
-      ratingType: this.fb.array([
+      ratings: this.fb.array([
 
       ]
       ),
       userType: ['', [Validators.required]],
       status: ['', [Validators.required]],
     });
+  //  this.addCheckboxes();
     this.ratingService.getReviewerList().subscribe((res) => {
       this.reviewerOptions = res;
     });
+
   }
 
   onToggleSidebar(sidebarState: any) {
@@ -64,19 +71,22 @@ export class AddRatingComponent implements OnInit {
   }
 
   submitForm() {
+    console.log("------>",this.ratingForm.value)
     let payload = {
+      username: localStorage.getItem("email"),
       reviewer: this.ratingForm.controls['reviewer'].value,
       review: this.ratingForm.controls['review'].value,
-      rating: this.ratingForm.controls['overall'].value,
+      overall: this.ratingForm.controls['overall'].value,
       status: this.ratingForm.controls['status'].value,
-      ratingType: this.ratingForm.controls['ratingType'].value,
-      positives: this.ratingForm.controls['pros'].value,
-      negatives: this.ratingForm.controls['cons'].value,
+      ratings: this.ratingForm.controls['ratings'].value,
+      pros: this.ratingForm.controls['pros'].value,
+      cons: this.ratingForm.controls['cons'].value,
       userType: this.ratingForm.controls['userType'].value,
     };
-    console.log(payload);
+    console.log("---Payload",payload);
     this.ratingService.submitRatingData(payload).subscribe((res) => {
       if (res) {
+        console.log("---response",res);
         this.route.navigate(['/rating/ratinglist']);
       }
     });
@@ -99,8 +109,9 @@ export class AddRatingComponent implements OnInit {
     this.getReviewList();
     this.getReviewerData();
     this.getCriteriaList();
+    this.getUsertypeList();
+    this.overAll=['Excellent','Good','Satisfying','Very Bad','Very Poor']
   }
-
   show(data) {
     console.log(data);
   }
@@ -109,6 +120,7 @@ export class AddRatingComponent implements OnInit {
     this.ratingCriteriaService.getCriteriaList().subscribe((res) => {
       this.CriteriaList = res;
       console.log('----> 98', this.CriteriaList);
+      this.populateRatings();
     });
   }
 
@@ -126,18 +138,23 @@ export class AddRatingComponent implements OnInit {
     });
   }
 
-  get ratingType() : FormArray {
-    return this.ratingForm.get("ratingType") as FormArray
-  }
-
-  newSkill(): FormGroup {
-    return this.fb.group({
-      value: '',
-
-    })
- }
-
-addSkills() {
-   this.ratingType.push(this.newSkill());
+populateRatings(): void {
+  const ratingsArray = this.ratingForm.get('ratings') as FormArray;
+  this.CriteriaList.forEach((rating) => {
+    ratingsArray.push(this.fb.group({
+      rating: [rating.value],
+      name: [rating.ratingCriteria],
+    }));
+  });
 }
+
+getUsertypeList(){
+  this.usertypeService.getUsertypeList().subscribe((res)=>{
+    this.usertypeSettingData=res
+    console.log("152",this.usertypeSettingData)
+  })
+}
+
+
+
 }

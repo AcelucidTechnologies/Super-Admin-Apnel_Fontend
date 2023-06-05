@@ -12,10 +12,12 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { MatButtonModule } from '@angular/material/button';
 import { AddEditUserTypeComponent } from './add-edit-usertype/add-edit-usertype.component';
 import { DialogComponent } from './dialog/dialog.component';
+import { RatingReviewDetailsComponent } from './rating-review-details/rating-review-details.component';
 // import { SharedModule } from '../shared/shared.module';
+import { ProgressBarModule } from 'primeng/progressbar';
 
 @NgModule({
-  declarations: [UserTypeComponent, AddEditUserTypeComponent,DialogComponent],
+  declarations: [UserTypeComponent, AddEditUserTypeComponent,DialogComponent, RatingReviewDetailsComponent],
   imports: [
     CommonModule,
     SharedModule,
@@ -25,7 +27,8 @@ import { DialogComponent } from './dialog/dialog.component';
     InputTextareaModule,ConfirmDialogModule,
     MatDialogModule,
     MatButtonModule,
-    SettingUsertypeRoutingModule
+    SettingUsertypeRoutingModule,
+    ProgressBarModule
   ]
 })
 export class SettingUsertypeModule { }
