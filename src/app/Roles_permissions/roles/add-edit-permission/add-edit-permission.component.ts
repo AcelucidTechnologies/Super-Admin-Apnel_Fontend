@@ -447,6 +447,7 @@ export class AddEditPermissionComponent implements OnInit {
               this.userlist.push(val.username)
               return val.username
             }
+            
           })
           // console.log(this.userData, this.userlist)
           // this.activatedRoute.queryParamMap.subscribe((params) => {
