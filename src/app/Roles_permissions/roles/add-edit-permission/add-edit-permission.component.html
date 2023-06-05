@@ -26,8 +26,8 @@
       sortField="moduleName"
       sortMode="single"
     >
-      <ng-template pTemplate="caption">
-        <!-- <div
+      <ng-template *ngIf="isAdd" pTemplate="caption">
+        <div
           class="form-group col-8 d-flex justify-content-start align-items-center"
           style="padding-left: 0px"
         >
@@ -41,9 +41,10 @@
               formControlName="username"
             ></p-dropdown>
           </div>
-        </div> -->
+        </div>
         <h5>Permission</h5>
       </ng-template>
+
       <ng-template pTemplate="header">
         <tr>
           <th class="text-center">

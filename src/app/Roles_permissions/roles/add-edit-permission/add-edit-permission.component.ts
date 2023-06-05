@@ -16,7 +16,7 @@ export class AddEditPermissionComponent implements OnInit {
   title: string
   isChecked = true;
   isOn: boolean = false;
-
+  isAdd : boolean = true;
   permissionData = [
     // {
     //   moduleName: 'Order',
@@ -228,8 +228,6 @@ export class AddEditPermissionComponent implements OnInit {
 
   }
 
-
-
   onToggleChange(event: Event) {
     this.isChecked = (event.target as HTMLInputElement).checked;
     console.log('Toggle button state:', this.isChecked);
@@ -433,8 +431,8 @@ export class AddEditPermissionComponent implements OnInit {
   //  }
 
   getUserList() {
+    let userPermitted = []
     this.userService.getUsers().subscribe((res: any) => {
-      let userPermitted = []
       console.log(res.data)
       this.userData = res.data;
       if (res.data) {
@@ -451,20 +449,35 @@ export class AddEditPermissionComponent implements OnInit {
             }
           })
           // console.log(this.userData, this.userlist)
-          this.activatedRoute.queryParamMap.subscribe((params) => {
-            this.name = params.get('user')
-            if (this.name) {
-              this.title = 'Edit';
-              this.getPermissionDetail()
-              Object.assign(this.userlist,userPermitted)
-            }
-            else {
-              this.title = "Add";
-            }
-          })
+          // this.activatedRoute.queryParamMap.subscribe((params) => {
+          //   this.name = params.get('user')
+          //   if (this.name) {
+          //     this.title = 'Edit';
+          //     this.isAdd = false;
+          //     this.getPermissionDetail()
+          //     Object.assign(this.userlist,userPermitted)
+          //   }
+          //   else {
+          //     this.title = "Add";
+          //     this.isAdd = true;
+          //   }
+          // })
         })
       }
     });
+    this.activatedRoute.queryParamMap.subscribe((params) => {
+      this.name = params.get('user')
+      if (this.name) {
+        this.title = 'Edit';
+        this.isAdd = false;
+        this.getPermissionDetail()
+        Object.assign(this.userlist,userPermitted)
+      }
+      else {
+        this.title = "Add";
+        this.isAdd = true;
+      }
+    })
   }
 
   submit() {
