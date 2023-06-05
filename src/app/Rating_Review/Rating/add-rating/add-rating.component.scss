@@ -38,3 +38,10 @@
 ::ng-deep.p-rating .p-rating-icon.pi-star-fill {
   color: rgb(228, 28, 28) !important;
 }
+
+select {
+  width: 100%;
+  height: 41px;
+  border: 1px solid #ced4da;
+  border-radius: 4px;
+}

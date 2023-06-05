@@ -61,8 +61,8 @@ statusList=['Active','Inactive']
     });
   }
 
-  deleteReviewDetails(name:string){
-    this.reviewerService.deleteReviewerDetails(name).subscribe(res => {
+  deleteReviewDetails(id:any){
+    this.reviewerService.deleteReviewerDetails(id._id).subscribe(res => {
       if (res) {
         // this.toastr.showSuccess("lead deleted successfully", "lead deleted")
         this.getReviewerData();
@@ -95,6 +95,7 @@ statusList=['Active','Inactive']
             doc.save('reviewers.pdf');
         }
 
+        
   onToggleSidebar(sidebarState: any) {
     if (sidebarState === 'open') {
       this.sidebarSpacing = 'contracted';

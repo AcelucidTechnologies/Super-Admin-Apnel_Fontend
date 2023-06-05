@@ -12,11 +12,15 @@ export const SideNaveMenueRoute = [
         label: 'Admin List',
         icon: 'pi pi-list',
         routerLink: ['/roleandpermission/adminlist'],
+        routerLinkActiveOptions: { exact: true },
+        routerLinkActive: 'active'
       },
       {
         label: 'Permitted Module List',
         icon: 'pi pi-list',
         routerLink: ['/modulepermission/rolelist'],
+        routerLinkActiveOptions: { exact: true },
+        routerLinkActive: 'active'
       },
     ],
   },
@@ -254,6 +258,12 @@ export const SideNaveMenueRoute = [
         label: 'Setting',
         icon: 'pi pi-star',
         items: [
+
+          {
+            label: 'Rating and Review List',
+            icon: 'pi pi-list',
+            routerLink: ['/usertypesettings/ratingReviewDetails'],
+          },
 
           {
             label: 'Rating Criteria List',

@@ -17,7 +17,6 @@
         </div>
       </div>
     </div>
-
         <p-table id="customerTable" #dt [columns]="cols" responsiveLayout="scroll" [paginator]="true" [rows]="10"
             [showCurrentPageReport]="true" [value]="ratingData"
             currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries" [responsive]="true"
@@ -80,18 +79,18 @@
             </ng-template>
             <ng-template pTemplate="body" let-list let-i="rowIndex" >
                 <tr>
-                    <td>{{list.rating}}</td>
+                    <td>{{list.overall}}</td>
                     <td>{{list.review}}</td>
                     <td>{{list.reviewer}}</td>
                     <td>{{list.status}}</td>
-                    <td>{{list.date | date: 'MM/dd/yyyy'}}</td>
+                    <td>{{list.createdAt | date: 'MM/dd/yyyy'}}</td>
                     <td>
                         <div>
                           <a pTooltip="Edit Rating" tooltipPosition="bottom" style="margin-right: 15px; cursor: pointer;">
                             <img src="../../../../assets/images/edit.svg" [queryParams]="{reviewerName:list.reviewer}"
                             [routerLink]="['/rating/editrating']" alt="img">
                           </a>
-                          <a pTooltip="Delete Rating" tooltipPosition="bottom" (click)=" openDialog(list.reviewer)"
+                          <a pTooltip="Delete Rating" tooltipPosition="bottom" (click)=" openDialog(list)"
                             class="me-3 confirm-text" href="javascript:void(0);" >
                             <img src="../../../../assets/images/delete.svg" alt="img">
                           </a>

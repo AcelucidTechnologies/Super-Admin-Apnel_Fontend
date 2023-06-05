@@ -11,12 +11,12 @@ export class ReviewerService {
 
   constructor(private http:HttpClient) { }
 
-  getReviewerList():Observable<any[]>{
+  getReviewerList():Observable<any>{
     const token = localStorage.getItem('token') || '';
+    const username= localStorage.getItem("email")
     let httpOptions = new HttpHeaders().set('x-access-token',token);
-    const endpointUrl = `${environment.JSON_SERVER}/reviewlist`
-    // return this.http.get<any[]>(endpointUrl,payload ,{ 'headers': httpOptions });
-    return of(reviewerDetail)
+    const endpointUrl = `${environment.JSON_SERVER}/getReviewerList?username=${username}`
+    return this.http.get<any[]>(endpointUrl,{ 'headers': httpOptions });
   }
 
   getReviewerDetails(serialno:number):Observable<any[]>{
@@ -24,7 +24,7 @@ export class ReviewerService {
   let httpOptions = new HttpHeaders().set('x-access-token',token);
   const endpointUrl = `${environment.JSON_SERVER}/reviewDetail`
   // return this.http.get<any[]>(endpointUrl,payload ,{ 'headers': httpOptions });
-  
+
   console.log(reviewerDetail)
   let filteredValue=reviewerDetail.filter(val=>{
     return (val.sno == serialno)
@@ -32,16 +32,11 @@ export class ReviewerService {
   return of(filteredValue)
   }
 
-  submitReviewerDetail(payload:any):Observable<any[]>{
+  submitReviewerDetail(payload:any):Observable<any>{
     const token = localStorage.getItem('token') || '';
-    let httpOption = new HttpHeaders().set('x-access-token', token)
-    const endpointUrl = `${environment.JSON_SERVER}/add`;
-    payload.sno=reviewerDetail.length+1;
-    let date = new Date();
-    payload.firstRating = date.toISOString().split('T')[0];
-    payload.rating = '4';
-    reviewerDetail.push(payload);
-    return of(reviewerDetail);
+    let httpOptions = new HttpHeaders().set('x-access-token', token)
+    const endpointUrl = `${environment.JSON_SERVER}/createReviewerList`;
+    return this.http.post<any[]>(endpointUrl,payload,{ 'headers': httpOptions });
   }
 
 submitEditedDetails(payload:any,serialno:number)
@@ -55,16 +50,17 @@ submitEditedDetails(payload:any,serialno:number)
       res.email = payload.email,
       res.status = payload.status
     }
-  }) 
+  })
   return of(reviewerDetail)
 }
 
-deleteReviewerDetails(name:string):Observable<any[]>{
+deleteReviewerDetails(id:string):Observable<any>{
   const token =localStorage.getItem('token') || '';
   let httpOptions = new HttpHeaders().set('x-access-token',token)
-  const endpointUrl = `${environment.JSON_SERVER}/delete`
-  let filteredreviewer = reviewerDetail.splice(reviewerDetail.findIndex((index) => index.name == name),1);
-        return of(filteredreviewer)
+  const endpointUrl = `${environment.JSON_SERVER}/deleteReviewerList?id=${id}`
+  return this.http.delete<any>(endpointUrl,{ 'headers': httpOptions })
+  // let filteredreviewer = reviewerDetail.splice(reviewerDetail.findIndex((index) => index.name == name),1);
+  //       return of(filteredreviewer)
 }
 
 

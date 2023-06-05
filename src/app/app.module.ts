@@ -21,7 +21,7 @@ import { AddCoupanComponent } from './subscription/addons/add-coupan/add-coupan.
 import { CreateOrderComponent } from './order-detail/create-order/create-order.component';
 import { NgxUiLoaderModule, NgxUiLoaderConfig, SPINNER, POSITION,PB_DIRECTION, NgxUiLoaderRouterModule, NgxUiLoaderHttpModule } from 'ngx-ui-loader';
 
-
+import { ProgressBarModule } from 'primeng/progressbar';
 @NgModule({
   declarations: [
     AppComponent,
@@ -44,6 +44,7 @@ import { NgxUiLoaderModule, NgxUiLoaderConfig, SPINNER, POSITION,PB_DIRECTION, N
     SharedModule,
     FontAwesomeModule,
     HttpClientModule,
+    ProgressBarModule,
     NgxUiLoaderModule,
     ToastrModule.forRoot()
   ],

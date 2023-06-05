@@ -19,7 +19,7 @@
 <p-table id="customerTable" #dt [columns]="cols" responsiveLayout="scroll" [paginator]="true" [rows]="10"
 [showCurrentPageReport]="true" [value]="usertypeSettingData"
 currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries" [responsive]="true"
-styleClass="p-datatable-striped" [globalFilterFields]="['usertype']">
+styleClass="p-datatable-striped" [globalFilterFields]="['usertype','status']">
 <ng-template pTemplate="caption">
   <div class="d-flex justify-content-between">
     <div class="d-flex align-items-center p-0" >
@@ -86,17 +86,43 @@ styleClass="p-datatable-striped" [globalFilterFields]="['usertype']">
     </div>
 </div>
 </ng-template> -->
-<ng-template pTemplate="header">
-    <tr>
-        <th class="text-center">UserType</th>
-        <th class="text-center">Status</th>
-        <th class="text-center">Actions</th>
-    </tr>
+<ng-template  pTemplate="header" >
+  <tr>
+      <!-- <th style="width: 3rem;">
+          <p-tableHeaderCheckbox></p-tableHeaderCheckbox>
+      </th> -->
+      <th pSortableColumn="userType">
+          <div class="flex justify-content-between align-items-center head1">
+            UserType
+              <p-sortIcon field="userType"></p-sortIcon>
+          </div>
+      </th>
+      <th pSortableColumn="status">
+          <div class="flex justify-content-between align-items-center head1">
+            Status
+              <p-sortIcon field="status"></p-sortIcon>
+          </div>
+      </th>
+  <th>
+    <div class="flex justify-content-between align-items-center head1">
+        Action
+    </div>
+</th>
+
+
+  </tr>
 </ng-template>
-<ng-template pTemplate="body" let-types>
-    <tr><td>{{types.userType}}</td>
-    <td>{{types.status}}</td>
-    <td>
+<ng-template pTemplate="body" let-types let-i="rowIndex">
+  <tr class="p-selectable-row">
+      <td>
+          <span class="p-column-title">UserType</span>
+          {{types.userType}}
+      </td>
+      <td>
+          <span class="p-column-title">Status</span>
+          {{types.status}}
+      </td>
+      <td>
         <div>
           <a pTooltip="Edit Usertype" tooltipPosition="bottom" style="margin-right: 15px; cursor: pointer;">
             <img src="../../../../assets/images/edit.svg" [routerLink]="['/usertypesettings/usertypeform']" [queryParams]="{id:types?._id}" alt="img">
@@ -109,8 +135,14 @@ styleClass="p-datatable-striped" [globalFilterFields]="['usertype']">
             <button pButton class="p-button-danger" icon="pi pi-trash" pTooltip="Delete Usertype" tooltipPosition="bottom" (click)="openDialog(types.usertype)" [disabled]="!accessPermission.delete"></button> -->
         </div>
     </td>
-</tr>
+      <!-- <td>
+        <span class="p-column-title">Image</span>
+          {{offerList.image}}
+      </td> -->
+
+  </tr>
 </ng-template>
+
 <ng-template pTemplate="emptymessage"><tr>
     <td colspan="12" class="text-danger">No Records to Show</td>
 </tr></ng-template>

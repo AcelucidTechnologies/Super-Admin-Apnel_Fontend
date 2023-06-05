@@ -1,0 +1,48 @@
+<div class="container page-heading">
+  <div class="row b-2 mt-2">
+    <h4>Rating and Review Details</h4>
+  </div>
+</div>
+
+<p-card>
+<div class="row">
+  <div style="border: 2px solid black" class="col-sm-4 col-md-4">
+    <div class="text-center">
+      <div class="mt-3">Rating Score based on 11 ratings</div>
+      <div>
+        <h2 class="mt-2">7.3</h2>
+
+        <!-- <div class="card">
+          <div class="progress">
+            <div class="progress-bar" role="progressbar" style="width: 5" aria-valuenow="5" aria-valuemin="0" aria-valuemax="5"></div>
+          </div>
+        </div> -->
+
+        <div class="card">
+          <p-progressBar [value]="ratingValue">{{ ratingName }}</p-progressBar>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div style="border: 2px solid black" class="col-sm-8 col-md-8">
+    <h3>Show Rating for</h3>
+    <select [(ngModel)]="selectedOverallRating">
+      <option value="">All</option>
+      <option value="excellent">Excellent</option>
+      <option value="good">Good</option>
+      <option value="Satisfying">Satisfying</option>
+      <option value="Very Bad">Very Bad</option>
+      <option value="Very Poor">Very Poor</option>
+    </select>
+    <div *ngFor="let item of getFilteredData()" class="mt-2">
+    <p-card>
+      <h2>{{ item.reviewer }}</h2>
+      <p>Pros: {{ item.pros }}</p>
+      <p>Cons: {{ item.cons }}</p>
+    </p-card>
+  </div>
+</div>
+
+
+</div>
+</p-card>

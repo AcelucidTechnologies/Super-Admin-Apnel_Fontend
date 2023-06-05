@@ -37,11 +37,11 @@
   }
 
 
-  .p-panelmenu .p-panelmenu-header:not(.p-highlight):not(.p-disabled) > a:hover {
-    background: #e9ecef;
-    border-color: #dee2e6;
-    color: #495057;
-}
+//   .p-panelmenu .p-panelmenu-header:not(.p-highlight):not(.p-disabled) > a:hover {
+//     background: #e9ecef;
+//     border-color: #dee2e6;
+//     color: #495057;
+// }
      .p-panelmenu .p-panelmenu-content .p-menuitem .p-menuitem-link:hover {
     background-color: lightcoral !important;
     color: red!important;
@@ -59,24 +59,24 @@
 
 
 
-    .p-panelmenu .p-panelmenu-content .p-menuitem .p-menuitem-link {
-      background-color: white !important;
-      border: none !important;
-      padding-left:  35px;
-      color: black !important;
-      font-weight: 350;
-    }
+    // .p-panelmenu .p-panelmenu-content .p-menuitem .p-menuitem-link {
+    //   background-color: white !important;
+    //   border: none !important;
+    //   padding-left:  35px;
+    //   color: black !important;
+    //   font-weight: 350;
+    // }
 
 
 
-    .p-panelmenu .p-panelmenu-content .p-menuitem .p-menuitem-link .p-menuitem-text {
-      color: #67748E !important;
-    }
+    // .p-panelmenu .p-panelmenu-content .p-menuitem .p-menuitem-link .p-menuitem-text {
+    //   color: #67748E !important;
+    // }
 
-    .p-panelmenu .p-panelmenu-content .p-menuitem .p-menuitem-link:hover {
-background-color: #fff !important;
-color: white !important;
-    }
+//     .p-panelmenu .p-panelmenu-content .p-menuitem .p-menuitem-link:hover {
+// background-color: #fff !important;
+// color: white !important;
+//     }
 
     .p-panelmenu .p-panelmenu-content {
       border: none;
@@ -173,11 +173,6 @@ color: white !important;
 
 
 
-
-::ng-deep.active-link {
-  background-color: blue;
-}
-
 :host::ng-deep{
   .p-panelmenu .p-panelmenu-content .p-menuitem .p-menuitem-link :hover{
    color: red !important;
@@ -187,17 +182,38 @@ color: white !important;
   background: red;
 }
 
-.p-panelmenu .p-panelmenu-content .p-menuitem .p-menuitem-link:focus {
-  background-color: rgb(241, 156, 156) !important;
-  color: red !important;
-}
+// .p-panelmenu .p-panelmenu-content .p-menuitem .p-menuitem-link:focus {
+//   background-color: rgb(241, 156, 156) !important;
+//   color: red !important;
+// }
 
 .p-panelmenu .p-panelmenu-content .p-menuitem .p-menuitem-link:focus {
   outline: 0 none;
   outline-offset: 0;
-  color: red;
 }
+
+
+
+.p-panelmenu .p-panelmenu-content .p-menuitem .p-menuitem-link:focus {
+  outline: 0 none;
+  color: orange !important;
+  text-decoration-color: aqua !important;
+  font-style: italic !important ;
 }
+
+
+}
+
+:host::ng-deep{
+  .p-submenu .p-submenu-item.active > a {
+    color: green !important; /* Replace with your desired color */
+    font-style: italic;
+  }
+
+}
+
+
+
 
 
 

@@ -256,9 +256,40 @@ mat-accordion .mat-expansion-panel:last-of-type {
   font-weight: bold;
 }
 
-:host::ng-deep{
-  .p-menuitem-link-active{
-    color: green !important;
+:host ::ng-deep {
+  /* Set the color and background for panel menu header */
+  .p-panelmenu .p-panelmenu-header > a {
+    color: #67748E;
+    background: none;
   }
+
+  /* Set the background and text color for highlighted panel menu header */
+  .p-panelmenu .p-panelmenu-header.p-highlight > a {
+    background-color: lightcoral !important;
+    color: white !important;
+  }
+
+  /* Set the background and text color on hover for panel menu header */
+  .p-panelmenu .p-panelmenu-header > a:hover {
+    background-color: #ff2800 !important;
+    color: white !important;
+  }
+
+  /* Set the background and text color on hover for panel menu items */
+  .p-panelmenu .p-menuitem .p-menuitem-link:hover {
+    background-color: lightcoral !important;
+    color: red !important;
+  }
+
+  /* Set the background color for panel menu content */
+  .p-panelmenu .p-panelmenu-content {
+    background-color: white;
+  }
+
+  /* Set the color for panel menu item icons */
+  .p-panelmenu .p-menuitem .p-menuitem-link .p-menuitem-icon {
+    color: black;
+  }
+
 }
 
