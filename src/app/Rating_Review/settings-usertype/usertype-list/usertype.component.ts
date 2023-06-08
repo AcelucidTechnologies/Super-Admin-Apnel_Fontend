@@ -3,7 +3,6 @@ import * as xlsxPackage from 'xlsx';
 import * as FileSaver from 'file-saver';
 import * as jsPDF from 'jspdf';
 import autoTable from 'jspdf-autotable'
-import { RatingCriteriaService } from 'src/app/_services/rating-criteria.service';
 import { DialogComponent } from '../dialog/dialog.component';
 import { MatDialog } from '@angular/material/dialog';
 import { Table } from 'primeng/table';
@@ -39,8 +38,9 @@ export class UserTypeComponent implements OnInit {
 
 
   ngOnInit(): void {
-    this.cols=[{field:"usertype",headers:"User Type"},
-    {field:"status",headers:"Status"}]
+    this.cols=[{field:"userType",headers:"User Type"},
+    {field:"status",headers:"Status"},
+  ]
     this.exportColumns = this.cols.map(col => ({title: col.headers,dataKey: col.field}))
     console.log(this.exportColumns)
   }
@@ -56,7 +56,6 @@ export class UserTypeComponent implements OnInit {
   getUsertypeList(){
     this.usertypeService.getUsertypeList().subscribe((res)=>{
       this.usertypeSettingData=res
-      console.log("---------->",this.usertypeSettingData)
     })
   }
 
@@ -72,7 +71,7 @@ export class UserTypeComponent implements OnInit {
   deleteUsertypeDetails(types: any){
     this.usertypeService.deleteUsertypeDetails(types._id).subscribe(res => {
       if (res) {
-        this.toastr.showSuccess("UserType deleted successfully", "lead deleted")
+        this.toastr.showSuccess("UserType deleted successfully", "UserType deleted")
         this.getUsertypeList();
       }
   })}
@@ -93,6 +92,9 @@ export class UserTypeComponent implements OnInit {
     FileSaver.saveAs(data, fileName + '_export_' + new Date().getTime() + EXCEL_EXTENSION);
   }
 
+  applyFilterGlobal($event, stringVal) {
+    this.dt.filterGlobal(($event.target as HTMLInputElement).value, stringVal);
+  }
   exportPdf() {
     this.usertypeData = this.usertypeSettingData
             const doc = new jsPDF.jsPDF('l', 'pt');
@@ -102,9 +104,6 @@ export class UserTypeComponent implements OnInit {
            });
             doc.save('usertype.pdf');
         }
-
           // search functionality start here
-          applyFilterGlobal($event, stringVal) {
-            this.dt.filterGlobal(($event.target as HTMLInputElement).value, stringVal);
-          }
+
 }

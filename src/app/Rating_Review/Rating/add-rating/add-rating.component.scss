@@ -45,3 +45,13 @@ select {
   border: 1px solid #ced4da;
   border-radius: 4px;
 }
+.label-width {
+  width: 80px;
+  margin-right: 20px;
+  margin-bottom: 5px;
+}
+::ng-deep .p-dropdown .p-dropdown-label {
+  background: white;
+  // border: ;
+  color: black;
+}

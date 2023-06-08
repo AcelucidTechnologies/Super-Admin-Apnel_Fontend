@@ -12,7 +12,10 @@ export class AddEditReviewerComponent implements OnInit {
 sidebarSpacing:string='contracted';
 statusList:string[]=['Active','Inactive']
 title:string;
-id:number;
+editMode:boolean = false;
+// id:number;
+id:any
+update:any;
 reviewerForm:FormGroup
   change: string;
 constructor(private reviewerService:ReviewerService,
@@ -22,36 +25,51 @@ constructor(private reviewerService:ReviewerService,
 
   this.reviewerForm = this.fb.group({
     name: ['', [Validators.required]],
-    email: ['', [Validators.required]],
+    email: ['', [Validators.required,  Validators.email]],
     reviewerStatus: ['', [Validators.required]],
   });
 
-  this.activatedRoute.queryParamMap.subscribe((params)=>{
-    this.id = parseInt(params.get('serialno'))
+  // this.activatedRoute.queryParamMap.subscribe((params)=>{
+  //   this.id = parseInt(params.get('serialno'))
+  //   if (this.id && this.id != undefined) {
+  //     this.title = "Edit"
+  //     this.change="Update"
+
+  //   } else {
+  //     this.title = "Add"
+  //     this.change="Submit"
+  //   }
+  // })
+  this.activatedRoute.queryParamMap.subscribe(params => {
+    this.id = params.get('id');
     if (this.id && this.id != undefined) {
-      this.title = "Edit"
-      this.change="Update"
-      this.getReviewerDetail();
+      this.editMode = true
+      this.title = "Edit Rating"
+      this.update= "Update"
     } else {
-      this.title = "Add"
-      this.change="Submit"
+      this.editMode = false
+
     }
-  })
+  });
 
 }
 
 ngOnInit(): void {
+  this.getReviewerDetail();
 }
 
+
+
 getReviewerDetail(){
-this.reviewerService.getReviewerDetails(this.id).subscribe((res)=>{
+this.reviewerService.getReviewerDetailsById(this.id).subscribe((res)=>{
 this.reviewerForm.patchValue({
-  name:res[0].name,
-  email:res[0].email,
-  reviewerStatus:res[0].status
+  name:res.name,
+  email:res.email,
+  reviewerStatus:res.status
 })
 })
 }
+
 submit()
 {
   let payload={
@@ -87,5 +105,23 @@ onToggleSidebar(sidebarState: any){
     this.sidebarSpacing = 'expanded';
   }
 }
+capitalizeFirstLetter(event: any) {
+  const input = event.target as HTMLInputElement;
+  const value = input.value;
+
+  if (value.length > 0) {
+    const capitalizedValue = value.charAt(0).toUpperCase() + value.slice(1);
+    this.reviewerForm.patchValue({
+      name: capitalizedValue
+    });
+  }
+}
+
+
+
+
+
+
+
 
 }

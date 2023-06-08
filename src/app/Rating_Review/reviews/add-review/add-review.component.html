@@ -23,11 +23,43 @@
             <div class="col-9 ">
               <input type="text" class="form-control " id="siteUrl" formControlName="publishSiteUrl"
                 placeholder="enter publishing url">
-              <div
-                *ngIf="!reviewForm.controls['publishSiteUrl'].valid && reviewForm.controls['publishSiteUrl'].touched ">
-                <div [hidden]="!reviewForm.controls['publishSiteUrl'].errors['required']"
-                  style="font-size:smaller; color: rgb(253, 122, 122); font-style: italic;">SiteUrl is required</div>
+                <div
+                *ngIf="
+                  !reviewForm.controls['publishSiteUrl'].valid &&
+                  (reviewForm.controls['publishSiteUrl'].touched ||
+                  reviewForm.controls['publishSiteUrl'].dirty)
+                "
+              >
+                <div
+                  [hidden]="
+                    !reviewForm.controls['publishSiteUrl'].errors[
+                      'required'
+                    ]
+                  "
+                  style="
+                    color: rgb(253, 122, 122);
+                    font-size: small;
+                    font-style: italic;
+                  "
+                >
+                  Url is required
+                </div>
+                <div
+                  *ngIf="
+                  reviewForm.controls['publishSiteUrl'].errors[
+                      'pattern'
+                    ]
+                  "
+                  style="
+                    color: rgb(253, 122, 122);
+                    font-size: small;
+                    font-style: italic;
+                  "
+                >
+                  Please enter valid Url
+                </div>
               </div>
+
             </div>
           </div>
 

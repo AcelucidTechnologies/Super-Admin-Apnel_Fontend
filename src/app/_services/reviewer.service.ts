@@ -19,17 +19,18 @@ export class ReviewerService {
     return this.http.get<any[]>(endpointUrl,{ 'headers': httpOptions });
   }
 
-  getReviewerDetails(serialno:number):Observable<any[]>{
+  getReviewerDetails(id:number):Observable<any[]>{
   const token = localStorage.getItem('token') || '';
   let httpOptions = new HttpHeaders().set('x-access-token',token);
-  const endpointUrl = `${environment.JSON_SERVER}/reviewDetail`
-  // return this.http.get<any[]>(endpointUrl,payload ,{ 'headers': httpOptions });
+  const endpointUrl = `${environment.JSON_SERVER}/getReviewerListById?id=${id}`
+  return this.http.get<any[]>(endpointUrl,{ 'headers': httpOptions });
+  }
 
-  console.log(reviewerDetail)
-  let filteredValue=reviewerDetail.filter(val=>{
-    return (val.sno == serialno)
-  })
-  return of(filteredValue)
+  getReviewerDetailsById(id:number): Observable<any>{
+    const token = localStorage.getItem('token') || '';
+    let httpOptions = new HttpHeaders().set('x-access-token',token);
+    const endpointUrl = `${environment.JSON_SERVER}/getReviewerListById?id=${id}`
+    return this.http.get<any>(endpointUrl, { 'headers': httpOptions });
   }
 
   submitReviewerDetail(payload:any):Observable<any>{
@@ -39,20 +40,15 @@ export class ReviewerService {
     return this.http.post<any[]>(endpointUrl,payload,{ 'headers': httpOptions });
   }
 
-submitEditedDetails(payload:any,serialno:number)
+submitEditedDetails(payload:any,id:number)
 {
   const token = localStorage.getItem('token') || '';
-  let httpOption = new HttpHeaders().set('x-access-token', token)
-  const endpointUrl = `${environment.JSON_SERVER}/edit`;
-  reviewerDetail.map((res)=>{
-    if (res.sno == serialno) {
-      res.name = payload.name,
-      res.email = payload.email,
-      res.status = payload.status
-    }
-  })
-  return of(reviewerDetail)
+  let httpOptions = new HttpHeaders().set('x-access-token', token)
+  const endpointUrl = `${environment.JSON_SERVER}/updateReviewerList?id=${id}`;
+  return this.http.put<any>(endpointUrl, payload, { headers: httpOptions });
+
 }
+
 
 deleteReviewerDetails(id:string):Observable<any>{
   const token =localStorage.getItem('token') || '';

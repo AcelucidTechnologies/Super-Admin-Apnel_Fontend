@@ -1,77 +1,162 @@
-<div style="height: 700px; margin-bottom: 100px;">
-<div class="page-heading"></div>
-<div class="button-heading-container ">
+<div style="height: 700px; margin-bottom: 100px">
+  <div class="page-heading"></div>
+  <div class="button-heading-container">
+    <button
+      class="mb-2 p-1 back-button"
+      [routerLink]="['/reviewer/reviewerlist']"
+    >
+      <i class="material-icons">arrow_back</i>
+    </button>
+    <h5>&nbsp;Reviewer Details</h5>
+  </div>
+  <div class="d-flex justify-content-center">
+    <div class="card" style="width: 1000px; height: 500px">
+      <div class="p-5">
+        <div class="card-body h-100 pl-4" style="width: 800px; margin: auto">
+          <div class="mt-3 mb-5">
+            <h4>{{ title }} Reviewer</h4>
+          </div>
+          <form [formGroup]="reviewerForm">
+            <div class="form-row ml-3 mt-4">
+              <div class="col-1">
+                <label for="reviewerName" class="text-center starlabel mb-4"
+                  >Name</label
+                >
+              </div>
+              <div class="col-10">
+                <input
+                  type="text"
+                  class="form-control"
+                  id="reviewerName"
+                  formControlName="name"
+                  placeholder="enter name.."
+                  (input)="capitalizeFirstLetter($event)"
+                />
+                <div
+                  *ngIf="
+                    !reviewerForm.controls['name'].valid &&
+                    reviewerForm.controls['name'].touched
+                  "
+                >
+                  <div
+                    [hidden]="!reviewerForm.controls['name'].errors['required']"
+                    style="
+                      font-size: smaller;
+                      color: rgb(253, 122, 122);
+                      font-style: italic;
+                    "
+                  >
+                    Name is required
+                  </div>
+                </div>
+              </div>
+            </div>
 
-  <button class="mb-2 p-1 back-button " [routerLink]="['/reviewer/reviewerlist']"><i
-      class="material-icons">arrow_back</i>
-  </button>
-  <h5>&nbsp;Reviewer Details</h5>
-</div>
-<div class="d-flex justify-content-center">
-  <div class="card" style="width: 1000px; height: 500px;">
-    <div class="p-5">
-      <div class="card-body h-100 pl-4" style="width:800px; margin: auto;">
-        <div class="mt-3 mb-5">
-          <h4>{{title}} Reviewer</h4>
+            <div class="form-row ml-3 mt-4">
+              <div class="col-1">
+                <label for="reviewerEmail" class="text-center starlabel mb-4"
+                  >Email</label
+                >
+              </div>
+              <div class="col-10">
+                <input
+                  type="text"
+                  class="form-control"
+                  id="reviewerEmail"
+                  formControlName="email"
+                  placeholder="enter email.."
+                />
+                <div
+                  *ngIf="
+                    !reviewerForm.controls['email'].valid &&
+                    (reviewerForm.controls['email'].touched ||
+                      reviewerForm.controls['email'].dirty)
+                  "
+                >
+                  <div
+                    [hidden]="
+                      !reviewerForm.controls['email'].errors['required']
+                    "
+                    style="
+                      color: rgb(253, 122, 122);
+                      font-size: small;
+                      font-style: italic;
+                    "
+                  >
+                    email is required
+                  </div>
+                  <div
+                    *ngIf="reviewerForm.controls['email'].errors['email']"
+                    style="
+                      color: rgb(253, 122, 122);
+                      font-size: small;
+                      font-style: italic;
+                    "
+                  >
+                    Please enter valid email
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="form-row ml-3 mt-4">
+              <div class="col-1">
+                <label for="status" class="text-center starlabel mb-4"
+                  >Status</label
+                >
+              </div>
+              <div class="col-10">
+                <p-dropdown
+                  styleClass="statusDropdown"
+                  [options]="statusList"
+                  placeholder="Select status"
+                  formControlName="reviewerStatus"
+                ></p-dropdown>
+                <div
+                  *ngIf="
+                    !reviewerForm.controls['reviewerStatus'].valid &&
+                    reviewerForm.controls['reviewerStatus'].touched
+                  "
+                >
+                  <div
+                    [hidden]="
+                      !reviewerForm.controls['reviewerStatus'].errors[
+                        'required'
+                      ]
+                    "
+                    style="
+                      font-size: smaller;
+                      color: rgb(253, 122, 122);
+                      font-style: italic;
+                    "
+                  >
+                    Status is required
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="d-flex justify-content-end col-11 mt-4">
+                <button
+                  type="submit"
+                  style="background: rgb(228, 28, 28); border: none"
+                  class="btn btn-info mr-3"
+                  (click)="submit()"
+                  [disabled]="!reviewerForm.valid"
+                >
+                  Update
+                </button>
+                <button
+                  class="btn btn-info"
+                  style="background: #637381; border: none"
+                  [routerLink]="['/reviewer/reviewerlist']"
+                >
+                  Cancel
+                </button>
+              </div>
+            </div>
+          </form>
         </div>
-        <form [formGroup]="reviewerForm">
-          <!-- <div class="row mb-4"> -->
-
-
-          <div class="form-row ml-3 mt-4">
-            <div class="col-1 ">
-              <label for="reviewerName" class=" text-center starlabel mb-4">Name</label>
-            </div>
-            <div class="col-10 ">
-              <input type="text" class="form-control" id="reviewerName" formControlName="name"
-                placeholder="enter name..">
-              <div *ngIf="!reviewerForm.controls['name'].valid && reviewerForm.controls['name'].touched ">
-                <div [hidden]="!reviewerForm.controls['name'].errors['required']"
-                  style="font-size:smaller; color: rgb(253, 122, 122); font-style: italic;">Name is required</div>
-              </div>
-            </div>
-          </div>
-
-          <div class="form-row ml-3 mt-4">
-            <div class="col-1 ">
-              <label for="reviewerEmail" class="text-center starlabel mb-4">Email</label>
-            </div>
-            <div class="col-10 ">
-              <input type="text" class="form-control" id="reviewerEmail" formControlName="email"
-                placeholder="enter email..">
-              <div *ngIf="!reviewerForm.controls['email'].valid && reviewerForm.controls['email'].touched ">
-                <div [hidden]="!reviewerForm.controls['email'].errors['required']"
-                  style="font-size:smaller; color: rgb(253, 122, 122); font-style: italic;">Email is required</div>
-              </div>
-            </div>
-          </div>
-          <!-- </div> -->
-          <!-- <div class="row mb-4"> -->
-          <div class="form-row  ml-3 mt-4">
-            <div class="col-1 ">
-              <label for="status" class="text-center starlabel mb-4">Status</label>
-            </div>
-            <div class="col-10 ">
-              <p-dropdown styleClass="statusDropdown" [options]="statusList" placeholder="Select status"
-                formControlName="reviewerStatus"></p-dropdown>
-              <div
-                *ngIf="!reviewerForm.controls['reviewerStatus'].valid && reviewerForm.controls['reviewerStatus'].touched ">
-                <div [hidden]="!reviewerForm.controls['reviewerStatus'].errors['required']"
-                  style="font-size:smaller; color: rgb(253, 122, 122); font-style: italic;">Status is required</div>
-              </div>
-            </div>
-          </div>
-          <div class="row">
-            <div class="d-flex justify-content-end col-11 mt-4">
-              <button type="submit" style="background: rgb(228, 28, 28);border:none" class="btn btn-info mr-3"
-                (click)="submit()" [disabled]="!reviewerForm.valid">{{change}}</button>
-              <button class="btn btn-info" style="background: #637381;border:none"
-                [routerLink]="['/reviewer/reviewerlist']">Cancel</button>
-            </div>
-          </div>
-        </form>
       </div>
     </div>
   </div>
-</div>
 </div>

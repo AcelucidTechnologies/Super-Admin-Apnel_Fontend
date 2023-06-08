@@ -48,11 +48,11 @@ export class RatingListComponent implements OnInit {
     this.statusList = ['Approved', 'Not Approved'];
     this.sidebarSpacing = 'contracted';
     this.cols = [
-      { field: 'rating', headers: 'Rating' },
+      { field: 'overall', headers: 'Rating' },
       { field: 'review', headers: 'Review Subject' },
       { field: 'reviewer', headers: 'Reviewer' },
       { field: 'status', headers: 'Status' },
-      { field: 'date', headers: 'Date' },
+      { field: 'createdAt', headers: 'Date' },
     ];
     this.exportColumns = this.cols.map((col) => ({
       title: col.headers,
@@ -61,22 +61,9 @@ export class RatingListComponent implements OnInit {
     this.getRatingDetails();
   }
 
-  // openExportDialog(){
-  //     const dialogRef = this.dialog.open(ExportDialogComponent);
-  //     dialogRef.afterClosed().subscribe(result => {
-  //       if (result == true) {
-  //       }
-  //     });
-  // }
-
   getRatingDetails() {
     this.ratingService.getRatingList().subscribe((res) => {
       this.ratingData = res;
-      // this.ratingData.forEach(
-      //   (val) => {
-      //    val.date = new Date(val.date)
-      //   }
-      // );
     });
   }
   onToggleSidebar(sidebarState: any) {
@@ -129,19 +116,20 @@ export class RatingListComponent implements OnInit {
     });
   }
 
-  deleteRatingDetails(name: string) {
-    // this.ngxLoader.start();
-    this.ratingService.deleteRatingDetails(name).subscribe((res) => {
+  deleteRatingDetails(id: number) {
+    this.ngxLoader.start();
+    this.ratingService.deleteRatingDetails(id).subscribe((res) => {
       if (res) {
-        this.toastr.showSuccess('Rating deleted successfully', 'lead deleted');
+        this.toastr.showSuccess(
+          'Rating deleted successfully',
+          'rating deleted'
+        );
         this.getRatingDetails();
       }
-
     });
   }
   // search functionality start here
-  applyFilterGlobal(data, stringVal) {
-    this.dt.filterGlobal(data, stringVal);
+  applyFilterGlobal($event, stringVal) {
+    this.dt.filterGlobal(($event.target as HTMLInputElement).value, stringVal);
   }
-
 }

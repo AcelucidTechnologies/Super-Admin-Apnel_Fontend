@@ -1,48 +1,134 @@
 <div class="container page-heading">
-  <div class="row b-2 mt-2">
-    <h4>Rating and Review Details</h4>
+  <div class="row mb-2 mt-2">
+    <div class="col-6 pt-3">
+      <h4>Rating and Reviews</h4>
+    </div>
+    <div class="col-6 text-right">
+      <span class="p-input-icon-right ml-5">
+        <div class="show-rating">
+          <p
+            style="
+              margin-right: 10px;
+              font-size: 16px;
+              font-weight: 400;
+              padding-top: 7px;
+              margin-top: 0px;
+            "
+          >
+            Show Ratings for
+          </p>
+          <p-dropdown
+            [(ngModel)]="selectedOverallRating"
+            [options]="type"
+            id="role"
+            placeholder="All Ratings"
+          ></p-dropdown>
+        </div>
+      </span>
+    </div>
   </div>
 </div>
 
 <p-card>
-<div class="row">
-  <div style="border: 2px solid black" class="col-sm-4 col-md-4">
-    <div class="text-center">
-      <div class="mt-3">Rating Score based on 11 ratings</div>
-      <div>
-        <h2 class="mt-2">7.3</h2>
-
-        <!-- <div class="card">
-          <div class="progress">
-            <div class="progress-bar" role="progressbar" style="width: 5" aria-valuenow="5" aria-valuemin="0" aria-valuemax="5"></div>
+  <div class="row">
+    <div class="col-sm-4 col-md-4 rating-score-overall">
+      <div class="text-center">
+        <div class="card mb-2 mt-2">
+          <div class="mt-3 rating-score">
+            Rating Score based on {{ totalNoRating }} ratings
           </div>
-        </div> -->
+          <!-- <div> -->
 
-        <div class="card">
-          <p-progressBar [value]="ratingValue">{{ ratingName }}</p-progressBar>
+          <div style="display: flex; justify-content: center">
+            <p class="overall-rating">{{ overallRating | number : "1.2-2" }}</p>
+          </div>
         </div>
+        <div class="card mt-4" style="padding: 10px; margin-bottom: 0px">
+          <div class="row-container">
+            <label for="file" class="label-width">Excellent</label>
+            <progress
+              id="file"
+              class="progress-bar-value"
+              [value]="averageRatingExcellent"
+              max="5"
+            ></progress>
+          </div>
+          <br />
+
+          <div class="row-container">
+            <label for="file" class="label-width">Good</label>
+            <progress
+              id="file"
+              class="progress-bar-value"
+              [value]="averageRatingGood"
+              max="5"
+            ></progress>
+          </div>
+          <br />
+
+          <div class="row-container">
+            <label for="file" class="label-width">Satisfying</label>
+            <progress
+              id="file"
+              class="progress-bar-value"
+              [value]="averageRatingSatisfying"
+              max="5"
+            ></progress>
+          </div>
+
+          <br />
+          <div class="row-container">
+            <label for="file" class="label-width">Very Bad</label>
+            <progress
+              id="file"
+              class="progress-bar-value"
+              [value]="averageRatingVeryBad"
+              max="5"
+            ></progress>
+          </div>
+          <br />
+          <div class="row-container">
+            <label for="file" class="label-width">Very Poor</label>
+            <progress
+              id="file"
+              class="progress-bar-value"
+              [value]="averageRatingVeryPoor"
+              max="5"
+            ></progress>
+          </div>
+          <br />
+        </div>
+        <!-- </div> -->
+      </div>
+    </div>
+    <div class="col-sm-8 col-md-8 show-rating-overall">
+      <div *ngFor="let item of getFilteredData()" class="mt-2">
+        <p-card>
+          <div style="display: flex">
+            <h5 style="margin-right: auto">{{ item.reviewer }}</h5>
+            <p style="font-size: 15px; font-weight: 600">
+              {{ item.createdAt | date : "short" | lowercase }}
+            </p>
+          </div>
+          <div style="display: flex">
+            <p class="user-rating">
+              {{ item.AverageRating | number : "1.2-2" }}
+            </p>
+            <p class="overall">"{{ item.overall }}"</p>
+            <p class="userType">{{ item.userType }}</p>
+          </div>
+          <div style="display: flex">
+            <p class="plus-sign">+</p>
+            <p class="pros-cons">Pros:</p>
+            <p style="font-size: 16px">{{ item.pros }}</p>
+          </div>
+          <div style="display: flex">
+            <p class="plus-sign">-</p>
+            <p class="pros-cons">Cons:</p>
+            <p style="font-size: 16px">{{ item.cons }}</p>
+          </div>
+        </p-card>
       </div>
     </div>
   </div>
-  <div style="border: 2px solid black" class="col-sm-8 col-md-8">
-    <h3>Show Rating for</h3>
-    <select [(ngModel)]="selectedOverallRating">
-      <option value="">All</option>
-      <option value="excellent">Excellent</option>
-      <option value="good">Good</option>
-      <option value="Satisfying">Satisfying</option>
-      <option value="Very Bad">Very Bad</option>
-      <option value="Very Poor">Very Poor</option>
-    </select>
-    <div *ngFor="let item of getFilteredData()" class="mt-2">
-    <p-card>
-      <h2>{{ item.reviewer }}</h2>
-      <p>Pros: {{ item.pros }}</p>
-      <p>Cons: {{ item.cons }}</p>
-    </p-card>
-  </div>
-</div>
-
-
-</div>
 </p-card>

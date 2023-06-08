@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { CommonModule, DatePipe } from '@angular/common';
 import { UserTypeComponent } from './usertype-list/usertype.component';
 import { SettingUsertypeRoutingModule } from './setting-usertype-routing.module';
 import { SharedModule } from '../../shared/shared.module';
@@ -28,7 +28,9 @@ import { ProgressBarModule } from 'primeng/progressbar';
     MatDialogModule,
     MatButtonModule,
     SettingUsertypeRoutingModule,
-    ProgressBarModule
-  ]
+    ProgressBarModule,
+
+  ],
+  providers: [DatePipe],
 })
 export class SettingUsertypeModule { }
