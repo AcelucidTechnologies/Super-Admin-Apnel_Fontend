@@ -9,6 +9,8 @@ import { MatDialog } from '@angular/material/dialog';
 import { DialogComponent } from '../dialog/dialog.component';
 import { ModulePermissionService } from 'src/app/_services/module-permission.service';
 import { access } from 'src/app/_models/modulepermission';
+import { ToastrMsgService } from 'src/app/_services/toastr-msg.service';
+import { NgxUiLoaderService } from 'ngx-ui-loader';
 
 @Component({
   selector: 'app-review-list',
@@ -25,6 +27,8 @@ export class ReviewListComponent implements OnInit {
   statusList:string[]=['Active','Inactive']
   accessPermission:access
   constructor(private reviewsService:ReviewsService,
+    private toastr: ToastrMsgService,
+    private ngxLoader: NgxUiLoaderService,
     public dialog:MatDialog,private permissionService:ModulePermissionService) {
       this.permissionService.getModulePermission().subscribe(res=>{
         this.accessPermission=res[0].RatingList
@@ -36,7 +40,7 @@ export class ReviewListComponent implements OnInit {
 
   ngOnInit(): void {
     this.cols = [{ field: "reviewSubject", headers: "Review Subject" },
-    { field: "publishingsiteurl", headers: "Publishing Site Url" },
+    { field: "publishingSiteUrl", headers: "publishing Site Url" },
     { field: "rating", headers: "Rating" },
     { field: "status", headers: "Status" }]
     this.exportColumns = this.cols.map(col => ({title: col.headers,dataKey: col.field}))
@@ -86,23 +90,22 @@ exportPdf() {
         const dialogRef = this.dialog.open(DialogComponent);
         dialogRef.afterClosed().subscribe(result => {
           if (result == true) {
-            this.deleteReviewDetails(name)
+            this.deleteReviewDetails(name._id)
           }
         });
       }
 
-      deleteReviewDetails(name:string) {
-        console.log(name)
-        // this.ngxLoader.start();
-        this.reviewsService.deleteReviewDetails(name).subscribe(res => {
+      deleteReviewDetails(id:number) {
+        this.ngxLoader.start();
+        this.reviewsService.deleteReviewDetails(id).subscribe(res => {
           if (res) {
-            // this.toastr.showSuccess("lead deleted successfully", "lead deleted")
+            this.toastr.showSuccess("Review deleted successfully", "Review deleted")
             this.getReviewList();
           }
         })
       }
 //search functionality
-  applyGlobalFilter(inputData, matchMode){
-    this.dt.filterGlobal(inputData,matchMode)
-  }
+applyFilterGlobal($event, stringVal) {
+  this.dt.filterGlobal(($event.target as HTMLInputElement).value, stringVal);
+}
 }

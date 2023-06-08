@@ -62,13 +62,14 @@ export class RatingCriteriaService {
   // return of(ratingCriteriaList)
 }
 
-deleteCriteriaDetails(name:string):Observable<any[]>{
+deleteCriteriaDetails(id:number):Observable<any[]>{
   const token =localStorage.getItem('token') || '';
   let httpOptions = new HttpHeaders().set('x-access-token',token)
-  const endpointUrl = `${environment.JSON_SERVER}/delete`
-  let filteredreviewer = ratingCriteriaList.splice(ratingCriteriaList.findIndex((index) => index.ratingCriteria == name),1);
-        return of(filteredreviewer)
+  const endpointUrl = `${environment.JSON_SERVER}/deleteRatingCriteria?id=${id}`
+  return this.http.delete<any>(endpointUrl,{ 'headers': httpOptions })
+
 }
+
 
 
 

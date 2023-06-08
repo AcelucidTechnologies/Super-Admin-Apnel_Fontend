@@ -21,7 +21,7 @@
         <p-table id="reviewTable" #dt [columns]="cols" responsiveLayout="scroll" [paginator]="true" [rows]="10"
             [showCurrentPageReport]="true" [value]="reviewListValue"
             currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries" [responsive]="true"
-            styleClass="p-datatable-striped" [globalFilterFields]="['reviewSubject']">
+            styleClass="p-datatable-striped" [globalFilterFields]="['reviewSubject','status','ratingCountReview']" >
             <ng-template pTemplate="caption">
               <div class="d-flex justify-content-between">
                 <div class="d-flex align-items-center p-0" >
@@ -32,7 +32,7 @@
                       class="input-container-img"
                     />
                     <input #search pInputText type="text" placeholder="Search..."
-                    (input)="applyGlobalFilter($event, 'contains')"/>
+                    (input)="applyFilterGlobal($event, 'contains')"/>
                   </div>
                 </div>
                 <div>
@@ -45,6 +45,13 @@
             </ng-template>
             <ng-template pTemplate="header">
                 <tr>
+                  <th >
+                    <div class="flex justify-content-between align-items-center head1">
+                      S.No.
+
+
+                    </div>
+                </th>
 
                   <th pSortableColumn="reviewSubject">
                     <div class="flex justify-content-between align-items-center head1">
@@ -54,18 +61,18 @@
                     </div>
                 </th>
 
-                <th pSortableColumn="publishingsiteurl">
+                <th pSortableColumn="publishingSiteUrl">
                   <div class="flex justify-content-between align-items-center head1">
                     Publishing Site Url
-                      <p-sortIcon field="publishingsiteurl"></p-sortIcon>
+                      <p-sortIcon field="publishingSiteUrl"></p-sortIcon>
 
                   </div>
               </th>
 
-              <th pSortableColumn="rating">
+              <th pSortableColumn="ratingCountReview">
                 <div class="flex justify-content-between align-items-center head1">
                   Rating
-                    <p-sortIcon field="rating"></p-sortIcon>
+                    <p-sortIcon field="ratingCountReview"></p-sortIcon>
 
                 </div>
             </th>
@@ -82,21 +89,21 @@
             </ng-template>
             <ng-template pTemplate="body" let-list let-i="rowIndex">
                 <tr>
+                  <td>
+                    <span class="p-column-title">Sr.no</span>
+                    {{i+1}}
+                </td>
                     <td>{{list.reviewSubject}}</td>
                     <td>{{list.publishingSiteUrl}}</td>
-                    <td>{{list.rating}}</td>
+                    <!-- <td>{{list.rating}}</td> -->
+                    <td>{{list.ratingCountReview}}</td>
                     <td>{{list.status}}</td>
                     <td>
-                        <!-- <button pButton type="button" icon="pi pi-user-edit" pTooltip="Edit Review"
-                            tooltipPosition="bottom" class="mr-2 p-button-secondary"
-                            [routerLink]="['/review/editreview']" [queryParams]="{serialno:reviews.Sno}" [disabled]="!accessPermission.edit"></button>
-                        <button pButton type="button" icon="pi pi-trash" pTooltip="Delete Review"
-                            tooltipPosition="bottom" class="mr-2 p-button-danger"
-                            (click)="openDialog(reviews.id)" [disabled]="!accessPermission.delete"></button> -->
+
                             <a pTooltip="Edit Review" tooltipPosition="bottom" style="margin-right: 15px; cursor: pointer;">
-                              <img src="../../../../assets/images/edit.svg" [routerLink]="['/review/editreview']" [queryParams]="{serialno:list.Sno}"  alt="img">
+                              <img src="../../../../assets/images/edit.svg" [routerLink]="['/review/editreview']" [queryParams]="{id:list._id}"  alt="img">
                             </a>
-                            <a pTooltip="Delete Review" tooltipPosition="bottom" (click)="openDialog(list.id)"
+                            <a pTooltip="Delete Review" tooltipPosition="bottom" (click)="openDialog(list)"
                               class="me-3 confirm-text" href="javascript:void(0);" >
                               <img src="../../../../assets/images/delete.svg" alt="img">
                             </a>
@@ -108,15 +115,6 @@
                     <td class="text-center text-danger" colspan="12">No records to show</td>
                 </tr>
             </ng-template>
-            <!-- <ng-template pTemplate="summary">
-                <div>
-                    <button pButton icon="pi pi-file" class="mr-2" pTooltip="CSV" tooltipPosition="bottom"
-                        (click)="dt.exportCSV()"></button>
-                    <button pButton icon="pi pi-file-excel" class="mr-2" pTooltip="Excel" tooltipPosition="bottom"
-                        (click)="exportExcel()"></button>
-                    <button pButton icon="pi pi-file-pdf" class="mr-2" pTooltip="Pdf" tooltipPosition="bottom"
-                        (click)="exportPdf()"></button>
-                </div>
-            </ng-template> -->
+
         </p-table>
 

@@ -126,14 +126,18 @@ export class AddRatingComponent implements OnInit {
 
   getReviewerData() {
     this.ratingService.getName().subscribe((res) => {
-      this.reviewerData = res;
+      // this.reviewerData = res;
+      this.reviewerData = res.filter(item => item.status === 'Active');
+
+
       console.log('51', this.reviewerData);
     });
   }
 
   getReviewList() {
     this.reviewsService.getReviewList().subscribe((res) => {
-      this.ratingSettingData = res;
+      // this.ratingSettingData = res;
+      this.ratingSettingData = res.filter(item => item.status === 'Active');
       console.log('--------->107', this.ratingSettingData);
     });
   }
@@ -150,7 +154,8 @@ populateRatings(): void {
 
 getUsertypeList(){
   this.usertypeService.getUsertypeList().subscribe((res)=>{
-    this.usertypeSettingData=res
+    // this.usertypeSettingData=res
+    this.usertypeSettingData = res.filter(item => item.status === 'Active');
     console.log("152",this.usertypeSettingData)
   })
 }

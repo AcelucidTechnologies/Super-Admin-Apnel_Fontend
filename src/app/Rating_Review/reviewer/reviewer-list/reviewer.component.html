@@ -5,109 +5,157 @@
     </div>
     <div class="col-6 text-right">
       <span class="p-input-icon-right ml-5">
-        <button pButton type="button" label=" + Add Reviewer" class="add-button-rating"
-          [routerLink]="['/reviewer/reviewerform']" [disabled]="!accessPermission?.add"></button>
+        <button
+          pButton
+          type="button"
+          label=" + Add Reviewer"
+          class="add-button-rating"
+          [routerLink]="['/reviewer/reviewerform']"
+          [disabled]="!accessPermission?.add"
+        ></button>
       </span>
     </div>
   </div>
 </div>
-<p-table id="customerTable" #dt [columns]="cols" responsiveLayout="scroll" [paginator]="true" [rows]="10"
-  [showCurrentPageReport]="true" [value]="reviewerData"
-  currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries" [responsive]="true"
-  styleClass="p-datatable-striped" [globalFilterFields]="['name']">
+<p-table
+  id="customerTable"
+  #dt
+  [columns]="cols"
+  responsiveLayout="scroll"
+  [paginator]="true"
+  [rows]="10"
+  [showCurrentPageReport]="true"
+  [value]="reviewerData"
+  currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
+  [responsive]="true"
+  styleClass="p-datatable-striped"
+  [globalFilterFields]="['name', 'email', 'ratingCount']"
+>
   <ng-template pTemplate="caption">
     <div class="d-flex justify-content-between">
       <div class="d-flex align-items-center p-0">
         <div class="input-container">
-          <img src="../../../assets/images/search-white.svg" class="input-container-img" />
-          <input #search pInputText type="text" placeholder="Search..."
-            (input)="applyFilterGlobal($event, 'contains')" />
+          <img
+            src="../../../assets/images/search-white.svg"
+            class="input-container-img"
+          />
+          <input
+            #search
+            pInputText
+            type="text"
+            placeholder="Search..."
+            (input)="applyFilterGlobal($event, 'contains')"
+          />
         </div>
       </div>
       <div>
+        <button
+          pButton
+          type="button"
+          pTooltip="Pdf"
+          class="custom-image"
+          tooltipPosition="bottom"
+          (click)="exportPdf()"
+        >
+          <img src="../../../../assets/images/pdf.svg" alt="Button Image" />
+        </button>
 
-        <button pButton type="button" pTooltip="Pdf" class="custom-image" tooltipPosition="bottom"
-          (click)=" exportPdf()"> <img src="../../../../assets/images/pdf.svg" alt="Button Image" /></button>
-
-        <button pButton type="button" pTooltip="Excel" class="custom-image" tooltipPosition="bottom"
-          (click)="exportExcel()"><img src="../../../../assets/images/excel.svg" alt="Button Image" /></button>
+        <button
+          pButton
+          type="button"
+          pTooltip="Excel"
+          class="custom-image"
+          tooltipPosition="bottom"
+          (click)="exportExcel()"
+        >
+          <img src="../../../../assets/images/excel.svg" alt="Button Image" />
+        </button>
       </div>
     </div>
   </ng-template>
 
   <ng-template pTemplate="header">
     <tr>
+      <th>
+        <div class="flex justify-content-between align-items-center head1">
+          S.No.
+        </div>
+      </th>
 
       <th pSortableColumn="name">
         <div class="flex justify-content-between align-items-center head1">
           Name
-            <p-sortIcon field="name"></p-sortIcon>
+          <p-sortIcon field="name"></p-sortIcon>
         </div>
-    </th>
+      </th>
 
-    <th pSortableColumn="email">
-      <div class="flex justify-content-between align-items-center head1">
-Email
+      <th pSortableColumn="email">
+        <div class="flex justify-content-between align-items-center head1">
+          Email
           <p-sortIcon field="email"></p-sortIcon>
+        </div>
+      </th>
 
-      </div>
-  </th>
+      <th pSortableColumn="ratingCount">
+        <div class="flex justify-content-between align-items-center head1">
+          Rating
+          <p-sortIcon field="ratingCount"></p-sortIcon>
+        </div>
+      </th>
 
-  <th pSortableColumn="rating">
-    <div class="flex justify-content-between align-items-center head1">
-      Rating
-        <p-sortIcon field="rating"></p-sortIcon>
+      <th pSortableColumn="firstRating">
+        <div class="flex justify-content-between align-items-center head1">
+          First Rating
+          <p-sortIcon field="firstRating"></p-sortIcon>
+        </div>
+      </th>
 
-    </div>
-</th>
-
-<th pSortableColumn="firstRating">
-  <div class="flex justify-content-between align-items-center head1">
-    First Rating
-      <p-sortIcon field="firstRating"></p-sortIcon>
-
-  </div>
-</th>
-
-<th pSortableColumn="status">
-  <div class="flex justify-content-between align-items-center head1">
-    Status
-      <p-sortIcon field="status"></p-sortIcon>
-
-  </div>
-</th>
+      <th pSortableColumn="status">
+        <div class="flex justify-content-between align-items-center head1">
+          Status
+          <p-sortIcon field="status"></p-sortIcon>
+        </div>
+      </th>
       <th class="text-center">Action</th>
     </tr>
   </ng-template>
   <ng-template pTemplate="body" let-list let-i="rowIndex">
     <tr>
-      <td>{{list.name}}</td>
-      <td>{{list.email}}</td>
-      <td>{{list.ratingCount}}</td>
-      <td>{{list.firstRating}}</td>
-      <td>{{list.status}}</td>
+      <td>
+        <span class="p-column-title">Sr.no</span>
+        {{ i + 1 }}
+      </td>
+      <td>{{ list.name }}</td>
+      <td>{{ list.email }}</td>
+      <td>{{ list.ratingCount }}</td>
+      <td>{{ list.firstRating | date : "short" | lowercase }}</td>
+      <td>{{ list.status }}</td>
 
       <td>
-        <a pTooltip="Edit Reviewer" tooltipPosition="bottom" style="margin-right: 15px; cursor: pointer;">
-          <img src="../../../../assets/images/edit.svg" [routerLink]="['/reviewer/reviewerform']"
-            [queryParams]="{serialno:list.sno}" alt="img">
+        <a
+          pTooltip="Edit Reviewer"
+          tooltipPosition="bottom"
+          style="margin-right: 15px; cursor: pointer"
+        >
+          <img
+            src="../../../../assets/images/edit.svg"
+            [routerLink]="['/reviewer/reviewerform']"
+            [queryParams]="{ id: list._id }"
+            alt="img"
+          />
         </a>
-        <a pTooltip="Delete Reviewer" tooltipPosition="bottom" (click)="openDialog(list)"
-          class="me-3 confirm-text" href="javascript:void(0);">
-          <img src="../../../../assets/images/delete.svg" alt="img">
+        <a
+          pTooltip="Delete Reviewer"
+          tooltipPosition="bottom"
+          (click)="openDialog(list)"
+          class="me-3 confirm-text"
+          href="javascript:void(0);"
+        >
+          <img src="../../../../assets/images/delete.svg" alt="img" />
         </a>
-        <!-- <button pButton icon="pi pi-user-edit" class="p-button-secondary mr-2" pTooltip="Edit Reviewer" tooltipPosition="bottom" [routerLink]="['/reviewer/reviewerform']" [queryParams]="{serialno:reviewers.sno}"  [disabled]="!accessPermission.edit"></button>
-                    <button pButton icon="pi pi-trash" class="p-button-danger" pTooltip="Delete Reviewer" tooltipPosition="bottom" (click)="openDialog(reviewers.name)"  [disabled]="!accessPermission.delete"></button> -->
       </td>
     </tr>
   </ng-template>
-  <!-- <ng-template pTemplate="summary">
-            <div>
-                <button pButton icon="pi pi-file" pTooltip="CSV" tooltipPosition="bottom" class="mr-2" (click)="dt.exportCSV()"></button>
-                <button pButton icon="pi pi-file-excel" pTooltip="excel" tooltipPosition="bottom" class="mr-2" (click)="exportExcel()"></button>
-                <button pButton icon="pi pi-file-pdf" pTooltip="pdf" tooltipPosition="bottom" (click)="exportPdf()" ></button>
-            </div>
-        </ng-template> -->
   <ng-template pTemplate="emptymessage">
     <tr>
       <td colspan="12" class="text-danger">No records to show</td>

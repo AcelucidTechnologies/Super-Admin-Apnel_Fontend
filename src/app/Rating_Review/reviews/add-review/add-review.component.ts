@@ -12,12 +12,23 @@ export class AddReviewComponent implements OnInit {
   sidebarSpacing: string = 'contracted';
   statusList: string[] = ['Active', 'Inactive'];
   reviewForm: FormGroup;
+  payload:any
   constructor(
     private fb: FormBuilder, private reviewService: ReviewsService,
     private route: Router
   ) {
     this.reviewForm = this.fb.group({
-      publishSiteUrl: ['', [Validators.required]],
+      // publishSiteUrl: ['', [Validators.required]],
+      publishSiteUrl: [
+        '',
+        [
+          Validators.required,
+
+          Validators.pattern(
+            '^(https?://)?([\\da-z.-]+)\\.([a-z.]{2,6})([/\\w .-]*)*/?$'
+          ),
+        ],
+      ],
       referenceId: ['', [Validators.required]],
       reviewStatus: ['', [Validators.required]]
     })
@@ -27,14 +38,15 @@ export class AddReviewComponent implements OnInit {
   }
 
   submitForm(){
-    let payload={
+    this.payload={
+      username: localStorage.getItem("email"),
       reviewSubject:this.reviewForm.controls['referenceId'].value,
-      publishingsiteurl:this.reviewForm.controls['publishSiteUrl'].value,
+      publishingSiteUrl:this.reviewForm.controls['publishSiteUrl'].value,
       rating:'4',
       status:this.reviewForm.controls['reviewStatus'].value
     }
-    
-    this.reviewService.submitReviewDetail(payload).subscribe((res)=>{
+
+    this.reviewService.submitReviewDetail(this.payload).subscribe((res)=>{
       if(res){
         this.route.navigate(['/review/reviewlist'])
       }

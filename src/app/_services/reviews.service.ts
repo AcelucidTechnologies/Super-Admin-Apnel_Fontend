@@ -19,27 +19,46 @@ export class ReviewsService {
      return this.http.get<any[]>(endpointUrl,{ 'headers': httpOptions });
 }
 
+editReviewList(payload, id: number) {
+  const token = localStorage.getItem('token') || '';
+  const httpOptions = new HttpHeaders().set('x-access-token', token);
+  const endpointUrl = `${environment.JSON_SERVER}/updateReviewList?id=${id}`;
+
+  return this.http.put<any>(endpointUrl, payload, { headers: httpOptions });
+}
+
+getReviewDetailById(id: number): Observable<any> {
+  const token = localStorage.getItem('token') || '';
+  let httpOptions = new HttpHeaders().set('x-access-token', token)
+  const endpointUrl = `${environment.JSON_SERVER}/getReviewListById?id=${id}`;
+  // let indexObj = bannerSpecialData.findIndex((obj)=>obj.id==id);
+  return this.http.get<any>(endpointUrl,{ 'headers': httpOptions });
+  // return of(bannerSpecialData[indexObj])
+}
 submitReviewDetail(payload:any):Observable<any[]>{
   const token = localStorage.getItem('token') || '';
   let httpOption = new HttpHeaders().set('x-access-token', token)
-  const endpointUrl = `${environment.JSON_SERVER}/add`;
-  payload.Sno=reviewList.length+1;
-  reviewList.push(payload)
-  return of(reviewList)
+  const endpointUrl = `${environment.JSON_SERVER}/createReviewList`;
+  return this.http.post<any[]>(endpointUrl,payload ,{ 'headers': httpOption });
+  // payload.Sno=reviewList.length+1;
+  // reviewList.push(payload)
+  // return of(reviewList)
 }
 
-deleteReviewDetails(name:string):Observable<any[]>{
+
+
+deleteReviewDetails(id:number):Observable<any[]>{
   const token =localStorage.getItem('token') || '';
   let httpOptions = new HttpHeaders().set('x-access-token',token)
-  const endpointUrl = `${environment.JSON_SERVER}/delete`
-  //return this.http.delete<any[]>(endpointUrl,{'headers':httpOption})
+  const endpointUrl = `${environment.JSON_SERVER}/deleteReviewList?id=${id}`
+  return this.http.delete<any[]>(endpointUrl,{'headers':httpOptions})
   // let filteredData = reviewList.filter(val=>{
   //   val.id =  name
   // })
   // reviewList.splice(reviewList.indexOf(filteredData[0]),1)
   // return of(reviewList)
-  let filteredreview = reviewList.splice(reviewList.findIndex((index) => index.reviewSubject == name),1);
-        return of(filteredreview)
+  // let filteredreview = reviewList.splice(reviewList.findIndex((index) => index.reviewSubject == name),1);
+  //       return of(filteredreview)
 }
 
 submitEditDetail(payload:any,serialno:number){

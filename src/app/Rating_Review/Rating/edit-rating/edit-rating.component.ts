@@ -1,9 +1,12 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ratingStructure } from 'src/app/_models/rating';
+import { RatingCriteriaService } from 'src/app/_services/rating-criteria.service';
 import { RatingService } from 'src/app/_services/rating.service';
+import { ReviewsService } from 'src/app/_services/reviews.service';
+import { UsertypeService } from 'src/app/_services/usertype.service';
 import { ExportDialogComponent } from '../export-dialog/export-dialog.component';
 
 @Component({
@@ -12,99 +15,113 @@ import { ExportDialogComponent } from '../export-dialog/export-dialog.component'
   styleUrls: ['./edit-rating.component.scss']
 })
 export class EditRatingComponent implements OnInit {
-  
-//  get cleaniness() : boolean {
-//   if(this.ratingData[0].ratingType.Cleaniness)
-//     return true
-//     else return false
-//   }
-//   get comfort() : boolean {
-//     if(this.ratingData[0].ratingType.Comfort)
-//       return true
-//       else return false
-//     }
-//     get facilities() : boolean {
-//       if(this.ratingData[0].ratingType.Facilities)
-//         return true
-//         else return false
-//       }
-//       get location() : boolean {
-//         if(this.ratingData[0].ratingType.Location)
-//           return true
-//           else return false
-//         }
-//         get staff() : boolean {
-//           if(this.ratingData[0].ratingType.Staff)
-//             return true
-//             else return false
-//           }
-  
+
+
+
   sidebarSpacing:string = 'contracted';
   ratingData:ratingStructure[]=[];
   ratingForm:FormGroup;
+  reviewerDataOption: any[]=[];
+  title:string;
+  update:any;
+  editMode:boolean = false;
+  CriteriaList: any;
+  payload: any;
+  ratingSettingData: any;
+  usertypeSettingData: any;
+  overAll: any;
+
+
+  id:any
+  rating:any
   name:string;
   // detailForm:FormGroup
   reviewerOptions:string[]=[];
   reviewOptions:string[]=['Hotel Plaza','Palm Hotel','Prince Hotel'];
   statusOptions:string[]=['Approved','Not Approved'];
   userTypeOptions:string[]=['Business Trip','Couple','Family','Group']
+  rating1: any;
   constructor(private fb:FormBuilder,private ratingService:RatingService,
     public dialog: MatDialog,
     private ActivatedRoute:ActivatedRoute,
+    private ratingCriteriaService: RatingCriteriaService,
+    private usertypeService: UsertypeService,
+    private reviewsService: ReviewsService,
     private route:Router) {
-    
+
     // this.detailForm = this.fb.group({
     //   date:['25-02-2022 14:56pm'],
     //   ipAddress:[ '13.126.212.31']
     // })
       this.ratingForm = this.fb.group({
-        date:['25-02-2022 14:56pm'],
-        ipAddress:[ '13.126.212.31'],
+        createdAt:['', Validators.required],
+        // ipAddress:[ '13.126.212.31'],
       reviewer: ['', [Validators.required]],
       review: ['', [Validators.required]],
       overall: ['', [Validators.required]],
       pros: [''],
       cons: [''],
-      ratingType:this.fb.group({
-        Cleaniness:[0],
-        Comfort:[0],
-        Facilities:[0],
-        Location:[0],
-        Staff:[0],
-      }),
-      userType: [''],
-      status: ['', [Validators.required]]
+      ratings: this.fb.array([
+
+      ]
+      ),
+      userType: ['',[Validators.required]],
+      status: ['', [Validators.required]],
+      username:[''],
+      id: ['']
     })
     this.ratingService.getReviewerList().subscribe((res)=>{
       this.reviewerOptions=res
     })
-    this.ActivatedRoute.queryParamMap.subscribe((params)=>{
-      this.name=params.get('reviewerName')
-          })
-   
+    // this.ActivatedRoute.queryParamMap.subscribe((params)=>{
+    //   this.name=params.get('reviewerName')
+    //       })
+    this.ActivatedRoute.queryParamMap.subscribe(params => {
+      this.id = params.get('id');
+      if (this.id && this.id != undefined) {
+        this.editMode = true
+        this.title = "Edit Rating"
+        this.update= "Update"
+        this.getRatingDetails()
+      } else {
+        this.editMode = false
+
+      }
+    });
+
    }
 
   ngOnInit(): void {
-    this.getRatingDetails()
+    this.getRatingDetails();
+    this.getReviewerDataOption();
+    this.getCriteriaList();
+    this.getReviewList();
+    this.getUsertypeList();
+    this.overAll=['Excellent','Good','Satisfying','Very Bad','Very Poor']
   }
 
   getRatingDetails()
   {
-    this.ratingService.getRatingDetails(this.name).subscribe((res) => {
-      this.ratingData = res
-      console.log(this.ratingData[0].ratingType)
-      this.ratingForm.patchValue({
-        reviewer: this.ratingData[0].reviewer,
-        review: this.ratingData[0].review,
-        overall: this.ratingData[0].rating,
-        pros: this.ratingData[0].positives,
-        cons: this.ratingData[0].negatives,
-        userType:this.ratingData[0].userType,
-        status: this.ratingData[0].status
-      })
-      this.ratingData[0].ratingType
-      this.ratingForm.controls["ratingType"].patchValue(this.ratingData[0].ratingType)
-    })
+
+    this.ratingService.getRatingDetailsById(this.id).subscribe((res) => {
+      this.rating1= res
+     console.log("rating response by id" + JSON.stringify(this.rating1))
+     this.ratingForm.patchValue({
+       reviewer: res.reviewer,
+       review: res.review,
+       overall: res.overall,
+       pros: res.pros,
+       cons: res.cons,
+       userType:res.userType,
+       status: res.status,
+       ratings:res.ratings,
+       createdAt:res.createdAt
+     })
+
+     // this.ratingData[0].ratingType
+     // this.ratingForm.controls["ratingType"].patchValue(this.ratingData[0].ratingType)
+   })
+
   }
   onToggleSidebar(sidebarState: any) {
   if (sidebarState === 'open') {
@@ -113,6 +130,49 @@ export class EditRatingComponent implements OnInit {
     this.sidebarSpacing = 'expanded';
   }
 
+}
+getUsertypeList(){
+  this.usertypeService.getUsertypeList().subscribe((res)=>{
+    // this.usertypeSettingData=res
+    this.usertypeSettingData = res.filter(item => item.status === 'Active');
+    console.log("152",this.usertypeSettingData)
+  })
+}
+populateRatings(): void {
+  const ratingsArray = this.ratingForm.get('ratings') as FormArray;
+  this.CriteriaList.forEach((rating) => {
+    if (rating.status === 'Active') {
+    ratingsArray.push(this.fb.group({
+      rating: [rating.value],
+      name: [rating.ratingCriteria],
+      _id:[rating._id]
+    }));
+  }
+  });
+}
+getCriteriaList() {
+  this.ratingCriteriaService.getCriteriaList().subscribe((res) => {
+    this.CriteriaList = res;
+    console.log('----> 98', this.CriteriaList);
+    this.populateRatings();
+  });
+}
+
+getReviewList() {
+  this.reviewsService.getReviewList().subscribe((res) => {
+    // this.ratingSettingData = res;
+    this.ratingSettingData = res.filter(item => item.status === 'Active');
+    console.log('--------->107', this.ratingSettingData);
+  });
+}
+
+
+getReviewerDataOption() {
+  this.ratingService.getName().subscribe((res) => {
+    // this.reviewerDataOption = res;
+    this.reviewerDataOption = res.filter(item => item.status === 'Active');
+    console.log('51', this.reviewerDataOption);
+  });
 }
 
 openExportDialog(){
@@ -128,18 +188,21 @@ openExportDialog(){
 }
 
 submitForm(){
-  let payload={
+  this.payload={
+    _id: this.id,
+    username: localStorage.getItem("email"),
     reviewer:this.ratingForm.controls["reviewer"].value,
     review:this.ratingForm.controls["review"].value,
     rating:this.ratingForm.controls["overall"].value,
     status:this.ratingForm.controls["status"].value,
-    ratingType:this.ratingForm.controls["ratingType"].value,
-    positives:this.ratingForm.controls["pros"].value,
-    negatives:this.ratingForm.controls["cons"].value,
+    ratings: this.ratingForm.controls['ratings'].value,
+    // ratingType:this.ratingForm.controls["ratingType"].value,
+    pros:this.ratingForm.controls["pros"].value,
+    cons:this.ratingForm.controls["cons"].value,
     userType:this.ratingForm.controls["userType"].value
   }
-  console.log(payload)
-  this.ratingService.submitRatingEditData(payload,this.name).subscribe((res)=>{
+  console.log(this.payload)
+  this.ratingService.submitRatingEditData(this.payload,this.id).subscribe((res)=>{
     if(res)
     {
       this.route.navigate(['/rating/ratinglist'])

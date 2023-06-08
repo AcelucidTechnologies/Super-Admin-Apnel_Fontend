@@ -20,6 +20,20 @@ getRatingList():Observable<any>{
      return this.http.get<any[]>(endpointUrl,{ 'headers': httpOptions });
 
 }
+getRatingandReviewList():Observable<any>{
+  const token = localStorage.getItem('token') || '';
+  const email = localStorage.getItem("email")
+  let httpOptions = new HttpHeaders().set('x-access-token',token);
+  const endpointUrl = `${environment.JSON_SERVER}/getAllRating`
+   return this.http.get<any[]>(endpointUrl,{ 'headers': httpOptions });
+
+}
+getRatingDetailsById(id:number): Observable<any>{
+  const token = localStorage.getItem('token') || '';
+  let httpOptions = new HttpHeaders().set('x-access-token',token);
+  const endpointUrl = `${environment.JSON_SERVER}/getRatingById?id=${id}`
+  return this.http.get<any>(endpointUrl, { 'headers': httpOptions });
+}
 
 submitRatingData(payloadData:any):Observable<any[]>{
   const token = localStorage.getItem('token') || '';
@@ -29,29 +43,14 @@ submitRatingData(payloadData:any):Observable<any[]>{
 
 }
 
-submitRatingEditData(payload:any,name:string):Observable<any[]>{
+submitRatingEditData(payload:any,id:number){
   const token = localStorage.getItem('token') || '';
   let httpOptions = new HttpHeaders().set('x-access-token',token);
-  const endpointUrl = `${environment.JSON_SERVER}/leadlist`
-  // return this.http.post<any[]>(endpointUrl,payload ,{ 'headers': httpOptions });
-  // leads.push(payload);
-// ratingDetails.splice(ratingDetails.findIndex((index) => index.reviewer == name),1)
-// ratingDetails.push(payload)
-ratingDetails.map(val=>{
-  if(val.reviewer==name){
-  val.reviewer=payload.reviewer,
- val.review=payload.review,
-  val.rating=payload.rating,
-  val.status=payload.status,
-  val.ratingType=payload.ratingType,
-  val.positives=payload.positives,
-  val.negatives=payload.negatives,
-  val.userType=payload.userType
-  }
-})
+  const endpointUrl = `${environment.JSON_SERVER}/updateRating?id=${id}`
+  return this.http.put<any>(endpointUrl, payload, { headers: httpOptions });
 
-  return of(ratingDetails)
 }
+
 submitReviewerData(Data:any):Observable<any[]>{
   const token = localStorage.getItem('token') || '';
   let httpOptions = new HttpHeaders().set('x-access-token',token);
@@ -82,7 +81,7 @@ getRatingDetails(name:string):Observable<any[]>{
   return of(filteredData)
 }
 
-deleteRatingDetails(id:string)
+deleteRatingDetails(id:number)
     {
         const token = localStorage.getItem('token') || '';
         let httpOptions = new HttpHeaders().set('x-access-token',token);

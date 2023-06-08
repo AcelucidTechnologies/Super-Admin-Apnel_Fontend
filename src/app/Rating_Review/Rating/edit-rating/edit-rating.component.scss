@@ -38,4 +38,19 @@
 }
 ::ng-deep.p-dropdown{
   border: 1px solid lightgray;
+  width: 100%;
+}
+.label-width {
+  width: 80px;
+  margin-right: 20px;
+  margin-bottom: 5px;
+}
+
+.full-width-dropdown .p-dropdown {
+  width: 100%;
+}
+::ng-deep .p-dropdown-panel .p-dropdown-items .p-dropdown-item.p-highlight {
+  color: #ffffff;
+  background:#e41c1c !important;
+
 }
