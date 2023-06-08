@@ -126,23 +126,23 @@
 
 
           <div class="row">
-            <div class="form-row col-6 pt-5">
-              <div class="col-5">
+            <div class="form-row col-12 pt-5">
+              <div class="col-2">
                 <label for="ratingType" class="col-form-label text-left">Rating Type</label>
               </div>
-              <div>
+              <div class="col-10">
+                <div class="columns-wrapper">
+                <div formArrayName="ratings" class="column-container">
 
-                <div formArrayName="ratings">
-
-                  <div *ngFor="let rating of ratingForm.get('ratings')['controls']; let i = index">
-                    <div [formGroupName]="i">
+                  <div *ngFor="let rating of ratingForm.get('ratings')['controls']; let i = index" class="column-item">
+                    <div [formGroupName]="i" >
                       <div style="display: flex;">
-                      <!-- <input type="number" formControlName="rating" [value]="rating.value.rating" /> -->
                       <p class="label-width">{{ rating.value.name }}</p>
                       <p-rating [cancel]="false" formControlName="rating"></p-rating>
                     </div>
                     </div>
                   </div>
+                </div>
                 </div>
 
             </div>

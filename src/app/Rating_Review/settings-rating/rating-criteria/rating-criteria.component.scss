@@ -104,3 +104,9 @@ th {
   border: none;
 
 }
+:host::ng-deep   .p-datatable .p-sortable-column .p-sortable-column-icon{
+  color: #848484;
+}
+:host::ng-deep   .p-datatable .p-sortable-column.p-highlight:hover .p-sortable-column-icon {
+  color: #848484;
+}

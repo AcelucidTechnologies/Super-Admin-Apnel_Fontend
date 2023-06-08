@@ -80,9 +80,15 @@
   <ng-template pTemplate="header">
     <tr>
       <th class="text-center">S.No.</th>
-      <th class="text-center">Rating Criteria</th>
-      <th class="text-center">Status</th>
-      <th class="text-center">Actions</th>
+      <th class="text-center" pSortableColumn="ratingCriteria">Rating Criteria
+        <p-sortIcon field="ratingCriteria"></p-sortIcon>
+      </th>
+      <th class="text-center" pSortableColumn="status">Status
+        <p-sortIcon field="status"></p-sortIcon>
+      </th>
+      <th class="text-center">Actions
+
+      </th>
     </tr>
   </ng-template>
   <ng-template pTemplate="body" let-criterias let-i="rowIndex">

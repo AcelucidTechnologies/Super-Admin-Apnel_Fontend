@@ -32,7 +32,7 @@
                   placeholder="enter name.."
                   (input)="capitalizeFirstLetter($event)"
                 />
-                <div
+                <!-- <div
                   *ngIf="
                     !reviewerForm.controls['name'].valid &&
                     reviewerForm.controls['name'].touched
@@ -48,7 +48,35 @@
                   >
                     Name is required
                   </div>
+                </div> -->
+                <div *ngIf="
+                !reviewerForm.controls['name'].valid &&
+                (reviewerForm.controls['name'].touched ||
+                reviewerForm.controls['name'].dirty)
+              ">
+                <div [hidden]="
+                  !reviewerForm.controls['name'].errors[
+                    'required'
+                  ]
+                " style="
+                  color: rgb(253, 122, 122);
+                  font-size: small;
+                  font-style: italic;
+                ">
+                 Name is required
                 </div>
+                <div *ngIf="
+                reviewerForm.controls['name'].errors[
+                    'pattern'
+                  ]
+                " style="
+                  color: rgb(253, 122, 122);
+                  font-size: small;
+                  font-style: italic;
+                ">
+                  Name should be of string type
+                </div>
+              </div>
               </div>
             </div>
 

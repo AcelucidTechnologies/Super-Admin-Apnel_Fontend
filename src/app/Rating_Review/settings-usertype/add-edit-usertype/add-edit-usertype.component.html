@@ -18,9 +18,37 @@
                                 <div class="form-group  col-12 d-flex justify-content-center">
                                     <label for="criteriaName" class=" col-2 col-form-label px-1 starlabel">Usertype</label>
                                     <div class="col-8"><input type="text" id="criteriaName" class="form-control" formControlName="userType">
-                                        <div *ngIf="!usertypeForm.controls['userType'].valid && usertypeForm.controls['userType'].touched ">
+                                        <!-- <div *ngIf="!usertypeForm.controls['userType'].valid && usertypeForm.controls['userType'].touched ">
                                             <div [hidden]="!usertypeForm.controls['userType'].errors['required']" style="font-size:smaller; color: rgb(253, 122, 122); font-style: italic; display:block">Usertype is required</div>
+                                        </div> -->
+                                        <div *ngIf="
+                                        !usertypeForm.controls['userType'].valid &&
+                                        (usertypeForm.controls['userType'].touched ||
+                                        usertypeForm.controls['userType'].dirty)
+                                      ">
+                                        <div [hidden]="
+                                          !usertypeForm.controls['userType'].errors[
+                                            'required'
+                                          ]
+                                        " style="
+                                          color: rgb(253, 122, 122);
+                                          font-size: small;
+                                          font-style: italic;
+                                        ">
+                                         User Type is required
                                         </div>
+                                        <div *ngIf="
+                                        usertypeForm.controls['userType'].errors[
+                                            'pattern'
+                                          ]
+                                        " style="
+                                          color: rgb(253, 122, 122);
+                                          font-size: small;
+                                          font-style: italic;
+                                        ">
+                                          User Type should be of string type
+                                        </div>
+                                      </div>
                                     </div>
                                 </div>
                             </div>
