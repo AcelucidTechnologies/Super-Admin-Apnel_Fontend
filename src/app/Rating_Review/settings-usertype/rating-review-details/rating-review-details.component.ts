@@ -4,6 +4,7 @@ import { RatingService } from 'src/app/_services/rating.service';
 import { ReviewsService } from 'src/app/_services/reviews.service';
 import { DatePipe } from '@angular/common';
 
+
 @Component({
   selector: 'app-rating-review-details',
   templateUrl: './rating-review-details.component.html',
@@ -28,11 +29,14 @@ export class RatingReviewDetailsComponent implements OnInit {
   totalNoRating: number;
   ratingandReview: any[] = [];
   filteredData: any;
+  roundedRating: number
 
   constructor(
     private ratingService: RatingService,
     private datePipe: DatePipe
-  ) {}
+  ) {
+    // this.roundedRating = Number(this.overallRating.toFixed(1));
+  }
 
   ngOnInit(): void {
     this.getAllRatingDetails();
@@ -67,6 +71,8 @@ export class RatingReviewDetailsComponent implements OnInit {
       console.log('21', this.averageRating);
 
       this.overallRating = this.sumofAverage / this.ratingLength;
+
+
     });
   }
 

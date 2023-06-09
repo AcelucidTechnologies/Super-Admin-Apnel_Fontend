@@ -40,7 +40,8 @@
           <!-- <div> -->
 
           <div style="display: flex; justify-content: center">
-            <p class="overall-rating">{{ overallRating | number : "1.2-2" }}</p>
+            <!-- <p class="overall-rating">{{ overallRating | number: '1.0-0' }}</p> -->
+            <p class="overall-rating">{{ overallRating | number: '1.0-0'}}</p>
           </div>
         </div>
         <div class="card mt-4" style="padding: 10px; margin-bottom: 0px">
@@ -112,7 +113,7 @@
           </div>
           <div style="display: flex">
             <p class="user-rating">
-              {{ item.AverageRating | number : "1.2-2" }}
+              {{ item.AverageRating | number: '1.0-0' }}
             </p>
             <p class="overall">"{{ item.overall }}"</p>
             <p class="userType">{{ item.userType }}</p>

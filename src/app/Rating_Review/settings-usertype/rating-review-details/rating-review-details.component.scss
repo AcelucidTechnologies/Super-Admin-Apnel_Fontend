@@ -30,13 +30,14 @@ border: none;
   // border: 1px solid black;
   background-color: red;
   color: #ffffff;
-  padding: 20px;
+  padding: 20px 30px 20px 30px;
   margin-top:20px;
   margin-right: 10px;
   // margin-bottom: 50px;
   font-size: 24px;
   font-weight: 600;
   border-radius: 5px;
+
 }
 .show-rating{
   display: flex;
@@ -47,7 +48,7 @@ border: none;
 }
 .user-rating{
   // border: 1px solid black;
-  padding: 5px;
+  padding: 5px 10px 5px 10px;
   margin-right: 10px;
   font-size: 18px;
   font-weight: 600;
@@ -96,7 +97,7 @@ border: none;
 //   border-bottom: 1px solid grey;
 // }
 .show-rating-overall{
-  height: 580px;
+  height: 900px;
   overflow-y: auto;
 }
 ::ng-deep .p-card .p-card-content {

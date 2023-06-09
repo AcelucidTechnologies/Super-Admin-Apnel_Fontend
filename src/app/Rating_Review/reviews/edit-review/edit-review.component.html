@@ -37,12 +37,40 @@
             </div>
             <div class="row mb-4">
                 <div class="form-group col-6">
-                    <label for="reference" class="starlabel mb-4">Reference Id</label>
+                    <label for="reference" class="starlabel mb-4">Subject Name</label>
                     <input type="text" id="reference" class="form-control" formControlName="referenceId">
-                    <div *ngIf="!editForm.controls['referenceId'].valid && editForm.controls['referenceId'].touched ">
+                    <!-- <div *ngIf="!editForm.controls['referenceId'].valid && editForm.controls['referenceId'].touched ">
                         <div [hidden]="!editForm.controls['referenceId'].errors['required']" style="font-size:smaller; color: rgb(253, 122, 122); font-style: italic;">ReferenceId is required</div>
                     </div>
+                </div> -->
+                <div *ngIf="
+                !reviewForm.controls['referenceId'].valid &&
+                (reviewForm.controls['referenceId'].touched ||
+                reviewForm.controls['referenceId'].dirty)
+              ">
+                <div [hidden]="
+                  !reviewForm.controls['referenceId'].errors[
+                    'required'
+                  ]
+                " style="
+                  color: rgb(253, 122, 122);
+                  font-size: small;
+                  font-style: italic;
+                ">
+                 Subject Name is required
                 </div>
+                <div *ngIf="
+                reviewForm.controls['referenceId'].errors[
+                    'pattern'
+                  ]
+                " style="
+                  color: rgb(253, 122, 122);
+                  font-size: small;
+                  font-style: italic;
+                ">
+                  Subject name should be of string type
+                </div>
+              </div>
                 <div class="form-group col-6">
                     <label for="status" class="starlabel mb-4">Status</label>
                     <!-- <p-dropdown id="status" styleClass="reviewDropdown" [options]="statusList" placeholder="Select" formControlName="reviewStatus"></p-dropdown>

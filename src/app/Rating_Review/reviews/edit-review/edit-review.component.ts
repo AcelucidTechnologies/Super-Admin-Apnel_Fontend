@@ -52,7 +52,7 @@ export class EditReviewComponent implements OnInit {
       // lastRating: ['24-03-2023, 12:34am By Rahul'],
       // reviewerType: ['', [Validators.required]],
       publishingSiteUrl: ['', [Validators.required]],
-      referenceId: ['', [Validators.required]],
+      referenceId: ['', [Validators.required, Validators.pattern(/^[a-zA-Z]+$/)]],
       status: ['', [Validators.required]],
       username:['']
 

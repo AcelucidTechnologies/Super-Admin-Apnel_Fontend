@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { AbstractControl, FormBuilder, FormGroup, ValidationErrors, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import {  RatingCriteriaService } from 'src/app/_services/rating-criteria.service'
 
@@ -20,7 +20,7 @@ export class AddEditRatingCriteriaComponent implements OnInit {
     private route: Router,
     private activatedRoute:ActivatedRoute) {
       this.criteriaForm = fb.group({
-        ratingCriteria: ['', [Validators.required]],
+        ratingCriteria: ['', [Validators.required, Validators.pattern(/^[a-zA-Z]+$/)]],
         status: ['', [Validators.required]],
       });
 
@@ -39,6 +39,7 @@ export class AddEditRatingCriteriaComponent implements OnInit {
     })
 
   }
+
   statusList: string[] = ['Active', 'Inactive'];
   ngOnInit(): void {}
 

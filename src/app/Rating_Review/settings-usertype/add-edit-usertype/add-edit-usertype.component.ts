@@ -26,7 +26,7 @@ export class AddEditUserTypeComponent implements OnInit {
     private toastr: ToastrMsgService,
     private activatedRoute:ActivatedRoute) {
       this.usertypeForm = fb.group({
-        userType: ['', [Validators.required]],
+        userType: ['', [Validators.required, Validators.pattern(/^[a-zA-Z]+$/)]],
         status: ['', [Validators.required]],
       });
 
@@ -40,7 +40,7 @@ export class AddEditUserTypeComponent implements OnInit {
         this.getUserTypeById();
       } else {
         this.editMode = false
-        this.title = "Add New Coupon Name"
+        this.title = "Add"
         //this.update= "Save"
       }
     })
