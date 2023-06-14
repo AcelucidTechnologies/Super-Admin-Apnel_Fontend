@@ -106,7 +106,6 @@ export class AddBannerSpecialComponent implements OnInit {
     this.fgsType = SPINNER.squareLoader;
     this.ngxLoader.start();
     bsCustomFileInput.init();
-    //this.myCkeditorConfig = this.common.getConfig(150,400);
     this.sidebarSpacing = 'contracted';
     this.activateRoute.queryParamMap.subscribe((params) => {
       this.id = params.get('id');
@@ -116,7 +115,6 @@ export class AddBannerSpecialComponent implements OnInit {
         this.title = 'Edit Special Banner';
         this.imagehide=false
         this.imageShow=true
-        // this.editBannerData()
         this.getBannerById();
       } else {
         this.editMode = false;
@@ -124,7 +122,6 @@ export class AddBannerSpecialComponent implements OnInit {
         this.imageShow= true
         this.imagehide=false
         this.title = 'Add New Special Banner';
-        //this.addCategory()
       }
     });
   }

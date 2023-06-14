@@ -7,22 +7,22 @@
     <h5>&nbsp;Review Details</h5>
   </div>
   <div class="d-flex justify-content-center">
-    <div class="card" style="width: 1000px; height: 520px;">
+    <div class="card" style="width: 1150px; height: 600px;">
 
-      <div class="card-body" style="width:800px; margin: auto;">
+      <div class="card-body">
         <div class="p-5">
-          <div class="mt-2 mb-5">
+          <div class=" mb-4">
             <h4>Add Reviews</h4>
           </div>
           <form [formGroup]="reviewForm">
             <!-- <div class="row mb-4"> -->
-            <div class="form-row  mt-5">
+            <div class="form-row  mt-3">
               <div class="col-3 ">
                 <label for="siteUrl" class=" text-center starlabel mb-4">Publishing Site Url</label>
               </div>
               <div class="col-9 ">
                 <input type="text" class="form-control " id="siteUrl" formControlName="publishSiteUrl"
-                  placeholder="enter publishing url">
+                  placeholder="Enter publishing url">
                 <div *ngIf="
                   !reviewForm.controls['publishSiteUrl'].valid &&
                   (reviewForm.controls['publishSiteUrl'].touched ||
@@ -55,13 +55,13 @@
               </div>
             </div>
 
-            <div class="form-row mt-5">
+            <div class="form-row mt-3">
               <div class="col-3 ">
                 <label for="reference" class="text-center starlabel mb-4">Subject Name</label>
               </div>
               <div class="col-9 ">
                 <input type="text" class="form-control " id="reference" formControlName="referenceId"
-                  placeholder="enter refrence id">
+                  placeholder="Enter subject name">
                 <!-- <div *ngIf="!reviewForm.controls['referenceId'].valid && reviewForm.controls['referenceId'].touched ">
                   <div [hidden]="!reviewForm.controls['referenceId'].errors['required']"
                     style="font-size:smaller; color: rgb(253, 122, 122); font-style: italic;">ReferenceId is required
@@ -92,7 +92,7 @@
                   font-size: small;
                   font-style: italic;
                 ">
-                  Subject name should be of string type
+                  Subject name should be of Alphabet only
                 </div>
               </div>
               </div>
@@ -100,7 +100,7 @@
             <!-- </div> -->
 
 
-            <div class="form-row  mt-5">
+            <div class="form-row  mt-3">
               <div class="col-3 ">
                 <label for="reference" class="text-center starlabel mb-4">Status</label>
               </div>

@@ -12,6 +12,7 @@ import { MatCardModule } from '@angular/material/card';
 import { RatingModule } from 'primeng/rating';
 import { EditRatingComponent } from './edit-rating/edit-rating.component';
 import { DialogComponent } from './dialog/dialog.component';
+import { TableModule } from 'primeng/table';
 
 
 
@@ -31,7 +32,8 @@ import { DialogComponent } from './dialog/dialog.component';
     MatButtonModule,
     MultiSelectModule,
     MatCardModule,
-    RatingModule, MatButtonModule
+    RatingModule, MatButtonModule,
+    TableModule,
   ]
 })
 export class AdminRatingModule { }

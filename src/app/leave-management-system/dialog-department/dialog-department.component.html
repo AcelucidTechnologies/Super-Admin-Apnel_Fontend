@@ -1,0 +1,61 @@
+<div class="box">
+  <mat-dialog-content>
+    <form [formGroup]="selectForm">
+      <div class="row gutters">
+        <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+          <div class="form-group">
+            <label for="name" class="col-form-label text-left starlabel"
+              >Enter Department</label
+            >
+            <input
+              type="text"
+              class="form-control"
+              placeholder=""
+              formControlName="department"
+            />
+            <div
+              *ngIf="
+                !selectForm.controls['department'].valid &&
+                (selectForm.controls['department'].touched ||
+                selectForm.controls['department'].dirty)
+              "
+            >
+              <div
+                [hidden]="!selectForm.controls['department'].errors['required']"
+                style="
+                  color: rgb(253, 122, 122);
+                  font-size: small;
+                  font-style: italic;
+                "
+              >
+                Department is required
+              </div>
+              <!-- <div
+                *ngIf="selectForm.controls['department'].errors['pattern']"
+                style="
+                  color: rgb(253, 122, 122);
+                  font-size: small;
+                  font-style: italic;
+                "
+              >
+                Department name should be alphabet
+              </div> -->
+            </div>
+          </div>
+        </div>
+      </div>
+    </form>
+  </mat-dialog-content>
+  <mat-dialog-actions align="end">
+    <button
+      mat-button
+      [mat-dialog-close]="true"
+      class="dialog1 button-color mr-2"
+      (click)="submitForm()" [disabled]="!selectForm.valid"
+    >
+      Save
+    </button>
+    <button mat-button mat-dialog-close class="dialog2"  >Cancel</button>
+  </mat-dialog-actions>
+</div>
+<ngx-ui-loader [fgsColor]="'#000000'" [fgsType]="fgsType"></ngx-ui-loader>

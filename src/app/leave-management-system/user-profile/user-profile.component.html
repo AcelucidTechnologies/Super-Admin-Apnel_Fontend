@@ -1,0 +1,126 @@
+
+<div class="button-heading-container">
+  <button class="mb-2 p-1 back-button" [routerLink]="['/leaveMgmt/profile-list']">
+    <i class="material-icons">arrow_back</i>
+  </button>
+  <h5>View Profile</h5>
+</div>
+<div class="card col-sm-12">
+  <div style="display: flex; justify-content: center;">
+    <img class="user-name-img" [src]="leaveres.image" width="100" height="100" style="border-radius: 50%; margin-top: 20px;">
+  </div>
+  <div class="row justify-content-between">
+    <div class="col-4 profile-basic-info">
+      <p class="name-info">{{leaveres?.employeeId}}-{{leaveres?.FirstName}}</p>
+    </div>
+    <div class="col-4 profile-basic-info">
+      <p class="name-info">{{ personalInfo?.expertise }}</p>
+    </div>
+    <div class="col-4 profile-basic-info">
+      <p class="name-info">{{leaveres?.email}}</p>
+    </div>
+  </div>
+  <!-- <div style="display: flex; justify-content: end;">
+    <button type="button" class="btn btn-warning add-edit-button" [routerLink]="['/leaveMgmt/add-profile']" routerLinkActive="router-link-active" >Add</button>
+    <button type="button" class="btn btn-warning add-edit-button" [routerLink]="['/leaveMgmt/edit-profile']">Edit</button>
+  </div> -->
+  <div class="row" style="margin: 30px 20px 20px 20px">
+    <div class="col-6">
+        <div class="card card-info">
+            <div class="card-body">
+                <h5 class="card-title">About Us</h5>
+                <p class="user-label">About Me:</p><p class="user-value">{{ personalInfo?.aboutMe }}</p>  <br>
+            </div>
+        </div>
+    </div>
+    <div class="col-6">
+        <div class="card card-info">
+            <div class="card-body">
+                <h5 class="card-title">Skills Set</h5>
+                <p class="user-label">Expertise:</p><p class="user-value">{{ personalInfo?.expertise }}</p>  <br>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row" style="margin: 20px;">
+  <div class="col-6">
+      <div class="card card-info">
+          <div class="card-body">
+              <h5 class="card-title">Basic Info</h5>
+              <div class="card-text" *ngIf="personalInfo">
+              <p class="user-label">Employee Id:</p><p class="user-value">{{ leaveres?.employeeId }}</p>  <br>
+              <p class="user-label">Employee Full Name:</p><p class="user-value">{{ leaveres?.employeeFullName }}</p>  <br>
+              <p class="user-label">First Name:</p><p class="user-value">{{ leaveres?.FirstName }}</p>  <br>
+              <p class="user-label">Last Name:</p><p class="user-value">{{ leaveres?.lastName }}</p>  <br>
+              <p class="user-label">Email:</p><p class="user-value">{{ leaveres?.email }}</p>  <br>
+          </div>
+          </div>
+      </div>
+  </div>
+  <div class="col-6">
+      <div class="card card-info">
+          <div class="card-body">
+              <h5 class="card-title">Personal Info</h5>
+              <div class="card-text" *ngIf="personalInfo">
+                <p class="user-label">Date of Birth:</p><p class="user-value">{{ personalInfo?.dateOfBirth }}</p>  <br>
+                <p class="user-label">Age:</p><p class="user-value">{{ personalInfo?.age }}</p>  <br>
+                <p class="user-label">Gender: </p><p class="user-value">{{ personalInfo?.gender }}</p>  <br>
+                <p class="user-label">Marital Status:</p><p class="user-value">{{ personalInfo?.maritalStatus }}</p>  <br>
+                <p class="user-label">Expertise:</p><p class="user-value">{{ personalInfo?.expertise }}</p>  <br>
+                <p class="user-label">About Me:</p><p class="user-value">{{ personalInfo?.aboutMe }}</p>  <br>
+              </div>
+          </div>
+      </div>
+  </div>
+</div>
+<div class="row" style="margin: 20px;">
+  <div class="col-6">
+      <div class="card card-info">
+          <div class="card-body">
+              <h5 class="card-title">
+
+Contact Info
+              </h5>
+              <p class="user-label">Email Address:</p><p class="user-value">{{ contactInfo?.personalEmailAddress }}</p>  <br>
+              <p class="user-label">Working Mobile:</p><p class="user-value">{{ contactInfo?.workingPhoneNumber }}</p>  <br>
+              <p class="user-label">Personal Mobile:</p><p class="user-value">{{ contactInfo?.personalMobileNumber }}</p>  <br>
+              <p class="user-label">Present Addresss:</p><p class="user-value">{{ contactInfo?.presentAddress.address1 }}, {{ contactInfo?.presentAddress.address2 }}, {{ contactInfo?.presentAddress.city }}, {{ contactInfo?.presentAddress.state }}, {{ contactInfo?.presentAddress.country }}, {{ contactInfo?.presentAddress.pincode }}</p>  <br>
+          </div>
+      </div>
+  </div>
+  <div class="col-6">
+      <div class="card card-info">
+          <div class="card-body">
+              <h5 class="card-title">Identity Info</h5>
+              <p class="user-label">UAN:</p><p class="user-value">{{ identityInfo?.uan }}</p>  <br>
+              <p class="user-label">Pan Number:</p><p class="user-value">{{ identityInfo?.panNumber }}</p>  <br>
+              <p class="user-label">Aadhar Number:</p><p class="user-value">{{ identityInfo?.aadharNumber }}</p>  <br>
+
+          </div>
+      </div>
+  </div>
+</div>
+<div class="row" style="margin: 20px;">
+  <div class="col-6">
+      <div class="card card-info" >
+          <div class="card-body">
+              <h5 class="card-title">Sepration Info</h5>
+              <p class="user-label">Sepration date:</p><p class="user-value">{{ separationInfo}}</p>  <br>
+          </div>
+      </div>
+  </div>
+  <div class="col-6">
+      <div class="card card-info" >
+          <div class="card-body">
+              <h5 class="card-title">System Field</h5>
+              <p class="user-label">Added By:</p><p class="user-value">{{ systemFieldInfo?.addedBy }}</p>  <br>
+              <p class="user-label">Added Time:</p><p class="user-value">{{ systemFieldInfo?.addedTime }}</p>  <br>
+              <p class="user-label">Modified By:</p><p class="user-value">{{ systemFieldInfo?.modifiedBy }}</p>  <br>
+              <p class="user-label">Modified Time:</p><p class="user-value">{{ systemFieldInfo?.modifiedTime }}</p>  <br>
+              <p class="user-label">OnBoarding Status:</p><p class="user-value">{{ systemFieldInfo?.onBoardingStatus }}</p>  <br>
+          </div>
+      </div>
+  </div>
+</div>
+
+</div>

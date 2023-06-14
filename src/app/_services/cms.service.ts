@@ -248,12 +248,6 @@ getPageById(id: number): Observable<any> {
         // const endpointUrl = `${environment.JSON_SERVER}/category/${id}`;
         const endpointUrl = `${environment.JSON_SERVER}/deleteBannerSpecial?id=${id}`;
         return this.http.delete<Admin>(endpointUrl, { 'headers': httpOptions });
-        // let bannerObj = bannerSpecialData.map(item => {
-        //     item.id == id;
-        //     return item;
-        // })
-        // bannerSpecialData.splice(bannerSpecialData.findIndex((index) => index.id == id),1);
-        // return of(bannerObj)
     }
 
     editSpecialBanner(payload: any, id: number) {

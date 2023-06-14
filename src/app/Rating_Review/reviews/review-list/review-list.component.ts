@@ -21,7 +21,7 @@ export class ReviewListComponent implements OnInit {
   sidebarSpacing:string='contracted'
   @ViewChild('dt') dt:Table|any
   cols:any[]
-  reviewListValue:any[]
+  reviewListValue:any[]=[]
   reviewDetails:any[]
   exportColumns:any[]
   statusList:string[]=['Active','Inactive']
@@ -39,11 +39,7 @@ export class ReviewListComponent implements OnInit {
 
 
   ngOnInit(): void {
-    this.cols = [{ field: "reviewSubject", headers: "Review Subject" },
-    { field: "publishingSiteUrl", headers: "publishing Site Url" },
-    { field: "rating", headers: "Rating" },
-    { field: "status", headers: "Status" }]
-    this.exportColumns = this.cols.map(col => ({title: col.headers,dataKey: col.field}))
+
   }
 
   onToggleSidebar(sidebarState: any) {
@@ -76,16 +72,30 @@ saveAsExcelFile(buffer: any, fileName: string): void {
   FileSaver.saveAs(data, fileName + '_export_' + new Date().getTime() + EXCEL_EXTENSION);
 }
 
-exportPdf() {
-  this.reviewDetails = this.reviewListValue
-          const doc = new jsPDF.jsPDF('l', 'pt');
-         autoTable(doc, {
-          columns:this.exportColumns,
-          body:this.reviewDetails
-         });
-          doc.save('reviews.pdf');
-      }
 
+exportPdf() {
+  this.reviewDetails = this.reviewListValue.map((item, index) => {
+    return { sno: index + 1, ...item };
+  });
+
+  const doc = new jsPDF.jsPDF('l', 'pt');
+  const data = this.reviewDetails;
+  const exportColumns = [
+    { title: 'S No.', dataKey: 'sno' },
+    { title: 'Review Subject', dataKey: 'reviewSubject' },
+    { title: 'Publishing Site Url', dataKey: 'publishingSiteUrl' },
+    { title: 'Rating Count Review ', dataKey: 'ratingCountReview' },
+    { title: 'status', dataKey: 'status' },
+
+  ];
+
+  autoTable(doc, {
+    columns: exportColumns,
+    body: data
+  });
+
+  doc.save('Review List.pdf');
+}
       openDialog(name: any) {
         const dialogRef = this.dialog.open(DialogComponent);
         dialogRef.afterClosed().subscribe(result => {
@@ -105,7 +115,20 @@ exportPdf() {
         })
       }
 //search functionality
-applyFilterGlobal($event, stringVal) {
-  this.dt.filterGlobal(($event.target as HTMLInputElement).value, stringVal);
+// applyFilterGlobal($event, stringVal) {
+//   this.dt.filterGlobal(($event.target as HTMLInputElement).value, stringVal);
+// }
+applyFilterGlobal(event: Event, stringVal: string) {
+  const searchValue = (event.target as HTMLInputElement).value;
+
+  // Check if the search value is empty or contains only whitespace
+  if (!searchValue || /^\s*$/.test(searchValue)) {
+    // Clear the global filter if the search value is empty
+    this.dt.filterGlobal('', stringVal);
+  } else {
+    // Apply the global filter with the search value
+    this.dt.filterGlobal(searchValue.trim(), stringVal);
+  }
 }
+
 }

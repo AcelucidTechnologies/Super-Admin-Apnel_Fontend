@@ -1,0 +1,48 @@
+
+<div class="box">
+  <mat-dialog-content>
+      <form [formGroup]="selectForm">
+          <div class="row gutters">
+              <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+                  <div class="form-group">
+                      <label for="name" class="col-form-label text-left starlabel">Enter Designation</label>
+                      <input type="text" class="form-control" placeholder="" formControlName="designation">
+
+                      <div
+              *ngIf="
+                !selectForm.controls['designation'].valid &&
+                (selectForm.controls['designation'].touched ||
+                selectForm.controls['designation'].dirty)
+              "
+            >
+              <div
+                [hidden]="!selectForm.controls['designation'].errors['required']"
+                style="
+                  color: rgb(253, 122, 122);
+                  font-size: small;
+                  font-style: italic;
+                "
+              >
+                Designation is required
+              </div>
+              <!-- <div
+                *ngIf="selectForm.controls['designation'].errors['pattern']"
+                style="
+                  color: rgb(253, 122, 122);
+                  font-size: small;
+                  font-style: italic;
+                "
+              >
+                Designation should be alphabet
+              </div> -->
+            </div>
+
+                  </div>
+              </div>
+          </div>
+      </form>
+  </mat-dialog-content>
+  <mat-dialog-actions align="end">
+    <button mat-button [mat-dialog-close]="true"  class="dialog1 button-color mr-2" (click)="submitForm()" [disabled]="!selectForm.valid">Save</button>
+    <button mat-button mat-dialog-close class="dialog2">Cancel</button>
+  </mat-dialog-actions>

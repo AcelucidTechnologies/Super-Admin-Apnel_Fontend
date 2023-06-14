@@ -115,6 +115,12 @@ const routes: Routes = [
     loadChildren: () => import('./Roles_permissions/roles/roles.module').then(mod=>mod.RolesModule),
     canActivate: [AuthGuard]
   },
+  {
+    path: 'leaveMgmt',
+    loadChildren: () => import('./leave-management-system/leave-management-system.module').then(mod=>mod.LeaveManagementSystemModule),
+    canActivate: [AuthGuard]
+  },
+
 
   { path: '', component: AuthenticationComponent },
   // { path: 'forgetPassword', component: ForgetPasswordComponent },

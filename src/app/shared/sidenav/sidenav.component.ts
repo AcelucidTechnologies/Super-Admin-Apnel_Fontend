@@ -45,6 +45,7 @@ import { AdminService } from 'src/app/_services/admin.service';
   ]
 })
 export class SidenavComponent implements OnInit {
+  activeItem: any;
 
   device: string = '';
   state: string = '';
@@ -96,6 +97,7 @@ export class SidenavComponent implements OnInit {
       }
     })
   }
+
 
   ngOnInit() {
     if (window.innerWidth > 992) {
@@ -167,10 +169,9 @@ export class SidenavComponent implements OnInit {
     const subMenuItem = target.closest('.p-submenu-item');
     const activeItems = document.querySelectorAll('.p-submenu-item.active');
 
-    // Remove 'active' class from previously active sub-menu item
     activeItems.forEach(item => item.classList.remove('active'));
 
-    // Add 'active' class to the clicked sub-menu item
+
     if (subMenuItem) {
       subMenuItem.classList.add('active');
     }

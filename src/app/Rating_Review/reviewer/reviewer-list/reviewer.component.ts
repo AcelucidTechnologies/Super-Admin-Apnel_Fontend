@@ -21,7 +21,7 @@ export class ReviewerComponent implements OnInit {
   sidebarSpacing: string = 'contracted';
   cols: any[];
   @ViewChild('dt') dt: Table | undefined;
-  reviewerData: any[];
+  reviewerData: any[]=[];
   reviewerDetails: any[];
   exportColumns: any[];
   accessPermission: access;
@@ -42,17 +42,7 @@ export class ReviewerComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.cols = [
-      { headers: 'Name', field: 'name' },
-      { headers: 'Email', field: 'email' },
-      { headers: 'Rating', field: 'ratingCount' },
-      { headers: 'First Rating', field: 'firstRating' },
-      { headers: 'status', field: 'status' },
-    ];
-    this.exportColumns = this.cols.map((col) => ({
-      title: col.headers,
-      dataKey: col.field,
-    }));
+
   }
 
   getReviewerData() {
@@ -105,15 +95,39 @@ export class ReviewerComponent implements OnInit {
     );
   }
 
+  // exportPdf() {
+  //   this.reviewerDetails = this.reviewerData;
+  //   console.log(this.reviewerDetails);
+  //   const doc = new jsPDF.jsPDF('l', 'pt');
+  //   autoTable(doc, {
+  //     columns: this.exportColumns,
+  //     body: this.reviewerDetails,
+  //   });
+  //   doc.save('reviewers.pdf');
+  // }
+
   exportPdf() {
-    this.reviewerDetails = this.reviewerData;
-    console.log(this.reviewerDetails);
-    const doc = new jsPDF.jsPDF('l', 'pt');
-    autoTable(doc, {
-      columns: this.exportColumns,
-      body: this.reviewerDetails,
+    this.reviewerDetails = this.reviewerData.map((item, index) => {
+      return { sno: index + 1, ...item };
     });
-    doc.save('reviewers.pdf');
+
+    const doc = new jsPDF.jsPDF('l', 'pt');
+    const data = this.reviewerDetails;
+    const exportColumns = [
+      { title: 'S No.', dataKey: 'sno' },
+      { title: 'Name', dataKey: 'name' },
+      { title: 'Email ', dataKey: 'email' },
+      { title: 'Rating Count', dataKey: 'ratingCount' },
+      { title: 'First Rating', dataKey: 'firstRating' },
+      { title: 'Status', dataKey: 'status' },
+    ];
+
+    autoTable(doc, {
+      columns: exportColumns,
+      body: data
+    });
+
+    doc.save('Reviewer List.pdf');
   }
 
   onToggleSidebar(sidebarState: any) {

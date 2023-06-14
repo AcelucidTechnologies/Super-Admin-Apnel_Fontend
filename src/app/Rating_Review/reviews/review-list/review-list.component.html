@@ -21,7 +21,7 @@
         <p-table id="reviewTable" #dt [columns]="cols" responsiveLayout="scroll" [paginator]="true" [rows]="10"
             [showCurrentPageReport]="true" [value]="reviewListValue"
             currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries" [responsive]="true"
-            styleClass="p-datatable-striped" [globalFilterFields]="['reviewSubject','status','ratingCountReview']" >
+            styleClass="p-datatable-striped" [globalFilterFields]="['reviewSubject','status','ratingCountReview','publishingSiteUrl']" >
             <ng-template pTemplate="caption">
               <div class="d-flex justify-content-between">
                 <div class="d-flex align-items-center p-0" >

@@ -25,6 +25,20 @@ export const SideNaveMenueRoute = [
     ],
   },
   {
+    label: 'Leave-tracker',
+    icon: 'pi pi-user-plus',
+    items: [
+
+      {
+        label: 'profile-list',
+        icon: 'pi pi-list',
+        routerLink: ['/leaveMgmt/profile-list'],
+        routerLinkActiveOptions: { exact: true },
+        routerLinkActive: 'active'
+      },
+    ],
+  },
+  {
     label: 'CMS',
     icon: 'pi pi-file',
     items: [

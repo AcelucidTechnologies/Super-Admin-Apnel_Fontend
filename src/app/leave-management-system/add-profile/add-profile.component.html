@@ -1,0 +1,709 @@
+<div class="button-heading-container">
+  <button class="mb-2 p-1 back-button" [routerLink]="['/leaveMgmt/profile-list']">
+    <i class="material-icons">arrow_back</i>
+  </button>
+  <h5>Add Profile</h5>
+</div>
+<form [formGroup]="profileForm">
+
+
+
+  <div class="col-12 mt-3">
+    <div class="card" >
+      <div class="card m-3" style="border: 1px solid lightgrey;" >
+        <div>
+      <h5 class="card-title ">Basic Information</h5>
+      <div class="row text-input-field">
+
+        <div class="col-6">
+          <div class="row" style="display: flex;">
+            <div class="col-4">Employee Full Name</div>
+            <div class="col-8"><input type="text" class="form-control" id="inputdefault" formControlName="employeeFullName"></div>
+          </div>
+        </div>
+        <div class="col-6">
+          <div class="row" style="display: flex;">
+            <div class="col-4">First Name</div>
+            <div class="col-8"><input type="text" class="form-control" id="inputdefault" formControlName="FirstName" ></div>
+          </div>
+        </div>
+      </div>
+      <div class="row text-input-field">
+
+        <div class="col-6">
+          <div class="row" style="display: flex;">
+            <div class="col-4">Last Name</div>
+            <div class="col-8"><input type="text" class="form-control" id="inputdefault" formControlName="lastName"></div>
+          </div>
+        </div>
+        <div class="col-6">
+          <div class="row" style="display: flex;">
+            <div class="col-4">Email</div>
+            <div class="col-8">
+              <input type="text" class="form-control" id="inputdefault"  (change)="checkEmailExists()" formControlName="email"></div>
+          </div>
+        </div>
+      </div>
+      <div class="row text-input-field">
+
+        <div class="col-6">
+          <div class="row" style="display: flex;">
+            <div class="col-4">Profile Image</div>
+            <div class="col-8"  style="position: relative;">
+              <input type="file" class="form-control "  id="inputdefault" formControlName="image"  (change)="fileChangeEvent($event)">
+              <!-- <span>{{ prevImageName }}</span> -->
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ############### work info ############### -->
+    <div>
+      <h5 class="card-title mt-3">Work Information</h5>
+      <div class="row text-input-field">
+        <div class="col-6" >
+          <div class="row" style="display: flex;">
+            <div class="col-4 info-name">Department</div>
+            <div class="col-7" style="padding-right: 0px;">
+              <div>
+                <select style="width: 100%; border: 1px solid lightgray; height: 38px; padding:5px"
+                  class="form-group"
+                  formControlName="department"
+
+                >
+                  <option>Enter Department</option>
+                  <option *ngFor="let count of departmentdrop">
+                    {{ count.department }}
+                  </option>
+                </select>
+              </div>
+            </div>
+            <div class="col-1" style="padding-left: 0px;"><button type="button" class="btn btn-danger"  (click)="openDialog()"><i class="pi pi-plus"></i></button></div>
+          </div>
+        </div>
+        <div class="col-6" >
+          <div class="row" style="display: flex;">
+            <div class="col-4">Designation</div>
+            <div class="col-7" style="padding-right: 0px;">
+            <div>
+              <select style="width: 100%; border: 1px solid lightgray; height: 38px; padding:5px"
+                class="form-group"
+
+                formControlName="designation"
+              >
+                <option>Enter Designation</option>
+                <option *ngFor="let count of designationdrop">
+                  {{ count.designation }}
+                </option>
+              </select>
+              </div>
+            </div>
+            <div class="col-1" style="padding-left: 0px;"><button type="button" class="btn btn-danger" (click)="openDialogDesignation()"><i class="pi pi-plus"></i></button></div>
+          </div>
+        </div>
+      </div>
+      <div class="row text-input-field">
+        <div class="col-6">
+          <div class="row" style="display: flex;">
+            <div class="col-4 info-name">Location</div>
+            <div class="col-7" style="padding-right: 0px;">
+            <div>
+              <select style="width: 100%; border: 1px solid lightgray; height: 38px; padding:5px"
+                class="form-group"
+
+                formControlName="location"
+              >
+                <option>Enter Location</option>
+                <option *ngFor="let count of locationList">
+                  {{ count.location }}
+                </option>
+              </select>
+              </div>
+              </div>
+            <div class="col-1" style="padding-left: 0px;"><button type="button" class="btn btn-danger" (click)="openDialogLocation()"><i class="pi pi-plus"></i></button></div>
+          </div>
+        </div>
+        <div class="col-6">
+          <div class="row" style="display: flex;">
+            <div class="col-4">Role</div>
+            <div class="col-8">
+              <select style="width: 100%; border: 1px solid lightgray; height: 38px; padding:5px"
+              class="form-group"
+
+              formControlName="role"
+            >
+              <option>Enter Location</option>
+              <option>Employee</option>
+              <option>Admin</option>
+
+            </select>
+              <!-- <p-dropdown [options]="roleOptions" id="ratingStatus" placeholder="Select"
+              styleClass="status-dropdown" formControlName="role"></p-dropdown> -->
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row text-input-field">
+        <div class="col-6" >
+          <div class="row" style="display: flex;">
+            <div class="col-4 info-name">Employement Type</div>
+              <div class="col-8">
+                <select style="width: 100%; border: 1px solid lightgray; height: 38px; padding:5px"
+                class="form-group"
+
+                formControlName="employmentType"
+              >
+                <option>Enter Location</option>
+                <option>Full Time</option>
+                <option>Part Time</option>
+                <option>Contract</option>
+                <option>Internship</option>
+
+              </select>
+                <!-- <p-dropdown [options]="employmentType" id="ratingStatus" placeholder="Select"
+              styleClass="status-dropdown" formControlName="employmentType"></p-dropdown> -->
+              </div>
+          </div>
+        </div>
+
+
+        <div class="col-6">
+          <div class="row" style="display: flex;">
+            <div class="col-4">Employement Status</div>
+            <div class="col-8">
+              <select style="width: 100%; border: 1px solid lightgray; height: 38px; padding:5px"
+              class="form-group"
+
+              formControlName="employeeStatus"
+            >
+              <option>Enter Location</option>
+              <option>Active</option>
+              <option>InActive</option>
+
+
+            </select>
+              <!-- <p-dropdown [options]="employmentStatus" id="ratingStatus" placeholder="Select"
+              styleClass="status-dropdown" formControlName="employeeStatus"></p-dropdown> -->
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row text-input-field">
+        <div class="col-6">
+          <div class="row" style="display: flex;">
+            <div class="col-4 info-name">Source Hiring</div>
+            <div class="col-7" style="padding-right: 0px;">
+              <div>
+                <select style="width: 100%; border: 1px solid lightgray; height: 38px; padding:5px"
+                  class="form-group"
+
+                  formControlName="sourceHiring"
+                >
+                  <option>Enter source hiring</option>
+                  <option *ngFor="let count of soruceHiring">
+                    {{ count.sourceHiring }}
+                  </option>
+                </select>
+                </div>
+                </div>
+            <div class="col-1" style="padding-left: 0px;"><button type="button" class="btn btn-danger"><i class="pi pi-plus" (click)="openDialogSourceHiring()"></i></button></div>
+        </div>
+        </div>
+        <div class="col-6">
+          <div class="row" style="display: flex;">
+            <div class="col-4">Date of Joining</div>
+            <div class="col-8"><input type="date" class="form-control" id="inputdefault" formControlName="dateOfJoining" ></div>
+          </div>
+        </div>
+      </div>
+      <div class="row text-input-field">
+        <div class="col-6">
+          <div class="row" style="display: flex;">
+            <div class="col-4 info-name">Current Experience</div>
+            <div class="col-8"><input class="form-control" id="inputdefault" type="number" formControlName="currentExp"></div>
+          </div>
+        </div>
+        <div class="col-6">
+          <div class="row" style="display: flex;">
+            <div class="col-4">Total Experience</div>
+            <div class="col-8"><input type="number" class="form-control" id="inputdefault"  formControlName="totalExp"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+     <!-- ############### reporting manager ############### -->
+    <div>
+      <h5 class="card-title mt-3">Hierarchy Information</h5>
+      <div class="row text-input-field">
+        <div class="col-6">
+          <div class="row" style="display: flex;">
+            <div class="col-4 info-name">Reporting Manager</div>
+            <div class="col-7" style="padding-right: 0px;">
+              <div>
+                <select style="width: 100%; border: 1px solid lightgray; height: 38px; padding:5px"
+                  class="form-group"
+                   formControlName="reportingManager" placeholder="enter reporting manager"
+
+                >
+                  <option>Enter reporting manager</option>
+                  <option *ngFor="let count of reportManager">
+                    {{ count.reporting }}
+                  </option>
+                </select>
+                </div>
+                </div>
+            <div class="col-1" style="padding-left: 0px;"><button type="button" class="btn btn-danger"><i class="pi pi-plus" (click)="openDialogReportingmanager()"></i></button></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ############### personal details ############### -->
+    <div formGroupName="personalDetails">
+      <h5 class="card-title mt-3">Personal Details</h5>
+
+      <div class="row text-input-field">
+        <div class="col-6">
+          <div class="row" style="display: flex;">
+            <div class="col-4 info-name">Date of Birth</div>
+            <div class="col-8">
+              <input type="date" class="form-control" placeholder="Select Birthday"
+              id="startDate" name="startDate" formControlName="dateOfBirth">
+            </div>
+          </div>
+        </div>
+        <div class="col-6">
+          <div class="row" style="display: flex;">
+            <div class="col-4">Age</div>
+            <div class="col-8"><input type="text" class="form-control" id="inputdefault"  formControlName="age"></div>
+          </div>
+        </div>
+      </div>
+      <div class="row text-input-field">
+        <div class="col-6">
+          <div class="row" style="display: flex;">
+            <div class="col-4 info-name">Gender</div>
+            <div class="col-8">
+              <!-- <p-dropdown [options]="genderOptions" id="ratingStatus" placeholder="Select"
+              styleClass="status-dropdown" formControlName="gender"></p-dropdown> -->
+              <select style="width: 100%; border: 1px solid lightgray; height: 38px; padding:5px"
+              class="form-group"
+
+              formControlName="gender"
+            >
+              <option>Enter Location</option>
+              <option>Male</option>
+              <option>Female</option>
+
+
+            </select>
+            </div>
+          </div>
+        </div>
+        <div class="col-6">
+          <div class="row" style="display: flex;">
+            <div class="col-4">Marital status</div>
+            <div class="col-8">
+              <!-- <p-dropdown [options]="maritalOptions" id="ratingStatus" placeholder="Select"
+              styleClass="status-dropdown" formControlName="maritalStatus"></p-dropdown> -->
+              <select style="width: 100%; border: 1px solid lightgray; height: 38px; padding:5px"
+              class="form-group"
+
+              formControlName="maritalStatus"
+            >
+              <option>Enter Location</option>
+              <option>single</option>
+              <option>Married</option>
+              <option>Divorced</option>
+              <option>Separated</option>
+              <option>Widowed</option>
+
+            </select>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row text-input-field">
+        <div class="col-12">
+          <div class="row" style="display: flex;">
+            <div class="col-2 info-name">Ask me about/Expertise</div>
+              <div class="col-10"><textarea class="form-control" id="inputdefault" style="height: 100px;" formControlName="expertise"></textarea></div>
+          </div>
+        </div>
+      </div>
+      <div class="row text-input-field">
+        <div class="col-12">
+          <div class="row" style="display: flex;">
+            <div class="col-2 info-name">About Me</div>
+            <div class="col-10">
+              <textarea class="form-control" id="inputdefault" style="height: 100px;" formControlName="aboutMe"></textarea>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+
+      <!-- ############### identify information ############### -->
+      <div>
+      <div formGroupName="identityInformation">
+      <h5 class="card-title mt-3">Identity Details</h5>
+
+        <div class="row text-input-field">
+          <div class="col-4">
+            <div class="row" style="display: flex;">
+              <div class="col-4 info-name">UAN</div>
+              <div class="col-8"><input type="text" class="form-control" id="inputdefault" formControlName="uan"></div>
+            </div>
+          </div>
+          <div class="col-4">
+            <div class="row" style="display: flex;">
+              <div class="col-4">Pan Number</div>
+              <div class="col-8"><input type="text" class="form-control" id="inputdefault" formControlName="panNumber" ></div>
+            </div>
+          </div>
+          <div class="col-4">
+            <div class="row" style="display: flex;">
+              <div class="col-4">Aadhar Number</div>
+              <div class="col-8"><input type="text" class="form-control" id="inputdefault" formControlName="aadharNumber" ></div>
+            </div>
+          </div>
+        </div>
+      </div>
+</div>
+
+
+      <!-- ################ conatct info ############### -->
+      <div formGroupName="contactDetails">
+      <h5 class="card-title mt-3">Contact Information</h5>
+
+        <div class="row text-input-field">
+          <div class="col-6">
+            <div class="row" style="display: flex;">
+              <div class="col-4 info-name">Working Phone Number</div>
+              <div class="col-8"><input type="text" class="form-control" id="inputdefault" formControlName="workingPhoneNumber"></div>
+            </div>
+          </div>
+          <div class="col-6">
+            <div class="row" style="display: flex;">
+              <div class="col-4">Personal Mobile Number</div>
+              <div class="col-8"><input type="text" class="form-control" id="inputdefault" formControlName="personalMobileNumber" ></div>
+            </div>
+          </div>
+        </div>
+        <div class="row text-input-field">
+          <div class="col-6">
+            <div class="row" style="display: flex;">
+              <div class="col-4">Personal Email Address</div>
+              <div class="col-8"><input type="text" class="form-control" id="inputdefault" formControlName="personalEmailAddress"></div>
+            </div>
+          </div>
+        </div>
+  <!-- ###############conatct personal info ############### -->
+        <div formGroupName="presentAddress">
+        <div class="row text-input-field">
+          <div class="col-6">
+            <div class="row" style="display: flex;">
+              <div class="col-4">Present Address</div>
+              <div class="col-8"><input type="text" class="form-control" id="inputdefault" placeholder="Address Line 1" formControlName="address1"></div>
+            </div>
+          </div>
+          <div class="col-6">
+            <div class="row" style="display: flex;">
+
+              <div class="col-8"><input type="text" class="form-control" id="inputdefault"  placeholder="Address Line 2" formControlName="address2"></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="row text-input-field">
+          <div class="col-6">
+            <div class="row" style="display: flex;">
+              <div class="col-4"></div>
+              <div class="col-8"><input type="text" class="form-control" id="inputdefault" placeholder="Country" formControlName="country" ></div>
+            </div>
+          </div>
+          <div class="col-6">
+            <div class="row" style="display: flex;">
+
+              <div class="col-8"><input type="text" class="form-control" id="inputdefault"  placeholder="State" formControlName="state"></div>
+            </div>
+          </div>
+        </div>
+        <div class="row text-input-field">
+          <div class="col-6">
+            <div class="row" style="display: flex;">
+              <div class="col-4"></div>
+              <div class="col-8"><input type="text" class="form-control" id="inputdefault" placeholder="City" formControlName="city"></div>
+            </div>
+          </div>
+          <div class="col-6">
+            <div class="row" style="display: flex;">
+
+              <div class="col-8"><input type="text" class="form-control" id="inputdefault"  placeholder="Pincode" formControlName="pincode"></div>
+            </div>
+          </div>
+        </div>
+</div>
+
+
+<!-- ############### contact personla indo end ############### -->
+
+            <div class="row text-input-field">
+              <div class="col-6">
+                <div class="row" style="display: flex;">
+                  <div class="col-4">Permanent Address</div>
+                  <div class="col-8" style="display: flex;align-items: center;">
+                    <input type="checkbox" formControlName="sameAsLocal" (change)="checkValue(profileForm.get('contactDetails.sameAsLocal'))">
+                    <p style="margin-bottom: 0; margin-left: 10px;">Same as Present Address</p>
+                  </div>
+                </div>
+              </div>
+              <div class="col-6">
+
+              </div>
+            </div>
+            <div formGroupName="permanentAddress">
+            <div class="row text-input-field">
+              <div class="col-6">
+                <div class="row" style="display: flex;">
+                  <div class="col-4"></div>
+                  <div class="col-8"><input type="text" class="form-control" id="inputdefault" placeholder="Address Line 1"  formControlName="address1"></div>
+                </div>
+              </div>
+              <div class="col-6">
+                <div class="row" style="display: flex;">
+
+                  <div class="col-8"><input type="text" class="form-control" id="inputdefault"  placeholder="Address Line 2" formControlName="address2"></div>
+                </div>
+              </div>
+            </div>
+
+
+
+
+            <div class="row text-input-field">
+              <div class="col-6">
+                <div class="row" style="display: flex;">
+                  <div class="col-4"></div>
+                  <div class="col-8"><input type="text" class="form-control" id="inputdefault" placeholder="Country" formControlName="country"></div>
+                </div>
+              </div>
+              <div class="col-6">
+                <div class="row" style="display: flex;">
+
+                  <div class="col-8"><input type="text" class="form-control" id="inputdefault"  placeholder="State" formControlName="state"></div>
+                </div>
+              </div>
+            </div>
+            <div class="row text-input-field">
+              <div class="col-6">
+                <div class="row" style="display: flex;">
+                  <div class="col-4"></div>
+                  <div class="col-8"><input type="text" class="form-control" id="inputdefault" placeholder="City"formControlName="city" ></div>
+                </div>
+              </div>
+              <div class="col-6">
+                <div class="row" style="display: flex;">
+
+                  <div class="col-8"><input type="text" class="form-control" id="inputdefault" placeholder="Pincode" formControlName="pincode"  ></div>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+          <div>
+
+            <!-- ############### separation date ############### -->
+            <div>
+      <h5 class="card-title mt-3">Sepration Date</h5>
+
+      <div class="row text-input-field">
+        <div class="col-6">
+          <div class="row" style="display: flex;">
+            <div class="col-4 info-name">Date of Exit</div>
+            <div class="col-8">
+              <input type="date" class="form-control" placeholder="Select date of exit"
+              id="startDate" name="startDate" formControlName="separationOfDate">
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+      <!-- ##########SYstem group starts from here ##################################### -->
+
+      <div>
+        <h5 class="card-title mt-3">System Field</h5>
+
+
+      <div formGroupName="systemFields">
+        <div class="row text-input-field">
+          <div class="col-6">
+            <div class="row" style="display: flex;">
+              <div class="col-4 info-name">Added Time</div>
+              <div class="col-8">
+                <input type="date" class="form-control" placeholder="added Time"
+                        id="startDate" name="startDate" formControlName="addedTime">
+              </div>
+            </div>
+          </div>
+          <div class="col-6">
+            <div class="row" style="display: flex;">
+              <div class="col-4 info-name">Modified Time</div>
+              <div class="col-8">
+                <input type="date" class="form-control" placeholder="modified time"
+                        id="startDate" name="startDate" formControlName="modifiedTime">
+              </div>
+            </div>
+          </div>
+        </div>
+
+      <div class="row text-input-field">
+        <div class="col-6">
+          <div class="row" style="display: flex;">
+            <div class="col-4 info-name">Added By</div>
+            <div class="col-8">
+              <input type="text" class="form-control" id="inputdefault" formControlName="addedBy">
+            </div>
+          </div>
+        </div>
+        <div class="col-6">
+          <div class="row" style="display: flex;">
+            <div class="col-4 info-name">Modified By</div>
+            <div class="col-8">
+              <input type="text" class="form-control" id="inputdefault" formControlName="modifiedBy">
+            </div>
+          </div>
+        </div>
+</div>
+
+<div class="row text-input-field">
+  <div class="col-6">
+    <div class="row" style="display: flex;">
+      <div class="col-4 info-name">Onboarding status</div>
+      <div class="col-8">
+        <!-- <p-dropdown [options]="statusOptions" id="ratingStatus" placeholder="Select"
+        styleClass="status-dropdown"  formControlName="onBoardingStatus"></p-dropdown> -->
+        <select style="width: 100%; border: 1px solid lightgray; height: 38px; padding:5px"
+        class="form-group"
+
+        formControlName="onBoardingStatus"
+      >
+        <option>Enter Location</option>
+        <option>Active</option>
+        <option>InActive</option>
+        <option>true</option>
+
+
+      </select>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+</div>
+
+
+<!-- ########################system field end here ########################## -->
+</div>
+<div>
+  <div formArrayName="workExperience">
+      <h5 class="card-title mt-3">Work Experience</h5>
+      <div style="display: flex; justify-content: end;">
+        <button type="button" (click)="addNewWorkRow()" class="btn btn-warning add-edit-button" >Add New Row</button>
+      </div>
+      <!-- <button (click)="addNewWorkRow()">Add work row</button> -->
+<div class="card">
+  <div style="overflow-x: auto;">
+ <table style="width: 100%;">
+  <thead>
+    <tr>
+      <th style="text-align: center;">Sno.</th>
+      <th style="text-align: center;">Company Name</th>
+      <th style="text-align: center;">Job Title</th>
+      <th style="text-align: center;">From Date</th>
+      <th style="text-align: center;">To Date</th>
+      <th style="text-align: center;">Job Description</th>
+      <th style="text-align: center;">Relevent Experience</th>
+      <th>Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+
+    <!-- <tr *ngFor="let row of rows; let rowIndex = index" [formGroup]="row"> -->
+      <tr *ngFor="let row of workExperience; let rowIndex = index" [formGroup]="row">
+      <td >{{ row.get('sno').value }}</td>
+      <td><input type="text" style="border: none;" formControlName="companyName" [disabled]="!row.get('editMode').value"></td>
+      <td><input type="text" style="border: none;" formControlName="jobTitle" [disabled]="!row.get('editMode').value"></td>
+      <td><input type="date" style="border: none;" formControlName="fromDate" [disabled]="!row.get('editMode').value"></td>
+      <td><input type="date" style="border: none;" formControlName="toDate" [disabled]="!row.get('editMode').value"></td>
+      <td><input type="text" style="border: none;" formControlName="jobDescription" [disabled]="!row.get('editMode').value"></td>
+      <td><input type="text" style="border: none;" formControlName="releventExp" [disabled]="!row.get('editMode').value"></td>
+      <td>
+
+        <!-- <button (click)="deleteWorkRow(rowIndex)">Delete</button> -->
+        <button (click)="deleteWorkRow(rowIndex)" type="button" class="btn btn-danger"><i class="pi pi-trash"></i></button>
+      </td>
+      </tr>
+  </tbody>
+</table>
+</div>
+</div>
+</div>
+</div>
+<div formArrayName="educationDetails">
+<h5 class="card-title" style="margin-top: 40px;">Education Details</h5>
+<div style="display: flex; justify-content: end;">
+  <button type="button" (click)="addNewRow()" class="btn btn-warning add-edit-button" >Add New Row</button>
+</div>
+<!-- <button (click)="addNewRow()">Add Row</button> -->
+<table style="width: 100%;">
+  <thead>
+    <tr>
+      <th style="text-align: center;">S.No</th>
+      <th style="text-align: center;">Institute Name</th>
+      <th style="text-align: center;">Degree/Diploma</th>
+      <th style="text-align: center;">Specialization</th>
+      <th style="text-align: center;">Date of Completion</th>
+      <th>Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+
+    <tr *ngFor="let row of educationDetails; let rowIndex = index" [formGroup]="row">
+      <td>{{ row.get('sno').value }}</td>
+      <td><input type="text" style="border: none;"  formControlName="instituteName" [disabled]="!row.get('editMode').value"></td>
+      <td><input type="text" style="border: none;"  formControlName="degree" [disabled]="!row.get('editMode').value"></td>
+      <td><input type="text" style="border: none;"  formControlName="specialization" [disabled]="!row.get('editMode').value"></td>
+      <td><input type="date" style="border: none;"  formControlName="dateOfCompletion" [disabled]="!row.get('editMode').value"></td>
+      <td>
+        <!-- <button (click)="toggleEditMode(row)">
+          {{ row.get('editMode').value ? 'Save' : 'Edit' }}
+        </button>  -->
+        <!-- <button (click)="deleteRow(rowIndex)">Delete</button> -->
+        <button (click)="deleteRow(rowIndex)" type="button" class="btn btn-danger"><i class="pi pi-trash"></i></button>
+      </td>
+      </tr>
+  </tbody>
+</table>
+</div>
+<!-- </div> -->
+<div class="row mb-5 mt-4">
+  <div class="d-flex justify-content-end col-11 mt-4">
+    <button type="submit" style="background: rgb(228, 28, 28);border:none" class="btn btn-info mr-3"
+      (click)="submit()" [disabled]="!profileForm.valid"  [routerLink]="['/leaveMgmt/profile-list']">Submit</button>
+      <!-- <button type="submit" style="background: rgb(228, 28, 28);border:none" class="btn btn-info mr-3"
+      (click)="submit()" >Submit</button> -->
+    <button class="btn btn-info" style="background: #637381;border:none"
+      [routerLink]="['/leaveMgmt/user-profile']">Cancel</button>
+  </div>
+</div>
+</div>
+</div>
+</div>
+</form>
