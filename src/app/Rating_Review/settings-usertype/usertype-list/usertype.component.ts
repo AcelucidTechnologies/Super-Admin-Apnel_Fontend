@@ -38,11 +38,7 @@ export class UserTypeComponent implements OnInit {
 
 
   ngOnInit(): void {
-    this.cols=[{field:"userType",headers:"User Type"},
-    {field:"status",headers:"Status"},
-  ]
-    this.exportColumns = this.cols.map(col => ({title: col.headers,dataKey: col.field}))
-    console.log(this.exportColumns)
+
   }
 
   onToggleSidebar(sidebarState: any) {
@@ -95,15 +91,28 @@ export class UserTypeComponent implements OnInit {
   applyFilterGlobal($event, stringVal) {
     this.dt.filterGlobal(($event.target as HTMLInputElement).value, stringVal);
   }
+
+
   exportPdf() {
-    this.usertypeData = this.usertypeSettingData
-            const doc = new jsPDF.jsPDF('l', 'pt');
-           autoTable(doc, {
-            columns:this.exportColumns,
-            body:this.usertypeData
-           });
-            doc.save('usertype.pdf');
-        }
-          // search functionality start here
+    this.usertypeData = this.usertypeSettingData.map((item, index) => {
+      return { sno: index + 1, ...item };
+    });
+
+    const doc = new jsPDF.jsPDF('l', 'pt');
+    const data = this.usertypeData;
+    const exportColumns = [
+      { title: 'S No.', dataKey: 'sno' },
+      { title: 'User Type', dataKey: 'userType' },
+      { title: 'Status', dataKey: 'status' },
+
+    ];
+
+    autoTable(doc, {
+      columns: exportColumns,
+      body: data
+    });
+
+    doc.save('User Type List.pdf');
+  }
 
 }

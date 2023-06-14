@@ -29,7 +29,7 @@
   currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
   [responsive]="true"
   styleClass="p-datatable-striped"
-  [globalFilterFields]="['overall', 'reviewer', 'review', 'status']"
+  [globalFilterFields]="['overall', 'reviewer', 'review', 'status','createdAt']"
 >
   <ng-template pTemplate="caption">
     <div class="d-flex justify-content-between">
@@ -106,14 +106,21 @@
           <p-sortIcon field="status"></p-sortIcon>
         </div>
       </th>
-      <th class="text-center">
-        Date<p-columnFilter
+      <th pSortableColumn="createdAt">
+        <div class="flex justify-content-between align-items-center head1">
+        Date
+          <p-sortIcon field="createdAt"></p-sortIcon>
+        </div>
+        <!-- <p-columnFilter
           class="column-subhead"
           type="date"
-          field="date"
+          field="createdAt"
           display="menu"
-        ></p-columnFilter>
+        ></p-columnFilter> -->
+
       </th>
+
+
 
       <th class="text-center">Actions</th>
     </tr>

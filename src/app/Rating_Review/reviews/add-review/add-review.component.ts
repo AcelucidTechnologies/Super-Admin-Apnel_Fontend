@@ -29,7 +29,7 @@ export class AddReviewComponent implements OnInit {
           ),
         ],
       ],
-      referenceId: ['', [Validators.required, Validators.pattern(/^[a-zA-Z]+$/)]],
+      referenceId: ['', [Validators.required, Validators.pattern(/^[a-zA-Z\s]+$/)]],
       reviewStatus: ['', [Validators.required]]
     })
   }

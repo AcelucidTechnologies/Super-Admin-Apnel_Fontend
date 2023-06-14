@@ -20,7 +20,7 @@ export class AddEditRatingCriteriaComponent implements OnInit {
     private route: Router,
     private activatedRoute:ActivatedRoute) {
       this.criteriaForm = fb.group({
-        ratingCriteria: ['', [Validators.required, Validators.pattern(/^[a-zA-Z]+$/)]],
+        ratingCriteria: ['', [Validators.required, Validators.pattern(/^[a-zA-Z\s]+$/)]],
         status: ['', [Validators.required]],
       });
 

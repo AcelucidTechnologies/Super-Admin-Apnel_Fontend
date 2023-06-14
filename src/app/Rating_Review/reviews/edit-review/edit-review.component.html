@@ -6,23 +6,16 @@
   <h5>&nbsp;Review Details</h5>
 </div>
    <div class="d-flex justify-content-center">
-    <div class="card " style="width: 1000px; height: 650px;">
+    <div class="card " style="width: 1150px; height: 600px;">
 
         <div class="card-body">
             <div class="p-5">
-            <div class="mt-2 mb-5">
+            <div class="mb-3">
                 <h4>Edit Reviews</h4>
             </div>
             <form [formGroup]="editForm">
 
-            <div class="row mb-4">
-                <!-- <div class="form-group col-6">
-                    <label for="reviewTypeField" class="starlabel mb-4">Reviewer Type</label>
-                    <p-dropdown styleClass="reviewDropdown" id="reviewTypeField" [options]="reviewList" placeholder="Select" formControlName="reviewerType"></p-dropdown>
-                    <div *ngIf="!editForm.controls['reviewerType'].valid && editForm.controls['reviewerType'].touched ">
-                        <div [hidden]="!editForm.controls['reviewerType'].errors['required']" style="font-size:smaller; color: rgb(253, 122, 122); font-style: italic;">ReviewType is required</div>
-                    </div>
-                </div> -->
+            <div class="row">
                 <div class="form-group col-6">
                   <label for="rating" class="mb-4">Rating</label>
                   <input readonly type="text" id="rating" class="form-control" formControlName="rating">
@@ -35,7 +28,7 @@
                   </div>
               </div>
             </div>
-            <div class="row mb-4">
+            <div class="row mb-2">
                 <div class="form-group col-6">
                     <label for="reference" class="starlabel mb-4">Subject Name</label>
                     <input type="text" id="reference" class="form-control" formControlName="referenceId">
@@ -44,12 +37,12 @@
                     </div>
                 </div> -->
                 <div *ngIf="
-                !reviewForm.controls['referenceId'].valid &&
-                (reviewForm.controls['referenceId'].touched ||
-                reviewForm.controls['referenceId'].dirty)
+                !editForm.controls['referenceId'].valid &&
+                (editForm.controls['referenceId'].touched ||
+                editForm.controls['referenceId'].dirty)
               ">
                 <div [hidden]="
-                  !reviewForm.controls['referenceId'].errors[
+                  !editForm.controls['referenceId'].errors[
                     'required'
                   ]
                 " style="
@@ -60,7 +53,7 @@
                  Subject Name is required
                 </div>
                 <div *ngIf="
-                reviewForm.controls['referenceId'].errors[
+                editForm.controls['referenceId'].errors[
                     'pattern'
                   ]
                 " style="
@@ -68,8 +61,9 @@
                   font-size: small;
                   font-style: italic;
                 ">
-                  Subject name should be of string type
+                  Subject name should be Alphabet only
                 </div>
+              </div>
               </div>
                 <div class="form-group col-6">
                     <label for="status" class="starlabel mb-4">Status</label>
@@ -87,9 +81,15 @@
               <button type="submit" style="background: rgb(228, 28, 28);border:none" class="btn btn-info mr-3"  [disabled]="!editForm.valid" (click)="submit()">Update</button>
               <button class="btn btn-info" style="background: #637381;border:none; margin-right: 20px;" [routerLink]="['/review/reviewlist']">Cancel</button>
           </div>
+
+
+
+
             </form>
             </div>
         </div>
-    </div>
+
+
+</div>
 </div>
 </div>

@@ -52,23 +52,7 @@ export class DialogSelectComponent implements OnInit {
        }
   })
   this.route.navigate(['/cms/page']);
-  // this.ngxLoader.start();
-    //this.addPage()
-  // this.route.navigate[('/cms/page')]
+
    }
 
-  // addPage() {
-  //   this.CmsService.addPageLink(this.selectForm.value).subscribe(res => {
-  //      if (res) {
-  //       console.log("add page")
-  //        this.toastr.showSuccess("page added successfully", "Product Added")
-  //        this.ngxLoader.stop()
-  //        this.route.navigate(['/cms/page'])
-  //      }
-  //      (error: any) => {
-  //        this.toastr.showError("Somthing wrong Please check", "Error occured")
-  //        this.ngxLoader.stop()
-  //      }
-  //    })
-  //  }
 }

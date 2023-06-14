@@ -24,7 +24,7 @@ constructor(private reviewerService:ReviewerService,
   private activatedRoute:ActivatedRoute) {
 
   this.reviewerForm = this.fb.group({
-    name: ['', [Validators.required, Validators.pattern(/^[a-zA-Z]+$/)]],
+    name: ['', [Validators.required, Validators.pattern(/^[a-zA-Z\s]+$/)]],
     email: ['', [Validators.required,  Validators.email]],
     reviewerStatus: ['', [Validators.required]],
   });

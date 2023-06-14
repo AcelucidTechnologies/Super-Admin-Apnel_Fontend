@@ -21,7 +21,9 @@ import { UsertypeService } from 'src/app/_services/usertype.service';
   styleUrls: ['./rating-list.component.scss'],
 })
 export class RatingListComponent implements OnInit {
-  ratingData: ratingStructure[] = [];
+  sortField: string;
+sortOrder: number;
+  ratingData: any[] = [];
   ratingDetails: any[];
   sidebarSpacing: string;
   cols: Table | any;
@@ -29,6 +31,8 @@ export class RatingListComponent implements OnInit {
   exportColumns: any[];
   accessPermission: access;
   usertypeSettingData: any;
+
+  ratingList: any[]=[]
   @ViewChild('dt') dt: Table | undefined;
 
   constructor(
@@ -47,17 +51,7 @@ export class RatingListComponent implements OnInit {
   ngOnInit(): void {
     this.statusList = ['Approved', 'Not Approved'];
     this.sidebarSpacing = 'contracted';
-    this.cols = [
-      { field: 'overall', headers: 'Rating' },
-      { field: 'review', headers: 'Review Subject' },
-      { field: 'reviewer', headers: 'Reviewer' },
-      { field: 'status', headers: 'Status' },
-      { field: 'createdAt', headers: 'Date' },
-    ];
-    this.exportColumns = this.cols.map((col) => ({
-      title: col.headers,
-      dataKey: col.field,
-    }));
+
     this.getRatingDetails();
   }
 
@@ -97,14 +91,29 @@ export class RatingListComponent implements OnInit {
     );
   }
 
+
+
   exportPdf() {
-    this.ratingDetails = this.ratingData;
-    const doc = new jsPDF.jsPDF('l', 'pt');
-    autoTable(doc, {
-      columns: this.exportColumns,
-      body: this.ratingDetails,
+    this.ratingDetails = this.ratingData.map((item, index) => {
+      return { sno: index + 1, ...item };
     });
-    doc.save('ratings.pdf');
+
+    const doc = new jsPDF.jsPDF('l', 'pt');
+    const data = this.ratingDetails;
+    const exportColumns = [
+      { title: 'S No.', dataKey: 'sno' },
+      { title: 'Overall', dataKey: 'overall' },
+      { title: 'Review ', dataKey: 'review' },
+      { title: 'Reviewer', dataKey: 'reviewer' },
+      { title: 'CreatedAt', dataKey: 'createdAt' },
+    ];
+
+    autoTable(doc, {
+      columns: exportColumns,
+      body: data
+    });
+
+    doc.save('Rating List.pdf');
   }
 
   openDialog(name: any) {
@@ -129,7 +138,19 @@ export class RatingListComponent implements OnInit {
     });
   }
   // search functionality start here
-  applyFilterGlobal($event, stringVal) {
-    this.dt.filterGlobal(($event.target as HTMLInputElement).value, stringVal);
+  // applyFilterGlobal($event, stringVal) {
+  //   this.dt.filterGlobal(($event.target as HTMLInputElement).value, stringVal);
+  // }
+  applyFilterGlobal(event: Event, stringVal: string) {
+    const searchValue = (event.target as HTMLInputElement).value;
+
+    // Check if the search value is empty or contains only whitespace
+    if (!searchValue || /^\s*$/.test(searchValue)) {
+      // Clear the global filter if the search value is empty
+      this.dt.filterGlobal('', stringVal);
+    } else {
+      // Apply the global filter with the search value
+      this.dt.filterGlobal(searchValue.trim(), stringVal);
+    }
   }
 }

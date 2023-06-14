@@ -22,6 +22,7 @@ import { CreateOrderComponent } from './order-detail/create-order/create-order.c
 import { NgxUiLoaderModule, NgxUiLoaderConfig, SPINNER, POSITION,PB_DIRECTION, NgxUiLoaderRouterModule, NgxUiLoaderHttpModule } from 'ngx-ui-loader';
 
 import { ProgressBarModule } from 'primeng/progressbar';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -30,6 +31,7 @@ import { ProgressBarModule } from 'primeng/progressbar';
     AddSubscriptionComponent,
     AddCoupanComponent,
     CreateOrderComponent,
+
     ],
   imports: [
     CommonModule,

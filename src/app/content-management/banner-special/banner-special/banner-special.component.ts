@@ -151,7 +151,7 @@ export class BannerSpecialComponent implements OnInit {
           const worksheet = xlsxPackage.utils.json_to_sheet(this.banner);
           const workbook = { Sheets: { 'data': worksheet }, SheetNames: ['data'] };
           const excelBuffer: any = xlsxPackage.write(workbook, { bookType: 'xlsx', type: 'array' });
-          this.saveAsExcelFile(excelBuffer, "leads");
+          this.saveAsExcelFile(excelBuffer, "Bannner");
         }
 
   saveAsExcelFile(buffer: any, fileName: string): void {

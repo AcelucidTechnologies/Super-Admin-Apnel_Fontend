@@ -100,3 +100,13 @@ th {
 :host::ng-deep   .p-datatable .p-sortable-column.p-highlight:hover .p-sortable-column-icon {
   color: #848484;
 }
+.page-heading {
+  padding: 0px !important;
+
+  h1 {
+      font-size: 1.5rem;
+      font-weight: 700;
+      letter-spacing: 1.2px;
+      word-spacing: 0.1rem;
+  }
+}

@@ -26,7 +26,7 @@ export class AddEditUserTypeComponent implements OnInit {
     private toastr: ToastrMsgService,
     private activatedRoute:ActivatedRoute) {
       this.usertypeForm = fb.group({
-        userType: ['', [Validators.required, Validators.pattern(/^[a-zA-Z]+$/)]],
+        userType: ['', [Validators.required,Validators.pattern(/^[a-zA-Z\s]+$/)]],
         status: ['', [Validators.required]],
       });
 

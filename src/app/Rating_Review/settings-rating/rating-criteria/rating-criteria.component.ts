@@ -41,15 +41,6 @@ export class RatingCriteriaComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.cols = [
-      { field: 'ratingCriteria', headers: 'Rating Criteria' },
-      { field: 'status', headers: 'Status' },
-    ];
-    this.exportColumns = this.cols.map((col) => ({
-      title: col.headers,
-      dataKey: col.field,
-    }));
-    console.log(this.exportColumns);
   }
 
   onToggleSidebar(sidebarState: any) {
@@ -75,8 +66,8 @@ export class RatingCriteriaComponent implements OnInit {
     });
   }
 
-  deleteCriteriaDetail(id: number) {
-    this.ratingCriteriaService.deleteCriteriaDetails(id).subscribe((res) => {
+  deleteCriteriaDetail(name:any){
+    this.ratingCriteriaService.deleteCriteriaDetails(name).subscribe(res => {
       if (res) {
         this.toastr.showSuccess(
           'rating criteria deleted successfully',
@@ -110,14 +101,27 @@ export class RatingCriteriaComponent implements OnInit {
     );
   }
 
+
   exportPdf() {
-    this.ratingData = this.ratingSettingData;
-    const doc = new jsPDF.jsPDF('l', 'pt');
-    autoTable(doc, {
-      columns: this.exportColumns,
-      body: this.ratingData,
+    this.ratingData = this.ratingSettingData.map((item, index) => {
+      return { sno: index + 1, ...item };
     });
-    doc.save('ratingCriteria.pdf');
+
+    const doc = new jsPDF.jsPDF('l', 'pt');
+    const data = this.ratingData;
+    const exportColumns = [
+      { title: 'S No.', dataKey: 'sno' },
+      { title: 'Rating Criteria', dataKey: 'ratingCriteria' },
+      { title: 'Status', dataKey: 'status' },
+
+    ];
+
+    autoTable(doc, {
+      columns: exportColumns,
+      body: data
+    });
+
+    doc.save('Rating Criteria List.pdf');
   }
 
   applyFilterGlobal($event, stringVal) {
