@@ -176,7 +176,7 @@ export class EditProfileComponent {
       instituteName: [''],
       degree: [''],
       specialization: [''],
-      dateOfCompletion: [''],
+      toDate: [''],
       // _id: [''],
       editMode: [true],
     });
@@ -624,27 +624,14 @@ export class EditProfileComponent {
       this.workExperience = [];
       this.serialNumberJob = 1;
       this.serialNumberWork = 1;
-      this.addNewRow();
-      this.addNewWorkRow();
-      this.getAllProfile();
+      // this.addNewRow();
+      // this.addNewWorkRow();
+      // this.getAllProfile();
     } else {
       this.markAllFormControlsAsTouched();
     }
   }
 
-  // workExperiencePayload() {
-  //   this.workExperience.map((item) => {
-  //     this.workExpPayload.push({
-  //       companyName: item.controls['companyName'].value,
-  //       jobTitle: item.controls['jobTitle'].value,
-  //       toDate: item.controls['toDate'].value,
-  //       fromDate: item.controls['toDate'].value,
-  //       jobDescription: item.controls['jobDescription'].value,
-  //       releventExp: item.controls['releventExp'].value,
-  //     });
-  //   });
-  //   return this.workExpPayload;
-  // }
 
   workExperiencePayload() {
     this.workExperience.map((item) => {

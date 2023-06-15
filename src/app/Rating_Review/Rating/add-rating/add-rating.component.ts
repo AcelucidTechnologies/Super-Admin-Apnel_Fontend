@@ -49,7 +49,6 @@ export class AddRatingComponent implements OnInit {
       pros: [''],
       cons: [''],
       ratings: this.fb.array([
-
       ]
       ),
       userType: ['', [Validators.required]],

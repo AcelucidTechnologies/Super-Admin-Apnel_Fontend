@@ -17,14 +17,71 @@
 
         <div class="col-6">
           <div class="row" style="display: flex;">
-            <div class="col-4">Employee Full Name</div>
-            <div class="col-8"><input type="text" class="form-control" id="inputdefault" formControlName="employeeFullName"></div>
+            <div class="col-4 "> <label class="starlabel">Employee Full Name</label></div>
+            <div class="col-8"><input type="text" class="form-control" id="inputdefault" formControlName="employeeFullName">
+              <div *ngIf="
+              !profileForm.controls['employeeFullName'].valid &&
+              (profileForm.controls['employeeFullName'].touched ||
+              profileForm.controls['employeeFullName'].dirty)
+            ">
+              <div [hidden]="
+                !profileForm.controls['employeeFullName'].errors[
+                  'required'
+                ]
+              " style="
+                color: rgb(253, 122, 122);
+                font-size: small;
+                font-style: italic;
+              ">
+               Employee full name is required
+              </div>
+              <div *ngIf="
+              profileForm.controls['employeeFullName'].errors[
+                  'pattern'
+                ]
+              " style="
+                color: rgb(253, 122, 122);
+                font-size: small;
+                font-style: italic;
+              ">
+                Employee full name should be of Alphabet only
+              </div>
+            </div>
+            </div>
           </div>
         </div>
         <div class="col-6">
           <div class="row" style="display: flex;">
-            <div class="col-4">First Name</div>
-            <div class="col-8"><input type="text" class="form-control" id="inputdefault" formControlName="FirstName" ></div>
+            <div class="col-4"><label class="starlabel">First Name</label></div>
+            <div class="col-8"><input type="text" class="form-control" id="inputdefault" formControlName="FirstName" >
+              <div *ngIf="
+              !profileForm.controls['FirstName'].valid &&
+              (profileForm.controls['FirstName'].touched ||
+              profileForm.controls['FirstName'].dirty)
+            ">
+              <div [hidden]="
+                !profileForm.controls['FirstName'].errors[
+                  'required'
+                ]
+              " style="
+                color: rgb(253, 122, 122);
+                font-size: small;
+                font-style: italic;
+              ">
+               first name is required
+              </div>
+              <div *ngIf="
+              profileForm.controls['FirstName'].errors[
+                  'pattern'
+                ]
+              " style="
+                color: rgb(253, 122, 122);
+                font-size: small;
+                font-style: italic;
+              ">
+                first name should be of Alphabet only
+              </div>
+            </div></div>
           </div>
         </div>
       </div>
@@ -32,15 +89,75 @@
 
         <div class="col-6">
           <div class="row" style="display: flex;">
-            <div class="col-4">Last Name</div>
-            <div class="col-8"><input type="text" class="form-control" id="inputdefault" formControlName="lastName"></div>
+            <div class="col-4"><label class="starlabel">Last Name</label></div>
+            <div class="col-8"><input type="text" class="form-control" id="inputdefault" formControlName="lastName">
+              <div *ngIf="
+              !profileForm.controls['lastName'].valid &&
+              (profileForm.controls['lastName'].touched ||
+              profileForm.controls['lastName'].dirty)
+            ">
+              <div [hidden]="
+                !profileForm.controls['lastName'].errors[
+                  'required'
+                ]
+              " style="
+                color: rgb(253, 122, 122);
+                font-size: small;
+                font-style: italic;
+              ">
+              last name is required
+              </div>
+              <div *ngIf="
+              profileForm.controls['lastName'].errors[
+                  'pattern'
+                ]
+              " style="
+                color: rgb(253, 122, 122);
+                font-size: small;
+                font-style: italic;
+              ">
+                last name should be of Alphabet only
+              </div>
+            </div>
+          </div>
           </div>
         </div>
         <div class="col-6">
           <div class="row" style="display: flex;">
-            <div class="col-4">Email</div>
+            <div class="col-4"><label class="starlabel">Email</label></div>
             <div class="col-8">
-              <input type="text" class="form-control" id="inputdefault"  formControlName="email"></div>
+              <input type="text" class="form-control" id="inputdefault"  formControlName="email">
+              <div
+              *ngIf="
+                !profileForm.controls['email'].valid &&
+                (profileForm.controls['email'].touched ||
+                  profileForm.controls['email'].dirty)
+              "
+            >
+              <div
+                [hidden]="
+                  !profileForm.controls['email'].errors['required']
+                "
+                style="
+                  color: rgb(253, 122, 122);
+                  font-size: small;
+                  font-style: italic;
+                "
+              >
+                email is required
+              </div>
+              <div
+                *ngIf="profileForm.controls['email'].errors['email']"
+                style="
+                  color: rgb(253, 122, 122);
+                  font-size: small;
+                  font-style: italic;
+                "
+              >
+                Please enter valid email
+              </div>
+            </div>
+          </div>
           </div>
         </div>
       </div>

@@ -1,5 +1,5 @@
 import { Component, ViewChild } from '@angular/core';
-import { AbstractControl, FormArray, FormBuilder, FormControl, FormGroup } from '@angular/forms';
+import { AbstractControl, FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute, Router } from '@angular/router';
 import { NgxUiLoaderService } from 'ngx-ui-loader';
@@ -92,10 +92,10 @@ export class AddProfileComponent {
 
 
         employeeId: [''],
-        employeeFullName: [''],
-        FirstName: [''],
-        lastName: [''],
-        email: [''],
+        employeeFullName: ['', [Validators.required, Validators.pattern(/^[a-zA-Z\s]+$/)]],
+        FirstName: ['', [Validators.required, Validators.pattern(/^[a-zA-Z\s]+$/)]],
+        lastName: ['', [Validators.required, Validators.pattern(/^[a-zA-Z\s]+$/)]],
+        email: ['', [Validators.required, Validators.email]],
         image:[''],
         department: [''],
         designation:[''],
@@ -158,6 +158,10 @@ export class AddProfileComponent {
 
       });
 
+      this.profileForm.get('email').valueChanges.subscribe((value) => {
+        this.checkEmailValidity(value);
+      });
+
 
       // this.profileForm.get('email').valueChanges.subscribe((value) => {
       //   this.checkEmailExists(value);
@@ -172,17 +176,18 @@ export class AddProfileComponent {
       console.log(this.workExperience);
     }
 
+
     // checkEmailExists(email: string) {
     //   if (this.emailList.includes(email)) {
     //     this.toastr.showError('Email already exists', 'Error');
     //   }
     // }
-    checkEmailExists(): void {
-      const enteredEmail = this.emailControl.value;
-      if (this.emailList.includes(enteredEmail)) {
-        this.toastr.showError('Email already exists', 'Error');
-      }
-    }
+    // checkEmailExists(): void {
+    //   const enteredEmail = this.emailControl.value;
+    //   if (this.emailList.includes(enteredEmail)) {
+    //     this.toastr.showError('Email already exists', 'Error');
+    //   }
+    // }
 
     getAllProfile() {
       this.leaveservice.getProfileList().pipe(
@@ -194,6 +199,12 @@ export class AddProfileComponent {
       });
     }
 
+
+    checkEmailValidity(enteredEmail: string): void {
+      if (this.emailList.includes(enteredEmail)) {
+        this.toastr.showError('Email already exists!', 'Error');
+      }
+    }
 
 
   createEducationRow(): FormGroup {

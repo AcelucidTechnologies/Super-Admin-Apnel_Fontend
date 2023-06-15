@@ -85,7 +85,7 @@ exportPdf() {
     { title: 'Review Subject', dataKey: 'reviewSubject' },
     { title: 'Publishing Site Url', dataKey: 'publishingSiteUrl' },
     { title: 'Rating Count Review ', dataKey: 'ratingCountReview' },
-    { title: 'status', dataKey: 'status' },
+    { title: 'Status', dataKey: 'status' },
 
   ];
 
