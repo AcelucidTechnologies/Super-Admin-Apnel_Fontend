@@ -7,7 +7,7 @@
   </div>
 
   <p-table #dt [value]="profileList" [(selection)]="selectedCustomers" dataKey="id" [rowHover]="true"
-    [rows]="8" [showCurrentPageReport]="true" responsiveLayout="scroll"
+    [rows]="7" [showCurrentPageReport]="true" responsiveLayout="scroll"
     [paginator]="true" currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
     [filterDelay]="0" [globalFilterFields]="['employeeFullName','email','department']" class="abc">
     <ng-template pTemplate="caption">

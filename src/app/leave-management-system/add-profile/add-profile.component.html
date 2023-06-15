@@ -40,7 +40,7 @@
           <div class="row" style="display: flex;">
             <div class="col-4">Email</div>
             <div class="col-8">
-              <input type="text" class="form-control" id="inputdefault"  (change)="checkEmailExists()" formControlName="email"></div>
+              <input type="text" class="form-control" id="inputdefault"  formControlName="email"></div>
           </div>
         </div>
       </div>
@@ -680,7 +680,7 @@
       <td><input type="text" style="border: none;"  formControlName="instituteName" [disabled]="!row.get('editMode').value"></td>
       <td><input type="text" style="border: none;"  formControlName="degree" [disabled]="!row.get('editMode').value"></td>
       <td><input type="text" style="border: none;"  formControlName="specialization" [disabled]="!row.get('editMode').value"></td>
-      <td><input type="date" style="border: none;"  formControlName="dateOfCompletion" [disabled]="!row.get('editMode').value"></td>
+      <td><input type="date" style="border: none;"  formControlName="toDate" [disabled]="!row.get('editMode').value"></td>
       <td>
         <!-- <button (click)="toggleEditMode(row)">
           {{ row.get('editMode').value ? 'Save' : 'Edit' }}
@@ -696,7 +696,7 @@
 <div class="row mb-5 mt-4">
   <div class="d-flex justify-content-end col-11 mt-4">
     <button type="submit" style="background: rgb(228, 28, 28);border:none" class="btn btn-info mr-3"
-      (click)="submit()" [disabled]="!profileForm.valid"  [routerLink]="['/leaveMgmt/profile-list']">Submit</button>
+      (click)="submit()" [disabled]="!profileForm.valid" >Submit</button>
       <!-- <button type="submit" style="background: rgb(228, 28, 28);border:none" class="btn btn-info mr-3"
       (click)="submit()" >Submit</button> -->
     <button class="btn btn-info" style="background: #637381;border:none"

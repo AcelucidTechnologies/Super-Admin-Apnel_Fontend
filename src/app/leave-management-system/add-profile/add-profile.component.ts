@@ -20,8 +20,11 @@ import { map } from 'rxjs';
   styleUrls: ['./add-profile.component.scss']
 })
 export class AddProfileComponent {
+  workExpPayload: any[] = [];
+  eduExpPayload: any[] = [];
   // @ViewChild("image")
   // private _image: HTMLImageElement;
+  emailControl = new FormControl();
   fileHolder: File | null;
   prevImageName: any;
   imageChangedEvent: any = '';
@@ -156,9 +159,10 @@ export class AddProfileComponent {
       });
 
 
-      this.profileForm.get('email').valueChanges.subscribe((value) => {
-        this.checkEmailExists(value);
-      });
+      // this.profileForm.get('email').valueChanges.subscribe((value) => {
+      //   this.checkEmailExists(value);
+      // });
+
 
       this.educationDetails = (this.profileForm.get('educationDetails') as FormArray).controls as FormGroup[];
       this.workExperience = (this.profileForm.get('workExperience') as FormArray).controls as FormGroup[];
@@ -168,8 +172,14 @@ export class AddProfileComponent {
       console.log(this.workExperience);
     }
 
-    checkEmailExists(email: string) {
-      if (this.emailList.includes(email)) {
+    // checkEmailExists(email: string) {
+    //   if (this.emailList.includes(email)) {
+    //     this.toastr.showError('Email already exists', 'Error');
+    //   }
+    // }
+    checkEmailExists(): void {
+      const enteredEmail = this.emailControl.value;
+      if (this.emailList.includes(enteredEmail)) {
         this.toastr.showError('Email already exists', 'Error');
       }
     }
@@ -185,13 +195,14 @@ export class AddProfileComponent {
     }
 
 
+
   createEducationRow(): FormGroup {
     return this.fb.group({
       sno: [this.serialNumberJob++],
       instituteName: [''],
       degree: [''],
       specialization: [''],
-      dateOfCompletion: [''],
+      toDate: [''],
       // _id:[''],
       editMode: [true]
     });
@@ -482,22 +493,9 @@ export class AddProfileComponent {
           modifiedTime: this.profileForm.get('systemFields.modifiedTime').value,
           onBoardingStatus: this.profileForm.get('systemFields.onBoardingStatus').value,
         },
-    //     workExperience:
-    //     {
-    //     companyName: this.workExperience[0].controls['companyName'].value,
-    //     jobTitle: this.workExperience[0].controls['jobTitle'].value,
-    //     toDate: this.workExperience[0].controls['toDate'].value,
-    //     jobDescription: this.workExperience[0].controls['jobDescription'].value,
-    //     releventExp: this.workExperience[0].controls['releventExp'].value,
-    //   },
-    //   educationDetails:
-    //   {
-    //     instituteName: this.educationDetails[0].controls['instituteName'].value,
-    //     degree: this.educationDetails[0].controls['degree'].value,
-    //     specialization: this.educationDetails[0].controls['specialization'].value,
-    //     toDate: this.educationDetails[0].controls['toDate'].value,
-    //     dateOfCompletion: this.educationDetails[0].controls['dateOfCompletion'].value,
-    // }
+        workExperience: this.workExperiencePayload(),
+        educationDetails: this.educationExperiencePayload() ,
+
       }
 
       this.submitDetails(this.payload);
@@ -522,7 +520,33 @@ export class AddProfileComponent {
       this.markAllFormControlsAsTouched();
     }
   }
-  workExperienceValues:any
+  workExperiencePayload() {
+    this.workExperience.map((item) => {
+      this.workExpPayload.push({
+        companyName: item.controls['companyName'].value,
+        jobTitle: item.controls['jobTitle'].value,
+        toDate: item.controls['toDate'].value,
+        fromDate: item.controls['fromDate'].value,
+        jobDescription: item.controls['jobDescription'].value,
+        releventExp: item.controls['releventExp'].value,
+      });
+    });
+    return this.workExpPayload;
+  }
+
+  educationExperiencePayload() {
+    this.educationDetails.map((item) => {
+      this.eduExpPayload.push({
+        instituteName: item.controls['instituteName'].value,
+        degree: item.controls['degree'].value,
+        specialization: item.controls['specialization'].value,
+        toDate: item.controls['toDate'].value,
+
+      });
+    });
+    return this.eduExpPayload;
+  }
+
 
   markAllFormControlsAsTouched() {
     const formControls = this.profileForm.controls;

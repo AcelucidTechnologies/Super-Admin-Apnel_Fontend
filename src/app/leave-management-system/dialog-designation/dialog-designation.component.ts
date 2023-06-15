@@ -29,7 +29,7 @@ export class DialogDesignationComponent {
    private route: Router) {
    this.selectForm = this.fb.group({
      username: localStorage.getItem("email"),
-     designation: ['', [Validators.required, Validators.pattern(/^[a-zA-Z]+$/)]],
+     designation: ['', [Validators.required]],
    });
 }
  ngOnInit(): void {
