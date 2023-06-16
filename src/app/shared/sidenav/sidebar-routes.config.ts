@@ -25,12 +25,12 @@ export const SideNaveMenueRoute = [
     ],
   },
   {
-    label: 'Leave-tracker',
+    label: 'Leave',
     icon: 'pi pi-user-plus',
     items: [
 
       {
-        label: 'profile-list',
+        label: 'ProfileList',
         icon: 'pi pi-list',
         routerLink: ['/leaveMgmt/profile-list'],
         routerLinkActiveOptions: { exact: true },

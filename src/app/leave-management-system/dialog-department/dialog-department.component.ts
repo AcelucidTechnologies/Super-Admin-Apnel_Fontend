@@ -30,8 +30,7 @@ export class DialogDepartmentComponent {
    private route: Router) {
    this.selectForm = this.fb.group({
      username: localStorage.getItem("email"),
-     department: ['', [Validators.required
-    ]],
+     department: ['', [Validators.required,  Validators.pattern(/^[a-zA-Z\s]+$/)]],
 
    });
 }

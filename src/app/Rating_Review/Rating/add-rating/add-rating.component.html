@@ -38,25 +38,7 @@
                 </div>
               </div> -->
 
-                 <!-- <div class="col-9">
-                  <select class="form-group" aria-label="Default select example" formControlName="reviewer" >
-                    <option class="default-option"  style="color: red;">Select Reviewer</option>
-                    <option *ngFor="let review of reviewerData" >{{review.name}}</option>
-                  </select>
-                <div *ngIf="
-                  !ratingForm.controls['reviewer'].valid &&
-                  (ratingForm.controls['reviewer'].touched ||
-                    ratingForm.controls['reviewer'].dirty)
-                ">
-                  <div [hidden]="!ratingForm.controls['reviewer'].errors['required']" style="
-                    color: rgb(253, 122, 122);
-                    font-size: small;
-                    font-style: italic;
-                  ">
-                    Reviewer is required
-                  </div>
-                </div>
-              </div> -->
+
               <div class="col-9">
                 <select class="form-group" aria-label="Default select example" formControlName="reviewer">
                   <option class="default-option" style="color: red;">Select Reviewer</option>
@@ -108,7 +90,7 @@
               <label for="reviewer" class="col-form-label text-left starlabel">Overall</label>
             </div>
             <div class="col-11" style="padding-left: 35px">
-              <p-dropdown [options]="overAll" formControlName="overall" styleClass="reviewer-dropdown" placeholder="enter overall rating"></p-dropdown>
+              <p-dropdown [options]="overAll" formControlName="overall" styleClass="reviewer-dropdown" placeholder="Enter overall rating"></p-dropdown>
               <div *ngIf="
                 !ratingForm.controls['overall'].valid &&
                 (ratingForm.controls['overall'].touched ||
@@ -130,7 +112,7 @@
                 <label for="reviewer" class="col-form-label text-left">Pros</label>
               </div>
               <div class="col-9">
-                <input type="text" class="form-control custom-placeholder" formControlName="pros" placeholder="enter pros" />
+                <input type="text" class="form-control custom-placeholder" formControlName="pros" placeholder="Enter pros" style="color: black;" />
               </div>
             </div>
             <div class="form-row col-6 pt-5">
@@ -138,7 +120,7 @@
                 <label for="reviewer" class="col-form-label text-left">Cons</label>
               </div>
               <div class="col-9">
-                <input type="text" class="form-control custom-placeholder" formControlName="cons" placeholder="enter cons" />
+                <input type="text" class="form-control custom-placeholder" formControlName="cons" placeholder="Enter cons" style="color: black;" />
               </div>
             </div>
           </div>
@@ -173,14 +155,14 @@
                 <label for="ratingType" class="col-form-label text-left starlabel">User Type</label>
               </div>
               <div class="col-9">
-                <select class="form-group" aria-label="Default select example" formControlName="userType" >
+                <!-- <select class="form-group" aria-label="Default select example" formControlName="userType" >
                   <option>Select review subject</option>
-                  <option *ngFor="let userType of usertypeSettingData" >{{userType.userType}}</option>
-                </select>
-                <!-- <select class="form-group" aria-label="Default select example" formControlName="userType">
+                  <option *ngFor="let review of ratingSettingData" >{{review.reviewSubject}}</option>
+                </select> -->
+                <select class="form-group" aria-label="Default select example" formControlName="userType">
                   <option >Select User Type</option>
                   <option *ngFor="let userType of usertypeSettingData">{{userType.userType}}</option>
-                </select> -->
+                </select>
                 <div *ngIf="
                   !ratingForm.controls['userType'].valid &&
                   (ratingForm.controls['userType'].touched ||

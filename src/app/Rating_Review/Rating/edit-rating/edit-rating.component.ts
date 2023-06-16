@@ -65,7 +65,7 @@ export class EditRatingComponent implements OnInit {
 
       ]
       ),
-      userType: ['',[Validators.required]],
+      userType: ['select',[Validators.required]],
       status: ['', [Validators.required]],
       username:[''],
       id: ['']

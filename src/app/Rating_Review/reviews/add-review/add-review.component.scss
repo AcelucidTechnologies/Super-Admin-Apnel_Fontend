@@ -30,3 +30,10 @@
 ::ng-deep.p-dropdown{
   border: 1px solid lightgray;
 }
+.custom-placeholder::placeholder {
+  color: black;
+
+}
+::ng-deep.p-dropdown .p-dropdown-label.p-placeholder {
+  color: black;
+}

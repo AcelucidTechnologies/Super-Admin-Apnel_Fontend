@@ -17,13 +17,13 @@
         <div class="col-6">
 
           <div class="row" style="display: flex;">
-            <div class="col-4 info-name">Employee ID</div>
+            <div class="col-4 info-name"><label class="starlabel">Employee ID</label></div>
             <div class="col-8"><input class="form-control" id="inputdefault" type="text" formControlName="employeeId"></div>
           </div>
         </div>
         <div class="col-6">
           <div class="row" style="display: flex;">
-            <div class="col-4">Employee Full Name</div>
+            <div class="col-4"><label class="starlabel">Employee Full Name</label></div>
             <div class="col-8"><input type="text" class="form-control" id="inputdefault" formControlName="employeeFullName"></div>
           </div>
         </div>
@@ -31,13 +31,13 @@
       <div class="row text-input-field">
         <div class="col-6">
           <div class="row" style="display: flex;">
-            <div class="col-4">First Name</div>
+            <div class="col-4"><label class="starlabel">First Name</label></div>
             <div class="col-8"><input type="text" class="form-control" id="inputdefault" formControlName="FirstName" ></div>
           </div>
         </div>
         <div class="col-6">
           <div class="row" style="display: flex;">
-            <div class="col-4">Last Name</div>
+            <div class="col-4"><label class="starlabel">Last Name</label></div>
             <div class="col-8"><input type="text" class="form-control" id="inputdefault" formControlName="lastName"></div>
           </div>
         </div>
@@ -45,7 +45,7 @@
       <div class="row text-input-field">
         <div class="col-6">
           <div class="row" style="display: flex;">
-            <div class="col-4">Email</div>
+            <div class="col-4"><label class="starlabel">Email</label></div>
             <div class="col-8">
               <input type="text" class="form-control" id="inputdefault"  formControlName="email"></div>
           </div>
@@ -73,7 +73,7 @@
       <div class="row text-input-field">
         <div class="col-6" >
           <div class="row" style="display: flex;">
-            <div class="col-4 info-name">Department</div>
+            <div class="col-4 info-name"><label class="starlabel">Department</label></div>
             <div class="col-7" style="padding-right: 0px;">
               <div>
                 <select style="width: 100%; border: 1px solid lightgray; height: 38px; padding:5px"
@@ -103,7 +103,7 @@
 
                 formControlName="designation"
               >
-                <option>Enter Designation</option>
+                <option><label class="starlabel">Enter Designation</label></option>
                 <option *ngFor="let count of designationdrop">
                   {{ count.designation }}
                 </option>
@@ -126,7 +126,7 @@
       <div class="row text-input-field">
         <div class="col-6">
           <div class="row" style="display: flex;">
-            <div class="col-4 info-name">Location</div>
+            <div class="col-4 info-name"><label class="starlabel">Location</label></div>
             <div class="col-7" style="padding-right: 0px;">
             <div>
               <select style="width: 100%; border: 1px solid lightgray; height: 38px; padding:5px"
@@ -146,7 +146,7 @@
         </div>
         <div class="col-6">
           <div class="row" style="display: flex;">
-            <div class="col-4">Role</div>
+            <div class="col-4"><label class="starlabel">Role</label></div>
             <div class="col-8">
               <select style="width: 100%; border: 1px solid lightgray; height: 38px; padding:5px"
               class="form-group"
@@ -167,7 +167,7 @@
       <div class="row text-input-field">
         <div class="col-6" >
           <div class="row" style="display: flex;">
-            <div class="col-4 info-name">Employement Type</div>
+            <div class="col-4 info-name"><label class="starlabel">Employement Type</label></div>
               <div class="col-8">
                 <select style="width: 100%; border: 1px solid lightgray; height: 38px; padding:5px"
                 class="form-group"
@@ -190,7 +190,7 @@
 
         <div class="col-6">
           <div class="row" style="display: flex;">
-            <div class="col-4">Employement Status</div>
+            <div class="col-4"><label class="starlabel">Employement Status</label></div>
             <div class="col-8">
               <select style="width: 100%; border: 1px solid lightgray; height: 38px; padding:5px"
               class="form-group"
@@ -212,7 +212,7 @@
       <div class="row text-input-field">
         <div class="col-6">
           <div class="row" style="display: flex;">
-            <div class="col-4 info-name">Source Hiring</div>
+            <div class="col-4 info-name"><label class="starlabel">Source Hiring</label></div>
             <div class="col-7" style="padding-right: 0px;">
               <div>
                 <select style="width: 100%; border: 1px solid lightgray; height: 38px; padding:5px"
@@ -232,7 +232,7 @@
         </div>
         <div class="col-6">
           <div class="row" style="display: flex;">
-            <div class="col-4">Date of Joining</div>
+            <div class="col-4"><label class="starlabel">Date of Joining</label></div>
             <div class="col-8"><input type="date" class="form-control" id="inputdefault" formControlName="dateOfJoining" ></div>
           </div>
         </div>
@@ -240,13 +240,13 @@
       <div class="row text-input-field">
         <div class="col-6">
           <div class="row" style="display: flex;">
-            <div class="col-4 info-name">Current Experience</div>
+            <div class="col-4 info-name"><label class="starlabel">Current Experience</label></div>
             <div class="col-8"><input class="form-control" id="inputdefault" type="number" formControlName="currentExp"></div>
           </div>
         </div>
         <div class="col-6">
           <div class="row" style="display: flex;">
-            <div class="col-4">Total Experience</div>
+            <div class="col-4"><label class="starlabel">Total Experience</label></div>
             <div class="col-8"><input type="number" class="form-control" id="inputdefault"  formControlName="totalExp"></div>
           </div>
         </div>
@@ -258,7 +258,7 @@
       <div class="row text-input-field">
         <div class="col-6">
           <div class="row" style="display: flex;">
-            <div class="col-4 info-name">Reporting Manager</div>
+            <div class="col-4 info-name"><label class="starlabel">Reporting Manager</label></div>
             <div class="col-7" style="padding-right: 0px;">
               <div>
                 <select style="width: 100%; border: 1px solid lightgray; height: 38px; padding:5px"
@@ -286,7 +286,7 @@
       <div class="row text-input-field">
         <div class="col-6">
           <div class="row" style="display: flex;">
-            <div class="col-4 info-name">Date of Birth</div>
+            <div class="col-4 info-name"><label class="starlabel">Date of Birth</label></div>
             <div class="col-8">
               <input type="date" class="form-control" placeholder="Select Birthday"
               id="startDate" name="startDate" formControlName="dateOfBirth">
@@ -295,7 +295,7 @@
         </div>
         <div class="col-6">
           <div class="row" style="display: flex;">
-            <div class="col-4">Age</div>
+            <div class="col-4"><label class="starlabel">Age</label></div>
             <div class="col-8"><input type="text" class="form-control" id="inputdefault"  formControlName="age"></div>
           </div>
         </div>
@@ -303,7 +303,7 @@
       <div class="row text-input-field">
         <div class="col-6">
           <div class="row" style="display: flex;">
-            <div class="col-4 info-name">Gender</div>
+            <div class="col-4 info-name"><label class="starlabel">Gender</label></div>
             <div class="col-8">
               <!-- <p-dropdown [options]="genderOptions" id="ratingStatus" placeholder="Select"
               styleClass="status-dropdown" formControlName="gender"></p-dropdown> -->
@@ -323,7 +323,7 @@
         </div>
         <div class="col-6">
           <div class="row" style="display: flex;">
-            <div class="col-4">Marital status</div>
+            <div class="col-4"><label class="starlabel">Marital status</label></div>
             <div class="col-8">
               <!-- <p-dropdown [options]="maritalOptions" id="ratingStatus" placeholder="Select"
               styleClass="status-dropdown" formControlName="maritalStatus"></p-dropdown> -->
@@ -347,7 +347,7 @@
       <div class="row text-input-field">
         <div class="col-12">
           <div class="row" style="display: flex;">
-            <div class="col-2 info-name">Ask me about/Expertise</div>
+            <div class="col-2 info-name"><label class="starlabel">Ask me about/Expertise</label></div>
               <div class="col-10"><textarea class="form-control" id="inputdefault" style="height: 100px;" formControlName="expertise"></textarea></div>
           </div>
         </div>
@@ -355,7 +355,7 @@
       <div class="row text-input-field">
         <div class="col-12">
           <div class="row" style="display: flex;">
-            <div class="col-2 info-name">About Me</div>
+            <div class="col-2 info-name"><label class="starlabel">About Me</label></div>
             <div class="col-10">
               <textarea class="form-control" id="inputdefault" style="height: 100px;" formControlName="aboutMe"></textarea>
             </div>
@@ -380,13 +380,13 @@
           </div>
           <div class="col-4">
             <div class="row" style="display: flex;">
-              <div class="col-4">Pan Number</div>
+              <div class="col-4"><label class="starlabel">Pan Number</label></div>
               <div class="col-8"><input type="text" class="form-control" id="inputdefault" formControlName="panNumber" ></div>
             </div>
           </div>
           <div class="col-4">
             <div class="row" style="display: flex;">
-              <div class="col-4">Aadhar Number</div>
+              <div class="col-4"><label class="starlabel">Aadhar Number</label></div>
               <div class="col-8"><input type="text" class="form-control" id="inputdefault" formControlName="aadharNumber" ></div>
             </div>
           </div>
@@ -402,13 +402,13 @@
         <div class="row text-input-field">
           <div class="col-6">
             <div class="row" style="display: flex;">
-              <div class="col-4 info-name">Working Phone Number</div>
+              <div class="col-4 info-name"><label class="starlabel">Working Phone Number</label></div>
               <div class="col-8"><input type="text" class="form-control" id="inputdefault" formControlName="workingPhoneNumber"></div>
             </div>
           </div>
           <div class="col-6">
             <div class="row" style="display: flex;">
-              <div class="col-4">Personal Mobile Number</div>
+              <div class="col-4"><label class="starlabel">Personal Mobile Number</label></div>
               <div class="col-8"><input type="text" class="form-control" id="inputdefault" formControlName="personalMobileNumber" ></div>
             </div>
           </div>
@@ -416,7 +416,7 @@
         <div class="row text-input-field">
           <div class="col-6">
             <div class="row" style="display: flex;">
-              <div class="col-4">Personal Email Address</div>
+              <div class="col-4"><label class="starlabel">Personal Email Address</label></div>
               <div class="col-8"><input type="text" class="form-control" id="inputdefault" formControlName="personalEmailAddress"></div>
             </div>
           </div>
@@ -426,7 +426,7 @@
         <div class="row text-input-field">
           <div class="col-6">
             <div class="row" style="display: flex;">
-              <div class="col-4">Present Address</div>
+              <div class="col-4"><label class="starlabel">Present Address</label></div>
               <div class="col-8"><input type="text" class="form-control" id="inputdefault" placeholder="Address Line 1" formControlName="address1"></div>
             </div>
           </div>
@@ -474,7 +474,7 @@
             <div class="row text-input-field">
               <div class="col-6">
                 <div class="row" style="display: flex;">
-                  <div class="col-4">Permanent Address</div>
+                  <div class="col-4"><label class="starlabel">Permanent Address</label></div>
                   <div class="col-8" style="display: flex;align-items: center;">
                     <!-- <input type="checkbox" value="" class="" formControlName="sameAsLocal" [checked]="isChecked" (change)="checkValue(profileForm.get('sameAsLocal'))" style="height: 20px; width: 20px;"> -->
                     <input type="checkbox" formControlName="sameAsLocal" (change)="checkValue(profileForm.get('contactDetails.sameAsLocal'))">
@@ -546,7 +546,7 @@
       <div class="row text-input-field">
         <div class="col-6">
           <div class="row" style="display: flex;">
-            <div class="col-4 info-name">Date of Exit</div>
+            <div class="col-4 info-name"><label class="starlabel">Date of Exit</label></div>
             <div class="col-8">
               <input type="date" class="form-control" placeholder="Select date of exit"
               id="startDate" name="startDate" formControlName="separationOfDate">
@@ -567,7 +567,7 @@
         <div class="row text-input-field">
           <div class="col-6">
             <div class="row" style="display: flex;">
-              <div class="col-4 info-name">Added Time</div>
+              <div class="col-4 info-name"><label class="starlabel">Added Time</label></div>
               <div class="col-8">
                 <input type="date" class="form-control" placeholder="added Time"
                         id="startDate" name="startDate" formControlName="addedTime">
@@ -576,7 +576,7 @@
           </div>
           <div class="col-6">
             <div class="row" style="display: flex;">
-              <div class="col-4 info-name">Modified Time</div>
+              <div class="col-4 info-name"><label class="starlabel">Modified Time</label></div>
               <div class="col-8">
                 <input type="date" class="form-control" placeholder="modified time"
                         id="startDate" name="startDate" formControlName="modifiedTime">
@@ -588,7 +588,7 @@
       <div class="row text-input-field">
         <div class="col-6">
           <div class="row" style="display: flex;">
-            <div class="col-4 info-name">Added By</div>
+            <div class="col-4 info-name"><label class="starlabel">Added By</label></div>
             <div class="col-8">
               <input type="text" class="form-control" id="inputdefault" formControlName="addedBy">
             </div>
@@ -596,7 +596,7 @@
         </div>
         <div class="col-6">
           <div class="row" style="display: flex;">
-            <div class="col-4 info-name">Modified By</div>
+            <div class="col-4 info-name"><label class="starlabel">Modified By</label></div>
             <div class="col-8">
               <input type="text" class="form-control" id="inputdefault" formControlName="modifiedBy">
             </div>
@@ -607,7 +607,7 @@
 <div class="row text-input-field">
   <div class="col-6">
     <div class="row" style="display: flex;">
-      <div class="col-4 info-name">Onboarding status</div>
+      <div class="col-4 info-name"><label class="starlabel">Onboarding status</label></div>
       <div class="col-8">
         <!-- <p-dropdown [options]="statusOptions" id="ratingStatus" placeholder="Select"
         styleClass="status-dropdown"  formControlName="onBoardingStatus"></p-dropdown> -->

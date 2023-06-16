@@ -28,7 +28,7 @@ export class DialogReportingManagerComponent {
    private route: Router) {
    this.selectForm = this.fb.group({
      username: localStorage.getItem("email"),
-     reporting: ['', [Validators.required]],
+     reporting: ['', [Validators.required,  Validators.pattern(/^[a-zA-Z\s]+$/)]],
    });
 }
  ngOnInit(): void {

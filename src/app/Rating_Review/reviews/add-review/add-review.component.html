@@ -21,7 +21,7 @@
                 <label for="siteUrl" class=" text-center starlabel mb-4">Publishing Site Url</label>
               </div>
               <div class="col-9 ">
-                <input type="text" class="form-control " id="siteUrl" formControlName="publishSiteUrl"
+                <input type="text" class="form-control custom-placeholder" id="siteUrl" formControlName="publishSiteUrl"
                   placeholder="Enter publishing url">
                 <div *ngIf="
                   !reviewForm.controls['publishSiteUrl'].valid &&
@@ -57,10 +57,10 @@
 
             <div class="form-row mt-3">
               <div class="col-3 ">
-                <label for="reference" class="text-center starlabel mb-4">Subject Name</label>
+                <label for="reference" class="text-center starlabel mb-4 ">Subject Name</label>
               </div>
               <div class="col-9 ">
-                <input type="text" class="form-control " id="reference" formControlName="referenceId"
+                <input type="text" class="form-control custom-placeholder " id="reference" formControlName="referenceId"
                   placeholder="Enter subject name">
                 <!-- <div *ngIf="!reviewForm.controls['referenceId'].valid && reviewForm.controls['referenceId'].touched ">
                   <div [hidden]="!reviewForm.controls['referenceId'].errors['required']"
@@ -105,7 +105,7 @@
                 <label for="reference" class="text-center starlabel mb-4">Status</label>
               </div>
               <div class="col-9 ">
-                <p-dropdown styleClass="statusDropdown" [options]="statusList" placeholder="Select status"
+                <p-dropdown styleClass="statusDropdown" style="color: black;" [options]="statusList" placeholder="Select status"
                   formControlName="reviewStatus"></p-dropdown>
                 <div *ngIf="!reviewForm.controls['reviewStatus'].valid && reviewForm.controls['reviewStatus'].touched ">
                   <div [hidden]="!reviewForm.controls['reviewStatus'].errors['required']"

@@ -28,7 +28,7 @@ export class DialogLocationComponent {
    private route: Router) {
    this.selectForm = this.fb.group({
      username: localStorage.getItem("email"),
-     location: ['', [Validators.required, Validators.pattern(/^[a-zA-Z]+$/)]],
+     location: ['', [Validators.required,  Validators.pattern(/^[a-zA-Z\s]+$/)]],
    });
 }
  ngOnInit(): void {

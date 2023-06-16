@@ -30,7 +30,9 @@
   [responsive]="true"
   styleClass="p-datatable-striped"
   [globalFilterFields]="['overall', 'reviewer', 'review', 'status','createdAt']"
+
 >
+
   <ng-template pTemplate="caption">
     <div class="d-flex justify-content-between">
       <div class="d-flex align-items-center p-0">
@@ -80,7 +82,7 @@
           S.No.
         </div>
       </th>
-      <th pSortableColumn="overall">
+      <th pSortableColumn="overall" >
         <div class="flex justify-content-between align-items-center head1">
           Rating
           <p-sortIcon field="overall"></p-sortIcon>
