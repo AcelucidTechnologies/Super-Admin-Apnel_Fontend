@@ -1,4 +1,4 @@
-<div style="height: 700px; margin-bottom: 100px">
+<div style="height: 500px; margin-bottom: 100px">
   <div class="page-heading"></div>
   <div class="button-heading-container">
     <button
@@ -10,7 +10,7 @@
     <h5>&nbsp;Reviewer Details</h5>
   </div>
   <div class="d-flex justify-content-center">
-    <div class="card" style="width: 1150px; height: 600px">
+    <div class="card" style="width: 1150px; height: 500px">
       <div class="p-5">
         <div class="card-body h-100 pl-4">
           <div class=" mb-5">
@@ -26,10 +26,10 @@
               <div class="col-10">
                 <input
                   type="text"
-                  class="form-control"
+                  class="form-control custom-placeholder"
                   id="reviewerName"
                   formControlName="name"
-                  placeholder="Enter your name.."
+                  placeholder="Enter your name"
                   (input)="capitalizeFirstLetter($event)"
                 />
                 <!-- <div
@@ -82,17 +82,17 @@
 
             <div class="form-row mt-4">
               <div class="col-1">
-                <label for="reviewerEmail" class="text-center starlabel mb-4"
+                <label for="reviewerEmail" class="text-center  custom-placeholder starlabel mb-4"
                   >Email</label
                 >
               </div>
               <div class="col-10">
                 <input
                   type="text"
-                  class="form-control"
+                  class="form-control custom-placeholder"
                   id="reviewerEmail"
                   formControlName="email"
-                  placeholder="Enter your email.."
+                  placeholder="Enter your email"
                 />
                 <div
                   *ngIf="

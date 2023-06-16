@@ -68,3 +68,11 @@ select {
 .column-item {
   width: 48%;
 }
+::ng-deep.p-dropdown .p-dropdown-label.p-placeholder {
+  color: black !important;
+}
+
+.custom-placeholder::placeholder {
+  color: black;
+
+}

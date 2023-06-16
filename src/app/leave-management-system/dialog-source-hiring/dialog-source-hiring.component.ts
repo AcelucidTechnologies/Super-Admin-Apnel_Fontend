@@ -28,7 +28,7 @@ export class DialogSourceHiringComponent {
    private route: Router) {
    this.selectForm = this.fb.group({
      username: localStorage.getItem("email"),
-     sourceHiring: ['', [Validators.required, Validators.pattern(/^[a-zA-Z]+$/)]],
+     sourceHiring: ['', [Validators.required, Validators.pattern(/^[a-zA-Z\s]+$/)]],
    });
 }
  ngOnInit(): void {

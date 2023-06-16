@@ -1,5 +1,5 @@
 import { Component, ViewChild } from '@angular/core';
-import { AbstractControl, FormArray, FormBuilder, FormControl, FormGroup } from '@angular/forms';
+import { AbstractControl, FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute, Router } from '@angular/router';
 import { NgxUiLoaderService } from 'ngx-ui-loader';
@@ -20,8 +20,11 @@ import { map } from 'rxjs';
   styleUrls: ['./add-profile.component.scss']
 })
 export class AddProfileComponent {
+  workExpPayload: any[] = [];
+  eduExpPayload: any[] = [];
   // @ViewChild("image")
   // private _image: HTMLImageElement;
+  emailControl = new FormControl();
   fileHolder: File | null;
   prevImageName: any;
   imageChangedEvent: any = '';
@@ -89,76 +92,83 @@ export class AddProfileComponent {
 
 
         employeeId: [''],
-        employeeFullName: [''],
-        FirstName: [''],
-        lastName: [''],
-        email: [''],
+        employeeFullName: ['', [Validators.required, Validators.pattern(/^[a-zA-Z\s]+$/)]],
+        FirstName: ['', [Validators.required, Validators.pattern(/^[a-zA-Z\s]+$/)]],
+        lastName: ['', [Validators.required, Validators.pattern(/^[a-zA-Z\s]+$/)]],
+        email: ['', [Validators.required, Validators.email]],
         image:[''],
-        department: [''],
-        designation:[''],
-        role:[''],
-        employmentType:[''],
-        employeeStatus:[''],
-        sourceHiring:[''],
-        dateOfJoining:[''],
-        currentExp:[''],
-        totalExp:[''],
-        reportingManager:[''],
-        separationOfDate: [''],
-        location:[''],
+        department: ['', [Validators.required]],
+        designation:['', [Validators.required]],
+        // role:[''],
+        role:['Enter role', Validators.required],
+        // employmentType:[''],
+        employmentType: ['Enter type', Validators.required],
+        employeeStatus:['Enter status', Validators.required],
+        sourceHiring:['', [Validators.required]],
+        dateOfJoining:['', [Validators.required]],
+        currentExp:['', [Validators.required]],
+        totalExp:['', [Validators.required]],
+        reportingManager:['', [Validators.required]],
+        separationOfDate: ['', [Validators.required]],
+        location:['', [Validators.required]],
         educationDetails: this.fb.array([]),
         workExperience: this.fb.array([]),
         contactDetails: this.fb.group({
           presentAddress: this.fb.group({
-            address1: [''],
-            address2: [''],
-            country: [''],
-            state: [''],
-            city: [''],
-            pincode: [''],
+            address1: ['', [Validators.required]],
+            address2: ['', [Validators.required]],
+            country: ['', [Validators.required]],
+            state: ['', [Validators.required]],
+            city: ['', [Validators.required]],
+            pincode: ['', [Validators.required]],
           }),
           permanentAddress: this.fb.group({
-            address1: [''],
-            address2: [''],
-            country: [''],
-            state: [''],
-            city: [''],
-            pincode: [''],
+            address1: ['', [Validators.required]],
+            address2: ['', [Validators.required]],
+            country: ['', [Validators.required]],
+            state: ['', [Validators.required]],
+            city: ['', [Validators.required]],
+            pincode: ['', [Validators.required]],
           }),
-          workingPhoneNumber: [''],
-          personalMobileNumber: [''],
-          personalEmailAddress: [''],
+          workingPhoneNumber: ['', [Validators.required,  Validators.pattern(/^\d{10}$/)]],
+          personalMobileNumber: ['', [Validators.required, Validators.pattern(/^\d{10}$/)]],
+          personalEmailAddress: ['', [Validators.required, Validators.email]],
           sameAsLocal:[false],
         }),
         personalDetails: this.fb.group({
-          dateOfBirth: [''],
-          expertise: [''],
-          age: [''],
-          gender: [''],
-          maritalStatus: [''],
-          aboutMe:['']
+          dateOfBirth: ['', [Validators.required]],
+          expertise: ['', [Validators.required]],
+          age: ['', [Validators.required,  Validators.pattern(/^[0-9]+$/)]],
+          gender: ['Enter gender', Validators.required],
+          maritalStatus: ['Enter marital', Validators.required],
+          aboutMe:['', [Validators.required]]
         }),
         systemFields: this.fb.group({
-          addedBy: [''],
-          modifiedBy: [''],
-          addedTime: [''],
-          modifiedTime: [''],
-          onBoardingStatus: ['']
+          addedBy: ['', [Validators.required]],
+          modifiedBy: ['', [Validators.required]],
+          addedTime: ['',[Validators.required]],
+          modifiedTime: ['', [Validators.required]],
+          onBoardingStatus: ['Enter onboading', [Validators.required]]
         }),
         identityInformation: this.fb.group({
           uan: [''],
-          panNumber: [''],
-          aadharNumber: ['']
+          panNumber: ['', [Validators.required, Validators.pattern(/^[A-Z]{5}[0-9]{4}[A-Z]{1}$/)]],
+          aadharNumber: ['', [Validators.required, Validators.pattern(/^\d{12}$/)]]
         }),
 
 
 
       });
 
-
       this.profileForm.get('email').valueChanges.subscribe((value) => {
-        this.checkEmailExists(value);
+        this.checkEmailValidity(value);
       });
+
+
+      // this.profileForm.get('email').valueChanges.subscribe((value) => {
+      //   this.checkEmailExists(value);
+      // });
+
 
       this.educationDetails = (this.profileForm.get('educationDetails') as FormArray).controls as FormGroup[];
       this.workExperience = (this.profileForm.get('workExperience') as FormArray).controls as FormGroup[];
@@ -168,11 +178,18 @@ export class AddProfileComponent {
       console.log(this.workExperience);
     }
 
-    checkEmailExists(email: string) {
-      if (this.emailList.includes(email)) {
-        this.toastr.showError('Email already exists', 'Error');
-      }
-    }
+
+    // checkEmailExists(email: string) {
+    //   if (this.emailList.includes(email)) {
+    //     this.toastr.showError('Email already exists', 'Error');
+    //   }
+    // }
+    // checkEmailExists(): void {
+    //   const enteredEmail = this.emailControl.value;
+    //   if (this.emailList.includes(enteredEmail)) {
+    //     this.toastr.showError('Email already exists', 'Error');
+    //   }
+    // }
 
     getAllProfile() {
       this.leaveservice.getProfileList().pipe(
@@ -185,13 +202,20 @@ export class AddProfileComponent {
     }
 
 
+    checkEmailValidity(enteredEmail: string): void {
+      if (this.emailList.includes(enteredEmail)) {
+        this.toastr.showError('Email already exists!', 'Error');
+      }
+    }
+
+
   createEducationRow(): FormGroup {
     return this.fb.group({
       sno: [this.serialNumberJob++],
       instituteName: [''],
       degree: [''],
       specialization: [''],
-      dateOfCompletion: [''],
+      toDate: [''],
       // _id:[''],
       editMode: [true]
     });
@@ -482,22 +506,9 @@ export class AddProfileComponent {
           modifiedTime: this.profileForm.get('systemFields.modifiedTime').value,
           onBoardingStatus: this.profileForm.get('systemFields.onBoardingStatus').value,
         },
-    //     workExperience:
-    //     {
-    //     companyName: this.workExperience[0].controls['companyName'].value,
-    //     jobTitle: this.workExperience[0].controls['jobTitle'].value,
-    //     toDate: this.workExperience[0].controls['toDate'].value,
-    //     jobDescription: this.workExperience[0].controls['jobDescription'].value,
-    //     releventExp: this.workExperience[0].controls['releventExp'].value,
-    //   },
-    //   educationDetails:
-    //   {
-    //     instituteName: this.educationDetails[0].controls['instituteName'].value,
-    //     degree: this.educationDetails[0].controls['degree'].value,
-    //     specialization: this.educationDetails[0].controls['specialization'].value,
-    //     toDate: this.educationDetails[0].controls['toDate'].value,
-    //     dateOfCompletion: this.educationDetails[0].controls['dateOfCompletion'].value,
-    // }
+        workExperience: this.workExperiencePayload(),
+        educationDetails: this.educationExperiencePayload() ,
+
       }
 
       this.submitDetails(this.payload);
@@ -522,7 +533,33 @@ export class AddProfileComponent {
       this.markAllFormControlsAsTouched();
     }
   }
-  workExperienceValues:any
+  workExperiencePayload() {
+    this.workExperience.map((item) => {
+      this.workExpPayload.push({
+        companyName: item.controls['companyName'].value,
+        jobTitle: item.controls['jobTitle'].value,
+        toDate: item.controls['toDate'].value,
+        fromDate: item.controls['fromDate'].value,
+        jobDescription: item.controls['jobDescription'].value,
+        releventExp: item.controls['releventExp'].value,
+      });
+    });
+    return this.workExpPayload;
+  }
+
+  educationExperiencePayload() {
+    this.educationDetails.map((item) => {
+      this.eduExpPayload.push({
+        instituteName: item.controls['instituteName'].value,
+        degree: item.controls['degree'].value,
+        specialization: item.controls['specialization'].value,
+        toDate: item.controls['toDate'].value,
+
+      });
+    });
+    return this.eduExpPayload;
+  }
+
 
   markAllFormControlsAsTouched() {
     const formControls = this.profileForm.controls;

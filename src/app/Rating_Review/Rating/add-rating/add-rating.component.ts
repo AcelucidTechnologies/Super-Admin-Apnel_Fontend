@@ -49,10 +49,10 @@ export class AddRatingComponent implements OnInit {
       pros: [''],
       cons: [''],
       ratings: this.fb.array([
-
       ]
       ),
-      userType: ['', [Validators.required]],
+      // userType: ['', [Validators.required]],
+      userType: ['Select User Type', Validators.required],
       status: ['', [Validators.required]],
     });
   //  this.addCheckboxes();

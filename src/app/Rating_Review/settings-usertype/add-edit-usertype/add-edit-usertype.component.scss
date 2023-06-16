@@ -26,3 +26,11 @@
 ::ng-deep.back-button:hover {
   background-color: lightcoral !important;
 }
+::ng-deep.p-dropdown .p-dropdown-label.p-placeholder {
+  color: black !important;
+}
+
+.custom-placeholder::placeholder {
+  color: black;
+
+}

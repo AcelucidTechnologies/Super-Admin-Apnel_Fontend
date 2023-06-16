@@ -211,7 +211,7 @@
                 <input
                   type="text"
                   class="form-control"
-                  formControlName="pros"
+                  formControlName="pros" style="color: black;"
                 />
               </div>
             </div>
@@ -225,7 +225,7 @@
                 <input
                   type="text"
                   class="form-control"
-                  formControlName="cons"
+                  formControlName="cons"  style="color: black;"
                 />
               </div>
             </div>
@@ -280,7 +280,7 @@
                   "
                   formControlName="userType"
                 >
-                  <option>Select</option>
+                  <option value="select">Select</option>
                   <option *ngFor="let userType of usertypeSettingData">
                     {{ userType.userType }}
                   </option>

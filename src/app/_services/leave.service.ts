@@ -85,20 +85,23 @@ addProfile(payload: any): Observable<any[]> {
     formData.append('systemFields[onBoardingStatus]', payload.systemFields.onBoardingStatus);
     formData.append('systemFields[addedBy]', payload.systemFields.addedBy);
 
-    // formData.append('workExperience[companyName]', payload.workExperience.companyName);
-    // formData.append('workExperience[jobTitle]', payload.workExperience.jobTitle);
-    // formData.append('workExperience[toDate]', payload.workExperience.toDate);
-    // formData.append('workExperience[jobDescription]', payload.workExperience.jobDescription);
-    // formData.append('workExperience[releventExp]', payload.workExperience.releventExp);
+    payload?.workExperience.map((item,index)=>{
+      formData.append(`workExperience[${index}][companyName]`, item.companyName);
+      formData.append(`workExperience[${index}][jobTitle]`, item.jobTitle);
+      formData.append(`workExperience[${index}][fromDate]`, item.fromDate);
+      formData.append(`workExperience[${index}][toDate]`, item.toDate);
+      formData.append(`workExperience[${index}][jobDescription]`, item.jobDescription);
+      formData.append(`workExperience[${index}][releventExp]`, item.releventExp);
+    })
 
 
-    // formData.append('educationDetails[instituteName]', payload.educationDetails.instituteName);
-    // formData.append('educationDetails[degree]', payload.educationDetails.degree);
-    // formData.append('educationDetails[specialization]', payload.educationDetails.specialization);
-    // formData.append('educationDetails[toDate]', payload.educationDetails.toDate);
-    // formData.append('educationDetails[dateOfCompletion]', payload.educationDetails.dateOfCompletion);
+    payload?.educationDetails.map((item,index)=>{
+      formData.append(`educationDetails[${index}][instituteName]`, item.instituteName);
+      formData.append(`educationDetails[${index}][degree]`, item.degree);
+      formData.append(`educationDetails[${index}][specialization]`, item.specialization);
+      formData.append(`educationDetails[${index}][toDate]`, item.toDate);
 
-
+    })
 
 
     console.log("add profile" + formData)
@@ -167,17 +170,38 @@ editProfile(payload: any, id: number) {
     formData.append('systemFields[onBoardingStatus]', payload.systemFields.onBoardingStatus);
     formData.append('systemFields[addedBy]', payload.systemFields.addedBy);
 
-     formData.append('workExperience[companyName]', payload.workExperience.companyName);
-    formData.append('workExperience[jobTitle]', payload.workExperience.jobTitle);
-    formData.append('workExperience[toDate]', payload.workExperience.toDate);
-    formData.append('workExperience[jobDescription]', payload.workExperience.jobDescription);
-    formData.append('workExperience[releventExp]', payload.workExperience.releventExp);
+    payload?.workExperience.map((item,index)=>{
+      formData.append(`workExperience[${index}][companyName]`, item.companyName);
+      formData.append(`workExperience[${index}][jobTitle]`, item.jobTitle);
+      formData.append(`workExperience[${index}][fromDate]`, item.fromDate);
+      formData.append(`workExperience[${index}][toDate]`, item.toDate);
+      formData.append(`workExperience[${index}][jobDescription]`, item.jobDescription);
+      formData.append(`workExperience[${index}][releventExp]`, item.releventExp);
+    })
 
-    formData.append('educationDetails[instituteName]', payload.educationDetails.instituteName);
-    formData.append('educationDetails[degree]', payload.educationDetails.degree);
-    formData.append('educationDetails[specialization]', payload.educationDetails.specialization);
-    formData.append('educationDetails[toDate]', payload.educationDetails.toDate);
-    formData.append('educationDetails[dateOfCompletion]', payload.educationDetails.dateOfCompletion);
+
+    payload?.educationDetails.map((item,index)=>{
+      formData.append(`educationDetails[${index}][instituteName]`, item.instituteName);
+      formData.append(`educationDetails[${index}][degree]`, item.degree);
+      formData.append(`educationDetails[${index}][specialization]`, item.specialization);
+      formData.append(`educationDetails[${index}][toDate]`, item.toDate);
+
+    })
+
+    // payload?.workExperience.map((item)=>{
+    //   formData.append('workExperience[companyName]', item.companyName);
+    //   formData.append('workExperience[jobTitle]', item.jobTitle);
+    //   formData.append('workExperience[fromDate]', item.fromDate);
+    //   formData.append('workExperience[toDate]', item.toDate);
+    //   formData.append('workExperience[jobDescription]', item.jobDescription);
+    //   formData.append('workExperience[releventExp]', item.releventExp);
+    // })
+
+    // formData.append('educationDetails[instituteName]', payload.educationDetails.instituteName);
+    // formData.append('educationDetails[degree]', payload.educationDetails.degree);
+    // formData.append('educationDetails[specialization]', payload.educationDetails.specialization);
+    // formData.append('educationDetails[toDate]', payload.educationDetails.toDate);
+    // formData.append('educationDetails[dateOfCompletion]', payload.educationDetails.dateOfCompletion);
 
   return this.http.put<any>(endpointUrl,formData, { 'headers': httpOptions });
 }

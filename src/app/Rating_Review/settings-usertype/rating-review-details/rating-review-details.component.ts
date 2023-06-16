@@ -28,6 +28,7 @@ export class RatingReviewDetailsComponent implements OnInit {
   averageRating: any;
   totalNoRating: number;
   ratingandReview: any[] = [];
+  ratingandReviewRes:any[]=[]
   filteredData: any;
   roundedRating: number
 
@@ -40,7 +41,7 @@ export class RatingReviewDetailsComponent implements OnInit {
 
   ngOnInit(): void {
     this.getAllRatingDetails();
-    this.getRatingDetails();
+    // this.getRatingDetails();
     this.getRatingandReviewData();
     this.type = [
       'All Ratings',
@@ -54,7 +55,10 @@ export class RatingReviewDetailsComponent implements OnInit {
 
   getAllRatingDetails() {
     this.ratingService.getAllRatingDetails().subscribe((res) => {
-      this.allRatingData = res;
+      this.allRatingData = res.filter(review => review.status === 'Approved');
+
+      console.log("1245" + JSON.stringify(this.allRatingData))
+
       this.ratingLength = this.allRatingData.length;
       this.averageRating = this.allRatingData.map((review) =>
         parseFloat(review.AverageRating)
@@ -76,18 +80,19 @@ export class RatingReviewDetailsComponent implements OnInit {
     });
   }
 
-  getRatingDetails() {
-    this.ratingService.getRatingList().subscribe((res) => {
-      this.ratingData = res;
-      console.log(
-        'length of an array in rating detail' + this.ratingData.length
-      );
-      console.log(
-        'rating details for user type' +
-          JSON.stringify(this.ratingData[0].createdAt)
-      );
-    });
-  }
+  // getRatingDetails() {
+  //   this.ratingService.getRatingList().subscribe((res) => {
+  //     this.ratingData = res;
+  //     console.log("get rating details 1000000===>"+ res)
+  //     console.log(
+  //       'length of an array in rating detail' + res
+  //     );
+  //     console.log(
+  //       'rating details for user type' +
+  //         JSON.stringify(this.ratingData[0].createdAt)
+  //     );
+  //   });
+  // }
   selectedOverallRating: string = 'All Ratings';
   getFilteredData() {
     if (this.selectedOverallRating !== 'All Ratings') {
@@ -101,7 +106,8 @@ export class RatingReviewDetailsComponent implements OnInit {
 
   getRatingandReviewData() {
     this.ratingService.getRatingandReviewList().subscribe((res) => {
-      this.ratingandReview = res;
+      this.ratingandReviewRes = res.filter(review => review.status === 'Approved');
+      this.ratingandReview =this.ratingandReviewRes.filter(review => review.status === 'Approved')
 
       let totalRatingsExcellent = 0;
       let totalRatingsGood = 0;
@@ -137,6 +143,8 @@ export class RatingReviewDetailsComponent implements OnInit {
       // this.overallRating = this.averageRatingExcellent + this.averageRatingGood + this.averageRatingSatisfying +
       // this.averageRatingVeryPoor +  this.averageRatingVeryPoor / this.ratingLength
 
+
+      console.log("101" + JSON.stringify(this.ratingandReview))
       console.log('Average Rating (Excellent): ', this.averageRatingExcellent);
       console.log('Average Rating (Good): ', this.averageRatingGood);
       console.log(

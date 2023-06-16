@@ -11,6 +11,8 @@ import { access } from 'src/app/_models/modulepermission';
 import { ModulePermissionService } from 'src/app/_services/module-permission.service';
 import { ToastrMsgService } from 'src/app/_services/toastr-msg.service';
 import { NgxUiLoaderService } from 'ngx-ui-loader';
+import * as XLSX from 'xlsx';
+import { DatePipe } from '@angular/common';
 
 @Component({
   selector: 'app-reviewer',
@@ -72,39 +74,51 @@ export class ReviewerComponent implements OnInit {
       }
     });
   }
-  exportExcel() {
-    const worksheet = xlsxPackage.utils.json_to_sheet(this.reviewerData);
-    const workbook = { Sheets: { data: worksheet }, SheetNames: ['data'] };
-    const excelBuffer: any = xlsxPackage.write(workbook, {
-      bookType: 'xlsx',
-      type: 'array',
-    });
-    this.saveAsExcelFile(excelBuffer, 'reviewers');
+
+
+  exportExcel(): void {
+    const datePipe = new DatePipe('en-US');
+
+    // Prepare the data for export
+    const data = this.reviewerData.map((item, index) => ({
+      'S.No.': index+1,
+      'Name': item.name,
+      'Email': item.email,
+      'Rating Count': item.ratingCount,
+      Date: datePipe.transform(item.firstRating, 'MM/dd/yyyy'),
+    }));
+
+    // Create a new workbook and worksheet
+    const workbook = XLSX.utils.book_new();
+    const worksheet = XLSX.utils.json_to_sheet(data);
+
+    // Add the worksheet to the workbook
+    XLSX.utils.book_append_sheet(workbook, worksheet, 'Sheet1');
+
+    // Generate a Blob from the workbook
+    const workbookBlob = this.workbookToBlob(workbook);
+
+    // Create a download link
+    const url = URL.createObjectURL(workbookBlob);
+    const link = document.createElement('a');
+    link.href = url;
+    link.download = 'table_data.xlsx';
+
+    // Simulate a click on the link to start the download
+    link.click();
+
+    // Clean up
+    URL.revokeObjectURL(url);
   }
 
-  saveAsExcelFile(buffer: any, fileName: string): void {
-    let EXCEL_TYPE =
-      'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;charset=UTF-8';
-    let EXCEL_EXTENSION = '.xlsx';
-    const data: Blob = new Blob([buffer], {
-      type: EXCEL_TYPE,
-    });
-    FileSaver.saveAs(
-      data,
-      fileName + '_export_' + new Date().getTime() + EXCEL_EXTENSION
-    );
+  // Helper function to convert a workbook to Blob
+  private workbookToBlob(workbook: XLSX.WorkBook): Blob {
+    const wbout = XLSX.write(workbook, { bookType: 'xlsx', type: 'array' });
+    const blob = new Blob([wbout], { type: 'application/octet-stream' });
+    return blob;
   }
 
-  // exportPdf() {
-  //   this.reviewerDetails = this.reviewerData;
-  //   console.log(this.reviewerDetails);
-  //   const doc = new jsPDF.jsPDF('l', 'pt');
-  //   autoTable(doc, {
-  //     columns: this.exportColumns,
-  //     body: this.reviewerDetails,
-  //   });
-  //   doc.save('reviewers.pdf');
-  // }
+
 
   exportPdf() {
     this.reviewerDetails = this.reviewerData.map((item, index) => {
@@ -112,14 +126,20 @@ export class ReviewerComponent implements OnInit {
     });
 
     const doc = new jsPDF.jsPDF('l', 'pt');
-    const data = this.reviewerDetails;
+    // const data = this.reviewerDetails;
+    const data = this.reviewerDetails.map(item => {
+      return {
+        ...item,
+        firstRating: this.formatDate(item.firstRating) // Format the createdAt date
+      };
+    });
     const exportColumns = [
       { title: 'S No.', dataKey: 'sno' },
       { title: 'Name', dataKey: 'name' },
       { title: 'Email ', dataKey: 'email' },
       { title: 'Rating Count', dataKey: 'ratingCount' },
-      { title: 'First Rating', dataKey: 'firstRating' },
-      { title: 'Status', dataKey: 'status' },
+      { title: 'Date', dataKey: 'firstRating' },
+
     ];
 
     autoTable(doc, {
@@ -129,6 +149,16 @@ export class ReviewerComponent implements OnInit {
 
     doc.save('Reviewer List.pdf');
   }
+
+  formatDate(dateString) {
+    const date = new Date(dateString);
+    const day = String(date.getDate()).padStart(2, '0');
+    const month = String(date.getMonth() + 1).padStart(2, '0');
+    const year = date.getFullYear();
+
+    return `${day}/${month}/${year}`;
+  }
+
 
   onToggleSidebar(sidebarState: any) {
     if (sidebarState === 'open') {

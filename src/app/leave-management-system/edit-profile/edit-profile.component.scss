@@ -37,3 +37,11 @@ td,th{
   color: black !important;
   text-align: center;
 }
+label.starlabel::after{
+  content: "*";
+  color: rgb(228, 28, 28);
+}
+.custom-placeholder::placeholder {
+  color: black;
+
+}
