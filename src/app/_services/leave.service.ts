@@ -188,20 +188,6 @@ editProfile(payload: any, id: number) {
 
     })
 
-    // payload?.workExperience.map((item)=>{
-    //   formData.append('workExperience[companyName]', item.companyName);
-    //   formData.append('workExperience[jobTitle]', item.jobTitle);
-    //   formData.append('workExperience[fromDate]', item.fromDate);
-    //   formData.append('workExperience[toDate]', item.toDate);
-    //   formData.append('workExperience[jobDescription]', item.jobDescription);
-    //   formData.append('workExperience[releventExp]', item.releventExp);
-    // })
-
-    // formData.append('educationDetails[instituteName]', payload.educationDetails.instituteName);
-    // formData.append('educationDetails[degree]', payload.educationDetails.degree);
-    // formData.append('educationDetails[specialization]', payload.educationDetails.specialization);
-    // formData.append('educationDetails[toDate]', payload.educationDetails.toDate);
-    // formData.append('educationDetails[dateOfCompletion]', payload.educationDetails.dateOfCompletion);
 
   return this.http.put<any>(endpointUrl,formData, { 'headers': httpOptions });
 }

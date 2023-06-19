@@ -61,23 +61,19 @@ export class EditProfileComponent {
   soruceHiringdrop: any;
   reportManager: any;
   locationList: any;
-  // id:string = '64805765fb6510393c2e8373';
+
 
   profileForm: FormGroup;
+  roledrop: { state: string }[];
+  employeedrop: { state: string }[];
+  employeestatus: { state: string }[];
+  genderType: { state: string }[];
+  maritalStatusType: { state: string }[];
+  onBoardingType: { state: string }[];
 
-  // genderOptions: string[]=['Male', 'Female']
-  roleOptions: string[] = ['Employee', 'Admin', 'user'];
-  maritalOptions: string[] = [
-    'Single',
-    'Married',
-    'Divorced',
-    'Separated',
-    'Widowed',
-  ];
-  statusOptions: string[] = ['Active', 'InActive'];
-  employmentStatus: string[] = ['Active', 'InActive'];
+
   selectedImage: string;
-  // employmentType: string[] = ['Full Time', 'Part Time', 'Contract', 'Internship'];
+
 
   constructor(
     private fb: FormBuilder,
@@ -90,6 +86,36 @@ export class EditProfileComponent {
 
     private ngxLoader: NgxUiLoaderService
   ) {
+    this.roledrop = [
+      { state: 'Employee' },
+      { state: 'Admin' }
+    ];
+    this.employeedrop = [
+      { state: 'Full Time' },
+      { state: 'Part Time' },
+      { state: 'Contract' },
+      { state: 'Internship' }
+    ];
+    this.employeestatus = [
+      { state: 'Active' },
+      { state: 'InActive' },
+    ];
+    this.genderType = [
+      { state: 'Male' },
+      { state: 'Female' },
+    ];
+    this.maritalStatusType = [
+      { state: 'single' },
+      { state: 'Married' },
+      { state: 'Divorced' },
+      { state: 'Separated' },
+      { state: 'Widowed' }
+    ];
+    this.onBoardingType = [
+      { state: 'Active' },
+      { state: 'InActive' },
+    ];
+
     this.fileHolder = null;
     this.isChecked = false;
 
@@ -101,61 +127,61 @@ export class EditProfileComponent {
       email: ['', [Validators.required, Validators.email]],
       image: [''],
       department: ['', [Validators.required]],
-      designation: ['', [Validators.required]],
+      userdesignation: ['select', [Validators.required]],
       role: ['', [Validators.required]],
       employmentType: ['', [Validators.required]],
       employeeStatus: ['', [Validators.required]],
-      sourceHiring: ['', [Validators.required]],
+      usersourceHiring: ['', [Validators.required]],
       dateOfJoining: ['', [Validators.required]],
       currentExp: ['', [Validators.required]],
       totalExp: ['', [Validators.required]],
-      reportingManager: ['',[Validators.required]],
+      userreportingManager: ['',[Validators.required]],
       separationOfDate: ['', [Validators.required]],
-      location: ['', [Validators.required]],
+      userlocation: ['', [Validators.required]],
       educationDetails: this.fb.array([]),
       workExperience: this.fb.array([]),
 
       contactDetails: this.fb.group({
         presentAddress: this.fb.group({
-          address1: [''],
-          address2: [''],
-          country: [''],
-          state: [''],
-          city: [''],
-          pincode: [''],
+          address1: ['', [Validators.required]],
+          address2: ['', [Validators.required]],
+          country: ['', [Validators.required]],
+          state: ['', [Validators.required]],
+          city: ['', [Validators.required]],
+          pincode: ['', [Validators.required]],
         }),
         permanentAddress: this.fb.group({
-          address1: [''],
-          address2: [''],
-          country: [''],
-          state: [''],
-          city: [''],
-          pincode: [''],
+          address1: ['', [Validators.required]],
+          address2: ['', [Validators.required]],
+          country: ['', [Validators.required]],
+          state: ['', [Validators.required]],
+          city: ['', [Validators.required]],
+          pincode: ['', [Validators.required]],
         }),
-        workingPhoneNumber: [''],
-        personalMobileNumber: [''],
-        personalEmailAddress: [''],
+        workingPhoneNumber: ['', [Validators.required, Validators.pattern(/^\d{10}$/)]],
+        personalMobileNumber: ['', [Validators.required, Validators.pattern(/^\d{10}$/)]],
+        personalEmailAddress: ['', [Validators.required, Validators.email]],
         sameAsLocal: [''],
       }),
       systemFields: this.fb.group({
-        addedBy: [''],
-        modifiedBy: [''],
-        addedTime: [''],
-        modifiedTime: [''],
-        onBoardingStatus: [''],
+        addedBy: ['', [Validators.required]],
+        modifiedBy: ['', [Validators.required]],
+        addedTime: ['', [Validators.required]],
+        modifiedTime: ['', [Validators.required]],
+        onBoardingStatus: ['', [Validators.required]],
       }),
       identityInformation: this.fb.group({
         uan: [''],
-        panNumber: [''],
-        aadharNumber: [''],
+        panNumber: ['', [Validators.required, Validators.pattern(/^[A-Z]{5}[0-9]{4}[A-Z]{1}$/)]],
+        aadharNumber: ['', [Validators.required , Validators.pattern(/^\d{12}$/)]],
       }),
       personalDetails: this.fb.group({
-        dateOfBirth: [''],
-        expertise: [''],
-        age: [''],
-        gender: [''],
-        maritalStatus: [''],
-        aboutMe: [''],
+        dateOfBirth: ['', [Validators.required]],
+        expertise: ['', [Validators.required]],
+        age: ['', [Validators.required]],
+        gender: ['', [Validators.required]],
+        maritalStatus: ['', [Validators.required]],
+        aboutMe: ['', [Validators.required]],
       }),
     });
 
@@ -176,8 +202,7 @@ export class EditProfileComponent {
       instituteName: [''],
       degree: [''],
       specialization: [''],
-      toDate: [''],
-      // _id: [''],
+      toDate: ['' ],
       editMode: [true],
     });
   }
@@ -355,7 +380,7 @@ export class EditProfileComponent {
   getLeaveById() {
     this.leaveservice.getLeaveProfileById(this.id).subscribe((res) => {
       this.laevebyid = res;
-      console.log('response leavybu id', res.workExperience.companyName);
+      console.log('response leavybu id', res);
       if (res.image) {
         this.Image = res.image;
         this.prevImageName = this.Image.toString().split('.com/profile/')[1];
@@ -378,15 +403,16 @@ export class EditProfileComponent {
 
         // image:this.prevImageName,
         department: res.department,
-        designation: res.designation,
+        userdesignation: res.designation,
         role: res.role,
         employmentType: res.employmentType,
         employeeStatus: res.employeeStatus,
-        sourceHiring: res.sourceHiring,
+        usersourceHiring: res.sourceHiring,
+        userlocation: res.location,
         dateOfJoining: dateOfJoining,
         currentExp: res.currentExp,
         totalExp: res.totalExp,
-        reportingManager: res.reportingManager,
+        userreportingManager: res.reportingManager,
         personalDetails: {
           dateOfBirth: this.convertDateFormat(res.personalDetails.dateOfBirth),
           expertise: res.personalDetails.expertise,
@@ -409,7 +435,7 @@ export class EditProfileComponent {
             address1: res.contactDetails.permanentAddress.address1,
             address2: res.contactDetails.permanentAddress.address2,
             country: res.contactDetails.permanentAddress.country,
-            state: res.contactDetails.permanentAddress.state,
+            state: res.contactDetails.permanentAddress.State,
             city: res.contactDetails.permanentAddress.city,
             pincode: res.contactDetails.permanentAddress.pincode,
           },
@@ -526,17 +552,17 @@ export class EditProfileComponent {
         FirstName: this.profileForm.controls['FirstName'].value,
         lastName: this.profileForm.controls['lastName'].value,
         department: this.profileForm.controls['department'].value,
-        designation: this.profileForm.controls['designation'].value,
+        userdesignation: this.profileForm.controls['userdesignation'].value,
         email: this.profileForm.controls['email'].value,
         role: this.profileForm.controls['role'].value,
-        location: this.profileForm.controls['location'].value,
+        location: this.profileForm.controls['userlocation'].value,
         employmentType: this.profileForm.controls['employmentType'].value,
         employeeStatus: this.profileForm.controls['employeeStatus'].value,
-        sourceHiring: this.profileForm.controls['sourceHiring'].value,
+        sourceHiring: this.profileForm.controls['usersourceHiring'].value,
         dateOfJoining: this.profileForm.controls['dateOfJoining'].value,
         currentExp: this.profileForm.controls['currentExp'].value,
         totalExp: this.profileForm.controls['totalExp'].value,
-        reportingManager: this.profileForm.controls['reportingManager'].value,
+        reportingManager: this.profileForm.controls['userreportingManager'].value,
         personalDetails: {
           dateOfBirth: this.profileForm.get('personalDetails.dateOfBirth')
             .value,

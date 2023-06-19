@@ -1,5 +1,5 @@
 <div class="button-heading-container">
-  <button class="mb-2 p-1 back-button" [routerLink]="['/leaveMgmt/profile-list']">
+  <button class=" p-1 back-button" [routerLink]="['/leaveMgmt/profile-list']">
     <i class="material-icons">arrow_back</i>
   </button>
   <h5>Edit Profile</h5>
@@ -8,7 +8,7 @@
 
 
 
-  <div class="col-12 mt-3">
+  <div class="col-12 mt-3 p-0">
     <div class="card" >
       <div class="card m-3" style="border: 1px solid lightgrey;" >
         <div>
@@ -18,13 +18,41 @@
 
           <div class="row" style="display: flex;">
             <div class="col-4 info-name"><label class="starlabel">Employee ID</label></div>
-            <div class="col-8"><input class="form-control" id="inputdefault" type="text" formControlName="employeeId"></div>
+            <div class="col-8"><input class="form-control input-font" id="inputdefault" type="text" formControlName="employeeId" readonly>
+
+          </div>
           </div>
         </div>
         <div class="col-6">
           <div class="row" style="display: flex;">
             <div class="col-4"><label class="starlabel">Employee Full Name</label></div>
-            <div class="col-8"><input type="text" class="form-control" id="inputdefault" formControlName="employeeFullName"></div>
+            <div class="col-8"><input type="text" class="form-control input-font" id="inputdefault" formControlName="employeeFullName">
+              <div *ngIf="
+              !profileForm.controls['employeeFullName'].valid || profileForm.controls['employeeFullName'].dirty">
+              <div [hidden]="
+                !profileForm.controls['employeeFullName'].errors[
+                  'required'
+                ]
+              " style="
+                color: rgb(253, 122, 122);
+                font-size: small;
+                font-style: italic;
+              ">
+               full name is required
+              </div>
+              <div *ngIf="
+              profileForm.controls['employeeFullName'].errors[
+                  'pattern'
+                ]
+              " style="
+                color: rgb(253, 122, 122);
+                font-size: small;
+                font-style: italic;
+              ">
+                Employee full name should be of Alphabet only
+              </div>
+            </div>
+            </div>
           </div>
         </div>
       </div>
@@ -32,13 +60,69 @@
         <div class="col-6">
           <div class="row" style="display: flex;">
             <div class="col-4"><label class="starlabel">First Name</label></div>
-            <div class="col-8"><input type="text" class="form-control" id="inputdefault" formControlName="FirstName" ></div>
+            <div class="col-8"><input type="text" class="form-control input-font" id="inputdefault" formControlName="FirstName" >
+              <div *ngIf="
+              !profileForm.controls['FirstName'].valid  ||
+              profileForm.controls['FirstName'].dirty
+            ">
+              <div [hidden]="
+                !profileForm.controls['FirstName'].errors[
+                  'required'
+                ]
+              " style="
+                color: rgb(253, 122, 122);
+                font-size: small;
+                font-style: italic;
+              ">
+               first name is required
+              </div>
+              <div *ngIf="
+              profileForm.controls['FirstName'].errors[
+                  'pattern'
+                ]
+              " style="
+                color: rgb(253, 122, 122);
+                font-size: small;
+                font-style: italic;
+              ">
+                first name should be of Alphabet only
+              </div>
+            </div>
+          </div>
           </div>
         </div>
         <div class="col-6">
           <div class="row" style="display: flex;">
             <div class="col-4"><label class="starlabel">Last Name</label></div>
-            <div class="col-8"><input type="text" class="form-control" id="inputdefault" formControlName="lastName"></div>
+            <div class="col-8"><input type="text" class="form-control input-font" id="inputdefault" formControlName="lastName">
+              <div *ngIf="
+              !profileForm.controls['lastName'].valid ||
+              profileForm.controls['lastName'].dirty
+            ">
+              <div [hidden]="
+                !profileForm.controls['lastName'].errors[
+                  'required'
+                ]
+              " style="
+                color: rgb(253, 122, 122);
+                font-size: small;
+                font-style: italic;
+              ">
+              last name is required
+              </div>
+              <div *ngIf="
+              profileForm.controls['lastName'].errors[
+                  'pattern'
+                ]
+              " style="
+                color: rgb(253, 122, 122);
+                font-size: small;
+                font-style: italic;
+              ">
+                last name should be of Alphabet only
+              </div>
+            </div>
+          </div>
           </div>
         </div>
       </div>
@@ -47,21 +131,51 @@
           <div class="row" style="display: flex;">
             <div class="col-4"><label class="starlabel">Email</label></div>
             <div class="col-8">
-              <input type="text" class="form-control" id="inputdefault"  formControlName="email"></div>
+              <input type="text" class="form-control input-font" id="inputdefault"  formControlName="email">
+              <div
+              *ngIf="
+                !profileForm.controls['email'].valid ||
+                  profileForm.controls['email'].dirty
+              "
+            >
+              <div
+                [hidden]="
+                  !profileForm.controls['email'].errors['required']
+                "
+                style="
+                  color: rgb(253, 122, 122);
+                  font-size: small;
+                  font-style: italic;
+                "
+              >
+                email is required
+              </div>
+              <div
+                *ngIf="profileForm.controls['email'].errors['email']"
+                style="
+                  color: rgb(253, 122, 122);
+                  font-size: small;
+                  font-style: italic;
+                "
+              >
+                Please enter valid email
+              </div>
+            </div>
+          </div>
           </div>
         </div>
         <div class="col-6">
           <div class="row" style="display: flex;">
-            <div class="col-4">Profile Image</div>
+            <div class="col-4">Choose New Profile</div>
             <!-- <div style="display: flex; align-items: center;"> -->
-            <div class="col-5"  >
-              <input type="file" class="form-control "   id="inputdefault" formControlName="image"  (change)="fileChangeEvent($event)">
+            <div class="col-8"  >
+              <input type="file" class="form-control  input-font"   id="inputdefault" formControlName="image"  (change)="fileChangeEvent($event)">
             </div>
-            <div class="col-3">
+            <!-- <div class="col-3"> -->
               <!-- <img class="user-name-img" [src]="laevebyid.image  ||  Image" width="40" height="40" style="margin-top: 4px;"> -->
-              <img class="user-name-img" [src]="laevebyid.image" width="40" height="40" style="margin-top: 4px;">
+              <!-- <img class="user-name-img" [src]="laevebyid.image" width="40" height="40" style="margin-top: 4px;"> -->
             <!-- </div> -->
-          </div>
+          <!-- </div> -->
           </div>
         </div>
       </div>
@@ -79,13 +193,15 @@
                 <select style="width: 100%; border: 1px solid lightgray; height: 38px; padding:5px"
                   class="form-group"
                   formControlName="department"
-
                 >
-                  <option>Enter Department</option>
-                  <option *ngFor="let count of departmentdrop">
-                    {{ count.department }}
-                  </option>
+                  <option value="">Enter department</option>
+                  <option *ngFor="let count of departmentdrop">{{ count.department }}</option>
                 </select>
+                <div *ngIf="!profileForm.controls['department'].valid && (profileForm.controls['department'].touched || profileForm.controls['department'].dirty || profileForm.controls['department'].value === '')">
+                  <div [hidden]="!profileForm.controls['department'].errors['required']" style="color: rgb(253, 122, 122); font-size: small; font-style: italic;">
+                    department is required
+                  </div>
+                </div>
               </div>
             </div>
             <div class="col-1" style="padding-left: 0px;"><button type="button" class="btn btn-danger"  (click)="openDialog()"><i class="pi pi-plus"></i></button></div>
@@ -97,28 +213,23 @@
           <div class="row" style="display: flex;">
             <div class="col-4">Designation</div>
             <div class="col-7" style="padding-right: 0px;">
-            <div>
-              <select style="width: 100%; border: 1px solid lightgray; height: 38px; padding:5px"
-                class="form-group"
-
-                formControlName="designation"
-              >
-                <option><label class="starlabel">Enter Designation</label></option>
-                <option *ngFor="let count of designationdrop">
-                  {{ count.designation }}
-                </option>
-              </select>
-              <!-- <select style="width: 100%; border: 1px solid lightgray; height: 38px; padding: 5px"
-        class="form-group"
-        formControlName="designation"
-        [formControl]="designationControl">
-  <option>Enter Designation</option>
-  <option *ngFor="let count of designationdrop">
-    {{ count.designation }}
-  </option>
-</select> -->
+              <div>
+                <select style="width: 100%; border: 1px solid lightgray; height: 38px; padding:5px"
+                  class="form-group"
+                  formControlName="userdesignation"
+                >
+                  <option value="select">Enter designation</option>
+                  <option *ngFor="let count of designationdrop">{{ count.designation }}</option>
+                </select>
+                <div *ngIf="!profileForm.controls['userdesignation'].valid && (profileForm.controls['userdesignation'].touched || profileForm.controls['userdesignation'].dirty || profileForm.controls['userdesignation'].value === '')">
+                  <div [hidden]="!profileForm.controls['userdesignation'].errors['required']" style="color: rgb(253, 122, 122); font-size: small; font-style: italic;">
+                    designation is required
+                  </div>
+                </div>
               </div>
             </div>
+
+
             <div class="col-1" style="padding-left: 0px;"><button type="button" class="btn btn-danger" (click)="openDialogDesignation()"><i class="pi pi-plus"></i></button></div>
           </div>
         </div>
@@ -126,21 +237,28 @@
       <div class="row text-input-field">
         <div class="col-6">
           <div class="row" style="display: flex;">
-            <div class="col-4 info-name"><label class="starlabel">Location</label></div>
-            <div class="col-7" style="padding-right: 0px;">
-            <div>
-              <select style="width: 100%; border: 1px solid lightgray; height: 38px; padding:5px"
-                class="form-group"
 
-                formControlName="location"
-              >
-                <option>Enter Location</option>
-                <option *ngFor="let count of locationList">
-                  {{ count.location }}
-                </option>
-              </select>
-              </div>
-              </div>
+
+<div class="col-4 info-name"><label class="starlabel">Location</label></div>
+<div class="col-7" style="padding-right: 0px;">
+  <div>
+    <select style="width: 100%; border: 1px solid lightgray; height: 38px; padding:5px"
+      class="form-group"
+      formControlName="userlocation"
+    >
+      <option value="">Enter Location</option>
+      <option *ngFor="let count of locationList">{{ count.location }}</option>
+    </select>
+    <div *ngIf="!profileForm.controls['userlocation'].valid && (profileForm.controls['userlocation'].touched || profileForm.controls['userlocation'].dirty || profileForm.controls['userlocation'].value === '')">
+      <div [hidden]="!profileForm.controls['userlocation'].errors['required']" style="color: rgb(253, 122, 122); font-size: small; font-style: italic;">
+        Location is required
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
             <div class="col-1" style="padding-left: 0px;"><button type="button" class="btn btn-danger" (click)="openDialogLocation()"><i class="pi pi-plus"></i></button></div>
           </div>
         </div>
@@ -150,16 +268,21 @@
             <div class="col-8">
               <select style="width: 100%; border: 1px solid lightgray; height: 38px; padding:5px"
               class="form-group"
-
               formControlName="role"
+
             >
-              <option>Enter Location</option>
-              <option>Employee</option>
-              <option>Admin</option>
-              <!-- <option>user</option> -->
+              <option>Enter role</option>
+              <option *ngFor="let count of roledrop">
+                {{ count.state }}
+              </option>
             </select>
               <!-- <p-dropdown [options]="roleOptions" id="ratingStatus" placeholder="Select"
               styleClass="status-dropdown" formControlName="role"></p-dropdown> -->
+              <div *ngIf="profileForm.get('role').invalid || profileForm.get('role').dirty">
+                <div *ngIf="profileForm.get('role').hasError('required')" style="color: rgb(253, 122, 122); font-size: small; font-style: italic;">
+                  Role is required
+                </div>
+              </div>
             </div>
           </div>
         </div>
@@ -169,20 +292,23 @@
           <div class="row" style="display: flex;">
             <div class="col-4 info-name"><label class="starlabel">Employement Type</label></div>
               <div class="col-8">
-                <select style="width: 100%; border: 1px solid lightgray; height: 38px; padding:5px"
-                class="form-group"
+                 <select style="width: 100%; border: 1px solid lightgray; height: 38px; padding:5px"
+            class="form-group"
+            formControlName="employmentType"
 
-                formControlName="employmentType"
-              >
-                <option>Enter Location</option>
-                <option>Full Time</option>
-                <option>Part Time</option>
-                <option>Contract</option>
-                <option>Internship</option>
-
-              </select>
+          >
+            <option>Enter Type</option>
+            <option *ngFor="let count of employeedrop">
+              {{ count.state }}
+            </option>
+          </select>
                 <!-- <p-dropdown [options]="employmentType" id="ratingStatus" placeholder="Select"
               styleClass="status-dropdown" formControlName="employmentType"></p-dropdown> -->
+            <div *ngIf="!profileForm.controls['employmentType'].valid && (profileForm.controls['employmentType'].touched || profileForm.controls['employmentType'].dirty || profileForm.controls['employmentType'].value === '')">
+              <div [hidden]="!profileForm.controls['employmentType'].errors['required']" style="color: rgb(253, 122, 122); font-size: small; font-style: italic;">
+                employmentType is required
+              </div>
+            </div>
               </div>
           </div>
         </div>
@@ -193,18 +319,24 @@
             <div class="col-4"><label class="starlabel">Employement Status</label></div>
             <div class="col-8">
               <select style="width: 100%; border: 1px solid lightgray; height: 38px; padding:5px"
-              class="form-group"
+            class="form-group"
+            formControlName="employeeStatus"
 
-              formControlName="employeeStatus"
-            >
-              <option>Enter Location</option>
-              <option>Active</option>
-              <option>InActive</option>
+          >
+            <option>Enter Status</option>
+            <option *ngFor="let count of employeestatus">
+              {{ count.state }}
+            </option>
+          </select>
 
-
-            </select>
               <!-- <p-dropdown [options]="employmentStatus" id="ratingStatus" placeholder="Select"
               styleClass="status-dropdown" formControlName="employeeStatus"></p-dropdown> -->
+
+            <div *ngIf="!profileForm.controls['employeeStatus'].valid && (profileForm.controls['employeeStatus'].touched || profileForm.controls['employeeStatus'].dirty || profileForm.controls['employeeStatus'].value === '')">
+              <div [hidden]="!profileForm.controls['employeeStatus'].errors['required']" style="color: rgb(253, 122, 122); font-size: small; font-style: italic;">
+                employeeStatus is required
+              </div>
+            </div>
             </div>
           </div>
         </div>
@@ -218,13 +350,35 @@
                 <select style="width: 100%; border: 1px solid lightgray; height: 38px; padding:5px"
                   class="form-group"
 
-                  formControlName="sourceHiring"
+                  formControlName="usersourceHiring"
                 >
                   <option>Enter source hiring</option>
                   <option *ngFor="let count of soruceHiringdrop">
                     {{ count.sourceHiring }}
                   </option>
                 </select>
+                <!-- <div *ngIf="
+                !profileForm.controls['sourceHiring'].valid ||
+                profileForm.controls['sourceHiring'].dirty
+              ">
+                <div [hidden]="
+                  !profileForm.controls['sourceHiring'].errors[
+                    'required'
+                  ]
+                " style="
+                  color: rgb(253, 122, 122);
+                  font-size: small;
+                  font-style: italic;
+                ">
+                 source Hiring is required
+                </div>
+
+              </div> -->
+              <div *ngIf="!profileForm.controls['usersourceHiring'].valid && (profileForm.controls['usersourceHiring'].touched || profileForm.controls['usersourceHiring'].dirty || profileForm.controls['usersourceHiring'].value === '')">
+                <div [hidden]="!profileForm.controls['usersourceHiring'].errors['required']" style="color: rgb(253, 122, 122); font-size: small; font-style: italic;">
+                  sourceHiring is required
+                </div>
+              </div>
                 </div>
                 </div>
             <div class="col-1" style="padding-left: 0px;"><button type="button" class="btn btn-danger"><i class="pi pi-plus" (click)="openDialogSourceHiring()"></i></button></div>
@@ -233,23 +387,102 @@
         <div class="col-6">
           <div class="row" style="display: flex;">
             <div class="col-4"><label class="starlabel">Date of Joining</label></div>
-            <div class="col-8"><input type="date" class="form-control" id="inputdefault" formControlName="dateOfJoining" ></div>
+            <div class="col-8"><input type="date" class="form-control input-font" id="inputdefault" formControlName="dateOfJoining" >
+              <div *ngIf="
+              !profileForm.controls['dateOfJoining'].valid  ||
+              profileForm.controls['dateOfJoining'].dirty
+            ">
+              <div [hidden]="
+                !profileForm.controls['dateOfJoining'].errors[
+                  'required'
+                ]
+              " style="
+                color: rgb(253, 122, 122);
+                font-size: small;
+                font-style: italic;
+              ">
+               date of joining is required
+              </div>
+
+            </div>
+          </div>
           </div>
         </div>
       </div>
       <div class="row text-input-field">
         <div class="col-6">
           <div class="row" style="display: flex;">
-            <div class="col-4 info-name"><label class="starlabel">Current Experience</label></div>
-            <div class="col-8"><input class="form-control" id="inputdefault" type="number" formControlName="currentExp"></div>
+            <div class="col-4"><label class="starlabel">Total Experience</label></div>
+            <div class="col-8"><input type="number" class="form-control input-font" id="inputdefault"  formControlName="totalExp">
+              <div
+              *ngIf="
+                !profileForm.controls['totalExp'].valid  ||
+                  profileForm.controls['totalExp'].dirty
+              "
+            >
+              <div
+                [hidden]="
+                  !profileForm.controls['totalExp'].errors['required']
+                "
+                style="
+                  color: rgb(253, 122, 122);
+                  font-size: small;
+                  font-style: italic;
+                "
+              >
+                totalExp is required
+              </div>
+              <div
+                *ngIf="profileForm.controls['totalExp'].errors['totalExp']"
+                style="
+                  color: rgb(253, 122, 122);
+                  font-size: small;
+                  font-style: italic;
+                "
+              >
+                Please enter valid totalExp
+              </div>
+            </div>
+          </div>
           </div>
         </div>
         <div class="col-6">
           <div class="row" style="display: flex;">
-            <div class="col-4"><label class="starlabel">Total Experience</label></div>
-            <div class="col-8"><input type="number" class="form-control" id="inputdefault"  formControlName="totalExp"></div>
+            <div class="col-4 info-name"><label class="starlabel">Current Experience</label></div>
+            <div class="col-8"><input class="form-control input-font" id="inputdefault" type="number" formControlName="currentExp">
+              <div
+              *ngIf="
+                !profileForm.controls['currentExp'].valid ||
+                  profileForm.controls['currentExp'].dirty
+              "
+            >
+              <div
+                [hidden]="
+                  !profileForm.controls['currentExp'].errors['required']
+                "
+                style="
+                  color: rgb(253, 122, 122);
+                  font-size: small;
+                  font-style: italic;
+                "
+              >
+                currentExp is required
+              </div>
+              <div
+                *ngIf="profileForm.controls['currentExp'].errors['currentExp']"
+                style="
+                  color: rgb(253, 122, 122);
+                  font-size: small;
+                  font-style: italic;
+                "
+              >
+                Please enter valid currentExp
+              </div>
+            </div>
+          </div>
           </div>
         </div>
+
       </div>
     </div>
      <!-- ############### reporting manager ############### -->
@@ -263,7 +496,7 @@
               <div>
                 <select style="width: 100%; border: 1px solid lightgray; height: 38px; padding:5px"
                   class="form-group"
-                   formControlName="reportingManager"
+                   formControlName="userreportingManager"
 
                 >
                   <option>Enter reporting manager</option>
@@ -271,6 +504,28 @@
                     {{ count.reporting }}
                   </option>
                 </select>
+                <!-- <div *ngIf="
+                !profileForm.controls['reportingManager'].valid  ||
+                profileForm.controls['reportingManager'].dirty
+              ">
+                <div [hidden]="
+                  !profileForm.controls['reportingManager'].errors[
+                    'required'
+                  ]
+                " style="
+                  color: rgb(253, 122, 122);
+                  font-size: small;
+                  font-style: italic;
+                ">
+                 reporting manager is required
+                </div>
+
+              </div> -->
+              <div *ngIf="!profileForm.controls['userreportingManager'].valid && (profileForm.controls['userreportingManager'].touched || profileForm.controls['userreportingManager'].dirty || profileForm.controls['userreportingManager'].value === '')">
+                <div [hidden]="!profileForm.controls['userreportingManager'].errors['required']" style="color: rgb(253, 122, 122); font-size: small; font-style: italic;">
+                  reporting manager is required
+                </div>
+              </div>
                 </div>
                 </div>
             <div class="col-1" style="padding-left: 0px;"><button type="button" class="btn btn-danger"><i class="pi pi-plus" (click)="openDialogReportingmanager()"></i></button></div>
@@ -288,15 +543,29 @@
           <div class="row" style="display: flex;">
             <div class="col-4 info-name"><label class="starlabel">Date of Birth</label></div>
             <div class="col-8">
-              <input type="date" class="form-control" placeholder="Select Birthday"
+              <input type="date" class="form-control input-font" placeholder="Select Birthday"
               id="startDate" name="startDate" formControlName="dateOfBirth">
+              <div *ngIf="profileForm.get('personalDetails.dateOfBirth').invalid  || profileForm.get('personalDetails.dateOfBirth').dirty">
+                <div *ngIf="profileForm.get('personalDetails.dateOfBirth').hasError('required')" style="color: rgb(253, 122, 122); font-size: small; font-style: italic;">
+                  Date of birth is required
+                </div>
+              </div>
             </div>
           </div>
         </div>
         <div class="col-6">
           <div class="row" style="display: flex;">
             <div class="col-4"><label class="starlabel">Age</label></div>
-            <div class="col-8"><input type="text" class="form-control" id="inputdefault"  formControlName="age"></div>
+            <div class="col-8"><input type="text" class="form-control input-font" id="inputdefault"  formControlName="age">
+              <div *ngIf="profileForm.get('personalDetails.age').invalid || profileForm.get('personalDetails.age').dirty">
+                <div *ngIf="profileForm.get('personalDetails.age').hasError('required')" style="color: rgb(253, 122, 122); font-size: small; font-style: italic;">
+                  Age is required
+                </div>
+                <div *ngIf="profileForm.get('personalDetails.age').hasError('pattern')" style="color: rgb(253, 122, 122); font-size: small; font-style: italic;">
+                  Age should be a number
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </div>
@@ -309,15 +578,19 @@
               styleClass="status-dropdown" formControlName="gender"></p-dropdown> -->
               <select style="width: 100%; border: 1px solid lightgray; height: 38px; padding:5px"
               class="form-group"
+               formControlName="gender" placeholder="enter gender"
 
-              formControlName="gender"
             >
-              <option>Enter Location</option>
-              <option>Male</option>
-              <option>Female</option>
-
-
+              <option>Enter gender</option>
+              <option *ngFor="let count of genderType">
+                {{ count.state }}
+              </option>
             </select>
+            <div *ngIf="profileForm.get('personalDetails.gender').invalid  || profileForm.get('personalDetails.gender').dirty">
+              <div *ngIf="profileForm.get('personalDetails.gender').hasError('required')" style="color: rgb(253, 122, 122); font-size: small; font-style: italic;">
+                gender is required
+              </div>
+            </div>
             </div>
           </div>
         </div>
@@ -329,17 +602,19 @@
               styleClass="status-dropdown" formControlName="maritalStatus"></p-dropdown> -->
               <select style="width: 100%; border: 1px solid lightgray; height: 38px; padding:5px"
               class="form-group"
+               formControlName="maritalStatus" placeholder="enter status"
 
-              formControlName="maritalStatus"
             >
-              <option>Enter Location</option>
-              <option>single</option>
-              <option>Married</option>
-              <option>Divorced</option>
-              <option>Separated</option>
-              <option>Widowed</option>
-
+              <option>Enter status</option>
+              <option *ngFor="let count of maritalStatusType">
+                {{ count.state }}
+              </option>
             </select>
+            <div *ngIf="profileForm.get('personalDetails.maritalStatus').invalid || profileForm.get('personalDetails.maritalStatus').dirty">
+              <div *ngIf="profileForm.get('personalDetails.maritalStatus').hasError('required')" style="color: rgb(253, 122, 122); font-size: small; font-style: italic;">
+                marital status is required
+              </div>
+            </div>
             </div>
           </div>
         </div>
@@ -348,7 +623,13 @@
         <div class="col-12">
           <div class="row" style="display: flex;">
             <div class="col-2 info-name"><label class="starlabel">Ask me about/Expertise</label></div>
-              <div class="col-10"><textarea class="form-control" id="inputdefault" style="height: 100px;" formControlName="expertise"></textarea></div>
+              <div class="col-10"><textarea class="form-control input-font" id="inputdefault" style="height: 100px;" formControlName="expertise"></textarea>
+                <div *ngIf="profileForm.get('personalDetails.expertise').invalid || profileForm.get('personalDetails.expertise').dirty">
+                  <div *ngIf="profileForm.get('personalDetails.expertise').hasError('required')" style="color: rgb(253, 122, 122); font-size: small; font-style: italic;">
+                    askme/expertise is required
+                  </div>
+                </div>
+              </div>
           </div>
         </div>
       </div>
@@ -357,7 +638,12 @@
           <div class="row" style="display: flex;">
             <div class="col-2 info-name"><label class="starlabel">About Me</label></div>
             <div class="col-10">
-              <textarea class="form-control" id="inputdefault" style="height: 100px;" formControlName="aboutMe"></textarea>
+              <textarea class="form-control input-font" id="inputdefault" style="height: 100px;" formControlName="aboutMe"></textarea>
+              <div *ngIf="profileForm.get('personalDetails.aboutMe').invalid  || profileForm.get('personalDetails.aboutMe').dirty">
+                <div *ngIf="profileForm.get('personalDetails.aboutMe').hasError('required')" style="color: rgb(253, 122, 122); font-size: small; font-style: italic;">
+                  aboutMe is required
+                </div>
+              </div>
             </div>
           </div>
         </div>
@@ -375,19 +661,40 @@
           <div class="col-4">
             <div class="row" style="display: flex;">
               <div class="col-4 info-name">UAN</div>
-              <div class="col-8"><input type="text" class="form-control" id="inputdefault" formControlName="uan"></div>
+              <div class="col-8"><input type="text" class="form-control input-font" id="inputdefault" formControlName="uan"></div>
             </div>
           </div>
+
           <div class="col-4">
             <div class="row" style="display: flex;">
               <div class="col-4"><label class="starlabel">Pan Number</label></div>
-              <div class="col-8"><input type="text" class="form-control" id="inputdefault" formControlName="panNumber" ></div>
+              <div class="col-8">
+                <input type="text" class="form-control input-font" id="inputdefault" formControlName="panNumber">
+                <div *ngIf="profileForm.get('identityInformation.panNumber').invalid || profileForm.get('identityInformation.panNumber').dirty">
+                  <div *ngIf="profileForm.get('identityInformation.panNumber').hasError('required')" style="color: rgb(253, 122, 122); font-size: small; font-style: italic;">
+                    Pan Number is required
+                  </div>
+                  <div *ngIf="profileForm.get('identityInformation.panNumber').hasError('pattern')" style="color: rgb(253, 122, 122); font-size: small; font-style: italic;">
+                    Invalid PAN number format. Please enter a valid PAN number.
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
+
           <div class="col-4">
             <div class="row" style="display: flex;">
               <div class="col-4"><label class="starlabel">Aadhar Number</label></div>
-              <div class="col-8"><input type="text" class="form-control" id="inputdefault" formControlName="aadharNumber" ></div>
+              <div class="col-8"><input type="text" class="form-control input-font" id="inputdefault" formControlName="aadharNumber" >
+                <div *ngIf="profileForm.get('identityInformation.aadharNumber').invalid || profileForm.get('identityInformation.aadharNumber').dirty">
+                  <div *ngIf="profileForm.get('identityInformation.aadharNumber').hasError('required')" style="color: rgb(253, 122, 122); font-size: small; font-style: italic;">
+                    aadharNumber is required
+                  </div>
+                  <div *ngIf="profileForm.get('identityInformation.aadharNumber').hasError('pattern')" style="color: rgb(253, 122, 122); font-size: small; font-style: italic;">
+                    Invalid Aadhar card number format. Please enter a valid Aadhar card number.
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
         </div>
@@ -403,13 +710,31 @@
           <div class="col-6">
             <div class="row" style="display: flex;">
               <div class="col-4 info-name"><label class="starlabel">Working Phone Number</label></div>
-              <div class="col-8"><input type="text" class="form-control" id="inputdefault" formControlName="workingPhoneNumber"></div>
+              <div class="col-8"><input type="text" class="form-control input-font" id="inputdefault" formControlName="workingPhoneNumber">
+                <div *ngIf="profileForm.get('contactDetails.workingPhoneNumber').invalid  || profileForm.get('contactDetails.workingPhoneNumber').dirty">
+                  <div *ngIf="profileForm.get('contactDetails.workingPhoneNumber').hasError('required')" style="color: rgb(253, 122, 122); font-size: small; font-style: italic;">
+                    workingPhoneNumber is required
+                  </div>
+                  <div *ngIf="profileForm.get('contactDetails.workingPhoneNumber').hasError('pattern')" style="color: rgb(253, 122, 122); font-size: small; font-style: italic;">
+                    Please enter a 10-digit number.
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
           <div class="col-6">
             <div class="row" style="display: flex;">
               <div class="col-4"><label class="starlabel">Personal Mobile Number</label></div>
-              <div class="col-8"><input type="text" class="form-control" id="inputdefault" formControlName="personalMobileNumber" ></div>
+              <div class="col-8"><input type="text" class="form-control input-font" id="inputdefault" formControlName="personalMobileNumber" >
+                <div *ngIf="profileForm.get('contactDetails.personalMobileNumber').invalid || profileForm.get('contactDetails.personalMobileNumber').dirty">
+                  <div *ngIf="profileForm.get('contactDetails.personalMobileNumber').hasError('required')" style="color: rgb(253, 122, 122); font-size: small; font-style: italic;">
+                    personal MobileNumber is required
+                  </div>
+                </div>
+                <div *ngIf="profileForm.get('contactDetails.personalMobileNumber').hasError('pattern')" style="color: rgb(253, 122, 122); font-size: small; font-style: italic;">
+                  Please enter a 10-digit number.
+                </div>
+              </div>
             </div>
           </div>
         </div>
@@ -417,7 +742,16 @@
           <div class="col-6">
             <div class="row" style="display: flex;">
               <div class="col-4"><label class="starlabel">Personal Email Address</label></div>
-              <div class="col-8"><input type="text" class="form-control" id="inputdefault" formControlName="personalEmailAddress"></div>
+              <div class="col-8"><input type="text" class="form-control input-font" id="inputdefault" formControlName="personalEmailAddress">
+                <div *ngIf="profileForm.get('contactDetails.personalEmailAddress').invalid|| profileForm.get('contactDetails.personalEmailAddress').dirty">
+                  <div *ngIf="profileForm.get('contactDetails.personalEmailAddress').hasError('required')" style="color: rgb(253, 122, 122); font-size: small; font-style: italic;">
+                    personal EmailAddress is required
+                  </div>
+                  <div *ngIf="profileForm.get('contactDetails.personalEmailAddress').hasError('email')" style="color: rgb(253, 122, 122); font-size: small; font-style: italic;">
+                    please enter valid email
+                  </div>
+
+                </div></div>
             </div>
           </div>
         </div>
@@ -427,13 +761,25 @@
           <div class="col-6">
             <div class="row" style="display: flex;">
               <div class="col-4"><label class="starlabel">Present Address</label></div>
-              <div class="col-8"><input type="text" class="form-control" id="inputdefault" placeholder="Address Line 1" formControlName="address1"></div>
+              <div class="col-8"><input type="text" class="form-control input-font" id="inputdefault" placeholder="Address Line 1" formControlName="address1">
+                <div *ngIf="profileForm.get('contactDetails.presentAddress.address1').invalid || profileForm.get('contactDetails.presentAddress.address1').dirty">
+                  <div *ngIf="profileForm.get('contactDetails.presentAddress.address1').hasError('required')" style="color: rgb(253, 122, 122); font-size: small; font-style: italic;">
+                    address1 is required
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
           <div class="col-6">
             <div class="row" style="display: flex;">
 
-              <div class="col-8"><input type="text" class="form-control" id="inputdefault"  placeholder="Address Line 2" formControlName="address2"></div>
+              <div class="col-8"><input type="text" class="form-control input-font" id="inputdefault"  placeholder="Address Line 2" formControlName="address2">
+                <div *ngIf="profileForm.get('contactDetails.presentAddress.address2').invalid  || profileForm.get('contactDetails.presentAddress.address2').dirty">
+                  <div *ngIf="profileForm.get('contactDetails.presentAddress.address2').hasError('required')" style="color: rgb(253, 122, 122); font-size: small; font-style: italic;">
+                    address2 is required
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
         </div>
@@ -442,13 +788,25 @@
           <div class="col-6">
             <div class="row" style="display: flex;">
               <div class="col-4"></div>
-              <div class="col-8"><input type="text" class="form-control" id="inputdefault" placeholder="Country" formControlName="country" ></div>
+              <div class="col-8"><input type="text" class="form-control input-font" id="inputdefault" placeholder="Country" formControlName="country" >
+                <div *ngIf="profileForm.get('contactDetails.presentAddress.country').invalid || profileForm.get('contactDetails.presentAddress.country').dirty">
+                  <div *ngIf="profileForm.get('contactDetails.presentAddress.country').hasError('required')" style="color: rgb(253, 122, 122); font-size: small; font-style: italic;">
+                    country is required
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
           <div class="col-6">
             <div class="row" style="display: flex;">
 
-              <div class="col-8"><input type="text" class="form-control" id="inputdefault"  placeholder="State" formControlName="state"></div>
+              <div class="col-8"><input type="text" class="form-control input-font" id="inputdefault"  placeholder="State" formControlName="state">
+                <div *ngIf="profileForm.get('contactDetails.presentAddress.state').invalid || profileForm.get('contactDetails.presentAddress.state').dirty">
+                  <div *ngIf="profileForm.get('contactDetails.presentAddress.state').hasError('required')" style="color: rgb(253, 122, 122); font-size: small; font-style: italic;">
+                    state is required
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
         </div>
@@ -456,13 +814,25 @@
           <div class="col-6">
             <div class="row" style="display: flex;">
               <div class="col-4"></div>
-              <div class="col-8"><input type="text" class="form-control" id="inputdefault" placeholder="City" formControlName="city"></div>
+              <div class="col-8"><input type="text" class="form-control input-font" id="inputdefault" placeholder="City" formControlName="city">
+                <div *ngIf="profileForm.get('contactDetails.presentAddress.city').invalid  || profileForm.get('contactDetails.presentAddress.city').dirty">
+                  <div *ngIf="profileForm.get('contactDetails.presentAddress.city').hasError('required')" style="color: rgb(253, 122, 122); font-size: small; font-style: italic;">
+                    city is required
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
           <div class="col-6">
             <div class="row" style="display: flex;">
 
-              <div class="col-8"><input type="text" class="form-control" id="inputdefault"  placeholder="Pincode" formControlName="pincode"></div>
+              <div class="col-8"><input type="text" class="form-control input-font" id="inputdefault"  placeholder="Pincode" formControlName="pincode">
+                <div *ngIf="profileForm.get('contactDetails.presentAddress.pincode').invalid  || profileForm.get('contactDetails.presentAddress.pincode').dirty">
+                  <div *ngIf="profileForm.get('contactDetails.presentAddress.pincode').hasError('required')" style="color: rgb(253, 122, 122); font-size: small; font-style: italic;">
+                    pincode is required
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
         </div>
@@ -493,13 +863,25 @@
               <div class="col-6">
                 <div class="row" style="display: flex;">
                   <div class="col-4"></div>
-                  <div class="col-8"><input type="text" class="form-control" id="inputdefault" placeholder="Address Line 1"  formControlName="address1"></div>
+                  <div class="col-8"><input type="text" class="form-control input-font" id="inputdefault" placeholder="Address Line 1"  formControlName="address1">
+                    <div *ngIf="profileForm.get('contactDetails.permanentAddress.address1').invalid  || profileForm.get('contactDetails.permanentAddress.address1').dirty">
+                      <div *ngIf="profileForm.get('contactDetails.permanentAddress.address1').hasError('required')" style="color: rgb(253, 122, 122); font-size: small; font-style: italic;">
+                        address1 is required
+                      </div>
+                    </div>
+                  </div>
                 </div>
               </div>
               <div class="col-6">
                 <div class="row" style="display: flex;">
 
-                  <div class="col-8"><input type="text" class="form-control" id="inputdefault"  placeholder="Address Line 2" formControlName="address2"></div>
+                  <div class="col-8"><input type="text" class="form-control input-font" id="inputdefault"  placeholder="Address Line 2" formControlName="address2">
+                    <div *ngIf="profileForm.get('contactDetails.permanentAddress.address2').invalid  || profileForm.get('contactDetails.permanentAddress.address2').dirty">
+                      <div *ngIf="profileForm.get('contactDetails.permanentAddress.address2').hasError('required')" style="color: rgb(253, 122, 122); font-size: small; font-style: italic;">
+                        address2 is required
+                      </div>
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>
@@ -511,13 +893,25 @@
               <div class="col-6">
                 <div class="row" style="display: flex;">
                   <div class="col-4"></div>
-                  <div class="col-8"><input type="text" class="form-control" id="inputdefault" placeholder="Country" formControlName="country"></div>
+                  <div class="col-8"><input type="text" class="form-control input-font" id="inputdefault" placeholder="Country" formControlName="country">
+                    <div *ngIf="profileForm.get('contactDetails.permanentAddress.country').invalid  || profileForm.get('contactDetails.permanentAddress.country').dirty">
+                      <div *ngIf="profileForm.get('contactDetails.permanentAddress.country').hasError('required')" style="color: rgb(253, 122, 122); font-size: small; font-style: italic;">
+                        country is required
+                      </div>
+                    </div>
+                  </div>
                 </div>
               </div>
+
               <div class="col-6">
                 <div class="row" style="display: flex;">
-
-                  <div class="col-8"><input type="text" class="form-control" id="inputdefault"  placeholder="State" formControlName="state"></div>
+                  <div class="col-8"><input type="text" class="form-control input-font" id="inputdefault"  placeholder="State" formControlName="state">
+                    <div *ngIf="profileForm.get('contactDetails.permanentAddress.state').invalid || profileForm.get('contactDetails.permanentAddress.state').dirty">
+                      <div *ngIf="profileForm.get('contactDetails.permanentAddress.state').hasError('required')" style="color: rgb(253, 122, 122); font-size: small; font-style: italic;">
+                        state is required
+                      </div>
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>
@@ -525,13 +919,24 @@
               <div class="col-6">
                 <div class="row" style="display: flex;">
                   <div class="col-4"></div>
-                  <div class="col-8"><input type="text" class="form-control" id="inputdefault" placeholder="City"formControlName="city" ></div>
+                  <div class="col-8"><input type="text" class="form-control input-font" id="inputdefault" placeholder="City"formControlName="city" >
+                    <div *ngIf="profileForm.get('contactDetails.permanentAddress.city').invalid  || profileForm.get('contactDetails.permanentAddress.city').dirty">
+                      <div *ngIf="profileForm.get('contactDetails.permanentAddress.city').hasError('required')" style="color: rgb(253, 122, 122); font-size: small; font-style: italic;">
+                        city is required
+                      </div>
+                    </div>
+                  </div>
                 </div>
               </div>
               <div class="col-6">
                 <div class="row" style="display: flex;">
 
-                  <div class="col-8"><input type="text" class="form-control" id="inputdefault" placeholder="Pincode" formControlName="pincode"  ></div>
+                  <div class="col-8"><input type="text" class="form-control input-font" id="inputdefault" placeholder="Pincode" formControlName="pincode"  >
+                    <div *ngIf="profileForm.get('contactDetails.permanentAddress.pincode').invalid  || profileForm.get('contactDetails.permanentAddress.pincode').dirty">
+                      <div *ngIf="profileForm.get('contactDetails.permanentAddress.pincode').hasError('required')" style="color: rgb(253, 122, 122); font-size: small; font-style: italic;">
+                        pincode is required
+                      </div>
+                    </div></div>
                 </div>
               </div>
             </div>
@@ -548,8 +953,28 @@
           <div class="row" style="display: flex;">
             <div class="col-4 info-name"><label class="starlabel">Date of Exit</label></div>
             <div class="col-8">
-              <input type="date" class="form-control" placeholder="Select date of exit"
+              <input type="date" class="form-control input-font" placeholder="Select date of exit"
               id="startDate" name="startDate" formControlName="separationOfDate">
+              <div
+              *ngIf="
+                !profileForm.controls['separationOfDate'].valid  ||
+                  profileForm.controls['separationOfDate'].dirty
+              "
+            >
+              <div
+                [hidden]="
+                  !profileForm.controls['separationOfDate'].errors['required']
+                "
+                style="
+                  color: rgb(253, 122, 122);
+                  font-size: small;
+                  font-style: italic;
+                "
+              >
+              separationOfDate is required
+              </div>
+
+            </div>
             </div>
           </div>
         </div>
@@ -569,8 +994,13 @@
             <div class="row" style="display: flex;">
               <div class="col-4 info-name"><label class="starlabel">Added Time</label></div>
               <div class="col-8">
-                <input type="date" class="form-control" placeholder="added Time"
+                <input type="date" class="form-control input-font" placeholder="added Time"
                         id="startDate" name="startDate" formControlName="addedTime">
+                        <div *ngIf="profileForm.get('systemFields.addedTime').invalid  || profileForm.get('systemFields.addedTime').dirty">
+                          <div *ngIf="profileForm.get('systemFields.addedTime').hasError('required')" style="color: rgb(253, 122, 122); font-size: small; font-style: italic;">
+                            added time is required
+                          </div>
+                        </div>
               </div>
             </div>
           </div>
@@ -578,8 +1008,13 @@
             <div class="row" style="display: flex;">
               <div class="col-4 info-name"><label class="starlabel">Modified Time</label></div>
               <div class="col-8">
-                <input type="date" class="form-control" placeholder="modified time"
+                <input type="date" class="form-control input-font" placeholder="modified time"
                         id="startDate" name="startDate" formControlName="modifiedTime">
+                        <div *ngIf="profileForm.get('systemFields.modifiedTime').invalid  || profileForm.get('systemFields.modifiedTime').dirty">
+                          <div *ngIf="profileForm.get('systemFields.modifiedTime').hasError('required')" style="color: rgb(253, 122, 122); font-size: small; font-style: italic;">
+                            modified time is required
+                          </div>
+                        </div>
               </div>
             </div>
           </div>
@@ -590,7 +1025,12 @@
           <div class="row" style="display: flex;">
             <div class="col-4 info-name"><label class="starlabel">Added By</label></div>
             <div class="col-8">
-              <input type="text" class="form-control" id="inputdefault" formControlName="addedBy">
+              <input type="text" class="form-control input-font" id="inputdefault" formControlName="addedBy">
+              <div *ngIf="profileForm.get('systemFields.addedBy').invalid || profileForm.get('systemFields.addedBy').dirty">
+                <div *ngIf="profileForm.get('systemFields.addedBy').hasError('required')" style="color: rgb(253, 122, 122); font-size: small; font-style: italic;">
+                  added by is required
+                </div>
+              </div>
             </div>
           </div>
         </div>
@@ -598,7 +1038,12 @@
           <div class="row" style="display: flex;">
             <div class="col-4 info-name"><label class="starlabel">Modified By</label></div>
             <div class="col-8">
-              <input type="text" class="form-control" id="inputdefault" formControlName="modifiedBy">
+              <input type="text" class="form-control input-font" id="inputdefault" formControlName="modifiedBy">
+              <div *ngIf="profileForm.get('systemFields.modifiedBy').invalid  || profileForm.get('systemFields.modifiedBy').dirty">
+                <div *ngIf="profileForm.get('systemFields.modifiedBy').hasError('required')" style="color: rgb(253, 122, 122); font-size: small; font-style: italic;">
+                  modifiedBy by is required
+                </div>
+              </div>
             </div>
           </div>
         </div>
@@ -616,13 +1061,16 @@
 
         formControlName="onBoardingStatus"
       >
-        <option>Enter Location</option>
-        <option>Active</option>
-        <option>InActive</option>
-        <!-- <option>true</option> -->
-
-
+        <option>Enter Type</option>
+        <option *ngFor="let count of onBoardingType">
+          {{ count.state }}
+        </option>
       </select>
+      <div *ngIf="profileForm.get('systemFields.onBoardingStatus').invalid || profileForm.get('systemFields.onBoardingStatus').dirty">
+        <div *ngIf="profileForm.get('systemFields.onBoardingStatus').hasError('required')" style="color: rgb(253, 122, 122); font-size: small; font-style: italic;">
+          onBoardingStatus is required
+        </div>
+      </div>
       </div>
     </div>
   </div>
@@ -645,12 +1093,12 @@
   <thead>
     <tr>
       <th style="text-align: center;">Sno.</th>
-      <th style="text-align: center;">Company Name</th>
-      <th style="text-align: center;">Job Title</th>
-      <th style="text-align: center;">From Date</th>
-      <th style="text-align: center;">To Date</th>
-      <th style="text-align: center;">Job Description</th>
-      <th style="text-align: center;">Relevent Experience</th>
+      <th style="text-align: center;"><label >Company Name</label></th>
+      <th style="text-align: center;"><label >Job Title</label></th>
+      <th style="text-align: center;"><label>From Date</label></th>
+      <th style="text-align: center;"><label >To Date</label></th>
+      <th style="text-align: center;"><label >Job Description</label></th>
+      <th style="text-align: center;"><label >Relevent Experience</label></th>
       <th>Actions</th>
     </tr>
   </thead>
@@ -660,12 +1108,48 @@
       <tr *ngFor="let row of workExperience; let rowIndex = index" [formGroup]="row">
       <!-- <tr *ngFor="let row of workExperience; let rowIndex = index" [formGroup]="row"> -->
       <td>{{rowIndex + 1}}</td>
-      <td><input type="text" style="border: none; text-align: center;" formControlName="companyName" [disabled]="!row.get('editMode').value"></td>
-      <td><input type="text" style="border: none; text-align: center;" formControlName="jobTitle" [disabled]="!row.get('editMode').value"></td>
-      <td><input type="date" style="border: none; text-align: center;" formControlName="fromDate" [disabled]="!row.get('editMode').value"></td>
-      <td><input type="date" style="border: none; text-align: center;" formControlName="toDate" [disabled]="!row.get('editMode').value"></td>
-      <td><input type="text" style="border: none; text-align: center;" formControlName="jobDescription" [disabled]="!row.get('editMode').value"></td>
-      <td><input type="text" style="border: none; text-align: center;" formControlName="releventExp" [disabled]="!row.get('editMode').value"></td>
+      <td><input type="text" style="border: none; text-align: center;" formControlName="companyName" [disabled]="!row.get('editMode').value">
+        <div *ngIf="row.get('companyName').invalid && (row.get('companyName').touched || row.get('companyName').dirty)">
+          <div *ngIf="row.get('companyName').hasError('required')" style="color: rgb(253, 122, 122); font-size: small; font-style: italic;">
+            company name is required.
+          </div>
+        </div>
+      </td>
+      <td><input type="text" style="border: none; text-align: center;" formControlName="jobTitle" [disabled]="!row.get('editMode').value">
+        <div *ngIf="row.get('jobTitle').invalid && (row.get('jobTitle').touched || row.get('jobTitle').dirty)">
+          <div *ngIf="row.get('jobTitle').hasError('required')" style="color: rgb(253, 122, 122); font-size: small; font-style: italic;">
+            job title is required.
+          </div>
+        </div>
+      </td>
+      <td><input type="date" style="border: none; text-align: center;" formControlName="fromDate" [disabled]="!row.get('editMode').value">
+        <div *ngIf="row.get('fromDate').invalid && (row.get('fromDate').touched || row.get('fromDate').dirty)">
+          <div *ngIf="row.get('fromDate').hasError('required')" style="color: rgb(253, 122, 122); font-size: small; font-style: italic;">
+            from date is required.
+          </div>
+        </div>
+      </td>
+      <td><input type="date" style="border: none; text-align: center;" formControlName="toDate" [disabled]="!row.get('editMode').value">
+        <div *ngIf="row.get('toDate').invalid && (row.get('toDate').touched || row.get('toDate').dirty)">
+          <div *ngIf="row.get('toDate').hasError('required')" style="color: rgb(253, 122, 122); font-size: small; font-style: italic;">
+            to date is required.
+          </div>
+        </div>
+      </td>
+      <td><input type="text" style="border: none; text-align: center;" formControlName="jobDescription" [disabled]="!row.get('editMode').value">
+        <div *ngIf="row.get('jobDescription').invalid && (row.get('jobDescription').touched || row.get('jobDescription').dirty)">
+          <div *ngIf="row.get('jobDescription').hasError('required')" style="color: rgb(253, 122, 122); font-size: small; font-style: italic;">
+            job description is required.
+          </div>
+        </div>
+      </td>
+      <td><input type="text" style="border: none; text-align: center;" formControlName="releventExp" [disabled]="!row.get('editMode').value">
+        <div *ngIf="row.get('releventExp').invalid && (row.get('releventExp').touched || row.get('releventExp').dirty)">
+          <div *ngIf="row.get('releventExp').hasError('required')" style="color: rgb(253, 122, 122); font-size: small; font-style: italic;">
+         experience is required.
+          </div>
+        </div>
+      </td>
       <td>
         <button (click)="deleteWorkRow(rowIndex)" type="button" class="btn btn-danger"><i class="pi pi-trash"></i></button>
       </td>
@@ -686,10 +1170,10 @@
   <thead>
     <tr>
       <th style="text-align: center;">S.No</th>
-      <th style="text-align: center;">Institute Name</th>
-      <th style="text-align: center;">Degree/Diploma</th>
-      <th style="text-align: center;">Specialization</th>
-      <th style="text-align: center;">Date of Completion</th>
+      <th style="text-align: center;"><label class="starlabel">Institute Name</label></th>
+      <th style="text-align: center;"> <label class="starlabel">Degree/Diploma</label></th>
+      <th style="text-align: center;"><label class="starlabel">Specialization</label></th>
+      <th style="text-align: center;"><label class="starlabel">Date of Completion</label></th>
       <th>Actions</th>
     </tr>
   </thead>
@@ -697,10 +1181,35 @@
 
     <tr *ngFor="let row of educationDetails; let rowIndex = index" [formGroup]="row">
       <td>{{ rowIndex + 1 }}</td>
-      <td><input type="text" style="border: none; text-align: center;"  formControlName="instituteName" [disabled]="!row.get('editMode').value"></td>
-      <td><input type="text" style="border: none; text-align: center;"  formControlName="degree" [disabled]="!row.get('editMode').value"></td>
-      <td><input type="text" style="border: none; text-align: center;"  formControlName="specialization" [disabled]="!row.get('editMode').value"></td>
-      <td><input type="date" style="border: none; text-align: center;"  formControlName="toDate" [disabled]="!row.get('editMode').value"></td>
+      <td><input type="text" style="border: none; text-align: center;"  formControlName="instituteName" [disabled]="!row.get('editMode').value">
+        <div *ngIf="row.get('instituteName').invalid && (row.get('instituteName').touched || row.get('instituteName').dirty)">
+          <div *ngIf="row.get('instituteName').hasError('required')" style="color: rgb(253, 122, 122); font-size: small; font-style: italic;">
+            institute name is required.
+          </div>
+        </div>
+      </td>
+      <td><input type="text" style="border: none; text-align: center;"  formControlName="degree" [disabled]="!row.get('editMode').value">
+        <div *ngIf="row.get('degree').invalid && (row.get('degree').touched || row.get('degree').dirty)">
+          <div *ngIf="row.get('degree').hasError('required')" style="color: rgb(253, 122, 122); font-size: small; font-style: italic;">
+            degree is required.
+          </div>
+        </div>
+      </td>
+
+      <td><input type="text" style="border: none; text-align: center;"  formControlName="specialization" [disabled]="!row.get('editMode').value">
+        <div *ngIf="row.get('specialization').invalid && (row.get('specialization').touched || row.get('specialization').dirty)">
+          <div *ngIf="row.get('specialization').hasError('required')" style="color: rgb(253, 122, 122); font-size: small; font-style: italic;">
+            specialization is required.
+          </div>
+        </div>
+      </td>
+      <td><input type="date" style="border: none; text-align: center;"  formControlName="toDate" [disabled]="!row.get('editMode').value">
+        <div *ngIf="row.get('toDate').invalid && (row.get('toDate').touched || row.get('toDate').dirty)">
+          <div *ngIf="row.get('toDate').hasError('required')" style="color: rgb(253, 122, 122); font-size: small; font-style: italic;">
+            to date is required.
+          </div>
+        </div>
+      </td>
       <!-- <td><input type="date" style="border: none; text-align: center;"  formControlName="dateOfCompletion" [disabled]="!row.get('editMode').value"></td> -->
       <td>
         <!-- <button (click)="toggleEditMode(row)">

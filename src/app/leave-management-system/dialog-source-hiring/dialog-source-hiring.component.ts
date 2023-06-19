@@ -6,6 +6,7 @@ import { ToastrMsgService } from 'src/app/_services/toastr-msg.service';
 import { CmsService } from '../../_services/cms.service'
 import { MatDialog } from '@angular/material/dialog';
 import { LeaveService } from 'src/app/_services/leave.service';
+import { map } from 'rxjs';
 
 @Component({
   selector: 'app-dialog-source-hiring',
@@ -19,6 +20,7 @@ export class DialogSourceHiringComponent {
   pageLink:string
   page: any
   fgsType:any;
+  hiringList:any;
  constructor(private ngxLoader: NgxUiLoaderService,
    private fb: FormBuilder,
    private toastr: ToastrMsgService,
@@ -30,11 +32,15 @@ export class DialogSourceHiringComponent {
      username: localStorage.getItem("email"),
      sourceHiring: ['', [Validators.required, Validators.pattern(/^[a-zA-Z\s]+$/)]],
    });
+   this.selectForm.get('sourceHiring').valueChanges.subscribe((value) => {
+    this.checkHiringValidity(value);
+  });
 }
  ngOnInit(): void {
    this.fgsType = SPINNER.squareLoader
    this.ngxLoader.start();
    this.ngxLoader.stop();
+   this.getReportingmanager()
  }
 
  submitForm(){
@@ -46,7 +52,7 @@ export class DialogSourceHiringComponent {
       if (res) {
        this.ngxLoader.start();
         location.reload()
-        this.toastr.showSuccess("designation added successfully", "designation Added")
+        this.toastr.showSuccess("Source Hiring added successfully", "Source Hiring Added")
       }
       (error: any) => {
        console.log("error");
@@ -57,4 +63,18 @@ export class DialogSourceHiringComponent {
 //  this.route.navigate(['/leaveMgmt/edit-profile']);
 
   }
+  checkHiringValidity(enteredreport: string): void {
+    if (this.hiringList.includes(enteredreport)) {
+      this.toastr.showError('Source Hiring already exists!', 'Error');
+    }
+  }
+
+  getReportingmanager() {
+      this.leaveservice.getSourceHiringList().pipe(
+        map((res) => res.map((profile) => profile.sourceHiring))
+      ).subscribe((res) => {
+        this.hiringList = res;
+        this.ngxLoader.stop();
+      });
+    }
 }

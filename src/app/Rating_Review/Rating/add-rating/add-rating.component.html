@@ -18,26 +18,6 @@
               <div class="col-3">
                 <label for="reviewer" class="starlabel">Reviewer</label>
               </div>
-              <!-- <div class="col-9">
-                <p-dropdown [options]="reviewerOptions" id="reviewer" placeholder="Select"
-                  styleClass="reviewer-dropdown" (onChange)="
-                  $event.value == 'Add New Reviewer' ? openExportDialog() : null
-                " formControlName="reviewer"></p-dropdown>
-                <div *ngIf="
-                  !ratingForm.controls['reviewer'].valid &&
-                  (ratingForm.controls['reviewer'].touched ||
-                    ratingForm.controls['reviewer'].dirty)
-                ">
-                  <div [hidden]="!ratingForm.controls['reviewer'].errors['required']" style="
-                    color: rgb(253, 122, 122);
-                    font-size: small;
-                    font-style: italic;
-                  ">
-                    Reviewer is required
-                  </div>
-                </div>
-              </div> -->
-
 
               <div class="col-9">
                 <select class="form-group" aria-label="Default select example" formControlName="reviewer">

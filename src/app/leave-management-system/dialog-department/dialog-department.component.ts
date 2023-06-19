@@ -6,6 +6,7 @@ import { ToastrMsgService } from 'src/app/_services/toastr-msg.service';
 import { CmsService } from '../../_services/cms.service'
 import { MatDialog } from '@angular/material/dialog';
 import { LeaveService } from 'src/app/_services/leave.service';
+import { map } from 'rxjs';
 
 @Component({
   selector: 'app-dialog-department',
@@ -19,6 +20,8 @@ export class DialogDepartmentComponent {
   pageLink:string
   page: any
   fgsType:any;
+  departmentdrop:any;
+  departmentList:any;
  constructor(private ngxLoader: NgxUiLoaderService,
    private fb: FormBuilder,
    private leaveservice: LeaveService,
@@ -33,12 +36,16 @@ export class DialogDepartmentComponent {
      department: ['', [Validators.required,  Validators.pattern(/^[a-zA-Z\s]+$/)]],
 
    });
+   this.selectForm.get('department').valueChanges.subscribe((value) => {
+    this.checkdepartmentValidity(value);
+  });
 }
  ngOnInit(): void {
 
    this.fgsType = SPINNER.squareLoader
    this.ngxLoader.start();
    this.ngxLoader.stop();
+   this.getDepartment()
  }
 
 
@@ -58,9 +65,23 @@ export class DialogDepartmentComponent {
         this.ngxLoader.stop();
       }
  })
-//  this.route.navigate(['/leaveMgmt/add-profile']);
-
   }
+
+  checkdepartmentValidity(enteredDepartment: string): void {
+    if (this.departmentList.includes(enteredDepartment)) {
+      this.toastr.showError('Department already exists!', 'Error');
+    }
+  }
+
+  getDepartment() {
+      this.leaveservice.getdepartmentList().pipe(
+        map((res) => res.map((profile) => profile.department))
+      ).subscribe((departmentList) => {
+        this.departmentList = departmentList;
+        console.log("department List:", this.departmentList);
+        this.ngxLoader.stop();
+      });
+    }
 
 
 }
