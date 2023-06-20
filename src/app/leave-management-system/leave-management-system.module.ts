@@ -21,6 +21,9 @@ import { DialogReportingManagerComponent } from './dialog-reporting-manager/dial
 import { ProfileListComponent } from './profile-list/profile-list.component';
 import { ButtonModule } from 'primeng/button';
 import { ProfileDialogComponent } from './profile-dialog/profile-dialog.component';
+import { TeamComponent } from './team/team.component';
+import { CalenderComponent } from './calender/calender.component';
+import { FullCalendarModule } from '@fullcalendar/angular';
 
 @NgModule({
   declarations: [
@@ -34,6 +37,8 @@ import { ProfileDialogComponent } from './profile-dialog/profile-dialog.componen
     DialogReportingManagerComponent,
     ProfileListComponent,
     ProfileDialogComponent,
+    TeamComponent,
+    CalenderComponent,
   ],
   imports: [
     CommonModule,
@@ -55,7 +60,8 @@ import { ProfileDialogComponent } from './profile-dialog/profile-dialog.componen
     ReactiveFormsModule,
     MatDialogModule,
     MatButtonModule,
-    ButtonModule
+    ButtonModule,
+    FullCalendarModule
   ]
 })
 export class LeaveManagementSystemModule { }

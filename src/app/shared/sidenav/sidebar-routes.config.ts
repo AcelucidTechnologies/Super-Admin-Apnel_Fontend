@@ -36,6 +36,20 @@ export const SideNaveMenueRoute = [
         routerLinkActiveOptions: { exact: true },
         routerLinkActive: 'active'
       },
+      {
+        label: 'Team',
+        icon: 'pi pi-list',
+        routerLink: ['/leaveMgmt/team'],
+        routerLinkActiveOptions: { exact: true },
+        routerLinkActive: 'active'
+      },
+      {
+        label: 'Calender',
+        icon: 'pi pi-list',
+        routerLink: ['/leaveMgmt/calender'],
+        routerLinkActiveOptions: { exact: true },
+        routerLinkActive: 'active'
+      },
     ],
   },
   {
@@ -259,7 +273,7 @@ export const SideNaveMenueRoute = [
         routerLink: ['/rating/ratinglist'],
       },
       {
-        label: 'Review List',
+        label: 'Product List',
         icon: 'pi pi-list',
         routerLink: ['/review/reviewlist'],
       },

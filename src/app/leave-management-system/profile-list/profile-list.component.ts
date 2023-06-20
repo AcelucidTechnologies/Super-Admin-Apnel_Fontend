@@ -14,6 +14,8 @@ import autoTable from 'jspdf-autotable'
 import * as FileSaver from 'file-saver';
 import * as xlsxPackage from 'xlsx';
 import { ProfileDialogComponent } from '../profile-dialog/profile-dialog.component';
+import * as XLSX from 'xlsx';
+import { DatePipe } from '@angular/common';
 
 @Component({
   selector: 'app-profile-list',
@@ -21,6 +23,9 @@ import { ProfileDialogComponent } from '../profile-dialog/profile-dialog.compone
   styleUrls: ['./profile-list.component.scss']
 })
 export class ProfileListComponent {
+  DefaultImage: any =
+  'data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wCEAAkGBwgHBgkIBwgKCgkLDRYPDQwMDRsUFRAWIB0iIiAdHx8kKDQsJCYxJx8fLT0tMTU3Ojo6Iys/RD84QzQ5OjcBCgoKDQwNGg8PGjclHyU3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3N//AABEIALgAuAMBIgACEQEDEQH/xAAaAAEAAwEBAQAAAAAAAAAAAAAAAQUGBAMC/8QANxAAAgIBAgMFBAgGAwAAAAAAAAECAwQFESExQRITIlFhMlJxgRQjQnKRocHRBhUkQ2OxNGKS/8QAFAEBAAAAAAAAAAAAAAAAAAAAAP/EABQRAQAAAAAAAAAAAAAAAAAAAAD/2gAMAwEAAhEDEQA/AN6AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAPXHxrsmXZpg5eb6L5lpTofXIt29IfuBTDc0tekYcOdbn96TPX+X4m230eH4AZUGmnpWFL+12futo5LtDhtvRbJPynxApAdGThZGNu7YeH3o8Uc4AAAAAAAAAAAAAAAAAAAC20/SXYlblcI9ILr8T00fTtuzk3rdvjCL6epcgfMIRhFRhFRiuiPoAAAAAAAPitnxRU6hpEJp2YvhnzcOj/YtgBjZRlCTjOLjJc0+hBo9V09ZUO8rSVsV/6XkzOPdPZpprg0AAAAAAAAAAAAAADu0nE+lZPjX1cPE/XyRwmm0ijuMOG62lPxSA7UtlsuQAAAkAQCQBAJAEAkAQUWu4nYn9JrXCXCfx6F8eWTTG+iyqXKS2+YGQBMouEnGXNPZkAAAAAAAAAAAB6UV97fXX70kjXLhwXQzGlR31Cn0e/5GoAEoglAAAAAAAAAAAAAAGX1evus+xL7Xi/E4y0/iBf1kH/jX+2VYAAAAAAAAAAAdelPs6hS31e35GoMhRPur67Pdkma9NPigBKIJQAAAAAAAAAAAAABn/4gf9ZWv8f6sqzt1ezvM+3blHaJxAAAAAAAAAAAANNpN6vw47vxQ8L+RmTt0rLWLk+J/VT4P08mBpiUQvQlAAAAAAAAAAAAPLJujRRO2XKK3+J6lFruX25/Rq34Y8Z/HyAqZSc5OUnvJvdsgAAAAAAAAAAAAAAAu9H1BNLGulx5Qk+voXJiy30/V+wlVlNuPSf7gXoPmE4zj2oNNeaZ9AAAAAAAEN7Ld8iq1DV4QTrxX2p+/wBEB66rnrGh3dbXfSXD/qvMzrbbbbbb57ibc5OUm5SfFt82QAAAAAAAAAAAAAAAAAB60Y12RwqrlL122R2S0bKVfaTg5L7G/EDkx8m7HlvTY4+nRlpRrvS+r5wf6Mp7K51y7M4SjLykj5A00NWw5Ljb2X5STPT+Y4e3/Jr/ABMqANPLVMOP95P7qZy3a5BcKanJ+cnsUQA6cnOyMndWWbR9yPBHN0JScntFNvyR306Rk2Q7TSr8oyfECvB0ZGFkY/G2p7e8uKOcAAAAAAAAAAAAB642PZk3Rqq23fnyQHzTVO+arqi5SfQvMPR6q9p5H1k/Lov3OzDxK8SpQrXHrJ82dIERSitopJLkkSAB8W1Qtj2bYRkvKS3OC7RsWfsqdf3WWQApJ6E/sZHD1gfD0K7pdD8GXwAo46FP7eQvlE6KtFx4e3Kdno3svyLQAeVOPTQtqq4x+CPUACHxODM0unI4x+rn5x5P4osABkcrFtxLOzdHbf2ZLkzxNffTC+t12xUoszWoYc8O3svxQfsS/R+oHKAAAAAAD8gJS3aS5vkabTMKOJRxX1k+M3+hV6Hjd7kO2S8NfL4mhAjYAASAAAAAAAAAAAAAAAAeOVjwyaZVz5Pk/J+Z7ADHXVSpunVNeKL2Z8F3r+NvCORBcY8J/DoUgAAAAwANRpVHcYVcX7Ul2pfM7AAAAAAAAAAAAAAAAAAAAAAADzyKldTOuXKS2MjOLhNwlzi9mAB8gAD/2Q==';
+
 
   @ViewChild('dt') dt: Table | undefined;
   sidebarSpacing: any;
@@ -88,21 +93,48 @@ export class ProfileListComponent {
       }
     }
 
-          exportExcel() {
-            const worksheet = xlsxPackage.utils.json_to_sheet(this.profileList);
-            const workbook = { Sheets: { 'data': worksheet }, SheetNames: ['data'] };
-            const excelBuffer: any = xlsxPackage.write(workbook, { bookType: 'xlsx', type: 'array' });
-            this.saveAsExcelFile(excelBuffer, "Profile");
-          }
 
-    saveAsExcelFile(buffer: any, fileName: string): void {
-      let EXCEL_TYPE = 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;charset=UTF-8';
-      let EXCEL_EXTENSION = '.xlsx';
-      const data: Blob = new Blob([buffer], {
-        type: EXCEL_TYPE
-      });
-      FileSaver.saveAs(data, fileName + '_export_' + new Date().getTime() + EXCEL_EXTENSION);
+    exportExcel(): void {
+
+      // Prepare the data for export
+      const data = this.profileList.map((item, index) => ({
+        'S.No.': index+1,
+        'Employee Name': item.employeeFullName,
+        'Email': item.email,
+        'Department': item.department,
+      }));
+
+      // Create a new workbook and worksheet
+      const workbook = XLSX.utils.book_new();
+      const worksheet = XLSX.utils.json_to_sheet(data);
+
+      // Add the worksheet to the workbook
+      XLSX.utils.book_append_sheet(workbook, worksheet, 'Sheet1');
+
+      // Generate a Blob from the workbook
+      const workbookBlob = this.workbookToBlob(workbook);
+
+      // Create a download link
+      const url = URL.createObjectURL(workbookBlob);
+      const link = document.createElement('a');
+      link.href = url;
+      link.download = 'table_data.xlsx';
+
+      // Simulate a click on the link to start the download
+      link.click();
+
+      // Clean up
+      URL.revokeObjectURL(url);
     }
+
+    // Helper function to convert a workbook to Blob
+    private workbookToBlob(workbook: XLSX.WorkBook): Blob {
+      const wbout = XLSX.write(workbook, { bookType: 'xlsx', type: 'array' });
+      const blob = new Blob([wbout], { type: 'application/octet-stream' });
+      return blob;
+    }
+
+
 
 
     applyFilterGlobal(event: Event, stringVal: string) {
@@ -130,7 +162,7 @@ export class ProfileListComponent {
         { title: 'Employee Name', dataKey: 'employeeFullName' },
         { title: 'Email', dataKey: 'email' },
         { title: 'Department', dataKey: 'department' },
-        { title: 'Image', dataKey: 'image' },
+
       ];
 
       autoTable(doc, {

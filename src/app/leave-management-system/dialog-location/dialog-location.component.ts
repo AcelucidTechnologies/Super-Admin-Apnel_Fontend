@@ -6,6 +6,7 @@ import { ToastrMsgService } from 'src/app/_services/toastr-msg.service';
 import { CmsService } from '../../_services/cms.service'
 import { MatDialog } from '@angular/material/dialog';
 import { LeaveService } from 'src/app/_services/leave.service';
+import { map } from 'rxjs';
 
 @Component({
   selector: 'app-dialog-location',
@@ -20,6 +21,8 @@ export class DialogLocationComponent {
   pageLink:string
   page: any
   fgsType:any;
+
+  locationList:any;
  constructor(private ngxLoader: NgxUiLoaderService,
    private fb: FormBuilder,
    private toastr: ToastrMsgService,
@@ -30,11 +33,15 @@ export class DialogLocationComponent {
      username: localStorage.getItem("email"),
      location: ['', [Validators.required,  Validators.pattern(/^[a-zA-Z\s]+$/)]],
    });
+   this.selectForm.get('location').valueChanges.subscribe((value) => {
+    this.checkdesignationValidity(value);
+  });
 }
  ngOnInit(): void {
    this.fgsType = SPINNER.squareLoader
    this.ngxLoader.start();
    this.ngxLoader.stop();
+   this.getLocation();
  }
 
  submitForm(){
@@ -52,8 +59,21 @@ export class DialogLocationComponent {
         this.ngxLoader.stop();
       }
  })
-//  this.route.navigate(['/leaveMgmt/add-profile']);
 
   }
+  checkdesignationValidity(enteredLocation: string): void {
+    if (this.locationList.includes(enteredLocation)) {
+      this.toastr.showError('Location already exists!', 'Error');
+    }
+  }
+
+  getLocation() {
+      this.leaveservice.getLocationList().pipe(
+        map((res) => res.map((profile) => profile.location))
+      ).subscribe((LocationRes) => {
+        this.locationList = LocationRes;
+        this.ngxLoader.stop();
+      });
+    }
 
 }

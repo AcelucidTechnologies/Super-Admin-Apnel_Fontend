@@ -1,0 +1,33 @@
+
+<div class="card col-sm-12">
+  <div class="row">
+    <div class="col-12">
+    <div class="card">
+      <div class="card-body">
+          <h5 class="card-title">List Of Departments</h5>
+          <div class="department-list-container" >
+          <div class="department-list">
+          <p class="user-value" *ngFor="let count of departmentList; let i = index">
+            {{ i+1 }}. &nbsp;{{ count.department }}<br>
+          </p>
+        </div>
+        </div>
+      </div>
+  </div>
+</div>
+  </div>
+
+<div class="row mt-1">
+    <div class="col-6 mt-4" *ngFor="let count of getUniqueDepartments(profileList)">
+    <div class="card card-info">
+      <div class="card-body">
+        <h5 class="card-title">{{ count}}</h5>
+        <div class="mt-2">
+          <p>No. of Employees:</p>
+             <div class="mt-4 department-count" >{{ getCountByDepartment(count) }}</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</div>

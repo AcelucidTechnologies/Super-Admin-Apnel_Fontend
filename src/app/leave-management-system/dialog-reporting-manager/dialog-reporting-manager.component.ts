@@ -6,6 +6,7 @@ import { ToastrMsgService } from 'src/app/_services/toastr-msg.service';
 import { CmsService } from '../../_services/cms.service'
 import { MatDialog } from '@angular/material/dialog';
 import { LeaveService } from 'src/app/_services/leave.service';
+import { map } from 'rxjs';
 
 @Component({
   selector: 'app-dialog-reporting-manager',
@@ -19,6 +20,7 @@ export class DialogReportingManagerComponent {
   pageLink:string
   page: any
   fgsType:any;
+  reportingList:any;
  constructor(private ngxLoader: NgxUiLoaderService,
   private leaveservice: LeaveService,
    private fb: FormBuilder,
@@ -30,11 +32,15 @@ export class DialogReportingManagerComponent {
      username: localStorage.getItem("email"),
      reporting: ['', [Validators.required,  Validators.pattern(/^[a-zA-Z\s]+$/)]],
    });
+   this.selectForm.get('reporting').valueChanges.subscribe((value) => {
+    this.checkreportingnValidity(value);
+  });
 }
  ngOnInit(): void {
    this.fgsType = SPINNER.squareLoader
    this.ngxLoader.start();
    this.ngxLoader.stop();
+   this.getReportingmanager()
  }
 
  submitForm(){
@@ -55,6 +61,21 @@ export class DialogReportingManagerComponent {
 //  this.route.navigate(['/leaveMgmt/edit-profile']);
 
   }
+
+  checkreportingnValidity(enteredreport: string): void {
+    if (this.reportingList.includes(enteredreport)) {
+      this.toastr.showError('Reporting manager already exists!', 'Error');
+    }
+  }
+
+  getReportingmanager() {
+      this.leaveservice.getReportList().pipe(
+        map((res) => res.map((profile) => profile.reporting))
+      ).subscribe((res) => {
+        this.reportingList = res;
+        this.ngxLoader.stop();
+      });
+    }
 
 
 }

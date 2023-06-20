@@ -1,5 +1,5 @@
 import { Component, ViewChild } from '@angular/core';
-import { AbstractControl, FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { AbstractControl, FormArray, FormBuilder, FormControl, FormGroup, ValidationErrors, ValidatorFn, Validators } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute, Router } from '@angular/router';
 import { NgxUiLoaderService } from 'ngx-ui-loader';
@@ -30,7 +30,10 @@ export class AddProfileComponent {
   imageChangedEvent: any = '';
   public imageName: string;
   profileList: any[]=[];
-  emailList:any
+  emailList:any;
+  departmentList:any;
+  designationList:any;
+  binaryData :any
   imageData: any = null;
   blobImage:any;
   Image:any;
@@ -64,6 +67,12 @@ export class AddProfileComponent {
   // id:string = '64805765fb6510393c2e8373';
 
   profileForm: FormGroup;
+  roledrop: { state: string }[];
+  employeedrop: { state: string }[];
+  employeestatus: { state: string }[];
+  genderType: { state: string }[];
+  maritalStatusType: { state: string }[];
+  onBoardingType: { state: string }[];
 
   statusOptions: string[] = ['Employee', 'Admin'];
   employmentStatus: string[] = ['Active', 'InActive'];
@@ -87,6 +96,36 @@ export class AddProfileComponent {
 
    ){
 
+    this.roledrop = [
+      { state: 'Employee' },
+      { state: 'Admin' }
+    ];
+    this.employeedrop = [
+      { state: 'Full Time' },
+      { state: 'Part Time' },
+      { state: 'Contract' },
+      { state: 'Internship' }
+    ];
+    this.employeestatus = [
+      { state: 'Active' },
+      { state: 'InActive' },
+    ];
+    this.genderType = [
+      { state: 'Male' },
+      { state: 'Female' },
+    ];
+    this.maritalStatusType = [
+      { state: 'single' },
+      { state: 'Married' },
+      { state: 'Divorced' },
+      { state: 'Separated' },
+      { state: 'Widowed' }
+    ];
+    this.onBoardingType = [
+      { state: 'Active' },
+      { state: 'InActive' },
+    ];
+
 
       this.profileForm = this.fb.group({
 
@@ -99,14 +138,12 @@ export class AddProfileComponent {
         image:[''],
         department: ['', [Validators.required]],
         designation:['', [Validators.required]],
-        // role:[''],
-        role:['Enter role', Validators.required],
-        // employmentType:[''],
-        employmentType: ['Enter type', Validators.required],
-        employeeStatus:['Enter status', Validators.required],
+        role:['', Validators.required],
+        employmentType: ['', Validators.required],
+        employeeStatus:['', Validators.required],
         sourceHiring:['', [Validators.required]],
         dateOfJoining:['', [Validators.required]],
-        currentExp:['', [Validators.required]],
+        currentExp:['', [Validators.required, Validators.pattern(/^\d+$/),this.validateCurrentExp]],
         totalExp:['', [Validators.required]],
         reportingManager:['', [Validators.required]],
         separationOfDate: ['', [Validators.required]],
@@ -138,9 +175,9 @@ export class AddProfileComponent {
         personalDetails: this.fb.group({
           dateOfBirth: ['', [Validators.required]],
           expertise: ['', [Validators.required]],
-          age: ['', [Validators.required,  Validators.pattern(/^[0-9]+$/)]],
-          gender: ['Enter gender', Validators.required],
-          maritalStatus: ['Enter marital', Validators.required],
+          age: ['', [Validators.required,  Validators.pattern(/^[0-9]+$/),  Validators.min(15), Validators.max(70)]],
+          gender: ['', Validators.required],
+          maritalStatus: ['', Validators.required],
           aboutMe:['', [Validators.required]]
         }),
         systemFields: this.fb.group({
@@ -148,7 +185,7 @@ export class AddProfileComponent {
           modifiedBy: ['', [Validators.required]],
           addedTime: ['',[Validators.required]],
           modifiedTime: ['', [Validators.required]],
-          onBoardingStatus: ['Enter onboading', [Validators.required]]
+          onBoardingStatus: ['', [Validators.required]]
         }),
         identityInformation: this.fb.group({
           uan: [''],
@@ -156,18 +193,12 @@ export class AddProfileComponent {
           aadharNumber: ['', [Validators.required, Validators.pattern(/^\d{12}$/)]]
         }),
 
-
-
       });
 
       this.profileForm.get('email').valueChanges.subscribe((value) => {
         this.checkEmailValidity(value);
       });
 
-
-      // this.profileForm.get('email').valueChanges.subscribe((value) => {
-      //   this.checkEmailExists(value);
-      // });
 
 
       this.educationDetails = (this.profileForm.get('educationDetails') as FormArray).controls as FormGroup[];
@@ -179,17 +210,17 @@ export class AddProfileComponent {
     }
 
 
-    // checkEmailExists(email: string) {
-    //   if (this.emailList.includes(email)) {
-    //     this.toastr.showError('Email already exists', 'Error');
-    //   }
-    // }
-    // checkEmailExists(): void {
-    //   const enteredEmail = this.emailControl.value;
-    //   if (this.emailList.includes(enteredEmail)) {
-    //     this.toastr.showError('Email already exists', 'Error');
-    //   }
-    // }
+
+    validateCurrentExp(control: AbstractControl): ValidationErrors | null {
+      const currentExp = control.value;
+      const totalExp = control?.parent?.get('totalExp')?.value;
+
+      if (currentExp > totalExp) {
+        return { greaterThanTotalExp: true };
+      }
+
+      return null;
+    }
 
     getAllProfile() {
       this.leaveservice.getProfileList().pipe(
@@ -202,21 +233,33 @@ export class AddProfileComponent {
     }
 
 
+
     checkEmailValidity(enteredEmail: string): void {
       if (this.emailList.includes(enteredEmail)) {
         this.toastr.showError('Email already exists!', 'Error');
       }
     }
 
+  // modifiedTimeValidator(): ValidatorFn {
+  //     return (formGroup: FormGroup): ValidationErrors | null => {
+  //       const addedTime = formGroup.get('addedTime').value;
+  //       const modifiedTime = formGroup.get('modifiedTime').value;
+
+  //       if (addedTime && modifiedTime && addedTime >= modifiedTime) {
+  //         return { invalidModifiedTime: true };
+  //       }
+
+  //       return null;
+  //     };
+  //   }
 
   createEducationRow(): FormGroup {
     return this.fb.group({
       sno: [this.serialNumberJob++],
-      instituteName: [''],
-      degree: [''],
-      specialization: [''],
-      toDate: [''],
-      // _id:[''],
+      instituteName: ['', [Validators.required]],
+      degree: ['', [Validators.required]],
+      specialization: ['', [Validators.required]],
+      toDate: ['', [Validators.required]],
       editMode: [true]
     });
   }
@@ -224,7 +267,7 @@ export class AddProfileComponent {
   createworkRow(): FormGroup {
     return this.fb.group({
       sno: [this.serialNumberWork++],
-      username:[''],
+      username:['' ],
       companyName: [''],
       jobTitle: [''],
       fromDate: [''],
@@ -401,13 +444,15 @@ export class AddProfileComponent {
     // this.imageName = event.target.files[0].name;
     // this.fileHolder = event.target.files[0];
     // reader.onload = (data) => {
-    //   this.Image = data.target.result;
+    //   this.DefaultImage = data.target.result;
 
     //   console.log("image 101" + this.fileHolder)
-    //   console.log("file event:", event);
+    //   console.log("file event:", this.DefaultImage);
 
     // };
   }
+
+
 
   submitDetails(recievedValue: any) {
     let newPayload = Object.assign({}, recievedValue);
@@ -510,6 +555,7 @@ export class AddProfileComponent {
         educationDetails: this.educationExperiencePayload() ,
 
       }
+
 
       this.submitDetails(this.payload);
       console.log("submit form value payload 24 ===>"+ this.payload);
