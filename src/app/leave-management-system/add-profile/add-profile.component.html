@@ -602,6 +602,12 @@
                 <div *ngIf="profileForm.get('personalDetails.age').hasError('pattern')" style="color: rgb(253, 122, 122); font-size: small; font-style: italic;">
                   Age should be a number
                 </div>
+                <div *ngIf="profileForm.get('personalDetails.age').hasError('min')" style="color: rgb(253, 122, 122); font-size: small; font-style: italic;">
+                  Age should be at least 15
+                </div>
+                <div *ngIf="profileForm.get('personalDetails.age').hasError('max')" style="color: rgb(253, 122, 122); font-size: small; font-style: italic;">
+                  Age should be at most 70
+                </div>
               </div>
             </div>
 
@@ -1060,6 +1066,9 @@
                           <div *ngIf="profileForm.get('systemFields.modifiedTime').hasError('required')" style="color: rgb(253, 122, 122); font-size: small; font-style: italic;">
                             modified time is required
                           </div>
+                          <div *ngIf="profileForm.get('systemFields.modifiedTime').hasError('invalidModifiedTime')" style="color: rgb(253, 122, 122); font-size: small; font-style: italic;">
+                            Modified time should be greater than Added time
+                          </div>
                         </div>
               </div>
             </div>
@@ -1086,9 +1095,9 @@
             <div class="col-8">
               <input type="text" class="form-control custom-placeholder" placeholder="Enter modified by" id="inputdefault" formControlName="modifiedBy">
               <div *ngIf="profileForm.get('systemFields.modifiedBy').invalid && (profileForm.get('systemFields.modifiedBy').touched || profileForm.get('systemFields.modifiedBy').dirty)">
-                <div *ngIf="profileForm.get('systemFields.modifiedBy').hasError('required')" style="color: rgb(253, 122, 122); font-size: small; font-style: italic;">
-                  modifiedBy by is required
-                </div>
+                <!-- <div *ngIf="profileForm.hasError('invalidModifiedTime')" style="color: rgb(253, 122, 122); font-size: small; font-style: italic;">
+                  Modified time should be greater than Added time
+                </div> -->
               </div>
             </div>
           </div>

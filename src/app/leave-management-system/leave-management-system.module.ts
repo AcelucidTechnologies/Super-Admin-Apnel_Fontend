@@ -23,6 +23,7 @@ import { ButtonModule } from 'primeng/button';
 import { ProfileDialogComponent } from './profile-dialog/profile-dialog.component';
 import { TeamComponent } from './team/team.component';
 import { CalenderComponent } from './calender/calender.component';
+import { FullCalendarModule } from '@fullcalendar/angular';
 
 @NgModule({
   declarations: [
@@ -59,7 +60,8 @@ import { CalenderComponent } from './calender/calender.component';
     ReactiveFormsModule,
     MatDialogModule,
     MatButtonModule,
-    ButtonModule
+    ButtonModule,
+    FullCalendarModule
   ]
 })
 export class LeaveManagementSystemModule { }

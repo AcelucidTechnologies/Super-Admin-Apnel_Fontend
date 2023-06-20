@@ -19,6 +19,7 @@ import { LeaveService } from 'src/app/_services/leave.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ToastrMsgService } from 'src/app/_services/toastr-msg.service';
 import { DxiItemModule } from 'devextreme-angular/ui/nested';
+import { combineLatest, filter, Observable, tap } from 'rxjs';
 
 @Component({
   selector: 'app-edit-profile',
@@ -35,6 +36,11 @@ export class EditProfileComponent {
   imageChangedEvent: any = '';
   public imageName: string;
   reportManagerdrop: any;
+  departmentdrop$: Observable<any>;
+  designationdrop$: Observable<any>;
+  soruceHiringdrop$: Observable<any>;
+  reportManager$: Observable<any>;
+  locationList$: Observable<any>;
   imageData: any = null;
   Image: any;
   // Image: any =
@@ -190,9 +196,31 @@ export class EditProfileComponent {
     ).controls as FormGroup[];
     this.workExperience = (this.profileForm.get('workExperience') as FormArray)
       .controls as FormGroup[];
-    // this.addNewRow();
-    // this.addNewWorkRow();
-    console.log(this.educationDetails);
+
+
+      this.departmentdrop$ = this.leaveservice.getdepartmentList();
+      this.designationdrop$ = this.leaveservice.getdesignationList();
+      this.soruceHiringdrop$ = this.leaveservice.getSourceHiringList();
+      this.reportManager$ = this.leaveservice.getReportList();
+      this.locationList$ = this.leaveservice.getLocationList();
+
+      combineLatest([
+        this.locationList$,
+        this.reportManager$,
+        this.departmentdrop$,
+        this.designationdrop$,
+        this.soruceHiringdrop$
+      ]).pipe(
+        filter(([locationList, reportManager, departmentdrop, designationdrop, soruceHiringdrop]) =>
+        locationList && reportManager && departmentdrop && designationdrop && soruceHiringdrop),
+        tap(([locationList, reportManager, departmentdrop, designationdrop, soruceHiringdrop]) => {
+          this.designationdrop = designationdrop;
+          this.soruceHiringdrop = soruceHiringdrop;
+          this.reportManagerdrop = reportManager;
+          this.locationList = locationList;
+          this.departmentdrop = departmentdrop;
+        })
+      ).subscribe();
   }
 
   createEducationRow(): FormGroup {
@@ -315,17 +343,16 @@ export class EditProfileComponent {
     this.activateRoute.queryParamMap.subscribe((params) => {
       this.id = params.get('id');
     });
-    this.getDepartment();
+
     this.getLeaveById();
-    this.getDesignation();
-    this.getSourceHiring();
-    this.getReportManager();
-    this.getLocation();
-    // this.editUserProfile();
-    this.designationControl.valueChanges.subscribe((value) => {
-      // Perform any desired action when the value changes
-      console.log('Selected Designation:', value);
-    });
+    // this.getDepartment();
+    // this.getDesignation();
+    // this.getSourceHiring();
+    // this.getReportManager();
+    // this.getLocation();
+    // this.designationControl.valueChanges.subscribe((value) => {
+    //   console.log('Selected Designation:', value);
+    // });
   }
 
   openDialog() {
