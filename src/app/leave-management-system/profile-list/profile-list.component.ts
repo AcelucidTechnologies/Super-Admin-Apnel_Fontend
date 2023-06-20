@@ -14,6 +14,8 @@ import autoTable from 'jspdf-autotable'
 import * as FileSaver from 'file-saver';
 import * as xlsxPackage from 'xlsx';
 import { ProfileDialogComponent } from '../profile-dialog/profile-dialog.component';
+import * as XLSX from 'xlsx';
+import { DatePipe } from '@angular/common';
 
 @Component({
   selector: 'app-profile-list',
@@ -91,21 +93,48 @@ export class ProfileListComponent {
       }
     }
 
-          exportExcel() {
-            const worksheet = xlsxPackage.utils.json_to_sheet(this.profileList);
-            const workbook = { Sheets: { 'data': worksheet }, SheetNames: ['data'] };
-            const excelBuffer: any = xlsxPackage.write(workbook, { bookType: 'xlsx', type: 'array' });
-            this.saveAsExcelFile(excelBuffer, "Profile");
-          }
 
-    saveAsExcelFile(buffer: any, fileName: string): void {
-      let EXCEL_TYPE = 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;charset=UTF-8';
-      let EXCEL_EXTENSION = '.xlsx';
-      const data: Blob = new Blob([buffer], {
-        type: EXCEL_TYPE
-      });
-      FileSaver.saveAs(data, fileName + '_export_' + new Date().getTime() + EXCEL_EXTENSION);
+    exportExcel(): void {
+
+      // Prepare the data for export
+      const data = this.profileList.map((item, index) => ({
+        'S.No.': index+1,
+        'Employee Name': item.employeeFullName,
+        'Email': item.email,
+        'Department': item.department,
+      }));
+
+      // Create a new workbook and worksheet
+      const workbook = XLSX.utils.book_new();
+      const worksheet = XLSX.utils.json_to_sheet(data);
+
+      // Add the worksheet to the workbook
+      XLSX.utils.book_append_sheet(workbook, worksheet, 'Sheet1');
+
+      // Generate a Blob from the workbook
+      const workbookBlob = this.workbookToBlob(workbook);
+
+      // Create a download link
+      const url = URL.createObjectURL(workbookBlob);
+      const link = document.createElement('a');
+      link.href = url;
+      link.download = 'table_data.xlsx';
+
+      // Simulate a click on the link to start the download
+      link.click();
+
+      // Clean up
+      URL.revokeObjectURL(url);
     }
+
+    // Helper function to convert a workbook to Blob
+    private workbookToBlob(workbook: XLSX.WorkBook): Blob {
+      const wbout = XLSX.write(workbook, { bookType: 'xlsx', type: 'array' });
+      const blob = new Blob([wbout], { type: 'application/octet-stream' });
+      return blob;
+    }
+
+
 
 
     applyFilterGlobal(event: Event, stringVal: string) {
@@ -133,7 +162,7 @@ export class ProfileListComponent {
         { title: 'Employee Name', dataKey: 'employeeFullName' },
         { title: 'Email', dataKey: 'email' },
         { title: 'Department', dataKey: 'department' },
-        { title: 'Image', dataKey: 'image' },
+
       ];
 
       autoTable(doc, {
