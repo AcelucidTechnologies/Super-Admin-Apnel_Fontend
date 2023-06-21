@@ -216,13 +216,13 @@
               <div>
                 <select style="width: 100%; border: 1px solid lightgray; height: 38px; padding:5px"
                   class="form-group"
-                  formControlName="userdesignation"
+                  formControlName="designation"
                 >
                   <option value="select">Enter designation</option>
                   <option *ngFor="let count of designationdrop">{{ count.designation }}</option>
                 </select>
-                <div *ngIf="!profileForm.controls['userdesignation'].valid && (profileForm.controls['userdesignation'].touched || profileForm.controls['userdesignation'].dirty || profileForm.controls['userdesignation'].value === '')">
-                  <div [hidden]="!profileForm.controls['userdesignation'].errors['required']" style="color: rgb(253, 122, 122); font-size: small; font-style: italic;">
+                <div *ngIf="!profileForm.controls['designation'].valid && (profileForm.controls['designation'].touched || profileForm.controls['designation'].dirty || profileForm.controls['designation'].value === '')">
+                  <div [hidden]="!profileForm.controls['designation'].errors['required']" style="color: rgb(253, 122, 122); font-size: small; font-style: italic;">
                     designation is required
                   </div>
                 </div>
@@ -951,11 +951,11 @@
       <div class="row text-input-field">
         <div class="col-6">
           <div class="row" style="display: flex;">
-            <div class="col-4 info-name"><label class="starlabel">Date of Exit</label></div>
+            <div class="col-4 info-name"><label>Date of Exit</label></div>
             <div class="col-8">
               <input type="date" class="form-control input-font" placeholder="Select date of exit"
               id="startDate" name="startDate" formControlName="separationOfDate">
-              <div
+              <!-- <div
               *ngIf="
                 !profileForm.controls['separationOfDate'].valid  ||
                   profileForm.controls['separationOfDate'].dirty
@@ -974,7 +974,7 @@
               separationOfDate is required
               </div>
 
-            </div>
+            </div> -->
             </div>
           </div>
         </div>
@@ -995,12 +995,8 @@
               <div class="col-4 info-name"><label class="starlabel">Added Time</label></div>
               <div class="col-8">
                 <input type="date" class="form-control input-font" placeholder="added Time"
-                        id="startDate" name="startDate" formControlName="addedTime">
-                        <div *ngIf="profileForm.get('systemFields.addedTime').invalid  || profileForm.get('systemFields.addedTime').dirty">
-                          <div *ngIf="profileForm.get('systemFields.addedTime').hasError('required')" style="color: rgb(253, 122, 122); font-size: small; font-style: italic;">
-                            added time is required
-                          </div>
-                        </div>
+                        id="startDate" name="startDate" formControlName="addedTime" readonly>
+
               </div>
             </div>
           </div>
@@ -1025,12 +1021,8 @@
           <div class="row" style="display: flex;">
             <div class="col-4 info-name"><label class="starlabel">Added By</label></div>
             <div class="col-8">
-              <input type="text" class="form-control input-font" id="inputdefault" formControlName="addedBy">
-              <div *ngIf="profileForm.get('systemFields.addedBy').invalid || profileForm.get('systemFields.addedBy').dirty">
-                <div *ngIf="profileForm.get('systemFields.addedBy').hasError('required')" style="color: rgb(253, 122, 122); font-size: small; font-style: italic;">
-                  added by is required
-                </div>
-              </div>
+              <input type="text" class="form-control input-font" id="inputdefault" formControlName="addedBy" readonly>
+
             </div>
           </div>
         </div>

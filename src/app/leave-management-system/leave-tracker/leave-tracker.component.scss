@@ -1,0 +1,35 @@
+.page-heading {
+  display: flex;
+  justify-content: space-between;
+
+}
+.p-button {
+  color: #ffffff;
+  background: rgb(245, 46, 46);
+  border: 1px solid rgb(245, 46, 46);
+  padding: 0.429rem 1rem;
+  font-size: 1rem;
+  // transition: background-color 0.2s, color 0.2s, border-color 0.2s, box-shadow 0.2s;
+  border-radius: 3px;
+}
+.p-button:hover {
+  background:  #f52e2e;
+  color: #ffffff;
+  border-color:  #f52e2e;
+}
+.card-header{
+  background: cadetblue;
+  color: white;
+  line-height: 10px;
+
+}
+.leave-count{
+  text-align:center;
+  font-size: 30px;
+  border: 1px solid lightcoral;
+  padding: 5px 5px 5px 5px;
+  margin: 30px 100px 30px 100px;
+  background-color: lightcoral;
+  color: white;
+  border-radius: 5px;
+}

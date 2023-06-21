@@ -25,6 +25,38 @@ getProfileList(): Observable<any[]> {
  return this.http.get<any[]>(endpointUrl ,{ 'headers': httpOptions });
 
 }
+
+getcalenderList(): Observable<any[]> {
+  const token = localStorage.getItem('token') || '';
+  const email = localStorage.getItem('email')
+  let httpOptions = new HttpHeaders().set('x-access-token', token)
+ const endpointUrl = `${environment.JSON_SERVER}/getCalenderLeaves`;
+ return this.http.get<any[]>(endpointUrl ,{ 'headers': httpOptions });
+}
+
+getLeaveList(): Observable<any[]> {
+  const token = localStorage.getItem('token') || '';
+  const email = localStorage.getItem('email')
+  let httpOptions = new HttpHeaders().set('x-access-token', token)
+ const endpointUrl = `${environment.JSON_SERVER}/getTotalLeaves?username=${email}`;
+ return this.http.get<any[]>(endpointUrl ,{ 'headers': httpOptions });
+}
+
+createLeave(payload:any): Observable<any[]> {
+  const token = localStorage.getItem('token') || '';
+        const email = localStorage.getItem('email') || '';
+        let httpOptions = new HttpHeaders().set('x-access-token', token)
+          const endpointUrl = `${environment.JSON_SERVER}/createLeaveTracker`;
+        return this.http.post<any>(endpointUrl, payload,{ 'headers': httpOptions });
+}
+
+getLeaveById(id: string): Observable<any> {
+  const token = localStorage.getItem('token') || '';
+  let httpOptions = new HttpHeaders().set('x-access-token', token)
+  const endpointUrl = `${environment.JSON_SERVER}/getLeaveTrackerById?id=${id}`;
+  return this.http.get<any>(endpointUrl,{ 'headers': httpOptions });
+}
+
 addProfile(payload: any): Observable<any[]> {
   const token = localStorage.getItem('token') || '';
   const email = localStorage.getItem('email') || '';
@@ -269,4 +301,50 @@ deleteProfile(id: string) {
   const endpointUrl = `${environment.JSON_SERVER}/deleteLeaveProfile?id=${id}`;
   return this.http.delete<any>(endpointUrl, { 'headers': httpOptions });
 }
+
+
+
+
+// #############################  Assets APis #############################
+
+getAssetList(): Observable<any[]> {
+  const token = localStorage.getItem('token') || '';
+  const email = localStorage.getItem('email')
+  let httpOptions = new HttpHeaders().set('x-access-token', token)
+ const endpointUrl = `${environment.JSON_SERVER}/getLeaveAssets?username=${email}`;
+ return this.http.get<any[]>(endpointUrl ,{ 'headers': httpOptions });
+
+}
+
+deleteAsset(id: string) {
+  const token = localStorage.getItem('token') || '';
+  let httpOptions = new HttpHeaders().set('x-access-token', token)
+  const endpointUrl = `${environment.JSON_SERVER}/deleteLeaveAssets?id=${id}`;
+  return this.http.delete<any>(endpointUrl, { 'headers': httpOptions });
+}
+
+createAsset(payload:any): Observable<any[]> {
+  const token = localStorage.getItem('token') || '';
+        const email = localStorage.getItem('email') || '';
+        let httpOptions = new HttpHeaders().set('x-access-token', token)
+          const endpointUrl = `${environment.JSON_SERVER}/createLeaveAssets`;
+        return this.http.post<any>(endpointUrl, payload,{ 'headers': httpOptions });
+}
+
+getAssetById(id: string): Observable<any> {
+  const token = localStorage.getItem('token') || '';
+  let httpOptions = new HttpHeaders().set('x-access-token', token)
+  const endpointUrl = `${environment.JSON_SERVER}/getLeaveAssetsById?id=${id}`;
+  return this.http.get<any>(endpointUrl,{ 'headers': httpOptions });
+}
+
+editAssetList(payload, id: number) {
+  const token = localStorage.getItem('token') || '';
+  const httpOptions = new HttpHeaders().set('x-access-token', token);
+  const endpointUrl = `${environment.JSON_SERVER}/updateLeaveAssets?id=${id}`;
+
+  return this.http.put<any>(endpointUrl, payload, { headers: httpOptions });
+}
+
+
 }

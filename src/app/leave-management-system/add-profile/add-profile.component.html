@@ -307,7 +307,7 @@
             formControlName="role"
 
           >
-            <option>Enter role</option>
+            <option >Enter role</option>
             <option *ngFor="let count of roledrop">
               {{ count.state }}
             </option>
@@ -1002,11 +1002,11 @@
       <div class="row text-input-field">
         <div class="col-6">
           <div class="row" style="display: flex;">
-            <div class="col-4 info-name"><label class="starlabel">Date of Exit</label></div>
+            <div class="col-4 info-name"><label>Date of Exit</label></div>
             <div class="col-8">
               <input type="date" class="form-control" placeholder="Select date of exit"
               id="startDate" name="startDate" formControlName="separationOfDate">
-              <div
+              <!-- <div
               *ngIf="
                 !profileForm.controls['separationOfDate'].valid &&
                 (profileForm.controls['separationOfDate'].touched ||
@@ -1026,7 +1026,7 @@
               separationOfDate is required
               </div>
 
-            </div>
+            </div> -->
             </div>
           </div>
         </div>
@@ -1058,18 +1058,11 @@
           </div>
           <div class="col-6">
             <div class="row" style="display: flex;">
-              <div class="col-4 info-name"><label class="starlabel">Modified Time</label></div>
+              <div class="col-4 info-name"><label >Modified Time</label></div>
               <div class="col-8">
                 <input type="date" class="form-control" placeholder="modified time"
-                        id="startDate" name="startDate" formControlName="modifiedTime">
-                        <div *ngIf="profileForm.get('systemFields.modifiedTime').invalid && (profileForm.get('systemFields.modifiedTime').touched || profileForm.get('systemFields.modifiedTime').dirty)">
-                          <div *ngIf="profileForm.get('systemFields.modifiedTime').hasError('required')" style="color: rgb(253, 122, 122); font-size: small; font-style: italic;">
-                            modified time is required
-                          </div>
-                          <div *ngIf="profileForm.get('systemFields.modifiedTime').hasError('invalidModifiedTime')" style="color: rgb(253, 122, 122); font-size: small; font-style: italic;">
-                            Modified time should be greater than Added time
-                          </div>
-                        </div>
+                        id="startDate" name="startDate" formControlName="modifiedTime" readonly>
+
               </div>
             </div>
           </div>
@@ -1091,14 +1084,10 @@
         </div>
         <div class="col-6">
           <div class="row" style="display: flex;">
-            <div class="col-4 info-name"><label class="starlabel">Modified By</label></div>
+            <div class="col-4 info-name"><label>Modified By</label></div>
             <div class="col-8">
-              <input type="text" class="form-control custom-placeholder" placeholder="Enter modified by" id="inputdefault" formControlName="modifiedBy">
-              <div *ngIf="profileForm.get('systemFields.modifiedBy').invalid && (profileForm.get('systemFields.modifiedBy').touched || profileForm.get('systemFields.modifiedBy').dirty)">
-                <!-- <div *ngIf="profileForm.hasError('invalidModifiedTime')" style="color: rgb(253, 122, 122); font-size: small; font-style: italic;">
-                  Modified time should be greater than Added time
-                </div> -->
-              </div>
+              <input type="text" class="form-control custom-placeholder" placeholder="Enter modified by" id="inputdefault" formControlName="modifiedBy" readonly>
+
             </div>
           </div>
         </div>

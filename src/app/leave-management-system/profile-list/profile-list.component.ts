@@ -62,7 +62,6 @@ export class ProfileListComponent {
     getAllProfile() {
       this.LeaveService.getProfileList().subscribe((res) => {
         this.profileList =res
-        console.log("response 24==>", res);
         this.ngxLoader.stop();
       });
     }

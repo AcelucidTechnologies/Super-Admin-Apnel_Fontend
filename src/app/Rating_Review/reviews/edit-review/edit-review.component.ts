@@ -112,23 +112,11 @@ export class EditReviewComponent implements OnInit {
       console.log("review list by id ===>"+JSON.stringify(res))
       this.editForm.patchValue({
         rating:res.ratingCountReview,
-        // reviewerType: '',
         publishingSiteUrl: res.publishingSiteUrl,
         referenceId: res.reviewSubject,
         status: res.status,
       });
     })
   }
-  // getReviewList(){
-  //   this.reviewsService.getReviewDetail(this.serialno).subscribe((res)=>{
-  //     console.log(res)
-  //     this.editForm.patchValue({
-  //       rating:res[0].rating,
-  //       reviewerType: 'Friend',
-  //       reviewPublishPage: res[0].publishingsiteurl,
-  //       referenceId: res[0].reviewSubject,
-  //       reviewStatus: res[0].status,
-  //     });
-  //   })
-  // }
+
 }

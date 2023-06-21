@@ -120,6 +120,11 @@ const routes: Routes = [
     loadChildren: () => import('./leave-management-system/leave-management-system.module').then(mod=>mod.LeaveManagementSystemModule),
     canActivate: [AuthGuard]
   },
+  {
+    path: 'asset',
+    loadChildren: () => import('./leave-management-system/Asset/asset.module').then(mod=>mod.AssetModule),
+    canActivate: [AuthGuard]
+  },
 
 
   { path: '', component: AuthenticationComponent },

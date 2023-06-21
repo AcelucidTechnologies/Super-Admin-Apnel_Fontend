@@ -31,9 +31,7 @@ getReviewDetailById(id: number): Observable<any> {
   const token = localStorage.getItem('token') || '';
   let httpOptions = new HttpHeaders().set('x-access-token', token)
   const endpointUrl = `${environment.JSON_SERVER}/getReviewListById?id=${id}`;
-  // let indexObj = bannerSpecialData.findIndex((obj)=>obj.id==id);
   return this.http.get<any>(endpointUrl,{ 'headers': httpOptions });
-  // return of(bannerSpecialData[indexObj])
 }
 submitReviewDetail(payload:any):Observable<any[]>{
   const token = localStorage.getItem('token') || '';
