@@ -29,17 +29,7 @@ constructor(private reviewerService:ReviewerService,
     reviewerStatus: ['', [Validators.required]],
   });
 
-  // this.activatedRoute.queryParamMap.subscribe((params)=>{
-  //   this.id = parseInt(params.get('serialno'))
-  //   if (this.id && this.id != undefined) {
-  //     this.title = "Edit"
-  //     this.change="Update"
 
-  //   } else {
-  //     this.title = "Add"
-  //     this.change="Submit"
-  //   }
-  // })
   this.activatedRoute.queryParamMap.subscribe(params => {
     this.id = params.get('id');
     if (this.id && this.id != undefined) {

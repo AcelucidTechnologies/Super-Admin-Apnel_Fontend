@@ -9,15 +9,15 @@ import {MatDialog} from '@angular/material/dialog';
 export class DialogComponent implements OnInit {
 
   constructor() {
-   
+
    }
-  
-  
-  
+
+
+
   ngOnInit(): void {
   }
 
- 
+
 
 
 }

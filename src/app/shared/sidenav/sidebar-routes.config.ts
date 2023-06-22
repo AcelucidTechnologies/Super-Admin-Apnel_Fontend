@@ -50,6 +50,27 @@ export const SideNaveMenueRoute = [
         routerLinkActiveOptions: { exact: true },
         routerLinkActive: 'active'
       },
+      {
+        label: 'Leave Tracker',
+        icon: 'pi pi-list',
+        routerLink: ['/leaveMgmt/leave-tracker'],
+        routerLinkActiveOptions: { exact: true },
+        routerLinkActive: 'active'
+      },
+      {
+        label: 'Leave Approve',
+        icon: 'pi pi-list',
+        routerLink: ['/leaveMgmt/leave-approve-disapprove'],
+        routerLinkActiveOptions: { exact: true },
+        routerLinkActive: 'active'
+      },
+      {
+        label: 'Assets',
+        icon: 'pi pi-list',
+        routerLink: ['/asset/asset-list'],
+        routerLinkActiveOptions: { exact: true },
+        routerLinkActive: 'active'
+      },
     ],
   },
   {

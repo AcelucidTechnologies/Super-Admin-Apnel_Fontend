@@ -60,7 +60,6 @@ export class DialogSourceHiringComponent {
         this.ngxLoader.stop();
       }
  })
-//  this.route.navigate(['/leaveMgmt/edit-profile']);
 
   }
   checkHiringValidity(enteredreport: string): void {

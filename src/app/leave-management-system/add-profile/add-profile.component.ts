@@ -97,6 +97,7 @@ export class AddProfileComponent {
    ){
 
     this.roledrop = [
+
       { state: 'Employee' },
       { state: 'Admin' }
     ];
@@ -146,7 +147,7 @@ export class AddProfileComponent {
         currentExp:['', [Validators.required, Validators.pattern(/^\d+$/),this.validateCurrentExp]],
         totalExp:['', [Validators.required]],
         reportingManager:['', [Validators.required]],
-        separationOfDate: ['', [Validators.required]],
+        separationOfDate: [''],
         location:['', [Validators.required]],
         educationDetails: this.fb.array([]),
         workExperience: this.fb.array([]),
@@ -182,9 +183,9 @@ export class AddProfileComponent {
         }),
         systemFields: this.fb.group({
           addedBy: ['', [Validators.required]],
-          modifiedBy: ['', [Validators.required]],
+          modifiedBy: [''],
           addedTime: ['',[Validators.required]],
-          modifiedTime: ['', [Validators.required]],
+          modifiedTime: [''],
           onBoardingStatus: ['', [Validators.required]]
         }),
         identityInformation: this.fb.group({

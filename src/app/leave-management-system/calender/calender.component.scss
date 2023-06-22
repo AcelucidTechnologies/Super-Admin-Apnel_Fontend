@@ -1,0 +1,54 @@
+::ng-deep th {
+  background-color:  rgb(228, 28, 28)   !important;
+  color: white !important;
+}
+// ::ng-deep.fc.fc-theme-standard a {
+//   color: #333333;
+// }
+
+::ng-deep .fc.fc-theme-standard .fc-toolbar .fc-button {
+  color: #ffffff;
+  background: rgb(228, 28, 28) ;
+  border: 1px solid rgb(228, 28, 28) ;
+  font-size: 1rem;
+  border-radius: 3px;
+}
+
+::ng-deep .fc.fc-theme-standard .fc-toolbar .fc-button.fc-timeGridWeek-button{
+  background: white;
+    border: 1px solid #dadada;
+    color: #333333;
+}
+::ng-deep .fc.fc-theme-standard .fc-toolbar .fc-button.fc-timeGridDay-button {
+  background: white;
+    border: 1px solid #dadada;
+    color: #333333;
+}
+::ng-deep .fc.fc-theme-standard .fc-toolbar .fc-button:disabled {
+  opacity: 0.5;
+  color: #ffffff;
+  background: lightcoral;
+  border: 1px solid lightcoral;
+}
+::ng-deep .fc.fc-theme-standard .fc-toolbar .fc-button.fc-timeGridWeek-button.fc-button-active {
+  background: rgb(228, 28, 28)  !important;
+  border-color: rgb(228, 28, 28)  !important;
+  color: #ffffff !important;
+}
+::ng-deep .fc.fc-theme-standard .fc-toolbar .fc-button.fc-timeGridDay-button.fc-button-active{
+  background: rgb(228, 28, 28)  !important;
+  border-color: rgb(228, 28, 28)  !important;
+  color: #ffffff !important;
+}
+::ng-deep .fc.fc-theme-standard .fc-toolbar .fc-button.fc-dayGridMonth-button.fc-button-active {
+  background: rgb(228, 28, 28)  !important;
+  border-color: rgb(228, 28, 28)  !important;
+  color: #ffffff !important;
+  border: none;
+}
+::ng-deep .fc.fc-theme-standard .fc-toolbar .fc-button.fc-dayGridMonth-button.fc-button-active:hover{
+  border: none !important;
+}
+::ng-deep .fc-col-header-cell-cushion {
+  color: white !important;
+}

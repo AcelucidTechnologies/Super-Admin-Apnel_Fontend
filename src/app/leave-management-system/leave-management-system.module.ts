@@ -24,6 +24,24 @@ import { ProfileDialogComponent } from './profile-dialog/profile-dialog.componen
 import { TeamComponent } from './team/team.component';
 import { CalenderComponent } from './calender/calender.component';
 import { FullCalendarModule } from '@fullcalendar/angular';
+import { CalendarOptions } from '@fullcalendar/core';
+import dayGridPlugin from '@fullcalendar/daygrid';
+import timeGridPlugin from '@fullcalendar/timegrid';
+import { LeaveTrackerComponent } from './leave-tracker/leave-tracker.component';
+import { LeaveApplyComponent } from './leave-apply/leave-apply.component';
+import { CKEditorModule } from 'ckeditor4-angular';
+import { LeaveApproveDisapproveComponent } from './leave-approve-disapprove/leave-approve-disapprove.component';
+import { AssetListComponent } from './Asset/asset-list/asset-list.component';
+import { AddAssetComponent } from './Asset/add-asset/add-asset.component';
+import { EditAssetComponent } from './Asset/edit-asset/edit-asset.component';
+
+const plugins = [dayGridPlugin, timeGridPlugin];
+
+const calendarOptions: CalendarOptions = {
+  plugins,
+  // other options
+};
+
 
 @NgModule({
   declarations: [
@@ -39,6 +57,10 @@ import { FullCalendarModule } from '@fullcalendar/angular';
     ProfileDialogComponent,
     TeamComponent,
     CalenderComponent,
+    LeaveTrackerComponent,
+    LeaveApplyComponent,
+    LeaveApproveDisapproveComponent,
+
   ],
   imports: [
     CommonModule,
@@ -58,10 +80,16 @@ import { FullCalendarModule } from '@fullcalendar/angular';
     SharedModule,
     FormsModule,
     ReactiveFormsModule,
-    MatDialogModule,
-    MatButtonModule,
     ButtonModule,
-    FullCalendarModule
-  ]
+    FullCalendarModule,
+    CKEditorModule,
+
+  ],
+  providers: [
+    {
+      provide: 'calendarOptions',
+      useValue: calendarOptions,
+    },
+  ],
 })
 export class LeaveManagementSystemModule { }

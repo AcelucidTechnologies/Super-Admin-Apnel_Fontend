@@ -133,7 +133,7 @@ export class EditProfileComponent {
       email: ['', [Validators.required, Validators.email]],
       image: [''],
       department: ['', [Validators.required]],
-      userdesignation: ['select', [Validators.required]],
+      designation: ['select', [Validators.required]],
       role: ['', [Validators.required]],
       employmentType: ['', [Validators.required]],
       employeeStatus: ['', [Validators.required]],
@@ -142,7 +142,7 @@ export class EditProfileComponent {
       currentExp: ['', [Validators.required]],
       totalExp: ['', [Validators.required]],
       userreportingManager: ['',[Validators.required]],
-      separationOfDate: ['', [Validators.required]],
+      separationOfDate: [''],
       userlocation: ['', [Validators.required]],
       educationDetails: this.fb.array([]),
       workExperience: this.fb.array([]),
@@ -170,9 +170,9 @@ export class EditProfileComponent {
         sameAsLocal: [''],
       }),
       systemFields: this.fb.group({
-        addedBy: ['', [Validators.required]],
+        addedBy: [''],
         modifiedBy: ['', [Validators.required]],
-        addedTime: ['', [Validators.required]],
+        addedTime: [''],
         modifiedTime: ['', [Validators.required]],
         onBoardingStatus: ['', [Validators.required]],
       }),
@@ -430,7 +430,7 @@ export class EditProfileComponent {
 
         // image:this.prevImageName,
         department: res.department,
-        userdesignation: res.designation,
+        designation: res.designation,
         role: res.role,
         employmentType: res.employmentType,
         employeeStatus: res.employeeStatus,
@@ -473,9 +473,9 @@ export class EditProfileComponent {
         separationOfDate: separationOfDate,
         systemFields: {
           addedBy: res.systemFields.addedBy,
-          modifiedBy: res.systemFields.modifiedBy,
+          modifiedBy: res.employeeFullName,
           addedTime: this.convertDateFormat(res.systemFields.addedTime),
-          modifiedTime: this.convertDateFormat(res.systemFields.modifiedTime),
+          modifiedTime: this.convertDateFormat(res.updatedAt),
           onBoardingStatus: res.systemFields.onBoardingStatus,
         },
         identityInformation: {
@@ -579,7 +579,7 @@ export class EditProfileComponent {
         FirstName: this.profileForm.controls['FirstName'].value,
         lastName: this.profileForm.controls['lastName'].value,
         department: this.profileForm.controls['department'].value,
-        userdesignation: this.profileForm.controls['userdesignation'].value,
+        designation: this.profileForm.controls['designation'].value,
         email: this.profileForm.controls['email'].value,
         role: this.profileForm.controls['role'].value,
         location: this.profileForm.controls['userlocation'].value,
@@ -670,6 +670,7 @@ export class EditProfileComponent {
 
         // educationDetails: this.profileForm.get('educationDetails').value
       };
+      console.log("submit payload" + JSON.stringify(this.payload))
 
       this.editUserProfile();
 

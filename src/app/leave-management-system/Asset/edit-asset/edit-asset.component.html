@@ -1,0 +1,162 @@
+
+<div class="button-heading-container">
+  <button class="mb-2 back-button" [routerLink]="['/asset/asset-list']">
+    <i class="material-icons">arrow_back</i>
+  </button>
+  <h5>&nbsp;Edit Asset</h5>
+</div>
+<div class="card pl-4 pr-4 pb-3 pt-5">
+<form [formGroup]="selectForm">
+  <div class="row mb-4">
+    <div class="col-6">
+        <div class="row">
+          <div class="col-4">
+            <label class="starlabel">Employee name</label></div>
+            <div class="col-8 "><input formControlName="employeeName" class="form-control custom-placeholder input-padding"  type="text" >
+              <div *ngIf="
+              !selectForm.controls['employeeName'].valid &&
+              (selectForm.controls['employeeName'].touched ||
+              selectForm.controls['employeeName'].dirty)
+            ">
+              <div [hidden]="!selectForm.controls['employeeName'].errors['required']" style="
+                color: rgb(253, 122, 122);
+                font-size: small;
+                font-style: italic;
+              ">
+                employee name  is required
+              </div>
+            </div>
+          </div>
+        </div>
+    </div>
+    <div class="col-6">
+      <div class="row">
+        <div class="col-4">
+          <label class="starlabel">Type of Asset</label></div>
+          <div class="col-8 "><input formControlName="typeOfAssets" class="form-control custom-placeholder input-padding"  type="text" >
+
+            <div *ngIf="
+            !selectForm.controls['typeOfAssets'].valid &&
+            (selectForm.controls['typeOfAssets'].touched ||
+            selectForm.controls['typeOfAssets'].dirty)
+          ">
+            <div [hidden]="!selectForm.controls['typeOfAssets'].errors['required']" style="
+              color: rgb(253, 122, 122);
+              font-size: small;
+              font-style: italic;
+            ">
+              type of asset is required
+            </div>
+          </div>
+        </div>
+      </div>
+  </div>
+
+  </div>
+  <div class="row mb-4">
+    <div class="col-6">
+        <div class="row">
+          <div class="col-4">
+            <label class="starlabel">Added By</label></div>
+            <div class="col-8"><input formControlName="addedBy" class="form-control custom-placeholder input-padding"  type="text" >
+              <div *ngIf="
+              !selectForm.controls['addedBy'].valid &&
+              (selectForm.controls['addedBy'].touched ||
+              selectForm.controls['addedBy'].dirty)
+            ">
+              <div [hidden]="!selectForm.controls['addedBy'].errors['required']" style="
+                color: rgb(253, 122, 122);
+                font-size: small;
+                font-style: italic;
+              ">
+                added by is required
+              </div>
+            </div>
+          </div>
+        </div>
+    </div>
+    <div class="col-6">
+      <div class="row">
+        <div class="col-4">
+          <label class="starlabel">Given Date</label></div>
+          <div class="col-8"><input formControlName="givenDate" class="form-control custom-placeholder input-padding"  type="date" >
+            <div *ngIf="
+            !selectForm.controls['givenDate'].valid &&
+            (selectForm.controls['givenDate'].touched ||
+            selectForm.controls['givenDate'].dirty)
+          ">
+            <div [hidden]="!selectForm.controls['givenDate'].errors['required']" style="
+              color: rgb(253, 122, 122);
+              font-size: small;
+              font-style: italic;
+            ">
+              given date is required
+            </div>
+          </div>
+        </div>
+      </div>
+  </div>
+
+  </div>
+  <div class="row mb-4">
+    <div class="col-6">
+        <div class="row">
+          <div class="col-4">
+            <label class="starlabel">Return Date</label></div>
+            <div class="col-8 "><input formControlName="returnDate" class="form-control custom-placeholder input-padding"  type="date" >
+              <div *ngIf="
+              !selectForm.controls['returnDate'].valid &&
+              (selectForm.controls['returnDate'].touched ||
+              selectForm.controls['returnDate'].dirty)
+            ">
+              <div [hidden]="!selectForm.controls['returnDate'].errors['required']" style="
+                color: rgb(253, 122, 122);
+                font-size: small;
+                font-style: italic;
+              ">
+                return date is required
+              </div>
+            </div>
+          </div>
+        </div>
+    </div>
+
+  </div>
+
+  <div class="row mb-4">
+
+      <div class="col-2">
+        <label class="starlabel">Asset Details</label></div>
+        <div class="col-10">
+      <textarea
+        name="editor1" class="form-control"
+        formControlName="assetsDetails" style="width: 100%; height: 100px;"
+      ></textarea>
+      <div *ngIf="
+      !selectForm.controls['assetsDetails'].valid &&
+      (selectForm.controls['assetsDetails'].touched ||
+      selectForm.controls['assetsDetails'].dirty)
+    ">
+      <div [hidden]="!selectForm.controls['assetsDetails'].errors['required']" style="
+        color: rgb(253, 122, 122);
+        font-size: small;
+        font-style: italic;
+      ">
+      asset details is required
+      </div>
+    </div>
+    </div>
+  </div>
+  <div class="row mb-5 mt-4">
+    <div class="d-flex justify-content-end col-11 mt-4">
+      <button type="submit" style="background: rgb(228, 28, 28);border:none" class="btn btn-info mr-3"
+        (click)="submit()"  [disabled]="!selectForm.valid"  [routerLink]="['/asset/asset-list']">Submit</button>
+      <button class="btn btn-info" style="background: #637381;border:none"
+        [routerLink]="['/asset/asset-list']">Cancel</button>
+    </div>
+  </div>
+
+
+
+</form>
+</div>

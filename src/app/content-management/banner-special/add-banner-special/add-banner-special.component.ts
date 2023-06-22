@@ -236,18 +236,7 @@ export class AddBannerSpecialComponent implements OnInit {
 
   }
 
-  // editBannerData(){
-  //     this.editData = this.bannerList.filter(item =>
-  //       item._id = this.id
-  //     )
 
-  //     this.bannerSpecialForm.patchValue({
-  //       bannerName: this.editData[0].bannerName,
-  //       image: this.editData[0].image,
-  //       bannerOrder: this.editData[0].bannerOrder,
-  //       descrbannerDescriptioniption: this.editData[0].bannerDescription,
-  //     })
-  // }
   submitDetails(recievedValue: any) {
     let newPayload = Object.assign({}, recievedValue);
     this.CmsService.addSpecialBanner(newPayload).subscribe((res) => {
