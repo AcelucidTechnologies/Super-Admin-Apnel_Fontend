@@ -13,6 +13,7 @@
           </div>
                <div class="leave-count" >
                  {{casualLeave}}/14
+                 <!-- {{casualLeave?.value ?? 0}}/14 -->
                 </div>
         </div>
       </div>
@@ -74,14 +75,6 @@
     <div class="m-3" style="border: 1px solid lightgrey;">
       <div class="page-heading mt-2">
         <h5 class="header-text-title" style="margin-left: 1%;">All Leaves</h5>
-      <!-- <div class="page-btn">
-        <button type="button" mat-raised-button color="primary" class="me-1"
-          [class.active]="activeButton === 'all'" (click)="filterAllList()">All</button>
-        <button type="button" mat-raised-button color="primary" class="me-1"
-          [class.active]="activeButton === 'upcoming'" (click)="filterUpcomingList()">Upcoming</button>
-        <button type="button" mat-raised-button color="primary" class="me-1"
-          [class.active]="activeButton === 'history'" (click)="filterHistoryList()">History</button>
-      </div> -->
       <div class="page-btn">
         <button type="button" mat-raised-button color="primary" class="me-1" style="margin-right: 5px;"
           [class.active]="activeButton === 'all'" (click)="setActiveButton('all'); filterAllList()">All</button>
@@ -97,11 +90,7 @@
       <p-table #dt [value]="filteredLeaveTrackerList" dataKey="id" [rowHover]="true"
       [rows]="3" [showCurrentPageReport]="true" responsiveLayout="scroll"
       [paginator]="true" currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
-      [filterDelay]="0" [globalFilterFields]="['employeeFullName','email','department']" class="abc">
-      <!-- <p-table #dt [value]="leaveTrackerList" dataKey="id" [rowHover]="true"
-      [rows]="3" [showCurrentPageReport]="true" responsiveLayout="scroll"
-      [paginator]="true" currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
-      [filterDelay]="0" [globalFilterFields]="['employeeFullName','email','department']" class="abc"> -->
+      [filterDelay]="0" [globalFilterFields]="['leaveType','appliedTo','fromDate','toDate','reason']" class="abc">
       <ng-template pTemplate="caption">
           <div class="table-header">
           </div>
@@ -146,7 +135,7 @@
         </th>
           <th>
             <div class="flex justify-content-between align-items-center head1">
-                status
+                Status
 
             </div>
         </th>

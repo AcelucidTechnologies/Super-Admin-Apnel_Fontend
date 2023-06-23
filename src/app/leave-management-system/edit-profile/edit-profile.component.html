@@ -194,7 +194,7 @@
                   class="form-group"
                   formControlName="department"
                 >
-                  <option value="">Enter department</option>
+                <option value="" disabled selected>Enter department</option>
                   <option *ngFor="let count of departmentdrop">{{ count.department }}</option>
                 </select>
                 <div *ngIf="!profileForm.controls['department'].valid && (profileForm.controls['department'].touched || profileForm.controls['department'].dirty || profileForm.controls['department'].value === '')">
@@ -218,7 +218,8 @@
                   class="form-group"
                   formControlName="designation"
                 >
-                  <option value="select">Enter designation</option>
+                  <!-- <option value="select">Enter designation</option> -->
+                  <option value="" disabled selected>Enter designation</option>
                   <option *ngFor="let count of designationdrop">{{ count.designation }}</option>
                 </select>
 
@@ -245,12 +246,12 @@
 
 <div class="col-4 info-name"><label class="starlabel">Location</label></div>
 <div class="col-7" style="padding-right: 0px;">
-  <!-- <div>
+  <div>
     <select style="width: 100%; border: 1px solid lightgray; height: 38px; padding:5px"
       class="form-group"
       formControlName="userlocation"
     >
-      <option value="">Enter Location</option>
+    <option value="" disabled selected>Enter Location</option>
       <option *ngFor="let count of locationList">{{ count.location }}</option>
     </select>
     <div *ngIf="!profileForm.controls['userlocation'].valid && (profileForm.controls['userlocation'].touched || profileForm.controls['userlocation'].dirty || profileForm.controls['userlocation'].value === '')">
@@ -258,23 +259,8 @@
         Location is required
       </div>
     </div>
-  </div> -->
-
-  <div>
-    <select style="width: 100%; border: 1px solid lightgray; height: 38px; padding:5px"
-      class="form-group"
-      formControlName="userlocation"
-      (change)="checkValidity()"
-    >
-      <option value="">Enter Location</option>
-      <option *ngFor="let count of locationList">{{ count.location }}</option>
-    </select>
-    <div *ngIf="!profileForm.controls['userlocation'].valid && profileForm.controls['userlocation'].touched">
-      <div [hidden]="!profileForm.controls['userlocation'].errors['required']" style="color: rgb(253, 122, 122); font-size: small; font-style: italic;">
-        Location is required
-      </div>
-    </div>
   </div>
+
 
 
 </div>
@@ -293,7 +279,7 @@
               formControlName="role"
 
             >
-              <option>Enter role</option>
+            <option value="" disabled selected>Enter role</option>
               <option *ngFor="let count of roledrop">
                 {{ count.state }}
               </option>
@@ -319,7 +305,7 @@
             formControlName="employmentType"
 
           >
-            <option>Enter Type</option>
+          <option value="" disabled selected>Enter type</option>
             <option *ngFor="let count of employeedrop">
               {{ count.state }}
             </option>
@@ -345,7 +331,7 @@
             formControlName="employeeStatus"
 
           >
-            <option>Enter Status</option>
+          <option value="" disabled selected>Enter status</option>
             <option *ngFor="let count of employeestatus">
               {{ count.state }}
             </option>
@@ -374,28 +360,12 @@
 
                   formControlName="usersourceHiring"
                 >
-                  <option>Enter source hiring</option>
+                <option value="" disabled selected>Enter source hiring</option>
                   <option *ngFor="let count of soruceHiringdrop">
                     {{ count.sourceHiring }}
                   </option>
                 </select>
-                <!-- <div *ngIf="
-                !profileForm.controls['sourceHiring'].valid ||
-                profileForm.controls['sourceHiring'].dirty
-              ">
-                <div [hidden]="
-                  !profileForm.controls['sourceHiring'].errors[
-                    'required'
-                  ]
-                " style="
-                  color: rgb(253, 122, 122);
-                  font-size: small;
-                  font-style: italic;
-                ">
-                 source Hiring is required
-                </div>
 
-              </div> -->
               <div *ngIf="!profileForm.controls['usersourceHiring'].valid && (profileForm.controls['usersourceHiring'].touched || profileForm.controls['usersourceHiring'].dirty || profileForm.controls['usersourceHiring'].value === '')">
                 <div [hidden]="!profileForm.controls['usersourceHiring'].errors['required']" style="color: rgb(253, 122, 122); font-size: small; font-style: italic;">
                   sourceHiring is required
@@ -521,28 +491,12 @@
                    formControlName="userreportingManager"
 
                 >
-                  <option>Enter reporting manager</option>
+                <option value="" disabled selected>Enter reporting manager</option>
                   <option *ngFor="let count of reportManagerdrop">
                     {{ count.reporting }}
                   </option>
                 </select>
-                <!-- <div *ngIf="
-                !profileForm.controls['reportingManager'].valid  ||
-                profileForm.controls['reportingManager'].dirty
-              ">
-                <div [hidden]="
-                  !profileForm.controls['reportingManager'].errors[
-                    'required'
-                  ]
-                " style="
-                  color: rgb(253, 122, 122);
-                  font-size: small;
-                  font-style: italic;
-                ">
-                 reporting manager is required
-                </div>
 
-              </div> -->
               <div *ngIf="!profileForm.controls['userreportingManager'].valid && (profileForm.controls['userreportingManager'].touched || profileForm.controls['userreportingManager'].dirty || profileForm.controls['userreportingManager'].value === '')">
                 <div [hidden]="!profileForm.controls['userreportingManager'].errors['required']" style="color: rgb(253, 122, 122); font-size: small; font-style: italic;">
                   reporting manager is required
@@ -603,7 +557,7 @@
                formControlName="gender" placeholder="enter gender"
 
             >
-              <option>Enter gender</option>
+            <option value="" disabled selected>Enter gender</option>
               <option *ngFor="let count of genderType">
                 {{ count.state }}
               </option>
@@ -627,7 +581,7 @@
                formControlName="maritalStatus" placeholder="enter status"
 
             >
-              <option>Enter status</option>
+            <option value="" disabled selected>Enter marital status</option>
               <option *ngFor="let count of maritalStatusType">
                 {{ count.state }}
               </option>
@@ -977,26 +931,6 @@
             <div class="col-8">
               <input type="date" class="form-control input-font" placeholder="Select date of exit"
               id="startDate" name="startDate" formControlName="separationOfDate">
-              <!-- <div
-              *ngIf="
-                !profileForm.controls['separationOfDate'].valid  ||
-                  profileForm.controls['separationOfDate'].dirty
-              "
-            >
-              <div
-                [hidden]="
-                  !profileForm.controls['separationOfDate'].errors['required']
-                "
-                style="
-                  color: rgb(253, 122, 122);
-                  font-size: small;
-                  font-style: italic;
-                "
-              >
-              separationOfDate is required
-              </div>
-
-            </div> -->
             </div>
           </div>
         </div>
@@ -1075,7 +1009,7 @@
 
         formControlName="onBoardingStatus"
       >
-        <option>Enter Type</option>
+      <option value="" disabled selected>Enter type</option>
         <option *ngFor="let count of onBoardingType">
           {{ count.state }}
         </option>

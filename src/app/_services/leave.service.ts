@@ -43,6 +43,13 @@ getProfileList(): Observable<any[]> {
 
 }
 
+getLeaveTrackerById(id: string): Observable<any> {
+  const token = localStorage.getItem('token') || '';
+  let httpOptions = new HttpHeaders().set('x-access-token', token)
+  const endpointUrl = `${environment.JSON_SERVER}/getLeaveTrackerById?id=${id}`;
+  return this.http.get<any>(endpointUrl,{ 'headers': httpOptions });
+}
+
 getcalenderList(): Observable<any[]> {
   const token = localStorage.getItem('token') || '';
   const email = localStorage.getItem('email')
@@ -88,6 +95,14 @@ getLeaveById(id: string): Observable<any> {
   const token = localStorage.getItem('token') || '';
   let httpOptions = new HttpHeaders().set('x-access-token', token)
   const endpointUrl = `${environment.JSON_SERVER}/getLeaveTrackerById?id=${id}`;
+  return this.http.get<any>(endpointUrl,{ 'headers': httpOptions });
+}
+
+getEmail(): Observable<any> {
+  const token = localStorage.getItem('token') || '';
+  const email = localStorage.getItem('email')
+  let httpOptions = new HttpHeaders().set('x-access-token', token)
+  const endpointUrl = `${environment.JSON_SERVER}/getEmail?username=${email}`;
   return this.http.get<any>(endpointUrl,{ 'headers': httpOptions });
 }
 

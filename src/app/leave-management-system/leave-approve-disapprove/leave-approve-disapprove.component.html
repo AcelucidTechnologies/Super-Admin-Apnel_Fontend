@@ -1,9 +1,9 @@
 
 <div>
-  <h5>Leave approve/disapprove</h5>
+  <h5>Leave Status</h5>
 </div>
 <p-table #dt [value]="leaveTrackerList" dataKey="id" [rowHover]="true"
-[rows]="8" [showCurrentPageReport]="true" responsiveLayout="scroll"
+[rows]="6" [showCurrentPageReport]="true" responsiveLayout="scroll"
 [paginator]="true" currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
 [filterDelay]="0" [globalFilterFields]="['employeeFullName','email','department']" class="abc">
 <ng-template pTemplate="caption">
@@ -50,7 +50,7 @@
   </th>
     <th>
       <div class="flex justify-content-between align-items-center head1">
-          status
+          Status
 
       </div>
   </th>
@@ -84,31 +84,23 @@
           {{List.reason}}
       </td>
       <td>
+          <a pTooltip="Open Profile" tooltipPosition="bottom"
+        class="me-3 mr-3" href="javascript:void(0);">
+        <img src="../assets/images/icons/eye.svg" [queryParams]="{id:List?._id}" [routerLink]="['/leaveMgmt/view-reason']"  alt="img" width="25px" height="25px">
+      </a>
+
         <span class="p-column-title">status </span>
-        <button mat-raised-button [color]="List.status === 'approved'? 'accent' : 'primary'" class="mr-2" (click)="approve(List._id)" >
-          {{ List.status === 'approved' ? List.status : 'approve' }}
+        <button mat-raised-button [color]="List.status === 'Approved'? 'accent' : 'primary'" class="mr-2" (click)="approve(List._id)" >
+          {{ List.status === 'Approved' ? List.status : 'Approve' }}
         </button>
 
-        <button mat-raised-button [color]="List.status === 'disapproved'? 'accent' : 'warn'" (click)="disapprove(List._id)" >
-          {{ List.status === 'disapproved' ? List.status : 'disapprove' }}
+
+        <button mat-raised-button [color]="List.status === 'Disapproved'? 'accent' : 'warn'" (click)="disapprove(List._id)" >
+          {{ List.status === 'Disapproved' ? List.status : 'Disapprove' }}
         </button>
       </td>
 
 
-      <!-- <td> -->
-        <!-- <span class="p-column-title">status </span> -->
-        <!-- <button mat-raised-button color="primary"  class="mr-2" (click)="approve(List._id)" [disabled]="List.approved"> -->
-
-          <!-- <button mat-raised-button color="primary" [color]="List.isApproved ? 'accent' : 'primary'" class="mr-2" (click)="approve(List._id)" > -->
-          <!-- {{ List.status ? 'Approved' : 'Approve' }} -->
-        <!-- </button> -->
-
-        <!-- <button mat-raised-button  mat-raised-button color="warn"  (click)="disapprove(List._id)" [disabled]="List.isDisapproved"> -->
-          <!-- <button mat-raised-button  mat-raised-button [color]="List.isDisapproved ? 'accent' : 'warn'" class="mr-2" (click)="disapprove(List._id)" > -->
-          <!-- {{ List.isDisapproved ? 'Disapproved' : 'Disapprove' }} -->
-        <!-- </button> -->
-
-    <!-- </td> -->
     </tr>
 </ng-template>
 <ng-template pTemplate="emptymessage">

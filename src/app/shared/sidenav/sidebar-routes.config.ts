@@ -58,7 +58,7 @@ export const SideNaveMenueRoute = [
         routerLinkActive: 'active'
       },
       {
-        label: 'Leave Approve',
+        label: 'Leave Status',
         icon: 'pi pi-list',
         routerLink: ['/leaveMgmt/leave-approve-disapprove'],
         routerLinkActiveOptions: { exact: true },

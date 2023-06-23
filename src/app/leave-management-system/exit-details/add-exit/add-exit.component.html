@@ -1,1 +1,319 @@
-<p>add-exit works!</p>
+<div class="button-heading-container">
+  <button class="mb-2 back-button" [routerLink]="['/exitmgmt/exit-list']">
+    <i class="material-icons">arrow_back</i>
+  </button>
+  <h5>&nbsp;Add Exit Details</h5>
+</div>
+<div class="card pl-4 pr-4 pb-3 pt-4">
+<form [formGroup]="selectForm">
+  <div class="row mb-4">
+    <div class="col-6">
+        <div class="row">
+          <div class="col-4">
+            <label class="starlabel">Employee Name</label></div>
+            <div class="col-8 ">
+              <input formControlName="toDate"  class="form-control custom-placeholder input-padding" type="text">
+          </div>
+        </div>
+    </div>
+    <div class="col-6">
+      <div class="row">
+        <div class="col-4">
+          <label class="starlabel">Interviewer Type</label></div>
+          <div class="col-8">
+            <input formControlName="toDate"  class="form-control custom-placeholder input-padding" type="date">
+
+        </div>
+      </div>
+  </div>
+
+  </div>
+  <div class="row mb-4">
+    <div class="col-6">
+        <div class="row">
+          <div class="col-4">
+            <label class="starlabel">Reason For Leaving</label></div>
+            <div class="col-8"><input formControlName="fromDate"  class="form-control custom-placeholder input-padding"  type="date" >
+              <div *ngIf="
+              !selectForm.controls['fromDate'].valid &&
+              (selectForm.controls['fromDate'].touched ||
+              selectForm.controls['fromDate'].dirty)
+            ">
+              <div [hidden]="!selectForm.controls['fromDate'].errors['required']" style="
+                color: rgb(253, 122, 122);
+                font-size: small;
+                font-style: italic;
+              ">
+                from date is required
+              </div>
+              <div *ngIf="selectForm.controls['fromDate'].errors && selectForm.controls['fromDate'].errors['invalidFromDate']"
+        style="color: rgb(253, 122, 122); font-size: small; font-style: italic;">
+        From date must be at least 3 days after the current date.
+      </div>
+            </div>
+          </div>
+        </div>
+    </div>
+
+  <!-- <div class="col-6">
+    <div class="row">
+      <div class="col-4">
+        <label class="starlabel">To date</label>
+      </div>
+      <div class="col-8">
+        <input formControlName="toDate"  class="form-control custom-placeholder input-padding" type="date">
+        <div *ngIf="selectForm.controls['toDate'].errors?.['required'] && (selectForm.controls['toDate'].touched || selectForm.controls['toDate'].dirty)"
+          style="color: rgb(253, 122, 122); font-size: small; font-style: italic;">
+          To date is required
+        </div>
+        <div *ngIf="selectForm.controls['toDate'].errors?.['invalidToDate'] && (selectForm.controls['toDate'].touched || selectForm.controls['toDate'].dirty)"
+          style="color: rgb(253, 122, 122); font-size: small; font-style: italic;">
+          To date should be greater than or equal to from date
+        </div>
+      </div>
+    </div>
+  </div> -->
+  </div>
+
+
+ <h5 class="card-title mt-3 ">Questionarrie</h5>
+
+  <div class="row mb-4 mt-2">
+    <div class="col-6">
+        <div class="row">
+          <div class="col-4">
+            <label class="starlabel">Working for oraganisation again</label></div>
+            <div class="col-8"> <input  formControlName="contactNo" type="number" class="form-control custom-placeholder input-padding"  placeholder="Enter contact number " >
+
+            <div
+            *ngIf="
+              !selectForm.controls['contactNo'].valid &&
+              (selectForm.controls['contactNo'].touched ||
+                selectForm.controls['contactNo'].dirty)
+            "
+          >
+            <div
+              [hidden]="
+                !selectForm.controls['contactNo'].errors['required']
+              "
+              style="
+                color: rgb(253, 122, 122);
+                font-size: small;
+                font-style: italic;
+              "
+            >
+              contactNo is required
+            </div>
+            <div
+              *ngIf="selectForm.controls['contactNo'].errors['pattern']"
+              style="
+                color: rgb(253, 122, 122);
+                font-size: small;
+                font-style: italic;
+              "
+            >
+            Please enter a 10-digit number.
+            </div>
+          </div>
+
+          </div>
+        </div>
+    </div>
+    <div class="col-6">
+      <div class="row">
+        <div class="col-4">
+          <label >What do you like most of the company</label></div>
+          <div class="col-8"> <input formControlName="altConatctNo" type="number" class="form-control custom-placeholder input-padding" placeholder="Enter contact number " >
+              <div class="col-8">
+                <div *ngIf="selectForm.controls['altConatctNo'].errors?.['pattern'] && (selectForm.controls['altConatctNo'].touched || selectForm.controls['altConatctNo'].dirty)"
+                  style="color: rgb(253, 122, 122); font-size: small; font-style: italic;">
+                  Please enter a 10-digit number.
+                </div>
+              </div>
+        </div>
+      </div>
+  </div>
+
+  </div>
+  <div class="row mb-4 mt-2">
+    <div class="col-6">
+        <div class="row">
+          <div class="col-4">
+            <label class="starlabel">Think the organisation do to improve the staff welfare</label></div>
+            <div class="col-8"> <input  formControlName="contactNo" type="text" class="form-control custom-placeholder input-padding"  placeholder="Enter contact number " >
+
+            <div
+            *ngIf="
+              !selectForm.controls['contactNo'].valid &&
+              (selectForm.controls['contactNo'].touched ||
+                selectForm.controls['contactNo'].dirty)
+            "
+          >
+            <div
+              [hidden]="
+                !selectForm.controls['contactNo'].errors['required']
+              "
+              style="
+                color: rgb(253, 122, 122);
+                font-size: small;
+                font-style: italic;
+              "
+            >
+              contactNo is required
+            </div>
+            <div
+              *ngIf="selectForm.controls['contactNo'].errors['pattern']"
+              style="
+                color: rgb(253, 122, 122);
+                font-size: small;
+                font-style: italic;
+              "
+            >
+            Please enter a 10-digit number.
+            </div>
+          </div>
+
+          </div>
+        </div>
+    </div>
+    <div class="col-6">
+      <div class="row">
+        <div class="col-4">
+          <label >Anything you want to share with us</label></div>
+          <div class="col-8"> <input formControlName="altConatctNo" type="number" class="form-control custom-placeholder input-padding" placeholder="Enter contact number " >
+              <div class="col-8">
+                <div *ngIf="selectForm.controls['altConatctNo'].errors?.['pattern'] && (selectForm.controls['altConatctNo'].touched || selectForm.controls['altConatctNo'].dirty)"
+                  style="color: rgb(253, 122, 122); font-size: small; font-style: italic;">
+                  Please enter a 10-digit number.
+                </div>
+              </div>
+        </div>
+      </div>
+  </div>
+
+  </div>
+  <h5 class="card-title mt-3 ">Checklist for Exit Interview</h5>
+  <div class="row mb-4 mt-2">
+    <div class="col-6">
+        <div class="row">
+          <div class="col-4">
+            <label class="starlabel">All assets handed in</label></div>
+            <div class="col-8"> <input  formControlName="contactNo" type="number" class="form-control custom-placeholder input-padding"  placeholder="Enter contact number " >
+
+            <div
+            *ngIf="
+              !selectForm.controls['contactNo'].valid &&
+              (selectForm.controls['contactNo'].touched ||
+                selectForm.controls['contactNo'].dirty)
+            "
+          >
+            <div
+              [hidden]="
+                !selectForm.controls['contactNo'].errors['required']
+              "
+              style="
+                color: rgb(253, 122, 122);
+                font-size: small;
+                font-style: italic;
+              "
+            >
+              contactNo is required
+            </div>
+            <div
+              *ngIf="selectForm.controls['contactNo'].errors['pattern']"
+              style="
+                color: rgb(253, 122, 122);
+                font-size: small;
+                font-style: italic;
+              "
+            >
+            Please enter a 10-digit number.
+            </div>
+          </div>
+
+          </div>
+        </div>
+    </div>
+    <div class="col-6">
+      <div class="row">
+        <div class="col-4">
+          <label >Notice period followed</label></div>
+          <div class="col-8"> <input formControlName="altConatctNo" type="number" class="form-control custom-placeholder input-padding" placeholder="Enter contact number " >
+              <div class="col-8">
+                <div *ngIf="selectForm.controls['altConatctNo'].errors?.['pattern'] && (selectForm.controls['altConatctNo'].touched || selectForm.controls['altConatctNo'].dirty)"
+                  style="color: rgb(253, 122, 122); font-size: small; font-style: italic;">
+                  Please enter a 10-digit number.
+                </div>
+              </div>
+        </div>
+      </div>
+  </div>
+
+  </div>
+
+
+
+  <div class="row mb-4 mt-2">
+    <div class="col-6">
+        <div class="row">
+          <div class="col-4">
+            <label class="starlabel">Manager/Supervisor Clearnce</label></div>
+            <div class="col-8"> <input  formControlName="contactNo" type="number" class="form-control custom-placeholder input-padding"  placeholder="Enter contact number " >
+
+            <div
+            *ngIf="
+              !selectForm.controls['contactNo'].valid &&
+              (selectForm.controls['contactNo'].touched ||
+                selectForm.controls['contactNo'].dirty)
+            "
+          >
+            <div
+              [hidden]="
+                !selectForm.controls['contactNo'].errors['required']
+              "
+              style="
+                color: rgb(253, 122, 122);
+                font-size: small;
+                font-style: italic;
+              "
+            >
+              contactNo is required
+            </div>
+            <div
+              *ngIf="selectForm.controls['contactNo'].errors['pattern']"
+              style="
+                color: rgb(253, 122, 122);
+                font-size: small;
+                font-style: italic;
+              "
+            >
+            Please enter a 10-digit number.
+            </div>
+          </div>
+
+          </div>
+        </div>
+    </div>
+    <div class="col-6">
+
+  </div>
+
+  </div>
+
+
+
+
+  <div class="row mb-5 mt-4">
+    <div class="d-flex justify-content-end col-11 mt-4">
+      <button type="submit" style="background: rgb(228, 28, 28);border:none" class="btn btn-info mr-3"
+        (click)="submit()" [disabled]="!selectForm.valid">Submit</button>
+      <button class="btn btn-info" style="background: #637381;border:none"
+        [routerLink]="['/leaveMgmt/leave-tracker']">Cancel</button>
+    </div>
+  </div>
+
+
+
+</form>
+</div>
+

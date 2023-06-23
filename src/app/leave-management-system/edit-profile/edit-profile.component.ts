@@ -349,16 +349,7 @@ export class EditProfileComponent {
 
   }
 
-  checkValidity() {
-    const userLocationValue = this.profileForm.get('userlocation').value;
-    const designationValue = this.profileForm.get('designation').value;
-    if (userLocationValue === '') {
-      this.profileForm.get('userlocation').setErrors({ required: true });
-    }
-    if (designationValue === '') {
-      this.profileForm.get('designation').setErrors({ required: true });
-    }
-  }
+
 
 
   openDialog() {

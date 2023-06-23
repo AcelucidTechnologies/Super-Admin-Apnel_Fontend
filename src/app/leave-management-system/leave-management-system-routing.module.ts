@@ -13,6 +13,7 @@ import { LeaveTrackerComponent } from './leave-tracker/leave-tracker.component';
 import { ProfileListComponent } from './profile-list/profile-list.component';
 import { TeamComponent } from './team/team.component';
 import { UserProfileComponent } from './user-profile/user-profile.component';
+import { ViewLeaveReasonComponent } from './view-leave-reason/view-leave-reason.component';
 
 const routes: Routes = [
   {
@@ -41,6 +42,9 @@ const routes: Routes = [
   },
   {
     path:'leave-approve-disapprove', component: LeaveApproveDisapproveComponent
+  },
+  {
+    path:'view-reason', component: ViewLeaveReasonComponent
   },
 
 ];

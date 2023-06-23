@@ -129,7 +129,7 @@
       </th>
       <th pSortableColumn="addedBy">
         <div class="flex justify-content-between align-items-center head1">
-          Registration Letter Submitted
+          Resignation Letter Submitted
           <p-sortIcon field="addedBy"></p-sortIcon>
         </div>
       </th>
@@ -190,8 +190,14 @@
       <td>{{ list.assetsDetails }}</td>
       <td>{{ list.reasonForLeaving }}</td>
       <td>{{ list.returnDate  }}</td>
+      <td>{{ list.mostTheCompany }}</td>
+      <td>{{ list.anythingShare}}</td>
       <td>{{ list.addedBy }}</td>
-      <td>{{ list.createdAt | date : "MM/dd/yyyy"}}</td>
+      <td>{{ list.allAssets }}</td>
+      <td>{{ list.noticePeriod }}</td>
+      <td>{{ list.manager }}</td>
+      <td>{{ list.addedBy }}</td>
+      <td>{{ list.createdAt | date : "MM/dd/yyyy"  }}</td>
       <td>{{ list.addedBy }}</td>
       <td>{{ list.updatedAt | date : "MM/dd/yyyy"  }}</td>
 
@@ -199,7 +205,7 @@
       <td>
         <div style="display: flex; align-items: center;">
         <a
-          pTooltip="Edit Asset"
+          pTooltip="Edit Exit"
           tooltipPosition="bottom"
           style="margin-right: 15px; cursor: pointer"
         >
@@ -211,7 +217,7 @@
           />
         </a>
         <a
-          pTooltip="Delete Asset"
+          pTooltip="Delete Exit"
           tooltipPosition="bottom"
           (click)="openDialog(list)"
           class="me-3 confirm-text"

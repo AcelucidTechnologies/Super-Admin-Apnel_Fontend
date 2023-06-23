@@ -1,8 +1,8 @@
 <div class="button-heading-container">
-  <button class="mb-2 back-button" [routerLink]="['/leaveMgmt/leave-tracker']">
+  <button class="mb-2 back-button" [routerLink]="['/leaveMgmt/leave-approve-disapprove']">
     <i class="material-icons">arrow_back</i>
   </button>
-  <h5>&nbsp;Leave Tracker</h5>
+  <h5>&nbsp;Leave Reason</h5>
 </div>
 
 <div class="card pl-4 pr-4 pb-3 pt-4">
@@ -19,7 +19,7 @@
               <!-- <p-dropdown formControlName="leaveType" [options]="leaveType" id="role" placeholder="Leave Type"></p-dropdown> -->
               <select style="width: 100%; border: 1px solid lightgray; height: 38px; padding:5px"
               class="form-group"
-              formControlName="leaveType"  >
+              formControlName="leaveType"  readonly>
               <option value="" disabled selected>Select Applied to</option>
               <option *ngFor="let count of leaveType">
                 {{ count }}
@@ -71,7 +71,7 @@
         <div class="row">
           <div class="col-4">
             <label class="starlabel">From date</label></div>
-            <div class="col-8"><input formControlName="fromDate"  [min]="getMinimumDate()" class="form-control custom-placeholder input-padding"  type="date" >
+            <div class="col-8"><input formControlName="fromDate"  class="form-control custom-placeholder input-padding"  type="date" >
               <div *ngIf="
               !selectForm.controls['fromDate'].valid &&
               (selectForm.controls['fromDate'].touched ||
@@ -99,7 +99,7 @@
         <label class="starlabel">To date</label>
       </div>
       <div class="col-8">
-        <input formControlName="toDate" [min]="getMinimumDate()" [disabled]="!selectForm.controls['fromDate'].value"  class="form-control custom-placeholder input-padding" type="date">
+        <input formControlName="toDate"   class="form-control custom-placeholder input-padding" type="date">
         <div *ngIf="selectForm.controls['toDate'].errors?.['required'] && (selectForm.controls['toDate'].touched || selectForm.controls['toDate'].dirty)"
           style="color: rgb(253, 122, 122); font-size: small; font-style: italic;">
           To date is required
@@ -176,7 +176,7 @@
     <div class="col-2">
       <label class="starlabel">Subject</label></div>
       <div class="col-10">
-        <input  formControlName="subject" type="text" class="form-control custom-placeholder input-padding"  placeholder="Enter subject " >
+        <input  formControlName="subject" type="text" class="form-control custom-placeholder input-padding"  placeholder="Enter subject "  >
 
     <div *ngIf="
     !selectForm.controls['subject'].valid &&
@@ -223,24 +223,10 @@
 
   </div>
 
-  <div class="row mb-4">
-    <div class="col-2">
-      <label>Attachment</label>
-    </div>
-    <div class="col-10">
-      <input type="file"  formControlName="image" class="form-control custom-placeholder input-padding" placeholder="attach file">
-    </div>
-  </div>
 
 
-  <div class="row mb-5 mt-4">
-    <div class="d-flex justify-content-end col-11 mt-4">
-      <button type="submit" style="background: rgb(228, 28, 28);border:none" class="btn btn-info mr-3"
-        (click)="submit()" [disabled]="!selectForm.valid">Submit</button>
-      <button class="btn btn-info" style="background: #637381;border:none"
-        [routerLink]="['/leaveMgmt/leave-tracker']">Cancel</button>
-    </div>
-  </div>
+
+
 
 
 

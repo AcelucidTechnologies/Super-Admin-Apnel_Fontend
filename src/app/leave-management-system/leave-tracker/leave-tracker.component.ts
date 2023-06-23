@@ -49,12 +49,12 @@ export class LeaveTrackerComponent {
 
   getColorByStatus(status: string): string {
     switch (status) {
-      case 'approved':
-        return 'orange';
-      case 'disapproved':
-        return 'blue';
-      case 'pending':
+      case 'Approved':
         return 'green';
+      case 'Disapproved':
+        return 'red';
+      case 'pending':
+        return 'orange';
       default:
         return '';
     }
@@ -84,7 +84,6 @@ export class LeaveTrackerComponent {
   filterAllList() {
     this.activeButton = 'all';
     this.filteredLeaveTrackerList = this.leaveTrackerList;
-    console.log("All dates: " + JSON.stringify(this.filteredLeaveTrackerList));
   }
 
   filterUpcomingList() {

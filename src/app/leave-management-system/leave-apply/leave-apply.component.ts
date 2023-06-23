@@ -14,15 +14,17 @@ export class LeaveApplyComponent {
   type: any;
   leaveType:any;
   appliedToType:any;
+  emailList:any
   selectForm: FormGroup;
   page: any
-
+  employeeList: any[]=[]
   constructor(
     private ngxLoader: NgxUiLoaderService,
     private fb: FormBuilder,
     private toastr: ToastrMsgService,
     private leaveservice: LeaveService,
     private route: Router) {
+
     this.selectForm = this.fb.group({
       username: localStorage.getItem("email"),
       leaveType: ['',[Validators.required] ],
@@ -33,6 +35,7 @@ export class LeaveApplyComponent {
       reason: ['', [Validators.required]],
       image: [''],
       appliedTo: ['',[Validators.required]],
+      subject:['',[Validators.required]]
 
     });
     this.selectForm.get('leaveType').valueChanges.subscribe((value) => {
@@ -43,6 +46,7 @@ export class LeaveApplyComponent {
  }
 
   ngOnInit(): void {
+    this.getAllEmail()
 
     this.type = [
       'earned',
@@ -60,12 +64,7 @@ export class LeaveApplyComponent {
       'compOff',
       'casualLeave',
     ];
-    this.appliedToType = [
-      'Admin',
-      'Mahender',
-      'Shivam',
 
-    ];
   }
 
   getMinimumDate() {
@@ -106,6 +105,17 @@ export class LeaveApplyComponent {
   }
 
 
+  getAllEmail() {
+    this.leaveservice.getEmail().subscribe((res) => {
+      this.employeeList =  res
+      // this.employeeList  = res.map(employee => `${employee.employeeFullName} (${employee.email})`);
+      this.ngxLoader.stop();
+      console.log("email" + JSON.stringify(this.employeeList))
+    });
+  }
+
+
+
   submit() {
     this.ngxLoader.start();
 
@@ -114,17 +124,16 @@ export class LeaveApplyComponent {
         this.page = res;
         console.log("leave data 107===>" + this.page);
         if (res) {
-
-          this.toastr.showSuccess("Leave applied successfully", "Leave Applied");
-          this.route.navigate(['/leaveMgmt/leave-tracker']);
+          if (this.page.error) {
+            this.toastr.showError(`${this.page.error}`, "Leave Applied");
+            this.route.navigate(['/leaveMgmt/leave-apply']);
+          } else {
+            this.toastr.showSuccess("Leave applied successfully", "Leave Applied");
+            this.route.navigate(['/leaveMgmt/leave-tracker']);
+          }
         }
+
       },
-      (error) => {
-        console.log("helloerror", error);
-        const errorMessage = error.message|| "Something went wrong. Please check.";
-        this.toastr.showError(errorMessage, "Error occurred");
-        this.route.navigate(['/leaveMgmt/leave-tracker']);
-      }
     );
   }
 
