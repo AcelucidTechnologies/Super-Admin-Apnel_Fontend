@@ -5,9 +5,6 @@
 </div>
 </div>
 <div class="card">
-
-
-
     <div class="row m-3">
       <div class="col-4">
         <div class="card">
@@ -15,7 +12,8 @@
             Casual Leave
           </div>
                <div class="leave-count" >
-                 50/50
+                 {{casualLeave}}/14
+                 <!-- {{casualLeave?.value ?? 0}}/14 -->
                 </div>
         </div>
       </div>
@@ -25,7 +23,7 @@
             Earned Leave
           </div>
           <div class="leave-count">
-            10/10
+            {{ earned}}/10
           </div>
         </div>
       </div>
@@ -35,7 +33,7 @@
             Leave Without Pay
           </div>
           <div class="leave-count">
-            0/0
+            {{leaveWithoutpay}}/0
           </div>
         </div>
       </div>
@@ -47,7 +45,7 @@
             Sick Leave
           </div>
           <div class="leave-count">
-             8/8
+             {{sickLeave}}/8
           </div>
         </div>
       </div>
@@ -57,7 +55,7 @@
             Work From Home
           </div>
           <div class="leave-count">
-             5/5
+             {{workFromHome}}/5
           </div>
         </div>
       </div>
@@ -67,7 +65,8 @@
             Comp. Off
           </div>
           <div class="leave-count">
-             5/5
+             {{compOff}}/0
+             <!-- {{compOff?.value ?? 0}}/0 -->
           </div>
         </div>
       </div>
@@ -75,18 +74,116 @@
 
     <div class="m-3" style="border: 1px solid lightgrey;">
       <div class="page-heading mt-2">
-        <h5 class="header-text-title" style="margin-left: 1%;">All Leaves & Holidays</h5>
-        <div class="page-btn">
-          <button type="button"  class="me-1"  class="theme" >Upcoming</button>
-          <button type="button"  class="me-1" class="theme" >History</button>
-      </div>
-      </div>
-      <div>
-        list of holidays
+        <h5 class="header-text-title" style="margin-left: 1%;">All Leaves</h5>
+      <div class="page-btn">
+        <button type="button" mat-raised-button color="primary" class="me-1" style="margin-right: 5px;"
+          [class.active]="activeButton === 'all'" (click)="setActiveButton('all'); filterAllList()">All</button>
+        <button type="button" mat-raised-button color="primary" class="me-1"
+          [class.active]="activeButton === 'upcoming'" (click)="setActiveButton('upcoming'); filterUpcomingList()" style="margin-right: 5px;">Upcoming</button>
+        <button type="button" mat-raised-button color="primary" class="me-1"
+          [class.active]="activeButton === 'history'" (click)="setActiveButton('history'); filterHistoryList()">History</button>
       </div>
 
-    </div>
 
 
+      </div>
+      <p-table #dt [value]="filteredLeaveTrackerList" dataKey="id" [rowHover]="true"
+      [rows]="3" [showCurrentPageReport]="true" responsiveLayout="scroll"
+      [paginator]="true" currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
+      [filterDelay]="0" [globalFilterFields]="['leaveType','appliedTo','fromDate','toDate','reason']" class="abc">
+      <ng-template pTemplate="caption">
+          <div class="table-header">
+          </div>
+      </ng-template>
+      <ng-template  pTemplate="header">
+          <tr>
+            <th> <div class="flex justify-content-between align-items-center head1">Sno.</div></th>
+
+              <th pSortableColumn="leaveType">
+                  <div class="flex justify-content-between align-items-center head1">
+                      Leave Type
+                      <p-sortIcon field="leaveType"></p-sortIcon>
+
+                  </div>
+              </th>
+              <th pSortableColumn="appliedTo">
+                  <div class="flex justify-content-between align-items-center head1">
+                    Applied To
+                      <p-sortIcon field="appliedTo"></p-sortIcon>
+
+                  </div>
+              </th>
+
+              <th pSortableColumn="fromDate">
+                <div class="flex justify-content-between align-items-center head1">
+                  From Date
+                    <p-sortIcon field="fromDate"></p-sortIcon>
+                </div>
+            </th>
+
+            <th pSortableColumn="toDate">
+              <div class="flex justify-content-between align-items-center head1">
+                To Date
+                  <p-sortIcon field="toDate"></p-sortIcon>
+              </div>
+          </th>
+          <th pSortableColumn="reason">
+            <div class="flex justify-content-between align-items-center head1">
+              Reason
+                <p-sortIcon field="reason"></p-sortIcon>
+            </div>
+        </th>
+          <th>
+            <div class="flex justify-content-between align-items-center head1">
+                Status
+
+            </div>
+        </th>
+
+
+          </tr>
+      </ng-template>
+      <ng-template pTemplate="body" let-List let-i="rowIndex">
+          <tr class="p-selectable-row">
+            <td>
+              {{i+1}}
+          </td>
+              <td>
+                  <span class="p-column-title">leave Type</span>
+                  {{List.leaveType}}
+              </td>
+              <td>
+                <span class="p-column-title">Applied To</span>
+                {{ List.appliedTo }}
+            </td>
+              <td>
+                  <span class="p-column-title">fromDate </span>
+                  {{List.fromDate |date : "MM/dd/yyyy"}}
+              </td>
+                <td>
+                  <span class="p-column-title">To date </span>
+                  {{List.toDate |date : "MM/dd/yyyy"}}
+              </td>
+              <td>
+                <span class="p-column-title">Reason </span>
+                {{List.reason}}
+            </td>
+            <td >
+              <span class="p-column-title" >status </span>
+             <!-- <p [ngStyle]="{'background-color': List.status === 'disapproved' ? 'orange' : 'blue', 'color': 'white', 'padding': '5px', 'border-radius':'5px'}">{{List.status}}</p> -->
+             <p [ngStyle]="{'background-color': getColorByStatus(List.status), 'color': 'white', 'padding': '5px', 'border-radius': '5px'}">{{List.status}}</p>
+
+          </td>
+
+          </tr>
+      </ng-template>
+      <ng-template pTemplate="emptymessage">
+          <tr>
+              <td colspan="8">No customers found.</td>
+          </tr>
+      </ng-template>
+  </p-table>
+
+  </div>
 
 </div>

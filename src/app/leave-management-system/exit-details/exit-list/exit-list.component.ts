@@ -9,21 +9,24 @@ import { DatePipe } from '@angular/common';
 import { LeaveService } from 'src/app/_services/leave.service';
 import { Table } from 'primeng/table';
 import autoTable from 'jspdf-autotable';
-import { AssetDialogComponent } from '../asset-dialog/asset-dialog.component';
-@Component({
-  selector: 'app-asset-list',
-  templateUrl: './asset-list.component.html',
-  styleUrls: ['./asset-list.component.scss']
-})
-export class AssetListComponent {
+import { DialogExitComponent } from '../dialog-exit/dialog-exit.component';
+// import { AssetDialogComponent } from '../asset-dialog/asset-dialog.component';
 
-  assetData: any[]=[];
-  assetDetails:any
+@Component({
+  selector: 'app-exit-list',
+  templateUrl: './exit-list.component.html',
+  styleUrls: ['./exit-list.component.scss']
+})
+export class ExitListComponent {
+
+  exitData: any[]=[];
+  exitDetails:any
 
 
   sidebarSpacing: string = 'contracted';
   cols: any[];
   @ViewChild('dt') dt: Table | undefined;
+
   exportColumns: any[];
 
   statusList = ['Active', 'Inactive'];
@@ -34,7 +37,7 @@ export class AssetListComponent {
     private dialog: MatDialog,
   ) {
 
-    this.getAssetData();
+    this.getExitData();
   }
 
   ngOnInit(): void {
@@ -43,15 +46,16 @@ export class AssetListComponent {
 
 
 
-  getAssetData() {
-    this.leaveService.getAssetList().subscribe((res) => {
-      this.assetData = res;
-      console.log('51', this.assetData);
+
+  getExitData() {
+    this.leaveService.getExitList().subscribe((res) => {
+      this.exitData = res;
+      console.log('51', this.exitData);
     });
   }
 
   openDialog(name: any) {
-    const dialogRef = this.dialog.open(AssetDialogComponent);
+    const dialogRef = this.dialog.open(DialogExitComponent);
     dialogRef.afterClosed().subscribe((result) => {
       if (result == true) {
         this.deleteAssetDetails(name);
@@ -66,7 +70,7 @@ export class AssetListComponent {
           'Asset deleted successfully',
           'Asset deleted'
         );
-        this.getAssetData()
+        this.getExitData()
       }
     });
   }
@@ -74,12 +78,12 @@ export class AssetListComponent {
 
   exportExcel(): void {
     const datePipe = new DatePipe('en-US');
-    const data = this.assetData.map((item, index) => ({
+    const data = this.exitData.map((item, index) => ({
       'S.No.': index+1,
-      'Employee Id': item.employeeId,
-      'Given Date': item.givenDate,
+      'Employee Id': item.emoloyeeId,
+      'Given Date': item.interviewerType,
       'Assets Details': item.assetsDetails,
-      'Type Of Assets': item.typeOfAssets,
+      'Type Of Assets': item.reasonForLeaving,
       'Return Date': item.returnDate,
       'Added By': item.addedBy,
       AddedTime: datePipe.transform(item.createdAt, 'MM/dd/yyyy'),
@@ -120,12 +124,13 @@ export class AssetListComponent {
 
 
   exportPdf() {
-    this.assetDetails = this.assetData.map((item, index) => {
+    this.exitDetails = this.exitData.map((item, index) => {
       return { sno: index + 1, ...item };
     });
 
     const doc = new jsPDF.jsPDF('l', 'pt');
-    const data = this.assetDetails.map(item => {
+    // const data = this.reviewerDetails;
+    const data = this.exitDetails.map(item => {
       return {
         ...item,
         createdAt: this.formatDate(item.createdAt), // Format the createdAt date
@@ -134,10 +139,10 @@ export class AssetListComponent {
     });
     const exportColumns = [
       { title: 'S No.', dataKey: 'sno' },
-      { title: 'Employee Id', dataKey: 'employeeId' },
-      { title: 'Assets Details ', dataKey: 'assetsDetails' },
+      { title: 'Employee Id', dataKey: 'emoloyeeId' },
+      { title: 'Assets Details ', dataKey: 'interviewerType' },
       { title: 'Type Of Assets', dataKey: 'typeOfAssets' },
-      { title: 'Return Date', dataKey: 'returnDate' },
+      { title: 'Return Date', dataKey: 'reasonForLeaving' },
       { title: 'Added By', dataKey: 'addedBy' },
       { title: 'AddedTime', dataKey: 'createdAt' },
       { title: 'Modified By', dataKey: 'addedBy' },

@@ -1,206 +1,111 @@
 
-<div class="button-heading-container">
-  <button class="mb-2 back-button" [routerLink]="['/leaveMgmt/leave-tracker']">
-    <i class="material-icons">arrow_back</i>
-  </button>
-  <h5>&nbsp;Leave Approve/Disapprove</h5>
+<div>
+  <h5>Leave Status</h5>
 </div>
-
-<div class="card pl-4 pr-4 pb-3 pt-4">
-
-
-
-  <form [formGroup]="selectForm">
-  <div class="row mb-4">
-    <div class="col-6">
-        <div class="row">
-          <div class="col-4">
-            <label class="starlabel">Leave Type</label></div>
-            <div class="col-8 "><p-dropdown formControlName="leaveType" [options]="leaveType" id="role" placeholder="Leave Type"></p-dropdown>
-              <div *ngIf="
-              !selectForm.controls['leaveType'].valid &&
-              (selectForm.controls['leaveType'].touched ||
-              selectForm.controls['leaveType'].dirty)
-            ">
-              <div [hidden]="!selectForm.controls['leaveType'].errors['required']" style="
-                color: rgb(253, 122, 122);
-                font-size: small;
-                font-style: italic;
-              ">
-                leave type is required
-              </div>
-            </div>
-          </div>
-        </div>
+<p-table #dt [value]="leaveTrackerList" dataKey="id" [rowHover]="true"
+[rows]="6" [showCurrentPageReport]="true" responsiveLayout="scroll"
+[paginator]="true" currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
+[filterDelay]="0" [globalFilterFields]="['employeeFullName','email','department']" class="abc">
+<ng-template pTemplate="caption">
+    <div class="table-header">
     </div>
-    <div class="col-6">
-      <div class="row">
-        <div class="col-4">
-          <label class="starlabel">Applied To</label></div>
-          <div class="col-8 "><p-dropdown  formControlName="appliedTo" [options]="appliedToType" id="role" placeholder="Applied To"></p-dropdown>
-            <div *ngIf="
-            !selectForm.controls['appliedTo'].valid &&
-            (selectForm.controls['appliedTo'].touched ||
-            selectForm.controls['appliedTo'].dirty)
-          ">
-            <div [hidden]="!selectForm.controls['appliedTo'].errors['required']" style="
-              color: rgb(253, 122, 122);
-              font-size: small;
-              font-style: italic;
-            ">
-              applied to is required
+</ng-template>
+<ng-template  pTemplate="header">
+    <tr>
+      <th> <div class="flex justify-content-between align-items-center head1">Sno.</div></th>
+
+        <th pSortableColumn="leaveType">
+            <div class="flex justify-content-between align-items-center head1">
+                Leave Type
+                <p-sortIcon field="leaveType"></p-sortIcon>
+
             </div>
+        </th>
+        <th pSortableColumn="appliedTo">
+            <div class="flex justify-content-between align-items-center head1">
+              Applied To
+                <p-sortIcon field="appliedTo"></p-sortIcon>
+
+            </div>
+        </th>
+
+        <th pSortableColumn="fromDate">
+          <div class="flex justify-content-between align-items-center head1">
+            From Date
+              <p-sortIcon field="fromDate"></p-sortIcon>
           </div>
+      </th>
+
+      <th pSortableColumn="toDate">
+        <div class="flex justify-content-between align-items-center head1">
+          To Date
+            <p-sortIcon field="toDate"></p-sortIcon>
         </div>
+    </th>
+    <th pSortableColumn="reason">
+      <div class="flex justify-content-between align-items-center head1">
+        Reason
+          <p-sortIcon field="reason"></p-sortIcon>
       </div>
-  </div>
+  </th>
+    <th>
+      <div class="flex justify-content-between align-items-center head1">
+          Status
 
-  </div>
-  <div class="row mb-4">
-    <div class="col-6">
-        <div class="row">
-          <div class="col-4">
-            <label class="starlabel">From date</label></div>
-            <div class="col-8"><input formControlName="fromDate" class="form-control custom-placeholder input-padding"  type="date" >
-              <div *ngIf="
-              !selectForm.controls['fromDate'].valid &&
-              (selectForm.controls['fromDate'].touched ||
-              selectForm.controls['fromDate'].dirty)
-            ">
-              <div [hidden]="!selectForm.controls['fromDate'].errors['required']" style="
-                color: rgb(253, 122, 122);
-                font-size: small;
-                font-style: italic;
-              ">
-                from date is required
-              </div>
-            </div>
-          </div>
-        </div>
-    </div>
-    <div class="col-6">
-      <div class="row">
-        <div class="col-4">
-          <label class="starlabel">To date</label></div>
-          <div class="col-8"><input formControlName="toDate" class="form-control custom-placeholder input-padding"  type="date" >
-            <div *ngIf="
-            !selectForm.controls['toDate'].valid &&
-            (selectForm.controls['toDate'].touched ||
-            selectForm.controls['toDate'].dirty)
-          ">
-            <div [hidden]="!selectForm.controls['toDate'].errors['required']" style="
-              color: rgb(253, 122, 122);
-              font-size: small;
-              font-style: italic;
-            ">
-              to date is required
-            </div>
-          </div>
-        </div>
       </div>
-  </div>
-
-  </div>
-  <div class="row mb-4">
-    <div class="col-6">
-        <div class="row">
-          <div class="col-4">
-            <label class="starlabel">Contact Number</label></div>
-            <div class="col-8"> <input  formControlName="contactNo" type="number" class="form-control custom-placeholder input-padding"  placeholder="Enter contact number " >
+  </th>
 
 
-            <div
-            *ngIf="
-              !selectForm.controls['contactNo'].valid &&
-              (selectForm.controls['contactNo'].touched ||
-                selectForm.controls['contactNo'].dirty)
-            "
-          >
-            <div
-              [hidden]="
-                !selectForm.controls['contactNo'].errors['required']
-              "
-              style="
-                color: rgb(253, 122, 122);
-                font-size: small;
-                font-style: italic;
-              "
-            >
-              contactNo is required
-            </div>
-            <div
-              *ngIf="selectForm.controls['contactNo'].errors['pattern']"
-              style="
-                color: rgb(253, 122, 122);
-                font-size: small;
-                font-style: italic;
-              "
-            >
-            Please enter a 10-digit number.
-            </div>
-          </div>
+    </tr>
+</ng-template>
+<ng-template pTemplate="body" let-List let-i="rowIndex">
+    <tr class="p-selectable-row">
+      <td>
+        {{i+1}}
+    </td>
+        <td>
+            <span class="p-column-title">leave Type</span>
+            {{List.leaveType}}
+        </td>
+        <td>
+          <span class="p-column-title">Applied To</span>
+          {{ List.appliedTo }}
+      </td>
+        <td>
+            <span class="p-column-title">fromDate </span>
+            {{List.fromDate |date : "MM/dd/yyyy"}}
+        </td>
+          <td>
+            <span class="p-column-title">To date </span>
+            {{List.toDate |date : "MM/dd/yyyy"}}
+        </td>
+        <td>
+          <span class="p-column-title">Reason </span>
+          {{List.reason}}
+      </td>
+      <td>
+          <a pTooltip="Open Profile" tooltipPosition="bottom"
+        class="me-3 mr-3" href="javascript:void(0);">
+        <img src="../assets/images/icons/eye.svg" [queryParams]="{id:List?._id}" [routerLink]="['/leaveMgmt/view-reason']"  alt="img" width="25px" height="25px">
+      </a>
 
-          </div>
-        </div>
-    </div>
-    <div class="col-6">
-      <div class="row">
-        <div class="col-4">
-          <label >Alt Contact Number</label></div>
-          <div class="col-8"> <input formControlName="altConatctNo" type="number" class="form-control custom-placeholder input-padding" placeholder="Enter contact number " >
-        </div>
-      </div>
-  </div>
-
-  </div>
-  <div class="row mb-4">
-
-      <div class="col-2">
-        <label class="starlabel">Reason</label></div>
-        <div class="col-10">
-      <ckeditor
-        name="editor1"
-        formControlName="reason"
-      ></ckeditor>
-      <div *ngIf="
-      !selectForm.controls['reason'].valid &&
-      (selectForm.controls['reason'].touched ||
-      selectForm.controls['reason'].dirty)
-    ">
-      <div [hidden]="!selectForm.controls['reason'].errors['required']" style="
-        color: rgb(253, 122, 122);
-        font-size: small;
-        font-style: italic;
-      ">
-      reason is required
-      </div>
-    </div>
-
-    </div>
-
-  </div>
-
-  <!-- <div class="row mb-4">
-    <div class="col-2">
-      <label>Attachment</label>
-    </div>
-    <div class="col-10">
-      <input type="file"  formControlName="image" class="form-control custom-placeholder input-padding" placeholder="attach file">
-    </div>
-  </div> -->
+        <span class="p-column-title">status </span>
+        <button mat-raised-button [color]="List.status === 'Approved'? 'accent' : 'primary'" class="mr-2" (click)="approve(List._id)" >
+          {{ List.status === 'Approved' ? List.status : 'Approve' }}
+        </button>
 
 
-  <div class="row mb-5 mt-4">
-    <div class="d-flex justify-content-end col-11 mt-4">
-      <button type="submit" style="background: rgb(228, 28, 28);border:none" class="btn btn-info mr-3"
-        (click)="submit()"  >Approve</button>
-      <button class="btn btn-info" style="background: #637381;border:none"
-        [routerLink]="['/leaveMgmt/leave-tracker']">Disapprove</button>
-    </div>
-  </div>
+        <button mat-raised-button [color]="List.status === 'Disapproved'? 'accent' : 'warn'" (click)="disapprove(List._id)" >
+          {{ List.status === 'Disapproved' ? List.status : 'Disapprove' }}
+        </button>
+      </td>
 
 
-
-</form>
-</div>
-
+    </tr>
+</ng-template>
+<ng-template pTemplate="emptymessage">
+    <tr>
+        <td colspan="8">No customers found.</td>
+    </tr>
+</ng-template>
+</p-table>

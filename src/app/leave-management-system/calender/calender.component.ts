@@ -16,6 +16,7 @@ export class CalenderComponent {
   calendarOptions: CalendarOptions;
   calenderList:any
   eventList: EventInput[] = [];
+  leaveTrackerList:any
 
   constructor( private leaveservice: LeaveService,
     private toastr: ToastrMsgService,
@@ -33,7 +34,8 @@ export class CalenderComponent {
         right: 'dayGridMonth,timeGridWeek,timeGridDay'
       },
     };
-    this.getCalendar()
+    this.getCalendar();
+    this.getTableforLeaves()
   }
 
   getCalendar() {
@@ -44,6 +46,7 @@ export class CalenderComponent {
       // Map the response data to the FullCalendar event format
       const events = [];
       this.eventList = events;
+      if (this.calenderList) {
       Object.keys(this.calenderList).forEach((month) => {
         this.calenderList[month].forEach((holiday) => {
           if (holiday.date) {
@@ -54,16 +57,38 @@ export class CalenderComponent {
           }
         });
       });
+    }
 
-      this.calendarOptions = {
-        plugins: [dayGridPlugin, timeGridPlugin],
-        initialView: 'dayGridMonth',
-        events: events,
+          if (this.leaveTrackerList) {
+    this.leaveTrackerList.forEach((leave) => {
+      events.push({
+        title: leave.leaveType,
+        start: leave.fromDate,
+        end: leave.toDate,
+        color: 'green',
+      });
+    });
+  }
 
-      };
+    this.calendarOptions = {
+      plugins: [dayGridPlugin, timeGridPlugin],
+      initialView: 'dayGridMonth',
+      events: events,
+    };
 
 
 
+      this.ngxLoader.stop();
+    });
+  }
+
+
+  getTableforLeaves() {
+    this.leaveservice.getLeaveTrackerList().subscribe((res) => {
+      this.leaveTrackerList = res.filter(item => item.status.toLowerCase() === 'approved');
+
+      console.log("response approved ==>", this.leaveTrackerList);
+      this.getCalendar();
       this.ngxLoader.stop();
     });
   }

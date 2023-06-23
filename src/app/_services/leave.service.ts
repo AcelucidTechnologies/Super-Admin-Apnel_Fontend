@@ -11,6 +11,23 @@ export class LeaveService {
 
   constructor(private http: HttpClient,private router: Router) { }
 
+
+
+approveLeave(payload, id: string) {
+  const token = localStorage.getItem('token') || '';
+  const httpOptions = new HttpHeaders().set('x-access-token', token);
+  const endpointUrl = `${environment.JSON_SERVER}/approve?id=${id}`;
+
+  return this.http.put<any>(endpointUrl, payload, { headers: httpOptions });
+}
+disapproveLeave(payload, id: string) {
+  const token = localStorage.getItem('token') || '';
+  const httpOptions = new HttpHeaders().set('x-access-token', token);
+  const endpointUrl = `${environment.JSON_SERVER}/disApproved?id=${id}`;
+
+  return this.http.put<any>(endpointUrl, payload, { headers: httpOptions });
+}
+
   getLeaveProfileById(id: string): Observable<any> {
     const token = localStorage.getItem('token') || '';
     let httpOptions = new HttpHeaders().set('x-access-token', token)
@@ -24,6 +41,13 @@ getProfileList(): Observable<any[]> {
  const endpointUrl = `${environment.JSON_SERVER}/getLeaveProfile?username=${email}`;
  return this.http.get<any[]>(endpointUrl ,{ 'headers': httpOptions });
 
+}
+
+getLeaveTrackerById(id: string): Observable<any> {
+  const token = localStorage.getItem('token') || '';
+  let httpOptions = new HttpHeaders().set('x-access-token', token)
+  const endpointUrl = `${environment.JSON_SERVER}/getLeaveTrackerById?id=${id}`;
+  return this.http.get<any>(endpointUrl,{ 'headers': httpOptions });
 }
 
 getcalenderList(): Observable<any[]> {
@@ -42,11 +66,28 @@ getLeaveList(): Observable<any[]> {
  return this.http.get<any[]>(endpointUrl ,{ 'headers': httpOptions });
 }
 
+getLeaveTrackerList(): Observable<any[]> {
+  const token = localStorage.getItem('token') || '';
+  const email = localStorage.getItem('email')
+  let httpOptions = new HttpHeaders().set('x-access-token', token)
+ const endpointUrl = `${environment.JSON_SERVER}/getLeaveTracker?username=${email}`;
+ return this.http.get<any[]>(endpointUrl ,{ 'headers': httpOptions });
+}
+
+getAllLeaveList(): Observable<any[]> {
+  const token = localStorage.getItem('token') || '';
+  const email = localStorage.getItem('email')
+  let httpOptions = new HttpHeaders().set('x-access-token', token)
+ const endpointUrl = `${environment.JSON_SERVER}/getAllLeaveTracker`;
+ return this.http.get<any[]>(endpointUrl ,{ 'headers': httpOptions });
+}
+
+
 createLeave(payload:any): Observable<any[]> {
   const token = localStorage.getItem('token') || '';
         const email = localStorage.getItem('email') || '';
         let httpOptions = new HttpHeaders().set('x-access-token', token)
-          const endpointUrl = `${environment.JSON_SERVER}/createLeaveTracker`;
+          const endpointUrl = `${environment.JSON_SERVER}/createLeaveTracker?`;
         return this.http.post<any>(endpointUrl, payload,{ 'headers': httpOptions });
 }
 
@@ -54,6 +95,14 @@ getLeaveById(id: string): Observable<any> {
   const token = localStorage.getItem('token') || '';
   let httpOptions = new HttpHeaders().set('x-access-token', token)
   const endpointUrl = `${environment.JSON_SERVER}/getLeaveTrackerById?id=${id}`;
+  return this.http.get<any>(endpointUrl,{ 'headers': httpOptions });
+}
+
+getEmail(): Observable<any> {
+  const token = localStorage.getItem('token') || '';
+  const email = localStorage.getItem('email')
+  let httpOptions = new HttpHeaders().set('x-access-token', token)
+  const endpointUrl = `${environment.JSON_SERVER}/getEmail?username=${email}`;
   return this.http.get<any>(endpointUrl,{ 'headers': httpOptions });
 }
 
@@ -338,7 +387,7 @@ getAssetById(id: string): Observable<any> {
   return this.http.get<any>(endpointUrl,{ 'headers': httpOptions });
 }
 
-editAssetList(payload, id: number) {
+editAssetList(payload, id: string) {
   const token = localStorage.getItem('token') || '';
   const httpOptions = new HttpHeaders().set('x-access-token', token);
   const endpointUrl = `${environment.JSON_SERVER}/updateLeaveAssets?id=${id}`;
@@ -346,5 +395,14 @@ editAssetList(payload, id: number) {
   return this.http.put<any>(endpointUrl, payload, { headers: httpOptions });
 }
 
+// ############################# Exit Details #############################
 
+getExitList(): Observable<any[]> {
+  const token = localStorage.getItem('token') || '';
+  const email = localStorage.getItem('email')
+  let httpOptions = new HttpHeaders().set('x-access-token', token)
+ const endpointUrl = `${environment.JSON_SERVER}/getExitDetails?username=${email}`;
+ return this.http.get<any[]>(endpointUrl ,{ 'headers': httpOptions });
+
+}
 }

@@ -220,7 +220,9 @@ export class EditProfileComponent {
           this.locationList = locationList;
           this.departmentdrop = departmentdrop;
         })
-      ).subscribe();
+      ).subscribe( ()=>{
+        this.getLeaveById()
+       });
   }
 
   createEducationRow(): FormGroup {
@@ -344,16 +346,11 @@ export class EditProfileComponent {
       this.id = params.get('id');
     });
 
-    this.getLeaveById();
-    // this.getDepartment();
-    // this.getDesignation();
-    // this.getSourceHiring();
-    // this.getReportManager();
-    // this.getLocation();
-    // this.designationControl.valueChanges.subscribe((value) => {
-    //   console.log('Selected Designation:', value);
-    // });
+
   }
+
+
+
 
   openDialog() {
     const dialogRef = this.dialog.open(DialogDepartmentComponent);
