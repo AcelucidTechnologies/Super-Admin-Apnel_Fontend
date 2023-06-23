@@ -71,6 +71,13 @@ export const SideNaveMenueRoute = [
         routerLinkActiveOptions: { exact: true },
         routerLinkActive: 'active'
       },
+      {
+        label: 'Exit',
+        icon: 'pi pi-list',
+        routerLink: ['/exitmgmt/exit-list'],
+        routerLinkActiveOptions: { exact: true },
+        routerLinkActive: 'active'
+      },
     ],
   },
   {

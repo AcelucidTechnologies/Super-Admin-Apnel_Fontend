@@ -1,16 +1,16 @@
 <div class="container page-heading">
   <div class="row mb-2 mt-2">
     <div class="col-6">
-      <h4>Asset List</h4>
+      <h4>Exit List</h4>
     </div>
     <div class="col-6 text-right">
       <span class="p-input-icon-right ml-5">
         <button
           pButton
           type="button"
-          label=" + Add Asset"
+          label=" + Add Exit"
           class="add-button-rating"
-          [routerLink]="['/asset/add-asset']"
+          [routerLink]="['/exitmgmt/add-exit']"
         ></button>
       </span>
     </div>
@@ -24,11 +24,11 @@
   [paginator]="true"
   [rows]="5"
   [showCurrentPageReport]="true"
-  [value]="assetData"
+  [value]="exitData"
   currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
   [responsive]="true"
   styleClass="p-datatable-striped"
-  [globalFilterFields]="['employeeId', 'assetsDetails', 'typeOfAssets','returnDate','addedBy','createdAt','updatedAt']"
+  [globalFilterFields]="['employeeId', 'interviewerType', 'typeOfAssets','reasonForLeaving','addedBy','createdAt','updatedAt']"
 >
   <ng-template pTemplate="caption">
     <div class="d-flex justify-content-between">
@@ -81,56 +81,92 @@
         </div>
       </th>
 
-      <th pSortableColumn="employeeId">
+      <th pSortableColumn="emoloyeeId">
         <div class="flex justify-content-between align-items-center head1">
           Employee ID
-          <p-sortIcon field="employeeId"></p-sortIcon>
+          <p-sortIcon field="emoloyeeId"></p-sortIcon>
         </div>
       </th>
 
-      <th pSortableColumn="givenDate">
+      <th pSortableColumn="interviewerType">
         <div class="flex justify-content-between align-items-center head1">
-          Given Date
-          <p-sortIcon field="givenDate"></p-sortIcon>
+          Interviewer Type
+          <p-sortIcon field="interviewerType"></p-sortIcon>
         </div>
       </th>
 
       <th pSortableColumn="assetsDetails">
         <div class="flex justify-content-between align-items-center head1">
-          Asset Details
+          Sepration date
           <p-sortIcon field="assetsDetails"></p-sortIcon>
         </div>
       </th>
 
-      <th pSortableColumn="typeOfAssets">
+      <th pSortableColumn="reasonForLeaving">
         <div class="flex justify-content-between align-items-center head1">
-          Type Of Asset
-          <p-sortIcon field="typeOfAssets"></p-sortIcon>
+          Reason of Leaving
+          <p-sortIcon field="reasonForLeaving"></p-sortIcon>
         </div>
       </th>
 
       <th pSortableColumn="returnDate">
         <div class="flex justify-content-between align-items-center head1">
-          Return Date
+          Work with this organisation again
           <p-sortIcon field="returnDate"></p-sortIcon>
         </div>
       </th>
       <th pSortableColumn="addedBy">
         <div class="flex justify-content-between align-items-center head1">
-          Added By
+          What do you like the most of the organization
           <p-sortIcon field="addedBy"></p-sortIcon>
         </div>
       </th>
       <th pSortableColumn="createdAt">
         <div class="flex justify-content-between align-items-center head1">
-          Added Time
+          Anything you want to share with us
           <p-sortIcon field="createdAt"></p-sortIcon>
         </div>
       </th>
       <th pSortableColumn="addedBy">
         <div class="flex justify-content-between align-items-center head1">
-          Modified By
+          Registration Letter Submitted
           <p-sortIcon field="addedBy"></p-sortIcon>
+        </div>
+      </th>
+      <th pSortableColumn="updatedAt">
+        <div class="flex justify-content-between align-items-center head1">
+          All Assets Submitted
+          <p-sortIcon field="updatedAt"></p-sortIcon>
+        </div>
+      </th>
+      <th pSortableColumn="updatedAt">
+        <div class="flex justify-content-between align-items-center head1">
+          Notice Peroid Followed
+          <p-sortIcon field="updatedAt"></p-sortIcon>
+        </div>
+      </th>
+      <th pSortableColumn="updatedAt">
+        <div class="flex justify-content-between align-items-center head1">
+         Manager/Supervior Clearance
+          <p-sortIcon field="updatedAt"></p-sortIcon>
+        </div>
+      </th>
+      <th pSortableColumn="updatedAt">
+        <div class="flex justify-content-between align-items-center head1">
+          Added By
+          <p-sortIcon field="updatedAt"></p-sortIcon>
+        </div>
+      </th>
+      <th pSortableColumn="updatedAt">
+        <div class="flex justify-content-between align-items-center head1">
+          Added Time
+          <p-sortIcon field="updatedAt"></p-sortIcon>
+        </div>
+      </th>
+      <th pSortableColumn="updatedAt">
+        <div class="flex justify-content-between align-items-center head1">
+          Modified By
+          <p-sortIcon field="updatedAt"></p-sortIcon>
         </div>
       </th>
       <th pSortableColumn="updatedAt">
@@ -139,6 +175,7 @@
           <p-sortIcon field="updatedAt"></p-sortIcon>
         </div>
       </th>
+
       <th class="text-center">Action</th>
     </tr>
   </ng-template>
@@ -148,10 +185,10 @@
         <span class="p-column-title">Sr.no</span>
         {{ i + 1 }}
       </td>
-      <td>{{ list.employeeId }}</td>
-      <td>{{ list.givenDate }}</td>
+      <td>{{ list.emoloyeeId }}</td>
+      <td>{{ list.interviewerType }}</td>
       <td>{{ list.assetsDetails }}</td>
-      <td>{{ list.typeOfAssets }}</td>
+      <td>{{ list.reasonForLeaving }}</td>
       <td>{{ list.returnDate  }}</td>
       <td>{{ list.addedBy }}</td>
       <td>{{ list.createdAt | date : "MM/dd/yyyy"}}</td>

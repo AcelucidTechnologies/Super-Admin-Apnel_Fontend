@@ -220,7 +220,9 @@ export class EditProfileComponent {
           this.locationList = locationList;
           this.departmentdrop = departmentdrop;
         })
-      ).subscribe();
+      ).subscribe( ()=>{
+        this.getLeaveById()
+       });
   }
 
   createEducationRow(): FormGroup {
@@ -344,16 +346,20 @@ export class EditProfileComponent {
       this.id = params.get('id');
     });
 
-    this.getLeaveById();
-    // this.getDepartment();
-    // this.getDesignation();
-    // this.getSourceHiring();
-    // this.getReportManager();
-    // this.getLocation();
-    // this.designationControl.valueChanges.subscribe((value) => {
-    //   console.log('Selected Designation:', value);
-    // });
+
   }
+
+  checkValidity() {
+    const userLocationValue = this.profileForm.get('userlocation').value;
+    const designationValue = this.profileForm.get('designation').value;
+    if (userLocationValue === '') {
+      this.profileForm.get('userlocation').setErrors({ required: true });
+    }
+    if (designationValue === '') {
+      this.profileForm.get('designation').setErrors({ required: true });
+    }
+  }
+
 
   openDialog() {
     const dialogRef = this.dialog.open(DialogDepartmentComponent);

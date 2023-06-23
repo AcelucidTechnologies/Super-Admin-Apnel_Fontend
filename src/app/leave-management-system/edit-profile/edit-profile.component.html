@@ -221,12 +221,16 @@
                   <option value="select">Enter designation</option>
                   <option *ngFor="let count of designationdrop">{{ count.designation }}</option>
                 </select>
-                <div *ngIf="!profileForm.controls['designation'].valid && (profileForm.controls['designation'].touched || profileForm.controls['designation'].dirty || profileForm.controls['designation'].value === '')">
+
+                <div *ngIf="!profileForm.controls['designation'].valid && profileForm.controls['designation'].touched">
                   <div [hidden]="!profileForm.controls['designation'].errors['required']" style="color: rgb(253, 122, 122); font-size: small; font-style: italic;">
                     designation is required
                   </div>
                 </div>
               </div>
+
+
+
             </div>
 
 
@@ -241,7 +245,7 @@
 
 <div class="col-4 info-name"><label class="starlabel">Location</label></div>
 <div class="col-7" style="padding-right: 0px;">
-  <div>
+  <!-- <div>
     <select style="width: 100%; border: 1px solid lightgray; height: 38px; padding:5px"
       class="form-group"
       formControlName="userlocation"
@@ -254,7 +258,25 @@
         Location is required
       </div>
     </div>
+  </div> -->
+
+  <div>
+    <select style="width: 100%; border: 1px solid lightgray; height: 38px; padding:5px"
+      class="form-group"
+      formControlName="userlocation"
+      (change)="checkValidity()"
+    >
+      <option value="">Enter Location</option>
+      <option *ngFor="let count of locationList">{{ count.location }}</option>
+    </select>
+    <div *ngIf="!profileForm.controls['userlocation'].valid && profileForm.controls['userlocation'].touched">
+      <div [hidden]="!profileForm.controls['userlocation'].errors['required']" style="color: rgb(253, 122, 122); font-size: small; font-style: italic;">
+        Location is required
+      </div>
+    </div>
   </div>
+
+
 </div>
 
 

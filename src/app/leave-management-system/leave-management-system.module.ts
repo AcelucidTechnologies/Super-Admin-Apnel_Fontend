@@ -31,9 +31,6 @@ import { LeaveTrackerComponent } from './leave-tracker/leave-tracker.component';
 import { LeaveApplyComponent } from './leave-apply/leave-apply.component';
 import { CKEditorModule } from 'ckeditor4-angular';
 import { LeaveApproveDisapproveComponent } from './leave-approve-disapprove/leave-approve-disapprove.component';
-import { AssetListComponent } from './Asset/asset-list/asset-list.component';
-import { AddAssetComponent } from './Asset/add-asset/add-asset.component';
-import { EditAssetComponent } from './Asset/edit-asset/edit-asset.component';
 
 const plugins = [dayGridPlugin, timeGridPlugin];
 
@@ -60,6 +57,7 @@ const calendarOptions: CalendarOptions = {
     LeaveTrackerComponent,
     LeaveApplyComponent,
     LeaveApproveDisapproveComponent,
+
 
   ],
   imports: [

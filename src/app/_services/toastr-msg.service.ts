@@ -11,21 +11,21 @@ export class ToastrMsgService {
   showSuccess(message:string, title:string){
     this.toastrService.success(message, title,
       {
-        timeOut: 1000,
+        timeOut: 5000,
       });
   }
 
   showError(message:string, title:string) {
     this.toastrService.error(message, title,
       {
-        timeOut: 1000,
+        timeOut: 5000,
       });
   }
 
   showWarning(message:string, title:string) {
     this.toastrService.warning(message, title,
       {
-        timeOut: 1000,
+        timeOut: 5000,
       });
   }
 }

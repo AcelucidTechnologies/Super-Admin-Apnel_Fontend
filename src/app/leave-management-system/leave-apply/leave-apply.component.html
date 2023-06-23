@@ -60,7 +60,7 @@
         <div class="row">
           <div class="col-4">
             <label class="starlabel">From date</label></div>
-            <div class="col-8"><input formControlName="fromDate" class="form-control custom-placeholder input-padding"  type="date" >
+            <div class="col-8"><input formControlName="fromDate"  [min]="getMinimumDate()" class="form-control custom-placeholder input-padding"  type="date" >
               <div *ngIf="
               !selectForm.controls['fromDate'].valid &&
               (selectForm.controls['fromDate'].touched ||
@@ -73,15 +73,19 @@
               ">
                 from date is required
               </div>
+              <div *ngIf="selectForm.controls['fromDate'].errors && selectForm.controls['fromDate'].errors['invalidFromDate']"
+        style="color: rgb(253, 122, 122); font-size: small; font-style: italic;">
+        From date must be at least 3 days after the current date.
+      </div>
             </div>
           </div>
         </div>
     </div>
-    <div class="col-6">
+    <!-- <div class="col-6">
       <div class="row">
         <div class="col-4">
           <label class="starlabel">To date</label></div>
-          <div class="col-8"><input formControlName="toDate" class="form-control custom-placeholder input-padding"  type="date" >
+          <div class="col-8"><input formControlName="toDate" [min]="getMinimumDate()" class="form-control custom-placeholder input-padding"  type="date" >
             <div *ngIf="
             !selectForm.controls['toDate'].valid &&
             (selectForm.controls['toDate'].touched ||
@@ -94,10 +98,58 @@
             ">
               to date is required
             </div>
+            <div *ngIf="selectForm.controls['toDate'].errors && selectForm.controls['toDate'].errors['invalidToDate']"
+            style="color: rgb(253, 122, 122); font-size: small; font-style: italic;">
+            To date should be greater than from date
+          </div>
           </div>
         </div>
       </div>
+  </div> -->
+
+  <!-- <div class="col-6">
+    <div class="row">
+      <div class="col-4">
+        <label class="starlabel">To date</label>
+      </div>
+      <div class="col-8">
+        <input formControlName="toDate" [min]="getMinimumDate()" class="form-control custom-placeholder input-padding" type="date">
+        <div *ngIf="
+          selectForm.controls['toDate'].errors?.['required'] && (selectForm.controls['toDate'].touched || selectForm.controls['toDate'].dirty)"
+          style="color: rgb(253, 122, 122); font-size: small; font-style: italic;">
+          To date is required
+        </div>
+        <div *ngIf="
+          selectForm.controls['toDate'].errors?.['invalidToDate'] && (selectForm.controls['toDate'].touched || selectForm.controls['toDate'].dirty)"
+          style="color: rgb(253, 122, 122); font-size: small; font-style: italic;">
+          To date should be greater than or equal to from date
+        </div>
+      </div>
+    </div>
+  </div> -->
+
+  <div class="col-6">
+    <div class="row">
+      <div class="col-4">
+        <label class="starlabel">To date</label>
+      </div>
+      <div class="col-8">
+        <input formControlName="toDate" [min]="getMinimumDate()" [disabled]="!selectForm.controls['fromDate'].value"  class="form-control custom-placeholder input-padding" type="date">
+        <div *ngIf="selectForm.controls['toDate'].errors?.['required'] && (selectForm.controls['toDate'].touched || selectForm.controls['toDate'].dirty)"
+          style="color: rgb(253, 122, 122); font-size: small; font-style: italic;">
+          To date is required
+        </div>
+        <div *ngIf="selectForm.controls['toDate'].errors?.['invalidToDate'] && (selectForm.controls['toDate'].touched || selectForm.controls['toDate'].dirty)"
+          style="color: rgb(253, 122, 122); font-size: small; font-style: italic;">
+          To date should be greater than or equal to from date
+        </div>
+      </div>
+    </div>
   </div>
+
+
+
+
 
   </div>
   <div class="row mb-4">
@@ -106,25 +158,6 @@
           <div class="col-4">
             <label class="starlabel">Contact Number</label></div>
             <div class="col-8"> <input  formControlName="contactNo" type="number" class="form-control custom-placeholder input-padding"  placeholder="Enter contact number " >
-              <!-- <div *ngIf="
-              !selectForm.controls['contactNo'].valid &&
-              (selectForm.controls['contactNo'].touched ||
-              selectForm.controls['contactNo'].dirty)
-            ">
-              <div [hidden]="!selectForm.controls['contactNo'].errors['required']" style="
-                color: rgb(253, 122, 122);
-                font-size: small;
-                font-style: italic;
-              ">
-              contact number is required
-              </div>
-
-            </div> -->
-
-
-            <!-- <div *ngIf="selectForm.controls['contactNo'].errors['required']" style="color: rgb(253, 122, 122); font-size: small; font-style: italic;">
-              Please enter a 10-digit number.
-            </div> -->
 
             <div
             *ngIf="
@@ -165,16 +198,12 @@
         <div class="col-4">
           <label >Alt Contact Number</label></div>
           <div class="col-8"> <input formControlName="altConatctNo" type="number" class="form-control custom-placeholder input-padding" placeholder="Enter contact number " >
-            <!-- <div
-            *ngIf="selectForm.controls['altConatctNo'].errors['pattern']"
-            style="
-              color: rgb(253, 122, 122);
-              font-size: small;
-              font-style: italic;
-            "
-          >
-          Please enter a 10-digit number.
-          </div> -->
+              <div class="col-8">
+                <div *ngIf="selectForm.controls['altConatctNo'].errors?.['pattern'] && (selectForm.controls['altConatctNo'].touched || selectForm.controls['altConatctNo'].dirty)"
+                  style="color: rgb(253, 122, 122); font-size: small; font-style: italic;">
+                  Please enter a 10-digit number.
+                </div>
+              </div>
         </div>
       </div>
   </div>
@@ -220,7 +249,7 @@
   <div class="row mb-5 mt-4">
     <div class="d-flex justify-content-end col-11 mt-4">
       <button type="submit" style="background: rgb(228, 28, 28);border:none" class="btn btn-info mr-3"
-        (click)="submit()"  >Submit</button>
+        (click)="submit()" [disabled]="!selectForm.valid">Submit</button>
       <button class="btn btn-info" style="background: #637381;border:none"
         [routerLink]="['/leaveMgmt/leave-tracker']">Cancel</button>
     </div>

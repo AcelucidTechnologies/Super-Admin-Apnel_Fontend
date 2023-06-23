@@ -1,8 +1,10 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { NgxUiLoaderService } from 'ngx-ui-loader';
 import { LeaveService } from 'src/app/_services/leave.service';
 import { ToastrMsgService } from 'src/app/_services/toastr-msg.service';
+
 
 @Component({
   selector: 'app-leave-approve-disapprove',
@@ -10,102 +12,94 @@ import { ToastrMsgService } from 'src/app/_services/toastr-msg.service';
   styleUrls: ['./leave-approve-disapprove.component.scss']
 })
 export class LeaveApproveDisapproveComponent {
-  type: any;
-  leaveType:any;
-  appliedToType:any;
-  selectForm: FormGroup;
-  leaveList:any
-  id:string ='64820460ad46b42ae9019539'
-  constructor(
-    // private ngxLoader: NgxUiLoaderService,
-    private fb: FormBuilder,
-    private toastr: ToastrMsgService,
-    private leaveservice: LeaveService,
-    private route: Router) {
-    this.selectForm = this.fb.group({
-      username: localStorage.getItem("email"),
-      leaveType: ['',[Validators.required] ],
-      fromDate: ['',[Validators.required]],
-      toDate: ['',[Validators.required]],
-      contactNo: ['',[Validators.required,  Validators.pattern(/^\d{10}$/)]],
-      altConatctNo: ['',  [Validators.pattern(/^\d{10}$/)]],
-      reason: ['', [Validators.required]],
-      image: [''],
-      appliedTo: ['',[Validators.required]],
+  leaveList: any
+  isApproved: boolean = false;
+  isDisapproved: boolean = false;
+  id:string
+  leaveTrackerList:any
+  payload:any;
+  constructor(  private leaveservice: LeaveService,
+    private ngxLoader: NgxUiLoaderService,
+      private toastr: ToastrMsgService,
+      private route: Router
+   ){
 
+   }
+
+
+
+  ngOnInit(){
+    this.getTableforLeaves()
+  }
+
+  getTableforLeaves() {
+    this.leaveservice.getAllLeaveList().subscribe((res) => {
+      this.leaveTrackerList =res
+      this.leaveTrackerList = res.map((item) => {
+        const cleanResponse = item.reason.replace(/<\/?p>/g, '');
+        return { ...item, reason: cleanResponse };
+      });
+
+      console.log("response 24==>", res);
+      this.ngxLoader.stop();
     });
+  }
 
- }
 
- ngOnInit(): void {
-   this.getLeaveListById()
 
-  this.type = [
-    'earned',
-    'leaveWithoutpay',
-    'sickLeave',
-    'workFromHome',
-    'compOff',
-    'casualLeave',
-  ];
-  this.leaveType = [
-    'earned',
-    'leaveWithoutpay',
-    'sickLeave',
-    'workFromHome',
-    'compOff',
-    'casualLeave',
-  ];
-  this.appliedToType = [
-    'Admin',
-    'Mahender',
-    'Shivam',
+approve(id: string) {
+  this.payload = {
+    _id: id,
+    username: localStorage.getItem('email'),
+    employeeName: this.leaveTrackerList.employeeName,
+    typeOfAssets: this.leaveTrackerList.typeOfAssets,
+    addedBy:this.leaveTrackerList.addedBy,
+    givenDate: this.leaveTrackerList.givenDate,
+    returnDate: this.leaveTrackerList.returnDate,
+    assetsDetails: this.leaveTrackerList.assetsDetails
+  };
 
-  ];
-}
-
-getLeaveListById(){
-  this.leaveservice.getLeaveById(this.id).subscribe((res)=>{
-    this.leaveList = res;
-    const fromDate = this.convertDateFormat(res.fromDate);
-    const toDate = this.convertDateFormat(res.toDate);
-    console.log("leave list by id ===>"+JSON.stringify(res));
-    this.selectForm.patchValue({
-      leaveType: res.leaveType,
-      fromDate: fromDate,
-      toDate: toDate,
-      contactNo:res.contactNo,
-      altConatctNo: res.altConatctNo,
-      reason: res.reason,
-      image: res.image,
-      appliedTo: res.appliedTo,
-    });
+  console.log(this.payload);
+  this.leaveservice.approveLeave(this.payload, id).subscribe((res) => {
+    if (res) {
+      this.getTableforLeaves()
+      this.toastr.showSuccess(
+        'Leave Approved successfully',
+        'Leave Approved'
+      );
+      this.route.navigate(['/leaveMgmt/leave-approve-disapprove']);
+    }
   });
-  console.log("after patched value ==>"+ this.selectForm.value)
-}
-convertDateFormat(apiDate: string): string {
-  if (!apiDate) {
-    return ''; // or return a default value if desired
-  }
-
-  const date = new Date(apiDate);
-  const year = date.getUTCFullYear();
-  const month = this.formatNumber(date.getUTCMonth() + 1);
-  const day = this.formatNumber(date.getUTCDate());
-  return `${year}-${month}-${day}`;
-  // return `${month}/${date}/${year}`;
-}
-
-formatNumber(num: number): string {
-  return num < 10 ? `0${num}` : `${num}`;
 }
 
 
+disapprove(id: string) {
+  this.payload = {
+    _id: id,
+    username: localStorage.getItem('email'),
+    employeeName: this.leaveTrackerList.employeeName,
+    typeOfAssets: this.leaveTrackerList.typeOfAssets,
+    addedBy:this.leaveTrackerList.addedBy,
+    givenDate: this.leaveTrackerList.givenDate,
+    returnDate: this.leaveTrackerList.returnDate,
+    assetsDetails: this.leaveTrackerList.assetsDetails
+  };
 
+  console.log(this.payload);
+  this.leaveservice.disapproveLeave(this.payload, id).subscribe((res) => {
+    if (res) {
+      this.getTableforLeaves()
 
-  submit(){
+      this.toastr.showSuccess(
+        'Leave Disapproved successfully',
+        'Leave Disapproved'
+      );
 
+      this.route.navigate(['/leaveMgmt/leave-approve-disapprove']);
+    }
+  });
+// }
+}
 
-  }
 
 }
