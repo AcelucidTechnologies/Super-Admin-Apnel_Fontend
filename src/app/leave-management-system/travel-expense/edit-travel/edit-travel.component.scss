@@ -21,4 +21,10 @@
   line-height: 30px;
   padding-left: 10px;
 }
-
+label.starlabel::after{
+  content: "*";
+  color: rgb(228, 28, 28);
+}
+.custom-placeholder::placeholder {
+  color: #495057;
+}

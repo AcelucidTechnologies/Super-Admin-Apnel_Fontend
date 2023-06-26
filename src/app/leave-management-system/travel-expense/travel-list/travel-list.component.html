@@ -1,16 +1,16 @@
 <div class="page-heading">
   <div class="row mb-2 mt-2">
     <div class="col-6">
-      <h4>Exit List</h4>
+      <h4>Travel Expense List</h4>
     </div>
     <div class="col-6 text-right">
       <span class="p-input-icon-right ml-5">
         <button
           pButton
           type="button"
-          label=" + Add Exit"
+          label=" + Add Travelling Expense"
           class="add-button-rating"
-          [routerLink]="['/exitmgmt/add-exit']"
+          [routerLink]="['/travelexpense/add-travel']"
         ></button>
       </span>
     </div>
@@ -24,11 +24,11 @@
   [paginator]="true"
   [rows]="5"
   [showCurrentPageReport]="true"
-  [value]="exitData"
+  [value]="travelData"
   currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
   [responsive]="true"
   styleClass="p-datatable-striped"
-  [globalFilterFields]="['employeeId', 'interviewerType', 'typeOfAssets','reasonForLeaving','resignation','anythingShare','createdAt','updatedAt','allAssets','noticePeriod']"
+  [globalFilterFields]="['employeeId', 'travelFrom', 'travelTo','journeyDate','returnDate','anythingShare','createdAt','updatedAt','allAssets','noticePeriod']"
 >
   <ng-template pTemplate="caption">
     <div class="d-flex justify-content-between">
@@ -81,76 +81,41 @@
         </div>
       </th>
 
-      <th pSortableColumn="emoloyeeId">
+      <th pSortableColumn="employeeId">
         <div class="flex justify-content-between align-items-center head1">
           Employee ID
-          <p-sortIcon field="emoloyeeId"></p-sortIcon>
+          <p-sortIcon field="employeeId"></p-sortIcon>
         </div>
       </th>
 
-      <th pSortableColumn="interviewerType">
+      <th pSortableColumn="travelFrom">
         <div class="flex justify-content-between align-items-center head1">
-          Interviewer Type
-          <p-sortIcon field="interviewerType"></p-sortIcon>
+          Travel From
+          <p-sortIcon field="travelFrom"></p-sortIcon>
         </div>
       </th>
 
-      <th pSortableColumn="separationDate">
+      <th pSortableColumn="travelTo">
         <div class="flex justify-content-between align-items-center head1">
-          Sepration date
-          <p-sortIcon field="separationDate"></p-sortIcon>
+          Travel To
+          <p-sortIcon field="travelTo"></p-sortIcon>
         </div>
       </th>
 
-      <th pSortableColumn="reasonForLeaving">
+      <th pSortableColumn="journeyDate">
         <div class="flex justify-content-between align-items-center head1">
-          Reason of Leaving
-          <p-sortIcon field="reasonForLeaving"></p-sortIcon>
+          Start Date
+          <p-sortIcon field="journeyDate"></p-sortIcon>
         </div>
       </th>
 
-      <th pSortableColumn="workWithOrganisationAgain">
+      <th pSortableColumn="returnDate">
         <div class="flex justify-content-between align-items-center head1">
-          Work with this organisation again
-          <p-sortIcon field="workWithOrganisationAgain"></p-sortIcon>
+          Return Date
+          <p-sortIcon field="returnDate"></p-sortIcon>
         </div>
       </th>
-      <th pSortableColumn="mostTheCompany">
-        <div class="flex justify-content-between align-items-center head1">
-          What do you like the most of the organization
-          <p-sortIcon field="mostTheCompany"></p-sortIcon>
-        </div>
-      </th>
-      <th pSortableColumn="anythingShare">
-        <div class="flex justify-content-between align-items-center head1">
-          Anything you want to share with us
-          <p-sortIcon field="anythingShare"></p-sortIcon>
-        </div>
-      </th>
-      <th pSortableColumn="resignation">
-        <div class="flex justify-content-between align-items-center head1">
-          Resignation Letter Submitted
-          <p-sortIcon field="resignation"></p-sortIcon>
-        </div>
-      </th>
-      <th pSortableColumn="allAssets">
-        <div class="flex justify-content-between align-items-center head1">
-          All Assets Submitted
-          <p-sortIcon field="allAssets"></p-sortIcon>
-        </div>
-      </th>
-      <th pSortableColumn="noticePeriod">
-        <div class="flex justify-content-between align-items-center head1">
-          Notice Peroid Followed
-          <p-sortIcon field="noticePeriod"></p-sortIcon>
-        </div>
-      </th>
-      <th pSortableColumn="manager">
-        <div class="flex justify-content-between align-items-center head1">
-         Manager/Supervior Clearance
-          <p-sortIcon field="manager"></p-sortIcon>
-        </div>
-      </th>
+
       <th pSortableColumn="addedBy">
         <div class="flex justify-content-between align-items-center head1">
           Added By
@@ -185,17 +150,11 @@
         <span class="p-column-title">Sr.no</span>
         {{ i + 1 }}
       </td>
-      <td>{{ list.emoloyeeId }}</td>
-      <td>{{ list.interviewerType }}</td>
-      <td>{{ list.separationDate | date : "MM/dd/yyyy" }}</td>
-      <td>{{ list.reasonForLeaving }}</td>
-      <td>{{ list.workWithOrganisationAgain  }}</td>
-      <td>{{ list.mostTheCompany }}</td>
-      <td>{{ list.anythingShare}}</td>
-      <td>{{ list.resignation }}</td>
-      <td>{{ list.allAssets }}</td>
-      <td>{{ list.noticePeriod }}</td>
-      <td>{{ list.manager }}</td>
+      <td>{{ list.employeeId }}</td>
+      <td>{{ list.travelFrom }}</td>
+      <td>{{ list.travelTo }}</td>
+      <td>{{ list.journeyDate }}</td>
+      <td>{{ list.returnDate  }}</td>
       <td>{{ list.addedBy }}</td>
       <td>{{ list.createdAt | date : "MM/dd/yyyy"  }}</td>
       <td>{{ list.modifiedBy }}</td>
@@ -205,19 +164,19 @@
       <td>
         <div style="display: flex; align-items: center;">
         <a
-          pTooltip="Edit Exit"
+          pTooltip="Edit Travel"
           tooltipPosition="bottom"
           style="margin-right: 15px; cursor: pointer"
         >
           <img
             src="../../../../assets/images/edit.svg"
-            [routerLink]="['/exitmgmt/edit-exit']"
+            [routerLink]="['/travelexpense/edit-travel']"
             [queryParams]="{ id: list._id }"
             alt="img"
           />
         </a>
         <a
-          pTooltip="Delete Exit"
+          pTooltip="Delete Travel"
           tooltipPosition="bottom"
           (click)="openDialog(list)"
           class="me-3 confirm-text"

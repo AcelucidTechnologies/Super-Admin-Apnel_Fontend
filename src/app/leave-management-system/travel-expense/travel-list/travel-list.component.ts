@@ -8,16 +8,15 @@ import { DatePipe } from '@angular/common';
 import { LeaveService } from 'src/app/_services/leave.service';
 import { Table } from 'primeng/table';
 import autoTable from 'jspdf-autotable';
-import { DialogExitComponent } from '../dialog-exit/dialog-exit.component';
+import { DialogTravelComponent } from '../dialog-travel/dialog-travel.component';
 
 @Component({
-  selector: 'app-exit-list',
-  templateUrl: './exit-list.component.html',
-  styleUrls: ['./exit-list.component.scss']
+  selector: 'app-travel-list',
+  templateUrl: './travel-list.component.html',
+  styleUrls: ['./travel-list.component.scss']
 })
-export class ExitListComponent {
-
-  exitData: any[]=[];
+export class TravelListComponent {
+  travelData: any[]=[];
   exitDetails:any
 
 
@@ -37,37 +36,36 @@ export class ExitListComponent {
   }
 
   ngOnInit(): void {
-
-    this.getExitData();
+    this.getTravelData();
   }
 
 
 
 
-  getExitData() {
-    this.leaveService.getExitList().subscribe((res) => {
-      this.exitData = res;
-      console.log('51', this.exitData);
+  getTravelData() {
+    this.leaveService.getTravelList().subscribe((res) => {
+      this.travelData = res;
+      console.log('51', this.travelData);
     });
   }
 
   openDialog(name: any) {
-    const dialogRef = this.dialog.open(DialogExitComponent);
+    const dialogRef = this.dialog.open(DialogTravelComponent);
     dialogRef.afterClosed().subscribe((result) => {
       if (result == true) {
-        this.deleteExitDetails(name);
+        this.deleteTravelDetails(name);
       }
     });
   }
 
-  deleteExitDetails(id: any) {
-    this.leaveService.deleteExit(id._id).subscribe((res) => {
+  deleteTravelDetails(id: any) {
+    this.leaveService.deleteTravel(id._id).subscribe((res) => {
       if (res) {
         this.toastr.showSuccess(
-          'Exit deleted successfully',
-          'Exit deleted'
+          'Travel Expense deleted successfully',
+          'Travel Expense deleted'
         );
-        this.getExitData()
+        this.getTravelData()
       }
     });
   }
@@ -75,19 +73,13 @@ export class ExitListComponent {
 
   exportExcel(): void {
     const datePipe = new DatePipe('en-US');
-    const data = this.exitData.map((item, index) => ({
+    const data = this.travelData.map((item, index) => ({
       'S.No.': index+1,
-      'Employee Id': item.emoloyeeId,
-      'Interviewer Type': item.interviewerType,
-      SeparationDate: datePipe.transform(item.separationDate),
-      'Reason For Leaving': item.reasonForLeaving,
-      'Work With Organisation Again': item.workWithOrganisationAgain,
-      'Most Of The Company': item.mostTheCompany,
-      'Anything To Share': item.anythingShare,
-      'Resignation': item.resignation,
-      'All Assets': item.allAssets,
-      'Notice Period': item.noticePeriod,
-      'Manager': item.manager,
+      'Employee Id': item.employeeId,
+      'Travel From': item.travelFrom,
+      'Travel To': item.travelTo,
+      'JourneyDate': item.journeyDate,
+      'ReturnDate': item.returnDate,
       'Added By': item.addedBy,
       AddedTime: datePipe.transform(item.createdAt, 'MM/dd/yyyy'),
       'Modified By': item.modifiedBy,
@@ -127,7 +119,7 @@ export class ExitListComponent {
 
 
   exportPdf() {
-    this.exitDetails = this.exitData.map((item, index) => {
+    this.exitDetails = this.travelData.map((item, index) => {
       return { sno: index + 1, ...item };
     });
 
@@ -138,23 +130,15 @@ export class ExitListComponent {
         ...item,
         createdAt: this.formatDate(item.createdAt), // Format the createdAt date
         updatedAt: this.formatDate(item.updatedAt), // Format the createdAt date
-        separationDate: this.formatDate(item.separationDate) // Format the createdAt date
       };
     });
     const exportColumns = [
       { title: 'S No.', dataKey: 'sno' },
-      { title: 'Employee Id', dataKey: 'emoloyeeId' },
-      { title: 'Interviewer Type ', dataKey: 'interviewerType' },
-      { title: 'Type Of Assets', dataKey: 'typeOfAssets' },
-      { title: 'Separation Date', dataKey: 'separationDate' },
-      { title: 'Reason For Leaving', dataKey: 'reasonForLeaving' },
-      { title: 'Work With OrganisationAgain ', dataKey: 'workWithOrganisationAgain ' },
-      { title: 'Most Of The Company', dataKey: 'mostTheCompany' },
-      { title: 'Anything Share', dataKey: 'anythingShare' },
-      { title: 'Resignation', dataKey: 'resignation' },
-      { title: 'All Assets', dataKey: 'allAssets' },
-      { title: 'Notice Period', dataKey: 'noticePeriod' },
-      { title: 'manager', dataKey: 'manager' },
+      { title: 'Employee Id', dataKey: 'employeeId' },
+      { title: 'Travel From', dataKey: 'travelFrom' },
+      { title: 'Travel To', dataKey: 'travelTo' },
+      { title: 'JourneyDate', dataKey: 'journeyDate' },
+      { title: 'ReturnDate', dataKey: 'returnDate' },
       { title: 'Added By', dataKey: 'addedBy' },
       { title: 'AddedTime', dataKey: 'createdAt' },
       { title: 'Modified By', dataKey: 'addedBy' },
@@ -167,7 +151,7 @@ export class ExitListComponent {
       body: data
     });
 
-    doc.save('Exit Detail List.pdf');
+    doc.save('Travel Expense List.pdf');
   }
 
   formatDate(dateString) {

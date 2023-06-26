@@ -11,6 +11,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { SharedModule } from 'src/app/shared/shared.module';
 import { FormsModule } from '@angular/forms';
 import { MatDividerModule } from '@angular/material/divider';
+import { NgxUiLoaderModule } from 'ngx-ui-loader';
 
 
 @NgModule({
@@ -28,6 +29,7 @@ import { MatDividerModule } from '@angular/material/divider';
     SharedModule,
     FormsModule,
     MatDividerModule,
+    NgxUiLoaderModule,
   ]
 })
 export class ExitModule { }

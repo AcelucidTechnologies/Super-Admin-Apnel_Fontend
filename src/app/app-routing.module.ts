@@ -130,6 +130,12 @@ const routes: Routes = [
     loadChildren: () => import('./leave-management-system/exit-details/exit.module').then(mod=>mod.ExitModule),
     canActivate: [AuthGuard]
   },
+  {
+    path: 'travelexpense',
+    loadChildren: () => import('./leave-management-system/travel-expense/travel.module').then(mod=>mod.TravelModule),
+    canActivate: [AuthGuard]
+  },
+
 
 
   { path: '', component: AuthenticationComponent },

@@ -224,7 +224,13 @@ export class EditProfileComponent {
         this.getLeaveById()
        });
   }
+  getMinimumDate() {
+    const leaveType = this.profileForm?.get('dateOfJoining')?.value;
+      const currentDate = new Date();
+      currentDate.setDate(currentDate.getDate() );
+      return currentDate.toISOString().split('T')[0];
 
+  }
   createEducationRow(): FormGroup {
     console.log('createEducationRow() called');
     return this.fb.group({

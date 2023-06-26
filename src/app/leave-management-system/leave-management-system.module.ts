@@ -60,7 +60,6 @@ const calendarOptions: CalendarOptions = {
     LeaveApproveDisapproveComponent,
     ViewLeaveReasonComponent,
 
-
   ],
   imports: [
     CommonModule,
