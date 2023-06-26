@@ -58,17 +58,36 @@ validateToDate(control: AbstractControl): ValidationErrors | null {
 
 getTravelDetail(){
   this.leaveservice.getTravelById(this.id).subscribe((res)=>{
+    const journeyDate = this.convertDateFormat(res.journeyDate);
+    const returnDate = this.convertDateFormat(res.returnDate);
   this.selectForm.patchValue({
     employeeId:res.employeeId,
     employeeName:res.employeeName,
-    journeyDate:res.journeyDate,
-    returnDate:res.returnDate,
+    journeyDate:journeyDate,
+    returnDate:returnDate,
     travelFrom:res.travelFrom,
     travelTo:res.travelTo,
     purposeTravel:res.purposeTravel,
   })
   })
   }
+  convertDateFormat(apiDate: string): string {
+    if (!apiDate) {
+      return ''; // or return a default value if desired
+    }
+
+    const date = new Date(apiDate);
+    const year = date.getUTCFullYear();
+    const month = this.formatNumber(date.getUTCMonth() + 1);
+    const day = this.formatNumber(date.getUTCDate());
+    return `${year}-${month}-${day}`;
+    // return `${month}/${date}/${year}`;
+  }
+
+  formatNumber(num: number): string {
+    return num < 10 ? `0${num}` : `${num}`;
+  }
+
 
   ngOnInit(){
     this.getTravelDetail()

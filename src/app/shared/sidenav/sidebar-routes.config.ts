@@ -85,6 +85,13 @@ export const SideNaveMenueRoute = [
         routerLinkActiveOptions: { exact: true },
         routerLinkActive: 'active'
       },
+      {
+        label: 'Documents',
+        icon: 'pi pi-list',
+        routerLink: ['/documents/document-list'],
+        routerLinkActiveOptions: { exact: true },
+        routerLinkActive: 'active'
+      },
     ],
   },
   {

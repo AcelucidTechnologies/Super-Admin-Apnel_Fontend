@@ -22,6 +22,7 @@ export class AddExitComponent {
 
     this.selectForm = this.fb.group({
       username: localStorage.getItem("email"),
+      employeeId:['', [Validators.required] ],
       employeeName: ['',[Validators.required] ],
       interviewerType: ['',[Validators.required, ]],
       reasonForLeaving: ['',[Validators.required, ]],
@@ -32,6 +33,7 @@ export class AddExitComponent {
       allAssets: ['',[Validators.required]],
       noticePeriod:['',[Validators.required]],
       manager:['',[Validators.required]],
+      addedBy:['',[Validators.required]],
 
 
     });
@@ -39,14 +41,16 @@ export class AddExitComponent {
 
  }
 
- submit(){
+
+submit(){
   this.ngxLoader.start();
   this.leaveservice.createExit(this.selectForm.value).subscribe((res)=>{
     this.exitlist= res;
+    console.log("100" + this.exitlist)
        if (res) {
         this.ngxLoader.start();
-         console.log("100" + this.exitlist)
-         this.toastr.showSuccess("Exit added successfully", "Exit Added")
+
+         this.toastr.showSuccess("Exit Details added successfully", "Details Added")
        }
        (error: any) => {
         console.log("error");
@@ -55,8 +59,11 @@ export class AddExitComponent {
        }
        this.route.navigate(['/exitmgmt/exit-list']);
 
+       console.log("245 ==>"+ JSON.stringify(this.selectForm.value))
+
   })
 
    }
+
 
 }

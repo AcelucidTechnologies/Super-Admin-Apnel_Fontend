@@ -30,7 +30,6 @@ import { TravelListComponent } from './travel-list/travel-list.component';
     SharedModule,
     FormsModule,
     MatDividerModule,
-    NgxUiLoaderModule,
   ]
 })
 export class TravelModule { }

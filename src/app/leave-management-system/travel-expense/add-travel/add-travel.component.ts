@@ -12,7 +12,7 @@ import { ToastrMsgService } from 'src/app/_services/toastr-msg.service';
 })
 export class AddTravelComponent {
   selectForm: FormGroup;
-  exitlist:any;
+  travellist:any;
   constructor(
     private ngxLoader: NgxUiLoaderService,
     private fb: FormBuilder,
@@ -54,10 +54,10 @@ validateToDate(control: AbstractControl): ValidationErrors | null {
  submit(){
   this.ngxLoader.start();
   this.leaveservice.createTravel(this.selectForm.value).subscribe((res)=>{
-    this.exitlist= res;
+    this.travellist= res;
        if (res) {
         this.ngxLoader.start();
-         console.log("100" + this.exitlist)
+         console.log("100" + this.travellist)
          this.toastr.showSuccess("Travel expense added successfully", "Expense Added")
        }
        (error: any) => {

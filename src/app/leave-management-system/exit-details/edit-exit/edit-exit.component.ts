@@ -43,6 +43,7 @@ export class EditExitComponent {
 
  getExitDetail(){
   this.leaveservice.getExitById(this.id).subscribe((res)=>{
+    console.log("patched value exit " + res)
   this.selectForm.patchValue({
     emoloyeeId:res.emoloyeeId,
     employeeName:res.employeeName,
@@ -62,6 +63,7 @@ export class EditExitComponent {
   ngOnInit(){
     this.getExitDetail()
   }
+
 
   submit(){
     this.payload={

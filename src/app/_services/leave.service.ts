@@ -415,7 +415,7 @@ deleteExit(id: string) {
 getExitById(id: string): Observable<any> {
   const token = localStorage.getItem('token') || '';
   let httpOptions = new HttpHeaders().set('x-access-token', token)
-  const endpointUrl = `${environment.JSON_SERVER}/getExitDetails?id=${id}`;
+  const endpointUrl = `${environment.JSON_SERVER}/getExitDetailsById?id=${id}`;
   return this.http.get<any>(endpointUrl,{ 'headers': httpOptions });
 }
 editExitList(payload, id: string) {
@@ -425,6 +425,7 @@ editExitList(payload, id: string) {
 
   return this.http.put<any>(endpointUrl, payload, { headers: httpOptions });
 }
+
 createExit(payload:any): Observable<any[]> {
   const token = localStorage.getItem('token') || '';
         const email = localStorage.getItem('email') || '';
@@ -432,7 +433,6 @@ createExit(payload:any): Observable<any[]> {
           const endpointUrl = `${environment.JSON_SERVER}/createExitDetails`;
         return this.http.post<any>(endpointUrl, payload,{ 'headers': httpOptions });
 }
-
 
 
 // ############################# Travel Expense #############################
@@ -470,6 +470,44 @@ createTravel(payload:any): Observable<any[]> {
         const email = localStorage.getItem('email') || '';
         let httpOptions = new HttpHeaders().set('x-access-token', token)
           const endpointUrl = `${environment.JSON_SERVER}/createReimbursement`;
+        return this.http.post<any>(endpointUrl, payload,{ 'headers': httpOptions });
+}
+
+// ############################# Documents #############################
+
+getDocumentList(): Observable<any[]> {
+  const token = localStorage.getItem('token') || '';
+  const email = localStorage.getItem('email')
+  let httpOptions = new HttpHeaders().set('x-access-token', token)
+ const endpointUrl = `${environment.JSON_SERVER}/getDocument?username=${email}`;
+ return this.http.get<any[]>(endpointUrl ,{ 'headers': httpOptions });
+
+}
+
+deleteDocument(id: string) {
+  const token = localStorage.getItem('token') || '';
+  let httpOptions = new HttpHeaders().set('x-access-token', token)
+  const endpointUrl = `${environment.JSON_SERVER}/deleteDocument?id=${id}`;
+  return this.http.delete<any>(endpointUrl, { 'headers': httpOptions });
+}
+getDocumentById(id: string): Observable<any> {
+  const token = localStorage.getItem('token') || '';
+  let httpOptions = new HttpHeaders().set('x-access-token', token)
+  const endpointUrl = `${environment.JSON_SERVER}/getDocumentById?id=${id}`;
+  return this.http.get<any>(endpointUrl,{ 'headers': httpOptions });
+}
+editDocumentList(payload, id: string) {
+  const token = localStorage.getItem('token') || '';
+  const httpOptions = new HttpHeaders().set('x-access-token', token);
+  const endpointUrl = `${environment.JSON_SERVER}/updateDocument?id=${id}`;
+
+  return this.http.put<any>(endpointUrl, payload, { headers: httpOptions });
+}
+createDocument(payload:any): Observable<any[]> {
+  const token = localStorage.getItem('token') || '';
+        const email = localStorage.getItem('email') || '';
+        let httpOptions = new HttpHeaders().set('x-access-token', token)
+          const endpointUrl = `${environment.JSON_SERVER}/createDocument`;
         return this.http.post<any>(endpointUrl, payload,{ 'headers': httpOptions });
 }
 

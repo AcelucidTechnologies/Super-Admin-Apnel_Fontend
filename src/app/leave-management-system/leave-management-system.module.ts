@@ -32,6 +32,9 @@ import { LeaveApplyComponent } from './leave-apply/leave-apply.component';
 import { CKEditorModule } from 'ckeditor4-angular';
 import { LeaveApproveDisapproveComponent } from './leave-approve-disapprove/leave-approve-disapprove.component';
 import { ViewLeaveReasonComponent } from './view-leave-reason/view-leave-reason.component';
+import { AddDocumentComponent } from './Documents/add-document/add-document.component';
+import { EditDocumentComponent } from './Documents/edit-document/edit-document.component';
+import { DialogDocumentComponent } from './Documents/dialog-document/dialog-document.component';
 
 const plugins = [dayGridPlugin, timeGridPlugin];
 
@@ -59,6 +62,9 @@ const calendarOptions: CalendarOptions = {
     LeaveApplyComponent,
     LeaveApproveDisapproveComponent,
     ViewLeaveReasonComponent,
+    AddDocumentComponent,
+    EditDocumentComponent,
+    DialogDocumentComponent,
 
   ],
   imports: [

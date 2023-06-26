@@ -135,6 +135,11 @@ const routes: Routes = [
     loadChildren: () => import('./leave-management-system/travel-expense/travel.module').then(mod=>mod.TravelModule),
     canActivate: [AuthGuard]
   },
+  {
+    path: 'documents',
+    loadChildren: () => import('./leave-management-system/Documents/document.module').then(mod=>mod.DocumentModule),
+    canActivate: [AuthGuard]
+  },
 
 
 
