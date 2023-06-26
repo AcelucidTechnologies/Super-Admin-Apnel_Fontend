@@ -223,6 +223,45 @@
 
 
     <div class="row mb-4 mt-2">
+      <div class="col-6">
+        <div class="row">
+          <div class="col-4">
+            <label class="starlabel">Added By</label>
+          </div>
+          <div class="col-8">
+            <input
+              formControlName="addedBy"
+              placeholder="Enter added by"
+              class="form-control custom-placeholder input-padding"
+              type="text"
+            />
+            <div
+            *ngIf="
+              !selectForm.controls['addedBy'].valid &&
+              (selectForm.controls['addedBy'].touched ||
+                selectForm.controls['addedBy'].dirty)
+            "
+          >
+            <div
+              [hidden]="!selectForm.controls['addedBy'].errors['required']"
+              style="
+                color: rgb(253, 122, 122);
+                font-size: small;
+                font-style: italic;
+              "
+            >
+              added by is required
+            </div>
+          </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+
+
+    <div class="row mb-4 mt-2">
       <div class="col-12">
         <div class="row">
           <div class="col-2">

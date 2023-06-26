@@ -8,10 +8,19 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { MatDividerModule } from '@angular/material/divider';
 import { NgxUiLoaderModule } from 'ngx-ui-loader';
 import { SharedModule } from 'src/app/shared/shared.module';
+import { AddDocumentComponent } from './add-document/add-document.component';
+import { DocumentListComponent } from './document-list/document-list.component';
+import { EditDocumentComponent } from './edit-document/edit-document.component';
+import { DialogDocumentComponent } from './dialog-document/dialog-document.component';
 
 
 @NgModule({
-  declarations: [],
+  declarations: [
+    DialogDocumentComponent,
+    AddDocumentComponent,
+    DocumentListComponent,
+    EditDocumentComponent,
+  ],
   imports: [
     CommonModule,
     DocumentRoutingModule,

@@ -68,6 +68,7 @@ getTravelDetail(){
     travelFrom:res.travelFrom,
     travelTo:res.travelTo,
     purposeTravel:res.purposeTravel,
+
   })
   })
   }

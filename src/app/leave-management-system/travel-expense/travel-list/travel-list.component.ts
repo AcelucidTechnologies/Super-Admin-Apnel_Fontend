@@ -82,7 +82,7 @@ export class TravelListComponent {
       'ReturnDate': item.returnDate,
       'Added By': item.addedBy,
       AddedTime: datePipe.transform(item.createdAt, 'MM/dd/yyyy'),
-      'Modified By': item.modifiedBy,
+      'Modified By': item.addedBy,
       ModifiedTime: datePipe.transform(item.updatedAt, 'MM/dd/yyyy'),
     }));
 

@@ -29,6 +29,7 @@ export class AddTravelComponent {
       travelFrom: ['',[Validators.required]],
       travelTo: ['',[Validators.required]],
       purposeTravel: ['',[Validators.required]],
+      addedBy: ['',[Validators.required]],
     });
 
 
