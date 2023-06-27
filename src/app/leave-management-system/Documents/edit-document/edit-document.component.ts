@@ -16,7 +16,7 @@ export class EditDocumentComponent {
   appliedToType: string[];
   assetlist:any;
   id:any
-
+  employeeList: any[]=[]
   constructor(
     private ngxLoader: NgxUiLoaderService,
     private fb: FormBuilder,
@@ -29,12 +29,19 @@ export class EditDocumentComponent {
       })
     this.selectForm = this.fb.group({
       username: localStorage.getItem("email"),
-      employee: ['',[Validators.required] ],
-      fileDescription: ['',[Validators.required]],
-      toview: ['',[Validators.required]],
-      toDownload: ['',[Validators.required]],
-      folderName: [''],
+      image: [''],
       fileName: [''],
+      employee: [''],
+      folderName: [''],
+      fileDescription: [''],
+      toview: this.fb.group({
+        employee: [false],
+        reportingManager: [false],
+      }),
+      toDownload: this.fb.group({
+        employee: [false],
+        reportingManager: [false],
+      })
 
     });
  }
@@ -45,20 +52,37 @@ export class EditDocumentComponent {
 
 }
  ngOnInit(){
-this.getEditByIDDetail()
+this.getEditByIDDetail(),
+this.getAllEmail()
  }
+ getAllEmail() {
+  this.leaveservice.getEmail().subscribe((res) => {
+    this.employeeList =  res
+    this.ngxLoader.stop();
+  });
+}
 
  getEditByIDDetail(){
   this.leaveservice.getDocumentById(this.id).subscribe((res)=>{
+    console.log("500==>"+JSON.stringify(res))
   this.selectForm.patchValue({
-    employee:res.employee,
-    fileDescription:res.fileDescription,
-    toview:res.toview,
-    givenDate:res.givenDate,
-    toDownload:res.toDownload,
-    folderName:res.folderName,
+    image:res.image,
     fileName:res.fileName,
+    employee:res.employee,
+    givenDate:res.givenDate,
+    fileDescription:res.fileDescription,
+    folderName:res.folderName,
+
+    toview: {
+      employee: res.employee,
+      reportingManager: res.reportingManager,
+    },
+    toDownload: {
+      employee: res.employee,
+      reportingManager: res.reportingManager,
+    },
   })
+  console.log("patched value for document" +  JSON.stringify(this.selectForm.value))
   })
   }
 

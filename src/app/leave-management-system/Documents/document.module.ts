@@ -12,6 +12,8 @@ import { AddDocumentComponent } from './add-document/add-document.component';
 import { DocumentListComponent } from './document-list/document-list.component';
 import { EditDocumentComponent } from './edit-document/edit-document.component';
 import { DialogDocumentComponent } from './dialog-document/dialog-document.component';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatSelectModule } from '@angular/material/select';
 
 
 @NgModule({
@@ -30,6 +32,8 @@ import { DialogDocumentComponent } from './dialog-document/dialog-document.compo
     SharedModule,
     FormsModule,
     MatDividerModule,
+    MatSelectModule,
+    MatFormFieldModule
 
   ]
 })

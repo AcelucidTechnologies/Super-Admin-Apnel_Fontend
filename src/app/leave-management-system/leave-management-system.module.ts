@@ -32,6 +32,8 @@ import { LeaveApplyComponent } from './leave-apply/leave-apply.component';
 import { CKEditorModule } from 'ckeditor4-angular';
 import { LeaveApproveDisapproveComponent } from './leave-approve-disapprove/leave-approve-disapprove.component';
 import { ViewLeaveReasonComponent } from './view-leave-reason/view-leave-reason.component';
+import { MatSelectModule } from '@angular/material/select';
+import { MatFormFieldModule } from '@angular/material/form-field';
 
 
 const plugins = [dayGridPlugin, timeGridPlugin];
@@ -83,6 +85,8 @@ const calendarOptions: CalendarOptions = {
     ButtonModule,
     FullCalendarModule,
     CKEditorModule,
+    MatSelectModule,
+    MatFormFieldModule
 
   ],
   providers: [

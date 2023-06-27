@@ -72,3 +72,15 @@ label.starlabel::after{
 ::ng-deep.ng-dirty.ng-invalid > .p-dropdown {
   border-color: lightgrey !important;
 }
+.mat-select {
+  display: inline-block;
+  width: 100%;
+  outline: none;
+  border: 1px solid lightgrey;
+  height: 40px;
+  padding: 5px 10px 5px 10px;
+  color: black;
+}
+::ng-deep.mat-select-placeholder {
+  color: black !important;
+}

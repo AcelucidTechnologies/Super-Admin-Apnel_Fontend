@@ -83,19 +83,19 @@
 
       <th pSortableColumn="employee">
         <div class="flex justify-content-between align-items-center head1">
-          Employee Name
+          Folder Name
           <p-sortIcon field="employee"></p-sortIcon>
         </div>
       </th>
 
       <th pSortableColumn="fileDescription">
         <div class="flex justify-content-between align-items-center head1">
-          File Description
+          File
           <p-sortIcon field="fileDescription"></p-sortIcon>
         </div>
       </th>
 
-      <th pSortableColumn="toview">
+      <!-- <th pSortableColumn="toview">
         <div class="flex justify-content-between align-items-center head1">
           view
           <p-sortIcon field="toview"></p-sortIcon>
@@ -138,7 +138,7 @@
           Modified Time
           <p-sortIcon field="updatedAt"></p-sortIcon>
         </div>
-      </th>
+      </th> -->
       <th class="text-center">Action</th>
     </tr>
   </ng-template>
@@ -148,15 +148,15 @@
         <span class="p-column-title">Sr.no</span>
         {{ i + 1 }}
       </td>
-      <td>{{ list.employee }}</td>
+      <td>{{ list.folderName }}</td>
       <td>{{ list.fileDescription }}</td>
-      <td>{{ list.toview }}</td>
+      <!-- <td>{{ list.toview }}</td>
       <td>{{ list.toDownload }}</td>
       <td>{{ list.image }}</td>
       <td>{{ list.addedBy }}</td>
       <td>{{ list.createdAt | date : "MM/dd/yyyy"}}</td>
       <td>{{ list.addedBy }}</td>
-      <td>{{ list.updatedAt | date : "MM/dd/yyyy"  }}</td>
+      <td>{{ list.updatedAt | date : "MM/dd/yyyy"  }}</td> -->
 
 
       <td>

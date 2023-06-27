@@ -493,22 +493,49 @@ deleteDocument(id: string) {
 getDocumentById(id: string): Observable<any> {
   const token = localStorage.getItem('token') || '';
   let httpOptions = new HttpHeaders().set('x-access-token', token)
-  const endpointUrl = `${environment.JSON_SERVER}/getDocumentById?id=${id}`;
+  const endpointUrl = `${environment.JSON_SERVER}/getDocuemntById?id=${id}`;
   return this.http.get<any>(endpointUrl,{ 'headers': httpOptions });
 }
 editDocumentList(payload, id: string) {
   const token = localStorage.getItem('token') || '';
+  const email = localStorage.getItem('email') || '';
   const httpOptions = new HttpHeaders().set('x-access-token', token);
+  const formData = new FormData();
+  formData.append('username', email);
+  formData.append('image', payload.image);
+  formData.append('fileName', payload.fileName);
+  formData.append('employee', payload.employee);
+  formData.append('folderName', payload.folderName);
+  formData.append('fileDescription', payload.fileDescription);
+  formData.append('toview[employee]', payload.toview.employee);
+  formData.append('toview[reportingManager]', payload.toview.reportingManager);
+  formData.append('toDownload[employee]', payload.toDownload.employee);
+  formData.append('toDownload[reportingManager]', payload.toDownload.reportingManager);
   const endpointUrl = `${environment.JSON_SERVER}/updateDocument?id=${id}`;
 
-  return this.http.put<any>(endpointUrl, payload, { headers: httpOptions });
+  return this.http.put<any>(endpointUrl, formData, { headers: httpOptions });
 }
-createDocument(payload:any): Observable<any[]> {
+
+
+createDocument(payload: any): Observable<any[]> {
   const token = localStorage.getItem('token') || '';
-        const email = localStorage.getItem('email') || '';
-        let httpOptions = new HttpHeaders().set('x-access-token', token)
-          const endpointUrl = `${environment.JSON_SERVER}/createDocument`;
-        return this.http.post<any>(endpointUrl, payload,{ 'headers': httpOptions });
+  const email = localStorage.getItem('email') || '';
+  let httpOptions = new HttpHeaders().set('x-access-token', token);
+  const formData = new FormData();
+  formData.append('username', email);
+  formData.append('image', payload.image);
+  formData.append('fileName', payload.fileName);
+  formData.append('employee', payload.employee);
+  formData.append('folderName', payload.folderName);
+  formData.append('fileDescription', payload.fileDescription);
+  formData.append('toview[employee]', payload.toview.employee);
+  formData.append('toview[reportingManager]', payload.toview.reportingManager);
+  formData.append('toDownload[employee]', payload.toDownload.employee);
+  formData.append('toDownload[reportingManager]', payload.toDownload.reportingManager);
+  const endpointUrl = `${environment.JSON_SERVER}/createDocument`;
+  return this.http.post<any>(endpointUrl, formData, { headers: httpOptions });
 }
+
+
 
 }

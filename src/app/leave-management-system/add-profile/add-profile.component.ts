@@ -203,13 +203,6 @@ export class AddProfileComponent {
         this.checkEmailValidity(value);
       });
 
-      // this.ageControl = new FormControl('', [
-      //   Validators.required,
-      //   Validators.pattern('^[0-9]*$'),
-      //   Validators.min(15),
-      //   Validators.max(70)
-      // ]);
-
 
 
       this.educationDetails = (this.profileForm.get('educationDetails') as FormArray).controls as FormGroup[];
@@ -242,6 +235,19 @@ export class AddProfileComponent {
         this.ngxLoader.stop();
       });
     }
+    calculateAge() {
+      const dateOfBirth = this.profileForm.get('personalDetails.dateOfBirth').value;
+      if (dateOfBirth) {
+        const today = new Date();
+        const birthDate = new Date(dateOfBirth);
+        let age = today.getFullYear() - birthDate.getFullYear();
+        const monthDiff = today.getMonth() - birthDate.getMonth();
+        if (monthDiff < 0 || (monthDiff === 0 && today.getDate() < birthDate.getDate())) {
+          age--;
+        }
+        this.profileForm.get('personalDetails.age').patchValue(age);
+      }
+    }
 
     getMinimumDate() {
       const leaveType = this.profileForm?.get('dateOfJoining')?.value;
@@ -258,18 +264,6 @@ export class AddProfileComponent {
       }
     }
 
-  // modifiedTimeValidator(): ValidatorFn {
-  //     return (formGroup: FormGroup): ValidationErrors | null => {
-  //       const addedTime = formGroup.get('addedTime').value;
-  //       const modifiedTime = formGroup.get('modifiedTime').value;
-
-  //       if (addedTime && modifiedTime && addedTime >= modifiedTime) {
-  //         return { invalidModifiedTime: true };
-  //       }
-
-  //       return null;
-  //     };
-  //   }
 
   createEducationRow(): FormGroup {
     return this.fb.group({
@@ -289,12 +283,24 @@ export class AddProfileComponent {
       companyName: [''],
       jobTitle: [''],
       fromDate: [''],
-      toDate: [''],
+      toDate: ['',this.validateToDate.bind(this)],
       jobDescription: [''],
-      releventExp: [''],
+      releventExp: ['', [Validators.min(0), Validators.max(50)]],
       editMode: [true]
     });
   }
+
+  validateToDate(control) {
+    const fromDate = this.profileForm?.get('fromDate')?.value;
+    const toDate = new Date(control.value);
+
+    if (!fromDate || !toDate || toDate >= new Date(fromDate)) {
+      return null;
+    }
+
+    return { invalidToDate: true };
+  }
+
 
   addNewRow() {
     console.log("addNewRow() called");

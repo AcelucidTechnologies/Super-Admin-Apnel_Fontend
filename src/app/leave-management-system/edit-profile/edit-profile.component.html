@@ -520,7 +520,7 @@
             <div class="col-4 info-name"><label class="starlabel">Date of Birth</label></div>
             <div class="col-8">
               <input type="date" class="form-control input-font" placeholder="Select Birthday"
-              id="startDate" name="startDate" formControlName="dateOfBirth">
+              id="startDate" name="startDate" formControlName="dateOfBirth" (change)="calculateAge()">
               <div *ngIf="profileForm.get('personalDetails.dateOfBirth').invalid  || profileForm.get('personalDetails.dateOfBirth').dirty">
                 <div *ngIf="profileForm.get('personalDetails.dateOfBirth').hasError('required')" style="color: rgb(253, 122, 122); font-size: small; font-style: italic;">
                   Date of birth is required
@@ -532,7 +532,7 @@
         <div class="col-6">
           <div class="row" style="display: flex;">
             <div class="col-4"><label class="starlabel">Age</label></div>
-            <div class="col-8"><input type="text" class="form-control input-font" id="inputdefault"  formControlName="age">
+            <div class="col-8"><input type="text" class="form-control input-font" id="inputdefault"  formControlName="age" readonly>
               <div *ngIf="profileForm.get('personalDetails.age').invalid || profileForm.get('personalDetails.age').dirty">
                 <div *ngIf="profileForm.get('personalDetails.age').hasError('required')" style="color: rgb(253, 122, 122); font-size: small; font-style: italic;">
                   Age is required
@@ -1091,13 +1091,20 @@
           </div>
         </div>
       </td>
-      <td><input type="text" style="border: none; text-align: center;" formControlName="releventExp" [disabled]="!row.get('editMode').value">
+      <td><input type="text" style="border: none; text-align: center;" formControlName="releventExp" >
         <div *ngIf="row.get('releventExp').invalid && (row.get('releventExp').touched || row.get('releventExp').dirty)">
-          <div *ngIf="row.get('releventExp').hasError('required')" style="color: rgb(253, 122, 122); font-size: small; font-style: italic;">
+          <!-- <div *ngIf="row.get('releventExp').hasError('required')" style="color: rgb(253, 122, 122); font-size: small; font-style: italic;">
          experience is required.
+          </div> -->
+          <div *ngIf="row.get('releventExp').hasError('min')" style="color: rgb(253, 122, 122); font-size: small; font-style: italic;">
+            Minimum experience is 0.
+          </div>
+          <div *ngIf="row.get('releventExp').hasError('max')" style="color: rgb(253, 122, 122); font-size: small; font-style: italic;">
+            Maximum experience is 50.
           </div>
         </div>
       </td>
+
       <td>
         <button (click)="deleteWorkRow(rowIndex)" type="button" class="btn btn-danger"><i class="pi pi-trash"></i></button>
       </td>

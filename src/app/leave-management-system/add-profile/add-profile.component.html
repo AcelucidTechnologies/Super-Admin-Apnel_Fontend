@@ -580,7 +580,7 @@
             <div class="col-4 info-name"><label class="starlabel">Date of Birth</label></div>
             <div class="col-8">
               <input type="date" class="form-control" placeholder="Select Birthday"
-              id="startDate" name="startDate" formControlName="dateOfBirth">
+              id="startDate" name="startDate" formControlName="dateOfBirth"  (change)="calculateAge()">
 
             <div *ngIf="profileForm.get('personalDetails.dateOfBirth').invalid && (profileForm.get('personalDetails.dateOfBirth').touched || profileForm.get('personalDetails.dateOfBirth').dirty)">
               <div *ngIf="profileForm.get('personalDetails.dateOfBirth').hasError('required')" style="color: rgb(253, 122, 122); font-size: small; font-style: italic;">
@@ -594,7 +594,7 @@
           <div class="row" style="display: flex;">
             <div class="col-4"><label class="starlabel">Age</label></div>
             <div class="col-8">
-              <input type="text" class="form-control custom-placeholder" id="inputdefault" placeholder="Enter age" formControlName="age"  >
+              <input type="text" class="form-control custom-placeholder" id="inputdefault" placeholder="Enter age" formControlName="age"  readonly>
               <div *ngIf="profileForm.get('personalDetails.age').invalid && (profileForm.get('personalDetails.age').touched || profileForm.get('personalDetails.age').dirty)">
                 <div *ngIf="profileForm.get('personalDetails.age').hasError('required')" style="color: rgb(253, 122, 122); font-size: small; font-style: italic;">
                   Age is required
@@ -1157,6 +1157,10 @@
           <div *ngIf="row.get('toDate').hasError('required')" style="color: rgb(253, 122, 122); font-size: small; font-style: italic;">
             to date is required.
           </div>
+          <div *ngIf="row.get['toDate'].errors?.['invalidToDate'] && (row.get['toDate'].touched || row.get['toDate'].dirty)"
+          style="color: rgb(253, 122, 122); font-size: small; font-style: italic;">
+          To date should be greater than or equal to from date
+        </div>
         </div>
       </td>
       <td><input type="text" style="border: none; text-align: center;" class="custom-placeholder" formControlName="jobDescription" placeholder="Enter job description"  [disabled]="!row.get('editMode').value">
@@ -1170,6 +1174,12 @@
         <div *ngIf="row.get('releventExp').invalid && (row.get('releventExp').touched || row.get('releventExp').dirty)">
           <div *ngIf="row.get('releventExp').hasError('required')" style="color: rgb(253, 122, 122); font-size: small; font-style: italic;">
          experience is required.
+          </div>
+          <div *ngIf="row.get('releventExp').hasError('min')" style="color: rgb(253, 122, 122); font-size: small; font-style: italic;">
+            Minimum experience is 1.
+          </div>
+          <div *ngIf="row.get('releventExp').hasError('max')" style="color: rgb(253, 122, 122); font-size: small; font-style: italic;">
+            Maximum experience is 50.
           </div>
         </div>
       </td>

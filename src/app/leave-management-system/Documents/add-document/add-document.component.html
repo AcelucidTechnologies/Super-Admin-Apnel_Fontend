@@ -12,7 +12,7 @@
         <div class="row">
           <div class="col-4">
             <label class="starlabel">File Browse</label></div>
-            <div class="col-8 "><input formControlName="employee" class="form-control custom-placeholder input-padding" placeholder="Enter name"  type="file" >
+            <div class="col-8 "><input formControlName="image" class="form-control custom-placeholder input-padding" placeholder="Enter name"  type="file" >
               <!-- <div *ngIf="
               !selectForm.controls['employee'].valid &&
               (selectForm.controls['employee'].touched ||
@@ -71,7 +71,18 @@
       <div class="row">
         <div class="col-4">
           <label class="starlabel">Employee</label></div>
-          <div class="col-8"><input formControlName="employee" placeholder="Enter Employee" class="form-control custom-placeholder input-padding"  type="text" >
+          <div class="col-8">
+            <!-- <select style="width: 100%; border: 1px solid lightgray; height: 38px; padding:5px"
+            class="form-group"
+            formControlName="employee"  >
+            <option value="" disabled selected>Select Applied to</option>
+            <option *ngFor="let count of employeeList"  [value]="count.employeeFullName">
+              {{ count.employeeFullName }}
+            </option>
+          </select> -->
+          <mat-select placeholder="appliedTo" formControlName="employee" multiple>
+            <mat-option *ngFor="let count of employeeList" [value]="count.employeeFullName">{{ count.employeeFullName }}</mat-option>
+          </mat-select>
             <!-- <div *ngIf="
             !selectForm.controls['givenDate'].valid &&
             (selectForm.controls['givenDate'].touched ||
@@ -119,7 +130,7 @@
         <label class="starlabel">File Description</label></div>
         <div class="col-10">
       <textarea
-        name="editor1" class="form-control custom-placeholder" placeholder="Enter asset details"
+        name="editor1" class="form-control custom-placeholder" placeholder="Enter file details"
         formControlName="fileDescription" style="width: 100%; height: 100px;"
       ></textarea>
       <!-- <div *ngIf="
@@ -142,17 +153,20 @@
     <div class="col-2">
       <label class="starlabel">File Permission</label></div>
       <div class="col-10">
-        <div class="row">
+        <div formGroupName="toview">
+        <div class="row"  >
           <div class="col-2"><b>To View</b></div>
-          <div class="col-2"><input type="checkbox" formControlName="toDownload"><label style="padding-left: 5px;">Employee</label></div>
-          <div class="col-4"><input type="checkbox" formControlName="toDownload"><label style="padding-left: 5px;">Reporting Manager</label></div>
+          <div class="col-2"><input type="checkbox" formControlName="employee"><label style="padding-left: 5px;">Employee</label></div>
+          <div class="col-4"><input type="checkbox" formControlName="reportingManager"><label style="padding-left: 5px;">Reporting Manager</label></div>
         </div>
-        <div class="row">
+      </div>
+      <div formGroupName="toDownload">
+        <div class="row" >
           <div class="col-2"><b>To Download</b></div>
-          <div class="col-2"><input type="checkbox" formControlName="toDownload"><label style="padding-left: 5px;">Employee</label></div>
-          <div class="col-4"><input type="checkbox" formControlName="toDownload"><label style="padding-left: 5px;">Reporting Manager</label></div>
+          <div class="col-2"><input type="checkbox" formControlName="employee"><label style="padding-left: 5px;">Employee</label></div>
+          <div class="col-4"><input type="checkbox" formControlName="reportingManager"><label style="padding-left: 5px;">Reporting Manager</label></div>
         </div>
-
+      </div>
     <!-- <div *ngIf="
     !selectForm.controls['assetsDetails'].valid &&
     (selectForm.controls['assetsDetails'].touched ||
