@@ -77,20 +77,19 @@ export class ExitListComponent {
     const datePipe = new DatePipe('en-US');
     const data = this.exitData.map((item, index) => ({
       'S.No.': index+1,
-      'Employee Id': item.emoloyeeId,
+      'Employee Id': item.employeeId,
       'Interviewer Type': item.interviewerType,
-      SeparationDate: datePipe.transform(item.separationDate),
       'Reason For Leaving': item.reasonForLeaving,
-      'Work With Organisation Again': item.workWithOrganisationAgain,
+      // 'Work With Organisation Again': item.workingOrganization,
       'Most Of The Company': item.mostTheCompany,
       'Anything To Share': item.anythingShare,
-      'Resignation': item.resignation,
+      'Resignation': item.reasonForLeaving,
       'All Assets': item.allAssets,
       'Notice Period': item.noticePeriod,
       'Manager': item.manager,
       'Added By': item.addedBy,
       AddedTime: datePipe.transform(item.createdAt, 'MM/dd/yyyy'),
-      'Modified By': item.modifiedBy,
+      'Modified By': item.addedBy,
       ModifiedTime: datePipe.transform(item.updatedAt, 'MM/dd/yyyy'),
     }));
 
@@ -143,15 +142,15 @@ export class ExitListComponent {
     });
     const exportColumns = [
       { title: 'S No.', dataKey: 'sno' },
-      { title: 'Employee Id', dataKey: 'emoloyeeId' },
+      { title: 'Employee Id', dataKey: 'employeeId' },
       { title: 'Interviewer Type ', dataKey: 'interviewerType' },
       { title: 'Type Of Assets', dataKey: 'typeOfAssets' },
       { title: 'Separation Date', dataKey: 'separationDate' },
       { title: 'Reason For Leaving', dataKey: 'reasonForLeaving' },
-      { title: 'Work With OrganisationAgain ', dataKey: 'workWithOrganisationAgain ' },
+      { title: 'Work With OrganisationAgain ', dataKey: 'workingOrganization ' },
       { title: 'Most Of The Company', dataKey: 'mostTheCompany' },
       { title: 'Anything Share', dataKey: 'anythingShare' },
-      { title: 'Resignation', dataKey: 'resignation' },
+      { title: 'Resignation', dataKey: 'reasonForLeaving' },
       { title: 'All Assets', dataKey: 'allAssets' },
       { title: 'Notice Period', dataKey: 'noticePeriod' },
       { title: 'manager', dataKey: 'manager' },

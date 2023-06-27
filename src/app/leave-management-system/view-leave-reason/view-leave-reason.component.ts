@@ -11,6 +11,7 @@ import { ToastrMsgService } from 'src/app/_services/toastr-msg.service';
   styleUrls: ['./view-leave-reason.component.scss']
 })
 export class ViewLeaveReasonComponent {
+
   type: any;
   id:any
   leaveType:any;

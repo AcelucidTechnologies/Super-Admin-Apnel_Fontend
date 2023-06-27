@@ -22,7 +22,7 @@
   [columns]="cols"
   responsiveLayout="scroll"
   [paginator]="true"
-  [rows]="5"
+  [rows]="7"
   [showCurrentPageReport]="true"
   [value]="exitData"
   currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
@@ -81,10 +81,10 @@
         </div>
       </th>
 
-      <th pSortableColumn="emoloyeeId">
+      <th pSortableColumn="employeeId">
         <div class="flex justify-content-between align-items-center head1">
           Employee ID
-          <p-sortIcon field="emoloyeeId"></p-sortIcon>
+          <p-sortIcon field="employeeId"></p-sortIcon>
         </div>
       </th>
 
@@ -127,10 +127,10 @@
           <p-sortIcon field="anythingShare"></p-sortIcon>
         </div>
       </th>
-      <th pSortableColumn="resignation">
+      <th pSortableColumn="reasonForLeaving">
         <div class="flex justify-content-between align-items-center head1">
           Resignation Letter Submitted
-          <p-sortIcon field="resignation"></p-sortIcon>
+          <p-sortIcon field="reasonForLeaving"></p-sortIcon>
         </div>
       </th>
       <th pSortableColumn="allAssets">
@@ -185,20 +185,20 @@
         <span class="p-column-title">Sr.no</span>
         {{ i + 1 }}
       </td>
-      <td>{{ list.emoloyeeId }}</td>
+      <td>{{ list.employeeId }}</td>
       <td>{{ list.interviewerType }}</td>
       <td>{{ list.createdAt | date : "MM/dd/yyyy" }}</td>
       <td>{{ list.reasonForLeaving }}</td>
-      <td>{{ list.workWithOrganisationAgain  }}</td>
+      <td>{{ list.workingOrganization  }}</td>
       <td>{{ list.mostTheCompany }}</td>
       <td>{{ list.anythingShare}}</td>
-      <td>{{ list.resignation }}</td>
+      <td>{{ list.reasonForLeaving }}</td>
       <td>{{ list.allAssets }}</td>
       <td>{{ list.noticePeriod }}</td>
       <td>{{ list.manager }}</td>
       <td>{{ list.addedBy }}</td>
       <td>{{ list.createdAt | date : "MM/dd/yyyy"  }}</td>
-      <td>{{ list.modifiedBy }}</td>
+      <td>{{ list.addedBy }}</td>
       <td>{{ list.updatedAt | date : "MM/dd/yyyy"  }}</td>
 
 

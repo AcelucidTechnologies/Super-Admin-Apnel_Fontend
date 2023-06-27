@@ -128,7 +128,10 @@ export class AddProfileComponent {
     ];
 
 
+
+
       this.profileForm = this.fb.group({
+
 
 
         employeeId: [''],
@@ -199,6 +202,13 @@ export class AddProfileComponent {
       this.profileForm.get('email').valueChanges.subscribe((value) => {
         this.checkEmailValidity(value);
       });
+
+      // this.ageControl = new FormControl('', [
+      //   Validators.required,
+      //   Validators.pattern('^[0-9]*$'),
+      //   Validators.min(15),
+      //   Validators.max(70)
+      // ]);
 
 
 
