@@ -54,7 +54,7 @@
 
   </div>
   <div class="row mb-4">
-    <div class="col-6">
+    <!-- <div class="col-6">
         <div class="row">
           <div class="col-4">
             <label class="starlabel">File Viewed</label></div>
@@ -66,12 +66,12 @@
 
           </div>
         </div>
-    </div>
+    </div> -->
     <div class="col-6">
       <div class="row">
         <div class="col-4">
           <label class="starlabel">Employee</label></div>
-          <div class="col-8"><input formControlName="employee"  class="form-control custom-placeholder input-padding"  type="text" >
+          <div class="col-8"><input formControlName="employee"  class="form-control custom-placeholder input-padding" placeholder="Enter Employee" type="text" >
             <!-- <div *ngIf="
             !selectForm.controls['givenDate'].valid &&
             (selectForm.controls['givenDate'].touched ||
@@ -88,32 +88,30 @@
         </div>
       </div>
   </div>
-
-  </div>
-  <div class="row mb-4">
-    <div class="col-6">
-        <div class="row">
-          <div class="col-4">
-            <label class="starlabel">Folder Name</label></div>
-            <div class="col-8 "><input formControlName="folderName" class="form-control custom-placeholder input-padding"  type="text" >
-              <!-- <div *ngIf="
-              !selectForm.controls['returnDate'].valid &&
-              (selectForm.controls['returnDate'].touched ||
-              selectForm.controls['returnDate'].dirty)
-            ">
-              <div [hidden]="!selectForm.controls['returnDate'].errors['required']" style="
-                color: rgb(253, 122, 122);
-                font-size: small;
-                font-style: italic;
-              ">
-                return date is required
-              </div>
-            </div> -->
+  <div class="col-6">
+    <div class="row">
+      <div class="col-4">
+        <label class="starlabel">Folder Name</label></div>
+        <div class="col-8 "><input formControlName="folderName" placeholder="Enter Folder name" class="form-control custom-placeholder input-padding"  type="text" >
+          <!-- <div *ngIf="
+          !selectForm.controls['returnDate'].valid &&
+          (selectForm.controls['returnDate'].touched ||
+          selectForm.controls['returnDate'].dirty)
+        ">
+          <div [hidden]="!selectForm.controls['returnDate'].errors['required']" style="
+            color: rgb(253, 122, 122);
+            font-size: small;
+            font-style: italic;
+          ">
+            return date is required
           </div>
-        </div>
+        </div> -->
+      </div>
     </div>
+</div>
 
   </div>
+
 
   <div class="row mb-4">
 

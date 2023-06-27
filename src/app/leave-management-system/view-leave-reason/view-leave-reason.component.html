@@ -17,9 +17,9 @@
             <label class="starlabel">Leave Type</label></div>
             <div class="col-8 ">
               <!-- <p-dropdown formControlName="leaveType" [options]="leaveType" id="role" placeholder="Leave Type"></p-dropdown> -->
-              <select style="width: 100%; border: 1px solid lightgray; height: 38px; padding:5px"
+              <select style="width: 100%; border: 1px solid lightgray; height: 38px; padding:5px; background-color: #e9ecef; pointer-events: none;"
               class="form-group"
-              formControlName="leaveType"  readonly>
+              formControlName="leaveType" readonly>
               <option value="" disabled selected>Select Applied to</option>
               <option *ngFor="let count of leaveType">
                 {{ count }}
@@ -46,7 +46,7 @@
         <div class="col-4">
           <label class="starlabel">Applied To</label></div>
           <div class="col-8">
-            <select style="width: 100%; border: 1px solid lightgray; height: 38px; padding:5px"
+            <select style="width: 100%; border: 1px solid lightgray; height: 38px; padding:5px; background-color: #e9ecef; pointer-events: none;"
             class="form-group"
             formControlName="appliedTo"  >
             <option value="" disabled selected>Select Applied to</option>
@@ -71,7 +71,7 @@
         <div class="row">
           <div class="col-4">
             <label class="starlabel">From date</label></div>
-            <div class="col-8"><input formControlName="fromDate"  class="form-control custom-placeholder input-padding"  type="date" >
+            <div class="col-8"><input formControlName="fromDate"  class="form-control custom-placeholder input-padding"  type="date" readonly>
               <div *ngIf="
               !selectForm.controls['fromDate'].valid &&
               (selectForm.controls['fromDate'].touched ||
@@ -99,7 +99,7 @@
         <label class="starlabel">To date</label>
       </div>
       <div class="col-8">
-        <input formControlName="toDate"   class="form-control custom-placeholder input-padding" type="date">
+        <input formControlName="toDate"   class="form-control custom-placeholder input-padding" type="date" readonly>
         <div *ngIf="selectForm.controls['toDate'].errors?.['required'] && (selectForm.controls['toDate'].touched || selectForm.controls['toDate'].dirty)"
           style="color: rgb(253, 122, 122); font-size: small; font-style: italic;">
           To date is required
@@ -119,7 +119,7 @@
         <div class="row">
           <div class="col-4">
             <label class="starlabel">Contact Number</label></div>
-            <div class="col-8"> <input  formControlName="contactNo" type="number" class="form-control custom-placeholder input-padding"  placeholder="Enter contact number " >
+            <div class="col-8"> <input  formControlName="contactNo" type="number" class="form-control custom-placeholder input-padding"  placeholder="Enter contact number " readonly >
 
             <div
             *ngIf="
@@ -159,7 +159,7 @@
       <div class="row">
         <div class="col-4">
           <label >Alt Contact Number</label></div>
-          <div class="col-8"> <input formControlName="altConatctNo" type="number" class="form-control custom-placeholder input-padding" placeholder="Enter contact number " >
+          <div class="col-8"> <input formControlName="altConatctNo" type="number" class="form-control custom-placeholder input-padding" placeholder="Enter contact number " readonly >
               <div class="col-8">
                 <div *ngIf="selectForm.controls['altConatctNo'].errors?.['pattern'] && (selectForm.controls['altConatctNo'].touched || selectForm.controls['altConatctNo'].dirty)"
                   style="color: rgb(253, 122, 122); font-size: small; font-style: italic;">
@@ -176,7 +176,7 @@
     <div class="col-2">
       <label class="starlabel">Subject</label></div>
       <div class="col-10">
-        <input  formControlName="subject" type="text" class="form-control custom-placeholder input-padding"  placeholder="Enter subject "  >
+        <input  formControlName="subject" type="text" class="form-control custom-placeholder input-padding"  placeholder="Enter subject " readonly >
 
     <div *ngIf="
     !selectForm.controls['subject'].valid &&
@@ -204,6 +204,8 @@
       <ckeditor
         name="editor1"
         formControlName="reason"
+
+        [config]="{ readOnly: true }"
       ></ckeditor>
       <div *ngIf="
       !selectForm.controls['reason'].valid &&

@@ -594,7 +594,7 @@
           <div class="row" style="display: flex;">
             <div class="col-4"><label class="starlabel">Age</label></div>
             <div class="col-8">
-              <input type="text" class="form-control custom-placeholder" id="inputdefault" placeholder="Enter age" formControlName="age">
+              <input type="text" class="form-control custom-placeholder" id="inputdefault" placeholder="Enter age" formControlName="age"  >
               <div *ngIf="profileForm.get('personalDetails.age').invalid && (profileForm.get('personalDetails.age').touched || profileForm.get('personalDetails.age').dirty)">
                 <div *ngIf="profileForm.get('personalDetails.age').hasError('required')" style="color: rgb(253, 122, 122); font-size: small; font-style: italic;">
                   Age is required

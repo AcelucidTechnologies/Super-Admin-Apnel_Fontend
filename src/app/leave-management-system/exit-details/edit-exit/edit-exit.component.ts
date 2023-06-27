@@ -45,7 +45,7 @@ export class EditExitComponent {
   this.leaveservice.getExitById(this.id).subscribe((res)=>{
     console.log("patched value exit " + res)
   this.selectForm.patchValue({
-    emoloyeeId:res.emoloyeeId,
+    emoloyeeId:res.employeeId,
     employeeName:res.employeeName,
     interviewerType:res.interviewerType,
     reasonForLeaving:res.reasonForLeaving,
