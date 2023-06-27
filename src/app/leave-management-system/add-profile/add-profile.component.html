@@ -461,7 +461,7 @@
         <div class="col-6">
           <div class="row" style="display: flex;">
             <div class="col-4"><label class="starlabel">Date of Joining</label></div>
-            <div class="col-8"><input type="date" class="form-control" id="inputdefault" formControlName="dateOfJoining" >
+            <div class="col-8"><input type="date" class="form-control" [min]="getMinimumDate()"  id="inputdefault" formControlName="dateOfJoining" >
               <div *ngIf="
               !profileForm.controls['dateOfJoining'].valid &&
               (profileForm.controls['dateOfJoining'].touched ||
@@ -1004,29 +1004,8 @@
           <div class="row" style="display: flex;">
             <div class="col-4 info-name"><label>Date of Exit</label></div>
             <div class="col-8">
-              <input type="date" class="form-control" placeholder="Select date of exit"
+              <input type="date" class="form-control" placeholder="Select date of exit"  [min]="getMinimumDate()"
               id="startDate" name="startDate" formControlName="separationOfDate">
-              <!-- <div
-              *ngIf="
-                !profileForm.controls['separationOfDate'].valid &&
-                (profileForm.controls['separationOfDate'].touched ||
-                  profileForm.controls['separationOfDate'].dirty)
-              "
-            >
-              <div
-                [hidden]="
-                  !profileForm.controls['separationOfDate'].errors['required']
-                "
-                style="
-                  color: rgb(253, 122, 122);
-                  font-size: small;
-                  font-style: italic;
-                "
-              >
-              separationOfDate is required
-              </div>
-
-            </div> -->
             </div>
           </div>
         </div>
@@ -1046,7 +1025,7 @@
             <div class="row" style="display: flex;">
               <div class="col-4 info-name"><label class="starlabel">Added Time</label></div>
               <div class="col-8">
-                <input type="date" class="form-control" placeholder="added Time"
+                <input type="date" class="form-control" placeholder="added Time"  [min]="getMinimumDate()"
                         id="startDate" name="startDate" formControlName="addedTime">
                         <div *ngIf="profileForm.get('systemFields.addedTime').invalid && (profileForm.get('systemFields.addedTime').touched || profileForm.get('systemFields.addedTime').dirty)">
                           <div *ngIf="profileForm.get('systemFields.addedTime').hasError('required')" style="color: rgb(253, 122, 122); font-size: small; font-style: italic;">
@@ -1060,7 +1039,7 @@
             <div class="row" style="display: flex;">
               <div class="col-4 info-name"><label >Modified Time</label></div>
               <div class="col-8">
-                <input type="date" class="form-control" placeholder="modified time"
+                <input type="date" class="form-control" placeholder="modified time"  [min]="getMinimumDate()"
                         id="startDate" name="startDate" formControlName="modifiedTime" readonly>
 
               </div>

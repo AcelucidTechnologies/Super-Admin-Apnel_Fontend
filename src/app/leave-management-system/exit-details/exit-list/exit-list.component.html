@@ -1,4 +1,4 @@
-<div class="container page-heading">
+<div class="page-heading">
   <div class="row mb-2 mt-2">
     <div class="col-6">
       <h4>Exit List</h4>
@@ -28,7 +28,7 @@
   currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
   [responsive]="true"
   styleClass="p-datatable-striped"
-  [globalFilterFields]="['employeeId', 'interviewerType', 'typeOfAssets','reasonForLeaving','addedBy','createdAt','updatedAt']"
+  [globalFilterFields]="['employeeId', 'interviewerType', 'typeOfAssets','reasonForLeaving','resignation','anythingShare','createdAt','updatedAt','allAssets','noticePeriod']"
 >
   <ng-template pTemplate="caption">
     <div class="d-flex justify-content-between">
@@ -95,10 +95,10 @@
         </div>
       </th>
 
-      <th pSortableColumn="assetsDetails">
+      <th pSortableColumn="separationDate">
         <div class="flex justify-content-between align-items-center head1">
           Sepration date
-          <p-sortIcon field="assetsDetails"></p-sortIcon>
+          <p-sortIcon field="separationDate"></p-sortIcon>
         </div>
       </th>
 
@@ -109,64 +109,64 @@
         </div>
       </th>
 
-      <th pSortableColumn="returnDate">
+      <th pSortableColumn="workWithOrganisationAgain">
         <div class="flex justify-content-between align-items-center head1">
           Work with this organisation again
-          <p-sortIcon field="returnDate"></p-sortIcon>
+          <p-sortIcon field="workWithOrganisationAgain"></p-sortIcon>
+        </div>
+      </th>
+      <th pSortableColumn="mostTheCompany">
+        <div class="flex justify-content-between align-items-center head1">
+          What do you like the most of the organization
+          <p-sortIcon field="mostTheCompany"></p-sortIcon>
+        </div>
+      </th>
+      <th pSortableColumn="anythingShare">
+        <div class="flex justify-content-between align-items-center head1">
+          Anything you want to share with us
+          <p-sortIcon field="anythingShare"></p-sortIcon>
+        </div>
+      </th>
+      <th pSortableColumn="resignation">
+        <div class="flex justify-content-between align-items-center head1">
+          Resignation Letter Submitted
+          <p-sortIcon field="resignation"></p-sortIcon>
+        </div>
+      </th>
+      <th pSortableColumn="allAssets">
+        <div class="flex justify-content-between align-items-center head1">
+          All Assets Submitted
+          <p-sortIcon field="allAssets"></p-sortIcon>
+        </div>
+      </th>
+      <th pSortableColumn="noticePeriod">
+        <div class="flex justify-content-between align-items-center head1">
+          Notice Peroid Followed
+          <p-sortIcon field="noticePeriod"></p-sortIcon>
+        </div>
+      </th>
+      <th pSortableColumn="manager">
+        <div class="flex justify-content-between align-items-center head1">
+         Manager/Supervior Clearance
+          <p-sortIcon field="manager"></p-sortIcon>
         </div>
       </th>
       <th pSortableColumn="addedBy">
         <div class="flex justify-content-between align-items-center head1">
-          What do you like the most of the organization
+          Added By
           <p-sortIcon field="addedBy"></p-sortIcon>
         </div>
       </th>
       <th pSortableColumn="createdAt">
         <div class="flex justify-content-between align-items-center head1">
-          Anything you want to share with us
+          Added Time
           <p-sortIcon field="createdAt"></p-sortIcon>
         </div>
       </th>
-      <th pSortableColumn="addedBy">
-        <div class="flex justify-content-between align-items-center head1">
-          Resignation Letter Submitted
-          <p-sortIcon field="addedBy"></p-sortIcon>
-        </div>
-      </th>
-      <th pSortableColumn="updatedAt">
-        <div class="flex justify-content-between align-items-center head1">
-          All Assets Submitted
-          <p-sortIcon field="updatedAt"></p-sortIcon>
-        </div>
-      </th>
-      <th pSortableColumn="updatedAt">
-        <div class="flex justify-content-between align-items-center head1">
-          Notice Peroid Followed
-          <p-sortIcon field="updatedAt"></p-sortIcon>
-        </div>
-      </th>
-      <th pSortableColumn="updatedAt">
-        <div class="flex justify-content-between align-items-center head1">
-         Manager/Supervior Clearance
-          <p-sortIcon field="updatedAt"></p-sortIcon>
-        </div>
-      </th>
-      <th pSortableColumn="updatedAt">
-        <div class="flex justify-content-between align-items-center head1">
-          Added By
-          <p-sortIcon field="updatedAt"></p-sortIcon>
-        </div>
-      </th>
-      <th pSortableColumn="updatedAt">
-        <div class="flex justify-content-between align-items-center head1">
-          Added Time
-          <p-sortIcon field="updatedAt"></p-sortIcon>
-        </div>
-      </th>
-      <th pSortableColumn="updatedAt">
+      <th pSortableColumn="modifiedBy">
         <div class="flex justify-content-between align-items-center head1">
           Modified By
-          <p-sortIcon field="updatedAt"></p-sortIcon>
+          <p-sortIcon field="modifiedBy"></p-sortIcon>
         </div>
       </th>
       <th pSortableColumn="updatedAt">
@@ -187,18 +187,18 @@
       </td>
       <td>{{ list.emoloyeeId }}</td>
       <td>{{ list.interviewerType }}</td>
-      <td>{{ list.assetsDetails }}</td>
+      <td>{{ list.createdAt | date : "MM/dd/yyyy" }}</td>
       <td>{{ list.reasonForLeaving }}</td>
-      <td>{{ list.returnDate  }}</td>
+      <td>{{ list.workWithOrganisationAgain  }}</td>
       <td>{{ list.mostTheCompany }}</td>
       <td>{{ list.anythingShare}}</td>
-      <td>{{ list.addedBy }}</td>
+      <td>{{ list.resignation }}</td>
       <td>{{ list.allAssets }}</td>
       <td>{{ list.noticePeriod }}</td>
       <td>{{ list.manager }}</td>
       <td>{{ list.addedBy }}</td>
       <td>{{ list.createdAt | date : "MM/dd/yyyy"  }}</td>
-      <td>{{ list.addedBy }}</td>
+      <td>{{ list.modifiedBy }}</td>
       <td>{{ list.updatedAt | date : "MM/dd/yyyy"  }}</td>
 
 
@@ -211,7 +211,7 @@
         >
           <img
             src="../../../../assets/images/edit.svg"
-            [routerLink]="['/asset/edit-asset']"
+            [routerLink]="['/exitmgmt/edit-exit']"
             [queryParams]="{ id: list._id }"
             alt="img"
           />

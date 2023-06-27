@@ -1,0 +1,194 @@
+<div class="page-heading">
+  <div class="row mb-2 mt-2">
+    <div class="col-6">
+      <h4>Document List</h4>
+    </div>
+    <div class="col-6 text-right">
+      <span class="p-input-icon-right ml-5">
+        <button
+          pButton
+          type="button"
+          label=" + Add documents"
+          class="add-button-rating"
+          [routerLink]="['/documents/add-document']"
+        ></button>
+      </span>
+    </div>
+  </div>
+</div>
+<p-table
+  id="customerTable"
+  #dt
+  [columns]="cols"
+  responsiveLayout="scroll"
+  [paginator]="true"
+  [rows]="5"
+  [showCurrentPageReport]="true"
+  [value]="docuemntData"
+  currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
+  [responsive]="true"
+  styleClass="p-datatable-striped"
+  [globalFilterFields]="['employee', 'fileDescription', 'toDownload','toview','addedBy','createdAt','updatedAt']"
+>
+  <ng-template pTemplate="caption">
+    <div class="d-flex justify-content-between">
+      <div class="d-flex align-items-center p-0">
+        <div class="input-container">
+          <img
+            src="../../../assets/images/search-white.svg"
+            class="input-container-img"
+          />
+          <input
+            #search
+            pInputText
+            type="text"
+            placeholder="Search..."
+            (input)="applyFilterGlobal($event, 'contains')"
+          />
+        </div>
+      </div>
+      <div>
+        <button
+          pButton
+          type="button"
+          pTooltip="Pdf"
+          class="custom-image"
+          tooltipPosition="bottom"
+          (click)="exportPdf()"
+        >
+          <img src="../../../../assets/images/pdf.svg" alt="Button Image" />
+        </button>
+
+        <button
+          pButton
+          type="button"
+          pTooltip="Excel"
+          class="custom-image"
+          tooltipPosition="bottom"
+          (click)="exportExcel()"
+        >
+          <img src="../../../../assets/images/excel.svg" alt="Button Image" />
+        </button>
+      </div>
+    </div>
+  </ng-template>
+
+  <ng-template pTemplate="header">
+    <tr>
+      <th>
+        <div class="flex justify-content-between align-items-center head1">
+          S.No.
+        </div>
+      </th>
+
+      <th pSortableColumn="employee">
+        <div class="flex justify-content-between align-items-center head1">
+          Employee Name
+          <p-sortIcon field="employee"></p-sortIcon>
+        </div>
+      </th>
+
+      <th pSortableColumn="fileDescription">
+        <div class="flex justify-content-between align-items-center head1">
+          File Description
+          <p-sortIcon field="fileDescription"></p-sortIcon>
+        </div>
+      </th>
+
+      <th pSortableColumn="toview">
+        <div class="flex justify-content-between align-items-center head1">
+          view
+          <p-sortIcon field="toview"></p-sortIcon>
+        </div>
+      </th>
+
+      <th pSortableColumn="toDownload">
+        <div class="flex justify-content-between align-items-center head1">
+          Download
+          <p-sortIcon field="toDownload"></p-sortIcon>
+        </div>
+      </th>
+      <th pSortableColumn="toDownload">
+        <div class="flex justify-content-between align-items-center head1">
+          Download File
+          <p-sortIcon field="toDownload"></p-sortIcon>
+        </div>
+      </th>
+
+      <th pSortableColumn="addedBy">
+        <div class="flex justify-content-between align-items-center head1">
+          Added By
+          <p-sortIcon field="addedBy"></p-sortIcon>
+        </div>
+      </th>
+      <th pSortableColumn="createdAt">
+        <div class="flex justify-content-between align-items-center head1">
+          Added Time
+          <p-sortIcon field="createdAt"></p-sortIcon>
+        </div>
+      </th>
+      <th pSortableColumn="addedBy">
+        <div class="flex justify-content-between align-items-center head1">
+          Modified By
+          <p-sortIcon field="addedBy"></p-sortIcon>
+        </div>
+      </th>
+      <th pSortableColumn="updatedAt">
+        <div class="flex justify-content-between align-items-center head1">
+          Modified Time
+          <p-sortIcon field="updatedAt"></p-sortIcon>
+        </div>
+      </th>
+      <th class="text-center">Action</th>
+    </tr>
+  </ng-template>
+  <ng-template pTemplate="body" let-list let-i="rowIndex">
+    <tr>
+      <td>
+        <span class="p-column-title">Sr.no</span>
+        {{ i + 1 }}
+      </td>
+      <td>{{ list.employee }}</td>
+      <td>{{ list.fileDescription }}</td>
+      <td>{{ list.toview }}</td>
+      <td>{{ list.toDownload }}</td>
+      <td>{{ list.image }}</td>
+      <td>{{ list.addedBy }}</td>
+      <td>{{ list.createdAt | date : "MM/dd/yyyy"}}</td>
+      <td>{{ list.addedBy }}</td>
+      <td>{{ list.updatedAt | date : "MM/dd/yyyy"  }}</td>
+
+
+      <td>
+        <div style="display: flex; align-items: center;">
+        <a
+          pTooltip="Edit Document"
+          tooltipPosition="bottom"
+          style="margin-right: 15px; cursor: pointer"
+        >
+          <img
+            src="../../../../assets/images/edit.svg"
+            [routerLink]="['/documents/edit-document']"
+            [queryParams]="{ id: list._id }"
+            alt="img"
+          />
+        </a>
+        <a
+          pTooltip="Delete Document"
+          tooltipPosition="bottom"
+          (click)="openDialog(list)"
+          class="me-3 confirm-text"
+          href="javascript:void(0);"
+        >
+          <img src="../../../../assets/images/delete.svg" alt="img" />
+        </a>
+        </div>
+      </td>
+    </tr>
+  </ng-template>
+  <ng-template pTemplate="emptymessage">
+    <tr>
+      <td colspan="12" class="text-danger">No records to show</td>
+    </tr>
+  </ng-template>
+</p-table>

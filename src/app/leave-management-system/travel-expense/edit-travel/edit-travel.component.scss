@@ -1,0 +1,30 @@
+.back-button {
+  background: rgb(228, 28, 28);
+  color: white;
+  border: none;
+  padding: 5px;
+  border-radius: 5px;
+  // margin-left: 20px;
+  width: 40px;
+}
+::ng-deep.back-button:hover {
+  background-color: lightcoral !important;
+}
+
+.button-heading-container {
+  display: flex;
+  align-items: center;
+}
+.card-title{
+  background-color: cadetblue;
+  color: whitesmoke;
+  line-height: 30px;
+  padding-left: 10px;
+}
+label.starlabel::after{
+  content: "*";
+  color: rgb(228, 28, 28);
+}
+.custom-placeholder::placeholder {
+  color: #495057;
+}

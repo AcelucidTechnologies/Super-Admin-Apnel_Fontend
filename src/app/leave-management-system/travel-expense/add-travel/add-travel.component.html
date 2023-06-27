@@ -1,0 +1,322 @@
+<div class="button-heading-container">
+  <button class="mb-2 back-button" [routerLink]="['/travelexpense/travel-list']">
+    <i class="material-icons">arrow_back</i>
+  </button>
+  <h5>&nbsp;Add Travelling Expense</h5>
+</div>
+<div class="card pl-4 pr-4 pb-3 pt-4">
+  <form [formGroup]="selectForm">
+    <div class="row mb-4">
+      <div class="col-6">
+        <div class="row">
+          <div class="col-4">
+            <label class="starlabel">Employee ID</label>
+          </div>
+          <div class="col-8">
+            <input
+              formControlName="employeeId"
+              placeholder="Enter employee name"
+              class="form-control custom-placeholder input-padding"
+              type="text"
+            />
+            <div
+              *ngIf="
+                !selectForm.controls['employeeId'].valid &&
+                (selectForm.controls['employeeId'].touched ||
+                  selectForm.controls['employeeId'].dirty)
+              "
+            >
+              <div
+                [hidden]="!selectForm.controls['employeeId'].errors['required']"
+                style="
+                  color: rgb(253, 122, 122);
+                  font-size: small;
+                  font-style: italic;
+                "
+              >
+                Employee Id is required
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-6">
+        <div class="row">
+          <div class="col-4">
+            <label class="starlabel">Employee Name</label>
+          </div>
+          <div class="col-8">
+            <input
+              formControlName="employeeName"
+              placeholder="Enter employee name"
+              class="form-control custom-placeholder input-padding"
+              type="text"
+            />
+            <div
+              *ngIf="
+                !selectForm.controls['employeeName'].valid &&
+                (selectForm.controls['employeeName'].touched ||
+                  selectForm.controls['employeeName'].dirty)
+              "
+            >
+              <div
+                [hidden]="!selectForm.controls['employeeName'].errors['required']"
+                style="
+                  color: rgb(253, 122, 122);
+                  font-size: small;
+                  font-style: italic;
+                "
+              >
+                Employee Name is required
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+    <div class="row mb-4">
+      <div class="col-6">
+        <div class="row">
+          <div class="col-4">
+            <label class="starlabel">Journey date</label>
+          </div>
+          <div class="col-8">
+            <input
+              formControlName="journeyDate"
+              placeholder="Enter employee type" [min]="getMinimumDate()"
+              class="form-control custom-placeholder input-padding"
+              type="date"
+            />
+             <div
+            *ngIf="
+              !selectForm.controls['journeyDate'].valid &&
+              (selectForm.controls['journeyDate'].touched ||
+                selectForm.controls['journeyDate'].dirty)
+            "
+          >
+            <div
+              [hidden]="!selectForm.controls['journeyDate'].errors['required']"
+              style="
+                color: rgb(253, 122, 122);
+                font-size: small;
+                font-style: italic;
+              "
+            >
+              Journey date is required
+            </div>
+          </div>
+
+          </div>
+        </div>
+      </div>
+      <div class="col-6">
+        <div class="row">
+          <div class="col-4">
+            <label class="starlabel">Return Date</label>
+          </div>
+          <div class="col-8">
+            <input
+              formControlName="returnDate"
+              placeholder="Enter Reason" [min]="getMinimumDate()"
+              class="form-control custom-placeholder input-padding"
+              type="date"
+            />
+            <div
+            *ngIf="
+              !selectForm.controls['returnDate'].valid &&
+              (selectForm.controls['returnDate'].touched ||
+                selectForm.controls['returnDate'].dirty)
+            "
+          >
+            <div
+              [hidden]="!selectForm.controls['returnDate'].errors['required']"
+              style="
+                color: rgb(253, 122, 122);
+                font-size: small;
+                font-style: italic;
+              "
+            >
+              return date is required
+            </div>
+            <div *ngIf="selectForm.controls['returnDate'].errors?.['invalidreturnDate'] && (selectForm.controls['returnDate'].touched || selectForm.controls['returnDate'].dirty)"
+            style="color: rgb(253, 122, 122); font-size: small; font-style: italic;">
+          return date should be greater than or equal to from date
+          </div>
+          </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+
+    <div class="row mb-4 mt-2">
+      <div class="col-6">
+        <div class="row">
+          <div class="col-4">
+            <label class="starlabel">Travel From</label>
+          </div>
+          <div class="col-8">
+            <input
+              formControlName="travelFrom"
+              placeholder="Enter travel from"
+              class="form-control custom-placeholder input-padding"
+              type="text"
+            />
+            <div
+            *ngIf="
+              !selectForm.controls['travelFrom'].valid &&
+              (selectForm.controls['travelFrom'].touched ||
+                selectForm.controls['travelFrom'].dirty)
+            "
+          >
+            <div
+              [hidden]="!selectForm.controls['travelFrom'].errors['required']"
+              style="
+                color: rgb(253, 122, 122);
+                font-size: small;
+                font-style: italic;
+              "
+            >
+              travel from is required
+            </div>
+          </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-6">
+        <div class="row">
+          <div class="col-4">
+            <label class="starlabel">Travel To</label>
+          </div>
+          <div class="col-8">
+            <input
+              formControlName="travelTo"
+              placeholder="Enter travel to"
+              type="text"
+              class="form-control custom-placeholder input-padding"
+            />
+            <div
+            *ngIf="
+              !selectForm.controls['travelTo'].valid &&
+              (selectForm.controls['travelTo'].touched ||
+                selectForm.controls['travelTo'].dirty)
+            "
+          >
+            <div
+              [hidden]="!selectForm.controls['travelTo'].errors['required']"
+              style="
+                color: rgb(253, 122, 122);
+                font-size: small;
+                font-style: italic;
+              "
+            >
+          travel to is required
+            </div>
+          </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+
+    <div class="row mb-4 mt-2">
+      <div class="col-6">
+        <div class="row">
+          <div class="col-4">
+            <label class="starlabel">Added By</label>
+          </div>
+          <div class="col-8">
+            <input
+              formControlName="addedBy"
+              placeholder="Enter added by"
+              class="form-control custom-placeholder input-padding"
+              type="text"
+            />
+            <div
+            *ngIf="
+              !selectForm.controls['addedBy'].valid &&
+              (selectForm.controls['addedBy'].touched ||
+                selectForm.controls['addedBy'].dirty)
+            "
+          >
+            <div
+              [hidden]="!selectForm.controls['addedBy'].errors['required']"
+              style="
+                color: rgb(253, 122, 122);
+                font-size: small;
+                font-style: italic;
+              "
+            >
+              added by is required
+            </div>
+          </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+
+
+    <div class="row mb-4 mt-2">
+      <div class="col-12">
+        <div class="row">
+          <div class="col-2">
+            <label class="starlabel">Purpose of Travel</label>
+          </div>
+          <div class="col-10">
+            <textarea style="height: 100px;"
+              formControlName="purposeTravel"
+              type="text"
+              class="form-control custom-placeholder input-padding"
+              placeholder="Enter travel purpose "
+            ></textarea>
+            <div
+            *ngIf="
+              !selectForm.controls['purposeTravel'].valid &&
+              (selectForm.controls['purposeTravel'].touched ||
+                selectForm.controls['purposeTravel'].dirty)
+            "
+          >
+            <div
+              [hidden]="!selectForm.controls['purposeTravel'].errors['required']"
+              style="
+                color: rgb(253, 122, 122);
+                font-size: small;
+                font-style: italic;
+              "
+            >
+            purpose of travel is required
+            </div>
+          </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-6"></div>
+    </div>
+
+    <div class="row mb-5 mt-4">
+      <div class="d-flex justify-content-end col-11 mt-4">
+        <button
+          type="submit"
+          style="background: rgb(228, 28, 28); border: none"
+          class="btn btn-info mr-3"
+          (click)="submit()"
+          [disabled]="!selectForm.valid"
+        >
+          Submit
+        </button>
+        <button
+          class="btn btn-info"
+          style="background: #637381; border: none"
+          [routerLink]="['/travelexpense/travel-list']"
+        >
+          Cancel
+        </button>
+      </div>
+    </div>
+  </form>
+</div>

@@ -33,6 +33,7 @@ import { CKEditorModule } from 'ckeditor4-angular';
 import { LeaveApproveDisapproveComponent } from './leave-approve-disapprove/leave-approve-disapprove.component';
 import { ViewLeaveReasonComponent } from './view-leave-reason/view-leave-reason.component';
 
+
 const plugins = [dayGridPlugin, timeGridPlugin];
 
 const calendarOptions: CalendarOptions = {
@@ -59,7 +60,6 @@ const calendarOptions: CalendarOptions = {
     LeaveApplyComponent,
     LeaveApproveDisapproveComponent,
     ViewLeaveReasonComponent,
-
 
   ],
   imports: [

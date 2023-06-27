@@ -1,7 +1,6 @@
 import { Component, ViewChild } from '@angular/core';
 import * as jsPDF from 'jspdf';
 import { MatDialog } from '@angular/material/dialog';
-import { access } from 'src/app/_models/modulepermission';
 import { ToastrMsgService } from 'src/app/_services/toastr-msg.service';
 import { NgxUiLoaderService } from 'ngx-ui-loader';
 import * as XLSX from 'xlsx';
@@ -10,7 +9,6 @@ import { LeaveService } from 'src/app/_services/leave.service';
 import { Table } from 'primeng/table';
 import autoTable from 'jspdf-autotable';
 import { DialogExitComponent } from '../dialog-exit/dialog-exit.component';
-// import { AssetDialogComponent } from '../asset-dialog/asset-dialog.component';
 
 @Component({
   selector: 'app-exit-list',
@@ -36,12 +34,11 @@ export class ExitListComponent {
     private ngxLoader: NgxUiLoaderService,
     private dialog: MatDialog,
   ) {
-
-    this.getExitData();
   }
 
   ngOnInit(): void {
 
+    this.getExitData();
   }
 
 
@@ -58,17 +55,17 @@ export class ExitListComponent {
     const dialogRef = this.dialog.open(DialogExitComponent);
     dialogRef.afterClosed().subscribe((result) => {
       if (result == true) {
-        this.deleteAssetDetails(name);
+        this.deleteExitDetails(name);
       }
     });
   }
 
-  deleteAssetDetails(id: any) {
-    this.leaveService.deleteAsset(id._id).subscribe((res) => {
+  deleteExitDetails(id: any) {
+    this.leaveService.deleteExit(id._id).subscribe((res) => {
       if (res) {
         this.toastr.showSuccess(
-          'Asset deleted successfully',
-          'Asset deleted'
+          'Exit deleted successfully',
+          'Exit deleted'
         );
         this.getExitData()
       }
@@ -81,13 +78,19 @@ export class ExitListComponent {
     const data = this.exitData.map((item, index) => ({
       'S.No.': index+1,
       'Employee Id': item.emoloyeeId,
-      'Given Date': item.interviewerType,
-      'Assets Details': item.assetsDetails,
-      'Type Of Assets': item.reasonForLeaving,
-      'Return Date': item.returnDate,
+      'Interviewer Type': item.interviewerType,
+      SeparationDate: datePipe.transform(item.separationDate),
+      'Reason For Leaving': item.reasonForLeaving,
+      'Work With Organisation Again': item.workWithOrganisationAgain,
+      'Most Of The Company': item.mostTheCompany,
+      'Anything To Share': item.anythingShare,
+      'Resignation': item.resignation,
+      'All Assets': item.allAssets,
+      'Notice Period': item.noticePeriod,
+      'Manager': item.manager,
       'Added By': item.addedBy,
       AddedTime: datePipe.transform(item.createdAt, 'MM/dd/yyyy'),
-      'Modified By': item.addedBy,
+      'Modified By': item.modifiedBy,
       ModifiedTime: datePipe.transform(item.updatedAt, 'MM/dd/yyyy'),
     }));
 
@@ -134,15 +137,24 @@ export class ExitListComponent {
       return {
         ...item,
         createdAt: this.formatDate(item.createdAt), // Format the createdAt date
-        updatedAt: this.formatDate(item.updatedAt) // Format the createdAt date
+        updatedAt: this.formatDate(item.updatedAt), // Format the createdAt date
+        separationDate: this.formatDate(item.separationDate) // Format the createdAt date
       };
     });
     const exportColumns = [
       { title: 'S No.', dataKey: 'sno' },
       { title: 'Employee Id', dataKey: 'emoloyeeId' },
-      { title: 'Assets Details ', dataKey: 'interviewerType' },
+      { title: 'Interviewer Type ', dataKey: 'interviewerType' },
       { title: 'Type Of Assets', dataKey: 'typeOfAssets' },
-      { title: 'Return Date', dataKey: 'reasonForLeaving' },
+      { title: 'Separation Date', dataKey: 'separationDate' },
+      { title: 'Reason For Leaving', dataKey: 'reasonForLeaving' },
+      { title: 'Work With OrganisationAgain ', dataKey: 'workWithOrganisationAgain ' },
+      { title: 'Most Of The Company', dataKey: 'mostTheCompany' },
+      { title: 'Anything Share', dataKey: 'anythingShare' },
+      { title: 'Resignation', dataKey: 'resignation' },
+      { title: 'All Assets', dataKey: 'allAssets' },
+      { title: 'Notice Period', dataKey: 'noticePeriod' },
+      { title: 'manager', dataKey: 'manager' },
       { title: 'Added By', dataKey: 'addedBy' },
       { title: 'AddedTime', dataKey: 'createdAt' },
       { title: 'Modified By', dataKey: 'addedBy' },
@@ -155,7 +167,7 @@ export class ExitListComponent {
       body: data
     });
 
-    doc.save('Asset List.pdf');
+    doc.save('Exit Detail List.pdf');
   }
 
   formatDate(dateString) {

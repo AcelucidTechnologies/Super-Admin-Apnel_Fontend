@@ -1,1 +1,418 @@
-<p>edit-exit works!</p>
+<div class="button-heading-container">
+  <button class="mb-2 back-button" [routerLink]="['/exitmgmt/exit-list']">
+    <i class="material-icons">arrow_back</i>
+  </button>
+  <h5>&nbsp;Edit Exit Details</h5>
+</div>
+<div class="card pl-4 pr-4 pb-3 pt-4">
+  <form [formGroup]="selectForm">
+    <h5 class="card-title mt-3">Sepration</h5>
+    <div class="row mb-4">
+      <div class="col-6">
+        <div class="row">
+          <div class="col-4">
+            <label class="starlabel">Employee Id</label>
+          </div>
+          <div class="col-8">
+            <input
+              formControlName="emoloyeeId"
+              placeholder="Enter employee name"
+              class="form-control custom-placeholder input-padding"
+              type="text" readonly
+            />
+            <div
+              *ngIf="
+                !selectForm.controls['emoloyeeId'].valid &&
+                (selectForm.controls['emoloyeeId'].touched ||
+                  selectForm.controls['emoloyeeId'].dirty)
+              "
+            >
+              <div
+                [hidden]="!selectForm.controls['emoloyeeId'].errors['required']"
+                style="
+                  color: rgb(253, 122, 122);
+                  font-size: small;
+                  font-style: italic;
+                "
+              >
+                Employee Id is required
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-6">
+        <div class="row">
+          <div class="col-4">
+            <label class="starlabel">Employee Name</label>
+          </div>
+          <div class="col-8">
+            <input
+              formControlName="employeeName"
+              placeholder="Enter employee name"
+              class="form-control custom-placeholder input-padding"
+              type="text"
+            />
+            <div
+              *ngIf="
+                !selectForm.controls['employeeName'].valid &&
+                (selectForm.controls['employeeName'].touched ||
+                  selectForm.controls['employeeName'].dirty)
+              "
+            >
+              <div
+                [hidden]="!selectForm.controls['employeeName'].errors['required']"
+                style="
+                  color: rgb(253, 122, 122);
+                  font-size: small;
+                  font-style: italic;
+                "
+              >
+                Employee Name is required
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+    <div class="row mb-4">
+      <div class="col-6">
+        <div class="row">
+          <div class="col-4">
+            <label class="starlabel">Interviewer Type</label>
+          </div>
+          <div class="col-8">
+            <input
+              formControlName="interviewerType"
+              placeholder="Enter employee type"
+              class="form-control custom-placeholder input-padding"
+              type="text"
+            />
+             <div
+            *ngIf="
+              !selectForm.controls['interviewerType'].valid &&
+              (selectForm.controls['interviewerType'].touched ||
+                selectForm.controls['interviewerType'].dirty)
+            "
+          >
+            <div
+              [hidden]="!selectForm.controls['interviewerType'].errors['required']"
+              style="
+                color: rgb(253, 122, 122);
+                font-size: small;
+                font-style: italic;
+              "
+            >
+              Interview Type is required
+            </div>
+          </div>
+
+          </div>
+        </div>
+      </div>
+      <div class="col-6">
+        <div class="row">
+          <div class="col-4">
+            <label class="starlabel">Reason For Leaving</label>
+          </div>
+          <div class="col-8">
+            <input
+              formControlName="reasonForLeaving"
+              placeholder="Enter Reason"
+              class="form-control custom-placeholder input-padding"
+              type="text"
+            />
+            <div
+            *ngIf="
+              !selectForm.controls['reasonForLeaving'].valid &&
+              (selectForm.controls['reasonForLeaving'].touched ||
+                selectForm.controls['reasonForLeaving'].dirty)
+            "
+          >
+            <div
+              [hidden]="!selectForm.controls['reasonForLeaving'].errors['required']"
+              style="
+                color: rgb(253, 122, 122);
+                font-size: small;
+                font-style: italic;
+              "
+            >
+              reason is required
+            </div>
+          </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <h5 class="card-title mt-3">Questionarrie</h5>
+
+    <div class="row mb-4 mt-2">
+      <div class="col-6">
+        <div class="row">
+          <div class="col-4">
+            <label class="starlabel">Working for organisation again</label>
+          </div>
+          <div class="col-8">
+            <input
+              formControlName="workingOrganization"
+              placeholder="Enter work for organisation"
+              type="text"
+              class="form-control custom-placeholder input-padding"
+            />
+            <div
+            *ngIf="
+              !selectForm.controls['workingOrganization'].valid &&
+              (selectForm.controls['workingOrganization'].touched ||
+                selectForm.controls['workingOrganization'].dirty)
+            "
+          >
+            <div
+              [hidden]="!selectForm.controls['workingOrganization'].errors['required']"
+              style="
+                color: rgb(253, 122, 122);
+                font-size: small;
+                font-style: italic;
+              "
+            >
+             work for organisation is required
+            </div>
+          </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-6">
+        <div class="row">
+          <div class="col-4">
+            <label class="starlabel">What do you like most of the company</label>
+          </div>
+          <div class="col-8">
+            <input
+              formControlName="mostTheCompany"
+              type="text"
+              class="form-control custom-placeholder input-padding"
+              placeholder="Enter most of company "
+            />
+
+            <div
+            *ngIf="
+              !selectForm.controls['mostTheCompany'].valid &&
+              (selectForm.controls['mostTheCompany'].touched ||
+                selectForm.controls['mostTheCompany'].dirty)
+            "
+          >
+            <div
+              [hidden]="!selectForm.controls['mostTheCompany'].errors['required']"
+              style="
+                color: rgb(253, 122, 122);
+                font-size: small;
+                font-style: italic;
+              "
+            >
+             most of company is required
+            </div>
+          </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row mb-4 mt-2">
+      <div class="col-6">
+        <div class="row">
+          <div class="col-4">
+            <label class="starlabel"
+              >Think the organisation do to improve the staff welfare</label
+            >
+          </div>
+          <div class="col-8">
+            <input
+              formControlName="improveStaffWelfare"
+              type="text"
+              class="form-control custom-placeholder input-padding"
+              placeholder="Enter organisation welfare "
+            />
+            <div
+            *ngIf="
+              !selectForm.controls['improveStaffWelfare'].valid &&
+              (selectForm.controls['improveStaffWelfare'].touched ||
+                selectForm.controls['improveStaffWelfare'].dirty)
+            "
+          >
+            <div
+              [hidden]="!selectForm.controls['improveStaffWelfare'].errors['required']"
+              style="
+                color: rgb(253, 122, 122);
+                font-size: small;
+                font-style: italic;
+              "
+            >
+            improve staff welfare is required
+            </div>
+          </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-6">
+        <div class="row">
+          <div class="col-4">
+            <label class="starlabel">Anything you want to share with us</label>
+          </div>
+          <div class="col-8">
+            <input
+              formControlName="anythingShare"
+              type="text"
+              class="form-control custom-placeholder input-padding"
+              placeholder="Enter anthing to share "
+            />
+            <div
+            *ngIf="
+              !selectForm.controls['anythingShare'].valid &&
+              (selectForm.controls['anythingShare'].touched ||
+                selectForm.controls['anythingShare'].dirty)
+            "
+          >
+            <div
+              [hidden]="!selectForm.controls['anythingShare'].errors['required']"
+              style="
+                color: rgb(253, 122, 122);
+                font-size: small;
+                font-style: italic;
+              "
+            >
+            anything to share is required
+            </div>
+          </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <h5 class="card-title mt-3">Checklist for Exit Interview</h5>
+    <div class="row mb-4 mt-2">
+      <div class="col-6">
+        <div class="row">
+          <div class="col-4">
+            <label class="starlabel">All assets handed in</label>
+          </div>
+          <div class="col-8">
+            <input
+              formControlName="allAssets"
+              type="text"
+              class="form-control custom-placeholder input-padding"
+              placeholder="Enter handed assets"
+            />
+            <div
+            *ngIf="
+              !selectForm.controls['allAssets'].valid &&
+              (selectForm.controls['allAssets'].touched ||
+                selectForm.controls['allAssets'].dirty)
+            "
+          >
+            <div
+              [hidden]="!selectForm.controls['allAssets'].errors['required']"
+              style="
+                color: rgb(253, 122, 122);
+                font-size: small;
+                font-style: italic;
+              "
+            >
+            all assets is required
+            </div>
+          </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-6">
+        <div class="row">
+          <div class="col-4">
+            <label class="starlabel">Notice period followed</label>
+          </div>
+          <div class="col-8">
+            <input
+              formControlName="noticePeriod"
+              type="text"
+              class="form-control custom-placeholder input-padding"
+              placeholder="Enter notice period followed "
+            />
+            <div
+            *ngIf="
+              !selectForm.controls['noticePeriod'].valid &&
+              (selectForm.controls['noticePeriod'].touched ||
+                selectForm.controls['noticePeriod'].dirty)
+            "
+          >
+            <div
+              [hidden]="!selectForm.controls['noticePeriod'].errors['required']"
+              style="
+                color: rgb(253, 122, 122);
+                font-size: small;
+                font-style: italic;
+              "
+            >
+           notice period is required
+            </div>
+          </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="row mb-4 mt-2">
+      <div class="col-6">
+        <div class="row">
+          <div class="col-4">
+            <label class="starlabel">Manager/Supervisor Clearance</label>
+          </div>
+          <div class="col-8">
+            <input
+              formControlName="manager"
+              type="text"
+              class="form-control custom-placeholder input-padding"
+              placeholder="Enter manager clearance "
+            />
+            <div
+            *ngIf="
+              !selectForm.controls['manager'].valid &&
+              (selectForm.controls['manager'].touched ||
+                selectForm.controls['manager'].dirty)
+            "
+          >
+            <div
+              [hidden]="!selectForm.controls['manager'].errors['required']"
+              style="
+                color: rgb(253, 122, 122);
+                font-size: small;
+                font-style: italic;
+              "
+            >
+           manager clearance is required
+            </div>
+          </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-6"></div>
+    </div>
+
+    <div class="row mb-5 mt-4">
+      <div class="d-flex justify-content-end col-11 mt-4">
+        <button
+          type="submit"
+          style="background: rgb(228, 28, 28); border: none"
+          class="btn btn-info mr-3"
+          (click)="submit()"
+          [disabled]="!selectForm.valid"
+        >
+          Submit
+        </button>
+        <button
+          class="btn btn-info"
+          style="background: #637381; border: none"
+          [routerLink]="['/exitmgmt/exit-list']"
+        >
+          Cancel
+        </button>
+      </div>
+    </div>
+  </form>
+</div>

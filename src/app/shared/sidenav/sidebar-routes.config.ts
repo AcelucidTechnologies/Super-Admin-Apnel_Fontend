@@ -72,9 +72,23 @@ export const SideNaveMenueRoute = [
         routerLinkActive: 'active'
       },
       {
-        label: 'Exit',
+        label: 'Exit Details',
         icon: 'pi pi-list',
         routerLink: ['/exitmgmt/exit-list'],
+        routerLinkActiveOptions: { exact: true },
+        routerLinkActive: 'active'
+      },
+      {
+        label: 'Travel Expense',
+        icon: 'pi pi-list',
+        routerLink: ['/travelexpense/travel-list'],
+        routerLinkActiveOptions: { exact: true },
+        routerLinkActive: 'active'
+      },
+      {
+        label: 'Documents',
+        icon: 'pi pi-list',
+        routerLink: ['/documents/document-list'],
         routerLinkActiveOptions: { exact: true },
         routerLinkActive: 'active'
       },

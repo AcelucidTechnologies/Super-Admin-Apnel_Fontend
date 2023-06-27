@@ -379,7 +379,7 @@
         <div class="col-6">
           <div class="row" style="display: flex;">
             <div class="col-4"><label class="starlabel">Date of Joining</label></div>
-            <div class="col-8"><input type="date" class="form-control input-font" id="inputdefault" formControlName="dateOfJoining" >
+            <div class="col-8"><input type="date" [min]="getMinimumDate()" class="form-control input-font" id="inputdefault" formControlName="dateOfJoining" >
               <div *ngIf="
               !profileForm.controls['dateOfJoining'].valid  ||
               profileForm.controls['dateOfJoining'].dirty
@@ -930,7 +930,7 @@
             <div class="col-4 info-name"><label>Date of Exit</label></div>
             <div class="col-8">
               <input type="date" class="form-control input-font" placeholder="Select date of exit"
-              id="startDate" name="startDate" formControlName="separationOfDate">
+              id="startDate" name="startDate"  [min]="getMinimumDate()" formControlName="separationOfDate">
             </div>
           </div>
         </div>
@@ -950,7 +950,7 @@
             <div class="row" style="display: flex;">
               <div class="col-4 info-name"><label class="starlabel">Added Time</label></div>
               <div class="col-8">
-                <input type="date" class="form-control input-font" placeholder="added Time"
+                <input type="date" class="form-control input-font" placeholder="added Time"  [min]="getMinimumDate()"
                         id="startDate" name="startDate" formControlName="addedTime" readonly>
 
               </div>
@@ -960,7 +960,7 @@
             <div class="row" style="display: flex;">
               <div class="col-4 info-name"><label class="starlabel">Modified Time</label></div>
               <div class="col-8">
-                <input type="date" class="form-control input-font" placeholder="modified time"
+                <input type="date" class="form-control input-font" placeholder="modified time"  [min]="getMinimumDate()"
                         id="startDate" name="startDate" formControlName="modifiedTime">
                         <div *ngIf="profileForm.get('systemFields.modifiedTime').invalid  || profileForm.get('systemFields.modifiedTime').dirty">
                           <div *ngIf="profileForm.get('systemFields.modifiedTime').hasError('required')" style="color: rgb(253, 122, 122); font-size: small; font-style: italic;">
