@@ -8,56 +8,50 @@ import { ToastrMsgService } from 'src/app/_services/toastr-msg.service';
 @Component({
   selector: 'app-add-asset',
   templateUrl: './add-asset.component.html',
-  styleUrls: ['./add-asset.component.scss']
+  styleUrls: ['./add-asset.component.scss'],
 })
 export class AddAssetComponent {
   selectForm: FormGroup;
   appliedToType: string[];
-  assetlist:any;
+  assetlist: any;
 
   constructor(
     private ngxLoader: NgxUiLoaderService,
     private fb: FormBuilder,
     private toastr: ToastrMsgService,
     private leaveservice: LeaveService,
-    private route: Router) {
+    private route: Router
+  ) {
     this.selectForm = this.fb.group({
-      username: localStorage.getItem("email"),
-      employeeName: ['',[Validators.required] ],
-      typeOfAssets: ['',[Validators.required]],
-      addedBy: ['',[Validators.required]],
-      givenDate: ['',[Validators.required]],
-      returnDate: ['',  [Validators.required]],
+      username: localStorage.getItem('email'),
+      employeeName: ['', [Validators.required]],
+      typeOfAssets: ['', [Validators.required]],
+      addedBy: ['', [Validators.required]],
+      givenDate: ['', [Validators.required]],
+      returnDate: ['', [Validators.required]],
       assetsDetails: ['', [Validators.required]],
-
     });
- }
- getMinimumDate() {
-  const currentDate = new Date();
-  currentDate.setDate(currentDate.getDate() );
-  return currentDate.toISOString().split('T')[0];
-
-}
- ngOnInit(){
-
- }
- submit(){
-  this.ngxLoader.start();
-  this.leaveservice.createAsset(this.selectForm.value).subscribe((res)=>{
-    this.assetlist= res;
-       if (res) {
+  }
+  getMinimumDate() {
+    const currentDate = new Date();
+    currentDate.setDate(currentDate.getDate());
+    return currentDate.toISOString().split('T')[0];
+  }
+  ngOnInit() {}
+  submit() {
+    this.ngxLoader.start();
+    this.leaveservice.createAsset(this.selectForm.value).subscribe((res) => {
+      this.assetlist = res;
+      if (res) {
         this.ngxLoader.start();
-         location.reload()
-         this.toastr.showSuccess("Asset added successfully", "Asset Added")
-       }
-       (error: any) => {
-        console.log("error");
-        this.toastr.showError("Somthing wrong Please check", "Error occured")
-         this.ngxLoader.stop();
-       }
-
-  })
-
-   }
-
+        location.reload();
+        this.toastr.showSuccess('Asset added successfully', 'Asset Added');
+      }
+      (error: any) => {
+        console.log('error');
+        this.toastr.showError('Somthing wrong Please check', 'Error occured');
+        this.ngxLoader.stop();
+      };
+    });
+  }
 }

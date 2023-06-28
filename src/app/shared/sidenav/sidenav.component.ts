@@ -1,10 +1,16 @@
 import { BreakpointObserver } from '@angular/cdk/layout';
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, Renderer2, ViewChild } from '@angular/core';
 import { MatSidenav } from '@angular/material/sidenav';
-import { trigger, state, style, transition, animate } from '@angular/animations';
+import {
+  trigger,
+  state,
+  style,
+  transition,
+  animate,
+} from '@angular/animations';
 import { Router } from '@angular/router';
-import {SideNaveMenueRoute} from './sidebar-routes.config'
-import {MenuItem} from 'primeng/api';
+import { SideNaveMenueRoute } from './sidebar-routes.config';
+import { MenuItem } from 'primeng/api';
 import { ModulePermissionService } from 'src/app/_services/module-permission.service';
 import { AdminService } from 'src/app/_services/admin.service';
 @Component({
@@ -13,39 +19,44 @@ import { AdminService } from 'src/app/_services/admin.service';
   styleUrls: ['./sidenav.component.scss'],
   animations: [
     trigger('toggleSidebar', [
-      state('close', style({
-        width: '0rem'
-      })),
-      state('open', style({
-        width: '15rem',
-      })),
-      transition('close => open', [
-        animate('300ms')
-      ]),
-      transition('open => close', [
-        animate('300ms')
-      ])
+      state(
+        'close',
+        style({
+          width: '0rem',
+        })
+      ),
+      state(
+        'open',
+        style({
+          width: '15rem',
+        })
+      ),
+      transition('close => open', [animate('300ms')]),
+      transition('open => close', [animate('300ms')]),
     ]),
     trigger('mToggleSidebar', [
-      state('close', style({
-        width: '0px',
-        visibility: 'hidden'
-      })),
-      state('open', style({
-        width: '15rem',
-        visibility: 'visible'
-      })),
-      transition('close => open', [
-        animate('300ms')
-      ]),
-      transition('open => close', [
-        animate('300ms')
-      ])
-    ])
-  ]
+      state(
+        'close',
+        style({
+          width: '0px',
+          visibility: 'hidden',
+        })
+      ),
+      state(
+        'open',
+        style({
+          width: '15rem',
+          visibility: 'visible',
+        })
+      ),
+      transition('close => open', [animate('300ms')]),
+      transition('open => close', [animate('300ms')]),
+    ]),
+  ],
 })
 export class SidenavComponent implements OnInit {
   activeItem: any;
+  @ViewChild('panelMenu') panelMenu: any;
 
   device: string = '';
   state: string = '';
@@ -53,51 +64,64 @@ export class SidenavComponent implements OnInit {
   isShowing: boolean = true;
   iconColor: string = '';
   items!: MenuItem[];
-  moduleList:string[]=[];
+  moduleList: string[] = [];
 
-  username:string;
-  image:string="https://source.unsplash.com/c_GmwfHBDzk/200x200";
-  itemShow:any[]=[]
+  username: string;
+  image: string = 'https://source.unsplash.com/c_GmwfHBDzk/200x200';
+  itemShow: any[] = [];
 
   @ViewChild(MatSidenav) sidenav!: MatSidenav;
 
-  constructor(private observer: BreakpointObserver, private router: Router,
-    private permissionService:ModulePermissionService,
-    private adminService:AdminService) {
-    this.permissionService.getModulePermission().subscribe(res=>{
-      this.moduleList=res[0].moduleList
-      this.username=res[0].username;
+  constructor(
+    private observer: BreakpointObserver,
+    private router: Router,
+    private permissionService: ModulePermissionService,
+    private renderer: Renderer2,
+    private adminService: AdminService
+  ) {
+    this.permissionService.getModulePermission().subscribe((res) => {
+      this.moduleList = res[0].moduleList;
+      this.username = res[0].username;
 
-      console.log( res[0].moduleList);
-      this.items = SideNaveMenueRoute
-      this.items = this.items.filter(val=>{
-        if(this.moduleList.includes(val.label))
-        return val
-        else
-        return null
-      })
-    })
+      console.log(res[0].moduleList);
+      this.items = SideNaveMenueRoute;
+      this.items = this.items.filter((val) => {
+        if (this.moduleList.includes(val.label)) return val;
+        else return null;
+      });
+    });
 
-      this.username = localStorage.getItem('UserData')
-    this.getImage()
+    this.username = localStorage.getItem('UserData');
+    this.getImage();
     // console.log(this.itemShow)
   }
 
-  // ngDoCheck(){
-  //   this.check = (window.location.href.split(environment.IP_ADDRESS)[1]=='/' || window.location.href.split(environment.IP_ADDRESS)[1]=='/login')?false:true;
-  // }
-  isActive(route: string): boolean {
-    return this.router.isActive(route, false);
+  activeMenu(event) {
+    let node;
+    if (event.target.classList.contains('p-submenu-header') == true) {
+      node = 'submenu';
+    } else if (event.target.tagName === 'SPAN') {
+      node = event.target.parentNode.parentNode;
+    } else {
+      node = event.target.parentNode;
+    }
+    if (node != 'submenu') {
+      let menuitem = document.getElementsByClassName('p-menuitem');
+      for (let i = 0; i < menuitem.length; i++) {
+        menuitem[i].classList.remove('active');
+      }
+      node.classList.add('active');
+    }
   }
+
   getImage() {
     this.adminService.getAdminDetails(this.username).subscribe((res) => {
       if (res[0].image) {
-        this.image = res[0].image
-        console.log(this.image)
+        this.image = res[0].image;
+        console.log(this.image);
       }
-    })
+    });
   }
-
 
   ngOnInit() {
     if (window.innerWidth > 992) {
@@ -108,7 +132,7 @@ export class SidenavComponent implements OnInit {
       this.state = 'close';
     }
     this.closed = false;
-    if(this.router.url === '/') {
+    if (this.router.url === '/') {
       this.isShowing = false;
     }
     this.iconColor = this.isShowing ? 'show' : 'hide';
@@ -140,32 +164,13 @@ export class SidenavComponent implements OnInit {
 
   getClosedStyle() {
     return {
-      width: '55px'
+      width: '55px',
     };
   }
 
   getOpenedStyle() {
     return {
-      width: '200px'
+      width: '200px',
     };
   }
-
-  // activeMenu(event) {
-
-  //   let node;
-  //   if (event.target.tagName === "A") {
-  //     node = event.target;
-  //   } else {
-  //     node = event.target.parentNode;
-  //   }
-  //   let menuitem = document.getElementsByClassName("ui-menuitem-link");
-  //   for (let i = 0; i < menuitem.length; i++) {
-  //     menuitem[i].classList.remove("active");
-  //   }
-  //   node.classList.add("active")
-  //   }
-
-
-
-
 }

@@ -10,25 +10,25 @@
   // margin-left: 20px;
   width: 40px;
   margin-right: 10px;
-
 }
 ::ng-deep.back-button:hover {
   background-color: lightcoral !important;
 }
-.card-title{
+.card-title {
   background-color: cadetblue;
   color: whitesmoke;
   line-height: 30px;
   padding-left: 10px;
 }
 
-.text-input-field{
+.text-input-field {
   margin: 10px 10px 20px 10px;
 }
-::ng-deep .p-dropdown{
+::ng-deep .p-dropdown {
   width: 100%;
 }
-td,th{
+td,
+th {
   border: none !important;
   border-bottom: 1px solid rgb(215, 198, 198) !important;
 }
@@ -37,7 +37,7 @@ td,th{
   color: black !important;
   text-align: center;
 }
-label.starlabel::after{
+label.starlabel::after {
   content: "*";
   color: rgb(228, 28, 28);
 }

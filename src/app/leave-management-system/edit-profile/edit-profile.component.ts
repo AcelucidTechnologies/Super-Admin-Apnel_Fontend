@@ -18,7 +18,6 @@ import { MatDialog } from '@angular/material/dialog';
 import { LeaveService } from 'src/app/_services/leave.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ToastrMsgService } from 'src/app/_services/toastr-msg.service';
-import { DxiItemModule } from 'devextreme-angular/ui/nested';
 import { combineLatest, filter, Observable, tap } from 'rxjs';
 
 @Component({
@@ -68,7 +67,6 @@ export class EditProfileComponent {
   reportManager: any;
   locationList: any;
 
-
   profileForm: FormGroup;
   roledrop: { state: string }[];
   employeedrop: { state: string }[];
@@ -77,9 +75,7 @@ export class EditProfileComponent {
   maritalStatusType: { state: string }[];
   onBoardingType: { state: string }[];
 
-
   selectedImage: string;
-
 
   constructor(
     private fb: FormBuilder,
@@ -92,44 +88,41 @@ export class EditProfileComponent {
 
     private ngxLoader: NgxUiLoaderService
   ) {
-    this.roledrop = [
-      { state: 'Employee' },
-      { state: 'Admin' }
-    ];
+    this.roledrop = [{ state: 'Employee' }, { state: 'Admin' }];
     this.employeedrop = [
       { state: 'Full Time' },
       { state: 'Part Time' },
       { state: 'Contract' },
-      { state: 'Internship' }
+      { state: 'Internship' },
     ];
-    this.employeestatus = [
-      { state: 'Active' },
-      { state: 'InActive' },
-    ];
-    this.genderType = [
-      { state: 'Male' },
-      { state: 'Female' },
-    ];
+    this.employeestatus = [{ state: 'Active' }, { state: 'InActive' }];
+    this.genderType = [{ state: 'Male' }, { state: 'Female' }];
     this.maritalStatusType = [
       { state: 'single' },
       { state: 'Married' },
       { state: 'Divorced' },
       { state: 'Separated' },
-      { state: 'Widowed' }
+      { state: 'Widowed' },
     ];
-    this.onBoardingType = [
-      { state: 'Active' },
-      { state: 'InActive' },
-    ];
+    this.onBoardingType = [{ state: 'Active' }, { state: 'InActive' }];
 
     this.fileHolder = null;
     this.isChecked = false;
 
     this.profileForm = this.fb.group({
       employeeId: [''],
-      employeeFullName: ['', [Validators.required, Validators.pattern(/^[a-zA-Z\s]+$/)]],
-      FirstName: ['', [Validators.required, Validators.pattern(/^[a-zA-Z\s]+$/)]],
-      lastName: ['', [Validators.required, Validators.pattern(/^[a-zA-Z\s]+$/)]],
+      employeeFullName: [
+        '',
+        [Validators.required, Validators.pattern(/^[a-zA-Z\s]+$/)],
+      ],
+      FirstName: [
+        '',
+        [Validators.required, Validators.pattern(/^[a-zA-Z\s]+$/)],
+      ],
+      lastName: [
+        '',
+        [Validators.required, Validators.pattern(/^[a-zA-Z\s]+$/)],
+      ],
       email: ['', [Validators.required, Validators.email]],
       image: [''],
       department: ['', [Validators.required]],
@@ -141,7 +134,7 @@ export class EditProfileComponent {
       dateOfJoining: ['', [Validators.required]],
       currentExp: ['', [Validators.required]],
       totalExp: ['', [Validators.required]],
-      userreportingManager: ['',[Validators.required]],
+      userreportingManager: ['', [Validators.required]],
       separationOfDate: [''],
       userlocation: ['', [Validators.required]],
       educationDetails: this.fb.array([]),
@@ -164,8 +157,14 @@ export class EditProfileComponent {
           city: ['', [Validators.required]],
           pincode: ['', [Validators.required]],
         }),
-        workingPhoneNumber: ['', [Validators.required, Validators.pattern(/^\d{10}$/)]],
-        personalMobileNumber: ['', [Validators.required, Validators.pattern(/^\d{10}$/)]],
+        workingPhoneNumber: [
+          '',
+          [Validators.required, Validators.pattern(/^\d{10}$/)],
+        ],
+        personalMobileNumber: [
+          '',
+          [Validators.required, Validators.pattern(/^\d{10}$/)],
+        ],
         personalEmailAddress: ['', [Validators.required, Validators.email]],
         sameAsLocal: [''],
       }),
@@ -178,8 +177,17 @@ export class EditProfileComponent {
       }),
       identityInformation: this.fb.group({
         uan: [''],
-        panNumber: ['', [Validators.required, Validators.pattern(/^[A-Z]{5}[0-9]{4}[A-Z]{1}$/)]],
-        aadharNumber: ['', [Validators.required , Validators.pattern(/^\d{12}$/)]],
+        panNumber: [
+          '',
+          [
+            Validators.required,
+            Validators.pattern(/^[A-Z]{5}[0-9]{4}[A-Z]{1}$/),
+          ],
+        ],
+        aadharNumber: [
+          '',
+          [Validators.required, Validators.pattern(/^\d{12}$/)],
+        ],
       }),
       personalDetails: this.fb.group({
         dateOfBirth: ['', [Validators.required]],
@@ -197,39 +205,59 @@ export class EditProfileComponent {
     this.workExperience = (this.profileForm.get('workExperience') as FormArray)
       .controls as FormGroup[];
 
+    this.departmentdrop$ = this.leaveservice.getdepartmentList();
+    this.designationdrop$ = this.leaveservice.getdesignationList();
+    this.soruceHiringdrop$ = this.leaveservice.getSourceHiringList();
+    this.reportManager$ = this.leaveservice.getReportList();
+    this.locationList$ = this.leaveservice.getLocationList();
 
-      this.departmentdrop$ = this.leaveservice.getdepartmentList();
-      this.designationdrop$ = this.leaveservice.getdesignationList();
-      this.soruceHiringdrop$ = this.leaveservice.getSourceHiringList();
-      this.reportManager$ = this.leaveservice.getReportList();
-      this.locationList$ = this.leaveservice.getLocationList();
-
-      combineLatest([
-        this.locationList$,
-        this.reportManager$,
-        this.departmentdrop$,
-        this.designationdrop$,
-        this.soruceHiringdrop$
-      ]).pipe(
-        filter(([locationList, reportManager, departmentdrop, designationdrop, soruceHiringdrop]) =>
-        locationList && reportManager && departmentdrop && designationdrop && soruceHiringdrop),
-        tap(([locationList, reportManager, departmentdrop, designationdrop, soruceHiringdrop]) => {
-          this.designationdrop = designationdrop;
-          this.soruceHiringdrop = soruceHiringdrop;
-          this.reportManagerdrop = reportManager;
-          this.locationList = locationList;
-          this.departmentdrop = departmentdrop;
-        })
-      ).subscribe( ()=>{
-        this.getLeaveById()
-       });
+    combineLatest([
+      this.locationList$,
+      this.reportManager$,
+      this.departmentdrop$,
+      this.designationdrop$,
+      this.soruceHiringdrop$,
+    ])
+      .pipe(
+        filter(
+          ([
+            locationList,
+            reportManager,
+            departmentdrop,
+            designationdrop,
+            soruceHiringdrop,
+          ]) =>
+            locationList &&
+            reportManager &&
+            departmentdrop &&
+            designationdrop &&
+            soruceHiringdrop
+        ),
+        tap(
+          ([
+            locationList,
+            reportManager,
+            departmentdrop,
+            designationdrop,
+            soruceHiringdrop,
+          ]) => {
+            this.designationdrop = designationdrop;
+            this.soruceHiringdrop = soruceHiringdrop;
+            this.reportManagerdrop = reportManager;
+            this.locationList = locationList;
+            this.departmentdrop = departmentdrop;
+          }
+        )
+      )
+      .subscribe(() => {
+        this.getLeaveById();
+      });
   }
   getMinimumDate() {
     const leaveType = this.profileForm?.get('dateOfJoining')?.value;
-      const currentDate = new Date();
-      currentDate.setDate(currentDate.getDate() );
-      return currentDate.toISOString().split('T')[0];
-
+    const currentDate = new Date();
+    currentDate.setDate(currentDate.getDate());
+    return currentDate.toISOString().split('T')[0];
   }
   createEducationRow(): FormGroup {
     console.log('createEducationRow() called');
@@ -238,7 +266,7 @@ export class EditProfileComponent {
       instituteName: [''],
       degree: [''],
       specialization: [''],
-      toDate: ['' ],
+      toDate: [''],
       editMode: [true],
     });
   }
@@ -257,8 +285,6 @@ export class EditProfileComponent {
     });
   }
 
-
-
   addNewRow() {
     console.log('addNewRow() called');
     const newEducationRow = this.createEducationRow();
@@ -272,13 +298,18 @@ export class EditProfileComponent {
     this.workExperience.push(newWorkRow);
   }
   calculateAge() {
-    const dateOfBirth = this.profileForm.get('personalDetails.dateOfBirth').value;
+    const dateOfBirth = this.profileForm.get(
+      'personalDetails.dateOfBirth'
+    ).value;
     if (dateOfBirth) {
       const today = new Date();
       const birthDate = new Date(dateOfBirth);
       let age = today.getFullYear() - birthDate.getFullYear();
       const monthDiff = today.getMonth() - birthDate.getMonth();
-      if (monthDiff < 0 || (monthDiff === 0 && today.getDate() < birthDate.getDate())) {
+      if (
+        monthDiff < 0 ||
+        (monthDiff === 0 && today.getDate() < birthDate.getDate())
+      ) {
         age--;
       }
       this.profileForm.get('personalDetails.age').patchValue(age);
@@ -365,28 +396,7 @@ export class EditProfileComponent {
     this.activateRoute.queryParamMap.subscribe((params) => {
       this.id = params.get('id');
     });
-
-
   }
-
-
-
-
-  // openDialog() {
-  //   const dialogRef = this.dialog.open(DialogDepartmentComponent);
-  // }
-  // openDialogDesignation() {
-  //   const dialogRef = this.dialog.open(DialogDesignationComponent);
-  // }
-  // openDialogLocation() {
-  //   const dialogRef = this.dialog.open(DialogLocationComponent);
-  // }
-  // openDialogSourceHiring() {
-  //   const dialogRef = this.dialog.open(DialogSourceHiringComponent);
-  // }
-  // openDialogReportingmanager() {
-  //   const dialogRef = this.dialog.open(DialogReportingManagerComponent);
-  // }
 
   openDialog() {
     this.getDepartment();
@@ -394,53 +404,62 @@ export class EditProfileComponent {
     dialogRef.afterClosed().subscribe((result) => {
       if (result) {
         console.log('Dialog result:', result);
-      this.getDepartment(); // Refresh dropdown values
-        this.route.navigate(['/leaveMgmt/edit-profile'], { skipLocationChange: true });
+        this.getDepartment(); // Refresh dropdown values
+        this.route.navigate(['/leaveMgmt/edit-profile'], {
+          skipLocationChange: true,
+        });
       }
     });
   }
-  openDialogDesignation(){
+  openDialogDesignation() {
     this.getDesignation();
     const dialogRef = this.dialog.open(DialogDesignationComponent);
     dialogRef.afterClosed().subscribe((result) => {
-      this.getDesignation()
+      this.getDesignation();
       if (result) {
-        this.route.navigate(['/leaveMgmt/edit-profile'], { skipLocationChange: true });
+        this.route.navigate(['/leaveMgmt/edit-profile'], {
+          skipLocationChange: true,
+        });
       }
     });
   }
-  openDialogLocation(){
-    this.getLocation()
+  openDialogLocation() {
+    this.getLocation();
     const dialogRef = this.dialog.open(DialogLocationComponent);
     dialogRef.afterClosed().subscribe((result) => {
-      this.getLocation()
+      this.getLocation();
       if (result) {
         console.log('Dialog result:', result);
-        this.route.navigate(['/leaveMgmt/edit-profile'], { skipLocationChange: true });
+        this.route.navigate(['/leaveMgmt/edit-profile'], {
+          skipLocationChange: true,
+        });
       }
     });
   }
-  openDialogSourceHiring(){
-    this.getSourceHiring()
+  openDialogSourceHiring() {
+    this.getSourceHiring();
     const dialogRef = this.dialog.open(DialogSourceHiringComponent);
     dialogRef.afterClosed().subscribe((result) => {
-      this.getSourceHiring()
+      this.getSourceHiring();
       if (result) {
-        this.route.navigate(['/leaveMgmt/edit-profile'], { skipLocationChange: true });
+        this.route.navigate(['/leaveMgmt/edit-profile'], {
+          skipLocationChange: true,
+        });
       }
     });
   }
-  openDialogReportingmanager(){
-    this.getReportManager()
+  openDialogReportingmanager() {
+    this.getReportManager();
     const dialogRef = this.dialog.open(DialogReportingManagerComponent);
     dialogRef.afterClosed().subscribe((result) => {
-      this.getReportManager()
+      this.getReportManager();
       if (result) {
-        this.route.navigate(['/leaveMgmt/edit-profile'], { skipLocationChange: true });
+        this.route.navigate(['/leaveMgmt/edit-profile'], {
+          skipLocationChange: true,
+        });
       }
     });
   }
-
 
   getDepartment() {
     this.leaveservice.getdepartmentList().subscribe((res) => {
@@ -560,9 +579,6 @@ export class EditProfileComponent {
             ? res?.identityInformation?.aadharNumber
             : '',
         },
-
-        // workExperience: res.workExperience.map((item: any) => this.fb.group(item))
-        //
       });
       console.log('Patch value:', this.profileForm.value);
 
@@ -596,15 +612,11 @@ export class EditProfileComponent {
       });
     });
   }
-  // convertDateFormat(date: string): string {
-  //   const parts = date.split('/');
-  //   const formattedDate = `${parts[2]}-${parts[1]}-${parts[0]}`;
-  //   return formattedDate;
-  // }
+
 
   convertDateFormat(apiDate: string): string {
     if (!apiDate) {
-      return ''; // or return a default value if desired
+      return '';
     }
 
     const date = new Date(apiDate);
@@ -660,7 +672,8 @@ export class EditProfileComponent {
         dateOfJoining: this.profileForm.controls['dateOfJoining'].value,
         currentExp: this.profileForm.controls['currentExp'].value,
         totalExp: this.profileForm.controls['totalExp'].value,
-        reportingManager: this.profileForm.controls['userreportingManager'].value,
+        reportingManager:
+          this.profileForm.controls['userreportingManager'].value,
         personalDetails: {
           dateOfBirth: this.profileForm.get('personalDetails.dateOfBirth')
             .value,
@@ -741,7 +754,7 @@ export class EditProfileComponent {
 
         // educationDetails: this.profileForm.get('educationDetails').value
       };
-      console.log("submit payload" + JSON.stringify(this.payload))
+      console.log('submit payload' + JSON.stringify(this.payload));
 
       this.editUserProfile();
 
@@ -756,7 +769,6 @@ export class EditProfileComponent {
       this.markAllFormControlsAsTouched();
     }
   }
-
 
   workExperiencePayload() {
     this.workExperience.map((item) => {

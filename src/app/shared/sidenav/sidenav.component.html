@@ -9,7 +9,7 @@
     <mat-divider></mat-divider>
 
     <p-panelMenu
-
+      #panelMenu
       [model]="items"
       [style]="{
         width: '230px',
@@ -19,8 +19,9 @@
         height: 'auto'
       }"
       [multiple]="false"
-
-    ></p-panelMenu>
+      (click)="activeMenu($event)"
+    >
+    </p-panelMenu>
   </div>
 </div>
 <div *ngIf="device === 'mobile'" class="sidebar-cont" [@mToggleSidebar]="state">
@@ -35,6 +36,6 @@
     <h4 class="name">{{ username }}</h4>
 
     <mat-divider></mat-divider>
-    <p-panelMenu [model]="items" [style]="{ width: '230px' }" ></p-panelMenu>
+    <p-panelMenu [model]="items" [style]="{ width: '230px' }"></p-panelMenu>
   </div>
 </div>
