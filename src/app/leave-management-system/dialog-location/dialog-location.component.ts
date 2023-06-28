@@ -27,8 +27,7 @@ export class DialogLocationComponent {
    private fb: FormBuilder,
    private toastr: ToastrMsgService,
    public dialog: MatDialog,
-   private leaveservice: LeaveService,
-   private route: Router) {
+   private leaveservice: LeaveService,) {
    this.selectForm = this.fb.group({
      username: localStorage.getItem("email"),
      location: ['', [Validators.required,  Validators.pattern(/^[a-zA-Z\s]+$/)]],
@@ -50,7 +49,8 @@ export class DialogLocationComponent {
    this.page= res;
       if (res) {
        this.ngxLoader.start();
-        location.reload()
+        // location.reload()
+        this.getLocation();
         this.toastr.showSuccess("Location added successfully", "Location Added")
       }
       (error: any) => {
@@ -71,9 +71,11 @@ export class DialogLocationComponent {
       this.leaveservice.getLocationList().pipe(
         map((res) => res.map((profile) => profile.location))
       ).subscribe((LocationRes) => {
+        this.locationList = [];
         this.locationList = LocationRes;
         this.ngxLoader.stop();
       });
     }
+
 
 }

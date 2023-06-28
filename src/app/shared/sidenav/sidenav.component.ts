@@ -164,17 +164,8 @@ export class SidenavComponent implements OnInit {
   //   }
   //   node.classList.add("active")
   //   }
-  activeMenu(event: Event) {
-    const target = event.target as HTMLElement;
-    const subMenuItem = target.closest('.p-submenu-item');
-    const activeItems = document.querySelectorAll('.p-submenu-item.active');
-
-    activeItems.forEach(item => item.classList.remove('active'));
 
 
-    if (subMenuItem) {
-      subMenuItem.classList.add('active');
-    }
-  }
+
 
 }

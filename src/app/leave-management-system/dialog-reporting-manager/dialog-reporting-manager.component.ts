@@ -25,9 +25,7 @@ export class DialogReportingManagerComponent {
   private leaveservice: LeaveService,
    private fb: FormBuilder,
    private toastr: ToastrMsgService,
-   private CmsService: CmsService,
-   public dialog: MatDialog,
-   private route: Router) {
+   public dialog: MatDialog,) {
    this.selectForm = this.fb.group({
      username: localStorage.getItem("email"),
      reporting: ['', [Validators.required,  Validators.pattern(/^[a-zA-Z\s]+$/)]],
@@ -49,7 +47,8 @@ export class DialogReportingManagerComponent {
    this.page= res;
       if (res) {
        this.ngxLoader.start();
-        location.reload()
+        // location.reload()
+        this.getReportingmanager()
         this.toastr.showSuccess("Report maanger added successfully", "soruce hiring Added")
       }
       (error: any) => {
@@ -72,10 +71,12 @@ export class DialogReportingManagerComponent {
       this.leaveservice.getReportList().pipe(
         map((res) => res.map((profile) => profile.reporting))
       ).subscribe((res) => {
+        this.reportingList = [];
         this.reportingList = res;
         this.ngxLoader.stop();
       });
     }
+
 
 
 }

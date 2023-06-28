@@ -372,21 +372,75 @@ export class EditProfileComponent {
 
 
 
+  // openDialog() {
+  //   const dialogRef = this.dialog.open(DialogDepartmentComponent);
+  // }
+  // openDialogDesignation() {
+  //   const dialogRef = this.dialog.open(DialogDesignationComponent);
+  // }
+  // openDialogLocation() {
+  //   const dialogRef = this.dialog.open(DialogLocationComponent);
+  // }
+  // openDialogSourceHiring() {
+  //   const dialogRef = this.dialog.open(DialogSourceHiringComponent);
+  // }
+  // openDialogReportingmanager() {
+  //   const dialogRef = this.dialog.open(DialogReportingManagerComponent);
+  // }
+
   openDialog() {
+    this.getDepartment();
     const dialogRef = this.dialog.open(DialogDepartmentComponent);
+    dialogRef.afterClosed().subscribe((result) => {
+      if (result) {
+        console.log('Dialog result:', result);
+      this.getDepartment(); // Refresh dropdown values
+        this.route.navigate(['/leaveMgmt/edit-profile'], { skipLocationChange: true });
+      }
+    });
   }
-  openDialogDesignation() {
+  openDialogDesignation(){
+    this.getDesignation();
     const dialogRef = this.dialog.open(DialogDesignationComponent);
+    dialogRef.afterClosed().subscribe((result) => {
+      this.getDesignation()
+      if (result) {
+        this.route.navigate(['/leaveMgmt/edit-profile'], { skipLocationChange: true });
+      }
+    });
   }
-  openDialogLocation() {
+  openDialogLocation(){
+    this.getLocation()
     const dialogRef = this.dialog.open(DialogLocationComponent);
+    dialogRef.afterClosed().subscribe((result) => {
+      this.getLocation()
+      if (result) {
+        console.log('Dialog result:', result);
+        this.route.navigate(['/leaveMgmt/edit-profile'], { skipLocationChange: true });
+      }
+    });
   }
-  openDialogSourceHiring() {
+  openDialogSourceHiring(){
+    this.getSourceHiring()
     const dialogRef = this.dialog.open(DialogSourceHiringComponent);
+    dialogRef.afterClosed().subscribe((result) => {
+      this.getSourceHiring()
+      if (result) {
+        this.route.navigate(['/leaveMgmt/edit-profile'], { skipLocationChange: true });
+      }
+    });
   }
-  openDialogReportingmanager() {
+  openDialogReportingmanager(){
+    this.getReportManager()
     const dialogRef = this.dialog.open(DialogReportingManagerComponent);
+    dialogRef.afterClosed().subscribe((result) => {
+      this.getReportManager()
+      if (result) {
+        this.route.navigate(['/leaveMgmt/edit-profile'], { skipLocationChange: true });
+      }
+    });
   }
+
 
   getDepartment() {
     this.leaveservice.getdepartmentList().subscribe((res) => {

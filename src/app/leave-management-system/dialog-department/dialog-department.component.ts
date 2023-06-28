@@ -25,12 +25,8 @@ export class DialogDepartmentComponent {
  constructor(private ngxLoader: NgxUiLoaderService,
    private fb: FormBuilder,
    private leaveservice: LeaveService,
-
    private toastr: ToastrMsgService,
-   private CmsService: CmsService,
-   public dialog: MatDialog,
-   private activateRoute: ActivatedRoute,
-   private route: Router) {
+   public dialog: MatDialog) {
    this.selectForm = this.fb.group({
      username: localStorage.getItem("email"),
      department: ['', [Validators.required,  Validators.pattern(/^[a-zA-Z\s]+$/)]],
@@ -48,15 +44,14 @@ export class DialogDepartmentComponent {
    this.getDepartment()
  }
 
-
-
  submitForm(){
  this.ngxLoader.start();
  this.leaveservice.createdepartment(this.selectForm.value).subscribe((res)=>{
    this.page= res;
       if (res) {
        this.ngxLoader.start();
-        location.reload()
+        // location.reload()
+        this.getDepartment()
         this.toastr.showSuccess("Department added successfully", "Department Added")
       }
       (error: any) => {
@@ -73,15 +68,16 @@ export class DialogDepartmentComponent {
     }
   }
 
-  getDepartment() {
-      this.leaveservice.getdepartmentList().pipe(
-        map((res) => res.map((profile) => profile.department))
-      ).subscribe((departmentList) => {
-        this.departmentList = departmentList;
-        console.log("department List:", this.departmentList);
-        this.ngxLoader.stop();
-      });
-    }
 
+  getDepartment() {
+    this.leaveservice.getdepartmentList().pipe(
+      map((res) => res.map((profile) => profile.department))
+    ).subscribe((departmentList) => {
+      this.departmentList = [];
+      this.departmentList = departmentList;
+      console.log("department List:", this.departmentList);
+      this.ngxLoader.stop();
+    });
+  }
 
 }

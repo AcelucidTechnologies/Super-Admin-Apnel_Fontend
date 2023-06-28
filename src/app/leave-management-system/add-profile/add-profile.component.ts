@@ -405,27 +405,51 @@ export class AddProfileComponent {
     const dialogRef = this.dialog.open(DialogDepartmentComponent);
     dialogRef.afterClosed().subscribe((result) => {
       if (result) {
-        // Handle dialog result
-        console.log('Dialog result:', result);
-        this.route.navigate(['/leaveMgmt/add-profile']);
+      this.getDepartment(); // Refresh dropdown values
+        this.route.navigate(['/leaveMgmt/add-profile'], { skipLocationChange: true });
       }
     });
   }
   openDialogDesignation(){
     this.getDesignation();
     const dialogRef = this.dialog.open(DialogDesignationComponent);
+    dialogRef.afterClosed().subscribe((result) => {
+      this.getDesignation()
+      if (result) {
+        this.route.navigate(['/leaveMgmt/add-profile'], { skipLocationChange: true });
+      }
+    });
   }
   openDialogLocation(){
     this.getLocation()
     const dialogRef = this.dialog.open(DialogLocationComponent);
+    dialogRef.afterClosed().subscribe((result) => {
+      this.getLocation()
+      if (result) {
+        console.log('Dialog result:', result);
+        this.route.navigate(['/leaveMgmt/add-profile'], { skipLocationChange: true });
+      }
+    });
   }
   openDialogSourceHiring(){
     this.getSourceHiring()
     const dialogRef = this.dialog.open(DialogSourceHiringComponent);
+    dialogRef.afterClosed().subscribe((result) => {
+      this.getSourceHiring()
+      if (result) {
+        this.route.navigate(['/leaveMgmt/add-profile'], { skipLocationChange: true });
+      }
+    });
   }
   openDialogReportingmanager(){
     this.getReportManager()
     const dialogRef = this.dialog.open(DialogReportingManagerComponent);
+    dialogRef.afterClosed().subscribe((result) => {
+      this.getReportManager()
+      if (result) {
+        this.route.navigate(['/leaveMgmt/add-profile'], { skipLocationChange: true });
+      }
+    });
   }
 
 
@@ -463,17 +487,6 @@ export class AddProfileComponent {
     this.imageChangedEvent = event;
     // this.imageData = event.target.files[0];
     this.Image = event.target.files[0];
-    // var reader = new FileReader();
-    // reader.readAsDataURL(event.target.files[0]);
-    // this.imageName = event.target.files[0].name;
-    // this.fileHolder = event.target.files[0];
-    // reader.onload = (data) => {
-    //   this.DefaultImage = data.target.result;
-
-    //   console.log("image 101" + this.fileHolder)
-    //   console.log("file event:", this.DefaultImage);
-
-    // };
   }
 
 
@@ -490,18 +503,6 @@ export class AddProfileComponent {
         console.log("error")
         this.toastr.showError('Somthing wrong Please check', 'Error occured');
       }
-      // if (res.length > 0) {
-      //   console.log("error");
-      //   if (res[0] === "Email Already Exist") {
-      //     this.toastr.showError('Email already exists', 'Error occurred');
-      //   } else {
-      //     this.toastr.showError('Something went wrong. Please check', 'Error occurred');
-      //   }
-      // } else {
-      //   this.toastr.showSuccess('Profile added successfully', 'Profile add');
-      //   this.ngxLoader.stop();
-      //   this.route.navigate(['/leaveMgmt/profile-list']);
-      // }
 
 
     });
