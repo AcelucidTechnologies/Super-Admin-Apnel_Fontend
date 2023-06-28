@@ -93,14 +93,14 @@
               <img class="user-name-img" src={{this.imgbucket}}{{profileList.image}}>
           </td> -->
             <td>
-              <a pTooltip="Edit Profile" tooltipPosition="bottom" class="me-3" style="margin-right: 10px;">
+              <a pTooltip="Edit Profile" tooltipPosition="bottom" class="me-3" style="margin-right: 10px; cursor: pointer;">
                   <img src="../assets/images/icons/edit.svg" [queryParams]="{id:profileList?._id}" [routerLink]="['/leaveMgmt/edit-profile']"  alt="img">
               </a>
-              <a pTooltip="Open Profile" tooltipPosition="bottom"
+              <a pTooltip="Open Profile" tooltipPosition="bottom" style="cursor: pointer;"
               class="me-3 mr-3" href="javascript:void(0);">
               <img src="../assets/images/icons/eye.svg" [queryParams]="{id:profileList?._id}" [routerLink]="['/leaveMgmt/user-profile']"  alt="img" width="25px" height="25px">
             </a>
-              <a pTooltip="Delete Profile" tooltipPosition="bottom" (click)="openDialog(profileList)"  class="me-3 confirm-text" href="javascript:void(0);">
+              <a pTooltip="Delete Profile" tooltipPosition="bottom" (click)="openDialog(profileList)"  class="me-3 confirm-text" href="javascript:void(0);" style="cursor: pointer;">
                   <img src="../assets/images/icons/delete.svg" alt="img">
               </a>
           </td>
