@@ -252,10 +252,12 @@ export class EditProfileComponent {
       fromDate: [''],
       toDate: [''],
       jobDescription: [''],
-      releventExp: [''],
+      releventExp: ['', [Validators.min(0), Validators.max(50)]],
       editMode: [true],
     });
   }
+
+
 
   addNewRow() {
     console.log('addNewRow() called');
@@ -269,7 +271,19 @@ export class EditProfileComponent {
     // (this.profileForm.get('workExperience') as FormArray).push(newRow);
     this.workExperience.push(newWorkRow);
   }
-
+  calculateAge() {
+    const dateOfBirth = this.profileForm.get('personalDetails.dateOfBirth').value;
+    if (dateOfBirth) {
+      const today = new Date();
+      const birthDate = new Date(dateOfBirth);
+      let age = today.getFullYear() - birthDate.getFullYear();
+      const monthDiff = today.getMonth() - birthDate.getMonth();
+      if (monthDiff < 0 || (monthDiff === 0 && today.getDate() < birthDate.getDate())) {
+        age--;
+      }
+      this.profileForm.get('personalDetails.age').patchValue(age);
+    }
+  }
   toggleEditMode(row: FormGroup) {
     row.get('editMode').setValue(!row.get('editMode').value);
   }

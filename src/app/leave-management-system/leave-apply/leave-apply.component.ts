@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { NgxUiLoaderService } from 'ngx-ui-loader';
 import { LeaveService } from 'src/app/_services/leave.service';
@@ -11,6 +11,7 @@ import { ToastrMsgService } from 'src/app/_services/toastr-msg.service';
   styleUrls: ['./leave-apply.component.scss']
 })
 export class LeaveApplyComponent {
+  applied = new FormControl();
   type: any;
   leaveType:any;
   appliedToType:any;
@@ -108,7 +109,6 @@ export class LeaveApplyComponent {
   getAllEmail() {
     this.leaveservice.getEmail().subscribe((res) => {
       this.employeeList =  res
-      // this.employeeList  = res.map(employee => `${employee.employeeFullName} (${employee.email})`);
       this.ngxLoader.stop();
       console.log("email" + JSON.stringify(this.employeeList))
     });

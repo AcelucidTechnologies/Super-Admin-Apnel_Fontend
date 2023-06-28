@@ -11,10 +11,13 @@ import { ToastrMsgService } from 'src/app/_services/toastr-msg.service';
   styleUrls: ['./add-document.component.scss']
 })
 export class AddDocumentComponent {
-
+  employeeList: any[]=[]
   selectForm: FormGroup;
   appliedToType: string[];
   assetlist:any;
+  payload:any
+  imageChangedEvent: any = '';
+  Image:any;
 
   constructor(
     private ngxLoader: NgxUiLoaderService,
@@ -24,12 +27,19 @@ export class AddDocumentComponent {
     private route: Router) {
     this.selectForm = this.fb.group({
       username: localStorage.getItem("email"),
-      employee: ['',[Validators.required] ],
+      image: ['',[Validators.required]],
+      fileName: ['',[Validators.required]],
+      employee: ['',[Validators.required]],
+      folderName: ['',[Validators.required]],
       fileDescription: ['',[Validators.required]],
-      toview: ['',[Validators.required]],
-      toDownload: ['',[Validators.required]],
-      folderName: [''],
-      fileName: [''],
+      toview: this.fb.group({
+        reportingManager: [false],
+        employee: [false]
+      }),
+      toDownload: this.fb.group({
+        reportingManager: [false],
+        employee: [false]
+      })
 
     });
  }
@@ -39,25 +49,60 @@ export class AddDocumentComponent {
   return currentDate.toISOString().split('T')[0];
 
 }
+
  ngOnInit(){
+   this.getAllEmail()
 
  }
+ getAllEmail() {
+  this.leaveservice.getEmail().subscribe((res) => {
+    this.employeeList =  res
+    // this.employeeList  = res.map(employee => `${employee.employeeFullName} (${employee.email})`);
+    this.ngxLoader.stop();
+    console.log("email" + JSON.stringify(this.employeeList))
+  });
+}
+fileChangeEvent(event) {
+  this.imageChangedEvent = event;
+  this.Image = event.target.files[0];
+}
  submit(){
+  if (this.selectForm.valid) {
+  this.payload = {
+    username: localStorage.getItem('email'),
+    image: this.Image,
+    fileName: this.selectForm.controls['fileName'].value,
+    employee:this.selectForm.controls['employee'].value,
+    folderName:this.selectForm.controls['folderName'].value,
+    fileDescription:this.selectForm.controls['fileDescription'].value,
+    toview: {
+      employee: this.selectForm.get('toview.employee').value,
+      reportingManager: this.selectForm.get('toview.reportingManager').value,
+    },
+    toDownload: {
+      employee: this.selectForm.get('toDownload.employee').value,
+      reportingManager: this.selectForm.get('toDownload.reportingManager').value,
+    },
+  }
+  }
   this.ngxLoader.start();
-  this.leaveservice.createDocument(this.selectForm.value).subscribe((res)=>{
-    this.assetlist= res;
-       if (res) {
-        this.ngxLoader.start();
-         this.toastr.showSuccess("Document added successfully", "Document Added")
-       }
-       (error: any) => {
-        console.log("error");
-        this.toastr.showError("Somthing wrong Please check", "Error occured")
-         this.ngxLoader.stop();
-       }
-
-  })
+  this.submitDetails(this.payload);
+  console.log("submit form value payload 24 ===>"+ JSON.stringify(this.payload));
 
    }
+
+   submitDetails(recievedValue: any) {
+    let newPayload = Object.assign({}, recievedValue);
+    this.leaveservice.createDocument(newPayload).subscribe((res) => {
+      if (res) {
+        this.toastr.showSuccess('Document added successfully', 'Document add');
+        this.ngxLoader.stop();
+        this.route.navigate(['/documents/document-list']);
+      } else {
+        console.log("error")
+        this.toastr.showError('Somthing wrong Please check', 'Error occured');
+      }
+    });
+  }
 
 }

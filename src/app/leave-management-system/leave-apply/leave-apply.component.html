@@ -46,14 +46,11 @@
         <div class="col-4">
           <label class="starlabel">Applied To</label></div>
           <div class="col-8">
-            <select style="width: 100%; border: 1px solid lightgray; height: 38px; padding:5px"
-            class="form-group"
-            formControlName="appliedTo"  >
-            <option value="" disabled selected>Select Applied to</option>
-            <option *ngFor="let count of employeeList"  [value]="count.email">
-              {{ count.employeeFullName }}
-            </option>
-          </select>
+
+            <mat-select placeholder="appliedTo" formControlName="appliedTo" multiple>
+              <mat-option *ngFor="let count of employeeList" [value]="count.email">{{ count.employeeFullName }}</mat-option>
+            </mat-select>
+
             <div *ngIf="selectForm.controls['appliedTo'].errors?.['required'] && selectForm.controls['appliedTo'].touched && (selectForm.controls['appliedTo'].dirty || selectForm.controls['appliedTo'].touched)">
               <div style="color: rgb(253, 122, 122); font-size: small; font-style: italic;">
                 applied to is required
@@ -99,7 +96,7 @@
         <label class="starlabel">To date</label>
       </div>
       <div class="col-8">
-        <input formControlName="toDate" [min]="getMinimumDate()" [disabled]="!selectForm.controls['fromDate'].value"  class="form-control custom-placeholder input-padding" type="date">
+        <input formControlName="toDate" [min]="getMinimumDate()"  class="form-control custom-placeholder input-padding" type="date">
         <div *ngIf="selectForm.controls['toDate'].errors?.['required'] && (selectForm.controls['toDate'].touched || selectForm.controls['toDate'].dirty)"
           style="color: rgb(253, 122, 122); font-size: small; font-style: italic;">
           To date is required

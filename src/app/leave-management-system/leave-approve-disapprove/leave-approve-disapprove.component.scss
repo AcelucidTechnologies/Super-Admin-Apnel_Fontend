@@ -145,3 +145,7 @@ border: none;
   position: relative;
   border: 0.5px solid rgba(145, 158, 171, 0.32) !important;
   }
+  .image-cell {
+    max-width: 250px;
+    word-wrap: break-word;
+  }

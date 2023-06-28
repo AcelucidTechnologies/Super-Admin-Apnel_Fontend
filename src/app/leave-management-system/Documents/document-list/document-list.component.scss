@@ -118,7 +118,11 @@ color: #848484;
   }
 
   .input-container input[type="text"] {
-  padding-left: 30px; /* adjust the padding to fit the image */
+  padding-left: 30px;
   font-size: 0.875rem;
   height: 37px;
+  }
+  .image-cell {
+    max-width: 300px;
+    word-wrap: break-word;
   }

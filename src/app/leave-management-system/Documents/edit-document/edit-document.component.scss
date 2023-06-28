@@ -20,7 +20,7 @@ label.starlabel::after{
   color: rgb(228, 28, 28);
 }
 .custom-placeholder::placeholder {
-  color: #495057;
+  color: black;
 }
 .checkbox-wrapper {
   display: flex;
@@ -31,4 +31,19 @@ label.starlabel::after{
 .checkbox-wrapper input[type="checkbox"] {
   margin-right: 5px;
     margin-bottom: 4px;
+}
+.mat-select {
+  display: inline-block;
+  width: 100%;
+  outline: none;
+  border: 1px solid lightgrey;
+  height: 40px;
+  padding: 5px 10px 5px 10px;
+  color: black;
+}
+::ng-deep.mat-select-placeholder {
+  color: black !important;
+}
+.form-control{
+  color: black;
 }

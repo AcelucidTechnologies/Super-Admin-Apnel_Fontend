@@ -10,6 +10,7 @@ import { LeaveService } from 'src/app/_services/leave.service';
 import { Table } from 'primeng/table';
 import autoTable from 'jspdf-autotable';
 import { DialogDocumentComponent } from '../dialog-document/dialog-document.component';
+import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-document-list',
@@ -18,8 +19,7 @@ import { DialogDocumentComponent } from '../dialog-document/dialog-document.comp
 })
 export class DocumentListComponent {
   docuemntData: any[]=[];
-  assetDetails:any
-
+  documentDetails:any
 
   sidebarSpacing: string = 'contracted';
   cols: any[];
@@ -31,14 +31,15 @@ export class DocumentListComponent {
     private leaveService: LeaveService,
     private toastr: ToastrMsgService,
     private ngxLoader: NgxUiLoaderService,
+    private http: HttpClient,
     private dialog: MatDialog,
   ) {
 
-    this.getDocumentData();
+
   }
 
   ngOnInit(): void {
-
+this.getDocumentData();
   }
 
 
@@ -71,19 +72,22 @@ export class DocumentListComponent {
     });
   }
 
+  downloadFile(fileUrl: string) {
+    this.http.get(fileUrl, { responseType: 'blob' }).subscribe((data: Blob) => {
+      const downloadUrl = URL.createObjectURL(data);
+      const link = document.createElement('a');
+      link.href = downloadUrl;
+      link.download = fileUrl.substr(fileUrl.lastIndexOf('/') + 1);
+      link.click();
+    });
+  }
 
   exportExcel(): void {
     const datePipe = new DatePipe('en-US');
     const data = this.docuemntData.map((item, index) => ({
       'S.No.': index+1,
-      'Employee Id': item.employeeId,
-      'File Description': item.fileDescription,
-      'view': item.toview,
-      'Download': item.toDownload,
-      'Return Date': item.returnDate,
-      'Added By': item.addedBy,
-      AddedTime: datePipe.transform(item.createdAt, 'MM/dd/yyyy'),
-      'Modified By': item.addedBy,
+      'Folder Name': item.folderName,
+      'File': item.image,
       ModifiedTime: datePipe.transform(item.updatedAt, 'MM/dd/yyyy'),
     }));
 
@@ -120,12 +124,12 @@ export class DocumentListComponent {
 
 
   exportPdf() {
-    this.assetDetails = this.docuemntData.map((item, index) => {
+    this.documentDetails = this.docuemntData.map((item, index) => {
       return { sno: index + 1, ...item };
     });
 
     const doc = new jsPDF.jsPDF('l', 'pt');
-    const data = this.assetDetails.map(item => {
+    const data = this.documentDetails.map(item => {
       return {
         ...item,
         createdAt: this.formatDate(item.createdAt), // Format the createdAt date
@@ -134,13 +138,8 @@ export class DocumentListComponent {
     });
     const exportColumns = [
       { title: 'S No.', dataKey: 'sno' },
-      { title: 'Employee Id', dataKey: 'employeeId' },
-      { title: 'File Description ', dataKey: 'fileDescription' },
-      { title: 'view', dataKey: 'toview' },
-      { title: 'Download', dataKey: 'toDownload' },
-      { title: 'Added By', dataKey: 'addedBy' },
-      { title: 'AddedTime', dataKey: 'createdAt' },
-      { title: 'Modified By', dataKey: 'addedBy' },
+      { title: 'Folder Name', dataKey: 'folderName' },
+      { title: 'File ', dataKey: 'image' },
       { title: 'ModifiedTime', dataKey: 'updatedAt' },
 
     ];
@@ -185,5 +184,7 @@ export class DocumentListComponent {
       this.dt.filterGlobal(searchValue.trim(), stringVal);
     }
   }
+
+
 
 }
