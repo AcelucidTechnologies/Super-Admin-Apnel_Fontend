@@ -16,6 +16,8 @@ export class AddDocumentComponent {
   appliedToType: string[];
   assetlist:any;
   payload:any
+  imageChangedEvent: any = '';
+  Image:any;
 
   constructor(
     private ngxLoader: NgxUiLoaderService,
@@ -25,11 +27,11 @@ export class AddDocumentComponent {
     private route: Router) {
     this.selectForm = this.fb.group({
       username: localStorage.getItem("email"),
-      image: [''],
-      fileName: [''],
-      employee: [''],
-      folderName: [''],
-      fileDescription: [''],
+      image: ['',[Validators.required]],
+      fileName: ['',[Validators.required]],
+      employee: ['',[Validators.required]],
+      folderName: ['',[Validators.required]],
+      fileDescription: ['',[Validators.required]],
       toview: this.fb.group({
         reportingManager: [false],
         employee: [false]
@@ -60,11 +62,15 @@ export class AddDocumentComponent {
     console.log("email" + JSON.stringify(this.employeeList))
   });
 }
+fileChangeEvent(event) {
+  this.imageChangedEvent = event;
+  this.Image = event.target.files[0];
+}
  submit(){
   if (this.selectForm.valid) {
   this.payload = {
     username: localStorage.getItem('email'),
-    image: this.selectForm.controls['image'].value,
+    image: this.Image,
     fileName: this.selectForm.controls['fileName'].value,
     employee:this.selectForm.controls['employee'].value,
     folderName:this.selectForm.controls['folderName'].value,
@@ -78,24 +84,10 @@ export class AddDocumentComponent {
       reportingManager: this.selectForm.get('toDownload.reportingManager').value,
     },
   }
-
   }
   this.ngxLoader.start();
   this.submitDetails(this.payload);
   console.log("submit form value payload 24 ===>"+ JSON.stringify(this.payload));
-  // this.leaveservice.createDocument(this.selectForm.value).subscribe((res)=>{
-  //   this.assetlist= res;
-  //      if (res) {
-  //       this.ngxLoader.start();
-  //        this.toastr.showSuccess("Document added successfully", "Document Added")
-  //      }
-  //      (error: any) => {
-  //       console.log("error");
-  //       this.toastr.showError("Somthing wrong Please check", "Error occured")
-  //        this.ngxLoader.stop();
-  //      }
-
-  // })
 
    }
 

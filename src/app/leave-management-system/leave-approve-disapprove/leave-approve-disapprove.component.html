@@ -1,6 +1,6 @@
 
 <div>
-  <h5>Leave Status</h5>
+  <h3>Leave Status</h3>
 </div>
 <p-table #dt [value]="leaveTrackerList" dataKey="id" [rowHover]="true"
 [rows]="6" [showCurrentPageReport]="true" responsiveLayout="scroll"
@@ -67,8 +67,8 @@
             <span class="p-column-title">leave Type</span>
             {{List.leaveType}}
         </td>
-        <td>
-          <span class="p-column-title">Applied To</span>
+        <td class="image-cell">
+          <span class="p-column-title " >Applied To</span>
           {{ List.appliedTo }}
       </td>
         <td>
@@ -79,7 +79,7 @@
             <span class="p-column-title">To date </span>
             {{List.toDate |date : "MM/dd/yyyy"}}
         </td>
-        <td>
+        <td class="image-cell">
           <span class="p-column-title">Reason </span>
           {{List.reason}}
       </td>

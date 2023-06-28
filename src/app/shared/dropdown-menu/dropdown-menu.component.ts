@@ -2,6 +2,8 @@ import { Component, OnInit, HostListener, ViewChild, ElementRef } from '@angular
 import { trigger, state, style, transition, animate } from '@angular/animations';
 import { Router } from '@angular/router';
 import { AdminService } from 'src/app/_services/admin.service';
+import { LeaveService } from 'src/app/_services/leave.service';
+
 
 @Component({
   selector: 'app-dropdown-menu',
@@ -30,6 +32,8 @@ import { AdminService } from 'src/app/_services/admin.service';
 })
 export class DropdownMenuComponent implements OnInit {
 role: any;
+leaveTrackerList: any[];
+notificationCount: number;
   profile: any;
   profileAvatarUrl: any;
   menuState: string = '';
@@ -44,7 +48,8 @@ role: any;
 
   constructor(
     private router: Router,
-    private adminService:AdminService
+    private adminService:AdminService,
+    private LeaveService: LeaveService,
   ) {
     this.user = localStorage.getItem('UserData')
     this.role = localStorage.getItem('role')
@@ -55,6 +60,7 @@ role: any;
     this.getImage()
     this.settingsClass = '';
     this.menuState = 'close';
+    this.getTableforLeaves()
   }
 
   toggleMenu() {
@@ -86,5 +92,12 @@ role: any;
         console.log(this.image)
       }
     })
+  }
+  getTableforLeaves() {
+    this.LeaveService.getLeaveTrackerList().subscribe((res) => {
+      this.leaveTrackerList =res
+      this.notificationCount = this.leaveTrackerList.length;
+    console.log(this.notificationCount);
+    });
   }
 }

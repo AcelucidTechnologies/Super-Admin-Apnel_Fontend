@@ -12,20 +12,20 @@
         <div class="row">
           <div class="col-4">
             <label class="starlabel">File Browse</label></div>
-            <div class="col-8 "><input formControlName="image" class="form-control custom-placeholder input-padding" placeholder="Enter name"  type="file" >
-              <!-- <div *ngIf="
-              !selectForm.controls['employee'].valid &&
-              (selectForm.controls['employee'].touched ||
-              selectForm.controls['employee'].dirty)
+            <div class="col-8 "><input formControlName="image" class="form-control custom-placeholder input-padding" placeholder="Enter name"  type="file" (change)="fileChangeEvent($event)">
+              <div *ngIf="
+              !selectForm.controls['image'].valid &&
+              (selectForm.controls['image'].touched ||
+              selectForm.controls['image'].dirty)
             ">
-              <div [hidden]="!selectForm.controls['employee'].errors['required']" style="
+              <div [hidden]="!selectForm.controls['image'].errors['required']" style="
                 color: rgb(253, 122, 122);
                 font-size: small;
                 font-style: italic;
               ">
-                employee  is required
+                File  is required
               </div>
-            </div> -->
+            </div>
           </div>
         </div>
     </div>
@@ -35,67 +35,46 @@
           <label class="starlabel">File Name</label></div>
           <div class="col-8 "><input formControlName="fileName" placeholder="Enter file name" class="form-control custom-placeholder input-padding"  type="text" >
 
-            <!-- <div *ngIf="
-            !selectForm.controls['typeOfAssets'].valid &&
-            (selectForm.controls['typeOfAssets'].touched ||
-            selectForm.controls['typeOfAssets'].dirty)
+            <div *ngIf="
+            !selectForm.controls['fileName'].valid &&
+            (selectForm.controls['fileName'].touched ||
+            selectForm.controls['fileName'].dirty)
           ">
-            <div [hidden]="!selectForm.controls['typeOfAssets'].errors['required']" style="
+            <div [hidden]="!selectForm.controls['fileName'].errors['required']" style="
               color: rgb(253, 122, 122);
               font-size: small;
               font-style: italic;
             ">
-              type of asset is required
+              File name is required
             </div>
-          </div> -->
+          </div>
         </div>
       </div>
   </div>
 
   </div>
   <div class="row mb-4">
-    <!-- <div class="col-6">
-        <div class="row">
-          <div class="col-4">
-            <label class="starlabel">File Viewed</label></div>
-            <div class="col-8">
-              <div class="row" >
-              <div class="col-8 checkbox-wrapper"><input type="checkbox" formControlName="toview"><label style="padding-left: 5px;">Active Employee</label></div>
-              </div>
-
-
-          </div>
-        </div>
-    </div> -->
     <div class="col-6">
       <div class="row">
         <div class="col-4">
           <label class="starlabel">Employee</label></div>
           <div class="col-8">
-            <!-- <select style="width: 100%; border: 1px solid lightgray; height: 38px; padding:5px"
-            class="form-group"
-            formControlName="employee"  >
-            <option value="" disabled selected>Select Applied to</option>
-            <option *ngFor="let count of employeeList"  [value]="count.employeeFullName">
-              {{ count.employeeFullName }}
-            </option>
-          </select> -->
           <mat-select placeholder="appliedTo" formControlName="employee" multiple>
             <mat-option *ngFor="let count of employeeList" [value]="count.employeeFullName">{{ count.employeeFullName }}</mat-option>
           </mat-select>
-            <!-- <div *ngIf="
-            !selectForm.controls['givenDate'].valid &&
-            (selectForm.controls['givenDate'].touched ||
-            selectForm.controls['givenDate'].dirty)
+            <div *ngIf="
+            !selectForm.controls['employee'].valid &&
+            (selectForm.controls['employee'].touched ||
+            selectForm.controls['employee'].dirty)
           ">
-            <div [hidden]="!selectForm.controls['givenDate'].errors['required']" style="
+            <div [hidden]="!selectForm.controls['employee'].errors['required']" style="
               color: rgb(253, 122, 122);
               font-size: small;
               font-style: italic;
             ">
-              given date is required
+              employee is required
             </div>
-          </div> -->
+          </div>
         </div>
       </div>
   </div>
@@ -104,19 +83,19 @@
       <div class="col-4">
         <label class="starlabel">Folder Name</label></div>
         <div class="col-8 "><input formControlName="folderName" placeholder="Enter folder name" class="form-control custom-placeholder input-padding"  type="text" >
-          <!-- <div *ngIf="
-          !selectForm.controls['returnDate'].valid &&
-          (selectForm.controls['returnDate'].touched ||
-          selectForm.controls['returnDate'].dirty)
+          <div *ngIf="
+          !selectForm.controls['folderName'].valid &&
+          (selectForm.controls['folderName'].touched ||
+          selectForm.controls['folderName'].dirty)
         ">
-          <div [hidden]="!selectForm.controls['returnDate'].errors['required']" style="
+          <div [hidden]="!selectForm.controls['folderName'].errors['required']" style="
             color: rgb(253, 122, 122);
             font-size: small;
             font-style: italic;
           ">
-            return date is required
+            folder name is required
           </div>
-        </div> -->
+        </div>
       </div>
     </div>
 </div>
@@ -133,7 +112,7 @@
         name="editor1" class="form-control custom-placeholder" placeholder="Enter file details"
         formControlName="fileDescription" style="width: 100%; height: 100px;"
       ></textarea>
-      <!-- <div *ngIf="
+      <div *ngIf="
       !selectForm.controls['fileDescription'].valid &&
       (selectForm.controls['fileDescription'].touched ||
       selectForm.controls['fileDescription'].dirty)
@@ -145,13 +124,13 @@
       ">
       fileDescription is required
       </div>
-    </div> -->
+    </div>
     </div>
   </div>
   <div class="row mb-4">
 
     <div class="col-2">
-      <label class="starlabel">File Permission</label></div>
+      <label >File Permission</label></div>
       <div class="col-10">
         <div formGroupName="toview">
         <div class="row"  >
@@ -167,27 +146,14 @@
           <div class="col-4"><input type="checkbox" formControlName="reportingManager"><label style="padding-left: 5px;">Reporting Manager</label></div>
         </div>
       </div>
-    <!-- <div *ngIf="
-    !selectForm.controls['assetsDetails'].valid &&
-    (selectForm.controls['assetsDetails'].touched ||
-    selectForm.controls['assetsDetails'].dirty)
-  ">
-    <div [hidden]="!selectForm.controls['assetsDetails'].errors['required']" style="
-      color: rgb(253, 122, 122);
-      font-size: small;
-      font-style: italic;
-    ">
-    asset details is required
-    </div>
-  </div> -->
   </div>
 </div>
   <div class="row mb-5 mt-4">
     <div class="d-flex justify-content-end col-11 mt-4">
       <button type="submit" style="background: rgb(228, 28, 28);border:none" class="btn btn-info mr-3"
-        (click)="submit()"  [disabled]="!selectForm.valid"  [routerLink]="['/documents/document-list']">Submit</button>
+        (click)="submit()"  [disabled]="!selectForm.valid">Submit</button>
       <button class="btn btn-info" style="background: #637381;border:none"
-        [routerLink]="['/documents/document-list']">Cancel</button>
+        >Cancel</button>
     </div>
   </div>
 
