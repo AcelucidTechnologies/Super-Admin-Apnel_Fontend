@@ -64,6 +64,7 @@ p-sortIcon {
 
 p-table {
   border: none !important;
+  cursor: default !important;
 }
 
 .table-header {
@@ -99,6 +100,7 @@ td,th{
 
   .p-datatable .p-sortable-column .p-sortable-column-icon{
       color: #848484;
+
   }
 
   .p-datatable .p-sortable-column.p-highlight:hover{
@@ -119,6 +121,9 @@ td,th{
   .p-paginator .p-paginator-pages .p-paginator-page.p-highlight{
       background-color: rgb(228, 28, 28);
   }
+  .p-datatable-hoverable-rows .p-selectable-row {
+    cursor: default;
+}
 }
 
 ::ng-deep.custom-image {
@@ -145,3 +150,7 @@ border: none;
     color: white; /* Set the text color for the active button */
   }
 
+
+  .cursor-default {
+    cursor: default !important;
+  }

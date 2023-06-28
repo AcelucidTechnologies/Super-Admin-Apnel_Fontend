@@ -89,6 +89,9 @@ td,th{
   .p-paginator .p-paginator-pages .p-paginator-page.p-highlight{
       background-color: rgb(228, 28, 28);
   }
+  .p-datatable-hoverable-rows .p-selectable-row {
+    cursor: default;
+  }
 }
 
 ::ng-deep.custom-image {

@@ -72,15 +72,7 @@ this.getDocumentData();
     });
   }
 
-  downloadFile(fileUrl: string) {
-    this.http.get(fileUrl, { responseType: 'blob' }).subscribe((data: Blob) => {
-      const downloadUrl = URL.createObjectURL(data);
-      const link = document.createElement('a');
-      link.href = downloadUrl;
-      link.download = fileUrl.substr(fileUrl.lastIndexOf('/') + 1);
-      link.click();
-    });
-  }
+
 
   exportExcel(): void {
     const datePipe = new DatePipe('en-US');
@@ -186,5 +178,30 @@ this.getDocumentData();
   }
 
 
+
+  downloadFile(imageUrl) {
+    const fileExtension = imageUrl.split('.').pop().toLowerCase();
+    let mimeType, extension;
+    if (fileExtension === 'xlsx' || fileExtension === 'xls') {
+      mimeType = 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet';
+      extension = '.xlsx';
+    } else if (fileExtension === 'pdf') {
+      mimeType = 'application/pdf';
+      extension = '.pdf';
+    } else {
+      mimeType = 'image/' + fileExtension;
+      extension = '.' + fileExtension;
+    }
+
+    const anchorElement = document.createElement('a');
+    anchorElement.href = imageUrl;
+    anchorElement.target = '_blank';
+    anchorElement.download = 'file' + extension;
+    anchorElement.type = mimeType;
+
+    document.body.appendChild(anchorElement);
+    anchorElement.click();
+    document.body.removeChild(anchorElement);
+  }
 
 }
