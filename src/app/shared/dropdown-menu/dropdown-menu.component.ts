@@ -31,6 +31,7 @@ import { LeaveService } from 'src/app/_services/leave.service';
   ]
 })
 export class DropdownMenuComponent implements OnInit {
+  notificationDropdownVisible = false;
 role: any;
 leaveTrackerList: any[];
 notificationCount: number;
@@ -93,11 +94,34 @@ notificationCount: number;
       }
     })
   }
+  // getTableforLeaves() {
+  //   this.LeaveService.getLeaveTrackerList().subscribe((res) => {
+  //     this.leaveTrackerList =res
+  //     this.notificationCount = this.leaveTrackerList.length;
+  //   console.log(this.notificationCount);
+  //   });
+  // }
   getTableforLeaves() {
     this.LeaveService.getLeaveTrackerList().subscribe((res) => {
-      this.leaveTrackerList =res
+      const previousNotificationCount = this.notificationCount;
+      this.leaveTrackerList = res;
       this.notificationCount = this.leaveTrackerList.length;
-    console.log(this.notificationCount);
+
+      if (this.notificationCount > previousNotificationCount) {
+        const newNotificationCount = this.notificationCount - previousNotificationCount;
+        this.notificationCount += newNotificationCount; // Corrected line
+      } else {
+        this.notificationCount = 0;
+      }
+
+      console.log("this.notificationCount" + this.notificationCount);
     });
   }
+
+
+  toggleNotificationDropdown() {
+    this.notificationDropdownVisible = !this.notificationDropdownVisible;
+    this.notificationCount = 0;
+  }
+
 }
