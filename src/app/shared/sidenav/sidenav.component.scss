@@ -1,4 +1,4 @@
-@import '~primeicons/primeicons.css';
+@import "~primeicons/primeicons.css";
 
 :host {
   ::ng-deep {
@@ -9,98 +9,70 @@
       border-top-color: rgba(255, 255, 255, 0.4) !important;
     }
 
-    .p-panelmenu .p-panelmenu-header>a {
+    .p-panelmenu .p-panelmenu-header > a {
       padding: 0.857rem 1rem;
       border: none;
-      color: #67748E;
+      color: #67748e;
       background: none;
       font-weight: 400;
       transition: background-color 0.2s, box-shadow 0.2s;
     }
 
-
-.p-panelmenu .p-panelmenu-header >a:hover{
+    .p-panelmenu .p-panelmenu-header > a:hover {
       background-color: #ff2800 !important;
       color: white !important;
-      border:none !important;
+      border: none !important;
     }
 
-
-  .p-panelmenu .p-panelmenu-header.p-highlight > a {
-    background-color: lightcoral !important;
-    color: white !important;
-    border:none !important;
-    padding: 0.857rem 1rem;
-    border: none;
-    font-weight: 400;
-    transition: background-color 0.2s, box-shadow 0.2s;
-  }
-
-
-//   .p-panelmenu .p-panelmenu-header:not(.p-highlight):not(.p-disabled) > a:hover {
-//     background: #e9ecef;
-//     border-color: #dee2e6;
-//     color: #495057;
-// }
-     .p-panelmenu .p-panelmenu-content .p-menuitem .p-menuitem-link:hover {
-    background-color: lightcoral !important;
-    color: red!important;
+    .p-panelmenu .p-panelmenu-header.p-highlight > a {
+      background-color: lightcoral !important;
+      color: white !important;
+      border: none !important;
+      padding: 0.857rem 1rem;
+      border: none;
+      font-weight: 400;
+      transition: background-color 0.2s, box-shadow 0.2s;
     }
 
+    .p-panelmenu .p-panelmenu-content .p-menuitem .p-menuitem-link:hover {
+      background-color: lightcoral !important;
+      color: red !important;
+    }
 
-    p-panelmenu .p-panelmenu-content .p-submenu-list:not(.p-panelmenu-root-submenu) {
+    .p-panelmenu
+      .p-panelmenu-content
+      .p-submenu-list:not(.p-panelmenu-root-submenu) {
       background-color: white !important;
       border: none !important;
       font-weight: 400;
     }
-  // .p-panelmenu .p-panelmenu-content .p-menuitem .p-menuitem-link > a:hover{
-  //     color: lightcoral !important;
-  //    }
-
-
-
-    // .p-panelmenu .p-panelmenu-content .p-menuitem .p-menuitem-link {
-    //   background-color: white !important;
-    //   border: none !important;
-    //   padding-left:  35px;
-    //   color: black !important;
-    //   font-weight: 350;
-    // }
-
-
-
-    // .p-panelmenu .p-panelmenu-content .p-menuitem .p-menuitem-link .p-menuitem-text {
-    //   color: #67748E !important;
-    // }
-
-//     .p-panelmenu .p-panelmenu-content .p-menuitem .p-menuitem-link:hover {
-// background-color: #fff !important;
-// color: white !important;
-//     }
 
     .p-panelmenu .p-panelmenu-content {
       border: none;
-      padding-left:  25px;
-      color: #67748E;
+      padding-left: 25px;
+      color: #67748e;
       background-color: white;
-      // color: #f4f4f4 !importan
-      // background-color: rgb(245, 46, 46)
     }
 
-    p-panelmenu .p-panelmenu-content .p-menuitem .p-menuitem-link .p-menuitem-icon {
+    .p-panelmenu
+      .p-panelmenu-content
+      .p-menuitem
+      .p-menuitem-link
+      .p-menuitem-icon {
       color: black;
-
     }
-
-    p-panelmenu .p-panelmenu-content .p-menuitem .p-menuitem-link:focus{
+    .p-panelmenu .p-panelmenu-content .p-menuitem .p-menuitem-link:focus {
       outline: none;
       box-shadow: none;
-      background-color: rgb(238, 162, 162);
+      background-color: rgb(238, 162, 162) !important;
+    }
+    .pi-fw {
+      color: #67748e;
+      padding-left: 5px;
     }
 
-    .pi-fw {
-      color: #67748E;
-      padding-left:  5px
+    .p-menuitem.active {
+      background-color: rgb(238, 155, 155);
     }
   }
 }
@@ -120,7 +92,7 @@
   transition: 300ms ease-in-out;
   // background-color: rgb(245, 46, 46)
   background-color: white;
-  color: #67748E;
+  color: #67748e;
 }
 .sidebar-cont::-webkit-scrollbar {
   display: none;
@@ -149,76 +121,55 @@
     font-size: 0.8rem;
     margin-top: 0.8rem;
     // color: #fff;
-    color: #67748E;
+    color: #67748e;
   }
 }
 
+:host::ng-deep {
+  .p-panelmenu .p-panelmenu-content .p-menuitem .p-menuitem-link :hover {
+    color: red !important;
+  }
 
-:host::ng-deep{
-  .p-panelmenu .p-panelmenu-content .p-menuitem .p-menuitem-link :hover{
-   color: red !important;
+  .pi-chevron-right:after {
+    content: "\e94a" !important;
+    display: end !important;
+  }
+  .pi-chevron-right:after {
+    content: "\e94a" !important;
+    display: none !important;
+  }
 }
 
+:host::ng-deep {
+  .p-panelmenu .p-panelmenu-content .p-menuitem .p-menuitem-link :hover {
+    color: red !important;
+  }
 
+  .p-panelmenu
+    .p-panelmenu-content
+    .p-menuitem
+    .p-menuitem-link:not(.p-disabled):hover {
+    background: red;
+  }
 
-.pi-chevron-right:after {
-  content: "\e94a" !important;
-  display: end !important;
-}
-.pi-chevron-right:after {
-  content: "\e94a" !important;
-  display: none !important;
-}
+  .p-panelmenu .p-panelmenu-content .p-menuitem .p-menuitem-link:focus {
+    outline: 0 none;
+    outline-offset: 0;
+  }
 
-}
-
-
-
-:host::ng-deep{
-  .p-panelmenu .p-panelmenu-content .p-menuitem .p-menuitem-link :hover{
-   color: red !important;
-}
-
-.p-panelmenu .p-panelmenu-content .p-menuitem .p-menuitem-link:not(.p-disabled):hover {
-  background: red;
-}
-
-// .p-panelmenu .p-panelmenu-content .p-menuitem .p-menuitem-link:focus {
-//   background-color: rgb(241, 156, 156) !important;
-//   color: red !important;
-// }
-
-.p-panelmenu .p-panelmenu-content .p-menuitem .p-menuitem-link:focus {
-  outline: 0 none;
-  outline-offset: 0;
+  .p-panelmenu .p-panelmenu-content .p-menuitem .p-menuitem-link:focus {
+    outline: 0 none;
+    color: orange !important;
+    text-decoration-color: aqua !important;
+  }
 }
 
-
-
-.p-panelmenu .p-panelmenu-content .p-menuitem .p-menuitem-link:focus {
-  outline: 0 none;
-  color: orange !important;
-  text-decoration-color: aqua !important;
-  font-style: italic !important ;
-}
-
-
-}
-
-:host::ng-deep{
+:host::ng-deep {
   .p-submenu .p-submenu-item.active > a {
     color: green !important; /* Replace with your desired color */
     font-style: italic;
   }
-
 }
-
-
-
-
-
-
-
 
 .active-item {
   background-color: green;

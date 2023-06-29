@@ -1,920 +1,1477 @@
 <div class="button-heading-container">
-  <button class=" p-1 back-button" [routerLink]="['/leaveMgmt/profile-list']">
+  <button class="p-1 back-button" [routerLink]="['/leaveMgmt/profile-list']">
     <i class="material-icons">arrow_back</i>
   </button>
   <h5>Add Profile</h5>
 </div>
 <form [formGroup]="profileForm">
-
-
-
   <div class="col-12 mt-3 p-0">
-    <div class="card" >
-      <div class="card m-3" style="border: 1px solid lightgrey;" >
+    <div class="card">
+      <div class="card m-3" style="border: 1px solid lightgrey">
         <div>
-      <h5 class="card-title ">Basic Information</h5>
-      <div class="row text-input-field">
-
-        <div class="col-6">
-          <div class="row" style="display: flex;">
-            <div class="col-4 "> <label class="starlabel">Employee Full Name</label></div>
-            <div class="col-8"><input type="text"  placeholder="Enter full name" class="form-control custom-placeholder" id="inputdefault" formControlName="employeeFullName">
-              <div *ngIf="
-              !profileForm.controls['employeeFullName'].valid &&
-              (profileForm.controls['employeeFullName'].touched ||
-              profileForm.controls['employeeFullName'].dirty)
-            ">
-              <div [hidden]="
-                !profileForm.controls['employeeFullName'].errors[
-                  'required'
-                ]
-              " style="
-                color: rgb(253, 122, 122);
-                font-size: small;
-                font-style: italic;
-              ">
-               full name is required
-              </div>
-              <div *ngIf="
-              profileForm.controls['employeeFullName'].errors[
-                  'pattern'
-                ]
-              " style="
-                color: rgb(253, 122, 122);
-                font-size: small;
-                font-style: italic;
-              ">
-                Employee full name should be of Alphabet only
-              </div>
-            </div>
-            </div>
-          </div>
-        </div>
-        <div class="col-6">
-          <div class="row" style="display: flex;">
-            <div class="col-4"><label class="starlabel">First Name</label></div>
-            <div class="col-8"><input type="text" placeholder="Enter first name" class="form-control custom-placeholder" id="inputdefault" formControlName="FirstName" >
-              <div *ngIf="
-              !profileForm.controls['FirstName'].valid &&
-              (profileForm.controls['FirstName'].touched ||
-              profileForm.controls['FirstName'].dirty)
-            ">
-              <div [hidden]="
-                !profileForm.controls['FirstName'].errors[
-                  'required'
-                ]
-              " style="
-                color: rgb(253, 122, 122);
-                font-size: small;
-                font-style: italic;
-              ">
-               first name is required
-              </div>
-              <div *ngIf="
-              profileForm.controls['FirstName'].errors[
-                  'pattern'
-                ]
-              " style="
-                color: rgb(253, 122, 122);
-                font-size: small;
-                font-style: italic;
-              ">
-                first name should be of Alphabet only
-              </div>
-            </div>
-          </div>
-          </div>
-        </div>
-      </div>
-      <div class="row text-input-field">
-
-        <div class="col-6">
-          <div class="row" style="display: flex;">
-            <div class="col-4"><label class="starlabel">Last Name</label></div>
-            <div class="col-8"><input type="text" placeholder="Enter last name" class="form-control custom-placeholder" id="inputdefault" formControlName="lastName">
-              <div *ngIf="
-              !profileForm.controls['lastName'].valid &&
-              (profileForm.controls['lastName'].touched ||
-              profileForm.controls['lastName'].dirty)
-            ">
-              <div [hidden]="
-                !profileForm.controls['lastName'].errors[
-                  'required'
-                ]
-              " style="
-                color: rgb(253, 122, 122);
-                font-size: small;
-                font-style: italic;
-              ">
-              last name is required
-              </div>
-              <div *ngIf="
-              profileForm.controls['lastName'].errors[
-                  'pattern'
-                ]
-              " style="
-                color: rgb(253, 122, 122);
-                font-size: small;
-                font-style: italic;
-              ">
-                last name should be of Alphabet only
-              </div>
-            </div>
-          </div>
-          </div>
-        </div>
-        <div class="col-6">
-          <div class="row" style="display: flex;">
-            <div class="col-4"><label class="starlabel">Email</label></div>
-            <div class="col-8">
-              <input type="text" class="form-control custom-placeholder" id="inputdefault" placeholder="Enter email"  formControlName="email">
-              <div
-              *ngIf="
-                !profileForm.controls['email'].valid &&
-                (profileForm.controls['email'].touched ||
-                  profileForm.controls['email'].dirty)
-              "
-            >
-              <div
-                [hidden]="
-                  !profileForm.controls['email'].errors['required']
-                "
-                style="
-                  color: rgb(253, 122, 122);
-                  font-size: small;
-                  font-style: italic;
-                "
-              >
-                email is required
-              </div>
-              <div
-                *ngIf="profileForm.controls['email'].errors['email']"
-                style="
-                  color: rgb(253, 122, 122);
-                  font-size: small;
-                  font-style: italic;
-                "
-              >
-                Please enter valid email
-              </div>
-            </div>
-          </div>
-          </div>
-        </div>
-      </div>
-      <div class="row text-input-field">
-
-        <div class="col-6">
-          <div class="row" style="display: flex;">
-            <div class="col-4">Profile Image</div>
-            <div class="col-8"  style="position: relative;">
-              <input type="file" class="form-control "  id="inputdefault" formControlName="image"  (change)="fileChangeEvent($event)">
-              <!-- <span>{{ prevImageName }}</span> -->
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <!-- ############### work info ############### -->
-    <div>
-      <h5 class="card-title mt-3">Work Information</h5>
-      <div class="row text-input-field">
-        <div class="col-6" >
-          <div class="row" style="display: flex;">
-            <div class="col-4 info-name"><label class="starlabel">Department</label></div>
-            <div class="col-7" style="padding-right: 0px;">
-              <div>
-                <select style="width: 100%; border: 1px solid lightgray; height: 38px; padding:5px"
-                  class="form-group"
-                  formControlName="department"
-
-                >
-                  <option>Enter department</option>
-                  <option *ngFor="let count of departmentdrop">
-                    {{ count.department }}
-                  </option>
-                </select>
-
-                <div *ngIf="
-                !profileForm.controls['department'].valid &&
-                (profileForm.controls['department'].touched ||
-                profileForm.controls['department'].dirty)
-              ">
-                <div [hidden]="
-                  !profileForm.controls['department'].errors[
-                    'required'
-                  ]
-                " style="
-                  color: rgb(253, 122, 122);
-                  font-size: small;
-                  font-style: italic;
-                ">
-                 department is required
+          <h5 class="card-title">Basic Information</h5>
+          <div class="row text-input-field">
+            <div class="col-6">
+              <div class="row" style="display: flex">
+                <div class="col-4">
+                  <label class="starlabel">Employee Full Name</label>
                 </div>
-
-              </div>
-
+                <div class="col-8">
+                  <input
+                    type="text"
+                    placeholder="Enter full name"
+                    class="form-control custom-placeholder"
+                    id="inputdefault"
+                    formControlName="employeeFullName"
+                  />
+                  <div
+                    *ngIf="
+                      !profileForm.controls['employeeFullName'].valid &&
+                      (profileForm.controls['employeeFullName'].touched ||
+                        profileForm.controls['employeeFullName'].dirty)
+                    "
+                  >
+                    <div
+                      [hidden]="
+                        !profileForm.controls['employeeFullName'].errors[
+                          'required'
+                        ]
+                      "
+                      style="
+                        color: rgb(253, 122, 122);
+                        font-size: small;
+                        font-style: italic;
+                      "
+                    >
+                      full name is required
+                    </div>
+                    <div
+                      *ngIf="
+                        profileForm.controls['employeeFullName'].errors[
+                          'pattern'
+                        ]
+                      "
+                      style="
+                        color: rgb(253, 122, 122);
+                        font-size: small;
+                        font-style: italic;
+                      "
+                    >
+                      Employee full name should be of Alphabet only
+                    </div>
+                  </div>
+                </div>
               </div>
             </div>
-            <div class="col-1" style="padding-left: 0px;"><button type="button" class="btn btn-danger"  (click)="openDialog()"><i class="pi pi-plus"></i></button></div>
-          </div>
-        </div>
-        <div class="col-6" >
-          <div class="row" style="display: flex;">
-            <div class="col-4"><label class="starlabel">Designation</label></div>
-            <div class="col-7" style="padding-right: 0px;">
-            <div>
-              <select style="width: 100%; border: 1px solid lightgray; height: 38px; padding:5px"
-                class="form-group"
-
-                formControlName="designation"
-              >
-                <option>Enter designation</option>
-                <option *ngFor="let count of designationdrop">
-                  {{ count.designation }}
-                </option>
-              </select>
-              <div *ngIf="
-              !profileForm.controls['designation'].valid &&
-              (profileForm.controls['designation'].touched ||
-              profileForm.controls['designation'].dirty)
-            ">
-              <div [hidden]="
-                !profileForm.controls['designation'].errors[
-                  'required'
-                ]
-              " style="
-                color: rgb(253, 122, 122);
-                font-size: small;
-                font-style: italic;
-              ">
-               designation is required
+            <div class="col-6">
+              <div class="row" style="display: flex">
+                <div class="col-4">
+                  <label class="starlabel">First Name</label>
+                </div>
+                <div class="col-8">
+                  <input
+                    type="text"
+                    placeholder="Enter first name"
+                    class="form-control custom-placeholder"
+                    id="inputdefault"
+                    formControlName="FirstName"
+                  />
+                  <div
+                    *ngIf="
+                      !profileForm.controls['FirstName'].valid &&
+                      (profileForm.controls['FirstName'].touched ||
+                        profileForm.controls['FirstName'].dirty)
+                    "
+                  >
+                    <div
+                      [hidden]="
+                        !profileForm.controls['FirstName'].errors['required']
+                      "
+                      style="
+                        color: rgb(253, 122, 122);
+                        font-size: small;
+                        font-style: italic;
+                      "
+                    >
+                      first name is required
+                    </div>
+                    <div
+                      *ngIf="
+                        profileForm.controls['FirstName'].errors['pattern']
+                      "
+                      style="
+                        color: rgb(253, 122, 122);
+                        font-size: small;
+                        font-style: italic;
+                      "
+                    >
+                      first name should be of Alphabet only
+                    </div>
+                  </div>
+                </div>
               </div>
-
             </div>
+          </div>
+          <div class="row text-input-field">
+            <div class="col-6">
+              <div class="row" style="display: flex">
+                <div class="col-4">
+                  <label class="starlabel">Last Name</label>
+                </div>
+                <div class="col-8">
+                  <input
+                    type="text"
+                    placeholder="Enter last name"
+                    class="form-control custom-placeholder"
+                    id="inputdefault"
+                    formControlName="lastName"
+                  />
+                  <div
+                    *ngIf="
+                      !profileForm.controls['lastName'].valid &&
+                      (profileForm.controls['lastName'].touched ||
+                        profileForm.controls['lastName'].dirty)
+                    "
+                  >
+                    <div
+                      [hidden]="
+                        !profileForm.controls['lastName'].errors['required']
+                      "
+                      style="
+                        color: rgb(253, 122, 122);
+                        font-size: small;
+                        font-style: italic;
+                      "
+                    >
+                      last name is required
+                    </div>
+                    <div
+                      *ngIf="profileForm.controls['lastName'].errors['pattern']"
+                      style="
+                        color: rgb(253, 122, 122);
+                        font-size: small;
+                        font-style: italic;
+                      "
+                    >
+                      last name should be of Alphabet only
+                    </div>
+                  </div>
+                </div>
               </div>
             </div>
-            <div class="col-1" style="padding-left: 0px;"><button type="button" class="btn btn-danger" (click)="openDialogDesignation()"><i class="pi pi-plus"></i></button></div>
-          </div>
-        </div>
-      </div>
-      <div class="row text-input-field">
-        <div class="col-6">
-          <div class="row" style="display: flex;">
-            <div class="col-4 info-name"><label class="starlabel">Location</label></div>
-            <div class="col-7" style="padding-right: 0px;">
-            <div>
-              <select style="width: 100%; border: 1px solid lightgray; height: 38px; padding:5px"
-                class="form-group"
-
-                formControlName="location"
-              >
-                <option>Enter location</option>
-                <option *ngFor="let count of locationList">
-                  {{ count.location }}
-                </option>
-              </select>
-              <div *ngIf="
-              !profileForm.controls['location'].valid &&
-              (profileForm.controls['location'].touched ||
-              profileForm.controls['location'].dirty)
-            ">
-              <div [hidden]="
-                !profileForm.controls['location'].errors[
-                  'required'
-                ]
-              " style="
-                color: rgb(253, 122, 122);
-                font-size: small;
-                font-style: italic;
-              ">
-               location is required
+            <div class="col-6">
+              <div class="row" style="display: flex">
+                <div class="col-4"><label class="starlabel">Email</label></div>
+                <div class="col-8">
+                  <input
+                    type="text"
+                    class="form-control custom-placeholder"
+                    id="inputdefault"
+                    placeholder="Enter email"
+                    formControlName="email"
+                  />
+                  <div
+                    *ngIf="
+                      !profileForm.controls['email'].valid &&
+                      (profileForm.controls['email'].touched ||
+                        profileForm.controls['email'].dirty)
+                    "
+                  >
+                    <div
+                      [hidden]="
+                        !profileForm.controls['email'].errors['required']
+                      "
+                      style="
+                        color: rgb(253, 122, 122);
+                        font-size: small;
+                        font-style: italic;
+                      "
+                    >
+                      email is required
+                    </div>
+                    <div
+                      *ngIf="profileForm.controls['email'].errors['email']"
+                      style="
+                        color: rgb(253, 122, 122);
+                        font-size: small;
+                        font-style: italic;
+                      "
+                    >
+                      Please enter valid email
+                    </div>
+                  </div>
+                </div>
               </div>
-
             </div>
+          </div>
+          <div class="row text-input-field">
+            <div class="col-6">
+              <div class="row" style="display: flex">
+                <div class="col-4">Profile Image</div>
+                <div class="col-8" style="position: relative">
+                  <input
+                    type="file"
+                    class="form-control"
+                    id="inputdefault"
+                    formControlName="image"
+                    (change)="fileChangeEvent($event)"
+                  />
+                  <!-- <span>{{ prevImageName }}</span> -->
+                </div>
               </div>
-              </div>
-            <div class="col-1" style="padding-left: 0px;"><button type="button" class="btn btn-danger" (click)="openDialogLocation()"><i class="pi pi-plus"></i></button></div>
+            </div>
           </div>
         </div>
-        <div class="col-6">
-          <div class="row" style="display: flex;">
-            <div class="col-4"><label class="starlabel">Role</label></div>
-            <div class="col-8">
-            <select style="width: 100%; border: 1px solid lightgray; height: 38px; padding:5px"
-            class="form-group"
-            formControlName="role"
 
-          >
-            <option >Enter role</option>
-            <option *ngFor="let count of roledrop">
-              {{ count.state }}
-            </option>
-          </select>
-          <div *ngIf="
-          !profileForm.controls['role'].valid &&
-          (profileForm.controls['role'].touched ||
-          profileForm.controls['role'].dirty)
-        ">
-          <div [hidden]="
-            !profileForm.controls['role'].errors[
-              'required'
-            ]
-          " style="
-            color: rgb(253, 122, 122);
-            font-size: small;
-            font-style: italic;
-          ">
-           role is required
+        <!-- ############### work info ############### -->
+        <div>
+          <h5 class="card-title mt-3">Work Information</h5>
+          <div class="row text-input-field">
+            <div class="col-6">
+              <div class="row" style="display: flex">
+                <div class="col-4 info-name">
+                  <label class="starlabel">Department</label>
+                </div>
+                <div class="col-7" style="padding-right: 0px">
+                  <div>
+                    <select
+                      style="
+                        width: 100%;
+                        border: 1px solid lightgray;
+                        height: 38px;
+                        padding: 5px;
+                      "
+                      class="form-group"
+                      formControlName="department"
+                    >
+                      <option>Enter department</option>
+                      <option *ngFor="let count of departmentdrop">
+                        {{ count.department }}
+                      </option>
+                    </select>
+
+                    <div
+                      *ngIf="
+                        !profileForm.controls['department'].valid &&
+                        (profileForm.controls['department'].touched ||
+                          profileForm.controls['department'].dirty)
+                      "
+                    >
+                      <div
+                        [hidden]="
+                          !profileForm.controls['department'].errors['required']
+                        "
+                        style="
+                          color: rgb(253, 122, 122);
+                          font-size: small;
+                          font-style: italic;
+                        "
+                      >
+                        department is required
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-1" style="padding-left: 0px">
+                  <button
+                    type="button"
+                    class="btn btn-danger"
+                    (click)="openDialog()"
+                  >
+                    <i class="pi pi-plus"></i>
+                  </button>
+                </div>
+              </div>
+            </div>
+            <div class="col-6">
+              <div class="row" style="display: flex">
+                <div class="col-4">
+                  <label class="starlabel">Designation</label>
+                </div>
+                <div class="col-7" style="padding-right: 0px">
+                  <div>
+                    <select
+                      style="
+                        width: 100%;
+                        border: 1px solid lightgray;
+                        height: 38px;
+                        padding: 5px;
+                      "
+                      class="form-group"
+                      formControlName="designation"
+                    >
+                      <option>Enter designation</option>
+                      <option *ngFor="let count of designationdrop">
+                        {{ count.designation }}
+                      </option>
+                    </select>
+                    <div
+                      *ngIf="
+                        !profileForm.controls['designation'].valid &&
+                        (profileForm.controls['designation'].touched ||
+                          profileForm.controls['designation'].dirty)
+                      "
+                    >
+                      <div
+                        [hidden]="
+                          !profileForm.controls['designation'].errors[
+                            'required'
+                          ]
+                        "
+                        style="
+                          color: rgb(253, 122, 122);
+                          font-size: small;
+                          font-style: italic;
+                        "
+                      >
+                        designation is required
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-1" style="padding-left: 0px">
+                  <button
+                    type="button"
+                    class="btn btn-danger"
+                    (click)="openDialogDesignation()"
+                  >
+                    <i class="pi pi-plus"></i>
+                  </button>
+                </div>
+              </div>
+            </div>
           </div>
-
-        </div>
-              <!-- <p-dropdown [options]="roleOptions" id="ratingStatus" placeholder="Select"
+          <div class="row text-input-field">
+            <div class="col-6">
+              <div class="row" style="display: flex">
+                <div class="col-4 info-name">
+                  <label class="starlabel">Location</label>
+                </div>
+                <div class="col-7" style="padding-right: 0px">
+                  <div>
+                    <select
+                      style="
+                        width: 100%;
+                        border: 1px solid lightgray;
+                        height: 38px;
+                        padding: 5px;
+                      "
+                      class="form-group"
+                      formControlName="location"
+                    >
+                      <option>Enter location</option>
+                      <option *ngFor="let count of locationList">
+                        {{ count.location }}
+                      </option>
+                    </select>
+                    <div
+                      *ngIf="
+                        !profileForm.controls['location'].valid &&
+                        (profileForm.controls['location'].touched ||
+                          profileForm.controls['location'].dirty)
+                      "
+                    >
+                      <div
+                        [hidden]="
+                          !profileForm.controls['location'].errors['required']
+                        "
+                        style="
+                          color: rgb(253, 122, 122);
+                          font-size: small;
+                          font-style: italic;
+                        "
+                      >
+                        location is required
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-1" style="padding-left: 0px">
+                  <button
+                    type="button"
+                    class="btn btn-danger"
+                    (click)="openDialogLocation()"
+                  >
+                    <i class="pi pi-plus"></i>
+                  </button>
+                </div>
+              </div>
+            </div>
+            <div class="col-6">
+              <div class="row" style="display: flex">
+                <div class="col-4"><label class="starlabel">Role</label></div>
+                <div class="col-8">
+                  <select
+                    style="
+                      width: 100%;
+                      border: 1px solid lightgray;
+                      height: 38px;
+                      padding: 5px;
+                    "
+                    class="form-group"
+                    formControlName="role"
+                  >
+                    <option>Enter role</option>
+                    <option *ngFor="let count of roledrop">
+                      {{ count.state }}
+                    </option>
+                  </select>
+                  <div
+                    *ngIf="
+                      !profileForm.controls['role'].valid &&
+                      (profileForm.controls['role'].touched ||
+                        profileForm.controls['role'].dirty)
+                    "
+                  >
+                    <div
+                      [hidden]="
+                        !profileForm.controls['role'].errors['required']
+                      "
+                      style="
+                        color: rgb(253, 122, 122);
+                        font-size: small;
+                        font-style: italic;
+                      "
+                    >
+                      role is required
+                    </div>
+                  </div>
+                  <!-- <p-dropdown [options]="roleOptions" id="ratingStatus" placeholder="Select"
               styleClass="status-dropdown" formControlName="role"></p-dropdown> -->
+                </div>
+              </div>
             </div>
           </div>
-        </div>
-      </div>
-      <div class="row text-input-field">
-        <div class="col-6" >
-          <div class="row" style="display: flex;">
-            <div class="col-4 info-name"><label class="starlabel">Employement Type</label></div>
-              <div class="col-8">
-              <select style="width: 100%; border: 1px solid lightgray; height: 38px; padding:5px"
-            class="form-group"
-            formControlName="employmentType"
+          <div class="row text-input-field">
+            <div class="col-6">
+              <div class="row" style="display: flex">
+                <div class="col-4 info-name">
+                  <label class="starlabel">Employement Type</label>
+                </div>
+                <div class="col-8">
+                  <select
+                    style="
+                      width: 100%;
+                      border: 1px solid lightgray;
+                      height: 38px;
+                      padding: 5px;
+                    "
+                    class="form-group"
+                    formControlName="employmentType"
+                  >
+                    <option>Enter Type</option>
+                    <option *ngFor="let count of employeedrop">
+                      {{ count.state }}
+                    </option>
+                  </select>
 
-          >
-            <option>Enter Type</option>
-            <option *ngFor="let count of employeedrop">
-              {{ count.state }}
-            </option>
-          </select>
+                  <div
+                    *ngIf="
+                      !profileForm.controls['employmentType'].valid &&
+                      (profileForm.controls['employmentType'].touched ||
+                        profileForm.controls['employmentType'].dirty)
+                    "
+                  >
+                    <div
+                      [hidden]="
+                        !profileForm.controls['employmentType'].errors[
+                          'required'
+                        ]
+                      "
+                      style="
+                        color: rgb(253, 122, 122);
+                        font-size: small;
+                        font-style: italic;
+                      "
+                    >
+                      employmentType is required
+                    </div>
+                  </div>
 
-              <div *ngIf="
-              !profileForm.controls['employmentType'].valid &&
-              (profileForm.controls['employmentType'].touched ||
-              profileForm.controls['employmentType'].dirty)
-            ">
-              <div [hidden]="
-                !profileForm.controls['employmentType'].errors[
-                  'required'
-                ]
-              " style="
-                color: rgb(253, 122, 122);
-                font-size: small;
-                font-style: italic;
-              ">
-               employmentType is required
-              </div>
-
-            </div>
-
-                <!-- <p-dropdown [options]="employmentType" id="ratingStatus" placeholder="Select"
+                  <!-- <p-dropdown [options]="employmentType" id="ratingStatus" placeholder="Select"
               styleClass="status-dropdown" formControlName="employmentType"></p-dropdown> -->
+                </div>
               </div>
-          </div>
-        </div>
-
-
-        <div class="col-6">
-          <div class="row" style="display: flex;">
-            <div class="col-4"><label class="starlabel">Employement Status</label></div>
-            <div class="col-8">
-
-            <select style="width: 100%; border: 1px solid lightgray; height: 38px; padding:5px"
-            class="form-group"
-            formControlName="employeeStatus"
-
-          >
-            <option>Enter Status</option>
-            <option *ngFor="let count of employeestatus">
-              {{ count.state }}
-            </option>
-          </select>
-
-            <div *ngIf="
-            !profileForm.controls['employeeStatus'].valid &&
-            (profileForm.controls['employeeStatus'].touched ||
-            profileForm.controls['employeeStatus'].dirty)
-          ">
-            <div [hidden]="
-              !profileForm.controls['employeeStatus'].errors[
-                'required'
-              ]
-            " style="
-              color: rgb(253, 122, 122);
-              font-size: small;
-              font-style: italic;
-            ">
-             employeeStatus is required
             </div>
 
-          </div>
+            <div class="col-6">
+              <div class="row" style="display: flex">
+                <div class="col-4">
+                  <label class="starlabel">Employement Status</label>
+                </div>
+                <div class="col-8">
+                  <select
+                    style="
+                      width: 100%;
+                      border: 1px solid lightgray;
+                      height: 38px;
+                      padding: 5px;
+                    "
+                    class="form-group"
+                    formControlName="employeeStatus"
+                  >
+                    <option>Enter Status</option>
+                    <option *ngFor="let count of employeestatus">
+                      {{ count.state }}
+                    </option>
+                  </select>
 
-              <!-- <p-dropdown [options]="employmentStatus" id="ratingStatus" placeholder="Select"
+                  <div
+                    *ngIf="
+                      !profileForm.controls['employeeStatus'].valid &&
+                      (profileForm.controls['employeeStatus'].touched ||
+                        profileForm.controls['employeeStatus'].dirty)
+                    "
+                  >
+                    <div
+                      [hidden]="
+                        !profileForm.controls['employeeStatus'].errors[
+                          'required'
+                        ]
+                      "
+                      style="
+                        color: rgb(253, 122, 122);
+                        font-size: small;
+                        font-style: italic;
+                      "
+                    >
+                      employeeStatus is required
+                    </div>
+                  </div>
+
+                  <!-- <p-dropdown [options]="employmentStatus" id="ratingStatus" placeholder="Select"
               styleClass="status-dropdown" formControlName="employeeStatus"></p-dropdown> -->
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="row text-input-field">
-        <div class="col-6">
-          <div class="row" style="display: flex;">
-            <div class="col-4 info-name"><label class="starlabel">Source Hiring</label></div>
-            <div class="col-7" style="padding-right: 0px;">
-              <div>
-                <select style="width: 100%; border: 1px solid lightgray; height: 38px; padding:5px"
-                  class="form-group"
-
-                  formControlName="sourceHiring"
-                >
-                  <option>Enter source hiring</option>
-                  <option *ngFor="let count of soruceHiring">
-                    {{ count.sourceHiring }}
-                  </option>
-                </select>
-                <div *ngIf="
-                !profileForm.controls['sourceHiring'].valid &&
-                (profileForm.controls['sourceHiring'].touched ||
-                profileForm.controls['sourceHiring'].dirty)
-              ">
-                <div [hidden]="
-                  !profileForm.controls['sourceHiring'].errors[
-                    'required'
-                  ]
-                " style="
-                  color: rgb(253, 122, 122);
-                  font-size: small;
-                  font-style: italic;
-                ">
-                 source Hiring is required
-                </div>
-
-              </div>
-                </div>
-                </div>
-            <div class="col-1" style="padding-left: 0px;"><button type="button" class="btn btn-danger"><i class="pi pi-plus" (click)="openDialogSourceHiring()"></i></button></div>
-        </div>
-        </div>
-        <div class="col-6">
-          <div class="row" style="display: flex;">
-            <div class="col-4"><label class="starlabel">Date of Joining</label></div>
-            <div class="col-8"><input type="date" class="form-control" [min]="getMinimumDate()"  id="inputdefault" formControlName="dateOfJoining" >
-              <div *ngIf="
-              !profileForm.controls['dateOfJoining'].valid &&
-              (profileForm.controls['dateOfJoining'].touched ||
-              profileForm.controls['dateOfJoining'].dirty)
-            ">
-              <div [hidden]="
-                !profileForm.controls['dateOfJoining'].errors[
-                  'required'
-                ]
-              " style="
-                color: rgb(253, 122, 122);
-                font-size: small;
-                font-style: italic;
-              ">
-               date of joining is required
-              </div>
-
-            </div>
-
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="row text-input-field">
-
-        <div class="col-6">
-          <div class="row" style="display: flex;">
-            <div class="col-4"><label class="starlabel">Total Experience</label></div>
-
-<div class="col-8">
-  <input type="number" class="form-control custom-placeholder" id="inputdefault" formControlName="totalExp" placeholder="Enter total experience">
-  <div *ngIf="!profileForm.controls['totalExp'].valid && (profileForm.controls['totalExp'].touched || profileForm.controls['totalExp'].dirty)">
-    <div [hidden]="!profileForm.controls['totalExp'].errors['required']" style="color: rgb(253, 122, 122); font-size: small; font-style: italic;">
-      Total Experience is required
-    </div>
-    <div *ngIf="profileForm.controls['totalExp'].errors['totalExp']" style="color: rgb(253, 122, 122); font-size: small; font-style: italic;">
-      Please enter a valid total experience
-    </div>
-  </div>
-</div>
-          </div>
-        </div>
-        <div class="col-6">
-          <div class="row" style="display: flex;">
-            <div class="col-4 info-name"><label class="starlabel">Current Experience</label></div>
-            <div class="col-8">
-              <input class="form-control custom-placeholder" id="inputdefault" type="number" formControlName="currentExp" placeholder="Enter current experience">
-              <div *ngIf="!profileForm.controls['currentExp'].valid && (profileForm.controls['currentExp'].touched || profileForm.controls['currentExp'].dirty)">
-                <div [hidden]="!profileForm.controls['currentExp'].errors['required']" style="color: rgb(253, 122, 122); font-size: small; font-style: italic;">
-                  Current Experience is required
-                </div>
-                <div *ngIf="profileForm.controls['currentExp'].errors['currentExp']" style="color: rgb(253, 122, 122); font-size: small; font-style: italic;">
-                  Please enter a valid current experience
-                </div>
-                <div *ngIf="profileForm.controls['currentExp'].errors['greaterThanTotalExp']" style="color: rgb(253, 122, 122); font-size: small; font-style: italic;">
-                  Current Experience cannot be greater than Total Experience
                 </div>
               </div>
             </div>
           </div>
-        </div>
-      </div>
-    </div>
-     <!-- ############### reporting manager ############### -->
-    <div>
-      <h5 class="card-title mt-3">Hierarchy Information</h5>
-      <div class="row text-input-field">
-        <div class="col-6">
-          <div class="row" style="display: flex;">
-            <div class="col-4 info-name"><label class="starlabel">Reporting Manager</label></div>
-            <div class="col-7" style="padding-right: 0px;">
-              <div>
-                <select style="width: 100%; border: 1px solid lightgray; height: 38px; padding:5px"
-                  class="form-group"
-                   formControlName="reportingManager" placeholder="enter reporting manager"
-
-                >
-                  <option>Enter reporting manager</option>
-                  <option *ngFor="let count of reportManager">
-                    {{ count.reporting }}
-                  </option>
-                </select>
-                <div *ngIf="
-                !profileForm.controls['reportingManager'].valid &&
-                (profileForm.controls['reportingManager'].touched ||
-                profileForm.controls['reportingManager'].dirty)
-              ">
-                <div [hidden]="
-                  !profileForm.controls['reportingManager'].errors[
-                    'required'
-                  ]
-                " style="
-                  color: rgb(253, 122, 122);
-                  font-size: small;
-                  font-style: italic;
-                ">
-                 reporting manager is required
+          <div class="row text-input-field">
+            <div class="col-6">
+              <div class="row" style="display: flex">
+                <div class="col-4 info-name">
+                  <label class="starlabel">Source Hiring</label>
                 </div>
-
-              </div>
-                </div>
-                </div>
-            <div class="col-1" style="padding-left: 0px;"><button type="button" class="btn btn-danger"><i class="pi pi-plus" (click)="openDialogReportingmanager()"></i></button></div>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <!-- ############### personal details ############### -->
-    <div formGroupName="personalDetails">
-      <h5 class="card-title mt-3">Personal Details</h5>
-
-      <div class="row text-input-field">
-        <div class="col-6">
-          <div class="row" style="display: flex;">
-            <div class="col-4 info-name"><label class="starlabel">Date of Birth</label></div>
-            <div class="col-8">
-              <input type="date" class="form-control" placeholder="Select Birthday"
-              id="startDate" name="startDate" formControlName="dateOfBirth"  (change)="calculateAge()">
-
-            <div *ngIf="profileForm.get('personalDetails.dateOfBirth').invalid && (profileForm.get('personalDetails.dateOfBirth').touched || profileForm.get('personalDetails.dateOfBirth').dirty)">
-              <div *ngIf="profileForm.get('personalDetails.dateOfBirth').hasError('required')" style="color: rgb(253, 122, 122); font-size: small; font-style: italic;">
-                Date of birth is required
-              </div>
-            </div>
-            </div>
-          </div>
-        </div>
-        <div class="col-6">
-          <div class="row" style="display: flex;">
-            <div class="col-4"><label class="starlabel">Age</label></div>
-            <div class="col-8">
-              <input type="text" class="form-control custom-placeholder" id="inputdefault" placeholder="Enter age" formControlName="age"  readonly>
-              <div *ngIf="profileForm.get('personalDetails.age').invalid && (profileForm.get('personalDetails.age').touched || profileForm.get('personalDetails.age').dirty)">
-                <div *ngIf="profileForm.get('personalDetails.age').hasError('required')" style="color: rgb(253, 122, 122); font-size: small; font-style: italic;">
-                  Age is required
-                </div>
-                <div *ngIf="profileForm.get('personalDetails.age').hasError('pattern')" style="color: rgb(253, 122, 122); font-size: small; font-style: italic;">
-                  Age should be a number
-                </div>
-                <div *ngIf="profileForm.get('personalDetails.age').hasError('min')" style="color: rgb(253, 122, 122); font-size: small; font-style: italic;">
-                  Age should be at least 15
-                </div>
-                <div *ngIf="profileForm.get('personalDetails.age').hasError('max')" style="color: rgb(253, 122, 122); font-size: small; font-style: italic;">
-                  Age should be at most 70
-                </div>
-              </div>
-            </div>
-
-          </div>
-        </div>
-      </div>
-      <div class="row text-input-field">
-        <div class="col-6">
-          <div class="row" style="display: flex;">
-            <div class="col-4 info-name"><label class="starlabel">Gender</label></div>
-            <div class="col-8">
-
-            <select style="width: 100%; border: 1px solid lightgray; height: 38px; padding:5px"
-            class="form-group"
-             formControlName="gender" placeholder="enter gender"
-
-          >
-            <option>Enter gender</option>
-            <option *ngFor="let count of genderType">
-              {{ count.state }}
-            </option>
-          </select>
-            <div *ngIf="profileForm.get('personalDetails.gender').invalid && (profileForm.get('personalDetails.gender').touched || profileForm.get('personalDetails.gender').dirty)">
-              <div *ngIf="profileForm.get('personalDetails.gender').hasError('required')" style="color: rgb(253, 122, 122); font-size: small; font-style: italic;">
-                gender is required
-              </div>
-            </div>
-            </div>
-          </div>
-        </div>
-        <div class="col-6">
-          <div class="row" style="display: flex;">
-            <div class="col-4"><label class="starlabel">Marital status</label></div>
-            <div class="col-8">
-
-            <select style="width: 100%; border: 1px solid lightgray; height: 38px; padding:5px"
-            class="form-group"
-             formControlName="maritalStatus" placeholder="enter status"
-
-          >
-            <option>Enter status</option>
-            <option *ngFor="let count of maritalStatusType">
-              {{ count.state }}
-            </option>
-          </select>
-            <div *ngIf="profileForm.get('personalDetails.maritalStatus').invalid && (profileForm.get('personalDetails.maritalStatus').touched || profileForm.get('personalDetails.maritalStatus').dirty)">
-              <div *ngIf="profileForm.get('personalDetails.maritalStatus').hasError('required')" style="color: rgb(253, 122, 122); font-size: small; font-style: italic;">
-                marital status is required
-              </div>
-            </div>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="row text-input-field">
-        <div class="col-12">
-          <div class="row" style="display: flex;">
-            <div class="col-2 info-name"><label class="starlabel">Ask me about/Expertise</label></div>
-              <div class="col-10"><textarea class="form-control custom-placeholder" id="inputdefault" placeholder="Ask me about" style="height: 100px;" formControlName="expertise"> </textarea>
-                <div *ngIf="profileForm.get('personalDetails.expertise').invalid && (profileForm.get('personalDetails.expertise').touched || profileForm.get('personalDetails.expertise').dirty)">
-                  <div *ngIf="profileForm.get('personalDetails.expertise').hasError('required')" style="color: rgb(253, 122, 122); font-size: small; font-style: italic;">
-                    askme/expertise is required
+                <div class="col-7" style="padding-right: 0px">
+                  <div>
+                    <select
+                      style="
+                        width: 100%;
+                        border: 1px solid lightgray;
+                        height: 38px;
+                        padding: 5px;
+                      "
+                      class="form-group"
+                      formControlName="sourceHiring"
+                    >
+                      <option>Enter source hiring</option>
+                      <option *ngFor="let count of soruceHiring">
+                        {{ count.sourceHiring }}
+                      </option>
+                    </select>
+                    <div
+                      *ngIf="
+                        !profileForm.controls['sourceHiring'].valid &&
+                        (profileForm.controls['sourceHiring'].touched ||
+                          profileForm.controls['sourceHiring'].dirty)
+                      "
+                    >
+                      <div
+                        [hidden]="
+                          !profileForm.controls['sourceHiring'].errors[
+                            'required'
+                          ]
+                        "
+                        style="
+                          color: rgb(253, 122, 122);
+                          font-size: small;
+                          font-style: italic;
+                        "
+                      >
+                        source Hiring is required
+                      </div>
+                    </div>
                   </div>
                 </div>
-            </div>
-
-          </div>
-        </div>
-      </div>
-      <div class="row text-input-field">
-        <div class="col-12">
-          <div class="row" style="display: flex;">
-            <div class="col-2 info-name"><label class="starlabel">About Me</label></div>
-            <div class="col-10">
-              <textarea class="form-control custom-placeholder" id="inputdefault " style="height: 100px;"  placeholder="About me" formControlName="aboutMe"></textarea>
-              <div *ngIf="profileForm.get('personalDetails.aboutMe').invalid && (profileForm.get('personalDetails.aboutMe').touched || profileForm.get('personalDetails.aboutMe').dirty)">
-                <div *ngIf="profileForm.get('personalDetails.aboutMe').hasError('required')" style="color: rgb(253, 122, 122); font-size: small; font-style: italic;">
-                  aboutMe is required
+                <div class="col-1" style="padding-left: 0px">
+                  <button type="button" class="btn btn-danger">
+                    <i
+                      class="pi pi-plus"
+                      (click)="openDialogSourceHiring()"
+                    ></i>
+                  </button>
                 </div>
               </div>
             </div>
-          </div>
-        </div>
-      </div>
-    </div>
-
-
-
-      <!-- ############### identify information ############### -->
-      <div>
-      <div formGroupName="identityInformation">
-      <h5 class="card-title mt-3">Identity Details</h5>
-
-        <div class="row text-input-field">
-          <div class="col-4">
-            <div class="row" style="display: flex;">
-              <div class="col-4 info-name">UAN</div>
-              <div class="col-8"><input type="text" class="form-control custom-placeholder" placeholder="Enter UAN" id="inputdefault" formControlName="uan"></div>
-            </div>
-          </div>
-          <div class="col-4">
-            <div class="row" style="display: flex;">
-              <div class="col-4"><label class="starlabel">Pan Number</label></div>
-              <div class="col-8">
-                <input type="text" class="form-control custom-placeholder" placeholder="Enter pan number" id="inputdefault" formControlName="panNumber">
-                <div *ngIf="profileForm.get('identityInformation.panNumber').invalid && (profileForm.get('identityInformation.panNumber').touched || profileForm.get('identityInformation.panNumber').dirty)">
-                  <div *ngIf="profileForm.get('identityInformation.panNumber').hasError('required')" style="color: rgb(253, 122, 122); font-size: small; font-style: italic;">
-                    panNumber is required
-                  </div>
-                  <div *ngIf="profileForm.get('identityInformation.panNumber').hasError('pattern')" style="color: rgb(253, 122, 122); font-size: small; font-style: italic;">
-                    Invalid PAN number format. Please enter a valid PAN number.
+            <div class="col-6">
+              <div class="row" style="display: flex">
+                <div class="col-4">
+                  <label class="starlabel">Date of Joining</label>
+                </div>
+                <div class="col-8">
+                  <input
+                    type="date"
+                    class="form-control"
+                    [min]="getMinimumDate()"
+                    id="inputdefault"
+                    formControlName="dateOfJoining"
+                  />
+                  <div
+                    *ngIf="
+                      !profileForm.controls['dateOfJoining'].valid &&
+                      (profileForm.controls['dateOfJoining'].touched ||
+                        profileForm.controls['dateOfJoining'].dirty)
+                    "
+                  >
+                    <div
+                      [hidden]="
+                        !profileForm.controls['dateOfJoining'].errors[
+                          'required'
+                        ]
+                      "
+                      style="
+                        color: rgb(253, 122, 122);
+                        font-size: small;
+                        font-style: italic;
+                      "
+                    >
+                      date of joining is required
+                    </div>
                   </div>
                 </div>
               </div>
-
             </div>
           </div>
-          <div class="col-4">
-            <div class="row" style="display: flex;">
-              <div class="col-4"><label class="starlabel">Aadhar Number</label></div>
-              <div class="col-8">
-                <input type="text" class="form-control custom-placeholder" placeholder="Enter aadhar number" id="inputdefault" formControlName="aadharNumber">
-                <div *ngIf="profileForm.get('identityInformation.aadharNumber').invalid && (profileForm.get('identityInformation.aadharNumber').touched || profileForm.get('identityInformation.aadharNumber').dirty)">
-                  <div *ngIf="profileForm.get('identityInformation.aadharNumber').hasError('required')" style="color: rgb(253, 122, 122); font-size: small; font-style: italic;">
-                    aadharNumber is required
-                  </div>
-                  <div *ngIf="profileForm.get('identityInformation.aadharNumber').hasError('pattern')" style="color: rgb(253, 122, 122); font-size: small; font-style: italic;">
-                    Invalid Aadhar card number format. Please enter a valid Aadhar card number.
+          <div class="row text-input-field">
+            <div class="col-6">
+              <div class="row" style="display: flex">
+                <div class="col-4">
+                  <label class="starlabel">Total Experience</label>
+                </div>
+
+                <div class="col-8">
+                  <input
+                    type="number"
+                    class="form-control custom-placeholder"
+                    id="inputdefault"
+                    formControlName="totalExp"
+                    placeholder="Enter total experience"
+                  />
+                  <div
+                    *ngIf="
+                      !profileForm.controls['totalExp'].valid &&
+                      (profileForm.controls['totalExp'].touched ||
+                        profileForm.controls['totalExp'].dirty)
+                    "
+                  >
+                    <div
+                      [hidden]="
+                        !profileForm.controls['totalExp'].errors['required']
+                      "
+                      style="
+                        color: rgb(253, 122, 122);
+                        font-size: small;
+                        font-style: italic;
+                      "
+                    >
+                      Total Experience is required
+                    </div>
+                    <div
+                      *ngIf="
+                        profileForm.controls['totalExp'].errors['totalExp']
+                      "
+                      style="
+                        color: rgb(253, 122, 122);
+                        font-size: small;
+                        font-style: italic;
+                      "
+                    >
+                      Please enter a valid total experience
+                    </div>
                   </div>
                 </div>
               </div>
-
+            </div>
+            <div class="col-6">
+              <div class="row" style="display: flex">
+                <div class="col-4 info-name">
+                  <label class="starlabel">Current Experience</label>
+                </div>
+                <div class="col-8">
+                  <input
+                    class="form-control custom-placeholder"
+                    id="inputdefault"
+                    type="number"
+                    formControlName="currentExp"
+                    placeholder="Enter current experience"
+                  />
+                  <div
+                    *ngIf="
+                      !profileForm.controls['currentExp'].valid &&
+                      (profileForm.controls['currentExp'].touched ||
+                        profileForm.controls['currentExp'].dirty)
+                    "
+                  >
+                    <div
+                      [hidden]="
+                        !profileForm.controls['currentExp'].errors['required']
+                      "
+                      style="
+                        color: rgb(253, 122, 122);
+                        font-size: small;
+                        font-style: italic;
+                      "
+                    >
+                      Current Experience is required
+                    </div>
+                    <div
+                      *ngIf="
+                        profileForm.controls['currentExp'].errors['currentExp']
+                      "
+                      style="
+                        color: rgb(253, 122, 122);
+                        font-size: small;
+                        font-style: italic;
+                      "
+                    >
+                      Please enter a valid current experience
+                    </div>
+                    <div
+                      *ngIf="
+                        profileForm.controls['currentExp'].errors[
+                          'greaterThanTotalExp'
+                        ]
+                      "
+                      style="
+                        color: rgb(253, 122, 122);
+                        font-size: small;
+                        font-style: italic;
+                      "
+                    >
+                      Current Experience cannot be greater than Total Experience
+                    </div>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
         </div>
-      </div>
-</div>
-
-
-      <!-- ################ conatct info ############### -->
-      <div formGroupName="contactDetails">
-      <h5 class="card-title mt-3">Contact Information</h5>
-
-        <div class="row text-input-field">
-          <div class="col-6">
-            <div class="row" style="display: flex;">
-              <div class="col-4 info-name"><label class="starlabel">Working Phone Number</label></div>
-              <div class="col-8">
-                <input type="text" placeholder="Enter working number" class="form-control custom-placeholder" id="inputdefault" formControlName="workingPhoneNumber">
-                <div *ngIf="profileForm.get('contactDetails.workingPhoneNumber').invalid && (profileForm.get('contactDetails.workingPhoneNumber').touched || profileForm.get('contactDetails.workingPhoneNumber').dirty)">
-                  <div *ngIf="profileForm.get('contactDetails.workingPhoneNumber').hasError('required')" style="color: rgb(253, 122, 122); font-size: small; font-style: italic;">
-                    workingPhoneNumber is required
+        <!-- ############### reporting manager ############### -->
+        <div>
+          <h5 class="card-title mt-3">Hierarchy Information</h5>
+          <div class="row text-input-field">
+            <div class="col-6">
+              <div class="row" style="display: flex">
+                <div class="col-4 info-name">
+                  <label class="starlabel">Reporting Manager</label>
+                </div>
+                <div class="col-7" style="padding-right: 0px">
+                  <div>
+                    <select
+                      style="
+                        width: 100%;
+                        border: 1px solid lightgray;
+                        height: 38px;
+                        padding: 5px;
+                      "
+                      class="form-group"
+                      formControlName="reportingManager"
+                      placeholder="enter reporting manager"
+                    >
+                      <option>Enter reporting manager</option>
+                      <option *ngFor="let count of reportManager">
+                        {{ count.reporting }}
+                      </option>
+                    </select>
+                    <div
+                      *ngIf="
+                        !profileForm.controls['reportingManager'].valid &&
+                        (profileForm.controls['reportingManager'].touched ||
+                          profileForm.controls['reportingManager'].dirty)
+                      "
+                    >
+                      <div
+                        [hidden]="
+                          !profileForm.controls['reportingManager'].errors[
+                            'required'
+                          ]
+                        "
+                        style="
+                          color: rgb(253, 122, 122);
+                          font-size: small;
+                          font-style: italic;
+                        "
+                      >
+                        reporting manager is required
+                      </div>
+                    </div>
                   </div>
-                  <div *ngIf="profileForm.get('contactDetails.workingPhoneNumber').hasError('pattern')" style="color: rgb(253, 122, 122); font-size: small; font-style: italic;">
+                </div>
+                <div class="col-1" style="padding-left: 0px">
+                  <button type="button" class="btn btn-danger">
+                    <i
+                      class="pi pi-plus"
+                      (click)="openDialogReportingmanager()"
+                    ></i>
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- ############### personal details ############### -->
+        <div formGroupName="personalDetails">
+          <h5 class="card-title mt-3">Personal Details</h5>
+
+          <div class="row text-input-field">
+            <div class="col-6">
+              <div class="row" style="display: flex">
+                <div class="col-4 info-name">
+                  <label class="starlabel">Date of Birth</label>
+                </div>
+                <div class="col-8">
+                  <input
+                    type="date"
+                    class="form-control"
+                    placeholder="Select Birthday"
+                    id="startDate"
+                    name="startDate"
+                    formControlName="dateOfBirth"
+                    (change)="calculateAge()"
+                  />
+
+                  <div
+                    *ngIf="
+                      profileForm.get('personalDetails.dateOfBirth').invalid &&
+                      (profileForm.get('personalDetails.dateOfBirth').touched ||
+                        profileForm.get('personalDetails.dateOfBirth').dirty)
+                    "
+                  >
+                    <div
+                      *ngIf="
+                        profileForm
+                          .get('personalDetails.dateOfBirth')
+                          .hasError('required')
+                      "
+                      style="
+                        color: rgb(253, 122, 122);
+                        font-size: small;
+                        font-style: italic;
+                      "
+                    >
+                      Date of birth is required
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-6">
+              <div class="row" style="display: flex">
+                <div class="col-4"><label class="starlabel">Age</label></div>
+                <div class="col-8">
+                  <input
+                    type="text"
+                    class="form-control custom-placeholder"
+                    id="inputdefault"
+                    placeholder="Enter age"
+                    formControlName="age"
+                    readonly
+                  />
+                  <div
+                    *ngIf="
+                      profileForm.get('personalDetails.age').invalid &&
+                      (profileForm.get('personalDetails.age').touched ||
+                        profileForm.get('personalDetails.age').dirty)
+                    "
+                  >
+                    <div
+                      *ngIf="
+                        profileForm
+                          .get('personalDetails.age')
+                          .hasError('required')
+                      "
+                      style="
+                        color: rgb(253, 122, 122);
+                        font-size: small;
+                        font-style: italic;
+                      "
+                    >
+                      Age is required
+                    </div>
+                    <div
+                      *ngIf="
+                        profileForm
+                          .get('personalDetails.age')
+                          .hasError('pattern')
+                      "
+                      style="
+                        color: rgb(253, 122, 122);
+                        font-size: small;
+                        font-style: italic;
+                      "
+                    >
+                      Age should be a number
+                    </div>
+                    <div
+                      *ngIf="
+                        profileForm.get('personalDetails.age').hasError('min')
+                      "
+                      style="
+                        color: rgb(253, 122, 122);
+                        font-size: small;
+                        font-style: italic;
+                      "
+                    >
+                      Age should be at least 15
+                    </div>
+                    <div
+                      *ngIf="
+                        profileForm.get('personalDetails.age').hasError('max')
+                      "
+                      style="
+                        color: rgb(253, 122, 122);
+                        font-size: small;
+                        font-style: italic;
+                      "
+                    >
+                      Age should be at most 70
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="row text-input-field">
+            <div class="col-6">
+              <div class="row" style="display: flex">
+                <div class="col-4 info-name">
+                  <label class="starlabel">Gender</label>
+                </div>
+                <div class="col-8">
+                  <select
+                    style="
+                      width: 100%;
+                      border: 1px solid lightgray;
+                      height: 38px;
+                      padding: 5px;
+                    "
+                    class="form-group"
+                    formControlName="gender"
+                    placeholder="enter gender"
+                  >
+                    <option>Enter gender</option>
+                    <option *ngFor="let count of genderType">
+                      {{ count.state }}
+                    </option>
+                  </select>
+                  <div
+                    *ngIf="
+                      profileForm.get('personalDetails.gender').invalid &&
+                      (profileForm.get('personalDetails.gender').touched ||
+                        profileForm.get('personalDetails.gender').dirty)
+                    "
+                  >
+                    <div
+                      *ngIf="
+                        profileForm
+                          .get('personalDetails.gender')
+                          .hasError('required')
+                      "
+                      style="
+                        color: rgb(253, 122, 122);
+                        font-size: small;
+                        font-style: italic;
+                      "
+                    >
+                      gender is required
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-6">
+              <div class="row" style="display: flex">
+                <div class="col-4">
+                  <label class="starlabel">Marital status</label>
+                </div>
+                <div class="col-8">
+                  <select
+                    style="
+                      width: 100%;
+                      border: 1px solid lightgray;
+                      height: 38px;
+                      padding: 5px;
+                    "
+                    class="form-group"
+                    formControlName="maritalStatus"
+                    placeholder="enter status"
+                  >
+                    <option>Enter status</option>
+                    <option *ngFor="let count of maritalStatusType">
+                      {{ count.state }}
+                    </option>
+                  </select>
+                  <div
+                    *ngIf="
+                      profileForm.get('personalDetails.maritalStatus')
+                        .invalid &&
+                      (profileForm.get('personalDetails.maritalStatus')
+                        .touched ||
+                        profileForm.get('personalDetails.maritalStatus').dirty)
+                    "
+                  >
+                    <div
+                      *ngIf="
+                        profileForm
+                          .get('personalDetails.maritalStatus')
+                          .hasError('required')
+                      "
+                      style="
+                        color: rgb(253, 122, 122);
+                        font-size: small;
+                        font-style: italic;
+                      "
+                    >
+                      marital status is required
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="row text-input-field">
+            <div class="col-12">
+              <div class="row" style="display: flex">
+                <div class="col-2 info-name">
+                  <label class="starlabel">Ask me about/Expertise</label>
+                </div>
+                <div class="col-10">
+                  <textarea
+                    class="form-control custom-placeholder"
+                    id="inputdefault"
+                    placeholder="Ask me about"
+                    style="height: 100px"
+                    formControlName="expertise"
+                  >
+                  </textarea>
+                  <div
+                    *ngIf="
+                      profileForm.get('personalDetails.expertise').invalid &&
+                      (profileForm.get('personalDetails.expertise').touched ||
+                        profileForm.get('personalDetails.expertise').dirty)
+                    "
+                  >
+                    <div
+                      *ngIf="
+                        profileForm
+                          .get('personalDetails.expertise')
+                          .hasError('required')
+                      "
+                      style="
+                        color: rgb(253, 122, 122);
+                        font-size: small;
+                        font-style: italic;
+                      "
+                    >
+                      askme/expertise is required
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="row text-input-field">
+            <div class="col-12">
+              <div class="row" style="display: flex">
+                <div class="col-2 info-name">
+                  <label class="starlabel">About Me</label>
+                </div>
+                <div class="col-10">
+                  <textarea
+                    class="form-control custom-placeholder"
+                    id="inputdefault "
+                    style="height: 100px"
+                    placeholder="About me"
+                    formControlName="aboutMe"
+                  ></textarea>
+                  <div
+                    *ngIf="
+                      profileForm.get('personalDetails.aboutMe').invalid &&
+                      (profileForm.get('personalDetails.aboutMe').touched ||
+                        profileForm.get('personalDetails.aboutMe').dirty)
+                    "
+                  >
+                    <div
+                      *ngIf="
+                        profileForm
+                          .get('personalDetails.aboutMe')
+                          .hasError('required')
+                      "
+                      style="
+                        color: rgb(253, 122, 122);
+                        font-size: small;
+                        font-style: italic;
+                      "
+                    >
+                      aboutMe is required
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- ############### identify information ############### -->
+        <div>
+          <div formGroupName="identityInformation">
+            <h5 class="card-title mt-3">Identity Details</h5>
+
+            <div class="row text-input-field">
+              <div class="col-4">
+                <div class="row" style="display: flex">
+                  <div class="col-4 info-name">UAN</div>
+                  <div class="col-8">
+                    <input
+                      type="text"
+                      class="form-control custom-placeholder"
+                      placeholder="Enter UAN"
+                      id="inputdefault"
+                      formControlName="uan"
+                    />
+                  </div>
+                </div>
+              </div>
+              <div class="col-4">
+                <div class="row" style="display: flex">
+                  <div class="col-4">
+                    <label class="starlabel">Pan Number</label>
+                  </div>
+                  <div class="col-8">
+                    <input
+                      type="text"
+                      class="form-control custom-placeholder"
+                      placeholder="Enter pan number"
+                      id="inputdefault"
+                      formControlName="panNumber"
+                    />
+                    <div
+                      *ngIf="
+                        profileForm.get('identityInformation.panNumber')
+                          .invalid &&
+                        (profileForm.get('identityInformation.panNumber')
+                          .touched ||
+                          profileForm.get('identityInformation.panNumber')
+                            .dirty)
+                      "
+                    >
+                      <div
+                        *ngIf="
+                          profileForm
+                            .get('identityInformation.panNumber')
+                            .hasError('required')
+                        "
+                        style="
+                          color: rgb(253, 122, 122);
+                          font-size: small;
+                          font-style: italic;
+                        "
+                      >
+                        panNumber is required
+                      </div>
+                      <div
+                        *ngIf="
+                          profileForm
+                            .get('identityInformation.panNumber')
+                            .hasError('pattern')
+                        "
+                        style="
+                          color: rgb(253, 122, 122);
+                          font-size: small;
+                          font-style: italic;
+                        "
+                      >
+                        Invalid PAN number format. Please enter a valid PAN
+                        number.
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-4">
+                <div class="row" style="display: flex">
+                  <div class="col-4">
+                    <label class="starlabel">Aadhar Number</label>
+                  </div>
+                  <div class="col-8">
+                    <input
+                      type="text"
+                      class="form-control custom-placeholder"
+                      placeholder="Enter aadhar number"
+                      id="inputdefault"
+                      formControlName="aadharNumber"
+                    />
+                    <div
+                      *ngIf="
+                        profileForm.get('identityInformation.aadharNumber')
+                          .invalid &&
+                        (profileForm.get('identityInformation.aadharNumber')
+                          .touched ||
+                          profileForm.get('identityInformation.aadharNumber')
+                            .dirty)
+                      "
+                    >
+                      <div
+                        *ngIf="
+                          profileForm
+                            .get('identityInformation.aadharNumber')
+                            .hasError('required')
+                        "
+                        style="
+                          color: rgb(253, 122, 122);
+                          font-size: small;
+                          font-style: italic;
+                        "
+                      >
+                        aadharNumber is required
+                      </div>
+                      <div
+                        *ngIf="
+                          profileForm
+                            .get('identityInformation.aadharNumber')
+                            .hasError('pattern')
+                        "
+                        style="
+                          color: rgb(253, 122, 122);
+                          font-size: small;
+                          font-style: italic;
+                        "
+                      >
+                        Invalid Aadhar card number format. Please enter a valid
+                        Aadhar card number.
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- ################ conatct info ############### -->
+        <div formGroupName="contactDetails">
+          <h5 class="card-title mt-3">Contact Information</h5>
+
+          <div class="row text-input-field">
+            <div class="col-6">
+              <div class="row" style="display: flex">
+                <div class="col-4 info-name">
+                  <label class="starlabel">Working Phone Number</label>
+                </div>
+                <div class="col-8">
+                  <input
+                    type="text"
+                    placeholder="Enter working number"
+                    class="form-control custom-placeholder"
+                    id="inputdefault"
+                    formControlName="workingPhoneNumber"
+                  />
+                  <div
+                    *ngIf="
+                      profileForm.get('contactDetails.workingPhoneNumber')
+                        .invalid &&
+                      (profileForm.get('contactDetails.workingPhoneNumber')
+                        .touched ||
+                        profileForm.get('contactDetails.workingPhoneNumber')
+                          .dirty)
+                    "
+                  >
+                    <div
+                      *ngIf="
+                        profileForm
+                          .get('contactDetails.workingPhoneNumber')
+                          .hasError('required')
+                      "
+                      style="
+                        color: rgb(253, 122, 122);
+                        font-size: small;
+                        font-style: italic;
+                      "
+                    >
+                      workingPhoneNumber is required
+                    </div>
+                    <div
+                      *ngIf="
+                        profileForm
+                          .get('contactDetails.workingPhoneNumber')
+                          .hasError('pattern')
+                      "
+                      style="
+                        color: rgb(253, 122, 122);
+                        font-size: small;
+                        font-style: italic;
+                      "
+                    >
+                      Please enter a 10-digit number.
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-6">
+              <div class="row" style="display: flex">
+                <div class="col-4">
+                  <label class="starlabel">Personal Mobile Number</label>
+                </div>
+                <div class="col-8">
+                  <input
+                    type="text"
+                    class="form-control custom-placeholder"
+                    placeholder="Enter personal number"
+                    id="inputdefault"
+                    formControlName="personalMobileNumber"
+                  />
+                  <div
+                    *ngIf="
+                      profileForm.get('contactDetails.personalMobileNumber')
+                        .invalid &&
+                      (profileForm.get('contactDetails.personalMobileNumber')
+                        .touched ||
+                        profileForm.get('contactDetails.personalMobileNumber')
+                          .dirty)
+                    "
+                  >
+                    <div
+                      *ngIf="
+                        profileForm
+                          .get('contactDetails.personalMobileNumber')
+                          .hasError('required')
+                      "
+                      style="
+                        color: rgb(253, 122, 122);
+                        font-size: small;
+                        font-style: italic;
+                      "
+                    >
+                      personal MobileNumber is required
+                    </div>
+                  </div>
+                  <div
+                    *ngIf="
+                      profileForm
+                        .get('contactDetails.personalMobileNumber')
+                        .hasError('pattern')
+                    "
+                    style="
+                      color: rgb(253, 122, 122);
+                      font-size: small;
+                      font-style: italic;
+                    "
+                  >
                     Please enter a 10-digit number.
                   </div>
                 </div>
               </div>
-
-
             </div>
           </div>
-          <div class="col-6">
-            <div class="row" style="display: flex;">
-              <div class="col-4"><label class="starlabel">Personal Mobile Number</label></div>
-              <div class="col-8"><input type="text" class="form-control custom-placeholder " placeholder="Enter personal number" id="inputdefault" formControlName="personalMobileNumber" >
-                <div *ngIf="profileForm.get('contactDetails.personalMobileNumber').invalid && (profileForm.get('contactDetails.personalMobileNumber').touched || profileForm.get('contactDetails.personalMobileNumber').dirty)">
-                  <div *ngIf="profileForm.get('contactDetails.personalMobileNumber').hasError('required')" style="color: rgb(253, 122, 122); font-size: small; font-style: italic;">
-                    personal MobileNumber is required
-                  </div>
+          <div class="row text-input-field">
+            <div class="col-6">
+              <div class="row" style="display: flex">
+                <div class="col-4">
+                  <label class="starlabel">Personal Email Address</label>
                 </div>
-                <div *ngIf="profileForm.get('contactDetails.personalMobileNumber').hasError('pattern')" style="color: rgb(253, 122, 122); font-size: small; font-style: italic;">
-                  Please enter a 10-digit number.
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="row text-input-field">
-          <div class="col-6">
-            <div class="row" style="display: flex;">
-              <div class="col-4"><label class="starlabel">Personal Email Address</label></div>
-              <div class="col-8"><input type="text" class="form-control custom-placeholder" placeholder="Enter personal email" id="inputdefault" formControlName="personalEmailAddress">
-                <div *ngIf="profileForm.get('contactDetails.personalEmailAddress').invalid && (profileForm.get('contactDetails.personalEmailAddress').touched || profileForm.get('contactDetails.personalEmailAddress').dirty)">
-                  <div *ngIf="profileForm.get('contactDetails.personalEmailAddress').hasError('required')" style="color: rgb(253, 122, 122); font-size: small; font-style: italic;">
-                    personal EmailAddress is required
-                  </div>
-                  <div *ngIf="profileForm.get('contactDetails.personalEmailAddress').hasError('email')" style="color: rgb(253, 122, 122); font-size: small; font-style: italic;">
-                    please enter valid email
-                  </div>
-
-                </div>
-
-              </div>
-            </div>
-          </div>
-        </div>
-  <!-- ###############conatct personal info ############### -->
-        <div formGroupName="presentAddress">
-        <div class="row text-input-field">
-          <div class="col-6">
-            <div class="row" style="display: flex;">
-              <div class="col-4"><label class="starlabel">Present Address</label></div>
-              <div class="col-8">
-                <input type="text" class="form-control custom-placeholder" id="inputdefault" placeholder="Address Line 1" formControlName="address1">
-                <div *ngIf="profileForm.get('contactDetails.presentAddress.address1').invalid && (profileForm.get('contactDetails.presentAddress.address1').touched || profileForm.get('contactDetails.presentAddress.address1').dirty)">
-                  <div *ngIf="profileForm.get('contactDetails.presentAddress.address1').hasError('required')" style="color: rgb(253, 122, 122); font-size: small; font-style: italic;">
-                    address1 is required
-                  </div>
-                </div>
-              </div>
-
-            </div>
-          </div>
-          <div class="col-6">
-            <div class="row" style="display: flex;">
-
-              <div class="col-8"><input type="text" class="form-control custom-placeholder" id="inputdefault"  placeholder="Address Line 2" formControlName="address2">
-                <div *ngIf="profileForm.get('contactDetails.presentAddress.address2').invalid && (profileForm.get('contactDetails.presentAddress.address2').touched || profileForm.get('contactDetails.presentAddress.address2').dirty)">
-                  <div *ngIf="profileForm.get('contactDetails.presentAddress.address2').hasError('required')" style="color: rgb(253, 122, 122); font-size: small; font-style: italic;">
-                    address2 is required
+                <div class="col-8">
+                  <input
+                    type="text"
+                    class="form-control custom-placeholder"
+                    placeholder="Enter personal email"
+                    id="inputdefault"
+                    formControlName="personalEmailAddress"
+                  />
+                  <div
+                    *ngIf="
+                      profileForm.get('contactDetails.personalEmailAddress')
+                        .invalid &&
+                      (profileForm.get('contactDetails.personalEmailAddress')
+                        .touched ||
+                        profileForm.get('contactDetails.personalEmailAddress')
+                          .dirty)
+                    "
+                  >
+                    <div
+                      *ngIf="
+                        profileForm
+                          .get('contactDetails.personalEmailAddress')
+                          .hasError('required')
+                      "
+                      style="
+                        color: rgb(253, 122, 122);
+                        font-size: small;
+                        font-style: italic;
+                      "
+                    >
+                      personal EmailAddress is required
+                    </div>
+                    <div
+                      *ngIf="
+                        profileForm
+                          .get('contactDetails.personalEmailAddress')
+                          .hasError('email')
+                      "
+                      style="
+                        color: rgb(253, 122, 122);
+                        font-size: small;
+                        font-style: italic;
+                      "
+                    >
+                      please enter valid email
+                    </div>
                   </div>
                 </div>
               </div>
             </div>
           </div>
-        </div>
-
-        <div class="row text-input-field">
-          <div class="col-6">
-            <div class="row" style="display: flex;">
-              <div class="col-4"></div>
-              <div class="col-8"><input type="text" class="form-control custom-placeholder" id="inputdefault" placeholder="Country" formControlName="country" >
-                <div *ngIf="profileForm.get('contactDetails.presentAddress.country').invalid && (profileForm.get('contactDetails.presentAddress.country').touched || profileForm.get('contactDetails.presentAddress.country').dirty)">
-                  <div *ngIf="profileForm.get('contactDetails.presentAddress.country').hasError('required')" style="color: rgb(253, 122, 122); font-size: small; font-style: italic;">
-                    country is required
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="col-6">
-            <div class="row" style="display: flex;">
-
-              <div class="col-8"><input type="text" class="form-control custom-placeholder" id="inputdefault"  placeholder="State" formControlName="state">
-                <div *ngIf="profileForm.get('contactDetails.presentAddress.state').invalid && (profileForm.get('contactDetails.presentAddress.state').touched || profileForm.get('contactDetails.presentAddress.state').dirty)">
-                  <div *ngIf="profileForm.get('contactDetails.presentAddress.state').hasError('required')" style="color: rgb(253, 122, 122); font-size: small; font-style: italic;">
-                    state is required
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="row text-input-field">
-          <div class="col-6">
-            <div class="row" style="display: flex;">
-              <div class="col-4"></div>
-              <div class="col-8"><input type="text" class="form-control custom-placeholder" id="inputdefault" placeholder="City" formControlName="city">
-                <div *ngIf="profileForm.get('contactDetails.presentAddress.city').invalid && (profileForm.get('contactDetails.presentAddress.city').touched || profileForm.get('contactDetails.presentAddress.city').dirty)">
-                  <div *ngIf="profileForm.get('contactDetails.presentAddress.city').hasError('required')" style="color: rgb(253, 122, 122); font-size: small; font-style: italic;">
-                    city is required
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="col-6">
-            <div class="row" style="display: flex;">
-
-              <div class="col-8"><input type="text" class="form-control custom-placeholder" id="inputdefault"  placeholder="Pincode" formControlName="pincode">
-                <div *ngIf="profileForm.get('contactDetails.presentAddress.pincode').invalid && (profileForm.get('contactDetails.presentAddress.pincode').touched || profileForm.get('contactDetails.presentAddress.pincode').dirty)">
-                  <div *ngIf="profileForm.get('contactDetails.presentAddress.pincode').hasError('required')" style="color: rgb(253, 122, 122); font-size: small; font-style: italic;">
-                    pincode is required
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-</div>
-
-
-<!-- ############### contact personla indo end ############### -->
-
+          <!-- ###############conatct personal info ############### -->
+          <div formGroupName="presentAddress">
             <div class="row text-input-field">
               <div class="col-6">
-                <div class="row" style="display: flex;">
-                  <div class="col-4"><label class="starlabel">Permanent Address</label></div>
-                  <div class="col-8" style="display: flex;align-items: center;">
-                    <input type="checkbox" formControlName="sameAsLocal" (change)="checkValue(profileForm.get('contactDetails.sameAsLocal'))">
-                    <p style="margin-bottom: 0; margin-left: 10px;">Same as Present Address</p>
+                <div class="row" style="display: flex">
+                  <div class="col-4">
+                    <label class="starlabel">Present Address</label>
                   </div>
-                </div>
-              </div>
-              <div class="col-6">
-
-              </div>
-            </div>
-            <div formGroupName="permanentAddress">
-            <div class="row text-input-field">
-              <div class="col-6">
-                <div class="row" style="display: flex;">
-                  <div class="col-4"></div>
-                  <div class="col-8"><input type="text" class="form-control custom-placeholder" id="inputdefault" placeholder="Address Line 1"  formControlName="address1">
-                    <div *ngIf="profileForm.get('contactDetails.permanentAddress.address1').invalid && (profileForm.get('contactDetails.permanentAddress.address1').touched || profileForm.get('contactDetails.permanentAddress.address1').dirty)">
-                      <div *ngIf="profileForm.get('contactDetails.permanentAddress.address1').hasError('required')" style="color: rgb(253, 122, 122); font-size: small; font-style: italic;">
+                  <div class="col-8">
+                    <input
+                      type="text"
+                      class="form-control custom-placeholder"
+                      id="inputdefault"
+                      placeholder="Address Line 1"
+                      formControlName="address1"
+                    />
+                    <div
+                      *ngIf="
+                        profileForm.get(
+                          'contactDetails.presentAddress.address1'
+                        ).invalid &&
+                        (profileForm.get(
+                          'contactDetails.presentAddress.address1'
+                        ).touched ||
+                          profileForm.get(
+                            'contactDetails.presentAddress.address1'
+                          ).dirty)
+                      "
+                    >
+                      <div
+                        *ngIf="
+                          profileForm
+                            .get('contactDetails.presentAddress.address1')
+                            .hasError('required')
+                        "
+                        style="
+                          color: rgb(253, 122, 122);
+                          font-size: small;
+                          font-style: italic;
+                        "
+                      >
                         address1 is required
                       </div>
                     </div>
@@ -922,11 +1479,40 @@
                 </div>
               </div>
               <div class="col-6">
-                <div class="row" style="display: flex;">
-
-                  <div class="col-8"><input type="text" class="form-control custom-placeholder" id="inputdefault"  placeholder="Address Line 2" formControlName="address2">
-                   <div *ngIf="profileForm.get('contactDetails.permanentAddress.address2').invalid && (profileForm.get('contactDetails.permanentAddress.address2').touched || profileForm.get('contactDetails.permanentAddress.address2').dirty)">
-                      <div *ngIf="profileForm.get('contactDetails.permanentAddress.address2').hasError('required')" style="color: rgb(253, 122, 122); font-size: small; font-style: italic;">
+                <div class="row" style="display: flex">
+                  <div class="col-8">
+                    <input
+                      type="text"
+                      class="form-control custom-placeholder"
+                      id="inputdefault"
+                      placeholder="Address Line 2"
+                      formControlName="address2"
+                    />
+                    <div
+                      *ngIf="
+                        profileForm.get(
+                          'contactDetails.presentAddress.address2'
+                        ).invalid &&
+                        (profileForm.get(
+                          'contactDetails.presentAddress.address2'
+                        ).touched ||
+                          profileForm.get(
+                            'contactDetails.presentAddress.address2'
+                          ).dirty)
+                      "
+                    >
+                      <div
+                        *ngIf="
+                          profileForm
+                            .get('contactDetails.presentAddress.address2')
+                            .hasError('required')
+                        "
+                        style="
+                          color: rgb(253, 122, 122);
+                          font-size: small;
+                          font-style: italic;
+                        "
+                      >
                         address2 is required
                       </div>
                     </div>
@@ -935,16 +1521,42 @@
               </div>
             </div>
 
-
-
-
             <div class="row text-input-field">
               <div class="col-6">
-                <div class="row" style="display: flex;">
+                <div class="row" style="display: flex">
                   <div class="col-4"></div>
-                  <div class="col-8"><input type="text" class="form-control custom-placeholder" id="inputdefault" placeholder="Country" formControlName="country">
-                    <div *ngIf="profileForm.get('contactDetails.permanentAddress.country').invalid && (profileForm.get('contactDetails.permanentAddress.country').touched || profileForm.get('contactDetails.permanentAddress.country').dirty)">
-                      <div *ngIf="profileForm.get('contactDetails.permanentAddress.country').hasError('required')" style="color: rgb(253, 122, 122); font-size: small; font-style: italic;">
+                  <div class="col-8">
+                    <input
+                      type="text"
+                      class="form-control custom-placeholder"
+                      id="inputdefault"
+                      placeholder="Country"
+                      formControlName="country"
+                    />
+                    <div
+                      *ngIf="
+                        profileForm.get('contactDetails.presentAddress.country')
+                          .invalid &&
+                        (profileForm.get(
+                          'contactDetails.presentAddress.country'
+                        ).touched ||
+                          profileForm.get(
+                            'contactDetails.presentAddress.country'
+                          ).dirty)
+                      "
+                    >
+                      <div
+                        *ngIf="
+                          profileForm
+                            .get('contactDetails.presentAddress.country')
+                            .hasError('required')
+                        "
+                        style="
+                          color: rgb(253, 122, 122);
+                          font-size: small;
+                          font-style: italic;
+                        "
+                      >
                         country is required
                       </div>
                     </div>
@@ -952,11 +1564,37 @@
                 </div>
               </div>
               <div class="col-6">
-                <div class="row" style="display: flex;">
-
-                  <div class="col-8"><input type="text" class="form-control custom-placeholder" id="inputdefault"  placeholder="State" formControlName="state">
-                    <div *ngIf="profileForm.get('contactDetails.permanentAddress.state').invalid && (profileForm.get('contactDetails.permanentAddress.state').touched || profileForm.get('contactDetails.permanentAddress.state').dirty)">
-                      <div *ngIf="profileForm.get('contactDetails.permanentAddress.state').hasError('required')" style="color: rgb(253, 122, 122); font-size: small; font-style: italic;">
+                <div class="row" style="display: flex">
+                  <div class="col-8">
+                    <input
+                      type="text"
+                      class="form-control custom-placeholder"
+                      id="inputdefault"
+                      placeholder="State"
+                      formControlName="state"
+                    />
+                    <div
+                      *ngIf="
+                        profileForm.get('contactDetails.presentAddress.state')
+                          .invalid &&
+                        (profileForm.get('contactDetails.presentAddress.state')
+                          .touched ||
+                          profileForm.get('contactDetails.presentAddress.state')
+                            .dirty)
+                      "
+                    >
+                      <div
+                        *ngIf="
+                          profileForm
+                            .get('contactDetails.presentAddress.state')
+                            .hasError('required')
+                        "
+                        style="
+                          color: rgb(253, 122, 122);
+                          font-size: small;
+                          font-style: italic;
+                        "
+                      >
                         state is required
                       </div>
                     </div>
@@ -966,11 +1604,38 @@
             </div>
             <div class="row text-input-field">
               <div class="col-6">
-                <div class="row" style="display: flex;">
+                <div class="row" style="display: flex">
                   <div class="col-4"></div>
-                  <div class="col-8"><input type="text" class="form-control custom-placeholder" id="inputdefault" placeholder="City"formControlName="city" >
-                    <div *ngIf="profileForm.get('contactDetails.permanentAddress.city').invalid && (profileForm.get('contactDetails.permanentAddress.city').touched || profileForm.get('contactDetails.permanentAddress.city').dirty)">
-                      <div *ngIf="profileForm.get('contactDetails.permanentAddress.city').hasError('required')" style="color: rgb(253, 122, 122); font-size: small; font-style: italic;">
+                  <div class="col-8">
+                    <input
+                      type="text"
+                      class="form-control custom-placeholder"
+                      id="inputdefault"
+                      placeholder="City"
+                      formControlName="city"
+                    />
+                    <div
+                      *ngIf="
+                        profileForm.get('contactDetails.presentAddress.city')
+                          .invalid &&
+                        (profileForm.get('contactDetails.presentAddress.city')
+                          .touched ||
+                          profileForm.get('contactDetails.presentAddress.city')
+                            .dirty)
+                      "
+                    >
+                      <div
+                        *ngIf="
+                          profileForm
+                            .get('contactDetails.presentAddress.city')
+                            .hasError('required')
+                        "
+                        style="
+                          color: rgb(253, 122, 122);
+                          font-size: small;
+                          font-style: italic;
+                        "
+                      >
                         city is required
                       </div>
                     </div>
@@ -978,11 +1643,39 @@
                 </div>
               </div>
               <div class="col-6">
-                <div class="row" style="display: flex;">
-
-                  <div class="col-8"><input type="text" class="form-control custom-placeholder" id="inputdefault" placeholder="Pincode" formControlName="pincode"  >
-                    <div *ngIf="profileForm.get('contactDetails.permanentAddress.pincode').invalid && (profileForm.get('contactDetails.permanentAddress.pincode').touched || profileForm.get('contactDetails.permanentAddress.pincode').dirty)">
-                      <div *ngIf="profileForm.get('contactDetails.permanentAddress.pincode').hasError('required')" style="color: rgb(253, 122, 122); font-size: small; font-style: italic;">
+                <div class="row" style="display: flex">
+                  <div class="col-8">
+                    <input
+                      type="text"
+                      class="form-control custom-placeholder"
+                      id="inputdefault"
+                      placeholder="Pincode"
+                      formControlName="pincode"
+                    />
+                    <div
+                      *ngIf="
+                        profileForm.get('contactDetails.presentAddress.pincode')
+                          .invalid &&
+                        (profileForm.get(
+                          'contactDetails.presentAddress.pincode'
+                        ).touched ||
+                          profileForm.get(
+                            'contactDetails.presentAddress.pincode'
+                          ).dirty)
+                      "
+                    >
+                      <div
+                        *ngIf="
+                          profileForm
+                            .get('contactDetails.presentAddress.pincode')
+                            .hasError('required')
+                        "
+                        style="
+                          color: rgb(253, 122, 122);
+                          font-size: small;
+                          font-style: italic;
+                        "
+                      >
                         pincode is required
                       </div>
                     </div>
@@ -990,283 +1683,942 @@
                 </div>
               </div>
             </div>
-
           </div>
-        </div>
-          <div>
 
-            <!-- ############### separation date ############### -->
-            <div>
-      <h5 class="card-title mt-3">Sepration Date</h5>
+          <!-- ############### contact personla indo end ############### -->
 
-      <div class="row text-input-field">
-        <div class="col-6">
-          <div class="row" style="display: flex;">
-            <div class="col-4 info-name"><label>Date of Exit</label></div>
-            <div class="col-8">
-              <input type="date" class="form-control" placeholder="Select date of exit"  [min]="getMinimumDate()"
-              id="startDate" name="startDate" formControlName="separationOfDate">
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-
-
-      <!-- ##########SYstem group starts from here ##################################### -->
-
-      <div>
-        <h5 class="card-title mt-3">System Field</h5>
-
-
-      <div formGroupName="systemFields">
-        <div class="row text-input-field">
-          <div class="col-6">
-            <div class="row" style="display: flex;">
-              <div class="col-4 info-name"><label class="starlabel">Added Time</label></div>
-              <div class="col-8">
-                <input type="date" class="form-control" placeholder="added Time"  [min]="getMinimumDate()"
-                        id="startDate" name="startDate" formControlName="addedTime">
-                        <div *ngIf="profileForm.get('systemFields.addedTime').invalid && (profileForm.get('systemFields.addedTime').touched || profileForm.get('systemFields.addedTime').dirty)">
-                          <div *ngIf="profileForm.get('systemFields.addedTime').hasError('required')" style="color: rgb(253, 122, 122); font-size: small; font-style: italic;">
-                            added time is required
-                          </div>
-                        </div>
+          <div class="row text-input-field">
+            <div class="col-6">
+              <div class="row" style="display: flex">
+                <div class="col-4">
+                  <label class="starlabel">Permanent Address</label>
+                </div>
+                <div class="col-8" style="display: flex; align-items: center">
+                  <input
+                    type="checkbox"
+                    formControlName="sameAsLocal"
+                    (change)="
+                      checkValue(profileForm.get('contactDetails.sameAsLocal'))
+                    "
+                  />
+                  <p style="margin-bottom: 0; margin-left: 10px">
+                    Same as Present Address
+                  </p>
+                </div>
               </div>
             </div>
+            <div class="col-6"></div>
           </div>
-          <div class="col-6">
-            <div class="row" style="display: flex;">
-              <div class="col-4 info-name"><label >Modified Time</label></div>
-              <div class="col-8">
-                <input type="date" class="form-control" placeholder="modified time"  [min]="getMinimumDate()"
-                        id="startDate" name="startDate" formControlName="modifiedTime" readonly>
-
+          <div formGroupName="permanentAddress">
+            <div class="row text-input-field">
+              <div class="col-6">
+                <div class="row" style="display: flex">
+                  <div class="col-4"></div>
+                  <div class="col-8">
+                    <input
+                      type="text"
+                      class="form-control custom-placeholder"
+                      id="inputdefault"
+                      placeholder="Address Line 1"
+                      formControlName="address1"
+                    />
+                    <div
+                      *ngIf="
+                        profileForm.get(
+                          'contactDetails.permanentAddress.address1'
+                        ).invalid &&
+                        (profileForm.get(
+                          'contactDetails.permanentAddress.address1'
+                        ).touched ||
+                          profileForm.get(
+                            'contactDetails.permanentAddress.address1'
+                          ).dirty)
+                      "
+                    >
+                      <div
+                        *ngIf="
+                          profileForm
+                            .get('contactDetails.permanentAddress.address1')
+                            .hasError('required')
+                        "
+                        style="
+                          color: rgb(253, 122, 122);
+                          font-size: small;
+                          font-style: italic;
+                        "
+                      >
+                        address1 is required
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-6">
+                <div class="row" style="display: flex">
+                  <div class="col-8">
+                    <input
+                      type="text"
+                      class="form-control custom-placeholder"
+                      id="inputdefault"
+                      placeholder="Address Line 2"
+                      formControlName="address2"
+                    />
+                    <div
+                      *ngIf="
+                        profileForm.get(
+                          'contactDetails.permanentAddress.address2'
+                        ).invalid &&
+                        (profileForm.get(
+                          'contactDetails.permanentAddress.address2'
+                        ).touched ||
+                          profileForm.get(
+                            'contactDetails.permanentAddress.address2'
+                          ).dirty)
+                      "
+                    >
+                      <div
+                        *ngIf="
+                          profileForm
+                            .get('contactDetails.permanentAddress.address2')
+                            .hasError('required')
+                        "
+                        style="
+                          color: rgb(253, 122, 122);
+                          font-size: small;
+                          font-style: italic;
+                        "
+                      >
+                        address2 is required
+                      </div>
+                    </div>
+                  </div>
+                </div>
               </div>
             </div>
-          </div>
-        </div>
 
-      <div class="row text-input-field">
-        <div class="col-6">
-          <div class="row" style="display: flex;">
-            <div class="col-4 info-name"><label class="starlabel">Added By</label></div>
-            <div class="col-8">
-              <input type="text" class="form-control custom-placeholder" placeholder="Enter added by" id="inputdefault" formControlName="addedBy">
-              <div *ngIf="profileForm.get('systemFields.addedBy').invalid && (profileForm.get('systemFields.addedBy').touched || profileForm.get('systemFields.addedBy').dirty)">
-                <div *ngIf="profileForm.get('systemFields.addedBy').hasError('required')" style="color: rgb(253, 122, 122); font-size: small; font-style: italic;">
-                  added by is required
+            <div class="row text-input-field">
+              <div class="col-6">
+                <div class="row" style="display: flex">
+                  <div class="col-4"></div>
+                  <div class="col-8">
+                    <input
+                      type="text"
+                      class="form-control custom-placeholder"
+                      id="inputdefault"
+                      placeholder="Country"
+                      formControlName="country"
+                    />
+                    <div
+                      *ngIf="
+                        profileForm.get(
+                          'contactDetails.permanentAddress.country'
+                        ).invalid &&
+                        (profileForm.get(
+                          'contactDetails.permanentAddress.country'
+                        ).touched ||
+                          profileForm.get(
+                            'contactDetails.permanentAddress.country'
+                          ).dirty)
+                      "
+                    >
+                      <div
+                        *ngIf="
+                          profileForm
+                            .get('contactDetails.permanentAddress.country')
+                            .hasError('required')
+                        "
+                        style="
+                          color: rgb(253, 122, 122);
+                          font-size: small;
+                          font-style: italic;
+                        "
+                      >
+                        country is required
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-6">
+                <div class="row" style="display: flex">
+                  <div class="col-8">
+                    <input
+                      type="text"
+                      class="form-control custom-placeholder"
+                      id="inputdefault"
+                      placeholder="State"
+                      formControlName="state"
+                    />
+                    <div
+                      *ngIf="
+                        profileForm.get('contactDetails.permanentAddress.state')
+                          .invalid &&
+                        (profileForm.get(
+                          'contactDetails.permanentAddress.state'
+                        ).touched ||
+                          profileForm.get(
+                            'contactDetails.permanentAddress.state'
+                          ).dirty)
+                      "
+                    >
+                      <div
+                        *ngIf="
+                          profileForm
+                            .get('contactDetails.permanentAddress.state')
+                            .hasError('required')
+                        "
+                        style="
+                          color: rgb(253, 122, 122);
+                          font-size: small;
+                          font-style: italic;
+                        "
+                      >
+                        state is required
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="row text-input-field">
+              <div class="col-6">
+                <div class="row" style="display: flex">
+                  <div class="col-4"></div>
+                  <div class="col-8">
+                    <input
+                      type="text"
+                      class="form-control custom-placeholder"
+                      id="inputdefault"
+                      placeholder="City"
+                      formControlName="city"
+                    />
+                    <div
+                      *ngIf="
+                        profileForm.get('contactDetails.permanentAddress.city')
+                          .invalid &&
+                        (profileForm.get('contactDetails.permanentAddress.city')
+                          .touched ||
+                          profileForm.get(
+                            'contactDetails.permanentAddress.city'
+                          ).dirty)
+                      "
+                    >
+                      <div
+                        *ngIf="
+                          profileForm
+                            .get('contactDetails.permanentAddress.city')
+                            .hasError('required')
+                        "
+                        style="
+                          color: rgb(253, 122, 122);
+                          font-size: small;
+                          font-style: italic;
+                        "
+                      >
+                        city is required
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-6">
+                <div class="row" style="display: flex">
+                  <div class="col-8">
+                    <input
+                      type="text"
+                      class="form-control custom-placeholder"
+                      id="inputdefault"
+                      placeholder="Pincode"
+                      formControlName="pincode"
+                    />
+                    <div
+                      *ngIf="
+                        profileForm.get(
+                          'contactDetails.permanentAddress.pincode'
+                        ).invalid &&
+                        (profileForm.get(
+                          'contactDetails.permanentAddress.pincode'
+                        ).touched ||
+                          profileForm.get(
+                            'contactDetails.permanentAddress.pincode'
+                          ).dirty)
+                      "
+                    >
+                      <div
+                        *ngIf="
+                          profileForm
+                            .get('contactDetails.permanentAddress.pincode')
+                            .hasError('required')
+                        "
+                        style="
+                          color: rgb(253, 122, 122);
+                          font-size: small;
+                          font-style: italic;
+                        "
+                      >
+                        pincode is required
+                      </div>
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>
           </div>
         </div>
-        <div class="col-6">
-          <div class="row" style="display: flex;">
-            <div class="col-4 info-name"><label>Modified By</label></div>
-            <div class="col-8">
-              <input type="text" class="form-control custom-placeholder" placeholder="Enter modified by" id="inputdefault" formControlName="modifiedBy" readonly>
+        <div>
+          <!-- ############### separation date ############### -->
+          <div>
+            <h5 class="card-title mt-3">Sepration Date</h5>
 
+            <div class="row text-input-field">
+              <div class="col-6">
+                <div class="row" style="display: flex">
+                  <div class="col-4 info-name"><label>Date of Exit</label></div>
+                  <div class="col-8">
+                    <input
+                      type="date"
+                      class="form-control"
+                      placeholder="Select date of exit"
+                      [min]="getMinimumDate()"
+                      id="startDate"
+                      name="startDate"
+                      formControlName="separationOfDate"
+                    />
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- ##########SYstem group starts from here ##################################### -->
+
+          <div>
+            <h5 class="card-title mt-3">System Field</h5>
+
+            <div formGroupName="systemFields">
+              <div class="row text-input-field">
+                <div class="col-6">
+                  <div class="row" style="display: flex">
+                    <div class="col-4 info-name">
+                      <label class="starlabel">Added Time</label>
+                    </div>
+                    <div class="col-8">
+                      <input
+                        type="date"
+                        class="form-control"
+                        placeholder="added Time"
+                        [min]="getMinimumDate()"
+                        id="startDate"
+                        name="startDate"
+                        formControlName="addedTime"
+                      />
+                      <div
+                        *ngIf="
+                          profileForm.get('systemFields.addedTime').invalid &&
+                          (profileForm.get('systemFields.addedTime').touched ||
+                            profileForm.get('systemFields.addedTime').dirty)
+                        "
+                      >
+                        <div
+                          *ngIf="
+                            profileForm
+                              .get('systemFields.addedTime')
+                              .hasError('required')
+                          "
+                          style="
+                            color: rgb(253, 122, 122);
+                            font-size: small;
+                            font-style: italic;
+                          "
+                        >
+                          added time is required
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-6">
+                  <div class="row" style="display: flex">
+                    <div class="col-4 info-name">
+                      <label>Modified Time</label>
+                    </div>
+                    <div class="col-8">
+                      <input
+                        type="date"
+                        class="form-control"
+                        placeholder="modified time"
+                        [min]="getMinimumDate()"
+                        id="startDate"
+                        name="startDate"
+                        formControlName="modifiedTime"
+                        readonly
+                      />
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="row text-input-field">
+                <div class="col-6">
+                  <div class="row" style="display: flex">
+                    <div class="col-4 info-name">
+                      <label class="starlabel">Added By</label>
+                    </div>
+                    <div class="col-8">
+                      <input
+                        type="text"
+                        class="form-control custom-placeholder"
+                        placeholder="Enter added by"
+                        id="inputdefault"
+                        formControlName="addedBy"
+                      />
+                      <div
+                        *ngIf="
+                          profileForm.get('systemFields.addedBy').invalid &&
+                          (profileForm.get('systemFields.addedBy').touched ||
+                            profileForm.get('systemFields.addedBy').dirty)
+                        "
+                      >
+                        <div
+                          *ngIf="
+                            profileForm
+                              .get('systemFields.addedBy')
+                              .hasError('required')
+                          "
+                          style="
+                            color: rgb(253, 122, 122);
+                            font-size: small;
+                            font-style: italic;
+                          "
+                        >
+                          added by is required
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-6">
+                  <div class="row" style="display: flex">
+                    <div class="col-4 info-name">
+                      <label>Modified By</label>
+                    </div>
+                    <div class="col-8">
+                      <input
+                        type="text"
+                        class="form-control custom-placeholder"
+                        placeholder="Enter modified by"
+                        id="inputdefault"
+                        formControlName="modifiedBy"
+                        readonly
+                      />
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="row text-input-field">
+                <div class="col-6">
+                  <div class="row" style="display: flex">
+                    <div class="col-4 info-name">
+                      <label class="starlabel">Onboarding status</label>
+                    </div>
+                    <div class="col-8">
+                      <select
+                        style="
+                          width: 100%;
+                          border: 1px solid lightgray;
+                          height: 38px;
+                          padding: 5px;
+                        "
+                        class="form-group"
+                        formControlName="onBoardingStatus"
+                      >
+                        <option>Enter Type</option>
+                        <option *ngFor="let count of onBoardingType">
+                          {{ count.state }}
+                        </option>
+                      </select>
+                      <div
+                        *ngIf="
+                          profileForm.get('systemFields.onBoardingStatus')
+                            .invalid &&
+                          (profileForm.get('systemFields.onBoardingStatus')
+                            .touched ||
+                            profileForm.get('systemFields.onBoardingStatus')
+                              .dirty)
+                        "
+                      >
+                        <div
+                          *ngIf="
+                            profileForm
+                              .get('systemFields.onBoardingStatus')
+                              .hasError('required')
+                          "
+                          style="
+                            color: rgb(253, 122, 122);
+                            font-size: small;
+                            font-style: italic;
+                          "
+                        >
+                          onBoardingStatus is required
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- ########################system field end here ########################## -->
+        </div>
+        <div>
+          <div formArrayName="workExperience">
+            <h5 class="card-title mt-3">Work Experience</h5>
+            <div style="display: flex; justify-content: end">
+              <button
+                type="button"
+                (click)="addNewWorkRow()"
+                class="btn btn-warning add-edit-button"
+              >
+                Add New Row
+              </button>
+            </div>
+            <!-- <button (click)="addNewWorkRow()">Add work row</button> -->
+            <div class="card">
+              <div style="overflow-x: auto">
+                <table style="width: 100%">
+                  <thead>
+                    <tr>
+                      <th style="text-align: center">Sno.</th>
+                      <th style="text-align: center">
+                        <label>Company Name</label>
+                      </th>
+                      <th style="text-align: center">
+                        <label>Job Title</label>
+                      </th>
+                      <th style="text-align: center">
+                        <label>From Date</label>
+                      </th>
+                      <th style="text-align: center"><label>To Date</label></th>
+                      <th style="text-align: center">
+                        <label>Job Description</label>
+                      </th>
+                      <th style="text-align: center">
+                        <label>Relevent Experience</label>
+                      </th>
+                      <th>Actions</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <!-- <tr *ngFor="let row of rows; let rowIndex = index" [formGroup]="row"> -->
+                    <tr
+                      *ngFor="let row of workExperience; let rowIndex = index"
+                      [formGroup]="row"
+                    >
+                      <td>{{ row.get("sno").value }}</td>
+                      <td>
+                        <input
+                          type="text"
+                          style="border: none; text-align: center"
+                          class="custom-placeholder"
+                          formControlName="companyName"
+                          placeholder="Enter company name"
+                          [disabled]="!row.get('editMode').value"
+                        />
+                        <div
+                          *ngIf="
+                            row.get('companyName').invalid &&
+                            (row.get('companyName').touched ||
+                              row.get('companyName').dirty)
+                          "
+                        >
+                          <div
+                            *ngIf="row.get('companyName').hasError('required')"
+                            style="
+                              color: rgb(253, 122, 122);
+                              font-size: small;
+                              font-style: italic;
+                            "
+                          >
+                            company name is required.
+                          </div>
+                        </div>
+                      </td>
+                      <td>
+                        <input
+                          type="text"
+                          style="border: none; text-align: center"
+                          class="custom-placeholder"
+                          formControlName="jobTitle"
+                          placeholder="Enter job title"
+                          [disabled]="!row.get('editMode').value"
+                        />
+                        <div
+                          *ngIf="
+                            row.get('jobTitle').invalid &&
+                            (row.get('jobTitle').touched ||
+                              row.get('jobTitle').dirty)
+                          "
+                        >
+                          <div
+                            *ngIf="row.get('jobTitle').hasError('required')"
+                            style="
+                              color: rgb(253, 122, 122);
+                              font-size: small;
+                              font-style: italic;
+                            "
+                          >
+                            job title is required.
+                          </div>
+                        </div>
+                      </td>
+                      <td>
+                        <input
+                          type="date"
+                          style="border: none; text-align: center"
+                          class="custom-placeholder"
+                          formControlName="fromDate"
+                          [disabled]="!row.get('editMode').value"
+                        />
+                        <div
+                          *ngIf="
+                            row.get('fromDate').invalid &&
+                            (row.get('fromDate').touched ||
+                              row.get('fromDate').dirty)
+                          "
+                        >
+                          <div
+                            *ngIf="row.get('fromDate').hasError('required')"
+                            style="
+                              color: rgb(253, 122, 122);
+                              font-size: small;
+                              font-style: italic;
+                            "
+                          >
+                            from date is required.
+                          </div>
+                        </div>
+                      </td>
+                      <td>
+                        <input
+                          type="date"
+                          style="border: none; text-align: center"
+                          class="custom-placeholder"
+                          formControlName="toDate"
+                          [disabled]="!row.get('editMode').value"
+                        />
+                        <div
+                          *ngIf="
+                            row.get('toDate').invalid &&
+                            (row.get('toDate').touched ||
+                              row.get('toDate').dirty)
+                          "
+                        >
+                          <div
+                            *ngIf="row.get('toDate').hasError('required')"
+                            style="
+                              color: rgb(253, 122, 122);
+                              font-size: small;
+                              font-style: italic;
+                            "
+                          >
+                            to date is required.
+                          </div>
+                          <div
+                            *ngIf="row.get['toDate'].errors?.['invalidToDate'] && (row.get['toDate'].touched || row.get['toDate'].dirty)"
+                            style="
+                              color: rgb(253, 122, 122);
+                              font-size: small;
+                              font-style: italic;
+                            "
+                          >
+                            To date should be greater than or equal to from date
+                          </div>
+                        </div>
+                      </td>
+                      <td>
+                        <input
+                          type="text"
+                          style="border: none; text-align: center"
+                          class="custom-placeholder"
+                          formControlName="jobDescription"
+                          placeholder="Enter job description"
+                          [disabled]="!row.get('editMode').value"
+                        />
+                        <div
+                          *ngIf="
+                            row.get('jobDescription').invalid &&
+                            (row.get('jobDescription').touched ||
+                              row.get('jobDescription').dirty)
+                          "
+                        >
+                          <div
+                            *ngIf="
+                              row.get('jobDescription').hasError('required')
+                            "
+                            style="
+                              color: rgb(253, 122, 122);
+                              font-size: small;
+                              font-style: italic;
+                            "
+                          >
+                            job description is required.
+                          </div>
+                        </div>
+                      </td>
+                      <td>
+                        <input
+                          type="text"
+                          style="border: none; text-align: center"
+                          class="custom-placeholder"
+                          formControlName="releventExp"
+                          placeholder="Enter relevant experiance"
+                          [disabled]="!row.get('editMode').value"
+                        />
+                        <div
+                          *ngIf="
+                            row.get('releventExp').invalid &&
+                            (row.get('releventExp').touched ||
+                              row.get('releventExp').dirty)
+                          "
+                        >
+                          <div
+                            *ngIf="row.get('releventExp').hasError('required')"
+                            style="
+                              color: rgb(253, 122, 122);
+                              font-size: small;
+                              font-style: italic;
+                            "
+                          >
+                            experience is required.
+                          </div>
+                          <div
+                            *ngIf="row.get('releventExp').hasError('min')"
+                            style="
+                              color: rgb(253, 122, 122);
+                              font-size: small;
+                              font-style: italic;
+                            "
+                          >
+                            Minimum experience is 1.
+                          </div>
+                          <div
+                            *ngIf="row.get('releventExp').hasError('max')"
+                            style="
+                              color: rgb(253, 122, 122);
+                              font-size: small;
+                              font-style: italic;
+                            "
+                          >
+                            Maximum experience is 50.
+                          </div>
+                        </div>
+                      </td>
+                      <td>
+                        <!-- <button (click)="deleteWorkRow(rowIndex)">Delete</button> -->
+                        <button
+                          (click)="deleteWorkRow(rowIndex)"
+                          type="button"
+                          class="btn btn-danger"
+                        >
+                          <i class="pi pi-trash"></i>
+                        </button>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
             </div>
           </div>
         </div>
-</div>
-
-<div class="row text-input-field">
-  <div class="col-6">
-    <div class="row" style="display: flex;">
-      <div class="col-4 info-name"><label class="starlabel">Onboarding status</label></div>
-      <div class="col-8">
-
-      <select style="width: 100%; border: 1px solid lightgray; height: 38px; padding:5px"
-      class="form-group"
-
-      formControlName="onBoardingStatus"
-    >
-      <option>Enter Type</option>
-      <option *ngFor="let count of onBoardingType">
-        {{ count.state }}
-      </option>
-    </select>
-      <div *ngIf="profileForm.get('systemFields.onBoardingStatus').invalid && (profileForm.get('systemFields.onBoardingStatus').touched || profileForm.get('systemFields.onBoardingStatus').dirty)">
-        <div *ngIf="profileForm.get('systemFields.onBoardingStatus').hasError('required')" style="color: rgb(253, 122, 122); font-size: small; font-style: italic;">
-          onBoardingStatus is required
+        <div formArrayName="educationDetails">
+          <h5 class="card-title" style="margin-top: 40px">Education Details</h5>
+          <div style="display: flex; justify-content: end">
+            <button
+              type="button"
+              (click)="addNewRow()"
+              class="btn btn-warning add-edit-button"
+            >
+              Add New Row
+            </button>
+          </div>
+          <!-- <button (click)="addNewRow()">Add Row</button> -->
+          <table style="width: 100%">
+            <thead>
+              <tr>
+                <th style="text-align: center">S.No</th>
+                <th style="text-align: center">
+                  <label class="starlabel">Institute Name</label>
+                </th>
+                <th style="text-align: center">
+                  <label class="starlabel">Degree/Diploma</label>
+                </th>
+                <th style="text-align: center">
+                  <label class="starlabel">Specialization</label>
+                </th>
+                <th style="text-align: center">
+                  <label class="starlabel">Date of Completion</label>
+                </th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr
+                *ngFor="let row of educationDetails; let rowIndex = index"
+                [formGroup]="row"
+              >
+                <td>{{ row.get("sno").value }}</td>
+                <td>
+                  <input
+                    type="text"
+                    style="border: none; text-align: center"
+                    class="custom-placeholder"
+                    placeholder="Enter institute name"
+                    formControlName="instituteName"
+                    [disabled]="!row.get('editMode').value"
+                  />
+                  <div
+                    *ngIf="
+                      row.get('instituteName').invalid &&
+                      (row.get('instituteName').touched ||
+                        row.get('instituteName').dirty)
+                    "
+                  >
+                    <div
+                      *ngIf="row.get('instituteName').hasError('required')"
+                      style="
+                        color: rgb(253, 122, 122);
+                        font-size: small;
+                        font-style: italic;
+                      "
+                    >
+                      institute name is required.
+                    </div>
+                  </div>
+                </td>
+                <td>
+                  <input
+                    type="text"
+                    style="border: none; text-align: center"
+                    class="custom-placeholder"
+                    placeholder="Enter degree/diploma"
+                    formControlName="degree"
+                    [disabled]="!row.get('editMode').value"
+                  />
+                  <div
+                    *ngIf="
+                      row.get('degree').invalid &&
+                      (row.get('degree').touched || row.get('degree').dirty)
+                    "
+                  >
+                    <div
+                      *ngIf="row.get('degree').hasError('required')"
+                      style="
+                        color: rgb(253, 122, 122);
+                        font-size: small;
+                        font-style: italic;
+                      "
+                    >
+                      degree is required.
+                    </div>
+                  </div>
+                </td>
+                <td>
+                  <input
+                    type="text"
+                    style="border: none; text-align: center"
+                    class="custom-placeholder"
+                    placeholder="Enter speacialization"
+                    formControlName="specialization"
+                    [disabled]="!row.get('editMode').value"
+                  />
+                  <div
+                    *ngIf="
+                      row.get('specialization').invalid &&
+                      (row.get('specialization').touched ||
+                        row.get('specialization').dirty)
+                    "
+                  >
+                    <div
+                      *ngIf="row.get('specialization').hasError('required')"
+                      style="
+                        color: rgb(253, 122, 122);
+                        font-size: small;
+                        font-style: italic;
+                      "
+                    >
+                      specialization is required.
+                    </div>
+                  </div>
+                </td>
+                <td>
+                  <input
+                    type="date"
+                    style="border: none; text-align: center"
+                    class="custom-placeholder"
+                    formControlName="toDate"
+                    [disabled]="!row.get('editMode').value"
+                  />
+                  <div
+                    *ngIf="
+                      row.get('toDate').invalid &&
+                      (row.get('toDate').touched || row.get('toDate').dirty)
+                    "
+                  >
+                    <div
+                      *ngIf="row.get('toDate').hasError('required')"
+                      style="
+                        color: rgb(253, 122, 122);
+                        font-size: small;
+                        font-style: italic;
+                      "
+                    >
+                      to date is required.
+                    </div>
+                  </div>
+                </td>
+                <td>
+                  <!-- <button (click)="toggleEditMode(row)">
+          {{ row.get('editMode').value ? 'Save' : 'Edit' }}
+        </button>  -->
+                  <!-- <button (click)="deleteRow(rowIndex)">Delete</button> -->
+                  <button
+                    (click)="deleteRow(rowIndex)"
+                    type="button"
+                    class="btn btn-danger"
+                  >
+                    <i class="pi pi-trash"></i>
+                  </button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
         </div>
-      </div>
+        <!-- </div> -->
+        <div class="row mb-5 mt-4">
+          <div class="d-flex justify-content-end col-11 mt-4">
+            <button
+              type="submit"
+              style="background: rgb(228, 28, 28); border: none"
+              class="btn btn-info mr-3"
+              (click)="submit()"
+              [disabled]="!profileForm.valid"
+            >
+              Submit
+            </button>
+            <!-- <button type="submit" style="background: rgb(228, 28, 28);border:none" class="btn btn-info mr-3"
+      (click)="submit()" >Submit</button> -->
+            <button
+              class="btn btn-info"
+              style="background: #637381; border: none"
+              [routerLink]="['/leaveMgmt/user-profile']"
+            >
+              Cancel
+            </button>
+          </div>
+        </div>
       </div>
     </div>
   </div>
-</div>
-</div>
-</div>
-
-
-<!-- ########################system field end here ########################## -->
-</div>
-<div>
-  <div formArrayName="workExperience">
-      <h5 class="card-title mt-3">Work Experience</h5>
-      <div style="display: flex; justify-content: end;">
-        <button type="button" (click)="addNewWorkRow()" class="btn btn-warning add-edit-button" >Add New Row</button>
-      </div>
-      <!-- <button (click)="addNewWorkRow()">Add work row</button> -->
-<div class="card">
-  <div style="overflow-x: auto;">
- <table style="width: 100%;">
-  <thead>
-    <tr>
-      <th style="text-align: center;">Sno.</th>
-      <th style="text-align: center;"> <label >Company Name</label></th>
-      <th style="text-align: center;"><label >Job Title</label></th>
-      <th style="text-align: center;"><label >From Date</label></th>
-      <th style="text-align: center;"><label >To Date</label></th>
-      <th style="text-align: center;"><label >Job Description</label></th>
-      <th style="text-align: center;"><label >Relevent Experience</label></th>
-      <th>Actions</th>
-    </tr>
-  </thead>
-  <tbody>
-
-    <!-- <tr *ngFor="let row of rows; let rowIndex = index" [formGroup]="row"> -->
-      <tr *ngFor="let row of workExperience; let rowIndex = index" [formGroup]="row">
-      <td >{{ row.get('sno').value }}</td>
-      <td><input type="text" style="border: none; text-align: center;" class="custom-placeholder" formControlName="companyName" placeholder="Enter company name" [disabled]="!row.get('editMode').value">
-        <div *ngIf="row.get('companyName').invalid && (row.get('companyName').touched || row.get('companyName').dirty)">
-          <div *ngIf="row.get('companyName').hasError('required')" style="color: rgb(253, 122, 122); font-size: small; font-style: italic;">
-            company name is required.
-          </div>
-        </div>
-
-      </td>
-      <td><input type="text" style="border: none; text-align: center;" class="custom-placeholder" formControlName="jobTitle"  placeholder="Enter job title"  [disabled]="!row.get('editMode').value">
-        <div *ngIf="row.get('jobTitle').invalid && (row.get('jobTitle').touched || row.get('jobTitle').dirty)">
-          <div *ngIf="row.get('jobTitle').hasError('required')" style="color: rgb(253, 122, 122); font-size: small; font-style: italic;">
-            job title is required.
-          </div>
-        </div>
-      </td>
-      <td><input type="date" style="border: none; text-align: center;"  class="custom-placeholder" formControlName="fromDate"  [disabled]="!row.get('editMode').value">
-        <div *ngIf="row.get('fromDate').invalid && (row.get('fromDate').touched || row.get('fromDate').dirty)">
-          <div *ngIf="row.get('fromDate').hasError('required')" style="color: rgb(253, 122, 122); font-size: small; font-style: italic;">
-            from date is required.
-          </div>
-        </div>
-      </td>
-      <td><input type="date" style="border: none; text-align: center;" class="custom-placeholder" formControlName="toDate"   [disabled]="!row.get('editMode').value">
-        <div *ngIf="row.get('toDate').invalid && (row.get('toDate').touched || row.get('toDate').dirty)">
-          <div *ngIf="row.get('toDate').hasError('required')" style="color: rgb(253, 122, 122); font-size: small; font-style: italic;">
-            to date is required.
-          </div>
-          <div *ngIf="row.get['toDate'].errors?.['invalidToDate'] && (row.get['toDate'].touched || row.get['toDate'].dirty)"
-          style="color: rgb(253, 122, 122); font-size: small; font-style: italic;">
-          To date should be greater than or equal to from date
-        </div>
-        </div>
-      </td>
-      <td><input type="text" style="border: none; text-align: center;" class="custom-placeholder" formControlName="jobDescription" placeholder="Enter job description"  [disabled]="!row.get('editMode').value">
-        <div *ngIf="row.get('jobDescription').invalid && (row.get('jobDescription').touched || row.get('jobDescription').dirty)">
-          <div *ngIf="row.get('jobDescription').hasError('required')" style="color: rgb(253, 122, 122); font-size: small; font-style: italic;">
-            job description is required.
-          </div>
-        </div>
-      </td>
-      <td><input type="text" style="border: none; text-align: center;" class="custom-placeholder" formControlName="releventExp" placeholder="Enter relevant experiance"  [disabled]="!row.get('editMode').value">
-        <div *ngIf="row.get('releventExp').invalid && (row.get('releventExp').touched || row.get('releventExp').dirty)">
-          <div *ngIf="row.get('releventExp').hasError('required')" style="color: rgb(253, 122, 122); font-size: small; font-style: italic;">
-         experience is required.
-          </div>
-          <div *ngIf="row.get('releventExp').hasError('min')" style="color: rgb(253, 122, 122); font-size: small; font-style: italic;">
-            Minimum experience is 1.
-          </div>
-          <div *ngIf="row.get('releventExp').hasError('max')" style="color: rgb(253, 122, 122); font-size: small; font-style: italic;">
-            Maximum experience is 50.
-          </div>
-        </div>
-      </td>
-      <td>
-
-        <!-- <button (click)="deleteWorkRow(rowIndex)">Delete</button> -->
-        <button (click)="deleteWorkRow(rowIndex)" type="button" class="btn btn-danger"><i class="pi pi-trash"></i></button>
-      </td>
-      </tr>
-  </tbody>
-</table>
-</div>
-</div>
-</div>
-</div>
-<div formArrayName="educationDetails">
-<h5 class="card-title" style="margin-top: 40px;">Education Details</h5>
-<div style="display: flex; justify-content: end;">
-  <button type="button" (click)="addNewRow()" class="btn btn-warning add-edit-button" >Add New Row</button>
-</div>
-<!-- <button (click)="addNewRow()">Add Row</button> -->
-<table style="width: 100%;">
-  <thead>
-    <tr>
-      <th style="text-align: center;">S.No</th>
-      <th style="text-align: center;"> <label class="starlabel">Institute Name</label></th>
-      <th style="text-align: center;"> <label class="starlabel">Degree/Diploma</label></th>
-      <th style="text-align: center;"> <label class="starlabel">Specialization</label></th>
-      <th style="text-align: center;"> <label class="starlabel">Date of Completion</label></th>
-      <th>Actions</th>
-    </tr>
-  </thead>
-  <tbody>
-
-    <tr *ngFor="let row of educationDetails; let rowIndex = index" [formGroup]="row">
-      <td>{{ row.get('sno').value }}</td>
-      <td><input type="text" style="border: none; text-align: center;"  class="custom-placeholder" placeholder="Enter institute name"  formControlName="instituteName" [disabled]="!row.get('editMode').value">
-        <div *ngIf="row.get('instituteName').invalid && (row.get('instituteName').touched || row.get('instituteName').dirty)">
-          <div *ngIf="row.get('instituteName').hasError('required')" style="color: rgb(253, 122, 122); font-size: small; font-style: italic;">
-            institute name is required.
-          </div>
-        </div>
-      </td>
-      <td><input type="text" style="border: none; text-align: center;" class="custom-placeholder" placeholder="Enter degree/diploma"  formControlName="degree" [disabled]="!row.get('editMode').value">
-        <div *ngIf="row.get('degree').invalid && (row.get('degree').touched || row.get('degree').dirty)">
-          <div *ngIf="row.get('degree').hasError('required')" style="color: rgb(253, 122, 122); font-size: small; font-style: italic;">
-            degree is required.
-          </div>
-        </div>
-      </td>
-      <td><input type="text" style="border: none; text-align: center;"  class="custom-placeholder" placeholder="Enter speacialization"  formControlName="specialization" [disabled]="!row.get('editMode').value">
-        <div *ngIf="row.get('specialization').invalid && (row.get('specialization').touched || row.get('specialization').dirty)">
-          <div *ngIf="row.get('specialization').hasError('required')" style="color: rgb(253, 122, 122); font-size: small; font-style: italic;">
-            specialization is required.
-          </div>
-        </div>
-      </td>
-      <td><input type="date" style="border: none; text-align: center;" class="custom-placeholder" formControlName="toDate" [disabled]="!row.get('editMode').value">
-        <div *ngIf="row.get('toDate').invalid && (row.get('toDate').touched || row.get('toDate').dirty)">
-          <div *ngIf="row.get('toDate').hasError('required')" style="color: rgb(253, 122, 122); font-size: small; font-style: italic;">
-            to date is required.
-          </div>
-        </div>
-      </td>
-      <td>
-        <!-- <button (click)="toggleEditMode(row)">
-          {{ row.get('editMode').value ? 'Save' : 'Edit' }}
-        </button>  -->
-        <!-- <button (click)="deleteRow(rowIndex)">Delete</button> -->
-        <button (click)="deleteRow(rowIndex)" type="button" class="btn btn-danger"><i class="pi pi-trash"></i></button>
-      </td>
-      </tr>
-  </tbody>
-</table>
-</div>
-<!-- </div> -->
-<div class="row mb-5 mt-4">
-  <div class="d-flex justify-content-end col-11 mt-4">
-    <button type="submit" style="background: rgb(228, 28, 28);border:none" class="btn btn-info mr-3"
-      (click)="submit()" [disabled]="!profileForm.valid" >Submit</button>
-      <!-- <button type="submit" style="background: rgb(228, 28, 28);border:none" class="btn btn-info mr-3"
-      (click)="submit()" >Submit</button> -->
-    <button class="btn btn-info" style="background: #637381;border:none"
-      [routerLink]="['/leaveMgmt/user-profile']">Cancel</button>
-  </div>
-</div>
-</div>
-</div>
-</div>
 </form>

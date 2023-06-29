@@ -25,7 +25,6 @@ export class DialogDesignationComponent {
  constructor(private ngxLoader: NgxUiLoaderService,
    private fb: FormBuilder,
    private toastr: ToastrMsgService,
-   private CmsService: CmsService,
    public dialog: MatDialog,
    private leaveservice: LeaveService,
    private activatedRoute: ActivatedRoute,
@@ -51,7 +50,7 @@ export class DialogDesignationComponent {
    this.page= res;
       if (res) {
        this.ngxLoader.start();
-        location.reload()
+       this.getDesignation()
         this.toastr.showSuccess("designation added successfully", "designation Added")
       }
       (error: any) => {
@@ -72,11 +71,11 @@ export class DialogDesignationComponent {
       this.leaveservice.getdesignationList().pipe(
         map((res) => res.map((profile) => profile.designation))
       ).subscribe((designationListres) => {
+        this.designationList = [];
         this.designationList = designationListres;
         console.log("designationList:", this.designationList);
         this.ngxLoader.stop();
       });
     }
-
 
 }

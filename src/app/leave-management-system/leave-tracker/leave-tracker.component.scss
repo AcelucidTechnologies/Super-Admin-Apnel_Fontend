@@ -154,3 +154,7 @@ border: none;
   .cursor-default {
     cursor: default !important;
   }
+  .image-cell {
+    max-width: 250px;
+    word-wrap: break-word;
+  }

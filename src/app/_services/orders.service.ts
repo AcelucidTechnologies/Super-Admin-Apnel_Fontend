@@ -11,12 +11,12 @@ import { order, cancelOrder, orderTransactin, shipmentData } from '../DummyData/
 export class OrdersService {
   constructor(private http: HttpClient) { }
 
-  getOrderList() {
+  getOrderList(): Observable<any[]> {
     const token = localStorage.getItem('token') || '';
+    const email = localStorage.getItem('email')
     let httpOptions = new HttpHeaders().set('x-access-token', token)
-    const endpointUrl = `${environment.JSON_SERVER}/orders`;
-    //return this.http.get(endpointUrl, { 'headers': httpOptions }).pipe(map(res => res));
-    return of(order)
+   const endpointUrl = `${environment.JSON_SERVER}/getOrderStatus?username=${email}`;
+   return this.http.get<any[]>(endpointUrl ,{ 'headers': httpOptions });
   }
   getOrderDetailsBy(orderId: number) {
     const token = localStorage.getItem('token') || '';
@@ -59,7 +59,7 @@ export class OrdersService {
     return of(orderTransactin)
   }
   getTransactionById(transactionId: string){
-    const token = localStorage.getItem('token') || ''; 
+    const token = localStorage.getItem('token') || '';
     let httpOptions = new HttpHeaders().set('x-access-token', token)
     const endpointUrl = `${environment.JSON_SERVER}/orders/${transactionId}`;
     let indexTransactionId = orderTransactin.findIndex((item) => item.transactionId === transactionId)
@@ -118,15 +118,21 @@ export class OrdersService {
     cancelOrder.splice(cancelOrder.findIndex((index) => index.orderId == orderId), 1);
     return of(cancelOrder[indexDeleteOrder])
   }
-  deteOrderTransactionById(orderId: number) {
+  // deteOrderTransactionById(orderId: number) {
+  //   const token = localStorage.getItem('token') || '';
+  //   let httpOptions = new HttpHeaders().set('x-access-token', token)
+  //   const endpointUrl = `${environment.JSON_SERVER}/orders`;
+  //   let indexOrderTrans = orderTransactin.findIndex(item => item.orderId === orderId)
+  //   orderTransactin.splice(orderTransactin.findIndex((index) => index.orderId == orderId), 1);
+  //   return of(orderTransactin[indexOrderTrans])
+  // }
+  deleteOrderTransaction(id: string) {
     const token = localStorage.getItem('token') || '';
     let httpOptions = new HttpHeaders().set('x-access-token', token)
-    const endpointUrl = `${environment.JSON_SERVER}/orders`;
-    //return this.http.get(endpointUrl, { 'headers': httpOptions }).pipe(map(res => res));
-    let indexOrderTrans = orderTransactin.findIndex(item => item.orderId === orderId)
-    orderTransactin.splice(orderTransactin.findIndex((index) => index.orderId == orderId), 1);
-    return of(orderTransactin[indexOrderTrans])
+    const endpointUrl = `${environment.JSON_SERVER}/getOrderStatusById?id=${id}`;
+    return this.http.delete<any>(endpointUrl, { 'headers': httpOptions });
   }
+
   deleteOrderShipping(orderId: number) {
     const token = localStorage.getItem('token') || '';
     let httpOptions = new HttpHeaders().set('x-access-token', token)

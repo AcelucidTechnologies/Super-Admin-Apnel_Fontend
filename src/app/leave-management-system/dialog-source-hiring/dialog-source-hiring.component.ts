@@ -40,7 +40,7 @@ export class DialogSourceHiringComponent {
    this.fgsType = SPINNER.squareLoader
    this.ngxLoader.start();
    this.ngxLoader.stop();
-   this.getReportingmanager()
+   this.getsourcemanager()
  }
 
  submitForm(){
@@ -51,7 +51,8 @@ export class DialogSourceHiringComponent {
    console.log("source hiring data 107===>"+this.page)
       if (res) {
        this.ngxLoader.start();
-        location.reload()
+        // location.reload()
+        this.getsourcemanager();
         this.toastr.showSuccess("Source Hiring added successfully", "Source Hiring Added")
       }
       (error: any) => {
@@ -68,10 +69,11 @@ export class DialogSourceHiringComponent {
     }
   }
 
-  getReportingmanager() {
+  getsourcemanager() {
       this.leaveservice.getSourceHiringList().pipe(
         map((res) => res.map((profile) => profile.sourceHiring))
       ).subscribe((res) => {
+        this.hiringList = [];
         this.hiringList = res;
         this.ngxLoader.stop();
       });
