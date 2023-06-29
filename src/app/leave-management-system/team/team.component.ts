@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { NgxUiLoaderService } from 'ngx-ui-loader';
+import { NgxUiLoaderService, SPINNER } from 'ngx-ui-loader';
 import { LeaveService } from 'src/app/_services/leave.service';
 import { ToastrMsgService } from 'src/app/_services/toastr-msg.service';
 
@@ -12,10 +12,12 @@ import { ToastrMsgService } from 'src/app/_services/toastr-msg.service';
 export class TeamComponent {
 
   id:any;
+  fgsType:any
  constructor(  private LeaveService: LeaveService,
   private ngxLoader: NgxUiLoaderService,
     private toastr: ToastrMsgService,
   private activateRoute: ActivatedRoute,){
+    this.fgsType = SPINNER.squareLoader;
 
  }
 leaveres:any
@@ -29,7 +31,8 @@ systemFieldInfo:any
 separationInfo:any
 
   ngOnInit(){
-
+    this.fgsType = SPINNER.squareLoader;
+    this.ngxLoader.start();
     this.getAllProfile(),
     this.getAlldepartment()
   }
@@ -38,15 +41,12 @@ separationInfo:any
   getAlldepartment() {
     this.LeaveService.getdepartmentList().subscribe((res) => {
       this.departmentList=res
-      console.log("response 24==>", res);
       this.ngxLoader.stop();
     });
   }
   getAllProfile() {
     this.LeaveService.getProfileList().subscribe((res) => {
       this.profileList =res
-
-      console.log("response 242==>", res);
       this.ngxLoader.stop();
     });
   }

@@ -16,6 +16,7 @@ import { DialogCreateOrderComponent } from '../dialog-create-order/dialog-create
   styleUrls: ['./add-edit-orders.component.scss']
 })
 export class AddEditOrdersComponent implements OnInit {
+  orderlist:any
 
   sidebarSpacing: any;
   ordersForm: FormGroup;
@@ -41,37 +42,37 @@ export class AddEditOrdersComponent implements OnInit {
     public dialog: MatDialog,
     private ngxLoader: NgxUiLoaderService,) {
     this.ordersForm = this.fb.group({
-      mobileNumber: ['', [Validators.required, Validators.minLength(10), Validators.maxLength(10), Validators.pattern('^[0-9]*$')]],
-      orderId: ['', [Validators.required]],
-      customerId: ['', [Validators.required]],
-      orderDate: ['', [Validators.required]],
-      orderNo: ['', [Validators.required]],
-      orderStatus: ['', [Validators.required]],
-      paymentStatus: ['', [Validators.required]],
-      deliveryType: ['', [Validators.required]],
-      deliveryStatus: ['', [Validators.required]],
-      paymentType: ['', [Validators.required]],
-      total: ['', [Validators.required]],
-      country: ['', [Validators.required]],
-      email: ['', [Validators.required]],
-      mobileNo: ['', [Validators.required]],
-      productName: ['', [Validators.required]],
-      quantity: ['', [Validators.required]],
-      billingPinCode: ['', [Validators.required]],
-      billingFlatNo: ['', [Validators.required]],
-      billingArea: ['', [Validators.required]],
-      billingLandmark: ['', [Validators.required]],
-      billingCity: ['', [Validators.required]],
-      billingTown: ['', [Validators.required]],
-      billingState: ['', [Validators.required]],
-      shippingPinCode: ['', [Validators.required]],
-      shippingFlatNo: ['', [Validators.required]],
-      shippingArea: ['', [Validators.required]],
-      shippingLandmark: ['', [Validators.required]],
-      shippingCity: ['', [Validators.required]],
-      shippingTown: ['', [Validators.required]],
-      shippingState: ['', [Validators.required]],
-      shippingAddressType: ['', [Validators.required]],
+      mobileNo: ['', [Validators.required, Validators.minLength(10), Validators.maxLength(10), Validators.pattern('^[0-9]*$')]],
+      // orderId: ['', [Validators.required]],
+      // customerId: ['', [Validators.required]],
+      // orderDate: ['', [Validators.required]],
+      // orderNo: ['', [Validators.required]],
+      // orderStatus: ['', [Validators.required]],
+      // paymentStatus: ['', [Validators.required]],
+      // deliveryType: ['', [Validators.required]],
+      // deliveryStatus: ['', [Validators.required]],
+      // paymentType: ['', [Validators.required]],
+      // total: ['', [Validators.required]],
+      // country: ['', [Validators.required]],
+      // email: ['', [Validators.required]],
+      // mobileNo: ['', [Validators.required]],
+      // productName: ['', [Validators.required]],
+      // quantity: ['', [Validators.required]],
+      // billingPinCode: ['', [Validators.required]],
+      // billingFlatNo: ['', [Validators.required]],
+      // billingArea: ['', [Validators.required]],
+      // billingLandmark: ['', [Validators.required]],
+      // billingCity: ['', [Validators.required]],
+      // billingTown: ['', [Validators.required]],
+      // billingState: ['', [Validators.required]],
+      // shippingPinCode: ['', [Validators.required]],
+      // shippingFlatNo: ['', [Validators.required]],
+      // shippingArea: ['', [Validators.required]],
+      // shippingLandmark: ['', [Validators.required]],
+      // shippingCity: ['', [Validators.required]],
+      // shippingTown: ['', [Validators.required]],
+      // shippingState: ['', [Validators.required]],
+      // shippingAddressType: ['', [Validators.required]],
     });
   }
 
@@ -79,55 +80,55 @@ export class AddEditOrdersComponent implements OnInit {
     this.sidebarSpacing = 'contracted';
     this.activateRoute.queryParamMap.subscribe((params) => {
       this.orderId = parseInt(params.get('id'));
-      if (this.orderId && this.orderId != undefined) {
-        this.editMode = true;
-        this.title = 'Edit Order';
-        this.getProductList()
-        this.getOrderById()
-      } else {
-        this.getProductList()
-        this.editMode = false;
-        this.expand = true;
-        this.title = 'Add New order';
-      }
+      // if (this.orderId && this.orderId != undefined) {
+      //   this.editMode = true;
+      //   this.title = 'Edit Order';
+        // this.getProductList()
+        // this.getOrderById()
+      // } else {
+      //   // this.getProductList()
+      //   this.editMode = false;
+      //   this.expand = true;
+      //   this.title = 'Add New order';
+      // }
     });
   }
 
-  getOrderById() {
-    this.ordersService
-      .getOrderDetailsBy(this.orderId)
-      .subscribe((res) => {
-        this.ordersForm.patchValue({
-          orderId: res.orderId,
-          customerId: res.customerId,
-          orderDate: res.orderDate,
-          orderNo: res.orderNo,
-          paymentStatus: res.paymentStatus,
-          deliveryType: res.deliveryType,
-          deliveryStatus: res.deliveryStatus,
-          paymentType: res.paymentType,
-          total: res.total,
-          country: res.country,
-          orderStatus: res.orderStatus,
-          email: res.email,
-          mobileNo: res.mobileNo,
-          billingPinCode: res.Billing_Address.billingPinCode,
-          billingFlatNo: res.Billing_Address.billingFlatNo,
-          billingArea: res.Billing_Address.billingArea,
-          billingLandmark: res.Billing_Address.billingLandmark,
-          billingCity: res.Billing_Address.billingCity,
-          billingTown: res.Billing_Address.billingTown,
-          billingState: res.Billing_Address.billingState,
-          shippingPinCode: res.Shipping_Address.shippingPinCode,
-          shippingFlatNo: res.Shipping_Address.shippingFlatNo,
-          shippingArea: res.Shipping_Address.shippingArea,
-          shippingLandmark: res.Shipping_Address.shippingLandmark,
-          shippingCity: res.Shipping_Address.shippingCity,
-          shippingTown: res.Shipping_Address.shippingTown,
-          shippingState: res.Shipping_Address.shippingState,
-        });
-      });
-  }
+  // getOrderById() {
+  //   this.ordersService
+  //     .getOrderDetailsBy(this.orderId)
+  //     .subscribe((res) => {
+  //       this.ordersForm.patchValue({
+  //         orderId: res.orderId,
+  //         customerId: res.customerId,
+  //         orderDate: res.orderDate,
+  //         orderNo: res.orderNo,
+  //         paymentStatus: res.paymentStatus,
+  //         deliveryType: res.deliveryType,
+  //         deliveryStatus: res.deliveryStatus,
+  //         paymentType: res.paymentType,
+  //         total: res.total,
+  //         country: res.country,
+  //         orderStatus: res.orderStatus,
+  //         email: res.email,
+  //         mobileNo: res.mobileNo,
+  //         billingPinCode: res.Billing_Address.billingPinCode,
+  //         billingFlatNo: res.Billing_Address.billingFlatNo,
+  //         billingArea: res.Billing_Address.billingArea,
+  //         billingLandmark: res.Billing_Address.billingLandmark,
+  //         billingCity: res.Billing_Address.billingCity,
+  //         billingTown: res.Billing_Address.billingTown,
+  //         billingState: res.Billing_Address.billingState,
+  //         shippingPinCode: res.Shipping_Address.shippingPinCode,
+  //         shippingFlatNo: res.Shipping_Address.shippingFlatNo,
+  //         shippingArea: res.Shipping_Address.shippingArea,
+  //         shippingLandmark: res.Shipping_Address.shippingLandmark,
+  //         shippingCity: res.Shipping_Address.shippingCity,
+  //         shippingTown: res.Shipping_Address.shippingTown,
+  //         shippingState: res.Shipping_Address.shippingState,
+  //       });
+  //     });
+  // }
   onToggleSidebar(sidebarState: any) {
     if (sidebarState === 'open') {
       this.sidebarSpacing = 'contracted';
@@ -135,37 +136,55 @@ export class AddEditOrdersComponent implements OnInit {
       this.sidebarSpacing = 'expanded';
     }
   }
-  getProductList() {
-    this.ProductService.getProductList().subscribe((res: any) => {
-      if (res && res != undefined) {
-        res.map(item => {
-          this.ProductList.push(item.product_Detail)
-        })
-      }
-      console.log(this.ProductList)
-      this.ngxLoader.stop();
-    })
-  }
+  // getProductList() {
+  //   this.ProductService.getProductList().subscribe((res: any) => {
+  //     if (res && res != undefined) {
+  //       res.map(item => {
+  //         this.ProductList.push(item.product_Detail)
+  //       })
+  //     }
+  //     console.log(this.ProductList)
+  //     this.ngxLoader.stop();
+  //   })
+  // }
+
 
   openDialog(order: any) {
     const dialogRef = this.dialog.open(DialogCreateOrderComponent);
     dialogRef.afterClosed().subscribe(result => {
-      if (result == true) {
-        this.submit()
+      if (result === true) {
+        this.submit();
       }
     });
   }
 
-  closedModel() {
-    let productName = this.ordersForm.controls['productName'].value;
-    let productDetails = this.ProductList.filter(item => item.name == productName);
-    productDetails[0].Quantity = this.ordersForm.controls['quantity'].value;
-    this.products.push(productDetails[0])
-    this.calCulateTotalAmount()
-    this.ordersForm.controls['total'].setValue(this.totalAmount)
-    this.showdialog = false
-  }
   submit() {
+    this.ngxLoader.start();
+    this.ProductService.createMobileStatus(this.ordersForm.value).subscribe(
+      (res) => {
+        this.orderlist = res;
+        this.ngxLoader.stop();
+        // location.reload();
+        this.toastr.showSuccess('Mobile number added successfully', 'Mobile Added');
+      },
+      (error: any) => {
+        console.log(error);
+        this.toastr.showError('Something went wrong. Please check.', 'Error occurred');
+        this.ngxLoader.stop();
+      }
+    );
+  }
+
+  // closedModel() {
+  //   let productName = this.ordersForm.controls['productName'].value;
+  //   let productDetails = this.ProductList.filter(item => item.name == productName);
+  //   productDetails[0].Quantity = this.ordersForm.controls['quantity'].value;
+  //   this.products.push(productDetails[0])
+  //   this.calCulateTotalAmount()
+  //   this.ordersForm.controls['total'].setValue(this.totalAmount)
+  //   this.showdialog = false
+  // }
+  // submit() {
     // this.Billing_Address = {
     //   billingPinCode: this.ordersForm.controls['billingPinCode'].value,
     //   billingFlatNo: this.ordersForm.controls['billingFlatNo'].value,
@@ -212,14 +231,14 @@ export class AddEditOrdersComponent implements OnInit {
     //     this.route.navigate(['/order'])
     //   }
     // })
-  }
+  // }
 
-  calCulateTotalAmount() {
-    this.totalAmount = 0.0
-    if (this.products.length > 0) {
-      this.products.map(item => {
-        this.totalAmount = this.totalAmount + parseFloat(item.Quantity) * parseFloat(item.price)
-      })
-    }
-  }
+  // calCulateTotalAmount() {
+  //   this.totalAmount = 0.0
+  //   if (this.products.length > 0) {
+  //     this.products.map(item => {
+  //       this.totalAmount = this.totalAmount + parseFloat(item.Quantity) * parseFloat(item.price)
+  //     })
+  //   }
+  // }
 }

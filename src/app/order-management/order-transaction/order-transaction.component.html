@@ -8,8 +8,9 @@
         <button
           pButton
           type="button"
-          label=" + Add"
+          label=" + Add Status"
           class="add-button-lead"
+          [routerLink]="['/order/add-order-status']"
 
         ></button>
       </span>
@@ -50,13 +51,13 @@
 
             </div>
         </th>
-          <th pSortableColumn="orderList">
+          <!-- <th pSortableColumn="orderList">
             <div class="flex justify-content-between align-items-center head1">
               Order ID
                 <p-sortIcon field="orderList"></p-sortIcon>
 
             </div>
-        </th>
+        </th> -->
         <th pSortableColumn="orderStatus">
           <div class="flex justify-content-between align-items-center head1">
             Order Status
@@ -72,7 +73,7 @@
           <td>
             {{ i + 1 }}
           </td>
-					<td>{{order.orderList}}</td>
+					<!-- <td>{{order.orderList}}</td> -->
 					<td>{{order.orderStatus}}</td>
 
 					<td>
@@ -84,7 +85,7 @@
 						</div> -->
 
               <a pTooltip="Edit Order" tooltipPosition="bottom" style="margin-right: 15px; cursor: pointer;">
-                <img src="../../../../assets/images/edit.svg" [routerLink]="['/order/transaction-details']" [queryParams]="{TransactionId:order?.transactionId}"alt="img">
+                <img src="../../../../assets/images/edit.svg" [routerLink]="['/order/edit-order-status']"  [queryParams]="{id:order?._id}"alt="img">
               </a>
               <a pTooltip="Delete Order" tooltipPosition="bottom" (click)="openDialog(order)"
 

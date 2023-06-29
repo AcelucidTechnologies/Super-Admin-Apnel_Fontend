@@ -13,6 +13,8 @@ import { ConfirmedOrderComponent } from './confirmed-order/confirmed-order.compo
 import { PendingOrderComponent } from './pending-order/pending-order.component';
 import { CreateOrderDetailsComponent } from './create-order-details/create-order-details.component';
 import { CreateOrderListComponent } from './create-order-list/create-order-list.component';
+import { AddOrderStatusComponent } from './add-order-status/add-order-status.component';
+import { EditOrderStatusComponent } from './edit-order-status/edit-order-status.component';
 
 const routes: Routes = [
   {
@@ -55,6 +57,12 @@ const routes: Routes = [
   },
   {
     path: 'createOrderList', component: CreateOrderListComponent
+  },
+  {
+    path: 'add-order-status', component: AddOrderStatusComponent
+  },
+  {
+    path: 'edit-order-status', component: EditOrderStatusComponent
   }
 ];
 

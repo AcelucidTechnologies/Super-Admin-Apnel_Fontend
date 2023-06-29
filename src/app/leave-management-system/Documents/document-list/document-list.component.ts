@@ -3,7 +3,7 @@ import * as jsPDF from 'jspdf';
 import { MatDialog } from '@angular/material/dialog';
 import { access } from 'src/app/_models/modulepermission';
 import { ToastrMsgService } from 'src/app/_services/toastr-msg.service';
-import { NgxUiLoaderService } from 'ngx-ui-loader';
+import { NgxUiLoaderService, SPINNER } from 'ngx-ui-loader';
 import * as XLSX from 'xlsx';
 import { DatePipe } from '@angular/common';
 import { LeaveService } from 'src/app/_services/leave.service';
@@ -15,11 +15,12 @@ import { HttpClient } from '@angular/common/http';
 @Component({
   selector: 'app-document-list',
   templateUrl: './document-list.component.html',
-  styleUrls: ['./document-list.component.scss']
+  styleUrls: ['./document-list.component.scss'],
 })
 export class DocumentListComponent {
-  docuemntData: any[]=[];
-  documentDetails:any
+  docuemntData: any[] = [];
+  documentDetails: any;
+  fgsType: any;
 
   sidebarSpacing: string = 'contracted';
   cols: any[];
@@ -32,22 +33,21 @@ export class DocumentListComponent {
     private toastr: ToastrMsgService,
     private ngxLoader: NgxUiLoaderService,
     private http: HttpClient,
-    private dialog: MatDialog,
+    private dialog: MatDialog
   ) {
-
-
+    this.fgsType = SPINNER.squareLoader;
   }
 
   ngOnInit(): void {
-this.getDocumentData();
+    this.fgsType = SPINNER.squareLoader;
+    this.ngxLoader.start();
+    this.getDocumentData();
   }
-
-
 
   getDocumentData() {
     this.leaveService.getDocumentList().subscribe((res) => {
       this.docuemntData = res;
-      console.log('51', this.docuemntData);
+      this.ngxLoader.stop();
     });
   }
 
@@ -67,19 +67,17 @@ this.getDocumentData();
           'Document deleted successfully',
           'Document deleted'
         );
-        this.getDocumentData()
+        this.getDocumentData();
       }
     });
   }
 
-
-
   exportExcel(): void {
     const datePipe = new DatePipe('en-US');
     const data = this.docuemntData.map((item, index) => ({
-      'S.No.': index+1,
+      'S.No.': index + 1,
       'Folder Name': item.folderName,
-      'File': item.image,
+      File: item.image,
       ModifiedTime: datePipe.transform(item.updatedAt, 'MM/dd/yyyy'),
     }));
 
@@ -113,19 +111,17 @@ this.getDocumentData();
     return blob;
   }
 
-
-
   exportPdf() {
     this.documentDetails = this.docuemntData.map((item, index) => {
       return { sno: index + 1, ...item };
     });
 
     const doc = new jsPDF.jsPDF('l', 'pt');
-    const data = this.documentDetails.map(item => {
+    const data = this.documentDetails.map((item) => {
       return {
         ...item,
         createdAt: this.formatDate(item.createdAt), // Format the createdAt date
-        updatedAt: this.formatDate(item.updatedAt) // Format the createdAt date
+        updatedAt: this.formatDate(item.updatedAt), // Format the createdAt date
       };
     });
     const exportColumns = [
@@ -133,12 +129,11 @@ this.getDocumentData();
       { title: 'Folder Name', dataKey: 'folderName' },
       { title: 'File ', dataKey: 'image' },
       { title: 'ModifiedTime', dataKey: 'updatedAt' },
-
     ];
 
     autoTable(doc, {
       columns: exportColumns,
-      body: data
+      body: data,
     });
 
     doc.save('Document List.pdf');
@@ -152,7 +147,6 @@ this.getDocumentData();
 
     return `${day}/${month}/${year}`;
   }
-
 
   onToggleSidebar(sidebarState: any) {
     if (sidebarState === 'open') {
@@ -177,13 +171,12 @@ this.getDocumentData();
     }
   }
 
-
-
   downloadFile(imageUrl) {
     const fileExtension = imageUrl.split('.').pop().toLowerCase();
     let mimeType, extension;
     if (fileExtension === 'xlsx' || fileExtension === 'xls') {
-      mimeType = 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet';
+      mimeType =
+        'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet';
       extension = '.xlsx';
     } else if (fileExtension === 'pdf') {
       mimeType = 'application/pdf';
@@ -203,5 +196,4 @@ this.getDocumentData();
     anchorElement.click();
     document.body.removeChild(anchorElement);
   }
-
 }

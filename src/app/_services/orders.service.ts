@@ -126,12 +126,7 @@ export class OrdersService {
   //   orderTransactin.splice(orderTransactin.findIndex((index) => index.orderId == orderId), 1);
   //   return of(orderTransactin[indexOrderTrans])
   // }
-  deleteOrderTransaction(id: string) {
-    const token = localStorage.getItem('token') || '';
-    let httpOptions = new HttpHeaders().set('x-access-token', token)
-    const endpointUrl = `${environment.JSON_SERVER}/getOrderStatusById?id=${id}`;
-    return this.http.delete<any>(endpointUrl, { 'headers': httpOptions });
-  }
+
 
   deleteOrderShipping(orderId: number) {
     const token = localStorage.getItem('token') || '';
@@ -157,4 +152,49 @@ export class OrdersService {
     let indexShipment = shipmentData.findIndex(item => item.OrderDetails.orderId === orderId)
     return of(shipmentData[indexShipment])
   }
+
+
+
+  // ############################# order status Apis #############################
+
+  getOrderStatusList(): Observable<any[]> {
+    const token = localStorage.getItem('token') || '';
+    const email = localStorage.getItem('email')
+    let httpOptions = new HttpHeaders().set('x-access-token', token)
+   const endpointUrl = `${environment.JSON_SERVER}/getOrderStatus?username=${email}`;
+   return this.http.get<any[]>(endpointUrl ,{ 'headers': httpOptions });
+
+  }
+
+  deleteOrderStatus(id: string) {
+    const token = localStorage.getItem('token') || '';
+    let httpOptions = new HttpHeaders().set('x-access-token', token)
+    const endpointUrl = `${environment.JSON_SERVER}/deleteOrderStatus?id=${id}`;
+    return this.http.delete<any>(endpointUrl, { 'headers': httpOptions });
+  }
+
+  getOrderStatusById(id: string): Observable<any> {
+    const token = localStorage.getItem('token') || '';
+    let httpOptions = new HttpHeaders().set('x-access-token', token)
+    const endpointUrl = `${environment.JSON_SERVER}/getOrderStatusById?id=${id}`;
+    return this.http.get<any>(endpointUrl,{ 'headers': httpOptions });
+  }
+  editOrderStatusList(payload, id: string) {
+    const token = localStorage.getItem('token') || '';
+    const httpOptions = new HttpHeaders().set('x-access-token', token);
+    const endpointUrl = `${environment.JSON_SERVER}/updateOrderStatus?id=${id}`;
+
+    return this.http.put<any>(endpointUrl, payload, { headers: httpOptions });
+  }
+  createOrderStatus(payload:any): Observable<any[]> {
+    const token = localStorage.getItem('token') || '';
+          const email = localStorage.getItem('email') || '';
+          let httpOptions = new HttpHeaders().set('x-access-token', token)
+            const endpointUrl = `${environment.JSON_SERVER}/createOrderStatus?`;
+          return this.http.post<any>(endpointUrl, payload,{ 'headers': httpOptions });
+  }
+
+
+
+
 }

@@ -2,7 +2,7 @@ import { Component, ViewChild } from '@angular/core';
 import * as jsPDF from 'jspdf';
 import { MatDialog } from '@angular/material/dialog';
 import { ToastrMsgService } from 'src/app/_services/toastr-msg.service';
-import { NgxUiLoaderService } from 'ngx-ui-loader';
+import { NgxUiLoaderService, SPINNER } from 'ngx-ui-loader';
 import * as XLSX from 'xlsx';
 import { DatePipe } from '@angular/common';
 import { LeaveService } from 'src/app/_services/leave.service';
@@ -13,12 +13,12 @@ import { DialogTravelComponent } from '../dialog-travel/dialog-travel.component'
 @Component({
   selector: 'app-travel-list',
   templateUrl: './travel-list.component.html',
-  styleUrls: ['./travel-list.component.scss']
+  styleUrls: ['./travel-list.component.scss'],
 })
 export class TravelListComponent {
-  travelData: any[]=[];
-  exitDetails:any
-
+  travelData: any[] = [];
+  exitDetails: any;
+  fgsType: any;
 
   sidebarSpacing: string = 'contracted';
   cols: any[];
@@ -31,21 +31,21 @@ export class TravelListComponent {
     private leaveService: LeaveService,
     private toastr: ToastrMsgService,
     private ngxLoader: NgxUiLoaderService,
-    private dialog: MatDialog,
+    private dialog: MatDialog
   ) {
+    this.fgsType = SPINNER.squareLoader;
   }
 
   ngOnInit(): void {
+    this.fgsType = SPINNER.squareLoader;
+    this.ngxLoader.start();
     this.getTravelData();
   }
-
-
-
 
   getTravelData() {
     this.leaveService.getTravelList().subscribe((res) => {
       this.travelData = res;
-      console.log('51', this.travelData);
+      this.ngxLoader.stop();
     });
   }
 
@@ -65,21 +65,20 @@ export class TravelListComponent {
           'Travel Expense deleted successfully',
           'Travel Expense deleted'
         );
-        this.getTravelData()
+        this.getTravelData();
       }
     });
   }
 
-
   exportExcel(): void {
     const datePipe = new DatePipe('en-US');
     const data = this.travelData.map((item, index) => ({
-      'S.No.': index+1,
+      'S.No.': index + 1,
       'Employee Id': item.employeeId,
       'Travel From': item.travelFrom,
       'Travel To': item.travelTo,
-      'JourneyDate': item.journeyDate,
-      'ReturnDate': item.returnDate,
+      JourneyDate: item.journeyDate,
+      ReturnDate: item.returnDate,
       'Added By': item.addedBy,
       AddedTime: datePipe.transform(item.createdAt, 'MM/dd/yyyy'),
       'Modified By': item.addedBy,
@@ -116,8 +115,6 @@ export class TravelListComponent {
     return blob;
   }
 
-
-
   exportPdf() {
     this.exitDetails = this.travelData.map((item, index) => {
       return { sno: index + 1, ...item };
@@ -125,7 +122,7 @@ export class TravelListComponent {
 
     const doc = new jsPDF.jsPDF('l', 'pt');
     // const data = this.reviewerDetails;
-    const data = this.exitDetails.map(item => {
+    const data = this.exitDetails.map((item) => {
       return {
         ...item,
         createdAt: this.formatDate(item.createdAt), // Format the createdAt date
@@ -143,12 +140,11 @@ export class TravelListComponent {
       { title: 'AddedTime', dataKey: 'createdAt' },
       { title: 'Modified By', dataKey: 'addedBy' },
       { title: 'ModifiedTime', dataKey: 'updatedAt' },
-
     ];
 
     autoTable(doc, {
       columns: exportColumns,
-      body: data
+      body: data,
     });
 
     doc.save('Travel Expense List.pdf');
@@ -162,7 +158,6 @@ export class TravelListComponent {
 
     return `${day}/${month}/${year}`;
   }
-
 
   onToggleSidebar(sidebarState: any) {
     if (sidebarState === 'open') {

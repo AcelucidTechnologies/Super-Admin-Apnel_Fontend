@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { NgxUiLoaderService } from 'ngx-ui-loader';
+import { NgxUiLoaderService, SPINNER } from 'ngx-ui-loader';
 import { LeaveService } from 'src/app/_services/leave.service';
 import { ToastrMsgService } from 'src/app/_services/toastr-msg.service';
 
@@ -18,17 +18,20 @@ export class LeaveApproveDisapproveComponent {
   id:string
   leaveTrackerList:any
   payload:any;
+  fgsType :any
   constructor(  private leaveservice: LeaveService,
     private ngxLoader: NgxUiLoaderService,
       private toastr: ToastrMsgService,
       private route: Router
    ){
-
+    this.fgsType = SPINNER.squareLoader;
    }
 
 
 
   ngOnInit(){
+    this.fgsType = SPINNER.squareLoader;
+    this.ngxLoader.start();
     this.getTableforLeaves()
   }
 

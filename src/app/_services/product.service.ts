@@ -45,6 +45,7 @@ export class ProductService {
         return this.http.put(endpointUrl, formData, { 'headers': httpOptions });
     }
 
+
     deleteProduct(id) {
         const token = localStorage.getItem('token') || '';
         let httpOptions = new HttpHeaders().set('x-access-token', token)
@@ -77,7 +78,7 @@ export class ProductService {
         categories.push(categoryData);
         return of(categoryData)
     }
-    
+
     editCategory(categoryData: any, id: number) {
         const token = localStorage.getItem('token') || '';
         let httpOptions = new HttpHeaders().set('x-access-token', token)
@@ -97,4 +98,18 @@ export class ProductService {
         categories.splice(categories.findIndex((index) => index.id == id), 1);
         return of(categories[indexObj])
     }
+
+
+
+
+    // ############################# create order apis #############################
+
+    createMobileStatus(payload:any): Observable<any[]> {
+      const token = localStorage.getItem('token') || '';
+            const email = localStorage.getItem('email') || '';
+            let httpOptions = new HttpHeaders().set('x-access-token', token)
+              const endpointUrl = `${environment.JSON_SERVER}/createOrder`;
+            return this.http.post<any>(endpointUrl, payload,{ 'headers': httpOptions });
+    }
+
 }

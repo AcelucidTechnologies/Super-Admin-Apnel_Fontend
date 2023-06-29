@@ -6,241 +6,337 @@
 </div>
 
 <div class="card pl-4 pr-4 pb-3 pt-4">
-
-
-
   <form [formGroup]="selectForm">
-  <div class="row mb-4">
-    <div class="col-6">
+    <div class="row mb-4">
+      <div class="col-6">
         <div class="row">
           <div class="col-4">
-            <label class="starlabel">Leave Type</label></div>
-            <div class="col-8 ">
-              <!-- <p-dropdown formControlName="leaveType" [options]="leaveType" id="role" placeholder="Leave Type"></p-dropdown> -->
-              <select style="width: 100%; border: 1px solid lightgray; height: 38px; padding:5px"
+            <label class="starlabel">Leave Type</label>
+          </div>
+          <div class="col-8">
+            <!-- <p-dropdown formControlName="leaveType" [options]="leaveType" id="role" placeholder="Leave Type"></p-dropdown> -->
+            <select
+              style="
+                width: 100%;
+                border: 1px solid lightgray;
+                height: 38px;
+                padding: 5px;
+              "
               class="form-group"
-              formControlName="leaveType"  >
+              formControlName="leaveType"
+            >
               <option value="" disabled selected>Select Applied to</option>
               <option *ngFor="let count of leaveType">
                 {{ count }}
               </option>
             </select>
-              <div *ngIf="
-              !selectForm.controls['leaveType'].valid &&
-              (selectForm.controls['leaveType'].touched ||
-              selectForm.controls['leaveType'].dirty)
-            ">
-              <div [hidden]="!selectForm.controls['leaveType'].errors['required']" style="
-                color: rgb(253, 122, 122);
-                font-size: small;
-                font-style: italic;
-              ">
+            <div
+              *ngIf="
+                !selectForm.controls['leaveType'].valid &&
+                (selectForm.controls['leaveType'].touched ||
+                  selectForm.controls['leaveType'].dirty)
+              "
+            >
+              <div
+                [hidden]="!selectForm.controls['leaveType'].errors['required']"
+                style="
+                  color: rgb(253, 122, 122);
+                  font-size: small;
+                  font-style: italic;
+                "
+              >
                 leave type is required
               </div>
             </div>
           </div>
         </div>
-    </div>
-    <div class="col-6">
-      <div class="row">
-        <div class="col-4">
-          <label class="starlabel">Applied To</label></div>
+      </div>
+      <div class="col-6">
+        <div class="row">
+          <div class="col-4">
+            <label class="starlabel">Applied To</label>
+          </div>
           <div class="col-8">
-
-            <mat-select placeholder="appliedTo" formControlName="appliedTo" multiple>
-              <mat-option *ngFor="let count of employeeList" [value]="count.email">{{ count.employeeFullName }}</mat-option>
+            <mat-select
+              placeholder="appliedTo"
+              formControlName="appliedTo"
+              multiple
+            >
+              <mat-option
+                *ngFor="let count of employeeList"
+                [value]="count.email"
+                >{{ count.employeeFullName }}</mat-option
+              >
             </mat-select>
 
-            <div *ngIf="selectForm.controls['appliedTo'].errors?.['required'] && selectForm.controls['appliedTo'].touched && (selectForm.controls['appliedTo'].dirty || selectForm.controls['appliedTo'].touched)">
-              <div style="color: rgb(253, 122, 122); font-size: small; font-style: italic;">
+            <div
+              *ngIf="selectForm.controls['appliedTo'].errors?.['required'] && selectForm.controls['appliedTo'].touched && (selectForm.controls['appliedTo'].dirty || selectForm.controls['appliedTo'].touched)"
+            >
+              <div
+                style="
+                  color: rgb(253, 122, 122);
+                  font-size: small;
+                  font-style: italic;
+                "
+              >
                 applied to is required
               </div>
             </div>
-
-
+          </div>
         </div>
       </div>
-  </div>
-
-  </div>
-  <div class="row mb-4">
-    <div class="col-6">
+    </div>
+    <div class="row mb-4">
+      <div class="col-6">
         <div class="row">
           <div class="col-4">
-            <label class="starlabel">From date</label></div>
-            <div class="col-8"><input formControlName="fromDate"  [min]="getMinimumDate()" class="form-control custom-placeholder input-padding"  type="date" >
-              <div *ngIf="
-              !selectForm.controls['fromDate'].valid &&
-              (selectForm.controls['fromDate'].touched ||
-              selectForm.controls['fromDate'].dirty)
-            ">
-              <div [hidden]="!selectForm.controls['fromDate'].errors['required']" style="
-                color: rgb(253, 122, 122);
-                font-size: small;
-                font-style: italic;
-              ">
+            <label class="starlabel">From date</label>
+          </div>
+          <div class="col-8">
+            <input
+              formControlName="fromDate"
+              [min]="getMinimumDate()"
+              class="form-control custom-placeholder input-padding"
+              type="date"
+            />
+            <div
+              *ngIf="
+                !selectForm.controls['fromDate'].valid &&
+                (selectForm.controls['fromDate'].touched ||
+                  selectForm.controls['fromDate'].dirty)
+              "
+            >
+              <div
+                [hidden]="!selectForm.controls['fromDate'].errors['required']"
+                style="
+                  color: rgb(253, 122, 122);
+                  font-size: small;
+                  font-style: italic;
+                "
+              >
                 from date is required
               </div>
-              <div *ngIf="selectForm.controls['fromDate'].errors && selectForm.controls['fromDate'].errors['invalidFromDate']"
-        style="color: rgb(253, 122, 122); font-size: small; font-style: italic;">
-        From date must be at least 3 days after the current date.
-      </div>
+              <div
+                *ngIf="
+                  selectForm.controls['fromDate'].errors &&
+                  selectForm.controls['fromDate'].errors['invalidFromDate']
+                "
+                style="
+                  color: rgb(253, 122, 122);
+                  font-size: small;
+                  font-style: italic;
+                "
+              >
+                From date must be at least 3 days after the current date.
+              </div>
             </div>
           </div>
         </div>
-    </div>
-
-  <div class="col-6">
-    <div class="row">
-      <div class="col-4">
-        <label class="starlabel">To date</label>
       </div>
-      <div class="col-8">
-        <input formControlName="toDate" [min]="getMinimumDate()"  class="form-control custom-placeholder input-padding" type="date">
-        <div *ngIf="selectForm.controls['toDate'].errors?.['required'] && (selectForm.controls['toDate'].touched || selectForm.controls['toDate'].dirty)"
-          style="color: rgb(253, 122, 122); font-size: small; font-style: italic;">
-          To date is required
-        </div>
-        <div *ngIf="selectForm.controls['toDate'].errors?.['invalidToDate'] && (selectForm.controls['toDate'].touched || selectForm.controls['toDate'].dirty)"
-          style="color: rgb(253, 122, 122); font-size: small; font-style: italic;">
-          To date should be greater than or equal to from date
-        </div>
-      </div>
-    </div>
-  </div>
-  </div>
 
-
-  <div class="row mb-4">
-    <div class="col-6">
+      <div class="col-6">
         <div class="row">
           <div class="col-4">
-            <label class="starlabel">Contact Number</label></div>
-            <div class="col-8"> <input  formControlName="contactNo" type="number" class="form-control custom-placeholder input-padding"  placeholder="Enter contact number " >
+            <label class="starlabel">To date</label>
+          </div>
+          <div class="col-8">
+            <input
+              formControlName="toDate"
+              [min]="getMinimumDate()"
+              class="form-control custom-placeholder input-padding"
+              type="date"
+            />
+            <div
+              *ngIf="selectForm.controls['toDate'].errors?.['required'] && (selectForm.controls['toDate'].touched || selectForm.controls['toDate'].dirty)"
+              style="
+                color: rgb(253, 122, 122);
+                font-size: small;
+                font-style: italic;
+              "
+            >
+              To date is required
+            </div>
+            <div
+              *ngIf="selectForm.controls['toDate'].errors?.['invalidToDate'] && (selectForm.controls['toDate'].touched || selectForm.controls['toDate'].dirty)"
+              style="
+                color: rgb(253, 122, 122);
+                font-size: small;
+                font-style: italic;
+              "
+            >
+              To date should be greater than or equal to from date
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="row mb-4">
+      <div class="col-6">
+        <div class="row">
+          <div class="col-4">
+            <label class="starlabel">Contact Number</label>
+          </div>
+          <div class="col-8">
+            <input
+              formControlName="contactNo"
+              type="number"
+              class="form-control custom-placeholder input-padding"
+              placeholder="Enter contact number "
+            />
 
             <div
-            *ngIf="
-              !selectForm.controls['contactNo'].valid &&
-              (selectForm.controls['contactNo'].touched ||
-                selectForm.controls['contactNo'].dirty)
+              *ngIf="
+                !selectForm.controls['contactNo'].valid &&
+                (selectForm.controls['contactNo'].touched ||
+                  selectForm.controls['contactNo'].dirty)
+              "
+            >
+              <div
+                [hidden]="!selectForm.controls['contactNo'].errors['required']"
+                style="
+                  color: rgb(253, 122, 122);
+                  font-size: small;
+                  font-style: italic;
+                "
+              >
+                contactNo is required
+              </div>
+              <div
+                *ngIf="selectForm.controls['contactNo'].errors['pattern']"
+                style="
+                  color: rgb(253, 122, 122);
+                  font-size: small;
+                  font-style: italic;
+                "
+              >
+                Please enter a 10-digit number.
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-6">
+        <div class="row">
+          <div class="col-4">
+            <label>Alt Contact Number</label>
+          </div>
+          <div class="col-8">
+            <input
+              formControlName="altConatctNo"
+              type="number"
+              class="form-control custom-placeholder input-padding"
+              placeholder="Enter contact number "
+            />
+            <div class="col-8">
+              <div
+                *ngIf="selectForm.controls['altConatctNo'].errors?.['pattern'] && (selectForm.controls['altConatctNo'].touched || selectForm.controls['altConatctNo'].dirty)"
+                style="
+                  color: rgb(253, 122, 122);
+                  font-size: small;
+                  font-style: italic;
+                "
+              >
+                Please enter a 10-digit number.
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row mb-4">
+      <div class="col-2">
+        <label class="starlabel">Subject</label>
+      </div>
+      <div class="col-10">
+        <input
+          formControlName="subject"
+          type="text"
+          class="form-control custom-placeholder input-padding"
+          placeholder="Enter subject "
+        />
+
+        <div
+          *ngIf="
+            !selectForm.controls['subject'].valid &&
+            (selectForm.controls['subject'].touched ||
+              selectForm.controls['subject'].dirty)
+          "
+        >
+          <div
+            [hidden]="!selectForm.controls['subject'].errors['required']"
+            style="
+              color: rgb(253, 122, 122);
+              font-size: small;
+              font-style: italic;
             "
           >
-            <div
-              [hidden]="
-                !selectForm.controls['contactNo'].errors['required']
-              "
-              style="
-                color: rgb(253, 122, 122);
-                font-size: small;
-                font-style: italic;
-              "
-            >
-              contactNo is required
-            </div>
-            <div
-              *ngIf="selectForm.controls['contactNo'].errors['pattern']"
-              style="
-                color: rgb(253, 122, 122);
-                font-size: small;
-                font-style: italic;
-              "
-            >
-            Please enter a 10-digit number.
-            </div>
+            subject is required
           </div>
-
-          </div>
-        </div>
-    </div>
-    <div class="col-6">
-      <div class="row">
-        <div class="col-4">
-          <label >Alt Contact Number</label></div>
-          <div class="col-8"> <input formControlName="altConatctNo" type="number" class="form-control custom-placeholder input-padding" placeholder="Enter contact number " >
-              <div class="col-8">
-                <div *ngIf="selectForm.controls['altConatctNo'].errors?.['pattern'] && (selectForm.controls['altConatctNo'].touched || selectForm.controls['altConatctNo'].dirty)"
-                  style="color: rgb(253, 122, 122); font-size: small; font-style: italic;">
-                  Please enter a 10-digit number.
-                </div>
-              </div>
         </div>
       </div>
-  </div>
-
-  </div>
-  <div class="row mb-4">
-
-    <div class="col-2">
-      <label class="starlabel">Subject</label></div>
-      <div class="col-10">
-        <input  formControlName="subject" type="text" class="form-control custom-placeholder input-padding"  placeholder="Enter subject " >
-
-    <div *ngIf="
-    !selectForm.controls['subject'].valid &&
-    (selectForm.controls['subject'].touched ||
-    selectForm.controls['subject'].dirty)
-  ">
-    <div [hidden]="!selectForm.controls['subject'].errors['required']" style="
-      color: rgb(253, 122, 122);
-      font-size: small;
-      font-style: italic;
-    ">
-    subject is required
     </div>
-  </div>
 
-  </div>
-
-</div>
-
-  <div class="row mb-4">
-
+    <div class="row mb-4">
       <div class="col-2">
-        <label class="starlabel">Reason</label></div>
-        <div class="col-10">
-      <ckeditor
-        name="editor1"
-        formControlName="reason"
-      ></ckeditor>
-      <div *ngIf="
-      !selectForm.controls['reason'].valid &&
-      (selectForm.controls['reason'].touched ||
-      selectForm.controls['reason'].dirty)
-    ">
-      <div [hidden]="!selectForm.controls['reason'].errors['required']" style="
-        color: rgb(253, 122, 122);
-        font-size: small;
-        font-style: italic;
-      ">
-      reason is required
+        <label class="starlabel">Reason</label>
+      </div>
+      <div class="col-10">
+        <ckeditor name="editor1" formControlName="reason"></ckeditor>
+        <div
+          *ngIf="
+            !selectForm.controls['reason'].valid &&
+            (selectForm.controls['reason'].touched ||
+              selectForm.controls['reason'].dirty)
+          "
+        >
+          <div
+            [hidden]="!selectForm.controls['reason'].errors['required']"
+            style="
+              color: rgb(253, 122, 122);
+              font-size: small;
+              font-style: italic;
+            "
+          >
+            reason is required
+          </div>
+        </div>
       </div>
     </div>
 
+    <div class="row mb-4">
+      <div class="col-2">
+        <label>Attachment</label>
+      </div>
+      <div class="col-10">
+        <input
+          type="file"
+          formControlName="image"
+          class="form-control custom-placeholder input-padding"
+          placeholder="attach file"
+        />
+      </div>
     </div>
 
-  </div>
-
-  <div class="row mb-4">
-    <div class="col-2">
-      <label>Attachment</label>
+    <div class="row mb-5 mt-4">
+      <div class="d-flex justify-content-end col-11 mt-4">
+        <button
+          type="submit"
+          style="background: rgb(228, 28, 28); border: none"
+          class="btn btn-info mr-3"
+          (click)="submit()"
+          [disabled]="!selectForm.valid"
+        >
+          Submit
+        </button>
+        <button
+          class="btn btn-info"
+          style="background: #637381; border: none"
+          [routerLink]="['/leaveMgmt/leave-tracker']"
+        >
+          Cancel
+        </button>
+      </div>
     </div>
-    <div class="col-10">
-      <input type="file"  formControlName="image" class="form-control custom-placeholder input-padding" placeholder="attach file">
-    </div>
-  </div>
-
-
-  <div class="row mb-5 mt-4">
-    <div class="d-flex justify-content-end col-11 mt-4">
-      <button type="submit" style="background: rgb(228, 28, 28);border:none" class="btn btn-info mr-3"
-        (click)="submit()" [disabled]="!selectForm.valid">Submit</button>
-      <button class="btn btn-info" style="background: #637381;border:none"
-        [routerLink]="['/leaveMgmt/leave-tracker']">Cancel</button>
-    </div>
-  </div>
-
-
-
-</form>
+  </form>
 </div>
-

@@ -82,8 +82,6 @@ export class SidenavComponent implements OnInit {
     this.permissionService.getModulePermission().subscribe((res) => {
       this.moduleList = res[0].moduleList;
       this.username = res[0].username;
-
-      console.log(res[0].moduleList);
       this.items = SideNaveMenueRoute;
       this.items = this.items.filter((val) => {
         if (this.moduleList.includes(val.label)) return val;
@@ -93,7 +91,6 @@ export class SidenavComponent implements OnInit {
 
     this.username = localStorage.getItem('UserData');
     this.getImage();
-    // console.log(this.itemShow)
   }
 
   activeMenu(event) {

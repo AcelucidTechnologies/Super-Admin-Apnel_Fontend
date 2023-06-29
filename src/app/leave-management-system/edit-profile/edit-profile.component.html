@@ -38,6 +38,7 @@
                     class="form-control input-font"
                     id="inputdefault"
                     formControlName="employeeFullName"
+
                   />
                   <div
                     *ngIf="
@@ -45,20 +46,6 @@
                       profileForm.controls['employeeFullName'].dirty
                     "
                   >
-                    <div
-                      [hidden]="
-                        !profileForm.controls['employeeFullName'].errors[
-                          'required'
-                        ]
-                      "
-                      style="
-                        color: rgb(253, 122, 122);
-                        font-size: small;
-                        font-style: italic;
-                      "
-                    >
-                      full name is required
-                    </div>
                     <div
                       *ngIf="
                         profileForm.controls['employeeFullName'].errors[
@@ -98,18 +85,6 @@
                     "
                   >
                     <div
-                      [hidden]="
-                        !profileForm.controls['FirstName'].errors['required']
-                      "
-                      style="
-                        color: rgb(253, 122, 122);
-                        font-size: small;
-                        font-style: italic;
-                      "
-                    >
-                      first name is required
-                    </div>
-                    <div
                       *ngIf="
                         profileForm.controls['FirstName'].errors['pattern']
                       "
@@ -144,18 +119,6 @@
                     "
                   >
                     <div
-                      [hidden]="
-                        !profileForm.controls['lastName'].errors['required']
-                      "
-                      style="
-                        color: rgb(253, 122, 122);
-                        font-size: small;
-                        font-style: italic;
-                      "
-                    >
-                      last name is required
-                    </div>
-                    <div
                       *ngIf="profileForm.controls['lastName'].errors['pattern']"
                       style="
                         color: rgb(253, 122, 122);
@@ -188,18 +151,6 @@
                     "
                   >
                     <div
-                      [hidden]="
-                        !profileForm.controls['email'].errors['required']
-                      "
-                      style="
-                        color: rgb(253, 122, 122);
-                        font-size: small;
-                        font-style: italic;
-                      "
-                    >
-                      email is required
-                    </div>
-                    <div
                       *ngIf="profileForm.controls['email'].errors['email']"
                       style="
                         color: rgb(253, 122, 122);
@@ -216,7 +167,6 @@
             <div class="col-6">
               <div class="row" style="display: flex">
                 <div class="col-4">Choose New Profile</div>
-                <!-- <div style="display: flex; align-items: center;"> -->
                 <div class="col-8">
                   <input
                     type="file"
@@ -226,11 +176,6 @@
                     (change)="fileChangeEvent($event)"
                   />
                 </div>
-                <!-- <div class="col-3"> -->
-                <!-- <img class="user-name-img" [src]="laevebyid.image  ||  Image" width="40" height="40" style="margin-top: 4px;"> -->
-                <!-- <img class="user-name-img" [src]="laevebyid.image" width="40" height="40" style="margin-top: 4px;"> -->
-                <!-- </div> -->
-                <!-- </div> -->
               </div>
             </div>
           </div>
@@ -437,8 +382,6 @@
                       {{ count.state }}
                     </option>
                   </select>
-                  <!-- <p-dropdown [options]="roleOptions" id="ratingStatus" placeholder="Select"
-              styleClass="status-dropdown" formControlName="role"></p-dropdown> -->
                   <div
                     *ngIf="
                       profileForm.get('role').invalid ||
@@ -482,8 +425,7 @@
                       {{ count.state }}
                     </option>
                   </select>
-                  <!-- <p-dropdown [options]="employmentType" id="ratingStatus" placeholder="Select"
-              styleClass="status-dropdown" formControlName="employmentType"></p-dropdown> -->
+
                   <div
                     *ngIf="
                       !profileForm.controls['employmentType'].valid &&
@@ -532,9 +474,6 @@
                       {{ count.state }}
                     </option>
                   </select>
-
-                  <!-- <p-dropdown [options]="employmentStatus" id="ratingStatus" placeholder="Select"
-              styleClass="status-dropdown" formControlName="employeeStatus"></p-dropdown> -->
 
                   <div
                     *ngIf="
@@ -681,18 +620,7 @@
                       profileForm.controls['totalExp'].dirty
                     "
                   >
-                    <div
-                      [hidden]="
-                        !profileForm.controls['totalExp'].errors['required']
-                      "
-                      style="
-                        color: rgb(253, 122, 122);
-                        font-size: small;
-                        font-style: italic;
-                      "
-                    >
-                      totalExp is required
-                    </div>
+
                     <div
                       *ngIf="
                         profileForm.controls['totalExp'].errors['totalExp']
@@ -727,18 +655,6 @@
                       profileForm.controls['currentExp'].dirty
                     "
                   >
-                    <div
-                      [hidden]="
-                        !profileForm.controls['currentExp'].errors['required']
-                      "
-                      style="
-                        color: rgb(253, 122, 122);
-                        font-size: small;
-                        font-style: italic;
-                      "
-                    >
-                      currentExp is required
-                    </div>
                     <div
                       *ngIf="
                         profileForm.controls['currentExp'].errors['currentExp']

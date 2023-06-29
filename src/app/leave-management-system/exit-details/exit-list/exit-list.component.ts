@@ -2,7 +2,7 @@ import { Component, ViewChild } from '@angular/core';
 import * as jsPDF from 'jspdf';
 import { MatDialog } from '@angular/material/dialog';
 import { ToastrMsgService } from 'src/app/_services/toastr-msg.service';
-import { NgxUiLoaderService } from 'ngx-ui-loader';
+import { NgxUiLoaderService, SPINNER } from 'ngx-ui-loader';
 import * as XLSX from 'xlsx';
 import { DatePipe } from '@angular/common';
 import { LeaveService } from 'src/app/_services/leave.service';
@@ -13,41 +13,40 @@ import { DialogExitComponent } from '../dialog-exit/dialog-exit.component';
 @Component({
   selector: 'app-exit-list',
   templateUrl: './exit-list.component.html',
-  styleUrls: ['./exit-list.component.scss']
+  styleUrls: ['./exit-list.component.scss'],
 })
 export class ExitListComponent {
-
-  exitData: any[]=[];
-  exitDetails:any
-
+  exitData: any[] = [];
+  exitDetails: any;
 
   sidebarSpacing: string = 'contracted';
   cols: any[];
   @ViewChild('dt') dt: Table | undefined;
 
   exportColumns: any[];
+  fgsType: any;
 
   statusList = ['Active', 'Inactive'];
   constructor(
     private leaveService: LeaveService,
     private toastr: ToastrMsgService,
     private ngxLoader: NgxUiLoaderService,
-    private dialog: MatDialog,
+    private dialog: MatDialog
   ) {
+    this.fgsType = SPINNER.squareLoader;
   }
 
   ngOnInit(): void {
+    this.fgsType = SPINNER.squareLoader;
+    this.ngxLoader.start();
 
     this.getExitData();
   }
 
-
-
-
   getExitData() {
     this.leaveService.getExitList().subscribe((res) => {
       this.exitData = res;
-      console.log('51', this.exitData);
+      this.ngxLoader.stop();
     });
   }
 
@@ -63,30 +62,26 @@ export class ExitListComponent {
   deleteExitDetails(id: any) {
     this.leaveService.deleteExit(id._id).subscribe((res) => {
       if (res) {
-        this.toastr.showSuccess(
-          'Exit deleted successfully',
-          'Exit deleted'
-        );
-        this.getExitData()
+        this.toastr.showSuccess('Exit deleted successfully', 'Exit deleted');
+        this.getExitData();
       }
     });
   }
 
-
   exportExcel(): void {
     const datePipe = new DatePipe('en-US');
     const data = this.exitData.map((item, index) => ({
-      'S.No.': index+1,
+      'S.No.': index + 1,
       'Employee Id': item.employeeId,
       'Interviewer Type': item.interviewerType,
       'Reason For Leaving': item.reasonForLeaving,
       // 'Work With Organisation Again': item.workingOrganization,
       'Most Of The Company': item.mostTheCompany,
       'Anything To Share': item.anythingShare,
-      'Resignation': item.reasonForLeaving,
+      Resignation: item.reasonForLeaving,
       'All Assets': item.allAssets,
       'Notice Period': item.noticePeriod,
-      'Manager': item.manager,
+      Manager: item.manager,
       'Added By': item.addedBy,
       AddedTime: datePipe.transform(item.createdAt, 'MM/dd/yyyy'),
       'Modified By': item.addedBy,
@@ -123,8 +118,6 @@ export class ExitListComponent {
     return blob;
   }
 
-
-
   exportPdf() {
     this.exitDetails = this.exitData.map((item, index) => {
       return { sno: index + 1, ...item };
@@ -132,12 +125,12 @@ export class ExitListComponent {
 
     const doc = new jsPDF.jsPDF('l', 'pt');
     // const data = this.reviewerDetails;
-    const data = this.exitDetails.map(item => {
+    const data = this.exitDetails.map((item) => {
       return {
         ...item,
         createdAt: this.formatDate(item.createdAt), // Format the createdAt date
         updatedAt: this.formatDate(item.updatedAt), // Format the createdAt date
-        separationDate: this.formatDate(item.separationDate) // Format the createdAt date
+        separationDate: this.formatDate(item.separationDate), // Format the createdAt date
       };
     });
     const exportColumns = [
@@ -147,7 +140,10 @@ export class ExitListComponent {
       { title: 'Type Of Assets', dataKey: 'typeOfAssets' },
       { title: 'Separation Date', dataKey: 'separationDate' },
       { title: 'Reason For Leaving', dataKey: 'reasonForLeaving' },
-      { title: 'Work With OrganisationAgain ', dataKey: 'workingOrganization ' },
+      {
+        title: 'Work With OrganisationAgain ',
+        dataKey: 'workingOrganization ',
+      },
       { title: 'Most Of The Company', dataKey: 'mostTheCompany' },
       { title: 'Anything Share', dataKey: 'anythingShare' },
       { title: 'Resignation', dataKey: 'reasonForLeaving' },
@@ -158,12 +154,11 @@ export class ExitListComponent {
       { title: 'AddedTime', dataKey: 'createdAt' },
       { title: 'Modified By', dataKey: 'addedBy' },
       { title: 'ModifiedTime', dataKey: 'updatedAt' },
-
     ];
 
     autoTable(doc, {
       columns: exportColumns,
-      body: data
+      body: data,
     });
 
     doc.save('Exit Detail List.pdf');
@@ -177,7 +172,6 @@ export class ExitListComponent {
 
     return `${day}/${month}/${year}`;
   }
-
 
   onToggleSidebar(sidebarState: any) {
     if (sidebarState === 'open') {
