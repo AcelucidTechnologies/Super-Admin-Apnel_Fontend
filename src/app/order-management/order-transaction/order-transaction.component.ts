@@ -29,6 +29,7 @@ export class OrderTransactionComponent implements OnInit {
   exportColumns:any[];
   orderValue:any[];
   order:any
+  orderData: any[]=[];
 
   constructor(private ngxLoader: NgxUiLoaderService,
     private orderService: OrdersService,
@@ -42,6 +43,7 @@ export class OrderTransactionComponent implements OnInit {
     }
 
   ngOnInit(): void {
+    this.getOrderStatus()
     this.sidebarSpacing = 'contracted';
     this.fgsType = SPINNER.squareLoader
     this.ngxLoader.start();
@@ -52,6 +54,14 @@ export class OrderTransactionComponent implements OnInit {
       { field: 'Name', show: true, headers: 'Name' },
     ]
   }
+  getOrderStatus() {
+    this.orderService.getOrderList().subscribe((res) => {
+      this.orderData = res;
+      console.log('51', this.orderData);
+    });
+  }
+
+
   onToggleSidebar(sidebarState: any) {
     if (sidebarState === 'open') {
       this.sidebarSpacing = 'contracted';
@@ -69,15 +79,43 @@ export class OrderTransactionComponent implements OnInit {
       console.log("orderlist" + JSON.stringify(this.orderTransactin))
     });
   }
-  deteOrderTransactionBy(orderId: number) {
-    this.ngxLoader.start();
-    this.orderService.deteOrderTransactionById(orderId).subscribe((res) => {
+  // deteOrderTransactionBy(orderId: string) {
+  //    this.ngxLoader.start();
+  //   this.orderService.deleteOrderTransaction(orderId._id).subscribe((res) => {
+  //     if (res) {
+  //       this.toastr.showSuccess('orders-transaction deleted successfully', 'order deleted');
+  //       this.getOrderTransactionList();
+  //     }
+  //   });
+  // }
+
+  deleteOrderDetails(id: any) {
+    // this.ngxLoader.start();
+    this.orderService.deleteOrderTransaction(id._id).subscribe((res) => {
       if (res) {
-        this.toastr.showSuccess('orders-transaction deleted successfully', 'order deleted');
-        this.getOrderTransactionList();
+        this.toastr.showSuccess(
+          'Order-transaction deleted successfully',
+          'Order-transaction deleted'
+        );
+        this.getOrderStatus()
       }
     });
   }
+
+
+  openDialog(name: any) {
+    const dialogRef = this.dialog.open(DialogOrderStatusComponent);
+    dialogRef.afterClosed().subscribe((result) => {
+      if (result == true) {
+        this.deleteOrderDetails(name);
+      }
+    });
+  }
+
+
+
+
+
   exportExcel() {
     const worksheet = xlsxPackage.utils.json_to_sheet(this.orderTransactin);
     const workbook = { Sheets: { 'data': worksheet }, SheetNames: ['data'] };
@@ -103,12 +141,12 @@ export class OrderTransactionComponent implements OnInit {
             doc.save('order.pdf');
         }
 
-        openDialog(order: any) {
-          const dialogRef = this.dialog.open(DialogOrderStatusComponent);
-          dialogRef.afterClosed().subscribe(result => {
-            if (result == true) {
-              this.deteOrderTransactionBy(order)
-            }
-          });
-        }
+        // openDialog(order: any) {
+        //   const dialogRef = this.dialog.open(DialogOrderStatusComponent);
+        //   dialogRef.afterClosed().subscribe(result => {
+        //     if (result == true) {
+        //       this.deleteOrderDetails(order)
+        //     }
+        //   });
+        // }
 }

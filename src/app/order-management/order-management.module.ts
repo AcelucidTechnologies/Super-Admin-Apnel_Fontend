@@ -36,7 +36,8 @@ import { CreateOrderListComponent } from './create-order-list/create-order-list.
     DialogOrderStatusComponent,
     DialogCreateOrderComponent,
     CreateOrderDetailsComponent,
-    CreateOrderListComponent
+    CreateOrderListComponent,
+    DialogOrderStatusComponent
   ],
   imports: [
     CommonModule,
