@@ -9,7 +9,7 @@
         <a *ngFor="let notification of leaveTrackerList" class="notification-item"  style="cursor: pointer;" (click)="handleNotificationClick(notification._id)" >{{notification.notificationContent || defaultNotification}}</a><br>
       </div> -->
       <div class="dropdown-content" [ngClass]="{'show': showNotificationsMenu}">
-        <ng-container *ngIf="leaveTrackerList.length > 0; else defaultMessage">
+        <ng-container *ngIf="leaveTrackerList && leaveTrackerList.length > 0; else defaultMessage">
           <a *ngFor="let notification of leaveTrackerList" class="notification-item" style="cursor: pointer;" (click)="handleNotificationClick(notification._id)">
             {{notification.notificationContent || defaultNotification}}
           </a><br>

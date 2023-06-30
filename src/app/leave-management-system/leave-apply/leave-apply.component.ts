@@ -131,7 +131,7 @@ export class LeaveApplyComponent {
           // this.ngxLoader.start();
           setTimeout(() => {
             location.reload();
-          }, 0);
+          }, 1000);
 
         }
       }
