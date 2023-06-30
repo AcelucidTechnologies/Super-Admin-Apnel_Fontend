@@ -1,7 +1,6 @@
 .page-heading {
   display: flex;
   justify-content: space-between;
-
 }
 .p-button {
   color: #ffffff;
@@ -13,18 +12,17 @@
   border-radius: 3px;
 }
 .p-button:hover {
-  background:  #f52e2e;
+  background: #f52e2e;
   color: #ffffff;
-  border-color:  #f52e2e;
+  border-color: #f52e2e;
 }
-.card-header{
+.card-header {
   background: cadetblue;
   color: white;
   line-height: 10px;
-
 }
-.leave-count{
-  text-align:center;
+.leave-count {
+  text-align: center;
   font-size: 30px;
   border: 1px solid lightcoral;
   padding: 5px 5px 5px 5px;
@@ -59,7 +57,7 @@ p-sortIcon {
 
 .btn:hover {
   color: #fff;
-  background-color: rgb(245, 46, 46);;
+  background-color: rgb(245, 46, 46);
 }
 
 p-table {
@@ -76,65 +74,65 @@ p-table {
   color: rgb(245, 46, 46);
 }
 
-.theme{
-  background-color: rgb(245, 46, 46) ;
+.theme {
+  background-color: rgb(245, 46, 46);
   color: white;
   border: none;
 }
 
-.theme:hover{
+.theme:hover {
   background-color: lightcoral !important;
   color: rgb(245, 46, 46);
   border: none;
 }
 
-td,th{
+td,
+th {
   border: none !important;
   border-bottom: 1px solid rgb(215, 198, 198) !important;
 }
 :host::ng-deep {
-  .p-datatable .p-datatable-header,.p-paginator{
-      background-color: #fff !important;
-      border: none !important;
+  .p-datatable .p-datatable-header,
+  .p-paginator {
+    background-color: #fff !important;
+    border: none !important;
   }
 
-  .p-datatable .p-sortable-column .p-sortable-column-icon{
-      color: #848484;
-
+  .p-datatable .p-sortable-column .p-sortable-column-icon {
+    color: #848484;
   }
 
-  .p-datatable .p-sortable-column.p-highlight:hover{
-      background-color: none;
+  .p-datatable .p-sortable-column.p-highlight:hover {
+    background-color: none;
   }
-  .p-datatable .p-sortable-column.p-highlight{
-      background-color: none;
+  .p-datatable .p-sortable-column.p-highlight {
+    background-color: none;
   }
 
   .p-datatable .p-sortable-column:focus {
-       box-shadow:none
+    box-shadow: none;
   }
 
   .p-datatable .p-sortable-column.p-highlight:hover .p-sortable-column-icon {
-      color: #848484;
+    color: #848484;
   }
 
-  .p-paginator .p-paginator-pages .p-paginator-page.p-highlight{
-      background-color: rgb(228, 28, 28);
+  .p-paginator .p-paginator-pages .p-paginator-page.p-highlight {
+    background-color: rgb(228, 28, 28);
   }
   .p-datatable-hoverable-rows .p-selectable-row {
     cursor: default;
-}
+  }
 }
 
 ::ng-deep.custom-image {
-background: none;
-border: none;
+  background: none;
+  border: none;
 }
 ::ng-deep.custom-image:hover {
-background: none;
-border: none;
+  background: none;
+  border: none;
 }
-
 
 .user-name-img {
   width: 40px;
@@ -144,17 +142,16 @@ border: none;
 .input-container {
   position: relative;
   border: 0.5px solid rgba(145, 158, 171, 0.32) !important;
-  }
-  .page-btn button.active {
-    background-color: red; /* Set your desired color for the active button */
-    color: white; /* Set the text color for the active button */
-  }
+}
+.page-btn button.active {
+  background-color: red; /* Set your desired color for the active button */
+  color: white; /* Set the text color for the active button */
+}
 
-
-  .cursor-default {
-    cursor: default !important;
-  }
-  .image-cell {
-    max-width: 250px;
-    word-wrap: break-word;
-  }
+.cursor-default {
+  cursor: default !important;
+}
+.image-cell {
+  max-width: 250px;
+  word-wrap: break-word;
+}

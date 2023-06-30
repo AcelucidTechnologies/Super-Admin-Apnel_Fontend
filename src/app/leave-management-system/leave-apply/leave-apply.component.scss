@@ -28,10 +28,9 @@
 .balance-leave {
   display: flex;
   align-items: center;
-
 }
-.leave-count{
-  text-align:center;
+.leave-count {
+  text-align: center;
   font-size: 18px;
   border: 1px solid lightcoral;
   padding: 4px;
@@ -40,27 +39,27 @@
   color: white;
   border-radius: 5px;
 }
-label.starlabel::after{
+label.starlabel::after {
   content: "*";
   color: rgb(228, 28, 28);
 }
 
 ::ng-deep .p-dropdown .p-dropdown-label.p-placeholder {
-  width: 270px
+  width: 270px;
 }
 
 ::ng-deep div.leave-dropdown .p-dropdown .p-dropdown-label {
   width: 270px !important;
 }
 
-
 .custom-placeholder::placeholder {
   color: black;
 }
-.input-padding{
-  width: 100%; padding: 6px 6px
+.input-padding {
+  width: 100%;
+  padding: 6px 6px;
 }
-.form-control{
+.form-control {
   color: black;
 }
 ::ng-deep .p-dropdown .p-dropdown-label.p-placeholder {

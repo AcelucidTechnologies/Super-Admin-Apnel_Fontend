@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { CalendarOptions, EventInput } from '@fullcalendar/core';
 import dayGridPlugin from '@fullcalendar/daygrid';
 import timeGridPlugin from '@fullcalendar/timegrid';
-import { NgxUiLoaderService } from 'ngx-ui-loader';
+import { NgxUiLoaderService, SPINNER } from 'ngx-ui-loader';
 import { LeaveService } from 'src/app/_services/leave.service';
 import { ToastrMsgService } from 'src/app/_services/toastr-msg.service';
 
@@ -17,14 +17,17 @@ export class CalenderComponent {
   calenderList:any
   eventList: EventInput[] = [];
   leaveTrackerList:any
+  fgsType:any
 
   constructor( private leaveservice: LeaveService,
     private toastr: ToastrMsgService,
     private ngxLoader: NgxUiLoaderService,
     ){
-
+      this.fgsType = SPINNER.squareLoader;
   }
   ngOnInit() {
+    this.fgsType = SPINNER.squareLoader;
+    this.ngxLoader.start();
     this.calendarOptions = {
       plugins: [dayGridPlugin, timeGridPlugin],
       initialView: 'dayGridMonth',
@@ -42,6 +45,7 @@ export class CalenderComponent {
     this.leaveservice.getcalenderList().subscribe((res) => {
       this.calenderList = res;
       console.log("response 24==>", res);
+      this.ngxLoader.stop();
 
       // Map the response data to the FullCalendar event format
       const events = [];

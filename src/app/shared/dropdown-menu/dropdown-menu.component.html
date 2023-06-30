@@ -1,13 +1,27 @@
 <div class="dropdown-menu-container" #dropdown >
   <div class="main-menu">
     <div class=" navigation-bar">
+      <div class="flex-container">
+      <div class="dropdown">
       <!-- <span class="main-menu-btn f-btn " ><mat-icon style="color: #67748E;">fullscreen</mat-icon></span> -->
-      <span class="main-menu-btn f-btn mr-3 " [matBadge]="notificationCount" (click)="toggleNotificationDropdown()"><mat-icon style="color: #67748E;">notifications</mat-icon></span>
-      <div *ngIf="notificationDropdownVisible" class="notification-dropdown">
-        1 Notification items
-        2 Notification items
+      <span class="main-menu-btn f-btn mr-3 " [matBadge]="notificationCount" (click)="toggleNotificationsMenu()" ><mat-icon style="color: #67748E;">notifications</mat-icon></span>
+      <!-- <div class="dropdown-content" [ngClass]="{'show': showNotificationsMenu}">
+        <a *ngFor="let notification of leaveTrackerList" class="notification-item"  style="cursor: pointer;" (click)="handleNotificationClick(notification._id)" >{{notification.notificationContent || defaultNotification}}</a><br>
+      </div> -->
+      <div class="dropdown-content" [ngClass]="{'show': showNotificationsMenu}">
+        <ng-container *ngIf="leaveTrackerList && leaveTrackerList.length > 0; else defaultMessage">
+          <a *ngFor="let notification of leaveTrackerList" class="notification-item" style="cursor: pointer;" (click)="handleNotificationClick(notification._id)">
+            {{notification.notificationContent || defaultNotification}}
+          </a><br>
+        </ng-container>
       </div>
 
+      <ng-template #defaultMessage>
+        <a class="notification-item">
+          {{defaultNotification}}
+        </a>
+      </ng-template>
+    </div>
       <span class="user-info">
 
         <img style="border-radius: 17px !important;" src="{{this.image}}" alt="Image">
@@ -17,6 +31,7 @@
           <span class="user-role">{{role}}</span>
         </span>
       </span>
+  </div>
   </div>
   <div class="sub-menu-container" #submenu>
     <ul class="menu-items" [@menu]="menuState" >  <!--[@menu] usage reference https://angular.io/guide/animations -->

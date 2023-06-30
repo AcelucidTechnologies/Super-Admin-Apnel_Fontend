@@ -117,7 +117,7 @@ export class EditProfileComponent {
       ],
       FirstName: [
         '',
-        [Validators.required, Validators.pattern(/^[a-zA-Z\s]+$/)],
+        [Validators.required, Validators.pattern(/^[a-zA-Z\s]*$/)],
       ],
       lastName: [
         '',

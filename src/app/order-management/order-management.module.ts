@@ -20,6 +20,9 @@ import { DialogOrderStatusComponent } from './dialog-order-status/dialog-order-s
 import { DialogCreateOrderComponent } from './dialog-create-order/dialog-create-order.component';
 import { CreateOrderDetailsComponent } from './create-order-details/create-order-details.component';
 import { CreateOrderListComponent } from './create-order-list/create-order-list.component';
+import { AddOrderStatusComponent } from './add-order-status/add-order-status.component';
+import { EditOrderStatusComponent } from './edit-order-status/edit-order-status.component';
+import { NgxUiLoaderModule } from 'ngx-ui-loader';
 
 @NgModule({
   declarations: [
@@ -37,7 +40,9 @@ import { CreateOrderListComponent } from './create-order-list/create-order-list.
     DialogCreateOrderComponent,
     CreateOrderDetailsComponent,
     CreateOrderListComponent,
-    DialogOrderStatusComponent
+    DialogOrderStatusComponent,
+    AddOrderStatusComponent,
+    EditOrderStatusComponent
   ],
   imports: [
     CommonModule,
@@ -47,6 +52,7 @@ import { CreateOrderListComponent } from './create-order-list/create-order-list.
     ReactiveFormsModule,
     MatDialogModule,
     MatButtonModule,
+    NgxUiLoaderModule,
 
   ]
 })

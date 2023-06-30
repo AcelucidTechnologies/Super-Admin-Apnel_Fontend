@@ -1,0 +1,64 @@
+<div class="button-heading-container">
+  <button class="mb-2 back-button" [routerLink]="['/order/order-status']">
+    <i class="material-icons">arrow_back</i>
+  </button>
+  <h5>&nbsp;Add Status</h5>
+</div>
+<div class="card" style="padding: 80px 150px 10px 150px">
+  <form [formGroup]="selectForm">
+    <div class="row mb-4">
+      <div class="col-12">
+        <div class="row">
+          <div class="col-3">
+            <label class="starlabel">Status Name</label>
+          </div>
+          <div class="col-9">
+            <input
+              formControlName="orderStatus"
+              class="form-control custom-placeholder input-padding"
+              placeholder="Enter status name"
+              type="text"
+            />
+            <div
+              *ngIf="
+                !selectForm.controls['orderStatus'].valid &&
+                (selectForm.controls['orderStatus'].touched ||
+                  selectForm.controls['orderStatus'].dirty)
+              "
+            >
+              <div
+                [hidden]="
+                  !selectForm.controls['orderStatus'].errors['required']
+                "
+                style="
+                  color: rgb(253, 122, 122);
+                  font-size: small;
+                  font-style: italic;
+                "
+              >
+                Order status is required
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="row mb-5 mt-4">
+      <div class="d-flex justify-content-end col-11 mt-4">
+        <button
+          type="submit"
+          style="background: rgb(228, 28, 28); border: none"
+          class="btn btn-info mr-3"
+          (click)="submit()"
+          [disabled]="!selectForm.valid"
+        >
+          Submit
+        </button>
+        <button class="btn btn-info" style="background: #637381; border: none">
+          Cancel
+        </button>
+      </div>
+    </div>
+  </form>
+</div>

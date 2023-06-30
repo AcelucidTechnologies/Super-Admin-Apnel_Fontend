@@ -1,5 +1,5 @@
 mat-icon {
-  font-size: 2.5rem!important;
+  font-size: 2.5rem !important;
 }
 
 /* .dropdown-menu-container {
@@ -18,7 +18,7 @@ mat-icon {
   right: 1.5rem;
   display: block;
   background: white;
-  border: 1px solid #D1D1D1;
+  border: 1px solid #d1d1d1;
   border-radius: 20px 0 20px 20px;
   list-style: none;
   margin: 0;
@@ -58,7 +58,6 @@ mat-icon {
 @media screen and (min-width: 992px) {
   .dropdown-menu-container .main-menu .main-menu-btn {
     padding: 1rem 1rem 0;
-
   }
   .sub-menu-container {
     position: relative;
@@ -69,45 +68,64 @@ mat-icon {
   }
 }
 mat-icon {
-  font-size: 2rem!important;
+  font-size: 2rem !important;
 }
-.user-detail{
+.user-detail {
   display: inline-grid;
   position: relative;
   margin-right: 30px;
-  margin-left: 10px
+  margin-left: 10px;
 }
-.user-name{
-  color: #1B2950;
+.user-name {
+  color: #1b2950;
   margin-top: -10px;
   cursor: pointer;
 }
-.user-role{
-  color: #67748E;
+.user-role {
+  color: #67748e;
   cursor: pointer;
   font-size: 12px;
   justify-content: center;
   margin-left: 10px;
 }
-.navigation-bar{
+.navigation-bar {
   margin-top: 30px;
 }
-.user-info{
+.user-info {
   float: center;
   align-items: center;
   display: inline-flex;
 }
-.user-info img{
+.user-info img {
   width: 35px;
   height: 35px;
   border-radius: 10px;
   margin-top: -20px;
 }
-.admin-icon{
+.admin-icon {
   color: black;
   width: 10px;
   height: 10px;
   margin-right: 25px;
 }
 
+.notification-item {
+  display: block;
+  margin-bottom: 5px;
+}
+.dropdown-content {
+  width: 300px;
+  max-height: 300px;
+  position: absolute;
+  top: 100%;
+  overflow-y: auto;
+  left: 0;
+  background-color: white;
+  color: black;
+  padding: 10px;
+  display: none;
+}
 
+.dropdown-content.show {
+  display: block;
+}

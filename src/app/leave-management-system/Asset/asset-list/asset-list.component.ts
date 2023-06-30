@@ -3,7 +3,7 @@ import * as jsPDF from 'jspdf';
 import { MatDialog } from '@angular/material/dialog';
 import { access } from 'src/app/_models/modulepermission';
 import { ToastrMsgService } from 'src/app/_services/toastr-msg.service';
-import { NgxUiLoaderService } from 'ngx-ui-loader';
+import { NgxUiLoaderService, SPINNER } from 'ngx-ui-loader';
 import * as XLSX from 'xlsx';
 import { DatePipe } from '@angular/common';
 import { LeaveService } from 'src/app/_services/leave.service';
@@ -13,13 +13,12 @@ import { AssetDialogComponent } from '../asset-dialog/asset-dialog.component';
 @Component({
   selector: 'app-asset-list',
   templateUrl: './asset-list.component.html',
-  styleUrls: ['./asset-list.component.scss']
+  styleUrls: ['./asset-list.component.scss'],
 })
 export class AssetListComponent {
-
-  assetData: any[]=[];
-  assetDetails:any
-
+  assetData: any[] = [];
+  assetDetails: any;
+  fgsType: any;
 
   sidebarSpacing: string = 'contracted';
   cols: any[];
@@ -31,22 +30,21 @@ export class AssetListComponent {
     private leaveService: LeaveService,
     private toastr: ToastrMsgService,
     private ngxLoader: NgxUiLoaderService,
-    private dialog: MatDialog,
+    private dialog: MatDialog
   ) {
-
+    this.fgsType = SPINNER.squareLoader;
     this.getAssetData();
   }
 
   ngOnInit(): void {
-
+    this.fgsType = SPINNER.squareLoader;
+    this.ngxLoader.start();
   }
-
-
 
   getAssetData() {
     this.leaveService.getAssetList().subscribe((res) => {
       this.assetData = res;
-      console.log('51', this.assetData);
+      this.ngxLoader.stop();
     });
   }
 
@@ -62,20 +60,16 @@ export class AssetListComponent {
   deleteAssetDetails(id: any) {
     this.leaveService.deleteAsset(id._id).subscribe((res) => {
       if (res) {
-        this.toastr.showSuccess(
-          'Asset deleted successfully',
-          'Asset deleted'
-        );
-        this.getAssetData()
+        this.toastr.showSuccess('Asset deleted successfully', 'Asset deleted');
+        this.getAssetData();
       }
     });
   }
 
-
   exportExcel(): void {
     const datePipe = new DatePipe('en-US');
     const data = this.assetData.map((item, index) => ({
-      'S.No.': index+1,
+      'S.No.': index + 1,
       'Employee Id': item.employeeId,
       'Given Date': item.givenDate,
       'Assets Details': item.assetsDetails,
@@ -117,19 +111,17 @@ export class AssetListComponent {
     return blob;
   }
 
-
-
   exportPdf() {
     this.assetDetails = this.assetData.map((item, index) => {
       return { sno: index + 1, ...item };
     });
 
     const doc = new jsPDF.jsPDF('l', 'pt');
-    const data = this.assetDetails.map(item => {
+    const data = this.assetDetails.map((item) => {
       return {
         ...item,
         createdAt: this.formatDate(item.createdAt), // Format the createdAt date
-        updatedAt: this.formatDate(item.updatedAt) // Format the createdAt date
+        updatedAt: this.formatDate(item.updatedAt), // Format the createdAt date
       };
     });
     const exportColumns = [
@@ -142,12 +134,11 @@ export class AssetListComponent {
       { title: 'AddedTime', dataKey: 'createdAt' },
       { title: 'Modified By', dataKey: 'addedBy' },
       { title: 'ModifiedTime', dataKey: 'updatedAt' },
-
     ];
 
     autoTable(doc, {
       columns: exportColumns,
-      body: data
+      body: data,
     });
 
     doc.save('Asset List.pdf');
@@ -161,7 +152,6 @@ export class AssetListComponent {
 
     return `${day}/${month}/${year}`;
   }
-
 
   onToggleSidebar(sidebarState: any) {
     if (sidebarState === 'open') {

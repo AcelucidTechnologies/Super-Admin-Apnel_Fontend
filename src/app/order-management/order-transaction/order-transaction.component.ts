@@ -73,25 +73,14 @@ export class OrderTransactionComponent implements OnInit {
     this.dt.filterGlobal(($event.target as HTMLInputElement).value, stringVal);
   }
   getOrderTransactionList() {
-    this.orderService.getOrderTransaction().subscribe((data) => {
+    this.orderService.getOrderStatusList().subscribe((data) => {
       this.orderTransactin = data
       this.ngxLoader.stop();
-      console.log("orderlist" + JSON.stringify(this.orderTransactin))
     });
   }
-  // deteOrderTransactionBy(orderId: string) {
-  //    this.ngxLoader.start();
-  //   this.orderService.deleteOrderTransaction(orderId._id).subscribe((res) => {
-  //     if (res) {
-  //       this.toastr.showSuccess('orders-transaction deleted successfully', 'order deleted');
-  //       this.getOrderTransactionList();
-  //     }
-  //   });
-  // }
-
   deleteOrderDetails(id: any) {
     // this.ngxLoader.start();
-    this.orderService.deleteOrderTransaction(id._id).subscribe((res) => {
+    this.orderService.deleteOrderStatus(id._id).subscribe((res) => {
       if (res) {
         this.toastr.showSuccess(
           'Order-transaction deleted successfully',
