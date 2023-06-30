@@ -126,10 +126,16 @@ export class LeaveApplyComponent {
             'Leave applied successfully',
             'Leave Applied'
           );
+
           this.route.navigate(['/leaveMgmt/leave-tracker']);
-          this.ngxLoader.start();
+          // this.ngxLoader.start();
+          setTimeout(() => {
+            location.reload();
+          }, 0);
+
         }
       }
     });
+
   }
 }

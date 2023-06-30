@@ -48,6 +48,7 @@ export class DropdownMenuComponent implements OnInit {
   role: any;
   payload: any;
   leaveTrackerList: any[];
+  defaultNotification:string = "no new notification"
   notificationList: any[];
   showNotificationsMenu: boolean = false;
   notificationCount: number;

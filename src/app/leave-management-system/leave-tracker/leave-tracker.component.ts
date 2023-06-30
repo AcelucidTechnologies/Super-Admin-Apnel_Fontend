@@ -21,6 +21,7 @@ export class LeaveTrackerComponent {
   leaveTrackerList: any[];
   upcomingLeaveTrackerList: any[];
   filteredLeaveTrackerList: any[];
+  defaultLeave:number = 0
   fgsType: any;
   constructor(
     private LeaveService: LeaveService,

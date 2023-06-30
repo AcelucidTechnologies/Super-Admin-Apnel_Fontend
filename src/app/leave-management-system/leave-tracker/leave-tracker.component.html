@@ -27,13 +27,15 @@
     <div class="col-4">
       <div class="card">
         <div class="card-header">Earned Leave</div>
-        <div class="leave-count">{{ earned }}/10</div>
+        <!-- <div class="leave-count">{{ earned || deafaultLeave}}/10</div> -->
+        <div class="leave-count">{{ earned ? earned : defaultLeave }}/10</div>
       </div>
     </div>
     <div class="col-4">
       <div class="card">
         <div class="card-header">Leave Without Pay</div>
-        <div class="leave-count">{{ leaveWithoutpay }}/0</div>
+        <!-- <div class="leave-count">{{ leaveWithoutpay }}/0</div> -->
+        <div class="leave-count">{{ leaveWithoutpay ? leaveWithoutpay : defaultLeave }}/0</div>
       </div>
     </div>
   </div>
@@ -41,22 +43,24 @@
     <div class="col-4">
       <div class="card">
         <div class="card-header">Sick Leave</div>
-        <div class="leave-count">{{ sickLeave }}/8</div>
+        <!-- <div class="leave-count">{{ sickLeave }}/8</div> -->
+        <div class="leave-count">{{ sickLeave ? sickLeave : defaultLeave}}/8</div>
       </div>
     </div>
     <div class="col-4">
       <div class="card">
         <div class="card-header">Work From Home</div>
-        <div class="leave-count">{{ workFromHome }}/5</div>
+        <!-- <div class="leave-count">{{ workFromHome }}/5</div> -->
+        <div class="leave-count">{{ workFromHome ? workFromHome : defaultLeave}}/5</div>
       </div>
     </div>
     <div class="col-4">
       <div class="card">
         <div class="card-header">Comp. Off</div>
-        <div class="leave-count">
+        <!-- <div class="leave-count">
           {{ compOff }}/0
-          <!-- {{compOff?.value ?? 0}}/0 -->
-        </div>
+        </div> -->
+        <div class="leave-count">{{ compOff ? compOff : defaultLeave}}/0</div>
       </div>
     </div>
   </div>
@@ -219,4 +223,4 @@
     </p-table>
   </div>
 </div>
-<ngx-ui-loader [fgsColor]="'#000000'" [fgsType]="fgsType"></ngx-ui-loader>
+<!-- <ngx-ui-loader [fgsColor]="'#000000'" [fgsType]="fgsType"></ngx-ui-loader> -->
