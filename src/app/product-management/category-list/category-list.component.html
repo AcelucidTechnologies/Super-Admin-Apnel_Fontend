@@ -28,7 +28,7 @@
     [value]="categoryList"
     currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
     [responsive]="true"
-    [globalFilterFields]="['name', '_id', 'status']"
+    [globalFilterFields]="['categoryName', 'subCategory', 'categoryOrder']"
     styleClass="p-datatable-striped"
   >
     <ng-template pTemplate="caption">
@@ -82,20 +82,30 @@
           </div>
         </th>
         <th>Category Image</th>
-        <th pSortableColumn="name">
+        <th pSortableColumn="categoryName">
           <div class="flex justify-content-between align-items-center head1">
             Category Name
-            <p-sortIcon field="name"></p-sortIcon>
+            <p-sortIcon field="categoryName"></p-sortIcon>
           </div>
         </th>
-        <th pSortableColumn="productName">
+        <th pSortableColumn="subCategory">
           <div class="flex justify-content-between align-items-center head1">
             Parent Name
-            <p-sortIcon field="productName"></p-sortIcon>
+            <p-sortIcon field="subCategory"></p-sortIcon>
           </div>
         </th>
-        <th>SortBy</th>
-        <th>Status</th>
+        <th pSortableColumn="categoryOrder">
+          <div class="flex justify-content-between align-items-center head1">
+            Sort By
+            <p-sortIcon field="categoryOrder"></p-sortIcon>
+          </div>
+        </th>
+        <th pSortableColumn="status">
+          <div class="flex justify-content-between align-items-center head1">
+            Status
+            <p-sortIcon field="status"></p-sortIcon>
+          </div>
+        </th>
         <th>Action</th>
       </tr>
     </ng-template>
