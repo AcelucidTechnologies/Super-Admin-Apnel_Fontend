@@ -17,6 +17,9 @@ import { ProductOptionListComponent } from './product-option-list/product-option
 import { AddProductOptionComponent } from './add-product-option/add-product-option.component';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
+import { NgxUiLoaderModule } from 'ngx-ui-loader';
+import { MatDividerModule } from '@angular/material/divider';
+import { MatSelectModule } from '@angular/material/select';
 
 @NgModule({
   declarations: [
@@ -40,7 +43,12 @@ import { MatInputModule } from '@angular/material/input';
     MatButtonModule,
     MatCardModule,
     MatFormFieldModule,
-    MatInputModule
+    MatInputModule,
+    CommonModule,
+    NgxUiLoaderModule,
+    MatDividerModule,
+    MatSelectModule,
+    MatFormFieldModule
 
   ]
 })

@@ -4,11 +4,11 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { NgxUiLoaderService, SPINNER } from 'ngx-ui-loader';
 import { ProductService } from 'src/app/_services/product.service';
 import { ToastrMsgService } from 'src/app/_services/toastr-msg.service';
-import { product, product_region, product_details, manufacturer, Description, prices, SEO, Satatus, Country_List, catalogExtraDetailsStructure } from 'src/app/_models/catalog'
+import { product, product_region, product_details, manufacturer, Description, prices, SEO, Country_List, catalogExtraDetailsStructure } from 'src/app/_models/catalog'
 import { CommonService } from 'src/app/_services/common';
 import { MatDialog } from '@angular/material/dialog';
 import { DialogProductSubmitComponent } from '../dialog-product-submit/dialog-product-submit.component';
-import { DialogComponent } from '../dialog/dialog.component';
+// import { DialogComponent } from '../dialog/dialog.component';
 @Component({
   selector: 'app-add-edit-product',
   templateUrl: './add-edit-product.component.html',
@@ -38,7 +38,7 @@ export class AddEditProductComponent implements OnInit {
 
   Image
   imageData: File
-  Status = Satatus
+  // Status = Satatus
   expand: boolean = false
   Description: Description
   constructor(

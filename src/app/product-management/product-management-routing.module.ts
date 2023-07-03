@@ -32,7 +32,8 @@ const routes: Routes = [
   },
   {
     path: 'addProductOptionList', component: AddProductOptionComponent
-  }
+  },
+
 ];
 
 @NgModule({

@@ -547,14 +547,6 @@ getNotificationList(): Observable<any[]> {
  return this.http.get<any[]>(endpointUrl ,{ 'headers': httpOptions });
 }
 
-// editNotificationList( id: string) {
-//   const token = localStorage.getItem('token') || '';
-//   const httpOptions = new HttpHeaders().set('x-access-token', token);
-//   const endpointUrl = `${environment.JSON_SERVER}/updateNotification?id=${id}`;
-
-//   return this.http.put<any>(endpointUrl, { headers: httpOptions });
-// }
-
 editNotificationList(payload, id: string) {
   const token = localStorage.getItem('token') || '';
   const httpOptions = new HttpHeaders().set('x-access-token', token);

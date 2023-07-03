@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { NgxUiLoaderService, SPINNER } from 'ngx-ui-loader';
-import { category, parent_category, SEO } from 'src/app/_models/catalog';
+// import { category, parent_category, SEO } from 'src/app/_models/catalog';
 import { CommonService } from 'src/app/_services/common';
 import { ProductService } from 'src/app/_services/product.service';
 import { ToastrMsgService } from 'src/app/_services/toastr-msg.service';
@@ -11,78 +11,56 @@ import bsCustomFileInput from 'bs-custom-file-input';
 @Component({
   selector: 'app-edit-category',
   templateUrl: './edit-category.component.html',
-  styleUrls: ['./edit-category.component.scss']
+  styleUrls: ['./edit-category.component.scss'],
 })
 export class EditCategoryComponent implements OnInit {
-
-  CatergoryName = [{ value: '100', label:'casual', inactive: false },
-{ value: '200', label: 'formal', inactive: false },
-{ value: '300', label: 'Sports Wear', inactive: false },
-{ value: '300', label: 'Gym Wear', inactive: false },
-];
   selectedItem: any;
-  deals: any[];
-  technologies: any[];
-  sources: any[];
+  imageChangedEvent: any = '';
+  Image: any;
   sidebarSpacing: any;
+  payload: any;
   fgsType: any;
-  id: any
-  title: string = " "
-  editMode: boolean = false
-  productCategoryForm: FormGroup
-  payload: category
-  parent_category: parent_category
-  parentId;
+  id: any;
+  title: string = ' ';
+  editMode: boolean = false;
+  productCategoryForm: FormGroup;
+  categorylist: any;
   image: File;
   imageUrl;
-  subCategory:String[];
-  seo: SEO
-  Category: string[];
+
+  subCategory: string[];
+  status: string[];
   constructor(
     private fb: FormBuilder,
     private activateRoute: ActivatedRoute,
     private ngxLoader: NgxUiLoaderService,
     private route: Router,
     private toastr: ToastrMsgService,
-    private commonService: CommonService,
+    private activatedRoute: ActivatedRoute,
     private ProductService: ProductService
   ) {
+    this.activatedRoute.queryParamMap.subscribe((params) => {
+      this.id = params.get('id');
+    });
     this.productCategoryForm = this.fb.group({
-      categoryName: ["", [Validators.required]],
-      parentCategoryName: ['', [Validators.required]],
-      image: ['', [Validators.required]],
-      description: ['', [Validators.required]],
-      metaTitle: ['', [Validators.required]],
-      metaDescription: ['', [Validators.required]],
-      metaKeyword: ['', [Validators.required]],
-      status: ['', [Validators.required]]
-    })
+      categoryName: ['', [Validators.required]],
+      subCategory: ['', [Validators.required]],
+      image: [''],
+      categoryOrder: [''],
 
-    this.subCategory = ['casual', 'formal', 'Gym Wear', 'Sports Wear']
-
-    this.sources = [ 'Site' , 'Linked In' , 'Newspaper','Other']
-    this.deals = ['Hot','Cold','Not Interested','Dead']
-    this.technologies = ['Front End','Back End']
-
-    this.Category = ['Active', 'Inactive'];
-
+      status: [''],
+    });
+    this.subCategory = ['casual', 'formal', 'Gym Wear', 'Sports Wear'];
+    this.status = ['Active', 'Inactive'];
   }
 
-
   ngOnInit(): void {
-    this.fgsType = SPINNER.squareLoader
+    this.fgsType = SPINNER.squareLoader;
     this.ngxLoader.start();
+    this.getProductCategoryById();
     this.sidebarSpacing = 'contracted';
-    this.activateRoute.queryParamMap.subscribe(params => {
+    this.activateRoute.queryParamMap.subscribe((params) => {
       this.id = params.get('id');
-      if (this.id && this.id != undefined) {
-        this.editMode = true
-        this.title = "Edit Category"
-        this.getProductCategoryById()
-      } else {
-        this.editMode = false
-        this.title = "Add New category"
-      }
     });
   }
 
@@ -93,88 +71,67 @@ export class EditCategoryComponent implements OnInit {
       this.sidebarSpacing = 'expanded';
     }
   }
-
-  addProductCategory(addPayloadData: category) {
-    this.ProductService.addCategory(addPayloadData).subscribe(res => {
-      if (res) {
-        this.toastr.showSuccess("Category added successfully", "Product Added")
-        this.ngxLoader.stop()
-        this.route.navigate(['/product/categorylist'])
-      }
-      (error: any) => {
-        this.toastr.showError("Somthing wrong Please check", "Error occured")
-        this.ngxLoader.stop()
-        this.route.navigate(['/'])
-      }
-    })
+  fileChangeEvent(event) {
+    this.imageChangedEvent = event;
+    this.Image = event.target.files[0];
+    console.log('this.image' + this.Image);
   }
 
   getProductCategoryById() {
-    this.ProductService.getCategoryById(parseInt(this.id)).subscribe((res: any) => {
+    this.ProductService.getCategoryById(this.id).subscribe((res: any) => {
       this.productCategoryForm.patchValue({
         categoryName: res.categoryName,
-        parentCategoryName: res.parent_category.name,
+        subCategory: res.subCategory,
         status: res.status,
-        description: res.description,
-        images: res.images,
-        metaTitle: res.meta_description.meta_title,
-        metaDescription: res.meta_description.meta_description,
-        metaKeyword: res.meta_description.meta_keyword,
-      })
-      this.imageUrl = res.image,
-        this.parentId = res.parent_category.id
+        categoryOrder: res.categoryOrder,
+      });
+
       this.ngxLoader.stop();
-    })
+    });
   }
 
-  editProductCategory(editData: category) {
-    this.ProductService.editCategory(editData, this.id).subscribe(res => {
+  editProductCategory(editData: any) {
+    this.ProductService.editCategory(editData, this.id).subscribe((res) => {
       if (res) {
-        this.toastr.showSuccess("Product edit successfully", "Product edit")
-        this.ngxLoader.stop()
-        this.route.navigate(['/product/categorylist'])
+        this.toastr.showSuccess('Product edit successfully', 'Product edit');
+        this.ngxLoader.stop();
+        this.route.navigate(['/product/categorylist']);
       }
       (error: any) => {
-        this.toastr.showError("Somthing wrong Please check", "Error occured")
-        this.ngxLoader.stop()
-        this.route.navigate(['/'])
-      }
-    })
+        this.toastr.showError('Somthing wrong Please check', 'Error occured');
+        this.ngxLoader.stop();
+        this.route.navigate(['/']);
+      };
+    });
   }
-  submitForm() {
-    this.seo = {
-      meta_title: this.productCategoryForm.controls['metaDescription'].value,
-      meta_description: this.productCategoryForm.controls['metaTitle'].value,
-      meta_keywords: this.productCategoryForm.controls['metaKeyword'].value
-    }
-    this.parent_category = {
-      id: this.parentId,
-      name: this.productCategoryForm.controls['parentCategoryName'].value
-    }
-    this.payload = {
-      id: parseInt(this.id),
-      categoryName: this.productCategoryForm.controls['categoryName'].value,
-      image: this.image,
-      description: this.productCategoryForm.controls['description'].value,
-      status: this.productCategoryForm.controls['status'].value,
-      parent_category: this.parent_category,
-      meta_description: this.seo
-    }
+
+  submit() {
     this.ngxLoader.start();
-    if (this.editMode) {
-      console.log(this.payload)
-      this.editProductCategory(this.payload)
-    } else {
-      this.addProductCategory(this.payload)
+    if (this.productCategoryForm.valid) {
+      this.payload = {
+        username: localStorage.getItem('email'),
+        image: this.Image,
+        subCategory: this.productCategoryForm.controls['subCategory'].value,
+        categoryName: this.productCategoryForm.controls['categoryName'].value,
+        status: this.productCategoryForm.controls['status'].value,
+        categoryOrder: this.productCategoryForm.controls['categoryOrder'].value,
+      };
     }
-  }
-  OnChange(event) {
-    this.image = event.target.files;
-    var reader = new FileReader();
-    reader.readAsDataURL(event.target.files[0]);
-    reader.onload = (data) => {
-        this.imageUrl = data.target.result;
-    }
+    this.ProductService.editCategory(this.payload, this.id).subscribe((res) => {
+      this.categorylist = res;
+      if (res) {
+        this.ngxLoader.start();
+        this.toastr.showSuccess(
+          'Category details edited successfully',
+          'Category edited'
+        );
+      }
+      this.route.navigate(['/product/categorylist']);
+      (error: any) => {
+        console.log('error');
+        this.toastr.showError('Somthing wrong Please check', 'Error occured');
+        this.ngxLoader.stop();
+      };
+    });
   }
 }
-
