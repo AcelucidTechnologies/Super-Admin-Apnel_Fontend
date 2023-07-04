@@ -79,7 +79,7 @@ export const SideNaveMenueRoute = [
         routerLinkActive: 'active'
       },
       {
-        label: 'Travel Expense',
+        label: 'Reimbursement',
         icon: 'pi pi-list',
         routerLink: ['/travelexpense/travel-list'],
         routerLinkActiveOptions: { exact: true },

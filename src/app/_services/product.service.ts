@@ -12,11 +12,13 @@ import { categories } from '../DummyData/product-category';
 export class ProductService {
     constructor(private http: HttpClient) { }
 
-    getProductList() {
-        const token = localStorage.getItem('token') || '';
-        let httpOptions = new HttpHeaders().set('x-access-token', token)
-        const endpointUrl = `${environment.BASE_URL}/products`;
-        return this.http.get<any[]>(endpointUrl, { 'headers': httpOptions });
+    getProductList(): Observable<any[]> {
+      const token = localStorage.getItem('token') || '';
+      const email = localStorage.getItem('email')
+      let httpOptions = new HttpHeaders().set('x-access-token', token)
+     const endpointUrl = `${environment.JSON_SERVER}/products?username=${email}`;
+     return this.http.get<any[]>(endpointUrl ,{ 'headers': httpOptions });
+
     }
     getProductById(id: string) {
         const token = localStorage.getItem('token') || '';
@@ -25,14 +27,30 @@ export class ProductService {
         return this.http.get<any>(endpointUrl, { 'headers': httpOptions });
 
     }
-    addProduct(productData: any) {
-        const token = localStorage.getItem('token') || '';
-        let httpOptions = new HttpHeaders().set('x-access-token', token)
-        const endpointUrl = `${environment.JSON_SERVER}/product`;
-        // return this.http.post<any>(endpointUrl, categoryData, { 'headers': httpOptions });
-        productData.id = products.length + 1
-        products.push(productData);
-        return of(productData)
+    // addProduct(productData: any) {
+    //     const token = localStorage.getItem('token') || '';
+    //     let httpOptions = new HttpHeaders().set('x-access-token', token)
+    //     const endpointUrl = `${environment.JSON_SERVER}/product`;
+    //     return this.http.post<any>(endpointUrl, categoryData, { 'headers': httpOptions });
+    //     productData.id = products.length + 1
+    //     products.push(productData);
+    //     return of(productData)
+    // }
+
+    addProduct(payload: any): Observable<any[]> {
+      const token = localStorage.getItem('token') || '';
+      const email = localStorage.getItem('email') || '';
+      let httpOptions = new HttpHeaders().set('x-access-token', token);
+      const formData = new FormData();
+      formData.append('username', email);
+      formData.append('image', payload.image);
+      formData.append('productName', payload.productName);
+      formData.append('categoryName', payload.categoryName);
+      formData.append('model', payload.model);
+      formData.append('ourPrice', payload.ourPrice);
+      formData.append('marketPrice', payload.marketPrice);
+      const endpointUrl = `${environment.JSON_SERVER}/createProducts`;
+      return this.http.post<any>(endpointUrl, formData, { headers: httpOptions });
     }
 
     editProduct(productData, id) {
@@ -120,6 +138,46 @@ export class ProductService {
             const email = localStorage.getItem('email') || '';
             let httpOptions = new HttpHeaders().set('x-access-token', token)
               const endpointUrl = `${environment.JSON_SERVER}/createOrder`;
+            return this.http.post<any>(endpointUrl, payload,{ 'headers': httpOptions });
+    }
+
+
+
+    // ############################# product options #############################
+    getproductOptionList(): Observable<any[]> {
+      const token = localStorage.getItem('token') || '';
+      const email = localStorage.getItem('email')
+      let httpOptions = new HttpHeaders().set('x-access-token', token)
+     const endpointUrl = `${environment.JSON_SERVER}/getProductOption?username=${email}`;
+     return this.http.get<any[]>(endpointUrl ,{ 'headers': httpOptions });
+
+    }
+
+    deleteproductOption(id: string) {
+      const token = localStorage.getItem('token') || '';
+      let httpOptions = new HttpHeaders().set('x-access-token', token)
+      const endpointUrl = `${environment.JSON_SERVER}/deleteProductOption?id=${id}`;
+      return this.http.delete<any>(endpointUrl, { 'headers': httpOptions });
+    }
+    getproductOptionById(id: string): Observable<any> {
+      const token = localStorage.getItem('token') || '';
+      let httpOptions = new HttpHeaders().set('x-access-token', token)
+      const endpointUrl = `${environment.JSON_SERVER}/getProductOptionById?id=${id}`;
+      return this.http.get<any>(endpointUrl,{ 'headers': httpOptions });
+    }
+    editproductOptionList(payload, id: string) {
+      const token = localStorage.getItem('token') || '';
+      const httpOptions = new HttpHeaders().set('x-access-token', token);
+      const endpointUrl = `${environment.JSON_SERVER}/updateProductOption?id=${id}`;
+
+      return this.http.put<any>(endpointUrl, payload, { headers: httpOptions });
+    }
+
+    createproductOption(payload:any): Observable<any[]> {
+      const token = localStorage.getItem('token') || '';
+            const email = localStorage.getItem('email') || '';
+            let httpOptions = new HttpHeaders().set('x-access-token', token)
+              const endpointUrl = `${environment.JSON_SERVER}/createProductOption`;
             return this.http.post<any>(endpointUrl, payload,{ 'headers': httpOptions });
     }
 

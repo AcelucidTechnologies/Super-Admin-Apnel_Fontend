@@ -20,6 +20,7 @@ import { MatInputModule } from '@angular/material/input';
 import { NgxUiLoaderModule } from 'ngx-ui-loader';
 import { MatDividerModule } from '@angular/material/divider';
 import { MatSelectModule } from '@angular/material/select';
+import { EditProductOptionComponent } from './edit-product-option/edit-product-option.component';
 
 @NgModule({
   declarations: [
@@ -32,6 +33,7 @@ import { MatSelectModule } from '@angular/material/select';
     DialogProductSubmitComponent,
     ProductOptionListComponent,
     AddProductOptionComponent,
+    EditProductOptionComponent,
   ],
   imports: [
     CommonModule,

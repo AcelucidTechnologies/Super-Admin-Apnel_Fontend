@@ -25,7 +25,13 @@
 
                   <div class="col-8" style="width: 100%;">
                     <input type="text" class="form-control" formControlName="productName" placeholder="Enter product name">
-                    <mat-error *ngIf="productForm.get('productName')?.errors?.['required']  && productForm.get('productName').touched"><span>Product Name is required</span></mat-error>
+                    <!-- <mat-error *ngIf="productForm.get('productName')?.errors?.['required']  && productForm.get('productName').touched"><span>Product Name is required</span></mat-error> -->
+                    <div *ngIf="!productForm.controls['productName'].valid && (productForm.controls['productName'].touched || productForm.controls['productName'].dirty)">
+                      <div [hidden]="!productForm.controls['productName'].errors['required']" style="color: rgb(253, 122, 122); font-size: small;
+                      font-style: italic;">
+                        Product Name is required
+                      </div>
+                    </div>
                   </div>
                   </div>
                 </div>
@@ -37,7 +43,8 @@
                     <div class="col-8 p-0">
                       <p-dropdown [options]="catergoryName" id="role" formControlName="categoryName" placeholder="Select Category Type"></p-dropdown>
                       <div *ngIf="!productForm.controls['categoryName'].valid && (productForm.controls['categoryName'].touched || productForm.controls['productName'].dirty)">
-                        <div [hidden]="!productForm.controls['categoryName'].errors['required']" style="color: rgb(253, 122, 122);">
+                        <div [hidden]="!productForm.controls['categoryName'].errors['required']" style="color: rgb(253, 122, 122); font-size: small;
+                        font-style: italic;">
                           Select a category type
                         </div>
                       </div>
@@ -48,7 +55,8 @@
 
                         </option>
                       </select> -->
-                      <mat-error *ngIf="productForm.get('status')?.errors?.['required'] && productForm.get('status').touched">Please select a type.</mat-error>
+                      <!-- <mat-error *ngIf="productForm.get('status')?.errors?.['required']  && productForm.get('status').touched"><span>Please select a type.</span></mat-error> -->
+                      <!-- <mat-error *ngIf="productForm.get('status')?.errors?.['required'] && productForm.get('status').touched"><span>Please select a type.</span></mat-error> -->
                     </div>
                 </div>
               </div>
@@ -61,7 +69,7 @@
                     <label for="name">Model</label>
                     </div>
                     <div class="col-8">
-                      <input type="text" class="form-control" formControlName="model" placeholder="enter model">
+                      <input type="text" class="form-control" formControlName="model" placeholder="Enter model">
                   </div>
                   </div>
                 </div>
@@ -71,8 +79,14 @@
                     <label for="image" class="starlabel">Our Price</label>
                     </div>
                     <div class="col-8">
-                    <input type="text" class="form-control" formControlName="ourPrice" placeholder="enter our price">
-                    <mat-error *ngIf="productForm.get('ourPrice')?.errors?.['required']  && productForm.get('ourPrice').touched"><span>our price is required</span></mat-error>
+                    <input type="text" class="form-control" formControlName="ourPrice" placeholder="Enter our price">
+                    <!-- <mat-error *ngIf="productForm.get('ourPrice')?.errors?.['required']  && productForm.get('ourPrice').touched"><span>our price is required</span></mat-error> -->
+                    <div *ngIf="!productForm.controls['ourPrice'].valid && (productForm.controls['ourPrice'].touched || productForm.controls['ourPrice'].dirty)">
+                      <div [hidden]="!productForm.controls['ourPrice'].errors['required']" style="color: rgb(253, 122, 122); font-size: small;
+                      font-style: italic;">
+                        our price is required
+                      </div>
+                    </div>
                   </div>
                 </div>
               </div>
@@ -84,8 +98,14 @@
                     <label for="name"  class="starlabel">Market Price</label>
                     </div>
                     <div class="col-8">
-                      <input type="text" class="form-control" formControlName="marketPrice" placeholder="enter market price">
-                      <mat-error *ngIf="productForm.get('marketPrice')?.errors?.['required']  && productForm.get('marketPrice').touched"><span>Market price is required</span></mat-error>
+                      <input type="text" class="form-control" formControlName="marketPrice" placeholder="Enter market price">
+                      <!-- <mat-error *ngIf="productForm.get('marketPrice')?.errors?.['required']  && productForm.get('marketPrice').touched"><span>Market price is required</span></mat-error> -->
+                      <div *ngIf="!productForm.controls['marketPrice'].valid && (productForm.controls['marketPrice'].touched || productForm.controls['marketPrice'].dirty)">
+                        <div [hidden]="!productForm.controls['marketPrice'].errors['required']" style="color: rgb(253, 122, 122); font-size: small;
+                        font-style: italic;">
+                          marketPrice is required
+                        </div>
+                      </div>
                   </div>
                   </div>
                 </div>
@@ -95,7 +115,7 @@
                     <label for="image">Product Weight</label>
                     </div>
                     <div class="col-8">
-                    <input type="text" class="form-control" formControlName="productWeight" placeholder="enter product weight">
+                    <input type="text" class="form-control" formControlName="productWeight" placeholder="Enter product weight">
                   </div>
                 </div>
               </div>
@@ -132,10 +152,18 @@
                     <span class="add" >
                         <label for="upload">
                           <span class="fa fa-plus">+</span>
-                    <input type='file' (change)="onSelectFile($event)" multiple hidden id="upload" formControlName="productImage">
-                    <mat-error *ngIf="productForm.get('productImage')?.errors?.['required'] && (productForm.get('productImage').touched)">
+                    <input type='file' (change)="onSelectFile($event)" multiple hidden id="upload" formControlName="image">
+                    <!-- <mat-error *ngIf="productForm.get('productImage')?.errors?.['required'] && (productForm.get('productImage').touched)">
                       <span>Product image is required</span>
-                    </mat-error>
+                    </mat-error> -->
+
+                    <div *ngIf="!productForm.controls['image'].valid && (productForm.controls['image'].touched || productForm.controls['image'].dirty)">
+                      <div [hidden]="!productForm.controls['image'].errors['required']" style="color: rgb(253, 122, 122); font-size: small;
+                      font-style: italic;">
+                        image is required
+                      </div>
+                    </div>
+
                         </label>
                     </span>
 
