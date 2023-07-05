@@ -1097,10 +1097,11 @@
                   </div>
                   <div class="col-8">
                     <input
-                      type="text"
+                      type="number"
                       class="form-control input-font"
                       id="inputdefault"
                       formControlName="aadharNumber"
+                      (input)="onInputaadhar($event)"
                     />
                     <div
                       *ngIf="

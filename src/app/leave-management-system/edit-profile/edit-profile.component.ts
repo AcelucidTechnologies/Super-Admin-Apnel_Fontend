@@ -296,6 +296,13 @@ export class EditProfileComponent {
     this.educationDetails.push(newEducationRow);
   }
 
+  onInputaadhar(event: any) {
+    let inputValue = event.target.value;
+    inputValue = inputValue.replace(/\D/g, '');
+    inputValue = inputValue.slice(0, 12);
+    this.profileForm.get('identityInformation.aadharNumber')?.setValue(inputValue);
+  }
+
   addNewWorkRow() {
     const newWorkRow = this.createworkRow();
     // (this.profileForm.get('workExperience') as FormArray).push(newRow);
