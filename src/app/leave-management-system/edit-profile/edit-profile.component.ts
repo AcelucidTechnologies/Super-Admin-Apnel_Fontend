@@ -284,6 +284,10 @@ export class EditProfileComponent {
       editMode: [true],
     });
   }
+  onInputChange(event: any) {
+    const inputValue = event.target.value;
+    this.profileForm.get('identityInformation.panNumber')?.patchValue(inputValue.toUpperCase());
+  }
 
   addNewRow() {
     console.log('addNewRow() called');

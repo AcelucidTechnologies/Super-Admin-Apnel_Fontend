@@ -1156,6 +1156,7 @@
                       placeholder="Enter pan number"
                       id="inputdefault"
                       formControlName="panNumber"
+                      (input)="onInputChange($event)"
                     />
                     <div
                       *ngIf="

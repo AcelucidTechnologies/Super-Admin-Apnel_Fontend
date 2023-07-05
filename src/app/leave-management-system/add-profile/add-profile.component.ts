@@ -261,6 +261,11 @@ export class AddProfileComponent {
     return null;
   }
 
+  onInputChange(event: any) {
+    const inputValue = event.target.value;
+    this.profileForm.get('identityInformation.panNumber')?.patchValue(inputValue.toUpperCase());
+  }
+
   getAllProfile() {
     this.leaveservice
       .getProfileList()
