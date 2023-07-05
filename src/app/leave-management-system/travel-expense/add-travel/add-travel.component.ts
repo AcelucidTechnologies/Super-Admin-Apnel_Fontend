@@ -13,6 +13,8 @@ import { ToastrMsgService } from 'src/app/_services/toastr-msg.service';
 export class AddTravelComponent {
   selectForm: FormGroup;
   travellist:any;
+  leaveType: any;
+  emailList: any;
   constructor(
     private ngxLoader: NgxUiLoaderService,
     private fb: FormBuilder,
@@ -30,6 +32,8 @@ export class AddTravelComponent {
       travelTo: ['',[Validators.required]],
       purposeTravel: ['',[Validators.required]],
       addedBy: ['',[Validators.required]],
+      totalReimbursementAmount:['', [Validators.required]],
+      image:['',[Validators.required]]
     });
 
 
@@ -51,7 +55,17 @@ validateToDate(control: AbstractControl): ValidationErrors | null {
 
   return { invalidreturnDate: true };
 }
+getAllEmail() {
+  this.leaveservice.getEmail().subscribe((res) => {
+    this.emailList = res;
+    this.ngxLoader.stop();
+    console.log('email' + JSON.stringify(this.emailList));
+  });
+}
 
+ngOnInit(){
+  this.getAllEmail();
+}
  submit(){
   this.ngxLoader.start();
   this.leaveservice.createTravel(this.selectForm.value).subscribe((res)=>{

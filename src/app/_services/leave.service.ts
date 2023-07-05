@@ -113,7 +113,7 @@ addProfile(payload: any): Observable<any[]> {
 
   const formData = new FormData();
   formData.append('username', email);
-  formData.append('employeeFullName', payload.employeeFullName);
+  // formData.append('employeeFullName', payload.employeeFullName);
     formData.append('FirstName', payload.FirstName);
     formData.append('lastName', payload.lastName);
     formData.append('email', payload.email);
@@ -198,7 +198,7 @@ editProfile(payload: any, id: number) {
   const endpointUrl = `${environment.JSON_SERVER}/updateLeaveProfile?id=${id}`;
   const formData = new FormData();
   formData.append('username', email);
-  formData.append('employeeFullName', payload.employeeFullName);
+  // formData.append('employeeFullName', payload.employeeFullName);
     formData.append('FirstName', payload.FirstName);
     formData.append('lastName', payload.lastName);
     formData.append('email', payload.email);
@@ -471,6 +471,21 @@ createTravel(payload:any): Observable<any[]> {
         let httpOptions = new HttpHeaders().set('x-access-token', token)
           const endpointUrl = `${environment.JSON_SERVER}/createReimbursement`;
         return this.http.post<any>(endpointUrl, payload,{ 'headers': httpOptions });
+}
+
+approveReimbursement(payload, id: string) {
+  const token = localStorage.getItem('token') || '';
+  const httpOptions = new HttpHeaders().set('x-access-token', token);
+  const endpointUrl = `${environment.JSON_SERVER}/approveReimbursement?id=${id}`;
+
+  return this.http.put<any>(endpointUrl, payload, { headers: httpOptions });
+}
+disapproveReimbursement(payload, id: string) {
+  const token = localStorage.getItem('token') || '';
+  const httpOptions = new HttpHeaders().set('x-access-token', token);
+  const endpointUrl = `${environment.JSON_SERVER}/updateReimbursement?id=${id}`;
+
+  return this.http.put<any>(endpointUrl, payload, { headers: httpOptions });
 }
 
 // ############################# Documents #############################

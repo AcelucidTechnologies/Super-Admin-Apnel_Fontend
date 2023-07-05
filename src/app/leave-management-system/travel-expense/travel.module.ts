@@ -12,6 +12,8 @@ import { AddTravelComponent } from './add-travel/add-travel.component';
 import { EditTravelComponent } from './edit-travel/edit-travel.component';
 import { DialogTravelComponent } from './dialog-travel/dialog-travel.component';
 import { TravelListComponent } from './travel-list/travel-list.component';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatSelectModule } from '@angular/material/select';
 
 
 @NgModule({
@@ -30,6 +32,8 @@ import { TravelListComponent } from './travel-list/travel-list.component';
     SharedModule,
     FormsModule,
     MatDividerModule,
+    MatSelectModule,
+    MatFormFieldModule
   ]
 })
 export class TravelModule { }

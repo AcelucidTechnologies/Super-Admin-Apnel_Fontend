@@ -11,6 +11,7 @@
           label=" + Add Reimbursement"
           class="add-button-rating"
           [routerLink]="['/travelexpense/add-travel']"
+          *ngIf="!isHidden('superAdmin')"
         ></button>
       </span>
     </div>
@@ -163,27 +164,69 @@
 
       <td>
         <div style="display: flex; align-items: center;">
-        <a
+        <!-- <a
           pTooltip="Edit Travel"
           tooltipPosition="bottom"
           style="margin-right: 15px; cursor: pointer"
+          [routerLink]="['/travelexpense/edit-travel']"
+          [queryParams]="{ id: list._id }"
+          class="text-success"
         >
-          <img
-            src="../../../../assets/images/edit.svg"
-            [routerLink]="['/travelexpense/edit-travel']"
-            [queryParams]="{ id: list._id }"
-            alt="img"
-          />
-        </a>
-        <a
+          Done
+        </a> -->
+        <!-- <button mat-raised-button
+
+        tooltipPosition="bottom"
+        style="margin-right: 15px; cursor: pointer"
+
+        [class.btn-primary]="!isClicked"
+        [class.btn-accent]="isClicked"
+        class="btn btn-primary"
+        (click)="approve(list._id)"
+        [disabled]="isClicked"
+      >
+        Done
+      </button> -->
+
+      <button mat-raised-button
+      tooltipPosition="bottom"
+      style="margin-right: 15px; cursor: pointer"
+      [class.btn-primary]="!list.isClicked"
+      [class.btn-accent]="list.isClicked"
+      class="btn"
+      [disabled]="list.isClicked"
+      (click)="approve(list._id)"
+    >
+      Done
+    </button>
+
+
+        <!-- <button mat-raised-button [color]="list.status === 'Approved'? 'accent' : 'primary'" class="mr-2" (click)="approve(list._id)" >
+          {{ list.status === 'Approved' ? list.status : 'Approve' }}
+        </button>
+        <button mat-raised-button [color]="list.status === 'Disapproved'? 'accent' : 'warn'" (click)="disapprove(list._id)" >
+          {{ list.status === 'Disapproved' ? list.status : 'Disapprove' }}
+        </button> -->
+        <!-- <a
           pTooltip="Delete Travel"
           tooltipPosition="bottom"
           (click)="openDialog(list)"
           class="me-3 confirm-text"
           href="javascript:void(0);"
-        >
-          <img src="../../../../assets/images/delete.svg" alt="img" />
-        </a>
+          class="text-danger"
+        >Pending
+
+        </a> -->
+        <button mat-raised-button
+
+        tooltipPosition="bottom"
+        style="margin-right: 15px; cursor: pointer"
+
+
+        class="btn btn-danger"
+      >
+        Pending
+      </button>
         </div>
       </td>
     </tr>

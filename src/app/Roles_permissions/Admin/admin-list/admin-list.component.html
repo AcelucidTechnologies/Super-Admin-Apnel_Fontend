@@ -16,7 +16,7 @@
   <p-table id="customerTable" #dt  responsiveLayout="scroll" [paginator]="true" [rows]="8"
     [showCurrentPageReport]="true" [value]="adminDetails"
     currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries" [responsive]="true"
-    styleClass="p-datatable-striped" [globalFilterFields]="['username']">
+    styleClass="p-datatable-striped" [globalFilterFields]="['username', 'email', 'role']">
     <ng-template pTemplate="caption">
       <div class="d-flex justify-content-between">
         <div class="d-flex align-items-center p-0">
