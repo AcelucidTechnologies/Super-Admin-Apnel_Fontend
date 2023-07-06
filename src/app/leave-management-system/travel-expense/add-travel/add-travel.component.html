@@ -226,15 +226,20 @@
       <div class="col-6">
         <div class="row">
           <div class="col-4">
-            <label class="starlabel">Added By</label>
+            <label class="starlabel">CC</label>
           </div>
           <div class="col-8">
-            <input
-              formControlName="addedBy"
-              placeholder="Enter added by"
-              class="form-control custom-placeholder input-padding"
-              type="text"
-            />
+          <mat-select
+          placeholder="appliedTo"
+          formControlName="appliedTo"
+          multiple
+        >
+          <mat-option
+            *ngFor="let count of emailList"
+            [value]="count.email"
+            >{{ count.employeeFullName }}</mat-option
+          >
+        </mat-select>
             <div
             *ngIf="
               !selectForm.controls['addedBy'].valid &&
@@ -250,7 +255,41 @@
                 font-style: italic;
               "
             >
-              added by is required
+              cc is required
+            </div>
+          </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-6">
+        <div class="row">
+          <div class="col-4">
+            <label class="starlabel">Total Reimbursement Amount</label>
+          </div>
+          <div class="col-8">
+            <input
+              formControlName="totalReimbursementAmount"
+              placeholder="Enter total amount"
+              class="form-control custom-placeholder input-padding"
+              type="text"
+            />
+            <div
+            *ngIf="
+              !selectForm.controls['totalReimbursementAmount'].valid &&
+              (selectForm.controls['totalReimbursementAmount'].touched ||
+                selectForm.controls['totalReimbursementAmount'].dirty)
+            "
+          >
+            <div
+              [hidden]="!selectForm.controls['totalReimbursementAmount'].errors['required']"
+              style="
+                color: rgb(253, 122, 122);
+                font-size: small;
+                font-style: italic;
+              "
+            >
+            totalReimbursementAmount is required
             </div>
           </div>
           </div>
@@ -258,7 +297,42 @@
       </div>
 
     </div>
+    <div class="row mb-4 mt-2">
+      <div class="col-12">
+        <div class="row">
+          <div class="col-2">
+            <label class="starlabel">Attachment Of Bills</label>
+          </div>
+          <div class="col-10">
+            <input
+            formControlName="image"
+            placeholder="Enter added by"
+            class="form-control custom-placeholder input-padding"
+            type="file"
+          />
+            <div
+            *ngIf="
+              !selectForm.controls['image'].valid &&
+              (selectForm.controls['image'].touched ||
+                selectForm.controls['image'].dirty)
+            "
+          >
+            <div
+              [hidden]="!selectForm.controls['image'].errors['required']"
+              style="
+                color: rgb(253, 122, 122);
+                font-size: small;
+                font-style: italic;
+              "
+            >
+            attachment is required
+            </div>
+          </div>
+          </div>
+        </div>
+      </div>
 
+    </div>
 
 
     <div class="row mb-4 mt-2">

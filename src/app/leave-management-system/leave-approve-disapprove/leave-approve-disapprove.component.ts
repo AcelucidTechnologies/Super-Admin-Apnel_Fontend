@@ -42,8 +42,6 @@ export class LeaveApproveDisapproveComponent {
         const cleanResponse = item.reason.replace(/<\/?p>/g, '');
         return { ...item, reason: cleanResponse };
       });
-
-      console.log("response 24==>", res);
       this.ngxLoader.stop();
     });
   }

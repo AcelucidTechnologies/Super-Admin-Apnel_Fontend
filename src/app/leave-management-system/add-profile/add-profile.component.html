@@ -11,7 +11,7 @@
         <div>
           <h5 class="card-title">Basic Information</h5>
           <div class="row text-input-field">
-            <div class="col-6">
+            <!-- <div class="col-6">
               <div class="row" style="display: flex">
                 <div class="col-4">
                   <label class="starlabel">Employee Full Name</label>
@@ -62,7 +62,7 @@
                   </div>
                 </div>
               </div>
-            </div>
+            </div> -->
             <div class="col-6">
               <div class="row" style="display: flex">
                 <div class="col-4">
@@ -111,8 +111,6 @@
                 </div>
               </div>
             </div>
-          </div>
-          <div class="row text-input-field">
             <div class="col-6">
               <div class="row" style="display: flex">
                 <div class="col-4">
@@ -159,6 +157,9 @@
                 </div>
               </div>
             </div>
+          </div>
+          <div class="row text-input-field">
+
             <div class="col-6">
               <div class="row" style="display: flex">
                 <div class="col-4"><label class="starlabel">Email</label></div>
@@ -203,8 +204,6 @@
                 </div>
               </div>
             </div>
-          </div>
-          <div class="row text-input-field">
             <div class="col-6">
               <div class="row" style="display: flex">
                 <div class="col-4">Profile Image</div>
@@ -221,6 +220,9 @@
               </div>
             </div>
           </div>
+          <!-- <div class="row text-input-field">
+
+          </div> -->
         </div>
 
         <!-- ############### work info ############### -->
@@ -1154,6 +1156,7 @@
                       placeholder="Enter pan number"
                       id="inputdefault"
                       formControlName="panNumber"
+                      (input)="onInputChange($event)"
                     />
                     <div
                       *ngIf="
@@ -1205,11 +1208,12 @@
                   </div>
                   <div class="col-8">
                     <input
-                      type="text"
+                      type="number"
                       class="form-control custom-placeholder"
                       placeholder="Enter aadhar number"
                       id="inputdefault"
                       formControlName="aadharNumber"
+                      (input)="onInputaadhar($event)"
                     />
                     <div
                       *ngIf="
@@ -2179,13 +2183,13 @@
               <button
                 type="button"
                 (click)="addNewWorkRow()"
-                class="btn btn-warning add-edit-button"
+                class="btn btn-warning add-edit-button mb-3"
               >
                 Add New Row
               </button>
             </div>
             <!-- <button (click)="addNewWorkRow()">Add work row</button> -->
-            <div class="card">
+            <div class="card pt-2">
               <div style="overflow-x: auto">
                 <table style="width: 100%">
                   <thead>
@@ -2438,11 +2442,13 @@
             <button
               type="button"
               (click)="addNewRow()"
-              class="btn btn-warning add-edit-button"
+              class="btn btn-warning add-edit-button mb-3"
             >
               Add New Row
             </button>
           </div>
+          <div class="card pt-2">
+            <div style="overflow-x: auto">
           <!-- <button (click)="addNewRow()">Add Row</button> -->
           <table style="width: 100%">
             <thead>
@@ -2594,6 +2600,8 @@
               </tr>
             </tbody>
           </table>
+        </div>
+        </div>
         </div>
         <!-- </div> -->
         <div class="row mb-5 mt-4">

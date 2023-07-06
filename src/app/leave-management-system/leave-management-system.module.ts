@@ -86,7 +86,7 @@ const calendarOptions: CalendarOptions = {
     FullCalendarModule,
     CKEditorModule,
     MatSelectModule,
-    MatFormFieldModule
+    MatFormFieldModule,
 
   ],
   providers: [

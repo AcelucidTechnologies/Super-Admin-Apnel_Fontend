@@ -261,6 +261,16 @@ export class AddProfileComponent {
     return null;
   }
 
+  onInputChange(event: any) {
+    const inputValue = event.target.value;
+    this.profileForm.get('identityInformation.panNumber')?.patchValue(inputValue.toUpperCase());
+  }
+  onInputaadhar(event: any) {
+    let inputValue = event.target.value;
+    inputValue = inputValue.replace(/\D/g, '');
+    inputValue = inputValue.slice(0, 12);
+    this.profileForm.get('identityInformation.aadharNumber')?.setValue(inputValue);
+  }
   getAllProfile() {
     this.leaveservice
       .getProfileList()

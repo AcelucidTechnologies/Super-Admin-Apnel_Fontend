@@ -64,7 +64,7 @@ export class ProductListComponent implements OnInit {
   getProductList() {
     this.ProductService.getProductList().subscribe((res:product[]) => {
       this.productList = res
-      console.log(res[0])
+      console.log("image value" + JSON.stringify(this.productList))
       this.ngxLoader.stop();
     })
   }

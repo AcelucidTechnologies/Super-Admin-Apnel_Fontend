@@ -1,115 +1,153 @@
-<div style="height: 700px; margin-bottom: 100px;">
-  <div class="page-heading" ></div>
-  <div class="button-heading-container " >
-
-    <button class="mb-2 p-1 back-button " [routerLink]="['/product/categorylist']"><i class="material-icons">arrow_back</i>
+<div style="height: 700px; margin-bottom: 100px">
+  <div class="page-heading"></div>
+  <div class="button-heading-container">
+    <button
+      class="mb-2 p-1 back-button"
+      [routerLink]="['/product/categorylist']"
+    >
+      <i class="material-icons">arrow_back</i>
     </button>
     <h5>&nbsp;Category Details</h5>
   </div>
 
-
-
-
-
-
   <div class="d-flex justify-content-center">
-    <div class="card" style="width: 1000px; height: 520px;">
-
-      <div class="card-body" style="width:1000px; margin: auto;">
+    <div class="card" style="width: 1000px; height: 520px">
+      <div class="card-body" style="width: 1000px; margin: auto">
         <div class="p-5">
-          <!-- <div class="mt-1 mb-5">
-            <h4>{{title}} Reviews</h4>
-          </div> -->
-          <h4 class="header-text-title">
-            Edit Category
-        <!-- {{title}} -->
+          <h4 class="header-text-title">Edit Category</h4>
 
-          </h4>
+          <form [formGroup]="productCategoryForm">
+            <div class="row">
+              <div class="form-row col-6 pt-3">
+                <div class="col-4">
+                  <label
+                    for="category"
+                    class="col-form-label text-left starlabel"
+                    >Category Name</label
+                  >
+                </div>
+                <div class="col-8">
+                  <input
+                    type="text"
+                    class="form-control"
+                    formControlName="categoryName"
+                    placeholder="enter category name"
+                  />
+                  <mat-error
+                    *ngIf="productCategoryForm.get('categoryName')?.errors?.['required']  && productCategoryForm.get('categoryName').touched"
+                    ><span>Category Name is required</span></mat-error
+                  >
+                </div>
+              </div>
+              <div class="form-row col-6 pt-3">
+                <div class="col-4">
+                  <label
+                    for="category"
+                    class="col-form-label text-left starlabel"
+                    >Parent Name/Sub Category</label
+                  >
+                </div>
+                <div class="col-8">
+                  <p-dropdown
+                    [options]="subCategory"
+                    id="role"
+                    formControlName="subCategory"
+                    placeholder="Select category Type"
+                  ></p-dropdown>
+                  <mat-error
+                    *ngIf="productCategoryForm.get('subCategory')?.errors?.['required']  && productCategoryForm.get('subCategory').touched"
+                    ><span
+                      >Parent Name/Sub Category is required</span
+                    ></mat-error
+                  >
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="form-row col-6 pt-4">
+                <div class="col-4">
+                  <label for="category" class="col-form-label text-left"
+                    >Sort By</label
+                  >
+                </div>
+                <div class="col-8">
+                  <input
+                    type="text"
+                    class="form-control"
+                    formControlName="categoryOrder"
+                    placeholder="sort by"
+                  />
+                </div>
+              </div>
+              <div class="form-row col-6 pt-4">
+                <div class="col-4">
+                  <label for="file" class="col-form-label"
+                    >Category New Image</label
+                  >
+                </div>
+                <div class="col-8" style="position: relative">
+                  <input
+                    formControlName="image"
+                    class="form-control custom-placeholder input-padding"
+                    placeholder="Enter name"
+                    type="file"
+                    (change)="fileChangeEvent($event)"
+                  />
 
-  <form [formGroup]="productCategoryForm">
+                  <mat-error
+                    *ngIf="productCategoryForm.get('image')?.errors?.['required']  && productCategoryForm.get('image').touched"
+                    ><span> Image is required</span></mat-error
+                  >
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="form-row col-12 pt-5">
+                <div class="col-2">
+                  <label for="weight" class="col-form-label text-left"
+                    >Status</label
+                  >
+                </div>
+                <div class="col-10" style="cursor: pointer">
+                  <p-dropdown
+                    [options]="status"
+                    id="role"
+                    formControlName="status"
+                    placeholder="Select Status Type"
+                  ></p-dropdown>
+                </div>
+              </div>
+            </div>
 
-    <div class="row">
-      <div class="form-row col-6 pt-3">
-        <div class="col-4">
-          <label for="category" class="col-form-label text-left starlabel" >Category Name</label>
-        </div>
-        <div class="col-8">
-          <input type="text" class="form-control" formControlName="categoryName" placeholder="enter category name" />
-          <mat-error *ngIf="productCategoryForm.get('categoryName')?.errors?.['required']  && productCategoryForm.get('categoryName').touched"><span>Category Name is required</span></mat-error>
-        </div>
-      </div>
-      <div class="form-row col-6 pt-3">
-        <div class="col-4">
-          <label for="category" class="col-form-label text-left starlabel">Parent Name/Sub Category</label>
-        </div>
-        <div class="col-8">
-          <p-dropdown [options]="subCategory" id="role" formControlName="parentCategoryName" placeholder="Select category Type"></p-dropdown>
-          <mat-error *ngIf="productCategoryForm.get('parentCategoryName')?.errors?.['required']  && productCategoryForm.get('parentCategoryName').touched"><span>Category Name is required</span></mat-error>
-          <!-- <input type="text" class="form-control" formControlName="parentCategoryName" placeholder="enter sub category" /> -->
-          <!-- <select class="form-control" placeholder="select type" formControlName="status">
-            <option value="null" selected>Select Type</option>
-            <option *ngFor="let option of CatergoryName" [value]="option.value" [disabled]="option.inactive">
-              {{ option.label }}
-
-            </option>
-          </select> -->
+            <div class="d-flex justify-content-end col-12 mt-5 p-0 pr-3">
+              <button
+                type="submit"
+                id="submit"
+                name="submit"
+                style="
+                  background: rgb(228, 28, 28);
+                  border: none;
+                  cursor: pointer;
+                "
+                class="btn btn-info mr-3"
+                (click)="submit()"
+                [disabled]="!productCategoryForm.valid"
+              >
+                Submit
+              </button>
+              <button
+                class="btn btn-info"
+                id="submit"
+                name="submit"
+                style="background: #637381; border: none"
+                [routerLink]="['/product/categorylist']"
+              >
+                Cancel
+              </button>
+            </div>
+          </form>
         </div>
       </div>
     </div>
-    <div class="row">
-      <div class="form-row col-6 pt-4">
-        <div class="col-4">
-          <label for="category" class="col-form-label text-left">Sort By</label>
-        </div>
-        <div class="col-8">
-          <input type="text" class="form-control" formControlName="sortBy" placeholder="sort by" />
-        </div>
-      </div>
-      <div class="form-row col-6 pt-4">
-        <div class="col-4">
-          <label for="file" class="col-form-label starlabel">Image</label>
-        </div>
-        <div class="col-8" style="position:relative;">
-
-
-          <input type="file" class="form-control" id="file" color="primary" formControlName="image" (change)="OnChange($event)">
-          <mat-error *ngIf="productCategoryForm.get('image')?.errors?.['required']  && productCategoryForm.get('image').touched"><span> Image is required</span></mat-error>
-          <!-- <div>
-            <input type="text" placeholder="Choose image" [value]="selectedItem?.name" readonly>
-            <button (click)="fileInput.click()">Choose</button>
-            <input type="file" hidden #fileInput (change)="OnChange($event)">
-          </div> -->
-
-        </div>
-      </div>
-
-
-
-    </div>
-    <div class="row">
-
-
-      <div class="form-row col-12 pt-5">
-        <div class="col-2">
-          <label for="tech" style="display: block;"
-          class="col-form-label text-left">Status</label>
-        </div>
-        <div class="col-10 pr-3">
-          <p-dropdown styleClass="tech-dropdown" [options]="Category"
-    id="category" placeholder="Select Status"></p-dropdown>
-
-        </div>
-      </div>
-
-    </div>
-
-
-    <div class="d-flex justify-content-end col-12 mt-5 p-0 pr-3">
-      <button type="submit" id="submit" name="submit" style="background: rgb(228, 28, 28);border:none; cursor:pointer" class="btn btn-info mr-3" (click)="submitForm()" [disabled]="!productCategoryForm.valid">Submit</button>
-      <button class="btn btn-info" id="submit" name="submit" style="background: #637381;border:none" [routerLink]="['/product/categorylist']">Cancel</button>
   </div>
-	</form>
-  </div>
-</div>
-</div>
 </div>

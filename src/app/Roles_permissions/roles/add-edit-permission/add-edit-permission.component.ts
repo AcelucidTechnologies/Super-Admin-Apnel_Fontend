@@ -18,21 +18,7 @@ export class AddEditPermissionComponent implements OnInit {
   isOn: boolean = false;
 
   permissionData = [
-    // {
-    //   moduleName: 'Order',
-    //   subModuleName: 'Order List',
-    //   nameForForm: 'OrderList'
-    // },
-    // {
-    //   moduleName: 'Order',
-    //   subModuleName: 'Order Transaction',
-    //   nameForForm: 'OrderTransaction'
-    // },
-    // {
-    //   moduleName: 'Order',
-    //   subModuleName: 'Shipment',
-    //   nameForForm: 'OrderShipment'
-    // },
+
     {
       moduleName: 'Catalogue',
       subModuleName: 'Category',
@@ -108,11 +94,58 @@ export class AddEditPermissionComponent implements OnInit {
       subModuleName:'Usertype Setting',
       nameForForm:'UsertypeSetting'
     },
-    // {
-    //   moduleName:'Profile',
-    //   subModuleName:'-',
-    //   nameForForm:'ProfileModule'
-    // }
+    {
+      moduleName:'Profile',
+      subModuleName:'-',
+      nameForForm:'ProfileModule'
+    },
+    {
+      moduleName: 'Leave',
+      subModuleName: 'ProfileList',
+      nameForForm: 'profileList'
+    },
+    {
+      moduleName: 'Leave',
+      subModuleName: 'Team',
+      nameForForm: 'team'
+    },
+    {
+      moduleName: 'Leave',
+      subModuleName: 'Calender',
+      nameForForm: 'calender'
+    },
+    {
+      moduleName: 'Leave',
+      subModuleName: 'Leave Tracker',
+      nameForForm: 'leaveTracker'
+    },
+    {
+      moduleName: 'Leave',
+      subModuleName: 'Leave Status',
+      nameForForm: 'leaveStatus'
+    },
+    {
+      moduleName: 'Leave',
+      subModuleName: 'Assets',
+      nameForForm: 'assets'
+    },
+    {
+      moduleName: 'Leave',
+      subModuleName: 'Exit Details',
+      nameForForm: 'ExitDetails'
+    },
+    {
+      moduleName: 'Leave',
+      subModuleName: 'Reimbursement',
+      nameForForm: 'Reimbursement'
+    },
+    {
+      moduleName: 'Leave',
+      subModuleName: 'Documents',
+      nameForForm: 'documents'
+    },
+
+
   ]
 
   // get permissions() : FormArray {
@@ -218,7 +251,62 @@ export class AddEditPermissionComponent implements OnInit {
         add: new FormControl(false),
         edit: new FormControl(false),
         delete: new FormControl(false)
+      }),
+
+      profileForm: new FormGroup({
+        add: new FormControl(false),
+        edit: new FormControl(false),
+        delete: new FormControl(false)
+      }),
+
+      profileList: new FormGroup({
+        add: new FormControl(false),
+        edit: new FormControl(false),
+        delete: new FormControl(false)
+      }),
+      team: new FormGroup({
+        add: new FormControl(false),
+        edit: new FormControl(false),
+        delete: new FormControl(false)
+      }),
+      calender: new FormGroup({
+        add: new FormControl(false),
+        edit: new FormControl(false),
+        delete: new FormControl(false)
+      }),
+      leaveTracker: new FormGroup({
+        add: new FormControl(false),
+        edit: new FormControl(false),
+        delete: new FormControl(false)
+      }),
+      leaveStatus: new FormGroup({
+        add: new FormControl(false),
+        edit: new FormControl(false),
+        delete: new FormControl(false)
+      }),
+      assets: new FormGroup({
+        add: new FormControl(false),
+        edit: new FormControl(false),
+        delete: new FormControl(false)
+      }),
+      ExitDetails: new FormGroup({
+        add: new FormControl(false),
+        edit: new FormControl(false),
+        delete: new FormControl(false)
+      }),
+      Reimbursement: new FormGroup({
+        add: new FormControl(false),
+        edit: new FormControl(false),
+        delete: new FormControl(false)
+      }),
+      documents: new FormGroup({
+        add: new FormControl(false),
+        edit: new FormControl(false),
+        delete: new FormControl(false)
       })
+
+
+
 
     });
 
@@ -385,7 +473,99 @@ export class AddEditPermissionComponent implements OnInit {
                           edit: res[0].UsertypeSetting.edit,
                           delete: res[0].UsertypeSetting.delete
                         }
-                      }) : null
+                      }) : null,
+                      (res[0].profileForm) ? this.permissionForm.patchValue(
+                        {
+                          profileForm: {
+                            add: res[0].profileForm.add,
+                            edit: res[0].profileForm.edit,
+                            delete: res[0].profileForm.delete
+                          }
+                        }) : null,
+
+
+
+                        (res[0].profileList) ? this.permissionForm.patchValue(
+                          {
+                            profileList: {
+                              add: res[0].profileList.add,
+                              edit: res[0].profileList.edit,
+                              delete: res[0].profileList.delete
+                            }
+                          }) : null,
+                          (res[0].team) ? this.permissionForm.patchValue(
+                            {
+                              team: {
+                                add: res[0].team.add,
+                                edit: res[0].team.edit,
+                                delete: res[0].team.delete
+                              }
+                            }) : null,
+                            (res[0].calender) ? this.permissionForm.patchValue(
+                              {
+                                calender: {
+                                  add: res[0].calender.add,
+                                  edit: res[0].calender.edit,
+                                  delete: res[0].calender.delete
+                                }
+                              }) : null,
+                              (res[0].leaveTracker) ? this.permissionForm.patchValue(
+                                {
+                                  leaveTracker: {
+                                    add: res[0].leaveTracker.add,
+                                    edit: res[0].leaveTracker.edit,
+                                    delete: res[0].leaveTracker.delete
+                                  }
+                                }) : null,
+                                (res[0].leaveStatus) ? this.permissionForm.patchValue(
+                                  {
+                                    leaveStatus: {
+                                      add: res[0].leaveStatus.add,
+                                      edit: res[0].leaveStatus.edit,
+                                      delete: res[0].leaveStatus.delete
+                                    }
+                                  }) : null,
+                                  (res[0].assets) ? this.permissionForm.patchValue(
+                                    {
+                                      assets: {
+                                        add: res[0].assets.add,
+                                        edit: res[0].assets.edit,
+                                        delete: res[0].assets.delete
+                                      }
+                                    }) : null,
+                                    (res[0].ExitDetails) ? this.permissionForm.patchValue(
+                                      {
+                                        ExitDetails: {
+                                          add: res[0].ExitDetails.add,
+                                          edit: res[0].ExitDetails.edit,
+                                          delete: res[0].ExitDetails.delete
+                                        }
+                                      }) : null,
+                                      (res[0].Reimbursement) ? this.permissionForm.patchValue(
+                                        {
+                                          profileForm: {
+                                            add: res[0].Reimbursement.add,
+                                            edit: res[0].Reimbursement.edit,
+                                            delete: res[0].Reimbursement.delete
+                                          }
+                                        }) : null,
+                                        (res[0].profileForm) ? this.permissionForm.patchValue(
+                                          {
+                                            profileForm: {
+                                              add: res[0].documents.add,
+                                              edit: res[0].documents.edit,
+                                              delete: res[0].documents.delete
+                                            }
+                                          }) : null,
+                                          (res[0].profileForm) ? this.permissionForm.patchValue(
+                                            {
+                                              profileForm: {
+                                                add: res[0].profileForm.add,
+                                                edit: res[0].profileForm.edit,
+                                                delete: res[0].profileForm.delete
+                                              }
+                                            }) : null
+
 // this.permissionForm.get('OrderShipment.add').setValue(true)
 // ,
 // (res[0].CatalogProduct)?this.permissionForm.controls['CatalogProduct'].setValue(res[0].CatalogProduct):this.permissionForm.controls['CatalogProduct'].setValue({add:false,edit:false,delete:false}),
@@ -488,6 +668,7 @@ export class AddEditPermissionComponent implements OnInit {
     let reviewerListFormGroup = (this.permissionForm.controls['ReviewerList']) as FormGroup
     let ratingSettingFormGroup = (this.permissionForm.controls['RatingSetting']) as FormGroup
     let usertypeSettingFormGroup = (this.permissionForm.controls['UsertypeSetting']) as FormGroup
+    let profileForm = (this.permissionForm.controls['profileForm']) as FormGroup
 
 
     if (Object.values(orderListFormGroup.value).includes(true) || Object.values(orderShipmentFormGroup.value).includes(true) || Object.values(orderTransactionFormGroup.value).includes(true)) {

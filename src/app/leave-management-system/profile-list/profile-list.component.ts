@@ -58,6 +58,7 @@ export class ProfileListComponent {
     this.LeaveService.getProfileList().subscribe((res) => {
       this.profileList = res;
       this.ngxLoader.stop();
+      console.log("profilelist" + JSON.stringify(this.profileList))
     });
   }
 

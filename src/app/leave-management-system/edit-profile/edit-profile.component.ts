@@ -284,12 +284,23 @@ export class EditProfileComponent {
       editMode: [true],
     });
   }
+  onInputChange(event: any) {
+    const inputValue = event.target.value;
+    this.profileForm.get('identityInformation.panNumber')?.patchValue(inputValue.toUpperCase());
+  }
 
   addNewRow() {
     console.log('addNewRow() called');
     const newEducationRow = this.createEducationRow();
     // (this.profileForm.get('educationDetails') as FormArray).push(newRow);
     this.educationDetails.push(newEducationRow);
+  }
+
+  onInputaadhar(event: any) {
+    let inputValue = event.target.value;
+    inputValue = inputValue.replace(/\D/g, '');
+    inputValue = inputValue.slice(0, 12);
+    this.profileForm.get('identityInformation.aadharNumber')?.setValue(inputValue);
   }
 
   addNewWorkRow() {

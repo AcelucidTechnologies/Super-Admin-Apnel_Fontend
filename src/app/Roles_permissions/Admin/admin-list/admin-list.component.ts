@@ -76,10 +76,18 @@ export class AdminListComponent implements OnInit {
       }
     })
   }
-    //Search functionality start here
-    applyFilterGlobal($event, stringVal) {
-      this.dt.filterGlobal(($event.target as HTMLInputElement).value, stringVal);
+  applyFilterGlobal(event: Event, stringVal: string) {
+    const searchValue = (event.target as HTMLInputElement).value;
+
+    // Check if the search value is empty or contains only whitespace
+    if (!searchValue || /^\s*$/.test(searchValue)) {
+      // Clear the global filter if the search value is empty
+      this.dt.filterGlobal('', stringVal);
+    } else {
+      // Apply the global filter with the search value
+      this.dt.filterGlobal(searchValue.trim(), stringVal);
     }
+  }
     exportExcel() {
       const worksheet = xlsxPackage.utils.json_to_sheet(this.adminDetails);
       const workbook = { Sheets: { 'data': worksheet }, SheetNames: ['data'] };

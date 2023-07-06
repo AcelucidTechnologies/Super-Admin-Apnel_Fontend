@@ -9,6 +9,7 @@ import { LeaveService } from 'src/app/_services/leave.service';
 import { Table } from 'primeng/table';
 import autoTable from 'jspdf-autotable';
 import { DialogTravelComponent } from '../dialog-travel/dialog-travel.component';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-travel-list',
@@ -19,6 +20,9 @@ export class TravelListComponent {
   travelData: any[] = [];
   exitDetails: any;
   fgsType: any;
+  payload:any;
+  isClicked = false;
+  selectedRow: any;
 
   sidebarSpacing: string = 'contracted';
   cols: any[];
@@ -31,7 +35,8 @@ export class TravelListComponent {
     private leaveService: LeaveService,
     private toastr: ToastrMsgService,
     private ngxLoader: NgxUiLoaderService,
-    private dialog: MatDialog
+    private dialog: MatDialog,
+    private route: Router
   ) {
     this.fgsType = SPINNER.squareLoader;
   }
@@ -42,13 +47,76 @@ export class TravelListComponent {
     this.getTravelData();
   }
 
+  isHidden(role: string): boolean {
+    return role === 'superAdmin';
+  }
   getTravelData() {
     this.leaveService.getTravelList().subscribe((res) => {
       this.travelData = res;
+      console.log("travel list 100=>" + JSON.stringify(this.travelData))
       this.ngxLoader.stop();
     });
   }
 
+    approve(id: string) {
+      const row = this.travelData.find(item => item._id === id);
+      if (row) {
+        row.isClicked = true;
+      }
+      this.payload = {
+        _id: id,
+        username: localStorage.getItem('email'),
+        employeeName: this.travelData[0].employeeName,
+        employeeId: this.travelData[0].employeeId,
+        journeyDate:this.travelData[0].journeyDate,
+        returnDate: this.travelData[0].returnDate,
+        travelFrom: this.travelData[0].travelFrom,
+        travelTo: this.travelData[0].travelTo,
+        purposeTravel: this.travelData[0].purposeTravel
+      };
+
+      console.log(this.payload);
+      this.leaveService.approveReimbursement(this.payload,id).subscribe((res) => {
+        const row = this.travelData.find(item => item._id === id);
+        if (row) {
+          row.isClicked = true;
+
+          this.toastr.showSuccess(
+            'Reimbursement Approved successfully',
+            'Reimbursement Approved'
+          );
+          // this.route.navigate(['/leaveMgmt/leave-approve-disapprove']);
+        }
+      });
+    }
+
+  // disapprove(id: string) {
+  //   this.payload = {
+  //     _id: id,
+  //     username: localStorage.getItem('email'),
+  //     employeeName: this.travelData.employeeName,
+  //     typeOfAssets: this.travelData.typeOfAssets,
+  //     addedBy:this.travelData.addedBy,
+  //     givenDate: this.travelData.givenDate,
+  //     returnDate: this.travelData.returnDate,
+  //     assetsDetails: this.travelData.assetsDetails
+  //   };
+
+  //   console.log(this.payload);
+  //   this.leaveservice.disapproveLeave(this.payload, id).subscribe((res) => {
+  //     if (res) {
+  //       this.getTableforLeaves()
+
+  //       this.toastr.showSuccess(
+  //         'Leave Disapproved successfully',
+  //         'Leave Disapproved'
+  //       );
+
+  //       this.route.navigate(['/leaveMgmt/leave-approve-disapprove']);
+  //     }
+  //   });
+
+  // }
   openDialog(name: any) {
     const dialogRef = this.dialog.open(DialogTravelComponent);
     dialogRef.afterClosed().subscribe((result) => {

@@ -1,112 +1,152 @@
-
-    <div class="container page-heading">
-      <div class="row mb-2 mt-2">
-        <div class="col-6">
-          <h4>Category List</h4>
+<div class="container page-heading">
+  <div class="row mb-2 mt-2">
+    <div class="col-6">
+      <h4>Category List</h4>
+    </div>
+    <div class="col-6 text-right">
+      <span class="p-input-icon-right ml-5">
+        <button
+          pButton
+          type="button"
+          label=" + Add Category"
+          class="add-button-category"
+          [routerLink]="['/product/addcategory']"
+        ></button>
+      </span>
+    </div>
+  </div>
+</div>
+<div class="card col-sm-12" style="border: none">
+  <p-table
+    id="customerTable"
+    #dt
+    [columns]="cols"
+    responsiveLayout="scroll"
+    [paginator]="true"
+    [rows]="10"
+    [showCurrentPageReport]="true"
+    [value]="categoryList"
+    currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
+    [responsive]="true"
+    [globalFilterFields]="['categoryName', 'subCategory', 'categoryOrder']"
+    styleClass="p-datatable-striped"
+  >
+    <ng-template pTemplate="caption">
+      <div class="d-flex justify-content-between">
+        <div class="d-flex align-items-center p-0">
+          <div class="input-container">
+            <img
+              src="../../../assets/images/search-white.svg"
+              class="input-container-img"
+            />
+            <input
+              #search
+              pInputText
+              type="text"
+              placeholder="Search..."
+              (input)="applyFilterGlobal($event, 'contains')"
+            />
+          </div>
         </div>
-        <div class="col-6 text-right">
-          <span class="p-input-icon-right ml-5">
-            <button
-              pButton
-              type="button"
-              label=" + Add Category"
-              class="add-button-category"
-              [routerLink]="['/product/addcategory']" [disabled]="!accessPermission.add"
-            ></button>
-          </span>
+        <div>
+          <button
+            pButton
+            type="button"
+            pTooltip="Pdf"
+            class="custom-image"
+            tooltipPosition="bottom"
+            (click)="exportPdf()"
+          >
+            <img src="../../../../assets/images/pdf.svg" alt="Button Image" />
+          </button>
+          <button
+            pButton
+            type="button"
+            pTooltip="Excel"
+            class="custom-image"
+            tooltipPosition="bottom"
+            (click)="exportExcel()"
+          >
+            <img src="../../../../assets/images/excel.svg" alt="Button Image" />
+          </button>
         </div>
       </div>
-    </div>
-	<div class="card col-sm-12" style="border:none;">
-		<p-table id="customerTable" #dt [columns]="cols" responsiveLayout="scroll" [paginator]="true" [rows]="10"
-			[showCurrentPageReport]="true" [value]="categoryList"
-			currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries" [responsive]="true"
-			[globalFilterFields]="['name', '_id', 'status']" styleClass="p-datatable-striped">
+    </ng-template>
 
-      <ng-template pTemplate="caption">
-        <div class="d-flex justify-content-between">
-          <div class="d-flex align-items-center p-0">
-            <div class="input-container">
-              <img
-                src="../../../assets/images/search-white.svg"
-                class="input-container-img"
-              />
-              <input #search pInputText type="text" placeholder="Search..."
-              (input)="applyFilterGlobal($event, 'contains')"/>
-            </div>
+    <ng-template pTemplate="header" let-columns>
+      <tr>
+        <th pSortableColumn="S.no">
+          <div class="flex justify-content-between align-items-center head1">
+            S.no
+            <p-sortIcon field="S.no"></p-sortIcon>
           </div>
-          <div>
-            <button pButton type="button" pTooltip="Pdf" class="custom-image" tooltipPosition="bottom" (click)=" exportPdf()"> <img src="../../../../assets/images/pdf.svg" alt="Button Image" /></button>
-            <button pButton type="button"   pTooltip="Excel" class="custom-image" tooltipPosition="bottom" (click)="exportExcel()"><img src="../../../../assets/images/excel.svg" alt="Button Image" /></button>
+        </th>
+        <th>Category Image</th>
+        <th pSortableColumn="categoryName">
+          <div class="flex justify-content-between align-items-center head1">
+            Category Name
+            <p-sortIcon field="categoryName"></p-sortIcon>
           </div>
-        </div>
-      </ng-template>
-
-			<ng-template pTemplate="header" let-columns>
-				<tr>
-          <th pSortableColumn="S.no">
-            <div class="flex justify-content-between align-items-center head1">
-              S.no
-                <p-sortIcon field="S.no"></p-sortIcon>
-
-            </div>
         </th>
-          <th>Category Image</th>
-          <th pSortableColumn="name">
-            <div class="flex justify-content-between align-items-center head1">
-              Category Name
-                <p-sortIcon field="name"></p-sortIcon>
-
-            </div>
-        </th>
-        <th pSortableColumn="productName">
+        <th pSortableColumn="subCategory">
           <div class="flex justify-content-between align-items-center head1">
             Parent Name
-              <p-sortIcon field="productName"></p-sortIcon>
+            <p-sortIcon field="subCategory"></p-sortIcon>
           </div>
-      </th>
-          <th>SortBy</th>
-          <th>Status</th>
-					<!-- <th *ngFor="let col of columns">{{col.headers}}</th> -->
-					<th>Action</th>
-				</tr>
-			</ng-template>
-			<ng-template pTemplate="body" let-i="rowIndex" let-categoryList>
-				<tr>
-					<td>{{i+1}}</td>
-          <td><img src={{categoryList.image}} style="width: 50px; height: 50px; border-radius: 50px;"></td>
-					<td>{{categoryList?.categoryName}}</td>
-          <td>{{categoryList?.subCategory}}</td>
-          <td>{{categoryList?.categoryOrder}}</td>
-					<!-- <td>{{categoryList?.name}}</td>
-					<td>{{categoryList?.parentCategoryId}}</td> -->
-
-					<td>{{categoryList?.status}}</td>
-					<td>
-						<div class="btn-grp">
-              <a pTooltip="Edit Category" tooltipPosition="bottom" style="margin-right: 15px; cursor: pointer; margin-left: 70px; ">
-                <img src="../../../../assets/images/edit.svg" [routerLink]="['/product/editcategory']"							[queryParams]="{id:categoryList?.id}" alt="img">
-              </a>
-              <!-- <a pTooltip="Delete Category" tooltipPosition="bottom" (click)="openDialog(categoryList)"
-                class="me-3 confirm-text" href="javascript:void(0);">
-                <img src="../../../../assets/images/delete.svg" alt="img">
-              </a> -->
-							<!-- <button class="p-button-warning" pButton type="button" icon="pi pi-user-edit" pTooltip="Edit category"
-								tooltipPosition="bottom" style="margin-right:5px" [routerLink]="['/product/editcategory']"
-								[queryParams]="{id:categoryList?.id}" [disabled]="!accessPermission.edit"></button>
-							<button class="p-button-danger" pButton type="button" icon="pi pi-trash" pTooltip="Delete category"
-								tooltipPosition="bottom" style="margin-right:5px" (click)="deleteCategory(categoryList)" [disabled]="!accessPermission.delete"></button> -->
-						</div>
-					</td>
-				</tr>
-			</ng-template>
-			<ng-template pTemplate="emptymessage">
-				<tr>
-					<td class="text-center text-danger font-weight-700" colspan="12">
-						No Records Found.
-					</td>
-				</tr>
-			</ng-template>
-		</p-table>
-		<ngx-ui-loader [fgsColor]="'#000000'" [fgsType]="fgsType"></ngx-ui-loader>
-	</div>
+        </th>
+        <th pSortableColumn="categoryOrder">
+          <div class="flex justify-content-between align-items-center head1">
+            Sort By
+            <p-sortIcon field="categoryOrder"></p-sortIcon>
+          </div>
+        </th>
+        <th pSortableColumn="status">
+          <div class="flex justify-content-between align-items-center head1">
+            Status
+            <p-sortIcon field="status"></p-sortIcon>
+          </div>
+        </th>
+        <th>Action</th>
+      </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-i="rowIndex" let-categoryList>
+      <tr>
+        <td>{{ i + 1 }}</td>
+        <td>
+          <img
+            src="{{ categoryList.image }}"
+            style="width: 50px; height: 50px; border-radius: 50px"
+          />
+        </td>
+        <td>{{ categoryList?.categoryName }}</td>
+        <td>{{ categoryList?.subCategory }}</td>
+        <td>{{ categoryList?.categoryOrder }}</td>
+        <td>{{ categoryList?.status }}</td>
+        <td>
+          <div class="btn-grp">
+            <a
+              pTooltip="Edit category"
+              tooltipPosition="bottom"
+              style="margin-right: 15px; cursor: pointer; margin-left: 70px"
+            >
+              <img
+                src="../../../../assets/images/edit.svg"
+                [routerLink]="['/product/editcategory']"
+                [queryParams]="{ id: categoryList?._id }"
+                alt="img"
+              />
+            </a>
+          </div>
+        </td>
+      </tr>
+    </ng-template>
+    <ng-template pTemplate="emptymessage">
+      <tr>
+        <td class="text-center text-danger font-weight-700" colspan="12">
+          No Records Found.
+        </td>
+      </tr>
+    </ng-template>
+  </p-table>
+  <ngx-ui-loader [fgsColor]="'#000000'" [fgsType]="fgsType"></ngx-ui-loader>
+</div>

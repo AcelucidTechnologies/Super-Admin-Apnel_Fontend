@@ -11,7 +11,7 @@
           label=" + Add Product"
           class="add-button-category"
           [routerLink]="['/product/addProduct']"
-          [disabled]="!accessPermission.add"
+
         ></button>
       </span>
     </div>
@@ -133,16 +133,17 @@
     <ng-template pTemplate="body" let-i="rowIndex" let-productList>
       <tr>
         <td>
+          <!-- <img class="user-name-img" [src]="profileList.image  || DefaultImage"> -->
           <img
-            src="{{ productList.images }}"
+            src="{{ productList.image }}"
             style="width: 50px; height: 50px; border-radius: 50px"
           />
         </td>
-        <td>{{ productList?.product_Detail?.name }}</td>
-        <td>{{ productList?.product_Detail?.category }}</td>
-        <td>{{ productList?.price?.price }}</td>
+        <td>{{ productList?.productName }}</td>
+        <td>{{ productList?.model }}</td>
+        <td>{{ productList?.ourPrice }}</td>
         <td>{{ productList?.product_Detail?.Quantity }}</td>
-        <td>{{ productList?.product_Detail?.category }}</td>
+        <td>{{ productList?.categoryName}}</td>
         <td>{{ productList?.product_Detail?.Status }}</td>
         <td>
           <div class="btn-grp">

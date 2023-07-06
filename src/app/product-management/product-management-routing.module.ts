@@ -5,6 +5,7 @@ import { AddEditProductComponent } from './add-edit-product/add-edit-product.com
 import { AddProductOptionComponent } from './add-product-option/add-product-option.component';
 import { CategoryListComponent } from './category-list/category-list.component';
 import { EditCategoryComponent } from './edit-category/edit-category.component';
+import { EditProductOptionComponent } from './edit-product-option/edit-product-option.component';
 import { ProductListComponent } from './product-list/product-list.component'
 import { ProductOptionListComponent } from './product-option-list/product-option-list.component';
 
@@ -32,7 +33,11 @@ const routes: Routes = [
   },
   {
     path: 'addProductOptionList', component: AddProductOptionComponent
-  }
+  }, {
+    path: 'editProductOptionList', component: EditProductOptionComponent
+  },
+
+
 ];
 
 @NgModule({

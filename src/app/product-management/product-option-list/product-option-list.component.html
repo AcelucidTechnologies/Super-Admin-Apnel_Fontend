@@ -18,7 +18,7 @@
 </div>
 <div class="card col-sm-12" style="border:none;">
   <p-table id="customerTable" #dt [columns]="" responsiveLayout="scroll" [paginator]="true" [rows]="10"
-    [showCurrentPageReport]="true" [value]=""
+    [showCurrentPageReport]="true" [value]="ProductData"
     currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries" [responsive]="true"
     [globalFilterFields]="['_id', 'name', 'price']" styleClass="p-datatable-striped">
     <ng-template pTemplate="caption">
@@ -34,8 +34,26 @@
           </div>
         </div>
         <div>
-          <button pButton type="button" pTooltip="Pdf" class="custom-image" tooltipPosition="bottom" > <img src="../../../../assets/images/pdf.svg" alt="Button Image" /></button>
-          <button pButton type="button"   pTooltip="Excel" class="custom-image" tooltipPosition="bottom" ><img src="../../../../assets/images/excel.svg" alt="Button Image" /></button>
+          <button
+            pButton
+            type="button"
+            pTooltip="Pdf"
+            class="custom-image"
+            tooltipPosition="bottom"
+            (click)="exportPdf()"
+          >
+            <img src="../../../../assets/images/pdf.svg" alt="Button Image" />
+          </button>
+          <button
+            pButton
+            type="button"
+            pTooltip="Excel"
+            class="custom-image"
+            tooltipPosition="bottom"
+            (click)="exportExcel()"
+          >
+            <img src="../../../../assets/images/excel.svg" alt="Button Image" />
+          </button>
         </div>
       </div>
     </ng-template>
@@ -43,10 +61,10 @@
       <tr>
         <th>S.no</th>
 
-        <th pSortableColumn="name">
+        <th pSortableColumn="productName">
           <div class="flex justify-content-between align-items-center head1">
             Option Name
-              <p-sortIcon field="name"></p-sortIcon>
+              <p-sortIcon field="productName"></p-sortIcon>
 
           </div>
       </th>
@@ -57,10 +75,22 @@
     <ng-template pTemplate="body" let-option let-i="rowIndex">
     <tr>
       <td>{{i + 1}}</td>
-      <td>{{option.name}}</td>
+      <td>{{option.productName}}</td>
       <td>
-        <!-- <button (click)="editOption(option)">Edit</button>
-        <button (click)="deleteOption(option)">Delete</button> -->
+        <div class="btn-grp">
+          <a
+            pTooltip="Edit product-option"
+            tooltipPosition="bottom"
+            style="margin-right: 15px; cursor: pointer; margin-left: 70px"
+          >
+            <img
+              src="../../../../assets/images/edit.svg"
+              [routerLink]="['/product/editProductOptionList']"
+              [queryParams]="{ id: option?._id }"
+              alt="img"
+            />
+          </a>
+        </div>
       </td>
     </tr>
   </ng-template>

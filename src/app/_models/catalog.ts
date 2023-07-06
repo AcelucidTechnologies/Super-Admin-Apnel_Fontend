@@ -49,24 +49,24 @@ export interface SEO {
   meta_description: string,
   meta_keywords: string
 }
-export interface category {
-  id: number,
-  categoryName: string,
-  image: string |any,
-  description: string,
-  status: Boolean,
-  parent_category: parent_category,
-  meta_description: SEO
-}
-export interface parent_category {
-  id: number,
-  name: string
-}
-export let Satatus = [
-  { name: 'active', code: 1 },
-  { name: 'Inactive', code: 0 },
+// export interface category {
+//   id: number,
+//   categoryName: string,
+//   image: string |any,
+//   description: string,
+//   status: Boolean,
+//   categoryOrder: number,
+//   subCategory: string
+// }
+// export interface parent_category {
+//   id: number,
+//   name: string
+// }
+// export let Satatus = [
+//   { name: 'active', code: 1 },
+//   { name: 'Inactive', code: 0 },
 
-]
+// ]
 
 
 export interface catalogExtraDetailsStructure {
