@@ -50,7 +50,6 @@ export class RolesListComponent implements OnInit {
   }
 
   deleteAdminData(name:string) {
-    console.log(name)
     // this.ngxLoader.start();
     this.permissionService.deletePermissionDetails(name).subscribe(res => {
       if (res) {
@@ -63,7 +62,6 @@ export class RolesListComponent implements OnInit {
   getPermittedModuleList(){
     this.permissionService.getPermittedModuleList().subscribe(res => {
      this.modulePermissionList=res
-     console.log("modulelist" + JSON.stringify(this.modulePermissionList))
     })
   }
 
@@ -91,7 +89,6 @@ export class RolesListComponent implements OnInit {
   }
 
   exportPdf() {
-    console.log("pdf");
 
     this.adminValue = this.modulePermissionList
             const doc = new jsPDF

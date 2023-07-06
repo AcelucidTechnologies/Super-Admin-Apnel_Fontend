@@ -246,8 +246,6 @@ export class AddProfileComponent {
       .controls as FormGroup[];
     this.addNewRow();
     this.addNewWorkRow();
-    console.log(this.educationDetails);
-    console.log(this.workExperience);
   }
 
   validateCurrentExp(control: AbstractControl): ValidationErrors | null {
@@ -262,7 +260,8 @@ export class AddProfileComponent {
   }
 
   onInputChange(event: any) {
-    const inputValue = event.target.value;
+    let inputValue = event.target.value;
+    inputValue = inputValue.slice(0, 10);
     this.profileForm.get('identityInformation.panNumber')?.patchValue(inputValue.toUpperCase());
   }
   onInputaadhar(event: any) {
@@ -276,8 +275,7 @@ export class AddProfileComponent {
       .getProfileList()
       .pipe(map((res) => res.map((profile) => profile.email)))
       .subscribe((emailList) => {
-        this.emailList = emailList;
-        console.log('Email List:', this.emailList);
+        this.emailList = emailList
         this.ngxLoader.stop();
       });
   }
@@ -350,7 +348,6 @@ export class AddProfileComponent {
   }
 
   addNewRow() {
-    console.log('addNewRow() called');
     const newEducationRow = this.createEducationRow();
     (this.profileForm.get('educationDetails') as FormArray).push(
       newEducationRow
@@ -381,7 +378,6 @@ export class AddProfileComponent {
 
   handleCheckboxChange(event: any) {
     const checkboxValue = event.target.checked;
-    console.log('Checkbox value:', checkboxValue);
   }
 
   checkValue(control: AbstractControl): void {
@@ -390,12 +386,10 @@ export class AddProfileComponent {
     this.isChecked = checked;
 
     if (checked === true) {
-      console.log('Before patchValue');
       const localAddress = this.profileForm.get(
         'contactDetails.presentAddress'
       ).value;
 
-      console.log('localAddress:', localAddress);
 
       this.profileForm.patchValue({
         contactDetails: {
@@ -410,13 +404,6 @@ export class AddProfileComponent {
         },
       });
 
-      console.log('After patchValue');
-      console.log('isChecked:', this.isChecked);
-      console.log('sameAsLocalControl:', sameAsLocalControl);
-      console.log(
-        'Updated permanentAddress:',
-        this.profileForm.get('contactDetails.permanentAddress').value
-      );
     } else {
       this.profileForm.patchValue({
         contactDetails: {
@@ -430,14 +417,6 @@ export class AddProfileComponent {
           },
         },
       });
-
-      console.log('After patchValue');
-      console.log('isChecked:', this.isChecked);
-      console.log('sameAsLocalControl:', sameAsLocalControl);
-      console.log(
-        'Updated permanentAddress:',
-        this.profileForm.get('contactDetails.permanentAddress').value
-      );
     }
   }
 
@@ -483,7 +462,6 @@ export class AddProfileComponent {
     dialogRef.afterClosed().subscribe((result) => {
       this.getLocation();
       if (result) {
-        console.log('Dialog result:', result);
         this.route.navigate(['/leaveMgmt/add-profile'], {
           skipLocationChange: true,
         });
@@ -538,7 +516,6 @@ export class AddProfileComponent {
   getLocation() {
     this.leaveservice.getLocationList().subscribe((res) => {
       this.locationList = res;
-      console.log('location values dropdown' + this.locationList);
     });
   }
 
@@ -552,12 +529,10 @@ export class AddProfileComponent {
     let newPayload = Object.assign({}, recievedValue);
     this.leaveservice.addProfile(newPayload).subscribe((res) => {
       if (res) {
-        console.log('response value' + res);
         this.toastr.showSuccess('profile add successfully', 'profile add');
         this.ngxLoader.stop();
         this.route.navigate(['/leaveMgmt/profile-list']);
       } else {
-        console.log('error');
         this.toastr.showError('Somthing wrong Please check', 'Error occured');
       }
     });
@@ -566,7 +541,6 @@ export class AddProfileComponent {
   submit() {
     if (this.profileForm.valid) {
       const formValue = this.profileForm.value;
-      console.log('submit form value ===>' + JSON.stringify(formValue));
       this.ngxLoader.start();
       this.payload = {
         username: localStorage.getItem('email'),
@@ -667,16 +641,9 @@ export class AddProfileComponent {
       };
 
       this.submitDetails(this.payload);
-      console.log('submit form value payload 24 ===>' + this.payload);
       this.ngxLoader.start();
       const table1Values = formValue.educationDetails;
       const table2Values = formValue.workExperience;
-
-      // this.payload = {
-      //   educationDetails: formValue.educationDetails,
-      //   workExperience: formValue.workExperience,
-      // };
-      // console.log("payload off submit form value 25===>"+ this.payload);
 
       this.rows = [];
       this.workExperience = [];

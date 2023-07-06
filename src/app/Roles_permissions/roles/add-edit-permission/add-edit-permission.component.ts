@@ -94,11 +94,11 @@ export class AddEditPermissionComponent implements OnInit {
       subModuleName:'Usertype Setting',
       nameForForm:'UsertypeSetting'
     },
-    {
-      moduleName:'Profile',
-      subModuleName:'-',
-      nameForForm:'ProfileModule'
-    },
+    // {
+    //   moduleName:'Profile',
+    //   subModuleName:'ProfileModule',
+    //   nameForForm:'ProfileModule'
+    // },
     {
       moduleName: 'Leave',
       subModuleName: 'ProfileList',
@@ -107,7 +107,7 @@ export class AddEditPermissionComponent implements OnInit {
     {
       moduleName: 'Leave',
       subModuleName: 'Team',
-      nameForForm: 'team'
+      nameForForm: 'Team'
     },
     {
       moduleName: 'Leave',
@@ -127,7 +127,7 @@ export class AddEditPermissionComponent implements OnInit {
     {
       moduleName: 'Leave',
       subModuleName: 'Assets',
-      nameForForm: 'assets'
+      nameForForm: 'Assets'
     },
     {
       moduleName: 'Leave',
@@ -253,7 +253,7 @@ export class AddEditPermissionComponent implements OnInit {
         delete: new FormControl(false)
       }),
 
-      profileForm: new FormGroup({
+      profileModule: new FormGroup({
         add: new FormControl(false),
         edit: new FormControl(false),
         delete: new FormControl(false)
@@ -264,7 +264,7 @@ export class AddEditPermissionComponent implements OnInit {
         edit: new FormControl(false),
         delete: new FormControl(false)
       }),
-      team: new FormGroup({
+      Team: new FormGroup({
         add: new FormControl(false),
         edit: new FormControl(false),
         delete: new FormControl(false)
@@ -284,7 +284,7 @@ export class AddEditPermissionComponent implements OnInit {
         edit: new FormControl(false),
         delete: new FormControl(false)
       }),
-      assets: new FormGroup({
+      Assets: new FormGroup({
         add: new FormControl(false),
         edit: new FormControl(false),
         delete: new FormControl(false)
@@ -474,12 +474,12 @@ export class AddEditPermissionComponent implements OnInit {
                           delete: res[0].UsertypeSetting.delete
                         }
                       }) : null,
-                      (res[0].profileForm) ? this.permissionForm.patchValue(
+                      (res[0].profileModule) ? this.permissionForm.patchValue(
                         {
-                          profileForm: {
-                            add: res[0].profileForm.add,
-                            edit: res[0].profileForm.edit,
-                            delete: res[0].profileForm.delete
+                          profileModule: {
+                            add: res[0].profileModule.add,
+                            edit: res[0].profileModule.edit,
+                            delete: res[0].profileModule.delete
                           }
                         }) : null,
 
@@ -493,12 +493,12 @@ export class AddEditPermissionComponent implements OnInit {
                               delete: res[0].profileList.delete
                             }
                           }) : null,
-                          (res[0].team) ? this.permissionForm.patchValue(
+                          (res[0].Team) ? this.permissionForm.patchValue(
                             {
-                              team: {
-                                add: res[0].team.add,
-                                edit: res[0].team.edit,
-                                delete: res[0].team.delete
+                              Team: {
+                                add: res[0].Team.add,
+                                edit: res[0].Team.edit,
+                                delete: res[0].Team.delete
                               }
                             }) : null,
                             (res[0].calender) ? this.permissionForm.patchValue(
@@ -525,12 +525,12 @@ export class AddEditPermissionComponent implements OnInit {
                                       delete: res[0].leaveStatus.delete
                                     }
                                   }) : null,
-                                  (res[0].assets) ? this.permissionForm.patchValue(
+                                  (res[0].Assets) ? this.permissionForm.patchValue(
                                     {
-                                      assets: {
-                                        add: res[0].assets.add,
-                                        edit: res[0].assets.edit,
-                                        delete: res[0].assets.delete
+                                      Assets: {
+                                        add: res[0].Assets.add,
+                                        edit: res[0].Assets.edit,
+                                        delete: res[0].Assets.delete
                                       }
                                     }) : null,
                                     (res[0].ExitDetails) ? this.permissionForm.patchValue(
@@ -615,7 +615,6 @@ export class AddEditPermissionComponent implements OnInit {
   getUserList() {
     this.userService.getUsers().subscribe((res: any) => {
       let userPermitted = []
-      console.log(res.data)
       this.userData = res.data;
       if (res.data) {
         this.permissionService.getPermittedModuleList().subscribe((resValue) => {
@@ -623,14 +622,12 @@ export class AddEditPermissionComponent implements OnInit {
             userPermitted.push(dataValue.username)
           })
 
-          // console.log(userPermitted)
           this.userData = this.userData.map(val => {
             if (val.username && (val.username != '' || val.username != null) && val.role != 'superAdmin' && !userPermitted.includes(val.username)) {
               this.userlist.push(val.username)
               return val.username
             }
           })
-          // console.log(this.userData, this.userlist)
           this.activatedRoute.queryParamMap.subscribe((params) => {
             this.name = params.get('user')
             if (this.name) {
@@ -669,6 +666,17 @@ export class AddEditPermissionComponent implements OnInit {
     let ratingSettingFormGroup = (this.permissionForm.controls['RatingSetting']) as FormGroup
     let usertypeSettingFormGroup = (this.permissionForm.controls['UsertypeSetting']) as FormGroup
     let profileForm = (this.permissionForm.controls['profileForm']) as FormGroup
+    let profileListSettingFormGroup = (this.permissionForm.controls['profileList']) as FormGroup
+    let TeamSettingFormGroup = (this.permissionForm.controls['Team']) as FormGroup
+    let calenderSettingFormGroup = (this.permissionForm.controls['calender']) as FormGroup
+    let leaveTrackerSettingFormGroup = (this.permissionForm.controls['leaveTracker']) as FormGroup
+    let leaveStatusSettingFormGroup = (this.permissionForm.controls['leaveStatus']) as FormGroup
+    let AssetsSettingFormGroup = (this.permissionForm.controls['Assets']) as FormGroup
+    let ExitDetailsSettingFormGroup = (this.permissionForm.controls['ExitDetails']) as FormGroup
+    let ReimbursementSettingFormGroup = (this.permissionForm.controls['Reimbursement']) as FormGroup
+    let documentsSettingFormGroup = (this.permissionForm.controls['documents']) as FormGroup
+
+
 
 
     if (Object.values(orderListFormGroup.value).includes(true) || Object.values(orderShipmentFormGroup.value).includes(true) || Object.values(orderTransactionFormGroup.value).includes(true)) {
@@ -823,6 +831,11 @@ export class AddEditPermissionComponent implements OnInit {
       //   moduleList: modules
       // })
     }
+
+    if (Object.values(profileListSettingFormGroup.value).includes(true)||Object.values(TeamSettingFormGroup.value).includes(true)||Object.values(calenderSettingFormGroup.value).includes(true)||Object.values(leaveTrackerSettingFormGroup.value).includes(true)||Object.values(leaveStatusSettingFormGroup.value).includes(true)||Object.values(AssetsSettingFormGroup.value).includes(true)||Object.values(ExitDetailsSettingFormGroup.value).includes(true)|| Object.values(ReimbursementSettingFormGroup.value).includes(true)|| Object.values(documentsSettingFormGroup.value).includes(true)) {
+      // console.log(Object.values(ratingListFormGroup.value).includes(true),)
+      modules.push('Leave')
+    }
     // if(Object.values(profileModuleFormGroup.value).includes(true))
     // {
     //  modules.push('Profile')
@@ -920,10 +933,10 @@ export class AddEditPermissionComponent implements OnInit {
     // }
 
     // let orderlistFormGroup=  (this.permissionForm.controls['OrderList']) as FormGroup
-    console.log(this.permissionForm);
+    console.log("abc100==>"+ this.permissionForm);
     Object.assign(payload, {moduleList:modules})
     Object.assign(payload, this.permissionForm.value)
-    console.log(payload),
+  console.log("xyz200==>" + JSON.stringify(payload)),
     (this.name)?this.submitEditedPermissionDetails(payload):this.submitPermissionDetails(payload)
   }
   submitPermissionDetails(payload:any){

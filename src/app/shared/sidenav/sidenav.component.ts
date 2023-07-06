@@ -115,7 +115,6 @@ export class SidenavComponent implements OnInit {
     this.adminService.getAdminDetails(this.username).subscribe((res) => {
       if (res[0].image) {
         this.image = res[0].image;
-        console.log(this.image);
       }
     });
   }
