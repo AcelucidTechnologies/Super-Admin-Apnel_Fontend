@@ -21,7 +21,6 @@ export class AppComponent implements DoCheck {
 
   ngOnInit() {
     this.primeNgConfig.ripple = true;
-    console.log(this.token, this.check)
   }
   ngDoCheck() {
     //For Production

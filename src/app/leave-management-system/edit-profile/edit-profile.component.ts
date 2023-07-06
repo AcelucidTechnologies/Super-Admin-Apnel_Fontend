@@ -285,7 +285,8 @@ export class EditProfileComponent {
     });
   }
   onInputChange(event: any) {
-    const inputValue = event.target.value;
+    let inputValue = event.target.value;
+    inputValue = inputValue.slice(0, 10);
     this.profileForm.get('identityInformation.panNumber')?.patchValue(inputValue.toUpperCase());
   }
 

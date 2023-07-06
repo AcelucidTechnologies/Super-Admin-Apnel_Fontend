@@ -73,7 +73,6 @@ export class DropdownMenuComponent implements OnInit {
   ) {
     this.user = localStorage.getItem('UserData');
     this.role = localStorage.getItem('role');
-    console.log('asdfghjk', this.user);
   }
 
   ngOnInit() {
@@ -114,7 +113,6 @@ export class DropdownMenuComponent implements OnInit {
   getImage() {
     this.adminService.getAdminDetails(this.UserData).subscribe((res) => {
       if (res[0].image) {
-        console.log('datalocal', this.UserData);
         this.image = res[0].image;
       }
     });
