@@ -47,7 +47,11 @@ export class TravelListComponent {
     this.getTravelData();
   }
 
-  isHidden(role: string): boolean {
+  // isHidden(role: string): boolean {
+  //   return role === 'superAdmin';
+  // }
+  isHidden(): boolean {
+    const role = localStorage.getItem('role');
     return role === 'superAdmin';
   }
   getTravelData() {
