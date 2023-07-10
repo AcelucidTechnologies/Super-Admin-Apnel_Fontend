@@ -20,7 +20,7 @@ export class TravelListComponent {
   travelData: any[] = [];
   exitDetails: any;
   fgsType: any;
-  payload:any;
+  payload: any;
   isClicked = false;
   selectedRow: any;
 
@@ -47,9 +47,6 @@ export class TravelListComponent {
     this.getTravelData();
   }
 
-  // isHidden(role: string): boolean {
-  //   return role === 'superAdmin';
-  // }
   isHidden(): boolean {
     const role = localStorage.getItem('role');
     return role === 'superAdmin';
@@ -57,33 +54,34 @@ export class TravelListComponent {
   getTravelData() {
     this.leaveService.getTravelList().subscribe((res) => {
       this.travelData = res;
-      console.log("travel list 100=>" + JSON.stringify(this.travelData))
       this.ngxLoader.stop();
     });
   }
 
-    approve(id: string) {
-      const row = this.travelData.find(item => item._id === id);
-      if (row) {
-        row.isClicked = true;
-      }
-      this.payload = {
-        _id: id,
-        username: localStorage.getItem('email'),
-        employeeName: this.travelData[0].employeeName,
-        employeeId: this.travelData[0].employeeId,
-        journeyDate:this.travelData[0].journeyDate,
-        returnDate: this.travelData[0].returnDate,
-        travelFrom: this.travelData[0].travelFrom,
-        travelTo: this.travelData[0].travelTo,
-        purposeTravel: this.travelData[0].purposeTravel
-      };
-
-      console.log(this.payload);
-      this.leaveService.approveReimbursement(this.payload,id).subscribe((res) => {
-        const row = this.travelData.find(item => item._id === id);
+  approve(id: string) {
+    const row = this.travelData.find((item) => item._id === id);
+    if (row) {
+      row.isClicked = true;
+    }
+    this.payload = {
+      _id: id,
+      username: localStorage.getItem('email'),
+      employeeName: this.travelData[0].employeeName,
+      employeeId: this.travelData[0].employeeId,
+      journeyDate: this.travelData[0].journeyDate,
+      returnDate: this.travelData[0].returnDate,
+      travelFrom: this.travelData[0].travelFrom,
+      travelTo: this.travelData[0].travelTo,
+      purposeTravel: this.travelData[0].purposeTravel,
+      status: this.travelData[0].status,
+    };
+    this.leaveService
+      .approveReimbursement(this.payload, id)
+      .subscribe((res) => {
+        const row = this.travelData.find((item) => item._id === id);
         if (row) {
           row.isClicked = true;
+          location.reload();
 
           this.toastr.showSuccess(
             'Reimbursement Approved successfully',
@@ -92,35 +90,8 @@ export class TravelListComponent {
           // this.route.navigate(['/leaveMgmt/leave-approve-disapprove']);
         }
       });
-    }
+  }
 
-  // disapprove(id: string) {
-  //   this.payload = {
-  //     _id: id,
-  //     username: localStorage.getItem('email'),
-  //     employeeName: this.travelData.employeeName,
-  //     typeOfAssets: this.travelData.typeOfAssets,
-  //     addedBy:this.travelData.addedBy,
-  //     givenDate: this.travelData.givenDate,
-  //     returnDate: this.travelData.returnDate,
-  //     assetsDetails: this.travelData.assetsDetails
-  //   };
-
-  //   console.log(this.payload);
-  //   this.leaveservice.disapproveLeave(this.payload, id).subscribe((res) => {
-  //     if (res) {
-  //       this.getTableforLeaves()
-
-  //       this.toastr.showSuccess(
-  //         'Leave Disapproved successfully',
-  //         'Leave Disapproved'
-  //       );
-
-  //       this.route.navigate(['/leaveMgmt/leave-approve-disapprove']);
-  //     }
-  //   });
-
-  // }
   openDialog(name: any) {
     const dialogRef = this.dialog.open(DialogTravelComponent);
     dialogRef.afterClosed().subscribe((result) => {
