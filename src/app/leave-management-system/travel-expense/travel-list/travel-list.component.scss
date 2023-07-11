@@ -122,3 +122,8 @@ color: #848484;
   font-size: 0.875rem;
   height: 37px;
   }
+  .mat-raised-button.mat-button-disabled:not([class*=mat-elevation-z]) {
+    color: white;
+    background-color:#ff4081;
+
+}
